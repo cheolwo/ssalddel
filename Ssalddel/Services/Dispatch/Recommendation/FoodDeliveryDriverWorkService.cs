@@ -761,6 +761,7 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
         DateTime now)
     {
         var previous = 음식주문상태코드.Normalize(order.상태);
+        음식배달업무상태전이Guard.허용확인(previous, nextState);
         order.상태 = nextState;
         order.배차상태 = nextDispatchState;
         order.UpdatedAt = now;

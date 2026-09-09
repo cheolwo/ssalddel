@@ -22,13 +22,16 @@ public static class 음식점주문진행Policy
             throw new ArgumentException("지원하지 않는 음식점 주문 진행 작업입니다.", nameof(request));
         }
 
-        return action switch
+        var decision = action switch
         {
             음식점주문진행작업코드.거절 => Reject(current, request),
             음식점주문진행작업코드.조리시간변경 => ChangePreparationTime(current, request),
             음식점주문진행작업코드.픽업준비 => MarkPickupReady(current),
             _ => throw new ArgumentOutOfRangeException(nameof(request))
         };
+
+        음식배달업무상태전이Guard.허용확인(current, decision.다음상태);
+        return decision;
     }
 
     private static 음식점주문진행판정 Reject(

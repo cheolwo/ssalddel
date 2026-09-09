@@ -2,6 +2,7 @@ using Ssalddel.Application.Driver.Transport;
 using Ssalddel.Contracts.Common.Orderer;
 using Ssalddel.Contracts.Food;
 using Ssalddel.Services.Community;
+using Ssalddel.Services.Food;
 using Ssalddel.WorkflowRules;
 using Ssalddel.WorkflowRules.Contracts;
 
@@ -26,8 +27,11 @@ public sealed class 업무흐름규칙ParityTests
             Assert.NotEmpty(rule.Simulation제외운영효과코드목록);
         });
         Assert.All(
-            rules.Where(rule => rule.업무흐름코드 != 업무흐름코드.창고입고),
+            rules.Where(rule => rule.업무흐름코드 is not (업무흐름코드.음식배달 or 업무흐름코드.창고입고)),
             rule => Assert.Equal("workflow-rules.v1", rule.RuleRevision));
+        Assert.Equal(
+            "food-delivery.v2",
+            rules.Single(rule => rule.업무흐름코드 == 업무흐름코드.음식배달).RuleRevision);
         Assert.Equal(
             "warehouse-inbound.v1",
             rules.Single(rule => rule.업무흐름코드 == 업무흐름코드.창고입고).RuleRevision);
@@ -69,10 +73,73 @@ public sealed class 업무흐름규칙ParityTests
             업무흐름코드.음식배달,
             음식주문상태코드.조리중,
             음식주문상태코드.픽업대기).허용여부);
+        Assert.True(업무상태전이Policy.판정(
+            업무흐름코드.음식배달,
+            음식주문상태코드.조리중,
+            음식주문상태코드.기사배정).허용여부);
         Assert.False(업무상태전이Policy.판정(
             업무흐름코드.음식배달,
             음식주문상태코드.수령확인,
             음식주문상태코드.조리중).허용여부);
+    }
+
+    [Fact]
+    public void 운영서버_음식배달Guard는_공통규칙판정과_모든상태쌍에서_같다()
+    {
+        foreach (var current in 음식주문상태코드.전체)
+        {
+            foreach (var target in 음식주문상태코드.전체)
+            {
+                var common = 업무상태전이Policy.판정(업무흐름코드.음식배달, current, target);
+                var server = 음식배달업무상태전이Guard.판정(current, target);
+
+                Assert.Equal(common.허용여부, server.허용여부);
+                Assert.Equal(common.멱등재시도여부, server.멱등재시도여부);
+                Assert.Equal(common.RuleRevision, server.RuleRevision);
+                Assert.Equal(common.차단사유코드목록, server.차단사유코드목록);
+                Assert.Equal(common.SourceStableIds, server.SourceStableIds);
+            }
+        }
+    }
+
+    [Fact]
+    public void 운영서버_음식배달Guard는_주문대기에서_기사배정으로_건너뛰지않는다()
+    {
+        var error = Assert.Throws<InvalidOperationException>(() =>
+            음식배달업무상태전이Guard.허용확인(
+                음식주문상태코드.주문대기,
+                음식주문상태코드.기사배정));
+
+        Assert.Contains("food-delivery.v2", error.Message, StringComparison.Ordinal);
+        Assert.Contains(업무규칙차단사유코드.허용되지않은상태전이, error.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void 음식점_거절과픽업준비는_운영Policy와_공통전이에서_같은의미를낸다()
+    {
+        var rule = 업무흐름규칙Catalog.조회(업무흐름코드.음식배달);
+        var reject = 음식점주문진행Policy.판정(
+            음식주문상태코드.주문대기,
+            new 음식점주문진행변경요청
+            {
+                작업 = 음식점주문진행작업코드.거절,
+                사유 = "비교 시험",
+            });
+        var pickupReady = 음식점주문진행Policy.판정(
+            음식주문상태코드.조리중,
+            new 음식점주문진행변경요청
+            {
+                작업 = 음식점주문진행작업코드.픽업준비,
+            });
+
+        Assert.Equal(음식주문상태코드.거절, reject.다음상태);
+        Assert.Equal(음식주문상태코드.픽업대기, pickupReady.다음상태);
+        Assert.Contains(rule.허용전이목록, transition =>
+            transition.현재상태코드 == 음식주문상태코드.주문대기
+            && transition.목표상태코드 == reject.다음상태);
+        Assert.Contains(rule.허용전이목록, transition =>
+            transition.현재상태코드 == 음식주문상태코드.조리중
+            && transition.목표상태코드 == pickupReady.다음상태);
     }
 
     [Fact]

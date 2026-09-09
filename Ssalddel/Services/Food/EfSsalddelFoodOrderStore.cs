@@ -162,6 +162,7 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
         var nextStatus = request.즉시픽업가능여부
             ? 음식주문상태코드.픽업대기
             : 음식주문상태코드.조리중;
+        음식배달업무상태전이Guard.허용확인(currentStatus, nextStatus);
         var cookingMinutes = request.즉시픽업가능여부
             ? 0
             : Math.Clamp(request.조리예상분 ?? 15, 1, 180);
@@ -279,6 +280,7 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
         }
 
         var now = DateTime.UtcNow;
+        음식배달업무상태전이Guard.허용확인(currentStatus, 음식주문상태코드.수령확인);
         order.상태 = 음식주문상태코드.수령확인;
         order.UpdatedAt = now;
         order.상태이력.Add(new 음식주문상태이력
