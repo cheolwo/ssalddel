@@ -3,9 +3,9 @@
 > 이 문서는 C# E 책임 Attribute와 현재 E 책임 모듈 대장에서 자동 생성된다. 직접 수정하지 않는다.
 
 - 후보 타입: `829`
-- 책임 지정: `813`
+- 책임 지정: `818`
 - 사유 있는 제외: `3`
-- 미분류: `13`
+- 미분류: `8`
 - 메서드 책임: `17`
 
 ## E 단계별 책임
@@ -13,8 +13,8 @@
 | E | G | 모듈 | 대표 | 보조 |
 | --- | --- | --- | ---: | ---: |
 | `E1` | `G1` | `E1핵심계약Module` 핵심 계약 | 128 | 0 |
-| `E2` | `G1` | `E2실행경계Module` 실행 경계 | 266 | 0 |
-| `E3` | `G1` | `E3회귀증거Module` 회귀 증거 | 268 | 1 |
+| `E2` | `G1` | `E2실행경계Module` 실행 경계 | 270 | 0 |
+| `E3` | `G1` | `E3회귀증거Module` 회귀 증거 | 269 | 1 |
 | `E4` | `G1` | `E4실행문맥결속Module` 실행 문맥 결속 | 51 | 0 |
 | `E5` | `G1` | `E5세계발현Module` 세계 발현 | 7 | 0 |
 | `E6` | `G1` | `E6세계정제Module` 세계 정제 | 21 | 0 |
@@ -34,13 +34,13 @@
 | `E1` | `E1세션권위계약Module` 세션 권위 계약 | `E1.SessionAuthorityContract` | Session 식별자·Revision·시간과 상태 권위의 불변 경계를 정의한다. | 6 | 0 |
 | `E1` | `E1공간계약Module` 공간 계약 | `E1.SpatialContract` | H·AreaSet·Graph·Handover의 안정 식별자와 구조 계약을 정의한다. | 18 | 0 |
 | `E1` | `E1세계상호작용계약Module` 세계 상호작용 계약 | `E1.WorldInteractionContract` | WI 목적·StableId·허용 발생원과 Preview·Confirm 계약을 정의한다. | 29 | 0 |
-| `E2` | `E2로컬권위AdapterModule` 로컬 권위 Adapter | `E2.LocalAuthorityAdapter` | Solo LocalProcess에서 공통 Simulation Core를 실행한다. | 1 | 0 |
-| `E2` | `E2원격HostAdapterModule` 원격 Host Adapter | `E2.RemoteHostAdapter` | Hosted Server에서 같은 Core를 HTTP 경계로 노출한다. | 12 | 0 |
+| `E2` | `E2로컬권위AdapterModule` 로컬 권위 Adapter | `E2.LocalAuthorityAdapter` | Solo LocalProcess에서 공통 Simulation Core를 실행한다. | 2 | 0 |
+| `E2` | `E2원격HostAdapterModule` 원격 Host Adapter | `E2.RemoteHostAdapter` | Hosted Server에서 같은 Core를 HTTP 경계로 노출한다. | 15 | 0 |
 | `E2` | `E2세션실행Module` 세션 실행 | `E2.SessionExecution` | Session 생성·조회·Tick·Save/Load의 공통 실행 포트를 제공한다. | 5 | 0 |
 | `E2` | `E2공간실행Module` 공간 실행 | `E2.SpatialExecution` | H·LH·배치 계획의 준비·활성·캐시·해제 실행 경계를 제공한다. | 11 | 0 |
 | `E2` | `E2Unity권위ClientModule` Unity 권위 Client | `E2.UnityAuthorityClient` | Unity 입력을 Local 또는 Remote 권위 포트에 전달한다. | 3 | 0 |
 | `E2` | `E2세계상호작용실행Module` 세계 상호작용 실행 | `E2.WorldInteractionExecution` | Farm·Nature WI Preview·Confirm 실행 포트를 제공한다. | 49 | 0 |
-| `E3` | `E3계약회귀Module` 계약 회귀 | `E3.ContractRegression` | StableId·요청·응답·WI metadata 계약의 회귀를 검증한다. | 32 | 0 |
+| `E3` | `E3계약회귀Module` 계약 회귀 | `E3.ContractRegression` | StableId·요청·응답·WI metadata 계약의 회귀를 검증한다. | 33 | 0 |
 | `E3` | `E3결정성검증Module` 결정성 검증 | `E3.DeterminismRegression` | 같은 Seed·명령·시간이 같은 canonical 상태를 만드는지 검증한다. | 18 | 0 |
 | `E3` | `E3로컬원격동등성Module` 로컬·원격 동등성 | `E3.LocalRemoteParityRegression` | LocalProcess와 RemoteHost가 같은 권위 결과를 만드는지 검증한다. | 2 | 0 |
 | `E3` | `E3저장재생검증Module` 저장·재생 검증 | `E3.SaveReplayRegression` | Save schema 호환·복원·Replay hash 회귀를 검증한다. | 5 | 1 |
@@ -56,12 +56,7 @@
 
 | 구성 요소 | 소스 |
 | --- | --- |
-| `Ssalddel.Simulation.Application.LocalBusinessWorkflowRuntimeFactory` | `Ssalddel.Simulation.Application/RuntimeCore/LocalBusinessWorkflowRuntimeFactory.cs` |
 | `Ssalddel.Simulation.Contracts.Simulation음식배달수명주기Adapter` | `Ssalddel.Simulation.Contracts/UnityPackage/Runtime/Simulation음식배달수명주기Adapter.cs` |
-| `Ssalddel.Simulation.Infrastructure.RemoteBusinessWorkflowRuntimeFactory` | `Ssalddel.Simulation.Infrastructure/RemoteBusinessWorkflowRuntimeFactory.cs` |
-| `Ssalddel.Simulation.Infrastructure.RemoteSimulationFoodOrderRuntime` | `Ssalddel.Simulation.Infrastructure/RemoteSimulationFoodOrderRuntime.cs` |
-| `Ssalddel.Simulation.Infrastructure.RemoteSimulationLogisticsRuntime` | `Ssalddel.Simulation.Infrastructure/RemoteSimulationLogisticsRuntime.cs` |
-| `Ssalddel.Simulation.Tests.BusinessWorkflowRuntimeCompositionTests` | `Ssalddel.Simulation.Tests/BusinessWorkflowRuntimeCompositionTests.cs` |
 | `Ssalddel.Simulation.Tests.SimulationFoodOrderRuntimeAdapterTests` | `Ssalddel.Simulation.Tests/SimulationFoodOrderRuntimeAdapterTests.cs` |
 | `Ssalddel.Simulation.Tests.가상동네배치기준Tests` | `Ssalddel.Simulation.Tests/가상동네배치기준Tests.cs` |
 | `Ssalddel.Simulation.Tests.가상동네하루Tests` | `Ssalddel.Simulation.Tests/가상동네하루Tests.cs` |
@@ -164,6 +159,7 @@
 | `Ssalddel.Simulation.Application.I세계상호작용E9변화봉투Module` | `-` | `` | `` | `` | `Excluded` |
 | `Ssalddel.Simulation.Application.I세계상호작용E단계Module` | `-` | `` | `` | `` | `Excluded` |
 | `Ssalddel.Simulation.Application.I세계상호작용E단계ModuleSet` | `-` | `` | `` | `` | `Excluded` |
+| `Ssalddel.Simulation.Application.LocalBusinessWorkflowRuntimeFactory` | `E2` | `E2.LocalAuthorityAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.LocalSimulationRuntime` | `E2` | `E2.LocalAuthorityAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.NullSimulationPlayableLoopEngineTraceSink` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.PyeongchangSimulationWorldUI기획Factory` | `E2` | `` | `` | `` | `Annotated` |
@@ -447,6 +443,9 @@
 | `Ssalddel.Simulation.Infrastructure.InMemorySimulationOnlineWorldCheckpointStore` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Infrastructure.InMemorySimulationSessionSaveStore` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Infrastructure.InMemory경영SimulationSessionStore` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Infrastructure.RemoteBusinessWorkflowRuntimeFactory` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Infrastructure.RemoteSimulationFoodOrderRuntime` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Infrastructure.RemoteSimulationLogisticsRuntime` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Persistence.SimulationFarmRealityEvidenceStore` | `E6` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Persistence.SimulationOnlineWorldCheckpointStore` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Persistence.SimulationSessionDbContextDesignTimeFactory` | `E2` | `` | `` | `` | `Annotated` |
@@ -499,6 +498,7 @@
 | `Ssalddel.Simulation.Server.Controllers.경영Simulation턴결정Controller` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.DisabledSimulationFarmRealityEvidenceStore` | `E6` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.SimulationWorldTileArtifactContentService` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.BusinessWorkflowRuntimeCompositionTests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.InteriorLayoutEngineTests` | `E3` | `E3.DeterminismRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.LocalSimulationRuntimeTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.PyeongchangRepresentativeSelectionTests` | `E3` | `` | `` | `` | `Annotated` |

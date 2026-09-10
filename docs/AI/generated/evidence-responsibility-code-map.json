@@ -16,7 +16,7 @@
       "managementSystem": "G1",
       "koreanName": "\uC2E4\uD589 \uACBD\uACC4",
       "technicalName": "E2\uC2E4\uD589\uACBD\uACC4Module",
-      "primaryCount": 266,
+      "primaryCount": 270,
       "secondaryCount": 0
     },
     {
@@ -24,7 +24,7 @@
       "managementSystem": "G1",
       "koreanName": "\uD68C\uADC0 \uC99D\uAC70",
       "technicalName": "E3\uD68C\uADC0\uC99D\uAC70Module",
-      "primaryCount": 268,
+      "primaryCount": 269,
       "secondaryCount": 1
     },
     {
@@ -136,7 +136,7 @@
       "koreanName": "\uB85C\uCEEC \uAD8C\uC704 Adapter",
       "technicalName": "E2\uB85C\uCEEC\uAD8C\uC704AdapterModule",
       "responsibility": "Solo LocalProcess\uC5D0\uC11C \uACF5\uD1B5 Simulation Core\uB97C \uC2E4\uD589\uD55C\uB2E4.",
-      "primaryCount": 1,
+      "primaryCount": 2,
       "secondaryCount": 0
     },
     {
@@ -145,7 +145,7 @@
       "koreanName": "\uC6D0\uACA9 Host Adapter",
       "technicalName": "E2\uC6D0\uACA9HostAdapterModule",
       "responsibility": "Hosted Server\uC5D0\uC11C \uAC19\uC740 Core\uB97C HTTP \uACBD\uACC4\uB85C \uB178\uCD9C\uD55C\uB2E4.",
-      "primaryCount": 12,
+      "primaryCount": 15,
       "secondaryCount": 0
     },
     {
@@ -190,7 +190,7 @@
       "koreanName": "\uACC4\uC57D \uD68C\uADC0",
       "technicalName": "E3\uACC4\uC57D\uD68C\uADC0Module",
       "responsibility": "StableId\u00B7\uC694\uCCAD\u00B7\uC751\uB2F5\u00B7WI metadata \uACC4\uC57D\uC758 \uD68C\uADC0\uB97C \uAC80\uC99D\uD55C\uB2E4.",
-      "primaryCount": 32,
+      "primaryCount": 33,
       "secondaryCount": 0
     },
     {
@@ -2065,7 +2065,11 @@
       "componentName": "Ssalddel.Simulation.Application.LocalBusinessWorkflowRuntimeFactory",
       "memberKind": "Type",
       "sourcePath": "Ssalddel.Simulation.Application/RuntimeCore/LocalBusinessWorkflowRuntimeFactory.cs",
-      "coverageState": "Uncovered",
+      "coverageState": "Annotated",
+      "primaryEvidenceStage": "E2",
+      "responsibility": "LocalProcess\uC758 \uAE30\uC874 Simulation Core\uB97C \uACF5\uD1B5 \uC5C5\uBB34 \uD750\uB984 Runtime\uC73C\uB85C \uC870\uB9BD\uD55C\uB2E4.",
+      "boundary": "\uC0C8 \uC0C1\uD0DC \uAD8C\uC704\uB97C \uB9CC\uB4E4\uC9C0 \uC54A\uACE0 \uAC19\uC740 LocalSimulationRuntime\uACFC Session\uC744 \uACF5\uC720\uD55C\uB2E4.",
+      "primarySubmoduleKey": "E2.LocalAuthorityAdapter",
       "secondaryEvidenceStages": [],
       "secondarySubmoduleKeys": [],
       "worldInteractionIds": [],
@@ -8113,7 +8117,11 @@
       "componentName": "Ssalddel.Simulation.Infrastructure.RemoteBusinessWorkflowRuntimeFactory",
       "memberKind": "Type",
       "sourcePath": "Ssalddel.Simulation.Infrastructure/RemoteBusinessWorkflowRuntimeFactory.cs",
-      "coverageState": "Uncovered",
+      "coverageState": "Annotated",
+      "primaryEvidenceStage": "E2",
+      "responsibility": "RemoteHost\uC758 \uAE30\uC874 Simulation HTTP \uD3EC\uD2B8\uB97C \uACF5\uD1B5 \uC5C5\uBB34 \uD750\uB984 Runtime\uC73C\uB85C \uC870\uB9BD\uD55C\uB2E4.",
+      "boundary": "\uC6D0\uACA9 \uC624\uB958\uB97C LocalProcess\uB85C \uC790\uB3D9 \uC804\uD658\uD558\uAC70\uB098 \uC11C\uBC84 \uAD8C\uC704 \uC0C1\uD0DC\uB97C \uBCF5\uC81C\uD558\uC9C0 \uC54A\uB294\uB2E4.",
+      "primarySubmoduleKey": "E2.RemoteHostAdapter",
       "secondaryEvidenceStages": [],
       "secondarySubmoduleKeys": [],
       "worldInteractionIds": [],
@@ -8128,7 +8136,11 @@
       "componentName": "Ssalddel.Simulation.Infrastructure.RemoteSimulationFoodOrderRuntime",
       "memberKind": "Type",
       "sourcePath": "Ssalddel.Simulation.Infrastructure/RemoteSimulationFoodOrderRuntime.cs",
-      "coverageState": "Uncovered",
+      "coverageState": "Annotated",
+      "primaryEvidenceStage": "E2",
+      "responsibility": "RemoteHost\uC758 \uC74C\uC2DD \uC8FC\uBB38\u00B7\uC74C\uC2DD\uC810 \uC751\uB2F5\u00B7\uBC30\uB2EC \uC218\uB839 \uD3EC\uD2B8\uB97C \uAE30\uC874 Simulation API\uB85C \uC804\uB2EC\uD55C\uB2E4.",
+      "boundary": "\uC5C5\uBB34 \uADDC\uCE59\u00B7\uC778\uC99D\u00B7\uC0C1\uD0DC \uAD8C\uC704\uB97C \uC7AC\uAD6C\uD604\uD558\uC9C0 \uC54A\uB294 HTTP Adapter\uB2E4.",
+      "primarySubmoduleKey": "E2.RemoteHostAdapter",
       "secondaryEvidenceStages": [],
       "secondarySubmoduleKeys": [],
       "worldInteractionIds": [],
@@ -8143,7 +8155,11 @@
       "componentName": "Ssalddel.Simulation.Infrastructure.RemoteSimulationLogisticsRuntime",
       "memberKind": "Type",
       "sourcePath": "Ssalddel.Simulation.Infrastructure/RemoteSimulationLogisticsRuntime.cs",
-      "coverageState": "Uncovered",
+      "coverageState": "Annotated",
+      "primaryEvidenceStage": "E2",
+      "responsibility": "RemoteHost\uC758 \uBC30\uCC28\u00B7\uBC30\uC1A1\u00B7\uCC3D\uACE0 \uBB3C\uB958 \uD3EC\uD2B8\uB97C \uAE30\uC874 Simulation API\uB85C \uC804\uB2EC\uD55C\uB2E4.",
+      "boundary": "\uC5C5\uBB34 \uADDC\uCE59\u00B7\uC0C1\uD0DC \uAD8C\uC704\uB97C \uC7AC\uAD6C\uD604\uD558\uC9C0 \uC54A\uB294 HTTP Adapter\uB2E4.",
+      "primarySubmoduleKey": "E2.RemoteHostAdapter",
       "secondaryEvidenceStages": [],
       "secondarySubmoduleKeys": [],
       "worldInteractionIds": [],
@@ -9206,7 +9222,11 @@
       "componentName": "Ssalddel.Simulation.Tests.BusinessWorkflowRuntimeCompositionTests",
       "memberKind": "Type",
       "sourcePath": "Ssalddel.Simulation.Tests/BusinessWorkflowRuntimeCompositionTests.cs",
-      "coverageState": "Uncovered",
+      "coverageState": "Annotated",
+      "primaryEvidenceStage": "E3",
+      "responsibility": "\uACF5\uD1B5 \uC5C5\uBB34 \uD750\uB984 Runtime\uC758 Local\u00B7Remote \uC870\uB9BD\uACFC \uC2E4\uD589 \uC704\uCE58 \uACBD\uACC4\uB97C \uD68C\uADC0 \uAC80\uC99D\uD55C\uB2E4.",
+      "boundary": "\uC790\uB3D9 \uC2DC\uD5D8\uC740 \uC2E4\uC81C \uC11C\uBC84 \uC5F0\uACB0\u00B7Unity Play Mode\u00B7Game View \uC99D\uAC70\uAC00 \uC544\uB2C8\uB2E4.",
+      "primarySubmoduleKey": "E3.ContractRegression",
       "secondaryEvidenceStages": [],
       "secondarySubmoduleKeys": [],
       "worldInteractionIds": [],
@@ -18678,46 +18698,16 @@
   ],
   "coverage": {
     "candidateTypeCount": 829,
-    "annotatedTypeCount": 813,
+    "annotatedTypeCount": 818,
     "excludedTypeCount": 3,
-    "uncoveredTypeCount": 13,
+    "uncoveredTypeCount": 8,
     "annotatedMethodCount": 17
   },
   "diagnostics": [
     {
       "severity": "Error",
       "code": "EVIDENCE001",
-      "componentId": "Ssalddel.Simulation.Application:Ssalddel.Simulation.Application.LocalBusinessWorkflowRuntimeFactory",
-      "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-    },
-    {
-      "severity": "Error",
-      "code": "EVIDENCE001",
       "componentId": "Ssalddel.Simulation.Contracts:Ssalddel.Simulation.Contracts.Simulation\uC74C\uC2DD\uBC30\uB2EC\uC218\uBA85\uC8FC\uAE30Adapter",
-      "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-    },
-    {
-      "severity": "Error",
-      "code": "EVIDENCE001",
-      "componentId": "Ssalddel.Simulation.Infrastructure:Ssalddel.Simulation.Infrastructure.RemoteBusinessWorkflowRuntimeFactory",
-      "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-    },
-    {
-      "severity": "Error",
-      "code": "EVIDENCE001",
-      "componentId": "Ssalddel.Simulation.Infrastructure:Ssalddel.Simulation.Infrastructure.RemoteSimulationFoodOrderRuntime",
-      "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-    },
-    {
-      "severity": "Error",
-      "code": "EVIDENCE001",
-      "componentId": "Ssalddel.Simulation.Infrastructure:Ssalddel.Simulation.Infrastructure.RemoteSimulationLogisticsRuntime",
-      "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-    },
-    {
-      "severity": "Error",
-      "code": "EVIDENCE001",
-      "componentId": "Ssalddel.Simulation.Tests:Ssalddel.Simulation.Tests.BusinessWorkflowRuntimeCompositionTests",
       "message": "\uB300\uD45C E \uCC45\uC784 \uB610\uB294 \uC0AC\uC720 \uC788\uB294 \uC81C\uC678\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
     },
     {
