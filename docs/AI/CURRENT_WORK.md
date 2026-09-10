@@ -5,7 +5,7 @@
 - [기준 문서](../Architecture/업무흐름Runtime.md)와 [구현·검증 보고](../Reports/업무흐름Runtime-공통조립-2026-09-10.md): `Ssalddel.BusinessWorkflow` 공통 프로젝트와 `IBusinessWorkflowRuntime` facade로 주문·음식점·배차·배송·창고 포트를 조립했다. 역할별 포트는 같은 하위 원장을 사용하며 상태를 복제하지 않는다.
 - 실행 API와 파일 이름은 `BusinessWorkflow`, `WorkflowRule`, `BusinessObjectInteraction`으로 정리했다. 오행·괘상은 선택적 `WorkflowClassificationMetadata`로만 보존하며 `IsExecutionAuthority=false`이고 실행 판정에 사용하지 않는다.
 - 웹·모바일은 명시적 `RemoteHost`, Unity Solo는 기존 `LocalSimulationRuntime`을 공유하는 `LocalProcess` 조립을 사용한다. 실패 시 실행 위치 자동 전환은 없다.
-- 공통 Runtime 집중 시험 8/8, 규칙·객체 결속 집중 시험 14/14, `Ssalddel.v3.5.slnx` build 오류 0을 확인했다. Unity package와 소스 연결은 반영했지만 Editor import·Play Mode·Game View·실제 서버 연결은 미검증이다.
+- 공통 Runtime 집중 시험 8/8, 규칙·객체 결속 집중 시험 14/14, `Ssalddel.v3.5.slnx`와 `Ssalddel.Unity.slnx`, 공공데이터 importer build 오류 0을 확인했다. Unity package와 소스 연결은 반영했지만 Editor import·Play Mode·Game View·실제 서버 연결은 미검증이다.
 
 ## 법정동별 공간 패키지·중화동 관측 재고 (2026-09-09)
 
