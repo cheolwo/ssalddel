@@ -1,6 +1,6 @@
 {
   "schemaVersion": "codex-playable-loop-goals.v4",
-  "revision": "codex-playable-loop-goals.r142",
+  "revision": "codex-playable-loop-goals.r144",
   "playableLoopCatalogPath": "eng/execution-ledgers/playable-loops.json",
   "worldInteractionDeliveryPriorityPath": "eng/execution-ledgers/world-interaction-delivery-priorities.json",
   "evidencePackageCatalogPath": "eng/execution-ledgers/evidence-packages.json",
@@ -124,7 +124,7 @@
         { "path": "docs/Architecture/PlayableLoops/Nature지식습득-E5공간배치연구.r1.md", "sha256": "5FA7B245C7B93189DA4B77A0C9E2E165EEDED0F2BEF1FEA89AD29822F85027A4" }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-basic-herbal-recovery.e7-work-order.json",
-      "workOrderSha256": "9B974AFE21BB8F5983B9F8A036187738A288B5E3B81451D50192F389F34A6F6F",
+      "workOrderSha256": "978B061542744DA56B29ECE93D2DC095560B041D73A5E4ADC67CAA2D778FFF9F",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature기초약초회복.md",
@@ -152,7 +152,7 @@
         {"path": "docs/Architecture/PlayableLoops/Nature야영지방문자임시체류-E5표현연구.r2.md", "sha256": "847D2A57CA215CD9B3310B2AD70331CF3A8F2D7586492E1964621E98346C67E0"}
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-camp-visitor-stay.e7-work-order.json",
-      "workOrderSha256": "D32C405875A4D3663E9A71D600910DEFCF7512769F9E36CEAD6A7E1314F3C2B4",
+      "workOrderSha256": "861E71D24E591FC07AC45D49D995AF17EEA366DA2DF1B213A92FF0DE0BB4ACEE",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature야영지방문자임시체류.md",
@@ -187,7 +187,7 @@
         {"path": "docs/Architecture/PlayableLoops/Farm경작세계발현E5-공간배치연구.r1.md", "sha256": "EADA84A0CA49E2D0BE986866420030612249CC622398F06C7BE83A72B57711B0"}
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -238,7 +238,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-woodcutting-animation.e7-work-order.json",
-      "workOrderSha256": "FEFB471028C5788E34C1DD5B0CC6D0FD7A7A16158A967A80997FCE63E8A72E7A",
+      "workOrderSha256": "AD2763F77660480D23DB9A548F072350953DBF6143958A3136EB8CD69FF305AD",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature벌목동작-Blender제작승인.md",
@@ -280,7 +280,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-woodcutting-animation.e7-work-order.json",
-      "workOrderSha256": "FEFB471028C5788E34C1DD5B0CC6D0FD7A7A16158A967A80997FCE63E8A72E7A",
+      "workOrderSha256": "AD2763F77660480D23DB9A548F072350953DBF6143958A3136EB8CD69FF305AD",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature벌목동작-Blender제작승인.md",
@@ -319,7 +319,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -354,7 +354,7 @@
         },
         {
           "path": "docs/Architecture/PlayableLoops/PlanningSessions/건물공간배치/landscape-composition.inquiry.r1.md",
-          "sha256": "ABF57E4907FAC5A152EA08CFC5AAEAF24C172C0731809B0B6AAF7785131731EC"
+          "sha256": "0E24DE6FA9B30AA91503B02851403450BD339470F486C3B0B6B2EF92BF01C46E"
         },
         {
           "path": "docs/Architecture/PlayableLoops/Farm경관-LS01-공간배치연구.md",
@@ -362,7 +362,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -403,7 +403,7 @@
         },
         {
           "path": "docs/Architecture/PlayableLoops/PlanningSessions/건물공간배치/landscape-composition.inquiry.r1.md",
-          "sha256": "ABF57E4907FAC5A152EA08CFC5AAEAF24C172C0731809B0B6AAF7785131731EC"
+          "sha256": "0E24DE6FA9B30AA91503B02851403450BD339470F486C3B0B6B2EF92BF01C46E"
         },
         {
           "path": "docs/Architecture/PlayableLoops/Farm경작세계발현E5-공간배치연구.r2.md",
@@ -411,7 +411,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -435,7 +435,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-woodcutting-animation.e7-work-order.json",
-      "workOrderSha256": "FEFB471028C5788E34C1DD5B0CC6D0FD7A7A16158A967A80997FCE63E8A72E7A",
+      "workOrderSha256": "AD2763F77660480D23DB9A548F072350953DBF6143958A3136EB8CD69FF305AD",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature벌목동작-Blender제작승인.md",
@@ -468,7 +468,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-woodcutting-animation.e7-work-order.json",
-      "workOrderSha256": "FEFB471028C5788E34C1DD5B0CC6D0FD7A7A16158A967A80997FCE63E8A72E7A",
+      "workOrderSha256": "AD2763F77660480D23DB9A548F072350953DBF6143958A3136EB8CD69FF305AD",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature벌목동작-Blender제작승인.md",
@@ -517,7 +517,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-fb01-harvest-delegation.e7-work-order.json",
-      "workOrderSha256": "438C600EAFCE605762414772B8DECE8B0BD4F927745EEEDD8A1455BCE10949D6",
+      "workOrderSha256": "6445989C69D14FC19B5407D67A5FBBEB2B933AF49C0624A5222350FD6A9845F7",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm생활위임-FB01개발승인보완.md",
@@ -554,7 +554,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-herbal-hb01-contents.e7-work-order.json",
-      "workOrderSha256": "104B83293922CD8E3022FECA180723FAD2D6496E3032F60EE5B32ECCEB7412A1",
+      "workOrderSha256": "D9E3FD16A16DE5490859DBA8F5C32045AD3F70220468E9DB7DA75263E5F9DEB3",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature약초차-HB01개발승인보완.md",
@@ -588,7 +588,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/local-npc-dialogue-foundation.e7-work-order.json",
-      "workOrderSha256": "B89F46842ECAE456479BF6BB01FACA2025420436072EF874F65C3C0CD1059920",
+      "workOrderSha256": "54E8D4A7AAB7B2946F4F372050E9857E61949CA451DB84DC221E2D198CFC03E3",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/로컬Npc대화지원기반.md",
@@ -622,11 +622,11 @@
       "baselineFiles": [
         {
           "path": "docs/Architecture/PlayableLoops/Nature세계자원재생E3.md",
-          "sha256": "f9a3e2043ba05a31f142615663aa061bf232e39d757aa7efd58d1d53bfd941cf"
+          "sha256": "F9A3E2043BA05A31F142615663AA061BF232E39D757AA7EFD58D1D53BFD941CF"
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-resource-regeneration.e7-work-order.json",
-      "workOrderSha256": "e288f8df77268013e27b4d954dc44d88da2ef5611adbda39e697863dc05cf4f1",
+      "workOrderSha256": "B52BE89E3B45F16243F8AC5CF5B8E0815F9B468BC0EE85C25B23E1135FDFC4F7",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature세계자원재생E3.md",
@@ -667,7 +667,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-basic-herbal-recovery.e7-work-order.json",
-      "workOrderSha256": "9B974AFE21BB8F5983B9F8A036187738A288B5E3B81451D50192F389F34A6F6F",
+      "workOrderSha256": "978B061542744DA56B29ECE93D2DC095560B041D73A5E4ADC67CAA2D778FFF9F",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature기초약초회복.md",
@@ -715,7 +715,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-camp-visitor-stay.e7-work-order.json",
-      "workOrderSha256": "D32C405875A4D3663E9A71D600910DEFCF7512769F9E36CEAD6A7E1314F3C2B4",
+      "workOrderSha256": "861E71D24E591FC07AC45D49D995AF17EEA366DA2DF1B213A92FF0DE0BB4ACEE",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature야영지방문자임시체류.md",
@@ -767,7 +767,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -801,7 +801,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-stamina-natural-recovery.e7-work-order.json",
-      "workOrderSha256": "C3F7A6DC357977C6D5E577591E011A4FA1C3B5C732476DE9BA836545EE2A17B1",
+      "workOrderSha256": "83768166EAF0308235A3A7495388808A7B50D5D5394D4257F19499C600CE06B6",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/플레이어행동체력자연회복.md",
@@ -845,7 +845,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-      "workOrderSha256": "CEF233D99C8FCF6A588999BF85B9AA359CBEEF71C14D073830CAD423C886F6E7",
+      "workOrderSha256": "7EC62D88A77451D9A11306CA780878B4A1CFEA781EBBB869E630320E820D10DB",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
@@ -879,7 +879,7 @@
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-herbal-hb01-contents.e7-work-order.json",
-      "workOrderSha256": "104B83293922CD8E3022FECA180723FAD2D6496E3032F60EE5B32ECCEB7412A1",
+      "workOrderSha256": "D9E3FD16A16DE5490859DBA8F5C32045AD3F70220468E9DB7DA75263E5F9DEB3",
       "planningGate": {
         "statusCode": "Approved",
         "designDocumentRef": "docs/Architecture/PlayableLoops/Nature약초차-HB01개발승인보완.md",
@@ -912,18 +912,18 @@
       "dependsOnWorkItemIds": [],
       "baselineFiles": [
         {
-          "path": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md",
-          "sha256": "1B0BDA2D9859372CF6D4E4F42C358BE18F7CD5512B9F8C61515C7F49311FFA7D"
+          "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+          "sha256": "938DE55F56D99CA1B733739B3D09CFFCF1C549D5D940394A2E2BFE9BEF6BBFFF"
         }
       ],
       "workOrderRef": "eng/execution-ledgers/work-orders/nature-logging-focus-meditation.e7-work-order.json",
-      "workOrderSha256": "3EF0D631CB0E1FEE47E178AC664ECCD9B3DD403FCB9DD0A7F4CD066ECE1094E5",
+      "workOrderSha256": "4F8D3FA14D0374BB5093F5EEB789AE75BC936665A41225DC2094F62C6AA45F65",
       "planningGate": {
         "statusCode": "Approved",
-        "designDocumentRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md",
-        "designRevision": "dual-possession-alchemist-succession.r63",
-        "designHashSha256": "1B0BDA2D9859372CF6D4E4F42C358BE18F7CD5512B9F8C61515C7F49311FFA7D",
-        "approvalEvidenceRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md"
+        "designDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+        "designRevision": "hex03-campaign.r11",
+        "designHashSha256": "938DE55F56D99CA1B733739B3D09CFFCF1C549D5D940394A2E2BFE9BEF6BBFFF",
+        "approvalEvidenceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
       }
     }
   ],
@@ -1146,6 +1146,17 @@
     },
     {
       "queueOrder": 19,
+      "loopStableId": "playable-loop:player-npc-learning-focus.v1",
+      "areaCode": "Nature",
+      "completionRoleCode": "Extension",
+      "targetEvidenceStage": "E7",
+      "targetClosureStateCode": "PlayClosed",
+      "goalStateCode": "Queued",
+      "activationPrerequisiteLoopStableIds": [],
+      "nextWorldInteractionId": "WI-NATURE-06"
+    },
+    {
+      "queueOrder": 20,
       "loopStableId": "playable-loop:farm-player-placement.v1",
       "areaCode": "Farm",
       "completionRoleCode": "Extension",
@@ -1158,7 +1169,7 @@
       "nextWorldInteractionId": "WI-WORLD-03"
     },
     {
-      "queueOrder": 20,
+      "queueOrder": 21,
       "loopStableId": "playable-loop:nature-hans-farm-fence-restoration.v1",
       "areaCode": "Farm",
       "completionRoleCode": "Extension",
@@ -1169,7 +1180,7 @@
       "nextWorldInteractionId": "WI-NATURE-19"
     },
     {
-      "queueOrder": 21,
+      "queueOrder": 22,
       "loopStableId": "playable-loop:town-arcana-context.v1",
       "areaCode": "Town",
       "completionRoleCode": "Extension",

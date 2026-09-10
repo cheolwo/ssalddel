@@ -1,6 +1,6 @@
 {
   "schemaVersion": "mirror-graph-map-overlay-catalog.v1",
-  "revision": "mirror-graph-map-overlay-catalog.r5",
+  "revision": "mirror-graph-map-overlay-catalog.r6",
   "title": "Mirror Graph Map 레이어·오버레이 대장",
   "meaning": "기준 공간 topology를 한 번만 유지하고 기상·시간, 운송, 위협·경비, 물류·보급, 플레이어 선택을 안정 노드·엣지 위의 판본화된 조회 레이어로 합성한다.",
   "compositionOrder": [
@@ -61,7 +61,7 @@
         { "edgeRef": "gm-edge:hub-outbound-to-yodong-gateway", "routeStateCode": "Unknown", "scopeCode": "PlanningOnlyUnresolvedRoute",
           "costComponents": [{ "dimensionCode": "Time", "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown", "contributionKey": "weather-time:travel-time", "combinationPolicyCode": "Annotation" }],
           "capacity": { "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown" },
-          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
+          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
         }
       ],
       "valueBoundary": "실제 시간·날씨 상태 사본과 상한이 없으므로 현재 경로 상태와 시간 값은 Unknown이다."
@@ -78,7 +78,7 @@
             { "dimensionCode": "Money", "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown", "contributionKey": "transport:money", "combinationPolicyCode": "Annotation" }
           ],
           "capacity": { "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown" },
-          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
+          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
         }
       ],
       "valueBoundary": "승인된 수단·거리·비용·용량 값과 실제 경로가 없으므로 값을 만들지 않는다."
@@ -92,7 +92,7 @@
         { "edgeRef": "gm-edge:hub-outbound-to-yodong-gateway", "routeStateCode": "Unknown", "scopeCode": "PlanningOnlyUnresolvedRoute",
           "costComponents": [{ "dimensionCode": "Risk", "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown", "contributionKey": "threat-security:risk", "combinationPolicyCode": "Constraint" }],
           "capacity": { "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown" },
-          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
+          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
         }
       ],
       "valueBoundary": "실제 서식지·침입·최근 사건·경비 상태가 없으므로 거리만으로 조우나 차단을 만들지 않는다."
@@ -106,7 +106,7 @@
         { "edgeRef": "gm-edge:hub-outbound-to-yodong-gateway", "routeStateCode": "Unknown", "scopeCode": "PlanningOnlyUnresolvedRoute",
           "costComponents": [{ "dimensionCode": "Resource", "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown", "contributionKey": "logistics-supply:resource", "combinationPolicyCode": "Annotation" }],
           "capacity": { "valueStateCode": "Unknown", "value": null, "unitCode": "Unknown" },
-          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
+          "evidence": { "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md", "sourceRevision": "long-route-encounter-planning.r3", "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904", "observedAt": "NotObserved", "validUntil": "NotEstablished", "freshnessStateCode": "PlanningCurrent" }
         }
       ],
       "valueBoundary": "한 엣지 차단과 망 전체 Blocked, 경로 존재와 InsufficientCapacity를 분리하며 실제 화물·기한·용량 없이 결과를 확정하지 않는다."

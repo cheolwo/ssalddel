@@ -3,16 +3,16 @@
 > 이 문서는 파일 기반 계획 그래프의 생성 조회다. ReferenceAvailable은 기존 실제 E5 공간 사본의 식별자를 확인했다는 뜻이며, 이번 작업의 Unity Scene 배치·Play Mode 이동·입력·결과 또는 E5/E6 승격 증거가 아니다.
 
 - 그래프 맵: graph-map:mirror:northern-life-hub-discovery.v1
-- 판본: mirror-graph-map-plan.northern-life-hub-discovery.r10
+- 판본: mirror-graph-map-plan.northern-life-hub-discovery.r13
 - 원본: [eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json](../../../eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json)
-- 원본 SHA-256: b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc
+- 원본 SHA-256: 55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e
 - 기준 공간 사본: simulation-world-actual-e5-spatial-output.r6 / AreaSet 4 / Graph 19 / 직접 결속 42
-- 기준 WI: simulation-world-interactions.r43 / 105개
-- federation: 하위 맵 6 / port 12 / connector 6
+- 기준 WI: simulation-world-interactions.r48 / 133개
+- federation: 하위 맵 7 / port 14 / connector 8
 - 이동 능력 프로필: 6 / 오버레이 9
-- 레이어: 6 / 엣지 효과 4 / 현행 기획 판정 21
+- 레이어: 6 / 엣지 효과 4 / 현행 기획 판정 59
 - 배치 규칙: Area 프로필 5 / 기존 규칙 21 / 직접 결속 5 / 규칙 결속 제약 3
-- 레벨 3 코드 결속: 6 / 소스 파일 13 / 실제 결속 미검증 대상 48
+- 레벨 3 코드 결속: 6 / 소스 파일 13 / 실제 결속 미검증 대상 60
 - 정규화 표본: 대상 9 / 관계 7 / 차단 1
 - 이번 실제 Runtime 검증: false
 
@@ -73,7 +73,8 @@
 | gm-subgraph:nature-discovery<br>Nature 발견·Farm 경계 | NatureWorldPlanning / AreaBoundary | 14 | 13 | 9 | 3 |
 | gm-subgraph:hans-precision-axe<br>한스 정밀 작업 도끼 발견·수리·반환 | NatureStoryPlanning / OptionalItemLineage | 3 | 2 | 2 | 1 |
 | gm-subgraph:farm-production<br>Farm 생산·집하·상차 | FarmWorldPlanning / IndependentArea | 3 | 2 | 1 | 2 |
-| gm-subgraph:hub-logistics<br>Hub 입고·차량·출고 | HubWorldPlanning / IndependentArea | 7 | 6 | 3 | 3 |
+| gm-subgraph:hub-logistics<br>Hub 입고·차량·출고 | HubWorldPlanning / IndependentArea | 11 | 11 | 6 | 3 |
+| gm-subgraph:regional-route-control<br>지역 장거리 경로 통제·중계 | RegionalRoutePlanning / OptionalExternalRoute | 1 | 0 | 2 | 2 |
 | gm-subgraph:town-life<br>Town 시장·생활 | TownWorldPlanning / IndependentArea | 4 | 3 | 1 | 1 |
 | gm-subgraph:yodong-gateway<br>요동성 방비 관문 | YodongPlanning / UnresolvedExternal | 3 | 2 | 1 | 2 |
 
@@ -85,6 +86,8 @@
 | gm-connector:farm-threat-hostile-network | gm-port:farm-deeper-threat:to-hostile-network → gm-port:hostile-network:from-farm-threat | gm-edge:deeper-threat-gateway-to-hostile-network | ExternalUnresolved | Unresolved |
 | gm-connector:hans-fence-precision-axe | gm-port:hans-broken-fence:to-precision-axe → gm-port:hans-broken-farm-axe:from-fence | gm-edge:hans-broken-fence-to-broken-farm-axe-storage | Discovery | Unresolved |
 | gm-connector:hub-yodong | gm-port:hub-outbound:to-yodong → gm-port:yodong:from-hub | gm-edge:hub-outbound-to-yodong-gateway | ExternalUnresolved | Unresolved |
+| gm-connector:hub-controlled-relay | gm-port:hub-outbound:to-yodong → gm-port:controlled-relay:from-hub | gm-edge:hub-outbound-to-controlled-relay | ExternalUnresolved | Unresolved |
+| gm-connector:controlled-relay-yodong | gm-port:controlled-relay:to-yodong → gm-port:yodong:from-hub | gm-edge:controlled-relay-to-yodong-gateway | ExternalUnresolved | Unresolved |
 
 ## 레벨 2 — 기존 배치 구조·제약 규칙 결속
 
@@ -133,6 +136,15 @@
 | gm-constraint:hans-house-repair-state-and-marker | GovernanceOnly | 없음 | 한스의 사후 발견·목재 소비·수리 상태·표식 의미를 보존하는 기획·표현 관문이며 배치 규칙을 새로 정의하지 않는다. |
 | gm-constraint:hans-house-damage-candidate-tool-blocked | GovernanceOnly | 없음 | 원본 불변 Blender 복사본 후보와 현재 도구 차단을 E4 후보 경계로 남기며 실제 자산 제작·배치 규칙이 아니다. |
 | gm-constraint:hans-life-base-boundary-unresolved | GovernanceOnly | 없음 | 한스 허락 뒤 제한 생활 거점의 역할과 미정 값을 보존하며 경비대 지휘소나 플레이어 소유 주택 배치 규칙을 만들지 않는다. |
+| gm-constraint:hub-circulation-registration-inspection-completion | GovernanceOnly | 없음 | Hub 업무 순서와 완료 권위를 보존하는 기획 제약이며 H1 좌표나 배치 수치를 새로 만들지 않는다. |
+| gm-constraint:hub-outbound-required-inputs | GovernanceOnly | 없음 | 출고 전 업무 입력과 대기 상태를 검증하는 권위 제약이며 물리 배치를 확정하지 않는다. |
+| gm-constraint:cargo-split-lineage-controlled-relay | GovernanceOnly | 없음 | 화물 분할·합류·회수 계보를 보존하는 업무 제약이며 중계 거점의 실제 위치를 만들지 않는다. |
+| gm-constraint:hub-multimodal-lane-transshipment | GovernanceOnly | 없음 | 운송 수단별 차로·설비 분리가 필요하다는 기획 관문이며 정확 폭·회전 반경·설비 배치는 아직 미정이다. |
+| gm-constraint:relay-capability-risk-not-hard-gate | GovernanceOnly | 없음 | 운송대 역량과 중계 권고의 판정 경계이며 중계소를 실제 공간에 배치하는 규칙이 아니다. |
+| gm-constraint:road-stable-id-versioned-upgrade-choice | GovernanceOnly | 없음 | 같은 도로 안정 ID의 선택형 판본 승격을 보존하며 현재 도로 형상이나 공사 배치를 계산하지 않는다. |
+| gm-constraint:roadwork-schedule-tradeoff | GovernanceOnly | 없음 | 공사 시간·비용·위험의 선택 대가를 보존하는 기획 제약이며 실제 공사 구간을 배치하지 않는다. |
+| gm-constraint:roadwork-protection-resource-exclusivity | GovernanceOnly | 없음 | 동시간 보호 자원의 중복 배정을 막는 권위 제약이며 경비·조명 객체 배치를 자동 생성하지 않는다. |
+| gm-constraint:hub-h4-external-areas-optional | GovernanceOnly | 없음 | 외부 Area를 필수 선행으로 만들지 않는 독립 개발 경계이며 새 Area나 연결 좌표를 생성하지 않는다. |
 | gm-constraint:hub-entry-contact-exit | PlacementRuleBound | gm-placement-rule:hub:inbound-inspection-putaway-sequence, gm-placement-rule:hub:outbound-staging-separation | 기존 H5 규칙의 식별·적용 범위만 결속 |
 | gm-constraint:route-capability-separation | PlacementRuleBound | gm-placement-rule:hub:vehicle-turning-radius, gm-placement-rule:town:service-traffic-control | 기존 H5 규칙의 식별·적용 범위만 결속 |
 | gm-constraint:season-does-not-rewrite-topology | GovernanceOnly | 없음 | 시간·표현이 권위 토폴로지를 바꾸지 못하게 하는 경계다. |
@@ -172,17 +184,22 @@ flowchart LR
     N20["Hub 입고·보관 접점"]
     N21["Hub 차량 마당"]
     N22["Hub 출고 접점"]
-    N23{{"Hub 미도착 화물·단서 조사<br/>미해결"}}
-    N24{{"미도착 화물 현장 확인<br/>미해결"}}
-    N25{{"화물 문제 예방·NPC 안도·회복<br/>미해결"}}
-    N26{{"Hub 사건 뒤 선택적 명상<br/>미해결"}}
-    N27["Town 시장 입고 접점"]
-    N28["Town 생활 광장"]
-    N29{{"Town 견습 공방 실패 작업대 관찰<br/>미해결"}}
-    N30{{"Town 견습과 작은 시험 batch<br/>미해결"}}
-    N31{{"거대 마수·적대 조직 위협망<br/>미해결"}}
-    N32{{"위협망 분할 대응<br/>미해결"}}
-    N33{{"요동성 방비 외부 관문<br/>미해결"}}
+    N23{{"Hub 차량·운송 수단 등록소<br/>미해결"}}
+    N24{{"Hub 화물 검수·접수장<br/>미해결"}}
+    N25{{"Hub 하역 대기장<br/>미해결"}}
+    N26{{"Hub 창고 입출고장<br/>미해결"}}
+    N27{{"장거리 중계·검문·안전 거점 후보<br/>미해결"}}
+    N28{{"Hub 미도착 화물·단서 조사<br/>미해결"}}
+    N29{{"미도착 화물 현장 확인<br/>미해결"}}
+    N30{{"화물 문제 예방·NPC 안도·회복<br/>미해결"}}
+    N31{{"Hub 사건 뒤 선택적 명상<br/>미해결"}}
+    N32["Town 시장 입고 접점"]
+    N33["Town 생활 광장"]
+    N34{{"Town 견습 공방 실패 작업대 관찰<br/>미해결"}}
+    N35{{"Town 견습과 작은 시험 batch<br/>미해결"}}
+    N36{{"거대 마수·적대 조직 위협망<br/>미해결"}}
+    N37{{"위협망 분할 대응<br/>미해결"}}
+    N38{{"요동성 방비 외부 관문<br/>미해결"}}
     N0 <-->|Traversal| N1
     N1 <-->|DiscoverySightline| N2
     N1 -.->|WorkHandoff| N3
@@ -203,20 +220,27 @@ flowchart LR
     N2 <-->|WorkHandoff| N18
     N18 <-->|Logistics| N19
     N19 -->|Logistics| N20
-    N20 <-->|Traversal| N21
-    N21 <-->|WorkHandoff| N22
     N20 -.->|WorkHandoff| N23
-    N23 -.->|Traversal| N24
+    N23 -.->|WorkHandoff| N24
     N24 -.->|WorkHandoff| N25
     N25 -.->|WorkHandoff| N26
-    N22 -->|Logistics| N27
-    N27 <-->|WorkHandoff| N28
-    N28 -.->|DiscoverySightline| N29
+    N26 -.->|Logistics| N21
+    N20 <-->|Traversal| N21
+    N21 <-->|WorkHandoff| N22
+    N20 -.->|WorkHandoff| N28
+    N28 -.->|Traversal| N29
     N29 -.->|WorkHandoff| N30
-    N16 -.->|ExternalGateway| N31
-    N31 -.->|WorkHandoff| N32
-    N32 -.->|ExternalGateway| N33
-    N22 -.->|ExternalGateway| N33
+    N30 -.->|WorkHandoff| N31
+    N22 -.->|ExternalGateway| N27
+    N27 -.->|ExternalGateway| N38
+    N22 -->|Logistics| N32
+    N32 <-->|WorkHandoff| N33
+    N33 -.->|DiscoverySightline| N34
+    N34 -.->|WorkHandoff| N35
+    N16 -.->|ExternalGateway| N36
+    N36 -.->|WorkHandoff| N37
+    N37 -.->|ExternalGateway| N38
+    N22 -.->|ExternalGateway| N38
 ```
 
 | 노드 | 역할 | 실현 상태 | WI | 실제 공간 참조 |
@@ -244,6 +268,11 @@ flowchart LR
 | gm-node:hub-receiving-storage<br>Hub 입고·보관 접점 | HubInboundContact | ExistingActualGraphRef / ReferenceAvailable | WI-LOG-04, WI-LOG-05, WI-HUB-03, WI-HUB-04 | landscape-graph:sim:pyeongchang:jinbu-hub.v1<br>node:actual-e5:jinbu-hub:space:hub-inbound-storage:hub-receiving-storage |
 | gm-node:hub-vehicle-yard<br>Hub 차량 마당 | HubObservationAndVehicleAccess | ExistingActualGraphRef / ReferenceAvailable | WI-HUB-06 | landscape-graph:sim:pyeongchang:hub-fulfillment-operations.v1<br>node:actual-e5:hub-fulfillment-operations:space:hub-outbound-vehicle:hub-vehicle-yard |
 | gm-node:hub-outbound-staging<br>Hub 출고 접점 | HubOutboundContact | ExistingActualGraphRef / ReferenceAvailable | WI-HUB-05, WI-HUB-06, WI-MARKET-01 | landscape-graph:sim:pyeongchang:hub-fulfillment-operations.v1<br>node:actual-e5:hub-fulfillment-operations:space:hub-outbound-vehicle:hub-outbound-staging |
+| gm-node:hub-vehicle-registration<br>Hub 차량·운송 수단 등록소 | HubVehicleRegistrationH1 | UnresolvedSpatial / Unresolved |  | 없음 |
+| gm-node:hub-cargo-inspection<br>Hub 화물 검수·접수장 | HubCargoInspectionH1 | UnresolvedSpatial / Unresolved |  | 없음 |
+| gm-node:hub-unloading-waiting<br>Hub 하역 대기장 | HubUnloadingWaitingH1 | UnresolvedSpatial / Unresolved |  | 없음 |
+| gm-node:hub-warehouse-inbound-outbound<br>Hub 창고 입출고장 | HubWarehouseInboundOutboundH1 | UnresolvedSpatial / Unresolved |  | 없음 |
+| gm-node:route-controlled-relay<br>장거리 중계·검문·안전 거점 후보 | ControlledRelayCheckpointSafeH1 | PlanningGateway / Unresolved |  | 없음 |
 | gm-node:hub-missing-cargo-investigation<br>Hub 미도착 화물·단서 조사 | MissingCargoInvestigation | PlanningGateway / Unresolved |  | 없음 |
 | gm-node:hub-missing-cargo-field-confirmation<br>미도착 화물 현장 확인 | HypothesisFieldConfirmation | PlanningGateway / Unresolved |  | 없음 |
 | gm-node:hub-cargo-relief-recovery<br>화물 문제 예방·NPC 안도·회복 | CargoReliefAndRecovery | PlanningGateway / Unresolved |  | 없음 |
@@ -278,12 +307,19 @@ flowchart LR
 | gm-edge:farm-production-to-work-yard<br>gm-node:farm-production → gm-node:farm-work-yard | WorkHandoff / Required | gm-capability:work-handoff | ReferenceAvailable | 양방향 | 수확 결과와 집하·포장 준비를 같은 공간으로 오인하지 않고 인계한다. |
 | gm-edge:farm-work-yard-to-loading-gate<br>gm-node:farm-work-yard → gm-node:farm-loading-gate | Logistics / Required | gm-capability:local-cargo | ReferenceAvailable | 양방향 | 작업마당·정비 여유·상차 관문을 순서 있는 화물 동선으로 읽는다. |
 | gm-edge:farm-loading-to-hub-receiving<br>gm-node:farm-loading-gate → gm-node:hub-receiving-storage | Logistics / Optional | gm-capability:inter-area-cargo | ReferenceAvailable | 단방향 | Farm과 Hub는 독립 실행을 유지하며 승인된 화물이 있을 때만 선택적으로 연결한다. |
+| gm-edge:hub-receiving-to-vehicle-registration<br>gm-node:hub-receiving-storage → gm-node:hub-vehicle-registration | WorkHandoff / Required | gm-capability:work-handoff | Unresolved | 단방향 | 기존 Hub 입고 접점은 실제 참조로 보존하고 세부 물류 순환은 등록 H1부터 별도 계획 계보로 시작한다. |
+| gm-edge:hub-registration-to-cargo-inspection<br>gm-node:hub-vehicle-registration → gm-node:hub-cargo-inspection | WorkHandoff / Required | gm-capability:work-handoff | Unresolved | 단방향 | 운송 수단 등록과 화물 검수는 서로 다른 H1이며 등록 성공이 화물 통과를 대신하지 않는다. |
+| gm-edge:hub-inspection-to-unloading-waiting<br>gm-node:hub-cargo-inspection → gm-node:hub-unloading-waiting | WorkHandoff / Required | gm-capability:work-handoff | Unresolved | 단방향 | 검수 통과 화물만 운송 수단별 하역 대기 순서와 설비 후보로 인계한다. |
+| gm-edge:hub-unloading-to-warehouse<br>gm-node:hub-unloading-waiting → gm-node:hub-warehouse-inbound-outbound | WorkHandoff / Required | gm-capability:work-handoff | Unresolved | 단방향 | 하역 대기와 창고 입출고·보관·환적 상태를 한 단계로 합치지 않는다. |
+| gm-edge:hub-warehouse-to-vehicle-yard<br>gm-node:hub-warehouse-inbound-outbound → gm-node:hub-vehicle-yard | Logistics / Required | gm-capability:inter-area-cargo | Unresolved | 단방향 | 적재 없음 또는 필수 출고 입력이 갖춰진 화물만 운송대 편성·차량 마당으로 넘어간다. |
 | gm-edge:hub-receiving-to-vehicle-yard<br>gm-node:hub-receiving-storage → gm-node:hub-vehicle-yard | Traversal / Required | gm-capability:walk-discovery | ReferenceAvailable | 양방향 | Hub의 입구·접점·출구를 한 화면에 뭉개지 않고 현장 이동과 광역 조회를 연결한다. |
 | gm-edge:hub-vehicle-yard-to-outbound<br>gm-node:hub-vehicle-yard → gm-node:hub-outbound-staging | WorkHandoff / Required | gm-capability:work-handoff | ReferenceAvailable | 양방향 | 차량 접근과 실제 출고 대기 상태를 분리한다. |
 | gm-edge:hub-receiving-to-missing-cargo-investigation<br>gm-node:hub-receiving-storage → gm-node:hub-missing-cargo-investigation | WorkHandoff / Optional | gm-capability:work-handoff | Unresolved | 양방향 | 예정과 실제 입고의 불일치가 확인될 때만 별도 사건 조사가 열리며 Hub 기본 입고 업무는 독립 실행을 유지한다. |
 | gm-edge:missing-cargo-investigation-to-field-confirmation<br>gm-node:hub-missing-cargo-investigation → gm-node:hub-missing-cargo-field-confirmation | Traversal / Optional | gm-capability:walk-discovery | Unresolved | 양방향 | 플레이어가 고른 가설과 근거를 현장 상태에 대조하며 틀린 가설이면 조사로 돌아갈 수 있다. |
 | gm-edge:field-confirmation-to-relief-recovery<br>gm-node:hub-missing-cargo-field-confirmation → gm-node:hub-cargo-relief-recovery | WorkHandoff / Optional | gm-capability:work-handoff | Unresolved | 단방향 | 확인된 원인과 실제 대응 결과만 NPC 안도·회복 후보에 인계한다. |
 | gm-edge:relief-recovery-to-optional-meditation<br>gm-node:hub-cargo-relief-recovery → gm-node:hub-optional-meditation | WorkHandoff / Optional | gm-capability:work-handoff | Unresolved | 단방향 | 명상은 회복 뒤의 선택이며 같은 결과를 다시 지급하거나 게임 진행을 막지 않는다. |
+| gm-edge:hub-outbound-to-controlled-relay<br>gm-node:hub-outbound-staging → gm-node:route-controlled-relay | ExternalGateway / Optional | gm-capability:unresolved-external | Unresolved | 단방향 | 중계·휴식은 권장 후보이며 충분한 수단·역량을 가진 운송대의 무정차 경로를 막지 않는다. |
+| gm-edge:controlled-relay-to-yodong-gateway<br>gm-node:route-controlled-relay → gm-node:yodong-defense-gateway | ExternalGateway / Optional | gm-capability:unresolved-external | Unresolved | 단방향 | 실제 목적지·좌표가 없는 상태에서 중계 H1을 거친 대체 경로 구조만 보존하며 요동성 결속을 확정하지 않는다. |
 | gm-edge:hub-outbound-to-town-receiving<br>gm-node:hub-outbound-staging → gm-node:town-market-receiving | Logistics / Optional | gm-capability:inter-area-cargo | ReferenceAvailable | 단방향 | Hub와 Town의 독립 업무를 유지하면서 확정된 출고만 운송 관계로 넘긴다. |
 | gm-edge:town-receiving-to-living-square<br>gm-node:town-market-receiving → gm-node:town-living-square | WorkHandoff / Optional | gm-capability:work-handoff | ReferenceAvailable | 양방향 | 후방 입고와 주민이 보는 시장·생활 접점을 구분한다. |
 | gm-edge:town-living-square-to-apprentice-workshop-failure<br>gm-node:town-living-square → gm-node:town-apprentice-workshop-failure | DiscoverySightline / Optional | gm-capability:discovery-sightline | Unresolved | 양방향 | Town 생활에서 공방 사건을 선택적으로 발견하며 Hub·Farm 완료를 입장 조건으로 만들지 않는다. |
@@ -325,6 +361,15 @@ flowchart LR
 | gm-constraint:hans-house-repair-state-and-marker | StateAndPresentationLineage | Blocking | StaticAndHumanReview | E4 | HansHouseRepairLineageOrMarkerInvalid | 플레이어 이탈·실재 목재·한스 접근·발견·소비·수리 경과를 보존하고 수리 필요→목재 확보→수리 중→수리됨을 구분하며 !/? 표식은 실제로 열린 상호작용 의미만 표시한다. |
 | gm-constraint:hans-house-damage-candidate-tool-blocked | PresentationCandidate | Blocking | StaticAndHumanReview | E4 | HansHouseDamageCandidatePromoted | 손상 집은 원본 Synty 자산을 수정하지 않는 프로젝트 전용 Blender 복사본 후보이며 Blender 환경·정확 Farmhouse·손상 부위·충돌·Bounds 검증 전 제작 명령이나 E5 할당으로 승격하지 않는다. |
 | gm-constraint:hans-life-base-boundary-unresolved | ConditionalLifeBase | Blocking | StaticAndHumanReview | E4 | HansLifeBaseBoundaryInvented | 생활 거점은 수리 관찰·한스 확인 대화·이용 허락 뒤 제한적으로 열리며 경비대 지휘소·무제한 창고·무료 치료소·플레이어 소유 주택으로 확대하지 않고 정확 회복·보관·폐쇄 값은 미정으로 남긴다. |
+| gm-constraint:hub-circulation-registration-inspection-completion | Topology | Blocking | StaticAndHumanReview | E4 | HubCirculationRequiredGateMissing | Hub H2 순환은 입차 뒤 등록→검수→하역 대기→창고 입출고→운송대 편성→출차 확인→이탈 순서를 보존하며 하역이나 등록만으로 완료하지 않는다. 기존 실제 접점의 넓은 표현은 이 세부 권위 순서를 우회하는 근거가 아니다. |
+| gm-constraint:hub-outbound-required-inputs | Authority | Blocking | StaticAndHumanReview | E4 | HubOutboundRequiredInputMissing | 화물 적재 출차 전 목적지 H1·수령 주체·운송 담당·도로 경로·출발 가능 시간·화물 수량과 상태 판본을 모두 확인한다. 하나라도 없으면 출고 대기로 남기며 시스템 후보는 자동 출차를 확정하지 않는다. |
+| gm-constraint:cargo-split-lineage-controlled-relay | Provenance | Blocking | StaticAndHumanReview | E4 | CargoSplitOrRouteChangeLineageInvalid | 화물은 적재 한도·기한·복수 목적지·긴급 물량·위험 분산 근거로 하위 묶음화할 수 있다. 출발 뒤 재분할·합류·차량 교체·경로 변경은 중계소·검문소·안전 거점에서만 판본 계보를 남기며 모든 하위 묶음이 도착·회수·손실 중 하나로 정리돼야 전체 완료다. |
+| gm-constraint:hub-multimodal-lane-transshipment | Capability | Blocking | StaticAndHumanReview | E4 | HubMultimodalLaneOrTransshipmentUnspecified | 공통 입구와 행정 기록은 공유하되 보행·손수레, 짐승·마차, 트럭, 마력 운송 H2의 전용 차로·하역 설비·노면 요구를 구분하고 환적은 창고·설비·화물 판본 계보를 가진다. 외형 차이만으로 운송 능력을 확정하지 않는다. |
+| gm-constraint:relay-capability-risk-not-hard-gate | Capability | Blocking | StaticAndHumanReview | E4 | RelayOrConvoyCapabilityPolicyInvalid | 장거리 중계·휴식은 권장 후보이며 충분한 운송 수단과 운전·선택적 호위·정비응급·화물 관리 역량이 있으면 무정차를 선택할 수 있다. 부족한 역할에 대응하는 위험만 Unknown 또는 가중 후보로 남기며 모든 역할을 절대 관문으로 만들지 않는다. |
+| gm-constraint:road-stable-id-versioned-upgrade-choice | Identity | Blocking | StaticAndHumanReview | E4 | RoadUpgradeIdentityOrChoiceInvalid | 자연 통행로→정비 비포장도로→주도로→특수 운송 대응도로 승격은 같은 안정 엣지의 판본화 상태로 관리한다. 교통량으로 잠그지 않고 정체·손실·미운송 재고·비용·유지비·예상 효과와 도로로 해결되지 않는 위협을 제시한 뒤 플레이어나 권한 NPC가 선택한다. |
+| gm-constraint:roadwork-schedule-tradeoff | Decision | Blocking | StaticAndHumanReview | E4 | RoadworkScheduleTradeoffMissing | 주간·야간·분할·긴급 전면 공사는 안전·운송 유지·기간·비용·운송 중단 대가를 분리해 제시한다. 야간 공사의 몬스터·마물·인건비 위험과 경비·조명·마법 보호 완화는 근거 없는 수치로 확정하지 않는다. |
+| gm-constraint:roadwork-protection-resource-exclusivity | Authority | Blocking | StaticAndHumanReview | E4 | RoadworkProtectionResourceDoubleBooked | 야간 공사에 배치한 경비대·조명·마법 보호 자원과 NPC는 같은 시간 다른 임무에 사용할 수 없다. 공사 안전을 높일 때 다른 도로·거점의 경비·대응 여력 감소를 함께 보여 주며 중복 배정하지 않는다. |
+| gm-constraint:hub-h4-external-areas-optional | Independence | Blocking | StaticAndHumanReview | E4 | HubH4ExternalAreaDependencyInvented | 첫 H4는 허브 중심 지역 물류권이며 Farm·Town·City를 필수 선행으로 강제하지 않는다. 기존 외부 연결은 선택 또는 역사 실제 참조로 보존하고 목적지가 미정인 새 연결을 Area 이름으로 추정하지 않는다. |
 | gm-constraint:hub-entry-contact-exit | Readability | Blocking | StaticAndHumanReview | E5 | HubReadabilityInvalid | Hub의 입구·접점·출구 내역을 구분해 읽을 수 있어야 하며 3인칭과 광역 시점이 같은 상태 사본을 소비해야 한다. |
 | gm-constraint:route-capability-separation | RouteCapability | Blocking | StaticAndPlayMode | E5 | RouteCapabilityInvalid | 보행·화물·차량 접근 능력을 분리하고 그래프 연결을 실제 Collider 통행이나 차량 운행 성공으로 확대하지 않는다. |
 | gm-constraint:season-does-not-rewrite-topology | TimeAndPresentation | Advisory | Static | E4 | SeasonTopologyMutation | 절기·날씨·Sky 표현은 발견 난도와 후보 표현에 영향을 줄 수 있지만 승인된 WI·경로·권위 상태를 조용히 바꾸지 않는다. |
@@ -395,9 +440,47 @@ flowchart LR
 | PLAN-GRAPH-PLANNING-INTEGRATION-001 | UpdateExisting | Integrated | graph-map:mirror:northern-life-hub-discovery.v1 | 현행 승인 기획을 안정 ID와 증분 관계로 통합하는 운영 기준을 검사한다. |
 | PLAN-GRAPH-LONG-ROUTE-ENCOUNTER-001 | CreateSubgraph | BlockedPendingRouteFixture | gm-edge:hub-outbound-to-yodong-gateway, gm-layer:weather-time, gm-layer:transport, gm-layer:threat-security, gm-layer:logistics-supply, gm-layer:player-choice | 레이어 계약은 통합하지만 실제 분절·병렬 경로는 좌표·수치·Goal/WI/E7이 없어 생성하지 않는다. |
 | PLAN-GRAPH-LAYER-FIRST-WORKFLOW-001 | UpdateExisting | Integrated | gm-layer:base-space, gm-layer:weather-time, gm-layer:transport, gm-layer:threat-security, gm-layer:logistics-supply, gm-layer:player-choice | 기준 공간을 복제하지 않는 레이어·비용·용량·근거·신선도·중복 방지 구조와 검사를 추가한다. |
+| PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:hub-logistics, gm-subgraph:regional-route-control, gm-layer:transport, gm-layer:threat-security, gm-layer:logistics-supply, gm-layer:player-choice | 기존 허브 실제 접점을 보존하면서 등록·검수·하역·창고·출차 순환과 선택적 중계·도로 승격·공사 시간 대가를 계획 관계·제약으로 증분한다. |
 | PLAN-DATA-GAMEOBJECT-ASSET-001 | NoImpact | PlanningReference |  | 자산 대응은 표현 후보 자료이며 공간·경로 관계를 확정하지 않는다. |
 | PLAN-DATA-REALITY-MYSQL-001 | NoImpact | PlanningReference |  | 현실 자료 축적 경계이며 World Graph topology를 변경하지 않는다. |
+| PLAN-DATA-EIGHT-LIFE-DOMAINS-001 | NoImpact | PlanningReference |  | 생활 여덟 영역은 공공데이터의 읽기 분류이며 자료 존재만으로 AreaSet·H·통행·배치를 확정하지 않는다. |
 | PLAN-PRESENTATION-SYNTY-SURVEY-001 | NoImpact | PlanningReference |  | 후보 조사 결과는 실제 채택·배치 전까지 Graph Map 요소로 승격하지 않는다. |
+| PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:hub-logistics, gm-layer:logistics-supply | Hub 입고·검수·적치 표본을 기존 Hub 물류 하위 그래프와 물류 레이어에 결속한다. |
+| PLAN-GAME-COMMON-PURPOSE-001 | NoImpact | PlanningReference |  | 자율 업무 세계라는 상위 목적은 기존 공간 관계의 의미를 안내하며 topology를 직접 추가하지 않는다. |
+| PLAN-GAMEPLAY-COMMUNITY-VISITOR-001 | Blocked | BlockedPendingFirstArea |  | 방문·체류의 첫 적용 Area가 확정되지 않아 대상 공간 관계를 만들지 않는다. |
+| PLAN-GAMEPLAY-DELEGATION-001 | NoImpact | PlanningReference |  | NPC 위임은 역량·권한·예외 반환 규칙이며 현재 공간 관계를 직접 추가하지 않는다. |
+| PLAN-GAMEPLAY-FARM-CROP-LIFE-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:farm-production | 수확 여유 시간은 기존 Farm 생산 관계의 시간 조건이며 새 공간 노드는 추가하지 않는다. |
+| PLAN-GAMEPLAY-FARM-DEFENSE-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:hans-precision-axe, gm-layer:threat-security | 농장 소집·경계·귀환 의미를 기존 한스 농장 경계 관계와 위협 레이어에 연결한다. |
+| PLAN-GAMEPLAY-FIRST-EXPERIENCE-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:nature-discovery | 발견·자유 이탈·귀환의 공통 체감을 기존 Nature 발견 하위 그래프에 연결한다. |
+| PLAN-GAMEPLAY-HERBAL-CRAFTING-001 | NoImpact | PlanningReference |  | 약초 제작 규칙은 재료와 작업 상태를 소유하며 현재 Graph Map의 공간 관계를 직접 변경하지 않는다. |
+| PLAN-GAMEPLAY-HUB-DEMAND-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:hub-logistics, gm-layer:logistics-supply | 수요·희소 재고·출고 준비를 기존 Hub 물류 하위 그래프와 물류 레이어에 연결한다. |
+| PLAN-GAMEPLAY-MULTI-AREA-CHOICE-001 | UpdateExisting | IntegratedPlanningOnly | graph-map:mirror:northern-life-hub-discovery.v1 | 영역 선택성과 독립 개발 원칙을 북부 생활권 federation 경계에 반영한다. |
+| PLAN-GAMEPLAY-NATURE-RESOURCE-CONSTRUCTION-001 | Blocked | BlockedPendingConstructionPlacement |  | 단계 건설과 자연 복원은 정확 대상·배치 제약이 미정이므로 기존 topology를 확장하지 않는다. |
+| PLAN-GAMEPLAY-NATURE-SHELTER-001 | Blocked | BlockedPendingShelterPlacement |  | Nature 오두막의 정확 H1 위치·접근·안전 경계가 현재 Graph Map에 결속되지 않았다. |
+| PLAN-GAMEPLAY-PERSPECTIVE-ROLES-001 | NoImpact | PlanningReference |  | 1인칭·3인칭·광역 운영의 시점 역할은 Presentation과 WI 스케일을 구분하며 공간 topology를 바꾸지 않는다. |
+| PLAN-GAMEPLAY-PLAYER-STAMINA-001 | NoImpact | PlanningReference |  | 체력·휴식·회복 성장은 Actor 상태 규칙이며 공간 topology를 직접 추가하지 않는다. |
+| PLAN-GAMEPLAY-PROGRESSION-CLUSTERS-001 | NoImpact | PlanningReference |  | NPC 학습 카드와 성장 군집은 관계 기반 진행 규칙이며 새 공간 노드를 요구하지 않는다. |
+| PLAN-GAMEPLAY-REGIONAL-MONSTER-001 | Blocked | BlockedPendingCreatureAndRegionBinding |  | 첫 마수 자산과 정확 지역 결속이 미정이므로 위협 노드나 경로를 새로 확정하지 않는다. |
+| PLAN-GAMEPLAY-SURVIVAL-ECONOMY-001 | NoImpact | PlanningReference | gm-layer:logistics-supply | 조달·비축·가격 전망은 물류 레이어의 조회 의미이며 고정 공간 topology를 만들지 않는다. |
+| PLAN-GAMEPLAY-TOWN-ORDER-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:town-life | 주문 확인·수령·소비·귀환은 기존 Town 생활 하위 그래프의 업무 의미로 연결한다. |
+| PLAN-PLACEMENT-CROSS-AREA-BUILDING-001 | Blocked | BlockedPendingExactAreaSlice |  | 영역별 H·시설·통행 문답은 범위가 열려 있어 정확한 단일 Area slice 없이 배치 제약으로 승격하지 않는다. |
+| PLAN-PLACEMENT-FOREST-EDGE-FARM-001 | UpdateExisting | BlockedPendingVisualApproval | gm-subgraph:hans-precision-axe, gm-subgraph:farm-production | 숲 경계 농장 배치 후보는 기존 한스·Farm 관계를 구체화하지만 시각 승인과 E5 결속 전에는 계획 상태로 유지한다. |
+| PLAN-PRESENTATION-E4-POOL-001 | NoImpact | PlanningReference |  | E4 후보 풀은 표현 후보와 상태 판독을 관리하며 Graph 관계를 확정하지 않는다. |
+| PLAN-PRESENTATION-H1-SYNTY-STATE-001 | NoImpact | PlanningReference |  | H1 Synty 상태 조사는 자산·동작 후보 자료이며 실제 배치나 Graph 권위가 아니다. |
+| PLAN-SPATIAL-FOOD-DELIVERY | CreateSubgraph | BlockedPendingFederation |  | 합성 음식 배달 Graph·배치 표본은 준비됐지만 북부 생활권 federation에 아직 승인 결속되지 않았다. |
+| PLAN-STORY-CITY-DISCOVERY-001 | Blocked | BlockedOutsideCurrentGraph |  | City 주거권 동선은 북부 생활권 현행 AreaSet과 정확 경로가 없어 현재 그래프 밖으로 유지한다. |
+| PLAN-STORY-HEX03-CAMPAIGN-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:hans-precision-axe, gm-subgraph:farm-production | 수뢰둔의 승인된 한스 농장 관계를 기존 정밀 도끼·Farm 생산 하위 그래프에 한정해 반영한다. |
+| PLAN-STORY-HEX04-CAMPAIGN-001 | Blocked | BlockedPendingImplementationRebind |  | 산수몽은 현재 효 문답과 구현 재결속이 진행 중이므로 새 공간 관계를 확정하지 않는다. |
+| PLAN-STORY-HEXAGRAM-CAMPAIGN-RESET-001 | NoImpact | PlanningReference |  | 캠페인 재진입과 다섯 조건 판정은 Runtime 진행 규칙이며 공간 배치를 직접 변경하지 않는다. |
+| PLAN-STORY-HEXAGRAM-SEQUENCE-001 | NoImpact | PlanningReference |  | 64괘와 효사는 기획 영감·제작 순서를 제공하지만 자동 공간 순서나 topology를 만들지 않는다. |
+| PLAN-STORY-IDEA-MAP-LEARNING-001 | NoImpact | PlanningReference |  | 괘상 맥락 카드와 학습 보정은 지리를 강제하지 않는 별도 진행 규칙이다. |
+| PLAN-STORY-TOWN-DISCOVERY-001 | UpdateExisting | IntegratedPlanningOnly | gm-subgraph:town-life | 시장 가격과 Town 생활 발견 의미를 기존 Town 생활 하위 그래프에 연결한다. |
+| PLAN-SYSTEM-MYEONMOK-OBSERVER | CreateSubgraph | BlockedPendingFederation |  | 합성 동네 그래프·배치 표본은 존재하지만 북부 생활권 federation에 승인 결속되지 않았다. |
+| PLAN-SYSTEM-OBSERVER-WORLD | NoImpact | PlanningReference |  | 관찰 기본값과 결과 요약은 카메라·조회 정책이며 공간 topology를 새로 만들지 않는다. |
+| PLAN-SYSTEM-SAVE-REENTRY-001 | NoImpact | PlanningReference |  | 저장·중단·재진입은 모든 공간을 가로지르는 지속성 계약이며 topology와 분리한다. |
+| PLAN-TIME-SOLAR-TERM-TAROT-TURN-001 | NoImpact | PlanningReference | gm-overlay:decision-card-authority-time | 절기 카드의 권위 시간은 기존 선택 카드 Overlay로 표현되며 기준 공간 topology를 변경하지 않는다. |
+| PLAN-VISUAL-HANS-FARM-001 | NoImpact | PlanningReference |  | 한스 농장 시각 후보는 Presentation 자료이며 Graph topology나 권위 공간을 확정하지 않는다. |
+| PLAN-VISUAL-SYNTY-REFINEMENT-001 | NoImpact | PlanningReference |  | Synty·Blender 고도화는 실행 보류된 표현 전략이며 공간 관계를 변경하지 않는다. |
 
 ## 레벨 3 — Unity 코드·Component 결속
 
@@ -531,11 +614,23 @@ flowchart LR
 | gm-edge:hans-broken-fence-to-broken-farm-axe-storage | NoApprovedUnityBinding — 울타리 부근 발견 위치·조사 입력·보관 경계를 잇는 승인 결속이 없다. |
 | gm-edge:broken-farm-axe-storage-to-repair-handoff | NoApprovedUnityBinding — 관계·집 접근·재료·시간 조건을 확인하는 승인 수리 맡김 결속이 없다. |
 | gm-edge:precision-axe-repair-handoff-to-return | NoApprovedUnityBinding — 수리 경과·동일 개체·반환을 잇는 승인 계약이 없다. |
+| gm-node:hub-vehicle-registration | NoApprovedUnityBinding — 차량 등록 H1과 권위 상태를 잇는 승인 Unity 결속이 없다. |
+| gm-node:hub-cargo-inspection | NoApprovedUnityBinding — 화물 검수 H1과 권위 검사 결과를 잇는 승인 Unity 결속이 없다. |
+| gm-node:hub-unloading-waiting | NoApprovedUnityBinding — 하역 대기 H1과 대기열 상태를 잇는 승인 Unity 결속이 없다. |
+| gm-node:hub-warehouse-inbound-outbound | NoApprovedUnityBinding — 창고 입출고 H1과 서버 원장을 잇는 승인 Unity 결속이 없다. |
+| gm-node:route-controlled-relay | NoApprovedUnityBinding — 선택형 통제 중계 지점의 실제 AreaSet·H1·좌표 결속이 없다. |
+| gm-edge:hub-receiving-to-vehicle-registration | NoApprovedUnityBinding — 입차에서 차량 등록으로 이어지는 승인 상태·공간 결속이 없다. |
+| gm-edge:hub-registration-to-cargo-inspection | NoApprovedUnityBinding — 차량 등록에서 화물 검수로 이어지는 승인 상태·공간 결속이 없다. |
+| gm-edge:hub-inspection-to-unloading-waiting | NoApprovedUnityBinding — 검수에서 하역 대기로 이어지는 승인 상태·공간 결속이 없다. |
+| gm-edge:hub-unloading-to-warehouse | NoApprovedUnityBinding — 하역에서 창고 입고로 이어지는 승인 상태·공간 결속이 없다. |
+| gm-edge:hub-warehouse-to-vehicle-yard | NoApprovedUnityBinding — 창고 출고에서 운송대 편성으로 이어지는 승인 상태·공간 결속이 없다. |
+| gm-edge:hub-outbound-to-controlled-relay | NoApprovedUnityBinding — Hub 출고에서 선택형 중계 지점으로 이어지는 승인 경로 결속이 없다. |
+| gm-edge:controlled-relay-to-yodong-gateway | NoApprovedUnityBinding — 통제 중계 지점에서 요동성 관문으로 이어지는 승인 경로 결속이 없다. |
 
 ## 현재 미해결
 
-- 미해결 노드: 23
-- 미해결 엣지: 25
+- 미해결 노드: 28
+- 미해결 엣지: 32
 - 요동성 방비 관문은 기획 방향만 있으며 실제 WI·AreaSet·Graph·경로가 없다.
 - 최신 공간 사본 자체가 runtimeValidated=false이므로 실제 이동·Collider·Game View 근거로 확대하지 않는다.
 - Synty 후보, 지면·통로 실측, InteractionAnchor, 입력·결과, 적용·해제는 후속 작은 실행 범위에서 별도 검증한다.

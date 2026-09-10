@@ -31,6 +31,11 @@ $delivery = Get-Content -LiteralPath (Join-Path $repositoryRoot ([string] $ledge
 $evidence = Get-Content -LiteralPath (Join-Path $repositoryRoot ([string] $ledger.evidencePackageCatalogPath)) -Raw -Encoding UTF8 | ConvertFrom-Json
 $pipeline = Get-Content -LiteralPath (Join-Path $repositoryRoot ([string] $ledger.engineInteractionValidationPath)) -Raw -Encoding UTF8 | ConvertFrom-Json
 
+# 이 원장은 기존 Loop 중심 작업의 읽기 호환 자료다. 모든 기존 항목도 먼저
+# 주체·단일 WI Goal 관문을 통과해야 하며 신규 Loop 없는 Goal은 별도 현행 원장이 소유한다.
+$subjectInteractionManager = Join-Path $PSScriptRoot "manage-subject-interaction-development.ps1"
+& $subjectInteractionManager -Mode Validate | Out-Null
+
 Require ([string] $ledger.schemaVersion -in @("codex-playable-loop-goals.v3", "codex-playable-loop-goals.v4")) "SchemaInvalid"
 $parallel = [string] $ledger.schemaVersion -eq "codex-playable-loop-goals.v4"
 foreach ($principle in @(
@@ -253,6 +258,7 @@ $builder = [Text.StringBuilder]::new()
 [void] $builder.AppendLine("> 이 문서는 ``$InputPath``에서 자동 생성된다. 직접 수정하지 않는다.")
 [void] $builder.AppendLine()
 [void] $builder.AppendLine("- Goal 원장 개정: ``$($ledger.revision)``")
+[void] $builder.AppendLine("- 현행 해석: 기존 항목을 주체가 결속된 단일 WI Goal로 호환 투영하며 PlayableLoop는 선택적 검증 묶음으로 유지")
 $limitLabel = if ($parallel) { '상한 없음' } else { '1' }
 [void] $builder.AppendLine("- Goal WIP: ``$($activeItems.Count)/$limitLabel``")
 $wiWip = @($workItems | Where-Object { $_.statusCode -in @('Active','ReadyForIntegration') } | ForEach-Object { $_.worldInteractionId } | Sort-Object -Unique).Count

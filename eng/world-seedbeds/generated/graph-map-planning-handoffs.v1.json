@@ -3,16 +3,21 @@
   "revision": "mirror-graph-map-planning-handoff-output.r1",
   "generatedAtRuleCode": "DeterministicNoWallClock",
   "sourceLedgerRef": "eng/world-seedbeds/graph-map-planning-handoffs.json",
-  "sourceLedgerSha256": "21c5f52e846d121334b5d7972e2eb43e96b993e53e1a054bc4c6f0db69aec92d",
+  "sourceLedgerSha256": "fec713bb91a1931197892c94c15830c797d42da1a7760f7d0ece56adf66c1467",
+  "artifactGwaeCodes": {
+    "planning": "RI",
+    "graphMap": "GAN",
+    "placementMap": "TAE"
+  },
   "counts": {
-    "total": 7,
+    "total": 9,
     "draft": 0,
     "approvedForHandoff": 0,
     "acceptedByGraphMap": 0,
     "integrated": 1,
     "blocked": 0,
     "noImpact": 0,
-    "superseded": 6
+    "superseded": 8
   },
   "ownershipBoundary": {
     "planningOwnerCode": "Planning",
@@ -544,7 +549,7 @@
     },
     {
       "handoffId": "graph-map-handoff:northern-life-hub-discovery:r10",
-      "statusCode": "Integrated",
+      "statusCode": "Superseded",
       "impactCode": "UpdateExisting",
       "planningSource": {
         "path": "docs/AI/PLANNING.md",
@@ -594,16 +599,7 @@
         "targetGraphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
         "targetGraphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10"
       },
-      "graphMapResult": {
-        "stableId": "graph-map:mirror:northern-life-hub-discovery.v1",
-        "revision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
-        "planRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-        "planSha256": "b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc",
-        "generatedRef": "eng/world-seedbeds/generated/graph-map-plans.v1.json",
-        "generatedSha256": "f0f9ae9eb59aa1be8a46b0f90093b19830de3ce23058330cf647e56bbac78eb7",
-        "reportRef": "docs/Reports/GraphMap-현행기획-레이어통합-2026-09-02.md",
-        "reportSha256": "b3c1212e9104e6d4d7421796be82cf3c658839b28ed123baaa8826b148645889"
-      },
+      "graphMapResult": null,
       "mappedRefs": [
         "planning-assessments:21",
         "level1:nodes:34",
@@ -628,10 +624,218 @@
         "NoUnityOrEvidencePromotion"
       ],
       "returnToPlanning": {
+        "terminalResultCode": "Superseded",
+        "planningQuestionRequired": false,
+        "summary": "현행 21기획을 분류한 Graph Map r10 역사 인계이며 r12가 이를 대체한다.",
+        "nextPlanningFocus": "장거리 경로의 정확 fixture와 한스 정밀 손도끼 실제 계약은 각각 승인된 후속 판본에서 가장 작은 단위로 다시 연다."
+      },
+      "evidenceBoundary": {
+        "unitySceneChanged": false,
+        "prefabApplied": false,
+        "runtimeExecuted": false,
+        "gameViewCaptured": false,
+        "actualTraversalVerified": false,
+        "evidencePromoted": false,
+        "operationalStateChanged": false
+      }
+    },
+    {
+      "handoffId": "graph-map-handoff:northern-life-hub-discovery:r12",
+      "statusCode": "Superseded",
+      "impactCode": "UpdateExisting",
+      "planningSource": {
+        "path": "docs/AI/PLANNING.md",
+        "revisionCode": "planning-index.current-2026-09-08",
+        "sha256": "9b2ac01642bf97d8445d48de9d04df8449c8816a6122b8fa8396dab673ac70f7",
+        "sourceDecisionIds": [],
+        "sourceWorldInteractionIds": [
+          "WI-NATURE-06",
+          "WI-HUB-03",
+          "WI-WORLD-04"
+        ],
+        "sourcePlanIds": [
+          "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
+          "PLAN-STORY-HEX03-CAMPAIGN-001",
+          "PLAN-STORY-HEX04-CAMPAIGN-001",
+          "PLAN-GAMEPLAY-MULTI-AREA-CHOICE-001",
+          "PLAN-GAMEPLAY-FARM-DEFENSE-001",
+          "PLAN-GAMEPLAY-HUB-DEMAND-001",
+          "PLAN-GAMEPLAY-TOWN-ORDER-001",
+          "PLAN-SPATIAL-FOOD-DELIVERY",
+          "PLAN-GRAPH-PLANNING-INTEGRATION-001",
+          "PLAN-GRAPH-LONG-ROUTE-ENCOUNTER-001",
+          "PLAN-GRAPH-LAYER-FIRST-WORKFLOW-001",
+          "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+        ],
+        "contextRefs": {
+          "time": "PLANNING.current-plans.time-and-season",
+          "place": "PLANNING.current-plans.graph-map-and-area",
+          "player": "PLANNING.current-plans.player-choice",
+          "target": "PLANNING.current-plans.actor-place-route",
+          "method": "PLANNING.current-plans.graph-impact-classification",
+          "result": "PLANNING.current-plans.integrated-r12",
+          "nextChoices": "PLANNING.current-plans.blocked-and-follow-up"
+        },
+        "exclusionRefs": [
+          "GraphMap-r12.no-unity-runtime",
+          "Unresolved-spatial-plans.no-invented-topology",
+          "No-auto-goal-wi-e-promotion"
+        ]
+      },
+      "request": {
+        "requestedLevelCodes": [
+          "Federation",
+          "Level1",
+          "Level2",
+          "Level3"
+        ],
+        "level1Intent": "현행 기획 58건을 기존 안정 ID에 대조하고 Hub 순환과 선택형 통제 중계 관계만 증분 반영한다.",
+        "level2Intent": "기존 배치 규칙을 재사용하고 미정 위치·수치·자산은 차단 상태로 유지한다.",
+        "level3Intent": "기존 코드 결속과 미결속 경계를 보존하며 새 Scene·Runtime·권위 상태를 만들지 않는다.",
+        "targetGraphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
+        "targetGraphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r12"
+      },
+      "graphMapResult": null,
+      "mappedRefs": [
+        "planning-assessments:58",
+        "level1:nodes:39",
+        "level1:edges:41",
+        "level2:constraints:37",
+        "federation:subgraphs:7",
+        "federation:ports:14",
+        "federation:connectors:8",
+        "layers:6",
+        "overlays:9"
+      ],
+      "unmappedItems": [
+        "합성 동네·음식 배달 Graph의 북부 생활권 federation 승인 결속",
+        "City·Nature 쉼터·건설·공동체 방문·지역 마수의 정확 Area·H·경로",
+        "새 Hub·중계 관계의 Unity SourceAndSymbol 결속",
+        "Unity Scene·실제 입력·Game View"
+      ],
+      "blockerItems": [],
+      "verificationCodes": [
+        "GraphMapCheckPassed",
+        "PlanningImpactCoverage58Passed",
+        "DeterministicOutputsRegenerated",
+        "UnitySourceHashVerificationDeferred",
+        "NoUnityOrEvidencePromotion"
+      ],
+      "returnToPlanning": {
+        "terminalResultCode": "Superseded",
+        "planningQuestionRequired": false,
+        "summary": "현행 58기획을 분류한 r12 이력이며 생활 여덟 영역 자료 기획을 결속한 r13이 대체한다.",
+        "nextPlanningFocus": "미정 공간은 차단 상태를 유지하고 승인된 단일 배치 slice부터 별도 개발 인계한다."
+      },
+      "evidenceBoundary": {
+        "unitySceneChanged": false,
+        "prefabApplied": false,
+        "runtimeExecuted": false,
+        "gameViewCaptured": false,
+        "actualTraversalVerified": false,
+        "evidencePromoted": false,
+        "operationalStateChanged": false
+      }
+    },
+    {
+      "handoffId": "graph-map-handoff:northern-life-hub-discovery:r13",
+      "statusCode": "Integrated",
+      "impactCode": "UpdateExisting",
+      "planningSource": {
+        "path": "docs/AI/PLANNING.md",
+        "revisionCode": "planning-index.current-2026-09-08",
+        "sha256": "9b2ac01642bf97d8445d48de9d04df8449c8816a6122b8fa8396dab673ac70f7",
+        "sourceDecisionIds": [],
+        "sourceWorldInteractionIds": [
+          "WI-NATURE-06",
+          "WI-HUB-03",
+          "WI-WORLD-04"
+        ],
+        "sourcePlanIds": [
+          "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
+          "PLAN-DATA-EIGHT-LIFE-DOMAINS-001",
+          "PLAN-STORY-HEX03-CAMPAIGN-001",
+          "PLAN-STORY-HEX04-CAMPAIGN-001",
+          "PLAN-GAMEPLAY-MULTI-AREA-CHOICE-001",
+          "PLAN-GAMEPLAY-FARM-DEFENSE-001",
+          "PLAN-GAMEPLAY-HUB-DEMAND-001",
+          "PLAN-GAMEPLAY-TOWN-ORDER-001",
+          "PLAN-SPATIAL-FOOD-DELIVERY",
+          "PLAN-GRAPH-PLANNING-INTEGRATION-001",
+          "PLAN-GRAPH-LONG-ROUTE-ENCOUNTER-001",
+          "PLAN-GRAPH-LAYER-FIRST-WORKFLOW-001",
+          "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+        ],
+        "contextRefs": {
+          "time": "PLANNING.current-plans.time-and-season",
+          "place": "PLANNING.current-plans.graph-map-and-area",
+          "player": "PLANNING.current-plans.player-choice",
+          "target": "PLANNING.current-plans.actor-place-route",
+          "method": "PLANNING.current-plans.graph-impact-classification",
+          "result": "PLANNING.current-plans.integrated-r13",
+          "nextChoices": "PLANNING.current-plans.blocked-and-follow-up"
+        },
+        "exclusionRefs": [
+          "GraphMap-r13.no-unity-runtime",
+          "Public-data-does-not-authorize-topology",
+          "Unresolved-spatial-plans.no-invented-topology",
+          "No-auto-goal-wi-e-promotion"
+        ]
+      },
+      "request": {
+        "requestedLevelCodes": [
+          "Federation",
+          "Level1",
+          "Level2",
+          "Level3"
+        ],
+        "level1Intent": "현행 기획 59건을 기존 안정 ID에 대조하고 새 자료 분류가 공간 topology 권위로 승격되지 않도록 결속한다.",
+        "level2Intent": "기존 배치 규칙을 재사용하고 미정 위치·수치·자산·공공데이터 공간 해석은 차단 상태로 유지한다.",
+        "level3Intent": "기존 코드 결속과 미결속 경계를 보존하며 새 Scene·Runtime·권위 상태를 만들지 않는다.",
+        "targetGraphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
+        "targetGraphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13"
+      },
+      "graphMapResult": {
+        "stableId": "graph-map:mirror:northern-life-hub-discovery.v1",
+        "revision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
+        "planRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
+        "planSha256": "55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e",
+        "generatedRef": "eng/world-seedbeds/generated/graph-map-plans.v1.json",
+        "generatedSha256": "454a6a17a50c7303340b52f1e7017b9b9feb37ad1836b9b7fbe1f95a4e56ea80",
+        "reportRef": "docs/Reports/GraphMap-현행기획-레이어통합-2026-09-02.md",
+        "reportSha256": "5cf2c28e27a62f260197108fb7249c9991264b20388faef61df0ba8a4efe5a37"
+      },
+      "mappedRefs": [
+        "planning-assessments:59",
+        "level1:nodes:39",
+        "level1:edges:41",
+        "level2:constraints:37",
+        "federation:subgraphs:7",
+        "federation:ports:14",
+        "federation:connectors:8",
+        "layers:6",
+        "overlays:9"
+      ],
+      "unmappedItems": [
+        "생활 여덟 영역 자료의 실제 AreaSet·H·통행·배치 적용 승인",
+        "합성 동네·음식 배달 Graph의 북부 생활권 federation 승인 결속",
+        "City·Nature 쉼터·건설·공동체 방문·지역 마수의 정확 Area·H·경로",
+        "새 Hub·중계 관계의 Unity SourceAndSymbol 결속",
+        "Unity Scene·실제 입력·Game View"
+      ],
+      "blockerItems": [],
+      "verificationCodes": [
+        "GraphMapCheckPassed",
+        "PlanningImpactCoverage59Passed",
+        "DeterministicOutputsRegenerated",
+        "UnitySourceHashVerificationDeferred",
+        "NoUnityOrEvidencePromotion"
+      ],
+      "returnToPlanning": {
         "terminalResultCode": "Integrated",
         "planningQuestionRequired": false,
-        "summary": "현행 21기획을 분류하고 기존 Graph Map r10에 한스 정밀 손도끼 하위 그래프와 6레이어 경로 계약을 통합했다.",
-        "nextPlanningFocus": "장거리 경로의 정확 fixture와 한스 정밀 손도끼 실제 계약은 각각 승인된 후속 판본에서 가장 작은 단위로 다시 연다."
+        "summary": "현행 59기획을 분류하고 생활 여덟 영역 자료 기획을 비공간 권위 참조로 Graph Map r13에 결속했다.",
+        "nextPlanningFocus": "공공데이터를 실제 공간 관계로 쓸 때는 승인된 단일 Area·H slice와 출처·정밀도 근거를 별도 인계한다."
       },
       "evidenceBoundary": {
         "unitySceneChanged": false,

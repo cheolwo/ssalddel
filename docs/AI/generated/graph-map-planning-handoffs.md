@@ -2,8 +2,9 @@
 
 > 이 문서는 `eng/world-seedbeds/graph-map-planning-handoffs.json`에서 생성한다. 직접 수정하지 않는다.
 
-- 원장 판본: mirror-graph-map-planning-handoffs.r7
-- 전체: 7 / 반영: 1 / 차단: 0 / 영향 없음: 0
+- 원장 판본: mirror-graph-map-planning-handoffs.r10
+- 산출물 괘상: 동결 기획 결과 `RI` / Graph Map `GAN` / 배치 맵 `TAE` (실행 권위·순서·자동 승격 아님)
+- 전체: 9 / 반영: 1 / 차단: 0 / 영향 없음: 0
 - 기획은 승인 판본과 인계만 소유하고, Graph Map 작업은 레벨 1·2·3 반영과 최종 반환을 소유한다.
 - 이 상태는 Unity Scene·Prefab·실제 입력·Game View·E 승격을 뜻하지 않는다.
 
@@ -15,7 +16,9 @@
 | graph-map-handoff:northern-life-hub-discovery:r7 | Superseded | UpdateExisting | graph-map-planning-integration.r1 | graph-map:mirror:northern-life-hub-discovery.v1 | Federation, Level1, Level2, Level3 | 없음 |
 | graph-map-handoff:northern-life-hub-discovery:r8 | Superseded | UpdateExisting | graph-map-normalization-hans.r1 | graph-map:mirror:northern-life-hub-discovery.v1 | Level1, Level2, Level3 | 없음 |
 | graph-map-handoff:northern-life-hub-discovery:r9 | Superseded | UpdateExisting | dual-possession-alchemist-succession.r63 | graph-map:mirror:northern-life-hub-discovery.v1 | Level1, Level2, Level3 | 없음 |
-| graph-map-handoff:northern-life-hub-discovery:r10 | Integrated | UpdateExisting | planning-index.current-2026-09-02 | graph-map:mirror:northern-life-hub-discovery.v1<br>mirror-graph-map-plan.northern-life-hub-discovery.r10 | Federation, Level1, Level2, Level3 | 없음 |
+| graph-map-handoff:northern-life-hub-discovery:r10 | Superseded | UpdateExisting | planning-index.current-2026-09-02 | graph-map:mirror:northern-life-hub-discovery.v1 | Federation, Level1, Level2, Level3 | 없음 |
+| graph-map-handoff:northern-life-hub-discovery:r12 | Superseded | UpdateExisting | planning-index.current-2026-09-08 | graph-map:mirror:northern-life-hub-discovery.v1 | Federation, Level1, Level2, Level3 | 없음 |
+| graph-map-handoff:northern-life-hub-discovery:r13 | Integrated | UpdateExisting | planning-index.current-2026-09-08 | graph-map:mirror:northern-life-hub-discovery.v1<br>mirror-graph-map-plan.northern-life-hub-discovery.r13 | Federation, Level1, Level2, Level3 | 없음 |
 
 ## graph-map-handoff:northern-life-hub-discovery:r4
 
@@ -86,12 +89,34 @@
 ## graph-map-handoff:northern-life-hub-discovery:r10
 
 - 기획: [docs/AI/PLANNING.md](../../../docs/AI/PLANNING.md) / planning-index.current-2026-09-02 / SHA-256 d9af1bbf5c21d6dca531da4b724153d2c50de78b3cb86eaa0ae3c577faeb7836
-- 상태·영향: Integrated / UpdateExisting
+- 상태·영향: Superseded / UpdateExisting
 - 반영: planning-assessments:21, level1:nodes:34, level1:edges:34, level2:constraints:28, federation:subgraphs:6, layers:6, overlays:9, overlay-edge-effects:4
 - 미반영: 장거리 경로의 실제 좌표·분절·병렬 경로·비용·용량 fixture; 한스 정밀 손도끼의 실제 아이템·수리·NPC·표현 계약; 4업무영역 상세 경계·좌표·Prefab 승인; Unity Scene·실제 입력·Game View
 - 차단: 없음
 - 검증: GraphMapCheckPassed, GraphMapRegression185Passed, PlanningImpactCoverage21Passed, NoUnityOrEvidencePromotion
-- 기획 반환: 현행 21기획을 분류하고 기존 Graph Map r10에 한스 정밀 손도끼 하위 그래프와 6레이어 경로 계약을 통합했다.
+- 기획 반환: 현행 21기획을 분류한 Graph Map r10 역사 인계이며 r12가 이를 대체한다.
 - 다음 기획 초점: 장거리 경로의 정확 fixture와 한스 정밀 손도끼 실제 계약은 각각 승인된 후속 판본에서 가장 작은 단위로 다시 연다.
-- 결과 Graph Map: [eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json](../../../eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json) / mirror-graph-map-plan.northern-life-hub-discovery.r10 / SHA-256 b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc
+
+## graph-map-handoff:northern-life-hub-discovery:r12
+
+- 기획: [docs/AI/PLANNING.md](../../../docs/AI/PLANNING.md) / planning-index.current-2026-09-08 / SHA-256 9b2ac01642bf97d8445d48de9d04df8449c8816a6122b8fa8396dab673ac70f7
+- 상태·영향: Superseded / UpdateExisting
+- 반영: planning-assessments:58, level1:nodes:39, level1:edges:41, level2:constraints:37, federation:subgraphs:7, federation:ports:14, federation:connectors:8, layers:6, overlays:9
+- 미반영: 합성 동네·음식 배달 Graph의 북부 생활권 federation 승인 결속; City·Nature 쉼터·건설·공동체 방문·지역 마수의 정확 Area·H·경로; 새 Hub·중계 관계의 Unity SourceAndSymbol 결속; Unity Scene·실제 입력·Game View
+- 차단: 없음
+- 검증: GraphMapCheckPassed, PlanningImpactCoverage58Passed, DeterministicOutputsRegenerated, UnitySourceHashVerificationDeferred, NoUnityOrEvidencePromotion
+- 기획 반환: 현행 58기획을 분류한 r12 이력이며 생활 여덟 영역 자료 기획을 결속한 r13이 대체한다.
+- 다음 기획 초점: 미정 공간은 차단 상태를 유지하고 승인된 단일 배치 slice부터 별도 개발 인계한다.
+
+## graph-map-handoff:northern-life-hub-discovery:r13
+
+- 기획: [docs/AI/PLANNING.md](../../../docs/AI/PLANNING.md) / planning-index.current-2026-09-08 / SHA-256 9b2ac01642bf97d8445d48de9d04df8449c8816a6122b8fa8396dab673ac70f7
+- 상태·영향: Integrated / UpdateExisting
+- 반영: planning-assessments:59, level1:nodes:39, level1:edges:41, level2:constraints:37, federation:subgraphs:7, federation:ports:14, federation:connectors:8, layers:6, overlays:9
+- 미반영: 생활 여덟 영역 자료의 실제 AreaSet·H·통행·배치 적용 승인; 합성 동네·음식 배달 Graph의 북부 생활권 federation 승인 결속; City·Nature 쉼터·건설·공동체 방문·지역 마수의 정확 Area·H·경로; 새 Hub·중계 관계의 Unity SourceAndSymbol 결속; Unity Scene·실제 입력·Game View
+- 차단: 없음
+- 검증: GraphMapCheckPassed, PlanningImpactCoverage59Passed, DeterministicOutputsRegenerated, UnitySourceHashVerificationDeferred, NoUnityOrEvidencePromotion
+- 기획 반환: 현행 59기획을 분류하고 생활 여덟 영역 자료 기획을 비공간 권위 참조로 Graph Map r13에 결속했다.
+- 다음 기획 초점: 공공데이터를 실제 공간 관계로 쓸 때는 승인된 단일 Area·H slice와 출처·정밀도 근거를 별도 인계한다.
+- 결과 Graph Map: [eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json](../../../eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json) / mirror-graph-map-plan.northern-life-hub-discovery.r13 / SHA-256 55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e
 - 결과 보고: [docs/Reports/GraphMap-현행기획-레이어통합-2026-09-02.md](../../../docs/Reports/GraphMap-현행기획-레이어통합-2026-09-02.md)

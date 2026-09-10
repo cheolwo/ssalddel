@@ -1,6 +1,6 @@
 {
   "schemaVersion": "mirror-graph-map-partition-catalog.v1",
-  "revision": "mirror-graph-map-partition-catalog.r7",
+  "revision": "mirror-graph-map-partition-catalog.r9",
   "federationStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
   "title": "북부 생활권 Graph Map 하위 맵·포트 대장",
   "meaning": "레벨 1~3의 의미는 각 하위 맵에서 유지하고, World 규모에서는 하위 맵과 명시 포트·connector만 조합한다.",
@@ -20,7 +20,7 @@
   },
   "sourceElementCatalogRef": {
     "path": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-    "expectedRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10"
+    "expectedRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13"
   },
   "subgraphs": [
     {
@@ -191,6 +191,10 @@
       ],
       "nodeRefs": [
         "gm-node:hub-receiving-storage",
+        "gm-node:hub-vehicle-registration",
+        "gm-node:hub-cargo-inspection",
+        "gm-node:hub-unloading-waiting",
+        "gm-node:hub-warehouse-inbound-outbound",
         "gm-node:hub-vehicle-yard",
         "gm-node:hub-outbound-staging",
         "gm-node:hub-missing-cargo-investigation",
@@ -200,6 +204,11 @@
       ],
       "internalEdgeRefs": [
         "gm-edge:hub-receiving-to-vehicle-yard",
+        "gm-edge:hub-receiving-to-vehicle-registration",
+        "gm-edge:hub-registration-to-cargo-inspection",
+        "gm-edge:hub-inspection-to-unloading-waiting",
+        "gm-edge:hub-unloading-to-warehouse",
+        "gm-edge:hub-warehouse-to-vehicle-yard",
         "gm-edge:hub-vehicle-yard-to-outbound",
         "gm-edge:hub-receiving-to-missing-cargo-investigation",
         "gm-edge:missing-cargo-investigation-to-field-confirmation",
@@ -208,6 +217,9 @@
       ],
       "constraintRefs": [
         "gm-constraint:hub-entry-contact-exit",
+        "gm-constraint:hub-circulation-registration-inspection-completion",
+        "gm-constraint:hub-outbound-required-inputs",
+        "gm-constraint:hub-multimodal-lane-transshipment",
         "gm-constraint:hub-evidence-not-answer",
         "gm-constraint:hub-recovery-meditation-no-duplication"
       ],
@@ -240,6 +252,37 @@
             "ExternalUnresolved"
           ],
           "meaning": "요동성 경로가 승인되기 전에는 미해결로 유지하는 외부 포트"
+        }
+      ]
+    },
+    {
+      "subgraphId": "gm-subgraph:regional-route-control",
+      "label": "지역 장거리 경로 통제·중계",
+      "scopeCode": "OptionalExternalRoute",
+      "ownerCode": "RegionalRoutePlanning",
+      "areaSetRefs": [],
+      "nodeRefs": [
+        "gm-node:route-controlled-relay"
+      ],
+      "internalEdgeRefs": [],
+      "constraintRefs": [
+        "gm-constraint:cargo-split-lineage-controlled-relay",
+        "gm-constraint:relay-capability-risk-not-hard-gate"
+      ],
+      "ports": [
+        {
+          "portId": "gm-port:controlled-relay:from-hub",
+          "nodeRef": "gm-node:route-controlled-relay",
+          "directionCode": "Inbound",
+          "capabilityCodes": ["ExternalUnresolved"],
+          "meaning": "Hub에서 출발한 장거리 화물의 선택형 중계·재편성 입력 포트"
+        },
+        {
+          "portId": "gm-port:controlled-relay:to-yodong",
+          "nodeRef": "gm-node:route-controlled-relay",
+          "directionCode": "Outbound",
+          "capabilityCodes": ["ExternalUnresolved"],
+          "meaning": "정확 목적지·경로 승인 전에는 미해결로 유지하는 요동성 방면 출력 포트"
         }
       ]
     },
@@ -379,6 +422,22 @@
         "ExternalUnresolved"
       ],
       "stateCode": "Unresolved"
+    },
+    {
+      "connectorId": "gm-connector:hub-controlled-relay",
+      "edgeRef": "gm-edge:hub-outbound-to-controlled-relay",
+      "fromPortRef": "gm-port:hub-outbound:to-yodong",
+      "toPortRef": "gm-port:controlled-relay:from-hub",
+      "requiredCapabilityCodes": ["ExternalUnresolved"],
+      "stateCode": "Unresolved"
+    },
+    {
+      "connectorId": "gm-connector:controlled-relay-yodong",
+      "edgeRef": "gm-edge:controlled-relay-to-yodong-gateway",
+      "fromPortRef": "gm-port:controlled-relay:to-yodong",
+      "toPortRef": "gm-port:yodong:from-hub",
+      "requiredCapabilityCodes": ["ExternalUnresolved"],
+      "stateCode": "Unresolved"
     }
   ],
   "federationConstraintRefs": [
@@ -392,6 +451,10 @@
     "gm-constraint:route-layer-evidence-freshness",
     "gm-constraint:route-cost-contribution-no-double-count",
     "gm-constraint:route-network-state-and-capacity-separation",
-    "gm-constraint:route-encounter-authority-and-return"
+    "gm-constraint:route-encounter-authority-and-return",
+    "gm-constraint:road-stable-id-versioned-upgrade-choice",
+    "gm-constraint:roadwork-schedule-tradeoff",
+    "gm-constraint:roadwork-protection-resource-exclusivity",
+    "gm-constraint:hub-h4-external-areas-optional"
   ]
 }

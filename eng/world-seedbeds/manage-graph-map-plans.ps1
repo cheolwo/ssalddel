@@ -85,10 +85,7 @@ $decisionIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordi
 foreach ($match in [regex]::Matches($decisionText, '(?m)^## (D-\d{3})\b')) {
     $null = $decisionIds.Add($match.Groups[1].Value)
 }
-$planIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-foreach ($match in [regex]::Matches($planningText, '`(PLAN-[A-Z0-9-]+)`')) {
-    $null = $planIds.Add($match.Groups[1].Value)
-}
+$planIds = Get-PlanningCatalogIds $planningText
 $wiIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
 foreach ($wi in @($wiCatalog.items)) { $null = $wiIds.Add([string] $wi.id) }
 

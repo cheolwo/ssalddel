@@ -1,11 +1,11 @@
 {
   "schemaVersion": "mirror-graph-map-normalization.v1",
-  "revision": "mirror-graph-map-normalization.northern-life-hub-discovery.r1",
+  "revision": "mirror-graph-map-normalization.northern-life-hub-discovery.r3",
   "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
   "sampleStableId": "graph-map-normalization-sample:hans-farm.v1",
   "title": "한스 농장 하위 그래프 노드·관계 정규화 표본",
   "meaning": "현행 레벨 1 요소를 삭제하거나 재번호화하지 않고 안정 대상과 동사형 관계를 비교 조회하는 단일 Graph Map 확장이다.",
-  "sourcePlanRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
+  "sourcePlanRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
   "contextFieldOrder": [
     "time",
     "place",

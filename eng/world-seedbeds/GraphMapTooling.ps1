@@ -105,3 +105,21 @@ function Escape-Cell([object] $value) {
     if ($null -eq $value) { return '' }
     return ([string] $value).Replace('|', '\|').Replace("`r", '').Replace("`n", '<br>')
 }
+
+function Get-PlanningCatalogIds([string] $planningText) {
+    $ids = [Collections.Generic.HashSet[string]]::new(
+        [StringComparer]::Ordinal)
+    $rowPattern = '(?m)^\|\s*`(PLAN-[A-Z0-9-]+)`(?:<!--\s*compatibility-id:\s*(PLAN-[A-Z0-9-]+)\s*-->)?\s*\|'
+    foreach ($match in [regex]::Matches($planningText, $rowPattern)) {
+        $displayId = $match.Groups[1].Value
+        $compatibilityId = $match.Groups[2].Value
+        $canonicalId = if ([string]::IsNullOrWhiteSpace($compatibilityId)) {
+            $displayId
+        }
+        else {
+            $compatibilityId
+        }
+        $null = $ids.Add($canonicalId)
+    }
+    return $ids
+}

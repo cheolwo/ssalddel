@@ -67,7 +67,7 @@ Assert ($valid -match 'Write passed') 'ValidFixture'
 $output = Get-Content -LiteralPath (Join-Path $folder 'valid.output.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 Assert ([string] $output.schemaVersion -eq 'mirror-graph-map-development-handoff-output.v1') 'OutputSchema'
 Assert ($output.counts.total -eq 2 -and $output.counts.readyForDevelopment -eq 1 -and $output.counts.integrated -eq 1) 'OutputCounts'
-Assert ([string] $output.items[0].source.graphMapRevision -eq 'mirror-graph-map-plan.northern-life-hub-discovery.r10') 'GraphMapRevisionOutput'
+Assert ([string] $output.items[0].source.graphMapRevision -eq 'mirror-graph-map-plan.northern-life-hub-discovery.r13') 'GraphMapRevisionOutput'
 Assert (@($output.items[0].slice.nodeRefs).Count -eq 2 -and @($output.items[0].slice.edgeRefs).Count -eq 1) 'SliceCounts'
 Assert (@($output.items[0].slice.placementRuleRefs).Count -eq 1) 'PlacementRuleSliceCount'
 Assert ([string] $output.items[0].developmentTarget.candidateStatusCode -eq 'Active') 'CandidateStatusOutput'

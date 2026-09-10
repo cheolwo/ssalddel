@@ -3,7 +3,7 @@
   "revision": "mirror-graph-map-development-handoff-output.r1",
   "generatedAtRuleCode": "DeterministicNoWallClock",
   "sourceLedgerRef": "eng/world-seedbeds/graph-map-development-handoffs.json",
-  "sourceLedgerSha256": "26044930247241aa1e2c5a2898c733a77a68cef20ef748db26adbe6fb1025847",
+  "sourceLedgerSha256": "1da28307d9f5a9a300fcbc9b5b037c84aee34a19c4030a673b29ebd56bb78729",
   "counts": {
     "total": 2,
     "readyForDevelopment": 1,
@@ -29,13 +29,13 @@
       "handoffId": "graph-map-development-handoff:farm-production-work-yard:r1",
       "statusCode": "ReadyForDevelopment",
       "source": {
-        "planningHandoffId": "graph-map-handoff:northern-life-hub-discovery:r10",
+        "planningHandoffId": "graph-map-handoff:northern-life-hub-discovery:r13",
         "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
-        "graphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
+        "graphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
         "graphMapPlanRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-        "graphMapPlanSha256": "b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc",
+        "graphMapPlanSha256": "55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e",
         "graphMapOutputRef": "eng/world-seedbeds/generated/graph-map-plans.v1.json",
-        "graphMapOutputSha256": "f0f9ae9eb59aa1be8a46b0f90093b19830de3ce23058330cf647e56bbac78eb7"
+        "graphMapOutputSha256": "454a6a17a50c7303340b52f1e7017b9b9feb37ad1836b9b7fbe1f95a4e56ea80"
       },
       "slice": {
         "sliceStableId": "graph-map-dev-slice:farm-production-work-yard.v1",
@@ -97,7 +97,7 @@
           "landscape-placement-binding-validation"
         ],
         "workOrderRef": "eng/execution-ledgers/work-orders/farm-crop-cycle.e7-work-order.json",
-        "workOrderSha256": "cef233d99c8fcf6a588999bf85b9aa359cbeef71c14d073830cad423c886f6e7",
+        "workOrderSha256": "7ec62d88a77451d9a11306ca780878b4a1cfea781ebbb869e630320e820d10db",
         "planningDesignRef": "docs/Architecture/PlayableLoops/Farm경작세계발현E5.md",
         "planningDesignSha256": "ff9d86e660486e77dcea1d6e6d8a69669c7c7d8a885966d4651486861d477ffc"
       },
@@ -160,13 +160,13 @@
       "handoffId": "graph-map-development-handoff:first-logging-reflection:r1",
       "statusCode": "Integrated",
       "source": {
-        "planningHandoffId": "graph-map-handoff:northern-life-hub-discovery:r10",
+        "planningHandoffId": "graph-map-handoff:northern-life-hub-discovery:r13",
         "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
-        "graphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
+        "graphMapRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
         "graphMapPlanRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-        "graphMapPlanSha256": "b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc",
+        "graphMapPlanSha256": "55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e",
         "graphMapOutputRef": "eng/world-seedbeds/generated/graph-map-plans.v1.json",
-        "graphMapOutputSha256": "f0f9ae9eb59aa1be8a46b0f90093b19830de3ce23058330cf647e56bbac78eb7"
+        "graphMapOutputSha256": "454a6a17a50c7303340b52f1e7017b9b9feb37ad1836b9b7fbe1f95a4e56ea80"
       },
       "slice": {
         "sliceStableId": "graph-map-dev-slice:first-logging-reflection.v1",
@@ -212,9 +212,9 @@
           "first-logging-reflection-seed"
         ],
         "workOrderRef": "eng/execution-ledgers/work-orders/nature-logging-focus-meditation.e7-work-order.json",
-        "workOrderSha256": "3ef0d631cb0e1fee47e178ac664eccd9b3dd403fcb9dd0a7f4cd066ece1094e5",
-        "planningDesignRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md",
-        "planningDesignSha256": "9fae03c1cf38a2a73d2b4e29e3e1c34aceba97b9ac9784d56d2b16cfeafa7ea9"
+        "workOrderSha256": "4f8d3fa14d0374bb5093f5eeb789ae75bc936665a41225dc2094f62c6aa45f65",
+        "planningDesignRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+        "planningDesignSha256": "938de55f56d99ca1b733739b3d09cffcf1c549d5d940394a2e2bfe9bef6bbfff"
       },
       "acceptanceContract": {
         "requiredBeforeAcceptCodes": [

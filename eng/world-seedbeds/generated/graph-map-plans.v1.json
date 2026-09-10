@@ -3,20 +3,20 @@
   "revision": "mirror-graph-map-plan-output.r3",
   "generatedAtRuleCode": "DeterministicNoWallClock",
   "sourcePlanRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-  "sourcePlanHashSha256": "b2f1288125e4974371e808a8ae59b2cde4d5a9222fe3a8c43bcbd4e0686b8adc",
+  "sourcePlanHashSha256": "55913f18daec11c884ccf62578cb1667d4ba8716f8a308d9986d3fcb93d2b18e",
   "federationSnapshot": {
     "partitionCatalogRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.partitions.v1.json",
-    "partitionCatalogRevision": "mirror-graph-map-partition-catalog.r7",
-    "partitionCatalogHashSha256": "43fd4c27aecd4a2e82bf9809b305b7c0b84510e9f373836e4f0a070476eb20d6",
+    "partitionCatalogRevision": "mirror-graph-map-partition-catalog.r9",
+    "partitionCatalogHashSha256": "2ad452b6e258c2c20a79f3ae34b2dae471c7462db9ecb141e2cc22ebeca7804e",
     "overlayCatalogRef": "eng/world-seedbeds/graph-maps/graph-map-overlays.v1.json",
-    "overlayCatalogRevision": "mirror-graph-map-overlay-catalog.r5",
-    "overlayCatalogHashSha256": "f24192a305bac241e40db1b06f0d69ddd9bb0ec7f8dc674b87c2d2410f338c51",
+    "overlayCatalogRevision": "mirror-graph-map-overlay-catalog.r6",
+    "overlayCatalogHashSha256": "738211f82a2d336e57284c7444cb4dca01ac8baaf3ae9845450e6c3fbfaa9c89",
     "codeBindingCatalogRef": "eng/world-seedbeds/graph-maps/unity-code-bindings.v1.json",
     "codeBindingCatalogRevision": "mirror-graph-map-code-binding-catalog.r1",
     "codeBindingCatalogHashSha256": "c1a2360271bbcfd76f0b29ea2291894625cb57050cf8b97d16582a4b62b1a0b0",
     "placementRuleCatalogRef": "eng/world-seedbeds/graph-maps/placement-rule-bindings.v1.json",
-    "placementRuleCatalogRevision": "mirror-graph-map-placement-rule-catalog.r5",
-    "placementRuleCatalogHashSha256": "83753a076df00d761f9d3af0d8d69086fd8a03341b81abad22035d2b70c252c5"
+    "placementRuleCatalogRevision": "mirror-graph-map-placement-rule-catalog.r6",
+    "placementRuleCatalogHashSha256": "dca1c6c988c6932d5b0d4395f8a96e113d2ab4f456dc68df0eb78aa1fecfe5b9"
   },
   "sourceCatalogSnapshot": {
     "actualE5Revision": "simulation-world-actual-e5-spatial-output.r6",
@@ -26,40 +26,40 @@
     "directBindingCount": 42,
     "contextualBindingCount": 6,
     "actualE5RuntimeValidated": false,
-    "worldInteractionRevision": "simulation-world-interactions.r43",
-    "worldInteractionCount": 105
+    "worldInteractionRevision": "simulation-world-interactions.r48",
+    "worldInteractionCount": 133
   },
   "counts": {
     "plans": 1,
-    "nodes": 34,
-    "edges": 34,
-    "constraints": 28,
+    "nodes": 39,
+    "edges": 41,
+    "constraints": 37,
     "placementRuleProfiles": 5,
     "placementRules": 21,
     "placementRuleBindings": 5,
     "placementRuleBoundConstraints": 3,
-    "governanceOnlyConstraints": 25,
+    "governanceOnlyConstraints": 34,
     "traversalProfiles": 6,
-    "subgraphs": 6,
-    "ports": 12,
-    "connectors": 6,
+    "subgraphs": 7,
+    "ports": 14,
+    "connectors": 8,
     "layers": 6,
     "overlays": 9,
     "overlayEdgeEffects": 4,
-    "planningAssessments": 21,
+    "planningAssessments": 59,
     "codeBindings": 6,
     "sourceCodeFiles": 13,
     "codeBoundLevel1Targets": 19,
-    "unboundLevel1Targets": 48,
-    "unresolvedNodes": 23,
-    "unresolvedEdges": 25,
+    "unboundLevel1Targets": 60,
+    "unresolvedNodes": 28,
+    "unresolvedEdges": 32,
     "normalizedElements": 9,
     "normalizedRelations": 7,
     "normalizationBlocked": 1
   },
   "plan": {
     "schemaVersion": "mirror-graph-map-plan.v3",
-    "revision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
+    "revision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
     "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
     "title": "북부 생활권 발견·생산·물류 첫 그래프 맵",
     "summary": "기존 실제 E5 공간 사본과 안정 ID를 유지하면서 현행 기획 21건의 Graph Map 영향을 전수 판정하고, 한스의 개인 손도끼와 별도 정밀 작업 도끼 계보, Farm 순찰·Hub 미도착 화물·Town 공방·요동성 관문, 계절 및 장거리 경로 레이어를 계획 관계로 통합한다.",
@@ -73,7 +73,7 @@
       {
         "kindCode": "WorldInteractionCatalog",
         "path": "eng/execution-ledgers/world-interactions.json",
-        "expectedRevision": "simulation-world-interactions.r43"
+        "expectedRevision": "simulation-world-interactions.r48"
       },
       {
         "kindCode": "DecisionCatalog",
@@ -104,11 +104,11 @@
       "scaleLayerCode": "PartitionedGraphMap",
       "partitionCatalogRef": {
         "path": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.partitions.v1.json",
-        "expectedRevision": "mirror-graph-map-partition-catalog.r7"
+        "expectedRevision": "mirror-graph-map-partition-catalog.r9"
       },
       "overlayCatalogRef": {
         "path": "eng/world-seedbeds/graph-maps/graph-map-overlays.v1.json",
-        "expectedRevision": "mirror-graph-map-overlay-catalog.r5"
+        "expectedRevision": "mirror-graph-map-overlay-catalog.r6"
       },
       "splitPolicyMeaning": "Level 1~3의 의미는 유지하고 규모가 커질 때 Area 책임별 하위 맵과 명시 port·connector로 분할한다."
     },
@@ -116,7 +116,7 @@
       {
         "planId": "PLAN-PLANNING-PLAYER-CONTEXT-001",
         "sourceRef": "docs/AI/시간공간플레이어대상-WI기획정리-2026-08-31.md",
-        "sourceExpectedSha256": "4DA06BE2AECCE97353E24A21C65DE1637012DA65E923562242498AF59F1ADCE7",
+        "sourceExpectedSha256": "8F8F38E5DD0B1594033F541B5C0A1A4EE06C5450BA9AFF735F0B21B645B2EC24",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
@@ -125,7 +125,7 @@
       {
         "planId": "PLAN-PLANNING-WI-GWAE-001",
         "sourceRef": "docs/Architecture/WI괘성분류체계.md",
-        "sourceExpectedSha256": "4282D2F0FBE963A2634DA5BE8C841E0E217519F4E1B61A3341BA1D37AC83AB0C",
+        "sourceExpectedSha256": "17029C4460FDD7C0DBBE51ED3F6F9B13AC86056A0F3BB6108A071F3451A7901D",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
@@ -134,7 +134,7 @@
       {
         "planId": "PLAN-PLANNING-MIGRATION-001",
         "sourceRef": "docs/AI/전체기획-네관점순환이관-2026-08-31.md",
-        "sourceExpectedSha256": "A84D5C11CFBF350DCFC439998B8CE56249771FDB81263FE599DBCDAF6607F92B",
+        "sourceExpectedSha256": "B240A8D0BA94DDE40896A5C9A79B5AB8BD32B1EA46D67B363EB167A4CC978AB6",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
@@ -143,7 +143,7 @@
       {
         "planId": "PLAN-PLANNING-DECISION-READING-001",
         "sourceRef": "docs/AI/결정원장-기획시작점-읽기안내.md",
-        "sourceExpectedSha256": "1CFFAE5FBD5B82AD05186D771ADAD1B0405AB0D91755FA6341AA38050DDB3872",
+        "sourceExpectedSha256": "D9307EFA5514C4977F9A6015B15EA133DAE530C971565F665EE7CE6F714B298D",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
@@ -152,7 +152,7 @@
       {
         "planId": "PLAN-STORY-MIRROR-MAIN-001",
         "sourceRef": "docs/AI/메인스토리-거울의흐름-기획-2026-09-01.md",
-        "sourceExpectedSha256": "E46D8DA7BC4474772625A0694A6924304B86F4127F2E2E63417D02C749BDB89B",
+        "sourceExpectedSha256": "0DB270DDD22DC47011AF8B0F1FC55B6305E432820813EB6E8D11A26DD68345B2",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "Integrated",
         "impactRefs": [
@@ -165,7 +165,7 @@
       {
         "planId": "PLAN-STORY-DUAL-PROTAGONIST-001",
         "sourceRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md",
-        "sourceExpectedSha256": "9FAE03C1CF38A2A73D2B4E29E3E1C34ACEBA97B9AC9784D56D2B16CFEAFA7EA9",
+        "sourceExpectedSha256": "9DDEE8D18EECBA79843A0CB3D768B7842BB89C806EC5120E3D508C7DE6ADBFF8",
         "classificationCode": "CreateSubgraph",
         "integrationStateCode": "IntegratedPlanningOnly",
         "impactRefs": [
@@ -176,7 +176,7 @@
       {
         "planId": "PLAN-STORY-YODONG-DEFENSE-001",
         "sourceRef": "docs/AI/요동성방어-메인스토리기획-2026-09-01.md",
-        "sourceExpectedSha256": "F28A2D6C44AB19165732DB7074EA9332034CB2BF998E40C224DA10819ED24796",
+        "sourceExpectedSha256": "FABD9537F6DD9A8825A8197620FAF097073F5B3FFFAE33BE0521350354248905",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "IntegratedPlanningOnly",
         "impactRefs": [
@@ -189,7 +189,7 @@
       {
         "planId": "PLAN-STORY-HUB-DISCOVERY-001",
         "sourceRef": "docs/AI/허브발견-3인칭관찰과광역노드-기획-2026-09-01.md",
-        "sourceExpectedSha256": "37660C56C52F20769E1BF80BCC476F00A1F6B495130E5EB14336A8A4AFB3D301",
+        "sourceExpectedSha256": "710AA6C69A42930A96BA7BBBED0F4EBCD19882CD234299BFFA5F2FC95CB91218",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "IntegratedPlanningOnly",
         "impactRefs": [
@@ -201,7 +201,7 @@
       {
         "planId": "PLAN-GAMEPLAY-FIRST-PERSON-FOCUS-001",
         "sourceRef": "docs/AI/1인칭-선택형집중타이밍-기획보완-2026-08-31.md",
-        "sourceExpectedSha256": "A791F092CEE3B9337AC4E8F3A47CCD65EA2362A7C76AD7ECEECAD251FC530C7D",
+        "sourceExpectedSha256": "47ACF0EC478BCDC34774E3C6F45441E7E80D85DA0B4F219941FFB3DD579AF9DB",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "IntegratedPlanningOnly",
         "impactRefs": [
@@ -212,7 +212,7 @@
       {
         "planId": "PLAN-GAMEPLAY-MEDITATION-ACTION-001",
         "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/플레이어내면명상/player-mind-meditation.inquiry.r1.md",
-        "sourceExpectedSha256": "14015DFCA69C47BF2B93651B873C10764A5F367ED82BCA67D1EC97CDEDAD33CA",
+        "sourceExpectedSha256": "560CE6A478DE276C3FB067C0364B9D1B74CE67DC6246F866D56AB3D6866C926B",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [
@@ -223,7 +223,7 @@
       {
         "planId": "PLAN-TIME-SEASONAL-001",
         "sourceRef": "docs/AI/24절기-제철자료-조사와기획연결-2026-08-31.md",
-        "sourceExpectedSha256": "5764EEDB7316524244127D7A54A63FB9313780942911C4D9CF01B0C8AD6A7AD1",
+        "sourceExpectedSha256": "464099ED9F88C9C90C7496ED694879909403DBC4E4F1DAF302939ACCBC37C51F",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "IntegratedPlanningOnly",
         "impactRefs": [
@@ -246,7 +246,7 @@
       {
         "planId": "PLAN-WORLD-FOUR-AREAS-001",
         "sourceRef": "docs/AI/월드맵-4업무영역-자연경계와자산선정제안-2026-08-31.md",
-        "sourceExpectedSha256": "F4CAEF7BD77ECB6DEC961937A3D28A2AEA9029EBBB5854C3245A68B5C6315A13",
+        "sourceExpectedSha256": "06DA8714BA2D67D23A7B9C36D5843167109ECA9FC6A0707828DA6C65E2F77844",
         "classificationCode": "Blocked",
         "integrationStateCode": "Blocked",
         "impactRefs": [],
@@ -255,7 +255,7 @@
       {
         "planId": "PLAN-GRAPH-NORTHERN-LIFE-001",
         "sourceRef": "docs/AI/북부생활권-첫그래프맵-상세제안-2026-09-01.md",
-        "sourceExpectedSha256": "8AC5DEC5109C6BD469C7460F9261B833859C355E0D696AACC61F0EADCB7E24D4",
+        "sourceExpectedSha256": "DF5FF67EA1850FEB53B12D394AEC5AD34D18FBC97A1A1742EA41DFA6A5875AB8",
         "classificationCode": "Blocked",
         "integrationStateCode": "StaleRevision",
         "impactRefs": [],
@@ -264,7 +264,7 @@
       {
         "planId": "PLAN-GRAPH-NORTHERN-LIFE-REVIEW-001",
         "sourceRef": "docs/AI/그래프맵-현행검증과구체화-기획-2026-09-01.md",
-        "sourceExpectedSha256": "5F62A6CE0C64BA63EA5617B065B7A1EA857F0F4CC486E54772E6172A6D7EFDFE",
+        "sourceExpectedSha256": "968C1DA61F49E970F3DE190A8BCD3AD89A426A7492E3455A99A016E9C20ACF66",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "Integrated",
         "impactRefs": [
@@ -275,7 +275,7 @@
       {
         "planId": "PLAN-GRAPH-PLANNING-INTEGRATION-001",
         "sourceRef": "docs/AI/GraphMap-분리기획통합-인계-2026-09-01.md",
-        "sourceExpectedSha256": "00AA5495D72F2C9D49EA35CB05457FC863D82C51677F94F87FA6421C6090E86C",
+        "sourceExpectedSha256": "688CFF1000CD3423B791B393D4BD403E3FE424825848487835A70259A02819FF",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "Integrated",
         "impactRefs": [
@@ -286,7 +286,7 @@
       {
         "planId": "PLAN-GRAPH-LONG-ROUTE-ENCOUNTER-001",
         "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md",
-        "sourceExpectedSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D",
+        "sourceExpectedSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904",
         "classificationCode": "CreateSubgraph",
         "integrationStateCode": "BlockedPendingRouteFixture",
         "impactRefs": [
@@ -302,7 +302,7 @@
       {
         "planId": "PLAN-GRAPH-LAYER-FIRST-WORKFLOW-001",
         "sourceRef": "docs/AI/GraphMap-레이어중심-설계개발우선순위-2026-09-02.md",
-        "sourceExpectedSha256": "6B0AED4EB98FCC2D23DCCE7AA2704F7E3EB0A8803CCB3CAEA238D53990F006DC",
+        "sourceExpectedSha256": "13DE043CD10ADA326EB71215B493F3D8AB680CE634A31C817BB164322B5E0D73",
         "classificationCode": "UpdateExisting",
         "integrationStateCode": "Integrated",
         "impactRefs": [
@@ -316,9 +316,25 @@
         "reason": "기준 공간을 복제하지 않는 레이어·비용·용량·근거·신선도·중복 방지 구조와 검사를 추가한다."
       },
       {
+        "planId": "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001",
+        "sourceRef": "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md",
+        "sourceExpectedSha256": "47FFFE846AD3AE47BE1243505A4FB79FBA58D5D212FCA062EE02A471A4A750B8",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:hub-logistics",
+          "gm-subgraph:regional-route-control",
+          "gm-layer:transport",
+          "gm-layer:threat-security",
+          "gm-layer:logistics-supply",
+          "gm-layer:player-choice"
+        ],
+        "reason": "기존 허브 실제 접점을 보존하면서 등록·검수·하역·창고·출차 순환과 선택적 중계·도로 승격·공사 시간 대가를 계획 관계·제약으로 증분한다."
+      },
+      {
         "planId": "PLAN-DATA-GAMEOBJECT-ASSET-001",
         "sourceRef": "docs/AI/농수산품목-시각자산대응-기획과개발인계-2026-08-31.md",
-        "sourceExpectedSha256": "12F7162F4F33AE5D7C6B3B61C079C6745DE3B0D27DCD3E9D313A8D52C7283DF6",
+        "sourceExpectedSha256": "6DBD79FB92100D63929394EA93187A2C3BAC2A0C432D09884D0A301134BF028F",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
@@ -327,20 +343,382 @@
       {
         "planId": "PLAN-DATA-REALITY-MYSQL-001",
         "sourceRef": "docs/AI/현실자료-서버MySQL축적-기획과개발인계-2026-08-31.md",
-        "sourceExpectedSha256": "4A4D5DAF0B47942C294A72F30305C13009F4625888B5513958513BFD3567670F",
+        "sourceExpectedSha256": "CFFB2B83311D93215F5DAA0F5C17D328AF1E73DF79E62AA57F80AD14BBF16269",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
         "reason": "현실 자료 축적 경계이며 World Graph topology를 변경하지 않는다."
       },
       {
+        "planId": "PLAN-DATA-EIGHT-LIFE-DOMAINS-001",
+        "sourceRef": "docs/AI/Planning/자료/PLAN-DATA-EIGHT-LIFE-DOMAINS-001/README.md",
+        "sourceExpectedSha256": "B8630E5AFADD2135A885CDE4562374D1DEAA076BC54F42E01DC50A3F7904993F",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "생활 여덟 영역은 공공데이터의 읽기 분류이며 자료 존재만으로 AreaSet·H·통행·배치를 확정하지 않는다."
+      },
+      {
         "planId": "PLAN-PRESENTATION-SYNTY-SURVEY-001",
         "sourceRef": "docs/AI/최근기획-SyntyPrefab조사-개발인계-2026-09-01.md",
-        "sourceExpectedSha256": "7516713D97FFC9C72F5859402D7D6A06C18A74A23BF96CBF5A2C555F7BB72863",
+        "sourceExpectedSha256": "E5919A12D822236F0481D1235E8D2EC5C58B8A5015AFB07131BDA6FAC1E49B22",
         "classificationCode": "NoImpact",
         "integrationStateCode": "PlanningReference",
         "impactRefs": [],
         "reason": "후보 조사 결과는 실제 채택·배치 전까지 Graph Map 요소로 승격하지 않는다."
+      },
+      {
+        "planId": "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
+        "sourceRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
+        "sourceExpectedSha256": "FD5AFAB87CB3E6B607840AA09C705D4833103074E104DA85448AEFA1E42B1FE7",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:hub-logistics",
+          "gm-layer:logistics-supply"
+        ],
+        "reason": "Hub 입고·검수·적치 표본을 기존 Hub 물류 하위 그래프와 물류 레이어에 결속한다."
+      },
+      {
+        "planId": "PLAN-GAME-COMMON-PURPOSE-001",
+        "sourceRef": "docs/AI/게임상위목적-오행순환과광복기-기획-2026-09-02.md",
+        "sourceExpectedSha256": "B03EF62CE8431A51FCA7163F8C1C0C4CF4765903CBFE4BC65757319CC1C692EE",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "자율 업무 세계라는 상위 목적은 기존 공간 관계의 의미를 안내하며 topology를 직접 추가하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-COMMUNITY-VISITOR-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/공동체편입방문/community-membership-visitor.inquiry.r1.md",
+        "sourceExpectedSha256": "CD0D410C453591C475B51A9E216B98317B78EA678F0DF3F7557022AF8A4AB039",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingFirstArea",
+        "impactRefs": [],
+        "reason": "방문·체류의 첫 적용 Area가 확정되지 않아 대상 공간 관계를 만들지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-DELEGATION-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/솔로업무위임/solo-work-delegation.inquiry.r1.md",
+        "sourceExpectedSha256": "E14ADA4E505C7B414B415BABACA147BC40AC771C2C3F77E04BE7A26DA67E25A5",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "NPC 위임은 역량·권한·예외 반환 규칙이며 현재 공간 관계를 직접 추가하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-FARM-CROP-LIFE-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/건물공간배치/harvest-ready-grace-window.inquiry.r1.md",
+        "sourceExpectedSha256": "A4105FCBB53F23402DCE0EC297C6733E9C975A7E9BAB4624BEC68842A196C42E",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:farm-production"
+        ],
+        "reason": "수확 여유 시간은 기존 Farm 생산 관계의 시간 조건이며 새 공간 노드는 추가하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-FARM-DEFENSE-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/Farm병영방위/farm-barracks-defense.inquiry.r1.md",
+        "sourceExpectedSha256": "F7097E9E9FA9C2FB0716A6E0CB0900C2567C5ACB0BB8E1B267BE79B91DBACB27",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:hans-precision-axe",
+          "gm-layer:threat-security"
+        ],
+        "reason": "농장 소집·경계·귀환 의미를 기존 한스 농장 경계 관계와 위협 레이어에 연결한다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-FIRST-EXPERIENCE-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/첫플레이체감/first-play-experience.inquiry.r1.md",
+        "sourceExpectedSha256": "D444EE2429BE531E88EC86F63214904CE44C99F3B26C025F22EB58E7384C15D7",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:nature-discovery"
+        ],
+        "reason": "발견·자유 이탈·귀환의 공통 체감을 기존 Nature 발견 하위 그래프에 연결한다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-HERBAL-CRAFTING-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/약초Recipe제작/herbal-recipe-crafting.inquiry.r1.md",
+        "sourceExpectedSha256": "AB6C60921CEA4165A0240485D60C88B9926429F77A98F50DCBD5856BD8264291",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "약초 제작 규칙은 재료와 작업 상태를 소유하며 현재 Graph Map의 공간 관계를 직접 변경하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-HUB-DEMAND-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/Hub수요분배/hub-demand-allocation.inquiry.r1.md",
+        "sourceExpectedSha256": "EF820C094DFBE812270DE671BB2FCFB34FA3001884EDAC223AE948357F546518",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:hub-logistics",
+          "gm-layer:logistics-supply"
+        ],
+        "reason": "수요·희소 재고·출고 준비를 기존 Hub 물류 하위 그래프와 물류 레이어에 연결한다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-MULTI-AREA-CHOICE-001",
+        "sourceRef": "docs/AI/다영역-선택형플레이와병행개발-2026-08-31.md",
+        "sourceExpectedSha256": "215B937A7C88BBFA9644B3423CF4AF9648CEABECA6E4781A410C2B6E654DB747",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "graph-map:mirror:northern-life-hub-discovery.v1"
+        ],
+        "reason": "영역 선택성과 독립 개발 원칙을 북부 생활권 federation 경계에 반영한다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-NATURE-RESOURCE-CONSTRUCTION-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/Nature자원건설/nature-resource-construction.inquiry.r1.md",
+        "sourceExpectedSha256": "1BAC2FCE76E4536486D93520EDE13111486C4235B05BD999ED2EA01B03281B9B",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingConstructionPlacement",
+        "impactRefs": [],
+        "reason": "단계 건설과 자연 복원은 정확 대상·배치 제약이 미정이므로 기존 topology를 확장하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-NATURE-SHELTER-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/Nature거점수면/nature-shelter-sleep.inquiry.r1.md",
+        "sourceExpectedSha256": "2F8483633C05AA6207F31031DBA7BCB864F29E52AA6423422E004B4D0B62CA07",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingShelterPlacement",
+        "impactRefs": [],
+        "reason": "Nature 오두막의 정확 H1 위치·접근·안전 경계가 현재 Graph Map에 결속되지 않았다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-PERSPECTIVE-ROLES-001",
+        "sourceRef": "docs/AI/탐험과운영-시점역할과현실업무연결-2026-08-31.md",
+        "sourceExpectedSha256": "0C660FE52FE0AFE331040C79EABFDF132E2981666E4E70BFC517C6FB021834CA",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "1인칭·3인칭·광역 운영의 시점 역할은 Presentation과 WI 스케일을 구분하며 공간 topology를 바꾸지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-PLAYER-STAMINA-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/플레이어행동체력회복과성장.md",
+        "sourceExpectedSha256": "CEC31E2C0C27373AF1A0430503BBE2E1143E6E4E1A876094832355914643E7AD",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "체력·휴식·회복 성장은 Actor 상태 규칙이며 공간 topology를 직접 추가하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-PROGRESSION-CLUSTERS-001",
+        "sourceRef": "docs/AI/문답기반-발전군집과테크트리-2026-08-31.md",
+        "sourceExpectedSha256": "34AC2CD86B6718C4D4644CEFFA21FB40ADDF4AA3385D8B09CBFAC3103EB3C336",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "NPC 학습 카드와 성장 군집은 관계 기반 진행 규칙이며 새 공간 노드를 요구하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-REGIONAL-MONSTER-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/지역오행몬스터/region-five-elements-monster.inquiry.r1.md",
+        "sourceExpectedSha256": "17E546426E1A2E0BFAD6115F98B873BF9436AA3C182EF15B5BAD327EF4538EB9",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingCreatureAndRegionBinding",
+        "impactRefs": [],
+        "reason": "첫 마수 자산과 정확 지역 결속이 미정이므로 위협 노드나 경로를 새로 확정하지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-SURVIVAL-ECONOMY-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/생존경제/survival-economy.inquiry.r1.md",
+        "sourceExpectedSha256": "F91AA5C3B43EF7BC3CF904E6CB198D346EDEA05A710692EB603F425DB3164B7B",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [
+          "gm-layer:logistics-supply"
+        ],
+        "reason": "조달·비축·가격 전망은 물류 레이어의 조회 의미이며 고정 공간 topology를 만들지 않는다."
+      },
+      {
+        "planId": "PLAN-GAMEPLAY-TOWN-ORDER-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/Town주문수령/town-order-pickup.inquiry.r1.md",
+        "sourceExpectedSha256": "28B35F5FE8B892CDB957876BAD4229FF9827DBB7FEB8AF2FB40DAF30E8C70B08",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:town-life"
+        ],
+        "reason": "주문 확인·수령·소비·귀환은 기존 Town 생활 하위 그래프의 업무 의미로 연결한다."
+      },
+      {
+        "planId": "PLAN-PLACEMENT-CROSS-AREA-BUILDING-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/건물공간배치/building-spatial-placement.inquiry.r1.md",
+        "sourceExpectedSha256": "0E044C021EE843E916BE06F025168E96F53AE52E0F72C5AC49AD23CBDE6222DF",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingExactAreaSlice",
+        "impactRefs": [],
+        "reason": "영역별 H·시설·통행 문답은 범위가 열려 있어 정확한 단일 Area slice 없이 배치 제약으로 승격하지 않는다."
+      },
+      {
+        "planId": "PLAN-PLACEMENT-FOREST-EDGE-FARM-001",
+        "sourceRef": "docs/AI/숲경계농장-H1-H2-배치맵-기획-2026-09-02.md",
+        "sourceExpectedSha256": "4DE86716F33D5512EC5BFDB1710640DB86AF66A80A4AD9D82B9FCD3A724C5373",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "BlockedPendingVisualApproval",
+        "impactRefs": [
+          "gm-subgraph:hans-precision-axe",
+          "gm-subgraph:farm-production"
+        ],
+        "reason": "숲 경계 농장 배치 후보는 기존 한스·Farm 관계를 구체화하지만 시각 승인과 E5 결속 전에는 계획 상태로 유지한다."
+      },
+      {
+        "planId": "PLAN-PRESENTATION-E4-POOL-001",
+        "sourceRef": "docs/AI/Planning/표현/PLAN-PRESENTATION-E4-POOL-001/README.md",
+        "sourceExpectedSha256": "D006A85BDF5BEED4F2F6C6B24CF1F9B1C9D3E5805FFF7A31417C5560A7B5F519",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "E4 후보 풀은 표현 후보와 상태 판독을 관리하며 Graph 관계를 확정하지 않는다."
+      },
+      {
+        "planId": "PLAN-PRESENTATION-H1-SYNTY-STATE-001",
+        "sourceRef": "docs/AI/Planning/표현/PLAN-PRESENTATION-H1-SYNTY-STATE-001/README.md",
+        "sourceExpectedSha256": "1AB131665DE394F72077D6FE62EF4FD92FEADCB406379892DBFB5743D1420A13",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "H1 Synty 상태 조사는 자산·동작 후보 자료이며 실제 배치나 Graph 권위가 아니다."
+      },
+      {
+        "planId": "PLAN-SPATIAL-FOOD-DELIVERY",
+        "sourceRef": "docs/AI/Planning/공간/PLAN-SPATIAL-FOOD-DELIVERY/README.md",
+        "sourceExpectedSha256": "FAC8863531B4FC65843326B074A344BC306ADEE89C048D8AFAEE5260621A78C6",
+        "classificationCode": "CreateSubgraph",
+        "integrationStateCode": "BlockedPendingFederation",
+        "impactRefs": [],
+        "reason": "합성 음식 배달 Graph·배치 표본은 준비됐지만 북부 생활권 federation에 아직 승인 결속되지 않았다."
+      },
+      {
+        "planId": "PLAN-STORY-CITY-DISCOVERY-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-CITY-DISCOVERY-001/README.md",
+        "sourceExpectedSha256": "9091DB0993C823140EF5D66CAAC2E40416C13EE393485597DC8AAF562FB176F9",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedOutsideCurrentGraph",
+        "impactRefs": [],
+        "reason": "City 주거권 동선은 북부 생활권 현행 AreaSet과 정확 경로가 없어 현재 그래프 밖으로 유지한다."
+      },
+      {
+        "planId": "PLAN-STORY-HEX03-CAMPAIGN-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+        "sourceExpectedSha256": "938DE55F56D99CA1B733739B3D09CFFCF1C549D5D940394A2E2BFE9BEF6BBFFF",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:hans-precision-axe",
+          "gm-subgraph:farm-production"
+        ],
+        "reason": "수뢰둔의 승인된 한스 농장 관계를 기존 정밀 도끼·Farm 생산 하위 그래프에 한정해 반영한다."
+      },
+      {
+        "planId": "PLAN-STORY-HEX04-CAMPAIGN-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md",
+        "sourceExpectedSha256": "1DF6CF4E68B46520D727E4D79674AC779EDBADB62CBCBD0609A67CDE1F100579",
+        "classificationCode": "Blocked",
+        "integrationStateCode": "BlockedPendingImplementationRebind",
+        "impactRefs": [],
+        "reason": "산수몽은 현재 효 문답과 구현 재결속이 진행 중이므로 새 공간 관계를 확정하지 않는다."
+      },
+      {
+        "planId": "PLAN-STORY-HEXAGRAM-CAMPAIGN-RESET-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEXAGRAM-CAMPAIGN-RESET-001/README.md",
+        "sourceExpectedSha256": "1B0169675DEC7F065EB929FA1DCC0B71B0D5A3BC1EFEA2EC7D6CE91505BDA6E1",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "캠페인 재진입과 다섯 조건 판정은 Runtime 진행 규칙이며 공간 배치를 직접 변경하지 않는다."
+      },
+      {
+        "planId": "PLAN-STORY-HEXAGRAM-SEQUENCE-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEXAGRAM-SEQUENCE-001/README.md",
+        "sourceExpectedSha256": "E59BB3B0C8176267609FACD633C320C0ED50E6D38EDA71D80CEB5C1138B56384",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "64괘와 효사는 기획 영감·제작 순서를 제공하지만 자동 공간 순서나 topology를 만들지 않는다."
+      },
+      {
+        "planId": "PLAN-STORY-IDEA-MAP-LEARNING-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-IDEA-MAP-LEARNING-001/README.md",
+        "sourceExpectedSha256": "66905A3AA40E1E458ADA70F56F41B081C96BC8D6B5BAB5CB693C939EE3D5C995",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "괘상 맥락 카드와 학습 보정은 지리를 강제하지 않는 별도 진행 규칙이다."
+      },
+      {
+        "planId": "PLAN-STORY-TOWN-DISCOVERY-001",
+        "sourceRef": "docs/AI/Planning/스토리/PLAN-STORY-TOWN-DISCOVERY-001/README.md",
+        "sourceExpectedSha256": "15E72EB382673A164E5FFBDD771A51C0A6FBAEEB06C4659615D705CBF48E6287",
+        "classificationCode": "UpdateExisting",
+        "integrationStateCode": "IntegratedPlanningOnly",
+        "impactRefs": [
+          "gm-subgraph:town-life"
+        ],
+        "reason": "시장 가격과 Town 생활 발견 의미를 기존 Town 생활 하위 그래프에 연결한다."
+      },
+      {
+        "planId": "PLAN-SYSTEM-MYEONMOK-OBSERVER",
+        "sourceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-maps.r1.md",
+        "sourceExpectedSha256": "FAC4B16FE0EE43789C87BF37175AE9837A14EE0285C19EE27BCC1182C2CADA17",
+        "classificationCode": "CreateSubgraph",
+        "integrationStateCode": "BlockedPendingFederation",
+        "impactRefs": [],
+        "reason": "합성 동네 그래프·배치 표본은 존재하지만 북부 생활권 federation에 승인 결속되지 않았다."
+      },
+      {
+        "planId": "PLAN-SYSTEM-OBSERVER-WORLD",
+        "sourceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-OBSERVER-WORLD/README.md",
+        "sourceExpectedSha256": "8CA43907739555585E11081FC30DC54E351DC6D8804D2AB5408A000015986DE2",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "관찰 기본값과 결과 요약은 카메라·조회 정책이며 공간 topology를 새로 만들지 않는다."
+      },
+      {
+        "planId": "PLAN-SYSTEM-SAVE-REENTRY-001",
+        "sourceRef": "docs/Architecture/PlayableLoops/PlanningSessions/저장재진입/save-load-runtime.inquiry.r1.md",
+        "sourceExpectedSha256": "4649228D052C907250A7C364FBB9AE44ABC4164B779BBC0EBB3C2030EE85BBCA",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "저장·중단·재진입은 모든 공간을 가로지르는 지속성 계약이며 topology와 분리한다."
+      },
+      {
+        "planId": "PLAN-TIME-SOLAR-TERM-TAROT-TURN-001",
+        "sourceRef": "docs/AI/절기전략턴-타로카드-기획-2026-09-02.md",
+        "sourceExpectedSha256": "66A878F1525B3281D2C2CE9D41B400304DC23CBA5351D5B21098540EC17A3846",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [
+          "gm-overlay:decision-card-authority-time"
+        ],
+        "reason": "절기 카드의 권위 시간은 기존 선택 카드 Overlay로 표현되며 기준 공간 topology를 변경하지 않는다."
+      },
+      {
+        "planId": "PLAN-VISUAL-HANS-FARM-001",
+        "sourceRef": "docs/AI/Planning/표현/PLAN-VISUAL-HANS-FARM-001/README.md",
+        "sourceExpectedSha256": "9840C56585A142EC45B22D1949B16AFF2E73E5049956EB38B8EF8CA86CD634E8",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "한스 농장 시각 후보는 Presentation 자료이며 Graph topology나 권위 공간을 확정하지 않는다."
+      },
+      {
+        "planId": "PLAN-VISUAL-SYNTY-REFINEMENT-001",
+        "sourceRef": "docs/AI/Planning/표현/PLAN-VISUAL-SYNTY-REFINEMENT-001/observational-realism.r2.md",
+        "sourceExpectedSha256": "7DA93AE7E94A8E3D6A5B188FB2BD4B409C9953538610EBFF9AEC0EF9682CCAFE",
+        "classificationCode": "NoImpact",
+        "integrationStateCode": "PlanningReference",
+        "impactRefs": [],
+        "reason": "Synty·Blender 고도화는 실행 보류된 표현 전략이며 공간 관계를 변경하지 않는다."
       }
     ],
     "traversalProfiles": [
@@ -453,7 +831,7 @@
       "meaning": "플레이어가 어느 상황에서 어떤 대상과 어떤 WI를 수행하고 어디로 이어지는지 읽는 관계 그래프",
       "normalizationCatalogRef": {
         "path": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.normalization.v1.json",
-        "expectedRevision": "mirror-graph-map-normalization.northern-life-hub-discovery.r1"
+        "expectedRevision": "mirror-graph-map-normalization.northern-life-hub-discovery.r3"
       },
       "contextFieldOrder": [
         "time",
@@ -988,6 +1366,9 @@
             "D-450",
             "D-451"
           ],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
           "planningContext": {
             "time": "화물 도착·하차·검수·보관 상태가 바뀌는 시간",
             "place": "Hub 입구와 보관 접점",
@@ -1016,6 +1397,9 @@
             "D-449",
             "D-450",
             "D-451"
+          ],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
           ],
           "planningContext": {
             "time": "차량 도착·대기·출발이 교차하는 운영 시간",
@@ -1048,6 +1432,9 @@
             "D-452",
             "D-453"
           ],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
           "planningContext": {
             "time": "피킹·포장 뒤 차량 상차와 Town 이송이 가능한 시간",
             "place": "Hub 출고 대기·차량 상차 접점",
@@ -1056,6 +1443,116 @@
             "method": "실행 가능한 출고 WI를 선택하고 결과를 확인한다.",
             "result": "출고 확정과 단순 대기를 구분하고 현실 참고 자료는 선택형 상세로 남는다.",
             "nextChoices": "Town 운송, Hub 재작업, 다른 독립 업무"
+          }
+        },
+        {
+          "nodeId": "gm-node:hub-vehicle-registration",
+          "label": "Hub 차량·운송 수단 등록소",
+          "roleCode": "HubVehicleRegistrationH1",
+          "realizationCode": "UnresolvedSpatial",
+          "stateCode": "Unresolved",
+          "actualRef": null,
+          "worldInteractionIds": [],
+          "sourceDecisionIds": [],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "planningContext": {
+            "time": "운송 수단이 허브 순환에 들어오기 전",
+            "place": "공통 입구 뒤 실제 좌표가 아직 정해지지 않은 등록 H1",
+            "player": "등록 상태와 이후 검수 가능 여부를 확인하는 플레이어 또는 승인 NPC",
+            "target": "손수레·짐승·마차·트럭·마력 운송체와 운송 담당",
+            "method": "운송 수단·담당·판본을 등록하고 화물 검수와 분리해 확인한다.",
+            "result": "운송 수단 등록만 성립하며 화물 검수·입고·출차는 아직 완료되지 않는다.",
+            "nextChoices": "화물 검수, 등록 보완, 허브 순환 진입 보류"
+          }
+        },
+        {
+          "nodeId": "gm-node:hub-cargo-inspection",
+          "label": "Hub 화물 검수·접수장",
+          "roleCode": "HubCargoInspectionH1",
+          "realizationCode": "UnresolvedSpatial",
+          "stateCode": "Unresolved",
+          "actualRef": null,
+          "worldInteractionIds": [],
+          "sourceDecisionIds": [],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "planningContext": {
+            "time": "운송 수단 등록 뒤 화물을 입고 처리하기 전",
+            "place": "등록 H1과 분리된 실제 좌표 미정의 검수 H1",
+            "player": "화물 수량·상태·판본과 보류 사유를 확인하는 플레이어 또는 승인 NPC",
+            "target": "등록된 운송 수단의 화물과 접수·검수 기록",
+            "method": "화물 상태와 판본을 검사하고 통과 또는 보류를 기록한다.",
+            "result": "통과 화물만 하역 대기로 넘어가며 운송 수단 등록 성공이 화물 통과를 대신하지 않는다.",
+            "nextChoices": "하역 대기, 보류 화물 조치, 운송 수단만 회송"
+          }
+        },
+        {
+          "nodeId": "gm-node:hub-unloading-waiting",
+          "label": "Hub 하역 대기장",
+          "roleCode": "HubUnloadingWaitingH1",
+          "realizationCode": "UnresolvedSpatial",
+          "stateCode": "Unresolved",
+          "actualRef": null,
+          "worldInteractionIds": [],
+          "sourceDecisionIds": [],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "planningContext": {
+            "time": "화물 검수 통과 뒤 하역 설비·창고 인수 준비를 기다리는 때",
+            "place": "운송 수단별 전용 차로·하역 설비와 연결될 좌표 미정 H1",
+            "player": "대기 순서·설비·화물 상태를 확인하는 플레이어 또는 승인 NPC",
+            "target": "검수 통과 화물, 운송 수단, 하역 설비와 대기 순서",
+            "method": "하역 가능 조건을 확인하고 창고 입출고 H1로 인계한다.",
+            "result": "하역 대기 또는 인계 준비만 성립하며 창고 처리나 순환 완료가 아니다.",
+            "nextChoices": "창고 입고, 설비·역할 보완, 대기 유지"
+          }
+        },
+        {
+          "nodeId": "gm-node:hub-warehouse-inbound-outbound",
+          "label": "Hub 창고 입출고장",
+          "roleCode": "HubWarehouseInboundOutboundH1",
+          "realizationCode": "UnresolvedSpatial",
+          "stateCode": "Unresolved",
+          "actualRef": null,
+          "worldInteractionIds": [],
+          "sourceDecisionIds": [],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "planningContext": {
+            "time": "하역 인계 뒤 보관·환적·출고 대기를 판정하는 때",
+            "place": "기존 Hub 입고·보관 접점을 세부화할 실제 좌표 미정 H1",
+            "player": "잔여 화물과 확정 출고 지시를 확인하는 플레이어 또는 승인 NPC",
+            "target": "입고 화물, 보관 재고, 환적 묶음, 출고 지시와 회수 용기",
+            "method": "보관·환적·출고 대기를 분리하고 출고 전 필수 입력의 판본을 확인한다.",
+            "result": "적재 없음 또는 확정 출고 있음의 다음 경로가 열리지만 출차는 아직 완료되지 않는다.",
+            "nextChoices": "빈 운송 수단 출차, 운송대 편성·적재, 출고 대기 유지"
+          }
+        },
+        {
+          "nodeId": "gm-node:route-controlled-relay",
+          "label": "장거리 중계·검문·안전 거점 후보",
+          "roleCode": "ControlledRelayCheckpointSafeH1",
+          "realizationCode": "PlanningGateway",
+          "stateCode": "Unresolved",
+          "actualRef": null,
+          "worldInteractionIds": [],
+          "sourceDecisionIds": [],
+          "sourcePlanIds": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "planningContext": {
+            "time": "출발 뒤 분할·합류·차량 교체·경로 변경 또는 선택적 휴식이 필요한 때",
+            "place": "일반 도로와 구분되는 실제 위치 미정의 중계소·검문소·안전 거점 H1",
+            "player": "중계 생략과 역할·수단 보완의 대가를 선택하는 플레이어 또는 승인 NPC",
+            "target": "운송대, 하위 화물 묶음, 운송 수단, 경로 판본과 부족 역할 위험",
+            "method": "근거가 있는 거점에서만 재분할·합류·교체·우회를 기록한다.",
+            "result": "선택한 운송 묶음과 경로 판본이 갱신되며 일반 도로 위 임의 변경은 허용되지 않는다.",
+            "nextChoices": "목적지 계속 이동, 안전 회항, 역할·수단 보완 뒤 재출발"
           }
         },
         {
@@ -1584,6 +2081,66 @@
           "capabilityProfileRef": "gm-capability:inter-area-cargo"
         },
         {
+          "edgeId": "gm-edge:hub-receiving-to-vehicle-registration",
+          "fromNodeId": "gm-node:hub-receiving-storage",
+          "toNodeId": "gm-node:hub-vehicle-registration",
+          "kindCode": "WorkHandoff",
+          "intentionCode": "Required",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "기존 Hub 입고 접점은 실제 참조로 보존하고 세부 물류 순환은 등록 H1부터 별도 계획 계보로 시작한다.",
+          "capabilityProfileRef": "gm-capability:work-handoff"
+        },
+        {
+          "edgeId": "gm-edge:hub-registration-to-cargo-inspection",
+          "fromNodeId": "gm-node:hub-vehicle-registration",
+          "toNodeId": "gm-node:hub-cargo-inspection",
+          "kindCode": "WorkHandoff",
+          "intentionCode": "Required",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "운송 수단 등록과 화물 검수는 서로 다른 H1이며 등록 성공이 화물 통과를 대신하지 않는다.",
+          "capabilityProfileRef": "gm-capability:work-handoff"
+        },
+        {
+          "edgeId": "gm-edge:hub-inspection-to-unloading-waiting",
+          "fromNodeId": "gm-node:hub-cargo-inspection",
+          "toNodeId": "gm-node:hub-unloading-waiting",
+          "kindCode": "WorkHandoff",
+          "intentionCode": "Required",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "검수 통과 화물만 운송 수단별 하역 대기 순서와 설비 후보로 인계한다.",
+          "capabilityProfileRef": "gm-capability:work-handoff"
+        },
+        {
+          "edgeId": "gm-edge:hub-unloading-to-warehouse",
+          "fromNodeId": "gm-node:hub-unloading-waiting",
+          "toNodeId": "gm-node:hub-warehouse-inbound-outbound",
+          "kindCode": "WorkHandoff",
+          "intentionCode": "Required",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "하역 대기와 창고 입출고·보관·환적 상태를 한 단계로 합치지 않는다.",
+          "capabilityProfileRef": "gm-capability:work-handoff"
+        },
+        {
+          "edgeId": "gm-edge:hub-warehouse-to-vehicle-yard",
+          "fromNodeId": "gm-node:hub-warehouse-inbound-outbound",
+          "toNodeId": "gm-node:hub-vehicle-yard",
+          "kindCode": "Logistics",
+          "intentionCode": "Required",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "적재 없음 또는 필수 출고 입력이 갖춰진 화물만 운송대 편성·차량 마당으로 넘어간다.",
+          "capabilityProfileRef": "gm-capability:inter-area-cargo"
+        },
+        {
           "edgeId": "gm-edge:hub-receiving-to-vehicle-yard",
           "fromNodeId": "gm-node:hub-receiving-storage",
           "toNodeId": "gm-node:hub-vehicle-yard",
@@ -1660,6 +2217,30 @@
           "sourceRelationRefs": [],
           "reason": "명상은 회복 뒤의 선택이며 같은 결과를 다시 지급하거나 게임 진행을 막지 않는다.",
           "capabilityProfileRef": "gm-capability:work-handoff"
+        },
+        {
+          "edgeId": "gm-edge:hub-outbound-to-controlled-relay",
+          "fromNodeId": "gm-node:hub-outbound-staging",
+          "toNodeId": "gm-node:route-controlled-relay",
+          "kindCode": "ExternalGateway",
+          "intentionCode": "Optional",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "중계·휴식은 권장 후보이며 충분한 수단·역량을 가진 운송대의 무정차 경로를 막지 않는다.",
+          "capabilityProfileRef": "gm-capability:unresolved-external"
+        },
+        {
+          "edgeId": "gm-edge:controlled-relay-to-yodong-gateway",
+          "fromNodeId": "gm-node:route-controlled-relay",
+          "toNodeId": "gm-node:yodong-defense-gateway",
+          "kindCode": "ExternalGateway",
+          "intentionCode": "Optional",
+          "stateCode": "Unresolved",
+          "bidirectional": false,
+          "sourceRelationRefs": [],
+          "reason": "실제 목적지·좌표가 없는 상태에서 중계 H1을 거친 대체 경로 구조만 보존하며 요동성 결속을 확정하지 않는다.",
+          "capabilityProfileRef": "gm-capability:unresolved-external"
         },
         {
           "edgeId": "gm-edge:hub-outbound-to-town-receiving",
@@ -1769,7 +2350,7 @@
       "meaning": "레벨 1의 관계를 실제 후보 배치 전에 검사하고 기존 배치 구조·제약 규칙의 출처와 적용 범위를 추적하는 계층",
       "placementRuleCatalogRef": {
         "path": "eng/world-seedbeds/graph-maps/placement-rule-bindings.v1.json",
-        "expectedRevision": "mirror-graph-map-placement-rule-catalog.r5"
+        "expectedRevision": "mirror-graph-map-placement-rule-catalog.r6"
       },
       "constraints": [
         {
@@ -2235,6 +2816,261 @@
             "PlanningRevisionChanged",
             "LifeBaseContractApproved",
             "HansPermissionMeaningChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:hub-circulation-registration-inspection-completion",
+          "categoryCode": "Topology",
+          "label": "Hub 등록·검수·하역·창고·출차 순환 완결",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-node:hub-receiving-storage",
+            "gm-node:hub-vehicle-registration",
+            "gm-node:hub-cargo-inspection",
+            "gm-node:hub-unloading-waiting",
+            "gm-node:hub-warehouse-inbound-outbound",
+            "gm-node:hub-vehicle-yard",
+            "gm-node:hub-outbound-staging"
+          ],
+          "stateCode": "Required",
+          "rule": "Hub H2 순환은 입차 뒤 등록→검수→하역 대기→창고 입출고→운송대 편성→출차 확인→이탈 순서를 보존하며 하역이나 등록만으로 완료하지 않는다. 기존 실제 접점의 넓은 표현은 이 세부 권위 순서를 우회하는 근거가 아니다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "HubCirculationRequiredGateMissing",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "HubH1Changed",
+            "ActualHubBindingChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:hub-outbound-required-inputs",
+          "categoryCode": "Authority",
+          "label": "Hub 출고 적재 전 필수 입력과 대기",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-node:hub-warehouse-inbound-outbound",
+            "gm-node:hub-vehicle-yard",
+            "gm-node:hub-outbound-staging"
+          ],
+          "stateCode": "Required",
+          "rule": "화물 적재 출차 전 목적지 H1·수령 주체·운송 담당·도로 경로·출발 가능 시간·화물 수량과 상태 판본을 모두 확인한다. 하나라도 없으면 출고 대기로 남기며 시스템 후보는 자동 출차를 확정하지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "HubOutboundRequiredInputMissing",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "CargoRevisionChanged",
+            "RouteRevisionChanged",
+            "ActorAssignmentChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:cargo-split-lineage-controlled-relay",
+          "categoryCode": "Provenance",
+          "label": "화물 하위 묶음 계보와 통제 거점 변경",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-node:hub-warehouse-inbound-outbound",
+            "gm-node:route-controlled-relay",
+            "gm-edge:hub-outbound-to-controlled-relay",
+            "gm-edge:controlled-relay-to-yodong-gateway",
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "화물은 적재 한도·기한·복수 목적지·긴급 물량·위험 분산 근거로 하위 묶음화할 수 있다. 출발 뒤 재분할·합류·차량 교체·경로 변경은 중계소·검문소·안전 거점에서만 판본 계보를 남기며 모든 하위 묶음이 도착·회수·손실 중 하나로 정리돼야 전체 완료다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "CargoSplitOrRouteChangeLineageInvalid",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "CargoBundleRevisionChanged",
+            "RelayContractChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:hub-multimodal-lane-transshipment",
+          "categoryCode": "Capability",
+          "label": "복합 운송 허브 전용 차로·설비·환적 분리",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-node:hub-vehicle-registration",
+            "gm-node:hub-unloading-waiting",
+            "gm-node:hub-warehouse-inbound-outbound",
+            "gm-node:hub-vehicle-yard"
+          ],
+          "stateCode": "Required",
+          "rule": "공통 입구와 행정 기록은 공유하되 보행·손수레, 짐승·마차, 트럭, 마력 운송 H2의 전용 차로·하역 설비·노면 요구를 구분하고 환적은 창고·설비·화물 판본 계보를 가진다. 외형 차이만으로 운송 능력을 확정하지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "HubMultimodalLaneOrTransshipmentUnspecified",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "TransportModeChanged",
+            "FacilityCandidateChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:relay-capability-risk-not-hard-gate",
+          "categoryCode": "Capability",
+          "label": "중계 권장과 운송대 역할별 위험 분리",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-node:hub-vehicle-yard",
+            "gm-node:route-controlled-relay",
+            "gm-edge:hub-outbound-to-controlled-relay",
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "장거리 중계·휴식은 권장 후보이며 충분한 운송 수단과 운전·선택적 호위·정비응급·화물 관리 역량이 있으면 무정차를 선택할 수 있다. 부족한 역할에 대응하는 위험만 Unknown 또는 가중 후보로 남기며 모든 역할을 절대 관문으로 만들지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "RelayOrConvoyCapabilityPolicyInvalid",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "TransportCapabilityChanged",
+            "RoleAssignmentChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:road-stable-id-versioned-upgrade-choice",
+          "categoryCode": "Identity",
+          "label": "도로 안정 ID 유지와 선택형 판본 승격",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "자연 통행로→정비 비포장도로→주도로→특수 운송 대응도로 승격은 같은 안정 엣지의 판본화 상태로 관리한다. 교통량으로 잠그지 않고 정체·손실·미운송 재고·비용·유지비·예상 효과와 도로로 해결되지 않는 위협을 제시한 뒤 플레이어나 권한 NPC가 선택한다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "RoadUpgradeIdentityOrChoiceInvalid",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "RoadRevisionChanged",
+            "CostEvidenceChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:roadwork-schedule-tradeoff",
+          "categoryCode": "Decision",
+          "label": "도로 공사 시간 선택과 위험·통행 대가",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "주간·야간·분할·긴급 전면 공사는 안전·운송 유지·기간·비용·운송 중단 대가를 분리해 제시한다. 야간 공사의 몬스터·마물·인건비 위험과 경비·조명·마법 보호 완화는 근거 없는 수치로 확정하지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "RoadworkScheduleTradeoffMissing",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "RoadworkPolicyChanged",
+            "ThreatEvidenceChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:roadwork-protection-resource-exclusivity",
+          "categoryCode": "Authority",
+          "label": "야간 공사 보호 자원 동시간 배타 사용",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "야간 공사에 배치한 경비대·조명·마법 보호 자원과 NPC는 같은 시간 다른 임무에 사용할 수 없다. 공사 안전을 높일 때 다른 도로·거점의 경비·대응 여력 감소를 함께 보여 주며 중복 배정하지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "RoadworkProtectionResourceDoubleBooked",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "TimeWindowChanged",
+            "ResourceAssignmentChanged"
+          ]
+        },
+        {
+          "constraintId": "gm-constraint:hub-h4-external-areas-optional",
+          "categoryCode": "Independence",
+          "label": "첫 H4 외부 Area 독립과 미정 목적지 보존",
+          "severityCode": "Blocking",
+          "targetRefs": [
+            "gm-edge:farm-loading-to-hub-receiving",
+            "gm-edge:hub-outbound-to-town-receiving",
+            "gm-edge:hub-outbound-to-yodong-gateway"
+          ],
+          "stateCode": "Required",
+          "rule": "첫 H4는 허브 중심 지역 물류권이며 Farm·Town·City를 필수 선행으로 강제하지 않는다. 기존 외부 연결은 선택 또는 역사 실제 참조로 보존하고 목적지가 미정인 새 연결을 Area 이름으로 추정하지 않는다.",
+          "sourceRefs": [
+            "PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001"
+          ],
+          "enforcementCode": "StaticAndHumanReview",
+          "requiredAtEvidence": "E4",
+          "validatorRefs": [
+            "GraphMapPlanValidator",
+            "HumanPlanningReview"
+          ],
+          "failureCode": "HubH4ExternalAreaDependencyInvented",
+          "invalidationConditions": [
+            "PlanningRevisionChanged",
+            "AreaBindingChanged",
+            "DestinationApproved"
           ]
         },
         {
@@ -2824,6 +3660,66 @@
           "targetRef": "gm-edge:precision-axe-repair-handoff-to-return",
           "reasonCode": "NoApprovedUnityBinding",
           "reason": "수리 경과·동일 개체·반환을 잇는 승인 계약이 없다."
+        },
+        {
+          "targetRef": "gm-node:hub-vehicle-registration",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "차량 등록 H1과 권위 상태를 잇는 승인 Unity 결속이 없다."
+        },
+        {
+          "targetRef": "gm-node:hub-cargo-inspection",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "화물 검수 H1과 권위 검사 결과를 잇는 승인 Unity 결속이 없다."
+        },
+        {
+          "targetRef": "gm-node:hub-unloading-waiting",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "하역 대기 H1과 대기열 상태를 잇는 승인 Unity 결속이 없다."
+        },
+        {
+          "targetRef": "gm-node:hub-warehouse-inbound-outbound",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "창고 입출고 H1과 서버 원장을 잇는 승인 Unity 결속이 없다."
+        },
+        {
+          "targetRef": "gm-node:route-controlled-relay",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "선택형 통제 중계 지점의 실제 AreaSet·H1·좌표 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-receiving-to-vehicle-registration",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "입차에서 차량 등록으로 이어지는 승인 상태·공간 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-registration-to-cargo-inspection",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "차량 등록에서 화물 검수로 이어지는 승인 상태·공간 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-inspection-to-unloading-waiting",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "검수에서 하역 대기로 이어지는 승인 상태·공간 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-unloading-to-warehouse",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "하역에서 창고 입고로 이어지는 승인 상태·공간 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-warehouse-to-vehicle-yard",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "창고 출고에서 운송대 편성으로 이어지는 승인 상태·공간 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:hub-outbound-to-controlled-relay",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "Hub 출고에서 선택형 중계 지점으로 이어지는 승인 경로 결속이 없다."
+        },
+        {
+          "targetRef": "gm-edge:controlled-relay-to-yodong-gateway",
+          "reasonCode": "NoApprovedUnityBinding",
+          "reason": "통제 중계 지점에서 요동성 관문으로 이어지는 승인 경로 결속이 없다."
         }
       ],
       "evidenceBoundary": {
@@ -2837,7 +3733,7 @@
   },
   "partitionCatalog": {
     "schemaVersion": "mirror-graph-map-partition-catalog.v1",
-    "revision": "mirror-graph-map-partition-catalog.r7",
+    "revision": "mirror-graph-map-partition-catalog.r9",
     "federationStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
     "title": "북부 생활권 Graph Map 하위 맵·포트 대장",
     "meaning": "레벨 1~3의 의미는 각 하위 맵에서 유지하고, World 규모에서는 하위 맵과 명시 포트·connector만 조합한다.",
@@ -2857,7 +3753,7 @@
     },
     "sourceElementCatalogRef": {
       "path": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-      "expectedRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10"
+      "expectedRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13"
     },
     "subgraphs": [
       {
@@ -3028,6 +3924,10 @@
         ],
         "nodeRefs": [
           "gm-node:hub-receiving-storage",
+          "gm-node:hub-vehicle-registration",
+          "gm-node:hub-cargo-inspection",
+          "gm-node:hub-unloading-waiting",
+          "gm-node:hub-warehouse-inbound-outbound",
           "gm-node:hub-vehicle-yard",
           "gm-node:hub-outbound-staging",
           "gm-node:hub-missing-cargo-investigation",
@@ -3037,6 +3937,11 @@
         ],
         "internalEdgeRefs": [
           "gm-edge:hub-receiving-to-vehicle-yard",
+          "gm-edge:hub-receiving-to-vehicle-registration",
+          "gm-edge:hub-registration-to-cargo-inspection",
+          "gm-edge:hub-inspection-to-unloading-waiting",
+          "gm-edge:hub-unloading-to-warehouse",
+          "gm-edge:hub-warehouse-to-vehicle-yard",
           "gm-edge:hub-vehicle-yard-to-outbound",
           "gm-edge:hub-receiving-to-missing-cargo-investigation",
           "gm-edge:missing-cargo-investigation-to-field-confirmation",
@@ -3045,6 +3950,9 @@
         ],
         "constraintRefs": [
           "gm-constraint:hub-entry-contact-exit",
+          "gm-constraint:hub-circulation-registration-inspection-completion",
+          "gm-constraint:hub-outbound-required-inputs",
+          "gm-constraint:hub-multimodal-lane-transshipment",
           "gm-constraint:hub-evidence-not-answer",
           "gm-constraint:hub-recovery-meditation-no-duplication"
         ],
@@ -3077,6 +3985,41 @@
               "ExternalUnresolved"
             ],
             "meaning": "요동성 경로가 승인되기 전에는 미해결로 유지하는 외부 포트"
+          }
+        ]
+      },
+      {
+        "subgraphId": "gm-subgraph:regional-route-control",
+        "label": "지역 장거리 경로 통제·중계",
+        "scopeCode": "OptionalExternalRoute",
+        "ownerCode": "RegionalRoutePlanning",
+        "areaSetRefs": [],
+        "nodeRefs": [
+          "gm-node:route-controlled-relay"
+        ],
+        "internalEdgeRefs": [],
+        "constraintRefs": [
+          "gm-constraint:cargo-split-lineage-controlled-relay",
+          "gm-constraint:relay-capability-risk-not-hard-gate"
+        ],
+        "ports": [
+          {
+            "portId": "gm-port:controlled-relay:from-hub",
+            "nodeRef": "gm-node:route-controlled-relay",
+            "directionCode": "Inbound",
+            "capabilityCodes": [
+              "ExternalUnresolved"
+            ],
+            "meaning": "Hub에서 출발한 장거리 화물의 선택형 중계·재편성 입력 포트"
+          },
+          {
+            "portId": "gm-port:controlled-relay:to-yodong",
+            "nodeRef": "gm-node:route-controlled-relay",
+            "directionCode": "Outbound",
+            "capabilityCodes": [
+              "ExternalUnresolved"
+            ],
+            "meaning": "정확 목적지·경로 승인 전에는 미해결로 유지하는 요동성 방면 출력 포트"
           }
         ]
       },
@@ -3216,6 +4159,26 @@
           "ExternalUnresolved"
         ],
         "stateCode": "Unresolved"
+      },
+      {
+        "connectorId": "gm-connector:hub-controlled-relay",
+        "edgeRef": "gm-edge:hub-outbound-to-controlled-relay",
+        "fromPortRef": "gm-port:hub-outbound:to-yodong",
+        "toPortRef": "gm-port:controlled-relay:from-hub",
+        "requiredCapabilityCodes": [
+          "ExternalUnresolved"
+        ],
+        "stateCode": "Unresolved"
+      },
+      {
+        "connectorId": "gm-connector:controlled-relay-yodong",
+        "edgeRef": "gm-edge:controlled-relay-to-yodong-gateway",
+        "fromPortRef": "gm-port:controlled-relay:to-yodong",
+        "toPortRef": "gm-port:yodong:from-hub",
+        "requiredCapabilityCodes": [
+          "ExternalUnresolved"
+        ],
+        "stateCode": "Unresolved"
       }
     ],
     "federationConstraintRefs": [
@@ -3229,12 +4192,16 @@
       "gm-constraint:route-layer-evidence-freshness",
       "gm-constraint:route-cost-contribution-no-double-count",
       "gm-constraint:route-network-state-and-capacity-separation",
-      "gm-constraint:route-encounter-authority-and-return"
+      "gm-constraint:route-encounter-authority-and-return",
+      "gm-constraint:road-stable-id-versioned-upgrade-choice",
+      "gm-constraint:roadwork-schedule-tradeoff",
+      "gm-constraint:roadwork-protection-resource-exclusivity",
+      "gm-constraint:hub-h4-external-areas-optional"
     ]
   },
   "overlayCatalog": {
     "schemaVersion": "mirror-graph-map-overlay-catalog.v1",
-    "revision": "mirror-graph-map-overlay-catalog.r5",
+    "revision": "mirror-graph-map-overlay-catalog.r6",
     "title": "Mirror Graph Map 레이어·오버레이 대장",
     "meaning": "기준 공간 topology를 한 번만 유지하고 기상·시간, 운송, 위협·경비, 물류·보급, 플레이어 선택을 안정 노드·엣지 위의 판본화된 조회 레이어로 합성한다.",
     "compositionOrder": [
@@ -3458,7 +4425,7 @@
             "evidence": {
               "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md",
               "sourceRevision": "long-route-encounter-planning.r3",
-              "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D",
+              "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904",
               "observedAt": "NotObserved",
               "validUntil": "NotEstablished",
               "freshnessStateCode": "PlanningCurrent"
@@ -3522,7 +4489,7 @@
             "evidence": {
               "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md",
               "sourceRevision": "long-route-encounter-planning.r3",
-              "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D",
+              "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904",
               "observedAt": "NotObserved",
               "validUntil": "NotEstablished",
               "freshnessStateCode": "PlanningCurrent"
@@ -3579,7 +4546,7 @@
             "evidence": {
               "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md",
               "sourceRevision": "long-route-encounter-planning.r3",
-              "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D",
+              "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904",
               "observedAt": "NotObserved",
               "validUntil": "NotEstablished",
               "freshnessStateCode": "PlanningCurrent"
@@ -3636,7 +4603,7 @@
             "evidence": {
               "sourceRef": "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md",
               "sourceRevision": "long-route-encounter-planning.r3",
-              "sourceSha256": "548733C312E752A572A9F354F0DFF9CBA23B653D46D30B70F3558E4D986C965D",
+              "sourceSha256": "BBAAD4FD9A2CAFEFAA07CD58C7C186156482A639ADA8BBDF29D87D7B1E19A904",
               "observedAt": "NotObserved",
               "validUntil": "NotEstablished",
               "freshnessStateCode": "PlanningCurrent"
@@ -3676,7 +4643,7 @@
   },
   "placementRuleCatalog": {
     "schemaVersion": "mirror-graph-map-placement-rule-catalog.v1",
-    "revision": "mirror-graph-map-placement-rule-catalog.r5",
+    "revision": "mirror-graph-map-placement-rule-catalog.r6",
     "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
     "title": "북부 생활권 Graph Map 배치 구조·제약 규칙 결속",
     "sourceRefs": [
@@ -4091,6 +5058,69 @@
         "sourceRefs": [
           "docs/AI/거점간장거리경로-위험조우-기획-2026-09-02.md"
         ]
+      },
+      {
+        "constraintRef": "gm-constraint:hub-circulation-registration-inspection-completion",
+        "reason": "Hub 업무 순서와 완료 권위를 보존하는 기획 제약이며 H1 좌표나 배치 수치를 새로 만들지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:hub-outbound-required-inputs",
+        "reason": "출고 전 업무 입력과 대기 상태를 검증하는 권위 제약이며 물리 배치를 확정하지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:cargo-split-lineage-controlled-relay",
+        "reason": "화물 분할·합류·회수 계보를 보존하는 업무 제약이며 중계 거점의 실제 위치를 만들지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:hub-multimodal-lane-transshipment",
+        "reason": "운송 수단별 차로·설비 분리가 필요하다는 기획 관문이며 정확 폭·회전 반경·설비 배치는 아직 미정이다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:relay-capability-risk-not-hard-gate",
+        "reason": "운송대 역량과 중계 권고의 판정 경계이며 중계소를 실제 공간에 배치하는 규칙이 아니다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:road-stable-id-versioned-upgrade-choice",
+        "reason": "같은 도로 안정 ID의 선택형 판본 승격을 보존하며 현재 도로 형상이나 공사 배치를 계산하지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:roadwork-schedule-tradeoff",
+        "reason": "공사 시간·비용·위험의 선택 대가를 보존하는 기획 제약이며 실제 공사 구간을 배치하지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:roadwork-protection-resource-exclusivity",
+        "reason": "동시간 보호 자원의 중복 배정을 막는 권위 제약이며 경비·조명 객체 배치를 자동 생성하지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
+      },
+      {
+        "constraintRef": "gm-constraint:hub-h4-external-areas-optional",
+        "reason": "외부 Area를 필수 선행으로 만들지 않는 독립 개발 경계이며 새 Area나 연결 좌표를 생성하지 않는다.",
+        "sourceRefs": [
+          "docs/AI/허브물류-H1-H4-순환경로-기획-2026-09-02.md"
+        ]
       }
     ]
   },
@@ -4466,12 +5496,12 @@
   ],
   "normalizationCatalog": {
     "schemaVersion": "mirror-graph-map-normalization.v1",
-    "revision": "mirror-graph-map-normalization.northern-life-hub-discovery.r1",
+    "revision": "mirror-graph-map-normalization.northern-life-hub-discovery.r3",
     "graphMapStableId": "graph-map:mirror:northern-life-hub-discovery.v1",
     "sampleStableId": "graph-map-normalization-sample:hans-farm.v1",
     "title": "한스 농장 하위 그래프 노드·관계 정규화 표본",
     "meaning": "현행 레벨 1 요소를 삭제하거나 재번호화하지 않고 안정 대상과 동사형 관계를 비교 조회하는 단일 Graph Map 확장이다.",
-    "sourcePlanRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r10",
+    "sourcePlanRevision": "mirror-graph-map-plan.northern-life-hub-discovery.r13",
     "contextFieldOrder": [
       "time",
       "place",

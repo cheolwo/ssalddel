@@ -141,7 +141,7 @@ foreach ($relative in $protectedUnity) {
 }
 
 $official = & $manager -Mode Check -UnityProjectRoot $unityRoot -VerifyUnitySources
-Assert ($official -match 'nodes=34, edges=34, constraints=28, placementRules=21, ruleBoundConstraints=3, subgraphs=6, ports=12, connectors=6, overlays=9, codeBindings=6, sourceFiles=13, unresolved=23/25') 'OfficialCheck'
+Assert ($official -match 'nodes=39, edges=41, constraints=37, placementRules=21, ruleBoundConstraints=3, subgraphs=7, ports=14, connectors=8, overlays=9, codeBindings=6, sourceFiles=13, unresolved=28/32') 'OfficialCheck'
 
 $state = New-State
 $validRef = Save-State $state 'valid'
@@ -150,26 +150,26 @@ Assert ($validResult -match 'Write passed') 'ValidFixture'
 
 $output = Read-JsonFile (Join-Path $folder 'valid.output.json')
 Assert ($output.schemaVersion -eq 'mirror-graph-map-plan-output.v3') 'OutputSchema'
-Assert ($output.counts.nodes -eq 34 -and $output.counts.edges -eq 34 -and $output.counts.constraints -eq 28) 'OutputCounts'
+Assert ($output.counts.nodes -eq 39 -and $output.counts.edges -eq 41 -and $output.counts.constraints -eq 37) 'OutputCounts'
 Assert ($output.counts.placementRuleProfiles -eq 5 -and $output.counts.placementRules -eq 21) 'PlacementRuleOutputCounts'
-Assert ($output.counts.placementRuleBindings -eq 5 -and $output.counts.placementRuleBoundConstraints -eq 3 -and $output.counts.governanceOnlyConstraints -eq 25) 'PlacementRuleBindingCounts'
-Assert ($output.counts.subgraphs -eq 6 -and $output.counts.ports -eq 12 -and $output.counts.connectors -eq 6) 'FederationOutputCounts'
+Assert ($output.counts.placementRuleBindings -eq 5 -and $output.counts.placementRuleBoundConstraints -eq 3 -and $output.counts.governanceOnlyConstraints -eq 34) 'PlacementRuleBindingCounts'
+Assert ($output.counts.subgraphs -eq 7 -and $output.counts.ports -eq 14 -and $output.counts.connectors -eq 8) 'FederationOutputCounts'
 Assert ($output.counts.traversalProfiles -eq 6 -and $output.counts.layers -eq 6 -and $output.counts.overlays -eq 9 -and $output.counts.overlayEdgeEffects -eq 4) 'CapabilityOverlayCounts'
-Assert ($output.counts.planningAssessments -eq 21) 'PlanningAssessmentCount'
+Assert ($output.counts.planningAssessments -eq 59) 'PlanningAssessmentCount'
 Assert ($output.counts.codeBindings -eq 6 -and $output.counts.sourceCodeFiles -eq 13) 'Level3OutputCounts'
-Assert ($output.counts.codeBoundLevel1Targets -eq 19 -and $output.counts.unboundLevel1Targets -eq 48) 'Level3CoverageCounts'
+Assert ($output.counts.codeBoundLevel1Targets -eq 19 -and $output.counts.unboundLevel1Targets -eq 61) 'Level3CoverageCounts'
 Assert (@($output.resolvedCodeBindings | ForEach-Object targetRefs | Where-Object { $_ -eq 'gm-node:first-logging-reflection-preparation' }).Count -eq 0) 'PlannedNodeNotAutoBound'
 Assert ($output.counts.normalizedElements -eq 9 -and $output.counts.normalizedRelations -eq 7 -and $output.counts.normalizationBlocked -eq 1) 'NormalizationCounts'
 Assert (-not $output.sourceCatalogSnapshot.actualE5RuntimeValidated) 'RuntimeBoundaryPreserved'
 Assert (-not $output.plan.authorityBoundary.worldApplied -and -not $output.plan.authorityBoundary.actualTraversalVerified) 'WorldBoundaryPreserved'
 Assert (-not $output.plan.level3.evidenceBoundary.sceneWiringVerified -and -not $output.plan.level3.evidenceBoundary.runtimeExecutionVerified) 'Level3RuntimeBoundaryPreserved'
-Assert (@($output.partitionCatalog.subgraphs).Count -eq 6 -and @($output.resolvedCodeBindings).Count -eq 6) 'ExpandedCatalogsPresent'
+Assert (@($output.partitionCatalog.subgraphs).Count -eq 7 -and @($output.resolvedCodeBindings).Count -eq 6) 'ExpandedCatalogsPresent'
 Assert (@($output.overlayCatalog.layers).Count -eq 6 -and @($output.overlayCatalog.overlays).Count -eq 9) 'LayeredOverlayCatalogPresent'
-Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'UpdateExisting').Count -eq 8) 'PlanningUpdateExistingCount'
-Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'CreateSubgraph').Count -eq 2) 'PlanningCreateSubgraphCount'
+Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'UpdateExisting').Count -eq 19) 'PlanningUpdateExistingCount'
+Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'CreateSubgraph').Count -eq 4) 'PlanningCreateSubgraphCount'
 Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'CreateGraphMap').Count -eq 0) 'PlanningCreateGraphMapCount'
-Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'Blocked').Count -eq 2) 'PlanningBlockedCount'
-Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'NoImpact').Count -eq 9) 'PlanningNoImpactCount'
+Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'Blocked').Count -eq 9) 'PlanningBlockedCount'
+Assert (@($output.plan.planningImpactAssessments | Where-Object classificationCode -eq 'NoImpact').Count -eq 27) 'PlanningNoImpactCount'
 Assert (@($output.placementRuleCatalog.areaRuleProfiles).Count -eq 5 -and @($output.resolvedPlacementRuleBindings).Count -eq 5) 'PlacementRuleCatalogPresent'
 Assert ($output.normalizationCatalog.sampleStableId -eq 'graph-map-normalization-sample:hans-farm.v1') 'NormalizationCatalogPresent'
 $maximumLine = (Get-Content -LiteralPath (Join-Path $folder 'valid.output.md') -Encoding UTF8 | ForEach-Object Length | Measure-Object -Maximum).Maximum

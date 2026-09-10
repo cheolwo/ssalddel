@@ -20,6 +20,11 @@ Require ([string] $ledger.schemaVersion -eq 'mirror-graph-map-planning-handoffs.
 Require-Text $ledger.revision 'LedgerRevision'
 Require ([string] $ledger.generatedAtRuleCode -eq 'DeterministicNoWallClock') 'GeneratedAtRule'
 
+$artifactGwaeCodes = $ledger.artifactGwaeCodes
+Require ([string] $artifactGwaeCodes.planning -eq 'RI') 'ArtifactGwaePlanning'
+Require ([string] $artifactGwaeCodes.graphMap -eq 'GAN') 'ArtifactGwaeGraphMap'
+Require ([string] $artifactGwaeCodes.placementMap -eq 'TAE') 'ArtifactGwaePlacementMap'
+
 $boundary = $ledger.ownershipBoundary
 Require ([string] $boundary.planningOwnerCode -eq 'Planning') 'PlanningOwner'
 Require ([string] $boundary.graphMapOwnerCode -eq 'GraphMapWorkstream') 'GraphMapOwner'
@@ -34,8 +39,7 @@ $decisionText = Get-Content -LiteralPath (Resolve-RepoChild 'docs/AI/DECISIONS.m
 $planningText = Get-Content -LiteralPath (Resolve-RepoChild 'docs/AI/PLANNING.md' 'PlanningCatalog') -Raw -Encoding UTF8
 $decisionIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
 foreach ($match in [regex]::Matches($decisionText, '(?m)^## (D-\d{3})\b')) { $null = $decisionIds.Add($match.Groups[1].Value) }
-$planIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-foreach ($match in [regex]::Matches($planningText, '`(PLAN-[A-Z0-9-]+)`')) { $null = $planIds.Add($match.Groups[1].Value) }
+$planIds = Get-PlanningCatalogIds $planningText
 $wiCatalog = Read-Json 'eng/execution-ledgers/world-interactions.json' 'WorldInteractionCatalog'
 $wiIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
 foreach ($wi in @($wiCatalog.items)) { $null = $wiIds.Add([string] $wi.id) }
@@ -200,6 +204,7 @@ $output = [ordered]@{
     generatedAtRuleCode = 'DeterministicNoWallClock'
     sourceLedgerRef = $LedgerPath
     sourceLedgerSha256 = File-Hash $LedgerPath 'Ledger'
+    artifactGwaeCodes = $artifactGwaeCodes
     counts = $counts
     ownershipBoundary = $boundary
     items = @($snapshots)
@@ -212,6 +217,7 @@ $lines.Add('')
 $lines.Add('> 이 문서는 `eng/world-seedbeds/graph-map-planning-handoffs.json`에서 생성한다. 직접 수정하지 않는다.')
 $lines.Add('')
 $lines.Add("- 원장 판본: $($ledger.revision)")
+$lines.Add('- 산출물 괘상: 동결 기획 결과 `RI` / Graph Map `GAN` / 배치 맵 `TAE` (실행 권위·순서·자동 승격 아님)')
 $lines.Add("- 전체: $($counts.total) / 반영: $($counts.integrated) / 차단: $($counts.blocked) / 영향 없음: $($counts.noImpact)")
 $lines.Add('- 기획은 승인 판본과 인계만 소유하고, Graph Map 작업은 레벨 1·2·3 반영과 최종 반환을 소유한다.')
 $lines.Add('- 이 상태는 Unity Scene·Prefab·실제 입력·Game View·E 승격을 뜻하지 않는다.')
