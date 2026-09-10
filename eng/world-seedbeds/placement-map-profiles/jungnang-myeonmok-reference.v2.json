@@ -1,0 +1,1084 @@
+{
+  "schemaVersion": "simulation-world-placement-map-preparation-profile.v1",
+  "profileStableId": "placement-map:jungnang-myeonmok-reference.v2",
+  "revision": "jungnang-myeonmok-reference.r2",
+  "title": "중랑구 색인·면목동 주소 레이어·500m 타일 배치 참고",
+  "stateCode": "PreparedPrivateReview",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/public-data-isometric-diorama-direction.r1.md",
+  "graphMapRef": "eng/world-seedbeds/graph-maps/jungnang-myeonmok-reference.v2.json",
+  "sourceManifestRef": "eng/world-seedbeds/map-source-manifests/jungnang-myeonmok.v2.json",
+  "sourceManifestSha256": "777d635d642424562dc1c07bdc2628cd0f9494083ec6da7f1015ed740088f57d",
+  "coordinateSource": {
+    "method": "WGS84-ECEF-ENU-at-zero-altitude",
+    "originStableId": "reference:sagajeong-station",
+    "originLatitude": 37.5806971,
+    "originLongitude": 127.0884106,
+    "worldOffsetX": 550.0,
+    "worldOffsetZ": 8.0,
+    "metersPerUnit": 1,
+    "tileSizeMeters": 500,
+    "tileKeyRule": "floor((worldCoordinate-worldOffset)/500m)"
+  },
+  "instances": [
+    {
+      "id": "tile:myeonmok:500m:x-3:z-3",
+      "nodeRef": "tile:myeonmok:500m:x-3:z-3",
+      "title": "면목동 500m 타일 (-3,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": -3,
+      "x": -700.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-3:z-2",
+      "nodeRef": "tile:myeonmok:500m:x-3:z-2",
+      "title": "면목동 500m 타일 (-3,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": -2,
+      "x": -700.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-3:z-1",
+      "nodeRef": "tile:myeonmok:500m:x-3:z-1",
+      "title": "면목동 500m 타일 (-3,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": -1,
+      "x": -700.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-3:z0",
+      "nodeRef": "tile:myeonmok:500m:x-3:z0",
+      "title": "면목동 500m 타일 (-3,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": 0,
+      "x": -700.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-3:z1",
+      "nodeRef": "tile:myeonmok:500m:x-3:z1",
+      "title": "면목동 500m 타일 (-3,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": 1,
+      "x": -700.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-3:z2",
+      "nodeRef": "tile:myeonmok:500m:x-3:z2",
+      "title": "면목동 500m 타일 (-3,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -3,
+      "tileIndexZ": 2,
+      "x": -700.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z-3",
+      "nodeRef": "tile:myeonmok:500m:x-2:z-3",
+      "title": "면목동 500m 타일 (-2,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": -3,
+      "x": -200.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z-2",
+      "nodeRef": "tile:myeonmok:500m:x-2:z-2",
+      "title": "면목동 500m 타일 (-2,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": -2,
+      "x": -200.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z-1",
+      "nodeRef": "tile:myeonmok:500m:x-2:z-1",
+      "title": "면목동 500m 타일 (-2,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": -1,
+      "x": -200.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z0",
+      "nodeRef": "tile:myeonmok:500m:x-2:z0",
+      "title": "면목동 500m 타일 (-2,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": 0,
+      "x": -200.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z1",
+      "nodeRef": "tile:myeonmok:500m:x-2:z1",
+      "title": "면목동 500m 타일 (-2,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": 1,
+      "x": -200.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-2:z2",
+      "nodeRef": "tile:myeonmok:500m:x-2:z2",
+      "title": "면목동 500m 타일 (-2,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -2,
+      "tileIndexZ": 2,
+      "x": -200.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z-3",
+      "nodeRef": "tile:myeonmok:500m:x-1:z-3",
+      "title": "면목동 500m 타일 (-1,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": -3,
+      "x": 300.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z-2",
+      "nodeRef": "tile:myeonmok:500m:x-1:z-2",
+      "title": "면목동 500m 타일 (-1,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": -2,
+      "x": 300.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z-1",
+      "nodeRef": "tile:myeonmok:500m:x-1:z-1",
+      "title": "면목동 500m 타일 (-1,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": -1,
+      "x": 300.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z0",
+      "nodeRef": "tile:myeonmok:500m:x-1:z0",
+      "title": "면목동 500m 타일 (-1,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": 0,
+      "x": 300.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z1",
+      "nodeRef": "tile:myeonmok:500m:x-1:z1",
+      "title": "면목동 500m 타일 (-1,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": 1,
+      "x": 300.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x-1:z2",
+      "nodeRef": "tile:myeonmok:500m:x-1:z2",
+      "title": "면목동 500m 타일 (-1,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": -1,
+      "tileIndexZ": 2,
+      "x": 300.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z-3",
+      "nodeRef": "tile:myeonmok:500m:x0:z-3",
+      "title": "면목동 500m 타일 (0,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": -3,
+      "x": 800.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z-2",
+      "nodeRef": "tile:myeonmok:500m:x0:z-2",
+      "title": "면목동 500m 타일 (0,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": -2,
+      "x": 800.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z-1",
+      "nodeRef": "tile:myeonmok:500m:x0:z-1",
+      "title": "면목동 500m 타일 (0,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": -1,
+      "x": 800.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z0",
+      "nodeRef": "tile:myeonmok:500m:x0:z0",
+      "title": "면목동 500m 타일 (0,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": 0,
+      "x": 800.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z1",
+      "nodeRef": "tile:myeonmok:500m:x0:z1",
+      "title": "면목동 500m 타일 (0,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": 1,
+      "x": 800.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x0:z2",
+      "nodeRef": "tile:myeonmok:500m:x0:z2",
+      "title": "면목동 500m 타일 (0,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 0,
+      "tileIndexZ": 2,
+      "x": 800.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z-3",
+      "nodeRef": "tile:myeonmok:500m:x1:z-3",
+      "title": "면목동 500m 타일 (1,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": -3,
+      "x": 1300.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z-2",
+      "nodeRef": "tile:myeonmok:500m:x1:z-2",
+      "title": "면목동 500m 타일 (1,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": -2,
+      "x": 1300.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z-1",
+      "nodeRef": "tile:myeonmok:500m:x1:z-1",
+      "title": "면목동 500m 타일 (1,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": -1,
+      "x": 1300.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z0",
+      "nodeRef": "tile:myeonmok:500m:x1:z0",
+      "title": "면목동 500m 타일 (1,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": 0,
+      "x": 1300.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z1",
+      "nodeRef": "tile:myeonmok:500m:x1:z1",
+      "title": "면목동 500m 타일 (1,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": 1,
+      "x": 1300.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x1:z2",
+      "nodeRef": "tile:myeonmok:500m:x1:z2",
+      "title": "면목동 500m 타일 (1,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 1,
+      "tileIndexZ": 2,
+      "x": 1300.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z-3",
+      "nodeRef": "tile:myeonmok:500m:x2:z-3",
+      "title": "면목동 500m 타일 (2,-3)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": -3,
+      "x": 1800.0,
+      "z": -1242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z-2",
+      "nodeRef": "tile:myeonmok:500m:x2:z-2",
+      "title": "면목동 500m 타일 (2,-2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": -2,
+      "x": 1800.0,
+      "z": -742.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z-1",
+      "nodeRef": "tile:myeonmok:500m:x2:z-1",
+      "title": "면목동 500m 타일 (2,-1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": -1,
+      "x": 1800.0,
+      "z": -242.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z0",
+      "nodeRef": "tile:myeonmok:500m:x2:z0",
+      "title": "면목동 500m 타일 (2,0)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": 0,
+      "x": 1800.0,
+      "z": 258.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z1",
+      "nodeRef": "tile:myeonmok:500m:x2:z1",
+      "title": "면목동 500m 타일 (2,1)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": 1,
+      "x": 1800.0,
+      "z": 758.0,
+      "width": 500,
+      "depth": 500
+    },
+    {
+      "id": "tile:myeonmok:500m:x2:z2",
+      "nodeRef": "tile:myeonmok:500m:x2:z2",
+      "title": "면목동 500m 타일 (2,2)",
+      "kind": "PlacementTile",
+      "geometryKind": "Tile",
+      "placementStatus": "Candidate",
+      "tileIndexX": 2,
+      "tileIndexZ": 2,
+      "x": 1800.0,
+      "z": 1258.0,
+      "width": 500,
+      "depth": 500
+    }
+  ],
+  "anchors": [
+    {
+      "id": "anchor:sagajeong-station",
+      "ownerRef": "area:reference:myeonmok",
+      "x": 550.0,
+      "z": 8.0,
+      "role": "ObservationOrigin",
+      "placementStatus": "SourceCoordinateReference"
+    },
+    {
+      "id": "anchor:synthetic-neighborhood-overlay",
+      "ownerRef": "scenario:synthetic-neighborhood",
+      "x": 0,
+      "z": 0,
+      "role": "ScenarioOverlayOrigin",
+      "placementStatus": "ScenarioOnly"
+    }
+  ],
+  "paths": [],
+  "actors": [],
+  "tileSummaries": [
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z-3",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z-2",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z-1",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z0",
+      "shopPointCandidates": 1,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z1",
+      "shopPointCandidates": 143,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-3:z2",
+      "shopPointCandidates": 190,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z-3",
+      "shopPointCandidates": 6,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z-2",
+      "shopPointCandidates": 168,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z-1",
+      "shopPointCandidates": 60,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z0",
+      "shopPointCandidates": 214,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z1",
+      "shopPointCandidates": 383,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-2:z2",
+      "shopPointCandidates": 266,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z-3",
+      "shopPointCandidates": 31,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z-2",
+      "shopPointCandidates": 244,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z-1",
+      "shopPointCandidates": 658,
+      "buildingFootprints": 82,
+      "roadSegments": 405,
+      "addressLinkedBuildings": 38,
+      "addressLinkedRecords": 222,
+      "jungnangFacilityCandidates": 4
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z0",
+      "shopPointCandidates": 532,
+      "buildingFootprints": 161,
+      "roadSegments": 622,
+      "addressLinkedBuildings": 54,
+      "addressLinkedRecords": 186,
+      "jungnangFacilityCandidates": 4
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z1",
+      "shopPointCandidates": 447,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x-1:z2",
+      "shopPointCandidates": 232,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z-3",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z-2",
+      "shopPointCandidates": 15,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z-1",
+      "shopPointCandidates": 206,
+      "buildingFootprints": 203,
+      "roadSegments": 994,
+      "addressLinkedBuildings": 41,
+      "addressLinkedRecords": 141,
+      "jungnangFacilityCandidates": 1
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z0",
+      "shopPointCandidates": 591,
+      "buildingFootprints": 156,
+      "roadSegments": 376,
+      "addressLinkedBuildings": 71,
+      "addressLinkedRecords": 252,
+      "jungnangFacilityCandidates": 1
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z1",
+      "shopPointCandidates": 367,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x0:z2",
+      "shopPointCandidates": 244,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z-3",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z-2",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z-1",
+      "shopPointCandidates": 7,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z0",
+      "shopPointCandidates": 28,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z1",
+      "shopPointCandidates": 297,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x1:z2",
+      "shopPointCandidates": 64,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z-3",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z-2",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z-1",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z0",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z1",
+      "shopPointCandidates": 17,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    },
+    {
+      "tileRef": "tile:myeonmok:500m:x2:z2",
+      "shopPointCandidates": 0,
+      "buildingFootprints": 0,
+      "roadSegments": 0,
+      "addressLinkedBuildings": 0,
+      "addressLinkedRecords": 0,
+      "jungnangFacilityCandidates": 0
+    }
+  ],
+  "sourceLayers": [
+    {
+      "nodeRef": "layer:myeonmok:shop-points",
+      "geometryKind": "Point",
+      "placementStatus": "ReviewRequired",
+      "count": 5411,
+      "categoryCounts": [
+        {
+          "category": "과학·기술",
+          "count": 424
+        },
+        {
+          "category": "교육",
+          "count": 282
+        },
+        {
+          "category": "보건의료",
+          "count": 198
+        },
+        {
+          "category": "부동산",
+          "count": 256
+        },
+        {
+          "category": "소매",
+          "count": 1313
+        },
+        {
+          "category": "수리·개인",
+          "count": 834
+        },
+        {
+          "category": "숙박",
+          "count": 67
+        },
+        {
+          "category": "시설관리·임대",
+          "count": 224
+        },
+        {
+          "category": "예술·스포츠",
+          "count": 279
+        },
+        {
+          "category": "음식",
+          "count": 1534
+        }
+      ],
+      "sourceRef": "source:myeonmok-shop-points:r1"
+    },
+    {
+      "nodeRef": "layer:myeonmok:osm-buildings",
+      "geometryKind": "Footprint",
+      "placementStatus": "Candidate",
+      "count": 602,
+      "sourceRef": "source:sagajeong-osm-reference:r3"
+    },
+    {
+      "nodeRef": "layer:myeonmok:osm-roads",
+      "geometryKind": "LineSegment",
+      "placementStatus": "Candidate",
+      "count": 2397,
+      "sourceRef": "source:sagajeong-osm-reference:r3"
+    },
+    {
+      "nodeRef": "layer:myeonmok:address-links",
+      "geometryKind": "BuildingReference",
+      "placementStatus": "Candidate",
+      "count": 801,
+      "buildingCount": 204,
+      "unplacedCount": 6742,
+      "reasonCounts": [
+        {
+          "reason": "AddressMissing",
+          "count": 45
+        },
+        {
+          "reason": "MultipleBuildingsForAddress",
+          "count": 82
+        },
+        {
+          "reason": "NoExactBuildingInCurrentMap",
+          "count": 6615
+        },
+        {
+          "reason": "UniqueAddressCandidateNotVerifiedOccupancy",
+          "count": 801
+        }
+      ],
+      "sourceRef": "source:myeonmok-address-building-links:r1"
+    },
+    {
+      "nodeRef": "layer:jungnang:public-facilities",
+      "geometryKind": "PointOrUnplaced",
+      "placementStatus": "ReviewRequired",
+      "count": 146,
+      "placedInCurrentSquare": 10,
+      "coordinateCount": 110,
+      "missingCoordinateCount": 36,
+      "kindCounts": [
+        {
+          "kind": "market",
+          "count": 12
+        },
+        {
+          "kind": "park",
+          "count": 58
+        },
+        {
+          "kind": "parking",
+          "count": 25
+        },
+        {
+          "kind": "toilet",
+          "count": 51
+        }
+      ],
+      "sourceRef": "source:jungnang-location-review:r1"
+    },
+    {
+      "nodeRef": "layer:myeonmok:diorama-presentation",
+      "geometryKind": "BuildingOverlayReference",
+      "placementStatus": "LocalEditorReviewOnly",
+      "count": 204,
+      "activityObservationCount": 801,
+      "landSampleCount": 30,
+      "officialBuildingLinkCount": 0,
+      "addressSingleCandidateCount": 14,
+      "multipleCandidateCount": 8,
+      "unlinkedSampleCount": 8,
+      "sourceRef": "source:myeonmok-diorama-presentation:r1"
+    }
+  ],
+  "unplacedCatalog": [
+    {
+      "sourceRef": "source:myeonmok-address-building-links:r1",
+      "reason": "NoExactBuildingInCurrentMap",
+      "count": 6615
+    },
+    {
+      "sourceRef": "source:myeonmok-address-building-links:r1",
+      "reason": "MultipleBuildingsForAddress",
+      "count": 82
+    },
+    {
+      "sourceRef": "source:myeonmok-address-building-links:r1",
+      "reason": "AddressMissing",
+      "count": 45
+    },
+    {
+      "sourceRef": "source:jungnang-sagajeong-markers:r1",
+      "reason": "OutsideExistingSagajeongSquare",
+      "count": 100
+    },
+    {
+      "sourceRef": "source:jungnang-sagajeong-markers:r1",
+      "reason": "SourceCoordinateUnavailable",
+      "count": 36
+    }
+  ],
+  "scenarioOverlays": [
+    {
+      "graphRef": "eng/world-seedbeds/graph-maps/synthetic-neighborhood.v1.json",
+      "anchorRef": "anchor:synthetic-neighborhood-overlay",
+      "relationCode": "ScenarioOverlayOf",
+      "promotesToRealPlace": false
+    }
+  ],
+  "knownGaps": [
+    {
+      "id": "myeonmok-administrative-boundary",
+      "reason": "면목동 전체 행정경계 도형이 없어 상가 관측 범위의 36개 타일을 상세 후보 범위로 사용한다.",
+      "blocksSceneReadiness": true
+    },
+    {
+      "id": "shop-coordinate-datum",
+      "reason": "상가 경위도 좌표의 측지 기준이 명시적으로 확인되지 않아 WGS84 변환 결과를 검토 후보로만 사용한다.",
+      "blocksSceneReadiness": true
+    },
+    {
+      "id": "building-occupancy-and-entrance",
+      "reason": "같은 주소의 단일 OSM 건물도 실제 입주·출입구·현재 영업을 증명하지 않는다.",
+      "blocksSceneReadiness": true
+    },
+    {
+      "id": "height-floor-unit",
+      "reason": "건물 높이·층·동·호수는 확인된 자료가 없는 경우 추정하지 않는다.",
+      "blocksSceneReadiness": true
+    }
+  ],
+  "placementRules": [
+    "500m 타일은 사가정역 ENU 기준점과 기존 World offset을 함께 보존",
+    "경계 객체는 중심점이 속한 대표 타일 한 곳에서만 집계",
+    "좌표 없음·주소 모호성·좌표계 미확정은 강제 보정하지 않음",
+    "개별 주소·사업체 행은 Git 산출물에 복제하지 않음",
+    "기존 도형 동네는 ScenarioOverlay이며 현실 공간으로 승격하지 않음"
+  ],
+  "requiredDevelopmentChecks": [
+    "SourceRevisionAndHash",
+    "UniqueReferences",
+    "GraphPlacementCrossReference",
+    "TileGeometryAndCoverage",
+    "AggregateCountConservation",
+    "UnplacedReasonConservation",
+    "SyntheticOverlayBoundary",
+    "DioramaPrivacyProjection"
+  ],
+  "presentationMode": "PlacementReviewOnly",
+  "presentationOnly": true,
+  "isOperationalState": false
+}

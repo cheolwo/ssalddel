@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "simulation-world-regional-reference-sources.v1",
+  "manifestStableId": "map-sources:jungnang-myeonmok.v1",
+  "revision": "jungnang-myeonmok-sources.r1",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-maps.r1.md",
+  "authorityBoundary": "비공개 검토 사본과 공개 공간 자료의 판본·집계만 결속한다. 개별 주소·사업체 행, 운영 상태, Unity Scene과 업무 권위를 만들지 않는다.",
+  "coordinateFrame": {
+    "method": "WGS84-ECEF-ENU-at-zero-altitude",
+    "originStableId": "reference:sagajeong-station",
+    "originLatitude": 37.5806971,
+    "originLongitude": 127.0884106,
+    "worldOffsetX": 550,
+    "worldOffsetZ": 8,
+    "metersPerUnit": 1,
+    "tileSizeMeters": 500,
+    "tileIndexMinX": -3,
+    "tileIndexMaxX": 2,
+    "tileIndexMinZ": -3,
+    "tileIndexMaxZ": 2
+  },
+  "sourceSnapshots": [
+    {
+      "sourceStableId": "source:myeonmok-shop-points:r1",
+      "roleCode": "PointCandidateCatalog",
+      "repoRelativePath": "artifacts/local/public-data/myeonmok-business-20260908-r1/wide-reference.json",
+      "expectedSha256": "E2420E86BDBCD323E7E52BA7431CF941091C44E0F2D74701C747B810F5FDF928",
+      "qualityCode": "ReviewRequiredCoordinateDatumUnconfirmed",
+      "recordCount": 5411,
+      "publicationApproved": false
+    },
+    {
+      "sourceStableId": "source:myeonmok-address-building-links:r1",
+      "roleCode": "AddressBuildingCandidateCatalog",
+      "repoRelativePath": "artifacts/local/public-data/myeonmok-business-20260908-r1/connection.json",
+      "expectedSha256": "D109A0AF26608E9627551600B37FE8B22F473893D5F6FEA542E83E5D1FD176E2",
+      "qualityCode": "PrivateReviewOnlyOccupancyUnverified",
+      "recordCount": 7543,
+      "connectedRecordCount": 801,
+      "connectedBuildingCount": 204,
+      "unlinkedRecordCount": 6742,
+      "publicationApproved": false
+    },
+    {
+      "sourceStableId": "source:jungnang-location-review:r1",
+      "roleCode": "DistrictFacilityIndex",
+      "repoRelativePath": "artifacts/local/public-data/jungnang-spatial-20260908-r2/unity-location-review-20260908T093712299.json",
+      "expectedSha256": "3B0765CEDCAA36D3F126ED5F4B8863DCC9C03412790854081C28D3AF8A492B91",
+      "qualityCode": "PendingHumanReview",
+      "recordCount": 146,
+      "coordinateRecordCount": 110,
+      "missingCoordinateCount": 36,
+      "publicationApproved": false
+    },
+    {
+      "sourceStableId": "source:jungnang-sagajeong-markers:r1",
+      "roleCode": "CurrentSquarePointCandidates",
+      "repoRelativePath": "artifacts/local/public-data/jungnang-spatial-20260908-r2/sagajeong-markers-v2.json",
+      "expectedSha256": "F055CB294414F9186D51D89CB8FEE805AAFD4257BFCACC09F620E80A8ADB522F",
+      "qualityCode": "ReferencePointNotEntranceOrFootprint",
+      "recordCount": 146,
+      "placedCandidateCount": 10,
+      "outsideCurrentSquareCount": 100,
+      "missingCoordinateCount": 36,
+      "publicationApproved": false
+    },
+    {
+      "sourceStableId": "source:sagajeong-osm-reference:r3",
+      "roleCode": "BuildingAndRoadReference",
+      "logicalResourcePath": "Assets/Ssalddel/Resources/SagajeongReference.json",
+      "expectedSha256": "4B81E60C3C389A69AA765C8CC8D20E4457102C359A5FFBCD7EBDFA880F7E84E3",
+      "rawSha256": "3BDF9E9D36360FB32CB65C7C216215DCE60C762F7918FB7556D6695288A2D0A3",
+      "sourceUrl": "https://api.openstreetmap.org/api/0.6/map?bbox=127.0825,37.5762,127.0942,37.5854",
+      "attribution": "© OpenStreetMap contributors",
+      "licenseUrl": "https://www.openstreetmap.org/copyright",
+      "qualityCode": "SourceGeometryNotSurveyed",
+      "buildingCount": 602,
+      "roadSegmentCount": 2397,
+      "publicationApproved": true
+    }
+  ]
+}

@@ -1,0 +1,626 @@
+{
+  "schemaVersion": "simulation-world-graph-map.v1",
+  "graphStableId": "graph-map:jungnang-myeonmok-reference.v2",
+  "revision": "jungnang-myeonmok-reference.r2",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/public-data-isometric-diorama-direction.r1.md",
+  "placementMapRef": "eng/world-seedbeds/placement-map-profiles/jungnang-myeonmok-reference.v2.json",
+  "sourceManifestRef": "eng/world-seedbeds/map-source-manifests/jungnang-myeonmok.v2.json",
+  "sourceManifestSha256": "777d635d642424562dc1c07bdc2628cd0f9494083ec6da7f1015ed740088f57d",
+  "authorityBoundary": "중랑구 색인과 면목동 공간 후보 관계만 표현한다. 실제 입주·영업·통행·업무 상태·Scene·E 승격을 만들지 않는다.",
+  "nodes": [
+    {
+      "nodeStableId": "region:kr:sig:11260",
+      "nodeKindCode": "Region",
+      "title": "서울특별시 중랑구",
+      "hStatus": "ReferenceIndexOnly"
+    },
+    {
+      "nodeStableId": "area:reference:myeonmok",
+      "nodeKindCode": "Area",
+      "title": "면목동 자료 상세 구역",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "reference:sagajeong-station",
+      "nodeKindCode": "ObservationAnchor",
+      "title": "사가정역 기준점",
+      "hStatus": "SourceCoordinateReference"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:shop-points",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "면목동 상가 위치 후보",
+      "hStatus": "ReviewRequiredCoordinateDatumUnconfirmed"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:osm-buildings",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "사가정 OSM 건물 외곽선",
+      "hStatus": "SourceGeometryNotSurveyed"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:osm-roads",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "사가정 OSM 도로 선분",
+      "hStatus": "SourceGeometryNotNavigation"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:address-links",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "주소 기반 건물 후보 연결",
+      "hStatus": "OccupancyUnverified"
+    },
+    {
+      "nodeStableId": "layer:jungnang:public-facilities",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "중랑구 공공시설 위치 색인",
+      "hStatus": "PendingHumanReview"
+    },
+    {
+      "nodeStableId": "scenario:synthetic-neighborhood",
+      "nodeKindCode": "ScenarioOverlay",
+      "title": "기존 도형 동네",
+      "hStatus": "ScenarioOnly",
+      "externalGraphRef": "eng/world-seedbeds/graph-maps/synthetic-neighborhood.v1.json"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:address-spatial-index",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "면목동 주소 중심 공간 색인",
+      "hStatus": "PrivateReviewOnly"
+    },
+    {
+      "nodeStableId": "layer:myeonmok:diorama-presentation",
+      "nodeKindCode": "ReferenceLayer",
+      "title": "면목동 디오라마 표현 투영",
+      "hStatus": "LocalEditorReviewOnly"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-3:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-3,2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-2:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-2,2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x-1:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (-1,2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x0:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (0,2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x1:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (1,2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z-3",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,-3)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z-2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,-2)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z-1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,-1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z0",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,0)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z1",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,1)",
+      "hStatus": "PrivateReviewCandidate"
+    },
+    {
+      "nodeStableId": "tile:myeonmok:500m:x2:z2",
+      "nodeKindCode": "PlacementTile",
+      "title": "면목동 500m 타일 (2,2)",
+      "hStatus": "PrivateReviewCandidate"
+    }
+  ],
+  "edges": [
+    {
+      "edgeStableId": "relation:jungnang-contains-myeonmok",
+      "fromNodeRef": "region:kr:sig:11260",
+      "toNodeRef": "area:reference:myeonmok",
+      "relationCode": "ContainsReferenceArea",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-observed-from-sagajeong",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "reference:sagajeong-station",
+      "relationCode": "UsesCoordinateOrigin",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-shop-points",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:shop-points",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-osm-buildings",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:osm-buildings",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-osm-roads",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:osm-roads",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-address-links",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:address-links",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:jungnang-has-public-facilities",
+      "fromNodeRef": "region:kr:sig:11260",
+      "toNodeRef": "layer:jungnang:public-facilities",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:synthetic-overlay-of-myeonmok",
+      "fromNodeRef": "scenario:synthetic-neighborhood",
+      "toNodeRef": "area:reference:myeonmok",
+      "relationCode": "ScenarioOverlayOf",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-address-spatial-index",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:address-spatial-index",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:diorama-projection-derived-from-address-index",
+      "fromNodeRef": "layer:myeonmok:diorama-presentation",
+      "toNodeRef": "layer:myeonmok:address-spatial-index",
+      "relationCode": "PrivacyProjectionOf",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-has-diorama-presentation",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "layer:myeonmok:diorama-presentation",
+      "relationCode": "HasReferenceLayer",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-3-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-3:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-2-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-2:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x-1-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x-1:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x0-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x0:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x1-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x1:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z-3",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z-3",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z-2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z-2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z-1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z-1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z0",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z0",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z1",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z1",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:myeonmok-contains-x2-z2",
+      "fromNodeRef": "area:reference:myeonmok",
+      "toNodeRef": "tile:myeonmok:500m:x2:z2",
+      "relationCode": "ContainsPlacementTile",
+      "wiRefs": []
+    }
+  ]
+}

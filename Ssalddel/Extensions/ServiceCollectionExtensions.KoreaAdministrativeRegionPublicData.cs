@@ -1,5 +1,6 @@
 using 살뜰.Services.External.PublicData;
 using 살뜰.Services.External.PublicData.Korea;
+using Ssalddel.Services.Community;
 
 namespace Ssalddel.Extensions;
 
@@ -11,7 +12,23 @@ public static partial class ServiceCollectionExtensions
         services.AddKoreaLegalDongProvider();
         services.AddKoreaAdministrativeJurisdictionProvider();
         services.AddKoreaBuildingAndLicensedBusinessLedgers();
+        services.AddKosisRegionalStatisticsProvider();
         return services;
+    }
+
+    private static void AddKosisRegionalStatisticsProvider(this IServiceCollection services)
+    {
+        services.AddHttpClient<Kosis지역통계Collector>(client =>
+        {
+            client.BaseAddress = new Uri("https://kosis.kr");
+            client.Timeout = Timeout.InfiniteTimeSpan;
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Ssalddel-KOSIS-RegionalStatistics/1.0");
+        });
+        services.AddScoped<IExternalDataCollector>(provider =>
+            provider.GetRequiredService<Kosis지역통계Collector>());
+        services.AddScoped<IKosis행정구역Resolver, EfKosis행정구역Resolver>();
+        services.AddScoped<IExternalDataNormalizer, Kosis지역통계Normalizer>();
+        services.AddScoped<I지역공공통계조회UseCase, 지역공공통계조회UseCase>();
     }
 
     private static void AddKoreaLegalDongProvider(this IServiceCollection services)
@@ -75,6 +92,7 @@ public static partial class ServiceCollectionExtensions
         services.AddScoped<건축물주용도분류원장Service>();
         services.AddScoped<건축물형태구성원장Service>();
         services.AddScoped<VWorld건물통합정보ImportService>();
+        services.AddSingleton<IExternalDataSourceRegistration, 동네공간SourceRegistration>();
         services.AddScoped<평창군공공공간원본등록Service>();
         services.AddSingleton<IExternalDataSourceRegistration, 지방행정인허가사업장SourceRegistration>();
         services.AddSingleton<IExternalDataSourceRegistration, 중랑구음식점현황SourceRegistration>();

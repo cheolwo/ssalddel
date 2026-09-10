@@ -1,0 +1,25 @@
+{
+  "revision": "neighborhood-market-extension.r2",
+  "baseProfileRef": "eng/world-seedbeds/placement-map-profiles/synthetic-neighborhood.v1.json",
+  "sourceRef": "docs/Reports/생활영역-공공데이터-첫수집-2026-09-08.md",
+  "sourceId": "semas-traditional-market-status",
+  "datasetId": "data-go-kr-15012894-standard",
+  "rawSha256": "13FFD04A946EC7EEC28222C8C3762F2E77AAB919CD250888CDAAF7F51CCE303B",
+  "referenceDate": "2025-11-10",
+  "quality": "source-point-unverified",
+  "coordinateMethod": "WGS84-ECEF-ENU-at-zero-altitude",
+  "originLatitude": 37.5806971,
+  "originLongitude": 127.0884106,
+  "originSource": "https://www.openstreetmap.org/node/6046633864",
+  "originSourceVersion": 5,
+  "offsetX": 550,
+  "offsetZ": 8,
+  "halfExtentMeters": 500,
+  "metersPerUnit": 1,
+  "features": [
+    {"id":"market-reference:myeonmok","name":"면목시장","latitude":37.57954367,"longitude":127.0862998},
+    {"id":"market-reference:myeonmok-alley","name":"면목골목시장","latitude":37.57749074,"longitude":127.0844409},
+    {"id":"market-reference:sagajeong","name":"사가정시장","latitude":37.58108117,"longitude":127.0893792}
+  ],
+  "boundary": "기존 동네 동쪽에 붙인 자료 참고 구역. 구역 사이 이동·실제 시장 외곽·높이·출입구·현재 영업은 미확정. 원장 검토 상태는 유지한다."
+}

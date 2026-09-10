@@ -212,6 +212,30 @@ public sealed class PublicDataApiMetadataCatalog : IPublicDataApiMetadataCatalog
         },
         new()
         {
+            Key = "kosis-regional-statistics",
+            Provider = "통계청 KOSIS",
+            DisplayName = "KOSIS 지역 인구·생활경제 통계",
+            Purpose = "시도·시군구별 인구, 가구, 연령대, 사업체, 종사자와 고용률의 최신 공표값과 직전 공표값을 수집합니다.",
+            Domain = "RegionalStatistics",
+            VersionScope = "0.0",
+            ApiType = "REST",
+            DataFormat = "JSON",
+            BaseUrl = "https://kosis.kr/openapi/Param",
+            DocumentationUrl = "https://kosis.kr/openapi/devGuide/devGuide_0201List.do",
+            RequiresServiceKey = true,
+            ContainsResidentialData = false,
+            ContainsPersonalData = false,
+            MainParameters = ["apiKey", "orgId", "tblId", "objL1", "objL2", "objL3", "itmId", "prdSe", "newEstPrdCnt", "format", "smblChk"],
+            MainResponseFields = ["DT", "ORG_ID", "TBL_ID", "TBL_NM", "C1", "C1_NM", "C2", "C2_NM", "C3", "C3_NM", "ITM_ID", "ITM_NM", "UNIT_NM", "PRD_SE", "PRD_DE", "LST_CHN_DE"],
+            UsageNotes =
+            [
+                "개인·주소 자료가 아닌 공표된 행정구역 집계만 저장합니다.",
+                "결측·마스킹·통계기호를 0으로 바꾸지 않고 지역코드가 기존 법정동 원장과 유일하게 대응할 때만 정규화합니다.",
+                "KOSIS 통계표·항목·분류·공표주기와 원문 SHA256을 보존합니다."
+            ]
+        },
+        new()
+        {
             Key = "standard-apartment-complex-data",
             Provider = "국토교통부",
             DisplayName = "전국공동주택표준데이터",
@@ -554,6 +578,7 @@ public sealed class PublicDataApiMetadataCatalog : IPublicDataApiMetadataCatalog
             ["online-collected-prices"] = new("온라인가격공공데이터Client", PublicDataKeyPaths("OnlinePrices"), ["/1240000/bpp_openapi/getPriceItemList", "/1240000/bpp_openapi/getPriceInfo"], "수집일과 조회시각 기록", ExplicitRetryPolicy),
             ["kosis-indicator-info"] = new("Kosis비교자료공공데이터Client", PublicDataKeyPaths("Kosis"), ["/1240000/IndicatorService/"], "지표 수록시점과 조회시각 기록", ExplicitRetryPolicy),
             ["kosis-statistics-data"] = new("Kosis비교자료공공데이터Client", PublicDataKeyPaths("Kosis"), ["/1240000/statisticsData/getStatisticsData"], "통계표 수록시점과 조회시각 기록", ExplicitRetryPolicy),
+            ["kosis-regional-statistics"] = new("Kosis지역통계Collector", PublicDataKeyPaths("Kosis"), ["/openapi/Param/statisticsParameterData.do"], "월·연 최신 완료기간과 직전기간; 공표기간·변경일·조회시각 기록", ExplicitRetryPolicy),
             ["semas-traditional-market-status"] = new("TraditionalMarketPublicDataClient", PublicDataKeyPaths("TraditionalMarket"), ["/api/15052837/v1/uddi:1fd54eb7-0565-4755-8ec7-a70931b6dc77"], "연간 기준자료; SourceReferenceDate 기록", ExplicitRetryPolicy),
             ["mfds-imported-food-product-db"] = new("수입식품제품조회Service", ["수입식품제품조회:ServiceKey", "PublicData:DataGoKrServiceKey", "PublicData:ServiceKey"], ["/getIprtFoodPrdtDBInq02"], "요청 시점 조회; 조회시각 기록", ExplicitRetryPolicy),
             ["mfds-imported-food-overseas-manufacturer"] = new("해외제조업소조회Service", ["해외제조업소조회:ServiceKey", "PublicData:DataGoKrServiceKey", "PublicData:ServiceKey"], ["/getIprtFoodOvseaMnftBsshInfoInq02"], "요청 시점 조회; 인증·중단 상태의 조회시각 기록", ExplicitRetryPolicy),
