@@ -3,7 +3,7 @@
 > `eng/execution-ledgers/post-e7-evidence-campaigns.json`에서 자동 생성된다. 직접 수정하지 않는다.
 
 - 증거 모델: `horizontal-dual-cycle-evidence.r3`
-- E8 개별 안정 후보: `20`
+- E8 개별 안정 후보: `23`
 - E9 영역 조화·사람 승인 후보: `4`
 - E9 보류 영역: `2`
 - E10 제한 운영 창: `1`
@@ -33,6 +33,9 @@
 | `playable-loop:nature-regional-threat-recovery.v1` | E1 | WaitingForE7 | False | PlayableUnit E7이 아직 닫히지 않았다. |
 | `playable-loop:farm-player-placement.v1` | E1 | WaitingForE7 | False | PlayableUnit E7이 아직 닫히지 않았다. |
 | `playable-loop:town-arcana-context.v1` | E1 | WaitingForE7 | False | PlayableUnit E7이 아직 닫히지 않았다. |
+| `playable-loop:player-npc-learning-focus.v1` | E3 | WaitingForE7 | False | PlayableUnit E7이 아직 닫히지 않았다. |
+| `playable-loop:player-hexagram-context.v1` | E3 | WaitingForE7 | False | 괘상 학습 맥락 PlayableUnit E7이 아직 닫히지 않았다. |
+| `playable-loop:nature-hans-farm-fence-restoration.v1` | E4 | WaitingForE7 | False | PlayableUnit E7이 아직 닫히지 않았다. 주체와 WI 직접 결과를 먼저 닫고, 반복 안정성은 그 뒤에 별도 검증한다. |
 
 ## E9 영역 조화와 사람 승인
 

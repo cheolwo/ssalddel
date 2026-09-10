@@ -1,6 +1,6 @@
 {
   "schemaVersion": "playable-loop-engine-interaction-validation.v2",
-  "revision": "playable-loop-engine-interaction-validation.r21",
+  "revision": "playable-loop-engine-interaction-validation.r24",
   "evidenceTrackCodes": [
     "Logic",
     "Presentation"
@@ -94,8 +94,8 @@
   "profileDerivation": {
     "requiredLoopLevelCode": "PlayableUnit",
     "profileRevision": "all-playable-units.pipeline-gate.r2",
-    "expectedPlayableUnitCount": 20,
-    "expectedLoopWiPairCount": 66,
+    "expectedPlayableUnitCount": 23,
+    "expectedLoopWiPairCount": 79,
     "baseRequirements": [
       {
         "order": 10,
@@ -218,6 +218,15 @@
         ],
         "presentationConsumerCodes": [
           "Placement.Exterior",
+          "World.Presentation"
+        ]
+      },
+      "player": {
+        "changeSemanticCodes": [
+          "PlayerProgressionChanged",
+          "LearningFocusProjectionChanged"
+        ],
+        "presentationConsumerCodes": [
           "World.Presentation"
         ]
       }
