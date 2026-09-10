@@ -43,6 +43,11 @@ builder.Services.AddScoped(sp =>
     };
 });
 builder.Services.AddScoped<관리자인증세션Service>();
+builder.Services.AddHttpClient<공간자료CatalogAdminService>((sp, client) =>
+{
+    var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<관리자ApiOptions>>().Value;
+    client.BaseAddress = new Uri(options.BaseUrl);
+});
 builder.Services.AddHttpClient<ViewPolicyService>((sp, client) =>
 {
     var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<관리자ApiOptions>>().Value;

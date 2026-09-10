@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "neighborhood-package-registry.v1",
+  "registryStableId": "neighborhood-package-registry:seoul-east.v1",
+  "revision": "seoul-east-neighborhood-packages.r1",
+  "stateCode": "ApprovedFoundation",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-NEIGHBORHOOD-SPATIAL-PACKAGES/README.md",
+  "authorityBoundary": {
+    "isExecutionAuthority": false,
+    "isPlacementAuthority": false,
+    "sceneReady": false,
+    "gameStateConnected": false,
+    "rule": "법정동별 동결 자료와 생성 규칙의 허용 목록이다. 현실 영업·입주·통행·업무 상태나 Unity Scene을 만들지 않는다."
+  },
+  "coordinateFrames": [
+    {
+      "coordinateFrameStableId": "coordinate-frame:seoul-east-sagajeong.r1",
+      "method": "WGS84-ECEF-ENU-at-zero-altitude",
+      "originStableId": "reference:sagajeong-station",
+      "originLatitude": 37.5806971,
+      "originLongitude": 127.0884106,
+      "worldOffsetX": 550,
+      "worldOffsetZ": 8,
+      "metersPerUnit": 1,
+      "tileSizeMeters": 500,
+      "rule": "기존 면목동 좌표를 이동시키지 않고 서울 동부 인접 법정동이 같은 XZ 기준을 공유한다."
+    }
+  ],
+  "packages": [
+    {
+      "packageStableId": "neighborhood-spatial-package:region:kr:bjd:1126010100.v1",
+      "packageRevision": "jungnang-myeonmok-neighborhood.r1",
+      "areaStableId": "region:kr:bjd:1126010100",
+      "legalDongCode": "1126010100",
+      "legalDongName": "면목동",
+      "dataset": "neighborhood:1126010100",
+      "tileScopeCode": "myeonmok",
+      "coordinateFrameRef": "coordinate-frame:seoul-east-sagajeong.r1",
+      "readinessCode": "PlacementReady",
+      "readinessIsApproval": false,
+      "boundaryState": "PendingOfficialBoundary",
+      "builderCode": "EstablishedMyeonmokCompatibility",
+      "sourceInputs": [
+        {
+          "sourceStableId": "source-input:myeonmok-legacy-object-catalog.r2",
+          "repoRelativePath": "eng/world-seedbeds/object-catalogs/jungnang-myeonmok-game-objects.v1.json",
+          "expectedSha256": "DDF05E53297D504BC1ABCD91C3093687445A5CE0D7C33B857201ED33803B0327"
+        },
+        {
+          "sourceStableId": "source-input:myeonmok-graph-map.r2",
+          "repoRelativePath": "eng/world-seedbeds/graph-maps/jungnang-myeonmok-reference.v2.json",
+          "expectedSha256": "12EAD7FA394F732552DC5EE3CD95716065560F5EE8D7B0880892DCF1F6441681"
+        },
+        {
+          "sourceStableId": "source-input:myeonmok-placement-map.r2",
+          "repoRelativePath": "eng/world-seedbeds/placement-map-profiles/jungnang-myeonmok-reference.v2.json",
+          "expectedSha256": "FC312CF2FD026F4EB257C55CB63F81F0D47346872B6514C321705E4E910514E0"
+        },
+        {
+          "sourceStableId": "source-input:myeonmok-source-manifest.r2",
+          "repoRelativePath": "eng/world-seedbeds/map-source-manifests/jungnang-myeonmok.v2.json",
+          "expectedSha256": "777D635D642424562DC1C07BDC2628CD0F9494083EC6DA7F1015ED740088F57D"
+        }
+      ]
+    },
+    {
+      "packageStableId": "neighborhood-spatial-package:region:kr:bjd:1126010300.v1",
+      "packageRevision": "jungnang-junghwa-neighborhood.r1",
+      "areaStableId": "region:kr:bjd:1126010300",
+      "legalDongCode": "1126010300",
+      "legalDongName": "중화동",
+      "dataset": "neighborhood:1126010300",
+      "tileScopeCode": "junghwa",
+      "coordinateFrameRef": "coordinate-frame:seoul-east-sagajeong.r1",
+      "readinessCode": "InventoryReady",
+      "readinessIsApproval": false,
+      "boundaryState": "NotAcquired",
+      "builderCode": "JunghwaFrozenObservationInventory",
+      "expectedShopRows": 1672,
+      "expectedFacilityRows": 14,
+      "expectedFacilityCoordinateRows": 11,
+      "sourceInputs": [
+        {
+          "sourceStableId": "source-input:semas-shops-national-202606",
+          "repoRelativePath": "artifacts/local/public-data/myeonmok-business-20260908-r1/shops-national.zip",
+          "expectedSha256": "57AA361544108FF4FC73334F87D2CED61E41FE8638DD70BCD842930F865D2386"
+        },
+        {
+          "sourceStableId": "source-input:jungnang-location-review.r1",
+          "repoRelativePath": "artifacts/local/public-data/jungnang-spatial-20260908-r2/unity-location-review-20260908T093712299.json",
+          "expectedSha256": "3B0765CEDCAA36D3F126ED5F4B8863DCC9C03412790854081C28D3AF8A492B91"
+        }
+      ]
+    }
+  ],
+  "nextExpansionOrder": [
+    "region:kr:bjd:1126010500",
+    "region:kr:bjd:1126010200",
+    "region:kr:bjd:1126010400",
+    "region:kr:bjd:1126010600",
+    "region:kr:bjd:1123010600"
+  ]
+}

@@ -14,6 +14,7 @@ public static class AdminV1NavigationPolicy
         new("커뮤니티 운영", "/community", "home", true),
         new("사용자·콘텐츠 관리", "/community/users", "manage_search"),
         new("공통 콘텐츠 관리", "/common-contents", "description"),
+        new("공간자료 보관함", "/spatial-catalog", "public"),
         new("운영 감사 기록", "/activity-logs", "fact_check"),
         new("공개 범위 정책", "/view-policies", "settings")
     ];
@@ -24,6 +25,7 @@ public static class AdminV1NavigationPolicy
         "/community",
         "/community/users",
         "/common-contents",
+        "/spatial-catalog",
         "/activity-logs",
         "/view-policies",
         "/dashboard",

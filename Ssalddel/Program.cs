@@ -160,6 +160,7 @@ var initializeDatabaseOnly = args.Any(argument =>
 
 builder.Services.AddSsalddelBackgroundJobs(dispatchQueueJobOptions, salesOrderSyncOptions, youTubeOptions, hongikHakdangCardOptions, agriculturalFisheriesBatchOptions, communityEditorialBatchOptions, executionOptions);
 builder.Services.AddSsalddelPersistence(builder.Configuration);
+builder.Services.AddSpatialCatalog();
 builder.Services.AddSsalddelHealthChecks();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -255,6 +256,7 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddSingleton<Ssalddel.Services.Orderer.IRestaurantSearchPolicyStore, Ssalddel.Services.Orderer.InMemoryRestaurantSearchPolicyStore>();
 builder.Services.AddSingleton<I기사개발스냅샷Provider, InMemory기사개발스냅샷Provider>();
 
+Ssalddel.Services.Development.FoodObserver.음식배달관찰검증Hosting.Add음식배달관찰검증(builder);
 var app = builder.Build();
 app.Logger.LogInformation("Ssalddel execution mode: {ExecutionMode}", executionOptions.Mode);
 if (developmentReadOnly)
@@ -2014,6 +2016,7 @@ app.UseMiddleware<IsmsPEncryptedTransportMiddleware>();
 app.UseMiddleware<HrRoleAccessMiddleware>();
 app.UseMiddleware<사용자행위로그Middleware>();
 app.MapControllers();
+Ssalddel.Services.Development.FoodObserver.음식배달관찰검증Hosting.Map음식배달관찰검증(app);
 app.MapHub<DispatchRecommendationHub>(
     Ssalddel.Contracts.Common.Drivers.DriverDispatchRealtimeContract.HubPath);
 app.MapHub<RestaurantOrderHub>("/hubs/restaurant-orders");

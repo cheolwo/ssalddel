@@ -1,0 +1,191 @@
+@page "/spatial-catalog"
+@rendermode InteractiveServer
+@using System.Text.Json
+@using Ssalddel.Contracts.Common.WorldProjection
+@inject 공간자료CatalogAdminService Catalog
+@inject 관리자인증세션Service Session
+
+<PageTitle>공간자료 보관함 · 살뜰</PageTitle>
+<section class="spatial-catalog">
+    <header>
+        <p class="eyebrow">SPATIAL CATALOG · PRIVATE REVIEW</p>
+        <h1>공간자료 보관함</h1>
+        <p>Graph Map, 배치 맵, 현실 관측을 같은 판본으로 찾아봅니다.</p>
+    </header>
+    <div class="boundary" role="note">
+        비공개 · 사람 검토 대기. 원문에 적힌 관계이며 승인·실제 입주·영업·통행·게임 상태를 뜻하지 않습니다.
+        <br />상호·상세주소는 기본 숨김입니다. Unity 실제 연결은 아직 하지 않았습니다.
+    </div>
+    @if (!Session.서버관리자인가)
+    {
+        <p role="alert">서버관리자 로그인이 필요합니다. <a href="/login?returnUrl=%2Fspatial-catalog">로그인으로 이동</a></p>
+    }
+    else
+    {
+        @if (_error is not null) { <p class="error" role="alert">@_error</p> }
+        @if (_busy) { <p role="status">같은 판본의 자료를 읽고 있습니다…</p> }
+        <fieldset disabled="@_busy" class="filters">
+            <label>검증 완료 판본
+                <select aria-label="검증 완료 판본" value="@_bundle" @onchange="ChangeBundle">
+                    @foreach (var item in _snapshots)
+                    { <option value="@Text(item,"_id")">@Text(item,"createdAtUtc") · @Number(item,"documentCount")개 문서</option> }
+                </select>
+            </label>
+            <label>자료 묶음
+                <select aria-label="자료 묶음" @bind="_dataset">
+                    <option value="">전체</option><option value="jungnang-myeonmok">중랑·면목 기존 자료</option>
+                    <option value="neighborhood:1126010100">면목동 패키지</option><option value="neighborhood:1126010300">중화동 패키지</option>
+                    <option value="shared-five-element-work">공통 오행 업무 객체</option><option value="neighborhood-registry">동별 패키지 대장</option>
+                    <option value="synthetic-neighborhood">합성 동네</option><option value="hans-farm">한스 농장</option>
+                    <option value="farm-production">농업 생산</option><option value="northern-life-hub">북부 생활 거점</option>
+                </select>
+            </label>
+            <label>법정동 범위
+                <select aria-label="법정동 범위" @bind="_area">
+                    <option value="">전체</option><option value="region:kr:bjd:1126010100">면목동</option>
+                    <option value="region:kr:bjd:1126010300">중화동</option>
+                </select>
+            </label>
+            <label>문서 종류
+                <select aria-label="문서 종류" @bind="_kind">
+                    <option value="">전체</option><option value="GraphMap">Graph Map</option><option value="PlacementMap">배치 맵</option>
+                    <option value="SourceManifest">출처 목록</option><option value="Geometry">건물·도로 도형</option>
+                    <option value="SpatialIndex">주소·활동 관계</option><option value="PresentationProjection">표현 사본</option>
+                    <option value="RealityContextDefinition">Reality Context 정의</option>
+                    <option value="ObjectCatalog">오행 업무 객체 대장</option><option value="ObjectCandidateProjection">객체 후보 투영</option>
+                    <option value="NeighborhoodRegistry">동별 패키지 대장</option><option value="NeighborhoodPackage">동별 공간 패키지</option>
+                    <option value="ObservationInventory">공공자료 관측 재고</option>
+                </select>
+            </label>
+            <button @onclick="ApplyFilters">목록 조회</button>
+        </fieldset>
+        <p class="bundle">현재 묶음: @_bundle</p>
+        <div class="workspace">
+            <aside>
+                <h2>문서 <span>@_documents.Count</span></h2>
+                @if (!_busy && _documents.Count==0) { <p>이 조건에 해당하는 자료가 없습니다.</p> }
+                @foreach (var doc in _documents)
+                {
+                    <button class="document @(Text(doc,"_id")==_selectedId ? "selected" : "")" disabled="@_busy" @onclick="()=>SelectDocument(doc)">
+                        <strong>@FileName(Text(doc,"sourcePath"))</strong>
+                        <span>@Text(doc,"kind") · @Text(doc,"dataset")</span>
+                        @if(Text(doc,"areaStableId") is {Length:>0} area) { <span>법정동 범위 @area</span> }
+                        <span>원본 판본 @(Text(doc,"revision") is "" ? "미기재 · 내용 해시로 구분" : Text(doc,"revision")) · 구성요소 @Number(doc,"elementCount")</span>
+                        <small>검토 대기 / 원본 상태: @(Text(doc,"sourceState") is "" ? "미기재" : Text(doc,"sourceState"))</small>
+                    </button>
+                }
+            </aside>
+            <main>
+                @if (_detail is null) { <div class="empty">왼쪽 문서를 선택하면 원본 정보와 구성요소, 관계를 확인할 수 있습니다.</div> }
+                else
+                {
+                    <h2>@FileName(Text(_detail.Document,"sourcePath"))</h2>
+                    <p class="bundle">원본 SHA256: @Text(_detail.Document,"rawSha256")</p>
+                    <p>원본 JSON은 MongoDB의 구조화 문서로 저장됩니다. 아래는 같은 묶음의 읽기 사본입니다.</p>
+                    <fieldset class="filters" disabled="@_busy">
+                        <label>레이어<input aria-label="레이어" @bind="_layer" placeholder="예: buildings, roads" /></label>
+                        <label>타일<input aria-label="타일" @bind="_tile" placeholder="예: tile:myeonmok:500m:x0:z0" /></label>
+                        <button @onclick="FilterElements">구성요소 조회</button>
+                        @if (Text(_detail.Document,"kind") is "Geometry" or "PlacementMap" or "PresentationProjection")
+                        { <button @onclick="ReadPresentation">표현 JSON 조회</button> }
+                    </fieldset>
+                    <p>구성요소 @(_elementsTotal)개 · 현재 @(_elements.Count==0 ? 0 : _skip+1)–@(_skip+_elements.Count) / 페이지당 100개</p>
+                    <div class="element-list">
+                        @foreach(var element in _elements)
+                        {
+                            var elementKey=Text(element,"stableId");
+                            <button disabled="@_busy" @onclick="()=>ReadRelations(elementKey)">
+                                <strong>@Text(element,"kind")</strong><span>@Text(element,"stableId")</span>
+                                <small>@Text(element,"layer") @Text(element,"tile")</small>
+                            </button>
+                        }
+                    </div>
+                    @if(_elements.Count==0) { <p>해당 조건의 구성요소가 없습니다.</p> }
+                    <div class="paging">
+                        <button disabled="@(_busy || _skip==0)" @onclick="Previous">이전 100개</button>
+                        <button disabled="@(_busy || _next is null)" @onclick="Next">다음 100개</button>
+                    </div>
+                    @if(_relationKey is not null)
+                    {
+                        <h3>들어오고 나가는 관계</h3><p class="bundle">@_relationKey · @(_relationsTotal)개 (최대 100개 표시)</p>
+                        @foreach(var relation in _relations)
+                        {
+                            <div class="relation"><strong>@Text(relation,"kind")</strong>
+                                <p>@Text(relation,"fromKey") → @Text(relation,"toKey")</p>
+                                <small>@Text(relation,"targetResolution") · 원문 @Text(relation,"sourcePath") @Text(relation,"pointer")</small>
+                            </div>
+                        }
+                        @if(_relations.Count==0) { <p>이 묶음에서 명시된 관계를 찾지 못했습니다. 이름·근접성으로 보충하지 않습니다.</p> }
+                    }
+                    <details><summary>구조화 JSON 미리보기 (민감 항목 제외)</summary><pre>@Preview(_detail.Document)</pre></details>
+                    @if(_presentation is not null)
+                    { <details open><summary>표현 JSON · 선택한 문서/레이어/타일의 현재 페이지</summary><pre>@Preview(_presentation.Document)</pre></details> }
+                }
+            </main>
+        </div>
+    }
+</section>
+
+@code {
+    private bool _busy;
+    private string? _error,_bundle,_selectedId,_relationKey;
+    private string _dataset="",_area="",_kind="",_layer="",_tile="";
+    private IReadOnlyList<JsonElement> _snapshots=[],_documents=[],_elements=[],_relations=[];
+    private 공간자료Detail? _detail,_presentation;
+    private int _elementsTotal,_relationsTotal,_skip;
+    private int? _next;
+    protected override async Task OnInitializedAsync()
+    {
+        if(!Session.서버관리자인가)return;
+        await Run(async()=>
+        {
+            _snapshots=(await Catalog.PageAsync("snapshots",new())).Items;
+            _bundle=_snapshots.Count>0 ? Text(_snapshots[0],"_id") : null;
+            if(_bundle is not null)await LoadDocuments();
+        });
+    }
+    private async Task Run(Func<Task> action)
+    {
+        if(_busy)return;_busy=true;_error=null;
+        try {await action();}catch(Exception ex){_error=ex is HttpRequestException or InvalidOperationException ? ex.Message : "자료 조회에 실패했습니다. 현재 판본과 연결을 확인해 주세요.";}
+        finally {_busy=false;}
+    }
+    private async Task ChangeBundle(ChangeEventArgs e)=>await Run(async()=>{_bundle=e.Value?.ToString();await LoadDocuments();});
+    private async Task ApplyFilters()=>await Run(LoadDocuments);
+    private async Task LoadDocuments()
+    {
+        _documents=[];_detail=null;_presentation=null;_elements=[];_relations=[];_selectedId=null;_relationKey=null;
+        var page=await Catalog.PageAsync("documents",new(){BundleId=_bundle,Dataset=Empty(_dataset),AreaStableId=Empty(_area),Kind=Empty(_kind)});
+        _bundle=page.BundleId;_documents=page.Items;
+    }
+    private async Task SelectDocument(JsonElement doc)=>await Run(async()=>
+    {
+        _selectedId=Text(doc,"_id");_detail=null;_presentation=null;_layer="";_tile="";_skip=0;_relationKey=null;_relations=[];
+        _detail=await Catalog.DetailAsync(_bundle!,_selectedId);await LoadElements();
+    });
+    private 공간자료Query ElementQuery()=>new(){BundleId=_bundle,AreaStableId=Empty(_area),DocumentId=_selectedId,Layer=Empty(_layer),Tile=Empty(_tile),Skip=_skip};
+    private async Task LoadElements()
+    {
+        _elements=[];_next=null;_elementsTotal=0;_presentation=null;
+        _relations=[];_relationKey=null;_relationsTotal=0;
+        var page=await Catalog.PageAsync("elements",ElementQuery());_elements=page.Items;_elementsTotal=page.Total;_next=page.NextSkip;
+    }
+    private Task FilterElements()=>Run(async()=>{_skip=0;_presentation=null;await LoadElements();});
+    private Task Previous()=>Run(async()=>{_skip=Math.Max(0,_skip-100);await LoadElements();});
+    private Task Next()=>Run(async()=>{if(_next.HasValue){_skip=_next.Value;await LoadElements();}});
+    private Task ReadPresentation()=>Run(async()=>{_presentation=null;_presentation=await Catalog.PresentationAsync(ElementQuery());});
+    private Task ReadRelations(string key)=>Run(async()=>
+    {
+        _relations=[];_relationKey=key;
+        var page=await Catalog.PageAsync("relations",new(){BundleId=_bundle,AreaStableId=Empty(_area),RelationKey=key,Direction="both"});_relations=page.Items;_relationsTotal=page.Total;
+    });
+    private static string? Empty(string value)=>string.IsNullOrWhiteSpace(value)?null:value.Trim();
+    private static string Text(JsonElement value,string key)=>value.TryGetProperty(key,out var x) ? x.ValueKind==JsonValueKind.String ? x.GetString()??"" : x.ValueKind==JsonValueKind.Null ? "" : x.GetRawText() : "";
+    private static int Number(JsonElement value,string key)=>value.TryGetProperty(key,out var x)&&x.TryGetInt32(out var n)?n:0;
+    private static string FileName(string path)=>path.Split('/').Last();
+    private static string Preview(JsonElement json)
+    {
+        var text=JsonSerializer.Serialize(json,new JsonSerializerOptions{WriteIndented=true,Encoder=System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping});
+        return text.Length<=16000 ? text : text[..16000]+"\n… 화면 미리보기만 생략됨. 관리자 API는 해당 문서 전체를 구조화 JSON으로 반환합니다.";
+    }
+}
