@@ -1,114 +1,174 @@
 # WI 괘성 분류 목록
 
-- 분류 입력 판본: `mirror-world-interaction-gwae-classifications.r7`
-- WI 대장 판본: `simulation-world-interactions.r43`
-- 전체: 105, 개별 의미 명시 검토: 77, 검토된 영역 의미 규칙 적용: 28
-- 이 목록은 기획 탐색용이며 WI 권위·구현 승인·E/G/H 성숙도와 실행 순서를 변경하지 않는다.
+- 분류 입력 판본: `mirror-world-interaction-gwae-classifications.r10`
+- WI 대장 판본: `simulation-world-interactions.r48`
+- 전체: 133, 개별 의미 명시 검토: 81, 검토된 영역 의미 규칙 적용: 52
+- E5 역할 객체·행위 정의 필수: 133, 역할 객체 표본 프로필: 2
+- 업무 의미 대표 괘 프로필: 5 (코드 계보: `food-workflow-lineage`)
+- 오행 업무 엔진 조립 프로필: 1, 주축 토(간괘), 보조 수(감괘)
+- 권위 상태 변화를 소유하거나 일으키는 모든 세계 객체의 역할·행위 정의는 E5 진입 필수 조건이다. 이 목록만으로 E5를 자동 승격하지 않는다.
 
-| WI | 제목 | 행위괘 | 작용괘 | 대상괘 | 보조괘 | 오행 관계 | 상태 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `WI-ACTOR-CONSUME` | 물품 섭취 | 목(진괘) | 대상 객체 승계 | 대상 객체 승계 | - | - | `ReviewedExplicit` |
-| `WI-ACTOR-PLAN-SET` | 개인 계획 설정 | 토(간괘) | - | 토(간괘) | 상황별 수(감괘) | - | `ReviewedExplicit` |
-| `WI-COMBAT-DIRECT-CONTROL-SET` | 직접 전투 조종 전환 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-COMBAT-TACTICAL-COMMAND` | 분대 전술 명령 확정 | 화(리괘) | 수(감괘) | 토(간괘) | 상황별 토(간괘) | - | `ReviewedExplicit` |
-| `WI-COMMUNITY-COOPERATION-PROPOSE` | 공동체 협력 제안 | 토(간괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-COMMUNITY-ENTRANCE-POLICY-SET` | 공동체 출입 정책 설정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-COMMUNITY-HIRE` | NPC 고용 확정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-COMMUNITY-MEMBERSHIP-CONFIRM` | 공동체 정식 편입 확정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-COMMUNITY-REMOTE-RESPONSE` | 원격 응대 지시 확정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-COMMUNITY-SUPPORT-MISSION-JOIN` | 공동 지원 임무 참여 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-CON-BLUEPRINT-PLACE` | 건설 청사진 배치 | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-CON-DEMOLISH` | 건설물 해체 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-CON-MATERIAL-DEPOSIT` | 건설 재료 투입 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-CON-WORK-CONTRIBUTE` | 건설 시공 기여 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-CRAFT-BREW` | 배합물 달이기 | 목(진괘) | 화(리괘) | 대상 객체 승계 | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-EXPEDITION-DISPATCH` | 탐사 임무 파견 | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-FARM-FIELD-BOUNDARY-CONFIRM` | 밭 경계 확정 | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-FARM-SOIL-AMEND` | 토양 개량 | 목(진괘) | - | 목(진괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-FARM-WATER-TRANSFER` | 농업 용수 이송 | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
-| `WI-GUEST-PERMISSION-SET` | 손님 활동 권한 설정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-HEAT-SOURCE-STATE-CHANGE` | 열원 상태 변경 | 목(진괘) | 작업 코드별 | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-HUB-DEMAND-ALLOCATE` | Hub 수요 재고 할당 | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-HUB-SUPPLY-TASK-ACCEPT` | Hub 조달 과제 수락 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-INVENTORY-BELOW-RESERVE-SALE-CONFIRM` | 목표 비축 미달 판매 확정 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-HERB-GATHER` | 약초 채집 | 목(진괘) | - | 목(진괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-TRACE-INVESTIGATE` | 자연 흔적 조사 | 수(감괘) | - | 목(진괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-SURVIVAL-RATION-POLICY-SET` | 생존 배급 정책 설정 | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-TOWN-DELIVERY-INSPECT` | Town 납품 검수 | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-TOWN-DELIVERY-RECEIVE` | Town 납품 인수 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-TOWN-STOCK-PUTAWAY` | Town 후방 재고 적재 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-TOWN-STOCK-REPLENISH` | Town 재고 보충 주문 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-TOWN-SUPPLY-DISPATCH` | Town 공급 운송 출발 확정 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-RESOURCE-REGENERATE` | 세계 자원 재생 | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
-| `WI-ACTOR-01` | 물품 획득 | 목(진괘) | - | 대상 객체 승계 | - | - | `ReviewedExplicit` |
-| `WI-ACTOR-02` | 장착 상태 변경 | 목(진괘) | 화(리괘) | 대상 객체 승계 | - | - | `ReviewedExplicit` |
-| `WI-ACTOR-03` | 지식 습득 | 수(감괘) | - | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-COMMUNITY-VISITOR-STAY` | 방문자 임시 체류 결정 | 토(간괘) | 화(리괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-FARM-DEFENSE-MOBILIZE` | 방위 분대 소집 | 화(리괘) | - | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-SQUAD-ASSIGN` | 경비 초소 분대 배정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-SQUAD-SUPPLY` | 경비 분대 식량·장비 보급 | 목(진괘) | 수(감괘) | 토(간괘) | 화(리괘) | - | `ReviewedExplicit` |
-| `WI-FARM-DEFENSE-RESOLVE` | Farm 방어 성공 결과 발현 | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-FARM-DEFENSE-RETURN` | Farm 방위 분대 초소 귀환 인계 | 화(리괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-FARM-01` | 경작지 밭갈이 | 목(진괘) | 금(태괘) | 목(진괘) | - | - | `ReviewedExplicit` |
-| `WI-FARM-02` | 경작지 씨앗 파종 | 목(진괘) | 금(태괘) | 목(진괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-FARM-03` | 농작물 생육 관리 | 토(간괘) | 수(감괘) | 목(진괘) | - | 수생목[RequiredInput]: 적정 수분 공급이 작물 생장을 돕는다.<br>토극수[RequiredConstraint]: 토양 수용력과 현재 수분 상태가 물 공급량을 제한한다.<br>금극목[ConditionalCare]: 가지치기가 필요한 품종과 생육 단계에서 과잉 가지를 분리해 성장 방향을 조절한다.<br>목생화[Outcome]: 씨앗·토양·수분과 필요한 관리 조건이 충족되면 온전한 생육과 성숙 전환이 발동한다. | `ReviewedExplicit` |
-| `WI-FARM-04` | 익은 농작물 수확 | 금(태괘) | 금(태괘) | 목(진괘) | 수(감괘) | 금극목[Outcome]: 성장이 끝난 작물을 절단·분리해 수확물로 완결한다. | `ReviewedExplicit` |
-| `WI-FARM-05` | 수확물 집하장 모으기 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-FARM-06` | 출하 물량 포장 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-LOG-01` | 출하 차량 상차 확정 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-LOG-02` | 농장에서 출발 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-LOG-03` | 농장에서 물류 거점으로 화물 이동 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-LOG-04` | 물류 거점 도착 화물 하차 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-LOG-05` | 물류 거점 도착 화물 인수 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-001` | 입고 화물 검수 | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-002` | 검수 완료 화물 창고 적재 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-HUB-03` | 출고 대상 재고 요청 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-HUB-04` | 출고 대상 재고 피킹 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-HUB-05` | 피킹 화물 포장 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-HUB-06` | 출고 차량 상차 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-MARKET-01` | 물류 거점에서 마트로 운송 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-MARKET-02` | 마트 도착 화물 인수 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-MARKET-03` | 마트 입고 상품 검수 | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-MARKET-04` | 검수 상품 후방 창고 적재 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-MARKET-05` | 매장 진열대 상품 보충 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-ORDER-01` | 주민 주문 확정 | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-ORDER-02` | 주문 상품 재고 예약 | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-ORDER-03` | 주문 상품 피킹 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-ORDER-04` | 주문 상품 포장 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-ORDER-05` | 주문 상품 수령 준비 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-ORDER-06` | 주민 주문 상품 수령 | 목(진괘) | 수(감괘) | 대상 객체 승계 | - | - | `ReviewedExplicit` |
-| `WI-ORDER-07` | 주민 상품 소비 | 목(진괘) | 대상 객체 승계 | 대상 객체 승계 | - | - | `ReviewedExplicit` |
-| `WI-NATURE-01` | 자연 지역 위험 징후 확인 | 수(감괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-02` | 안전 거점으로 긴급 후퇴 | 목(진괘) | 금(태괘) | 금(태괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-03` | 훼손된 자연 경로 복원 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-04` | 탐사대 안전 회복 | 토(간괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-05` | 벌목 도끼 획득 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-06` | 나무 벌목 작업 시작 | 목(진괘) | 금(태괘) | 목(진괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-07` | 오두막을 지을 터 선정 | 금(태괘) | - | 금(태괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-08` | 오두막 건설 작업 시작 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-09` | 오두막 안으로 들어가기 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-10` | 오두막 밖으로 나가기 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-11` | 황혼 위협 대응 방식 확정 | 화(리괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-12` | 진행 중 작업 취소 | 화(리괘) | - | 진행 WI 대상 승계 | - | - | `ReviewedExplicit` |
-| `WI-NATURE-13` | 획득 자원 거점 보관 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-14` | 오두막에서 수면·새벽 맞기 | 토(간괘) | 금(태괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-15` | 다음 날 거점 확장 계획 선택 | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-NATURE-16` | 현장 보급 꾸러미 제작 | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-17` | 현장 보급 제작 업무 위임 | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-NATURE-18` | 벌목 통나무 줍기 | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
-| `WI-REFLECT-01` | 승인 자료로 거점 성찰 확정 | 토(간괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-CARD-01` | 현재 세계의 메이저 아르카나 활성화 | 목(진괘) | 수(감괘) | 수(감괘) | 상황별 토(간괘) | - | `ReviewedByMeaningRule` |
-| `WI-CON-01` | 영역 건물 건설 확정 | 목(진괘) | 금(태괘) | 금(태괘) | 수(감괘) | - | `ReviewedExplicit` |
-| `WI-CITY-01` | 도심 서비스 수요 확정 | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
-| `WI-CITY-02` | 도심 서비스용 지역 재고 배정 | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-CITY-03` | 도심 주민 서비스 처리 | 목(진괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-CITY-04` | 도심 서비스 결과 확인 | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
-| `WI-WORLD-01` | NPC에게 반복 업무 배정 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-02` | NPC에게 업무 역량 위임 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-03` | 진행 중 세계 업무 취소 | 화(리괘) | - | 진행 WI 대상 승계 | - | - | `ReviewedExplicit` |
-| `WI-WORLD-04` | 손상된 시설 수리 | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-05` | 새로운 지역 발견 | 목(진괘) | 수(감괘) | 금(태괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-06` | 일행 역할 카드 장착 | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-07` | 세계 활동 상태 변경 | 화(리괘) | - | 화(리괘) | - | - | `ReviewedExplicit` |
-| `WI-WORLD-08` | 하루 운영 턴 마감 | 화(리괘) | 수(감괘) | 화(리괘) | - | - | `ReviewedExplicit` |
-| `WI-REVIEW-01` | NPC 업무 결과 검토 확정 | 수(감괘) | - | 토(간괘) | 화(리괘) | - | `ReviewedExplicit` |
+## 오행 업무 엔진 조립 의미
+
+| 엔진 | 의미 판본 | 주 괘 | 보조 괘 | 안정 목적 | 실행 권위 |
+| --- | --- | --- | --- | --- | --- |
+| `FiveElementWorkflow` | `five-element-workflow-engine-meaning.r1` | 토(간괘) | 수(감괘) | 산처럼 업무 모듈의 경계와 전이 질서를 고정하고, 물처럼 서버·로컬·Unity 사이의 요청과 상태 사본 흐름을 보조한다. | `False` |
+
+> 엔진 조립 괘는 모듈 경계와 상태 사본 흐름을 설명하는 비권위 메타데이터다. 개별 전이의 모듈·대표 괘나 실행 권위를 바꾸지 않는다.
+
+## 업무 의미 대표 괘
+
+| 프로필 | 의미 판본 | 업무 | 대표 괘 | 코드 계보 | 안정 목적 | 실행 권위 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `workflow-meaning:restaurant.r1` | `restaurant-workflow-meaning.r1` | 음식점 운영 | 화(리괘) | `domain.restaurant-response-adaptation`<br>`domain.restaurant-cooking-adaptation` | 등록한 상품의 주문을 수락·거절하고 조리와 픽업 준비 사실을 이어 가는 운영 의미를 설명한다. | `False` |
+| `workflow-meaning:order.r1` | `order-workflow-meaning.r1` | 주문 | 목(진괘) | `domain.food-order-adaptation` | 주문자가 수요를 실제 주문 원장으로 열고 이후 이행 흐름의 대상을 식별하는 의미를 설명한다. | `False` |
+| `workflow-meaning:dispatch.r1` | `dispatch-workflow-meaning.r2` | 배차 | 토(간괘) | `domain.food-dispatch-shared-rule`<br>`domain.freight-dispatch-shared-rule` | 운송 요청과 기사·차량 후보를 읽어 담당 운송 주체와 인계 대상을 연결하는 의미를 설명한다. | `False` |
+| `workflow-meaning:delivery.r1` | `delivery-workflow-meaning.r1` | 배달·운송 | 수(감괘) | `domain.freight-transport-adaptation` | 배정된 주체가 픽업지에서 인수한 대상을 목적지까지 이동하고 전달하는 흐름의 의미를 설명한다. | `False` |
+| `workflow-meaning:warehouse.r1` | `warehouse-workflow-meaning.r1` | 창고 운영 | 금(태괘) | `domain.warehouse-put-away-adaptation`<br>`domain.warehouse-outbound-shared-rule` | 입고 대상을 검수·적재하고 출고 대상을 분리·배분해 시설의 입구와 출구를 유지하는 의미를 설명한다. | `False` |
+
+> 업무 의미 대표 괘는 변하지 않는 역할 의미와 코드 계보를 찾기 위한 비권위 메타데이터다. 원자 WI의 행위·작용·대상 괘를 덮어쓰지 않으며 상생·상극은 명령 라우팅이나 권한 부여에 사용하지 않는다.
+
+| WI | 제목 | E5 역할 객체 | 권위 행위·전환 | 행위괘 | 작용괘 | 대상괘 | 보조괘 | 오행 관계 | 상태 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `WI-CITY-SYNTHETIC-LIFE-SHIFT` | 근무 복귀 | `Required/NpcActor` | `SyntheticLIFESHIFT`<br>SyntheticProfilePreconditions → Working<br>효과: Working | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-LIFE-REST` | 인계 후 휴식 | `Required/NpcActor` | `SyntheticLIFEREST`<br>SyntheticProfilePreconditions → Resting<br>효과: Resting | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-INSPECT` | 보충창고 입고 검수 | `Required/NpcActor` | `SyntheticDEPOTINSPECT`<br>SyntheticProfilePreconditions → Inspected<br>효과: Inspected | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-PUTAWAY` | 검수 물품 적치 | `Required/NpcActor` | `SyntheticDEPOTPUTAWAY`<br>SyntheticProfilePreconditions → Stored<br>효과: Stored | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-RESERVE` | 보충 출고 예약 | `Required/NpcActor` | `SyntheticDEPOTRESERVE`<br>SyntheticProfilePreconditions → Reserved<br>효과: Reserved | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-PICK` | 보충 물품 피킹 | `Required/NpcActor` | `SyntheticDEPOTPICK`<br>SyntheticProfilePreconditions → Picked<br>효과: Picked | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-PACK` | 보충 물품 포장 | `Required/NpcActor` | `SyntheticDEPOTPACK`<br>SyntheticProfilePreconditions → Packed<br>효과: Packed | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DEPOT-STAGE` | 보충 물품 상차대 인계 | `Required/NpcActor` | `SyntheticDEPOTSTAGE`<br>SyntheticProfilePreconditions → Ready<br>효과: Ready | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-FREIGHT-LOAD` | 화물차 상차 | `Required/NpcActor` | `SyntheticFREIGHTLOAD`<br>SyntheticProfilePreconditions → Loaded<br>효과: Loaded | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-FREIGHT-UNLOAD` | 마트 화물 하차 | `Required/NpcActor` | `SyntheticFREIGHTUNLOAD`<br>SyntheticProfilePreconditions → Unloaded<br>효과: Unloaded | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MART-INBOUND` | 마트 검수 입고 | `Required/NpcActor` | `SyntheticMARTINBOUND`<br>SyntheticProfilePreconditions → Received<br>효과: Received | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MART-RESERVE` | 마트 예약 | `Required/NpcActor` | `SyntheticMartRESERVE`<br>SyntheticProfilePreconditions → Reserved<br>효과: Reserved | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MART-PICK` | 마트 피킹 | `Required/NpcActor` | `SyntheticMartPICK`<br>SyntheticProfilePreconditions → Picked<br>효과: Picked | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MART-PACK` | 마트 포장 | `Required/NpcActor` | `SyntheticMartPACK`<br>SyntheticProfilePreconditions → Packed<br>효과: Packed | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MART-STAGE` | 마트 인계대 적치 | `Required/NpcActor` | `SyntheticMartSTAGE`<br>SyntheticProfilePreconditions → ReadyForCourier<br>효과: ReadyForCourier | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-ASSIGN` | 기사 배정 | `Required/NpcActor` | `SyntheticDeliveryASSIGN`<br>SyntheticProfilePreconditions → Assigned<br>효과: Assigned | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-MOVE` | 도로·출입구 이동 | `Required/NpcActor` | `SyntheticDeliveryMOVE`<br>SyntheticProfilePreconditions → PositionAdvanced<br>효과: PositionAdvanced | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-PICKUP` | 음식 픽업 | `Required/NpcActor` | `SyntheticDeliveryPICKUP`<br>SyntheticProfilePreconditions → PickedUp<br>효과: PickedUp | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-DELIVER` | 주택 전달 | `Required/NpcActor` | `SyntheticDeliveryDELIVER`<br>SyntheticProfilePreconditions → Delivered<br>효과: Delivered | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-RECEIVE` | 주문자 수령 | `Required/NpcActor` | `SyntheticDeliveryRECEIVE`<br>SyntheticProfilePreconditions → Received<br>효과: Received | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-SYNTHETIC-RETURN` | 기사 복귀 | `Required/NpcActor` | `SyntheticDeliveryRETURN`<br>SyntheticProfilePreconditions → Returned<br>효과: Returned | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-RESTAURANT-COOK` | 음식점 조리 자리 배정 | `Required/NpcActor` | `RestaurantCooking`<br>FoodOrderCookingQueued → ReadyForPickup<br>효과: RestaurantCookingScheduled | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-RESTAURANT-ACCEPT` | 음식점 NPC 주문 자동 수락 | `Required/NpcActor` | `RestaurantAutoAccept`<br>FoodOrderNpcSubmission → FoodOrderCookingQueued<br>효과: RestaurantResponseRecorded | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-ACTOR-CONSUME` | 물품 섭취 | `Required/PlayerActor` | `ActorConsume`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ItemConsumed<br>효과: ItemConsumed | 목(진괘) | 대상 객체 승계 | 대상 객체 승계 | - | - | `ReviewedExplicit` |
+| `WI-ACTOR-PLAN-SET` | 개인 계획 설정 | `Required/PlayerActor` | `ActorPlanSet`<br>PersonalPlanPolicyReady → PersonalPlanSet<br>효과: PersonalPlanSet | 토(간괘) | - | 토(간괘) | 상황별 수(감괘) | - | `ReviewedExplicit` |
+| `WI-COMBAT-DIRECT-CONTROL-SET` | 직접 전투 조종 전환 | `Required/PlayerActor` | `CombatDirectControlSet`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ActorDirectControlChanged<br>효과: ActorDirectControlChanged | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-COMBAT-TACTICAL-COMMAND` | 분대 전술 명령 확정 | `Required/PlayerActor` | `CombatTacticalCommand`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → SquadTacticalOrderConfirmed<br>효과: SquadTacticalOrderConfirmed | 화(리괘) | 수(감괘) | 토(간괘) | 상황별 토(간괘) | - | `ReviewedExplicit` |
+| `WI-COMMUNITY-COOPERATION-PROPOSE` | 공동체 협력 제안 | `Required/PlayerActor` | `CommunityCooperationPropose`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → CooperationProposed<br>효과: CooperationProposed | 토(간괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-COMMUNITY-ENTRANCE-POLICY-SET` | 공동체 출입 정책 설정 | `Required/PlayerActor` | `CommunityEntrancePolicySet`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → EntrancePolicySet<br>효과: EntrancePolicySet | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-COMMUNITY-HIRE` | NPC 고용 확정 | `Required/PlayerActor` | `CommunityHire`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → NpcEmploymentConfirmed<br>효과: NpcEmploymentConfirmed | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-COMMUNITY-MEMBERSHIP-CONFIRM` | 공동체 정식 편입 확정 | `Required/PlayerActor` | `CommunityMembershipConfirm`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → CommunityMembershipConfirmed<br>효과: CommunityMembershipConfirmed | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-COMMUNITY-REMOTE-RESPONSE` | 원격 응대 지시 확정 | `Required/PlayerActor` | `CommunityRemoteResponse`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → RemoteResponseOrderConfirmed<br>효과: RemoteResponseOrderConfirmed | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-COMMUNITY-SUPPORT-MISSION-JOIN` | 공동 지원 임무 참여 | `Required/PlayerActor` | `CommunitySupportMissionJoin`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → SupportMissionParticipationConfirmed<br>효과: SupportMissionParticipationConfirmed | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CON-BLUEPRINT-PLACE` | 건설 청사진 배치 | `Required/ResolvedExecutionObject` | `ConBlueprintPlace`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ConstructionBlueprintPlaced<br>효과: ConstructionBlueprintPlaced | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-CON-DEMOLISH` | 건설물 해체 | `Required/ResolvedExecutionObject` | `ConDemolish`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ConstructionDemolished<br>효과: ConstructionDemolished | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-CON-MATERIAL-DEPOSIT` | 건설 재료 투입 | `Required/ResolvedExecutionObject` | `ConMaterialDeposit`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ConstructionMaterialDeposited<br>효과: ConstructionMaterialDeposited | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-CON-WORK-CONTRIBUTE` | 건설 시공 기여 | `Required/ResolvedExecutionObject` | `ConWorkContribute`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ConstructionWorkContributed<br>효과: ConstructionWorkContributed | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-CRAFT-BREW` | 배합물 달이기 | `Required/ResolvedExecutionObject` | `CraftBrew`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → BrewBatchCompleted<br>효과: BrewBatchCompleted | 목(진괘) | 화(리괘) | 대상 객체 승계 | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-EXPEDITION-DISPATCH` | 탐사 임무 파견 | `Required/ResolvedExecutionObject` | `ExpeditionDispatch`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → ExpeditionDispatched<br>효과: ExpeditionDispatched | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-FARM-FIELD-BOUNDARY-CONFIRM` | 밭 경계 확정 | `Required/PlayerActor` | `FarmFieldBoundaryConfirm`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → FieldBoundaryConfirmed<br>효과: FieldBoundaryConfirmed | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-FARM-SOIL-AMEND` | 토양 개량 | `Required/ResolvedExecutionObject` | `FarmSoilAmend`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → SoilAmended<br>효과: SoilAmended | 목(진괘) | - | 목(진괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-FARM-WATER-TRANSFER` | 농업 용수 이송 | `Required/ResolvedExecutionObject` | `FarmWaterTransfer`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → IrrigationWaterTransferred<br>효과: IrrigationWaterTransferred | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
+| `WI-GUEST-PERMISSION-SET` | 손님 활동 권한 설정 | `Required/PlayerActor` | `GuestPermissionSet`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → GuestPermissionSet<br>효과: GuestPermissionSet | 화(리괘) | - | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-HEAT-SOURCE-STATE-CHANGE` | 열원 상태 변경 | `Required/ResolvedExecutionObject` | `HeatSourceStateChange`<br>Off, Smoldering, Burning → HeatSourceStateChanged<br>효과: HeatSourceStateChanged | 목(진괘) | 작업 코드별 | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-HUB-DEMAND-ALLOCATE` | Hub 수요 재고 할당 | `Required/PlayerActor` | `HubDemandAllocate`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → HubDemandInventoryAllocated<br>효과: HubDemandInventoryAllocated | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-HUB-SUPPLY-TASK-ACCEPT` | Hub 조달 과제 수락 | `Required/PlayerActor` | `HubSupplyTaskAccept`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → HubSupplyTaskAccepted<br>효과: HubSupplyTaskAccepted | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-INVENTORY-BELOW-RESERVE-SALE-CONFIRM` | 목표 비축 미달 판매 확정 | `Required/PlayerActor` | `InventoryBelowReserveSaleConfirm`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → BelowReserveSaleConfirmed<br>효과: BelowReserveSaleConfirmed | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-HERB-GATHER` | 약초 채집 | `Required/ResolvedExecutionObject` | `NatureHerbGather`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → HerbGathered<br>효과: HerbGathered | 목(진괘) | - | 목(진괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-TRACE-INVESTIGATE` | 자연 흔적 조사 | `Required/ResolvedExecutionObject` | `NatureTraceInvestigate`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → NatureTraceInvestigated<br>효과: NatureTraceInvestigated | 수(감괘) | - | 목(진괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-SURVIVAL-RATION-POLICY-SET` | 생존 배급 정책 설정 | `Required/PlayerActor` | `SurvivalRationPolicySet`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → RationPolicySet<br>효과: RationPolicySet | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-TOWN-DELIVERY-INSPECT` | Town 납품 검수 | `Required/ResolvedExecutionObject` | `TownDeliveryInspect`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → TownDeliveryInspected<br>효과: TownDeliveryInspected | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-TOWN-DELIVERY-RECEIVE` | Town 납품 인수 | `Required/ResolvedExecutionObject` | `TownDeliveryReceive`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → TownDeliveryReceived<br>효과: TownDeliveryReceived | 목(진괘) | 수(감괘) | 수(감괘) | - | 수생목[Outcome]: 목적지·주문·수량·봉인 또는 파손 상태를 확인해 인수된 동일 화물만 수령 측의 새 입고 작업을 연다. | `ReviewedExplicit` |
+| `WI-TOWN-STOCK-PUTAWAY` | Town 후방 재고 적재 | `Required/ResolvedExecutionObject` | `TownStockPutaway`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → TownStockPutAway<br>효과: TownStockPutAway | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-TOWN-STOCK-REPLENISH` | Town 재고 보충 주문 | `Required/PlayerActor` | `TownStockReplenish`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → TownReplenishmentOrderConfirmed<br>효과: TownReplenishmentOrderConfirmed | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-TOWN-SUPPLY-DISPATCH` | Town 공급 운송 출발 확정 | `Required/ResolvedExecutionObject` | `TownSupplyDispatch`<br>RegistrationOnly:PreconditionsRequireApprovedDesign → TownSupplyDispatched<br>효과: TownSupplyDispatched | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-RESOURCE-REGENERATE` | 세계 자원 재생 | `Required/WorldRule` | `WorldResourceRegenerate`<br>TrustedResourcePolicyReady, ConsecutiveWorldTickAvailable → ResourceAvailabilityRestored, ResourceAvailabilityUnchanged<br>효과: ResourceAvailabilityRestored, ResourceAvailabilityUnchanged | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
+| `WI-ACTOR-01` | 물품 획득 | `Required/ResolvedExecutionObject` | `AcquireItem`<br>WorldItemAvailable, ActorDoesNotOwnItem → ItemOwnedInInventory<br>효과: ItemAcquired | 목(진괘) | - | 대상 객체 승계 | - | - | `ReviewedExplicit` |
+| `WI-ACTOR-02` | 장착 상태 변경 | `Required/ResolvedExecutionObject` | `ChangeEquipment`<br>ItemOwnedInInventory, ItemEquipped → EquipmentStateChanged<br>효과: ItemEquipmentChanged | 목(진괘) | 화(리괘) | 대상 객체 승계 | - | - | `ReviewedExplicit` |
+| `WI-ACTOR-03` | 지식 습득 | `Required/PlayerActor` | `AcquireRecipeKnowledge`<br>ReadableKnowledgeSourceAvailable, RecipeNotKnown → RecipeKnown<br>효과: RecipeKnowledgeAdded | 수(감괘) | - | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-COMMUNITY-VISITOR-STAY` | 방문자 임시 체류 결정 | `Required/PlayerActor` | `DecideCommunityVisitorTemporaryStay`<br>NatureCampVisitorAwaitingDecision → CommunityVisitorTemporaryStayAccepted, CommunityVisitorRejected<br>효과: CommunityVisitorStayDecisionRecorded, CommunityMindTraceRecorded | 토(간괘) | 화(리괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-FARM-DEFENSE-MOBILIZE` | 방위 분대 소집 | `Required/WorldRule` | `MobilizeFarmDefenseSquad`<br>FarmDefenseThreatApproaching, FarmDefenseSquadReady → FarmDefenseSquadMobilized, FarmProductionContributionSuspended<br>효과: FarmDefenseSquadMobilized, FarmProductionContributionSuspended | 화(리괘) | - | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-SQUAD-ASSIGN` | 경비 초소 분대 배정 | `Required/PlayerActor` | `AssignFarmDefenseSquad`<br>FarmDefenseOutpostSlotEmpty, FarmDefenseSquadUnassigned → FarmDefenseSquadAssignedToOutpostSlot<br>효과: FarmDefenseSquadAssigned | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-SQUAD-SUPPLY` | 경비 분대 식량·장비 보급 | `Required/PlayerActor` | `SupplyFarmDefenseSquad`<br>FarmDefenseSquadSupplyRequired → FarmDefenseSquadSupplied<br>효과: FarmDefenseSquadSupplied | 목(진괘) | 수(감괘) | 토(간괘) | 화(리괘) | - | `ReviewedExplicit` |
+| `WI-FARM-DEFENSE-RESOLVE` | Farm 방어 성공 결과 발현 | `Required/WorldRule` | `ResolveFarmDefenseResult`<br>FarmDefenseResultConfirmed → FarmDefenseResultManifested<br>효과: FarmDefenseResolved, FarmThreatReduced, FarmSafePeriodExtended, FarmProductionRecoveryModified, FarmDefenseLootAdded | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-FARM-DEFENSE-RETURN` | Farm 방위 분대 초소 귀환 인계 | `Required/WorldRule` | `ReturnFarmDefenseSquad`<br>FarmDefenseResultResolved, FarmDefenseReturnPending → FarmDefenseSquadReturned<br>효과: FarmDefenseSquadReturned | 화(리괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-FARM-01` | 경작지 밭갈이 | `Required/ResolvedExecutionObject` | `Tilling`<br>Untilled → Tilled<br>효과: SoilTilled | 목(진괘) | 금(태괘) | 목(진괘) | - | - | `ReviewedExplicit` |
+| `WI-FARM-02` | 경작지 씨앗 파종 | `Required/ResolvedExecutionObject` | `Sowing`<br>Tilled → Growing<br>효과: CultivationStarted | 목(진괘) | 금(태괘) | 목(진괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-FARM-03` | 농작물 생육 관리 | `Required/ResolvedExecutionObject` | `CropCare`<br>Growing → Growing, HarvestReady<br>효과: CropCareApplied | 토(간괘) | 수(감괘) | 목(진괘) | - | 수생목[RequiredInput]: 적정 수분 공급이 작물 생장을 돕는다.<br>토극수[RequiredConstraint]: 토양 수용력과 현재 수분 상태가 물 공급량을 제한한다.<br>금극목[ConditionalCare]: 가지치기가 필요한 품종과 생육 단계에서 과잉 가지를 분리해 성장 방향을 조절한다.<br>목생화[Outcome]: 씨앗·토양·수분과 필요한 관리 조건이 충족되면 온전한 생육과 성숙 전환이 발동한다. | `ReviewedExplicit` |
+| `WI-FARM-04` | 익은 농작물 수확 | `Required/ResolvedExecutionObject` | `Harvesting`<br>HarvestReady → Harvested, HarvestedAtField<br>효과: HarvestLotCreated, CultivationHarvested | 금(태괘) | 금(태괘) | 목(진괘) | 수(감괘) | 금극목[Outcome]: 성장이 끝난 작물을 절단·분리해 수확물로 완결한다. | `ReviewedExplicit` |
+| `WI-FARM-05` | 수확물 집하장 모으기 | `Required/ResolvedExecutionObject` | `HarvestCollection`<br>HarvestedAtField → CollectedAtYard<br>효과: HarvestLotCollected | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-FARM-06` | 출하 물량 포장 | `Required/ResolvedExecutionObject` | `OutboundPacking`<br>CollectedAtYard → PackedForShipment, PreparedForShipment<br>효과: PackageLotCreated, CargoPrepared | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-LOG-01` | 출하 차량 상차 확정 | `Required/NpcActor` | `CargoRouteMovement`<br>PreparedForShipment → Reserved<br>효과: CargoTransportReserved | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-LOG-02` | 농장에서 출발 | `Required/WorldRule` | `CargoDepartureTransition`<br>Reserved → InTransit<br>효과: CargoDeparted | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-LOG-03` | 농장에서 물류 거점으로 화물 이동 | `Required/WorldRule` | `CargoRouteProgressTransition`<br>InTransit → InTransit, ArrivedAtDestination<br>효과: CargoRouteProgressed | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-LOG-04` | 물류 거점 도착 화물 하차 | `Required/WorldRule` | `CargoUnloadTransition`<br>InTransit → ArrivedAtDestination<br>효과: CargoUnloaded | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-LOG-05` | 물류 거점 도착 화물 인수 | `Required/WorldRule` | `FreightReceiptTransition`<br>ArrivedAtDestination, PendingInspection → Received, StorageEligible<br>효과: FreightReceived, StorageEligible | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-001` | 입고 화물 검수 | `Required/NpcActor` | `WarehouseInboundInspection`<br>ArrivedAtDestination, PendingInspection → StorageEligible, Received<br>효과: InspectionWorkAreaReleased, StorageEligible, FreightReceived | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-002` | 검수 완료 화물 창고 적재 | `Required/NpcActor` | `WarehouseStorageMove`<br>StorageEligible → PutAwayCompleted<br>효과: SpatialStorageCapacityConsumed, SpatialWorkAreaReleased, PutAwayCompleted | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-HUB-03` | 출고 대상 재고 요청 | `Required/NpcActor` | `WarehouseOutboundRequest`<br>PutAwayCompleted → OutboundRequested<br>효과: OutboundRequested | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-HUB-04` | 출고 대상 재고 피킹 | `Required/WorldRule` | `WarehousePickingTransition`<br>OutboundRequested → Picked<br>효과: StockPicked | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-HUB-05` | 피킹 화물 포장 | `Required/WorldRule` | `WarehouseOutboundPreparationTransition`<br>Picked → OutboundReady<br>효과: OutboundCargoPrepared | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-HUB-06` | 출고 차량 상차 | `Required/NpcActor` | `HubVehicleLoading`<br>OutboundReady → Reserved<br>효과: HubCargoLoaded | 화(리괘) | 금(태괘) | 수(감괘) | - | 화생토[Outcome]: 화물의 적재 순서와 차량 역할을 확정한 상차 행위가 적재 완료의 안정 상태를 만든다. | `ReviewedExplicit` |
+| `WI-MARKET-01` | 물류 거점에서 마트로 운송 | `Required/NpcActor` | `HubToMarketTransport`<br>Reserved → ArrivedAtDestination<br>효과: MarketCargoArrived | 수(감괘) | 금(태괘) | 수(감괘) | - | 금생수[RequiredInput]: 출차 확인으로 Hub 권역에서 분리된 동일 화물만 등록 경로의 운송 흐름에 들어간다. | `ReviewedExplicit` |
+| `WI-MARKET-02` | 마트 도착 화물 인수 | `Required/NpcActor` | `MarketFreightReceipt`<br>ArrivedAtDestination → MarketReceived<br>효과: MarketFreightReceived | 목(진괘) | 수(감괘) | 수(감괘) | - | 수생목[Outcome]: 도착 화물의 목적지·수량·상태를 확인한 인수만 마트 입고 작업을 새로 연다. | `ReviewedExplicit` |
+| `WI-MARKET-03` | 마트 입고 상품 검수 | `Required/NpcActor` | `MarketInboundInspection`<br>MarketReceived → MarketStorageEligible<br>효과: MarketStorageEligible | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-MARKET-04` | 검수 상품 후방 창고 적재 | `Required/NpcActor` | `MarketBackroomPutAway`<br>MarketStorageEligible → MarketBackroomStored<br>효과: MarketBackroomStored | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-MARKET-05` | 매장 진열대 상품 보충 | `Required/NpcActor` | `MarketDisplayReplenishment`<br>MarketBackroomStored → Displayed<br>효과: DisplayStockReplenished | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-ORDER-01` | 주민 주문 확정 | `Required/NpcActor` | `IndividualOrderConfirm`<br>DemandCandidate → OrderConfirmed<br>효과: OrderConfirmed | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-ORDER-02` | 주문 상품 재고 예약 | `Required/WorldRule` | `OrderStockReservationTransition`<br>OrderConfirmed → StockReserved<br>효과: OrderStockReserved | 수(감괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-ORDER-03` | 주문 상품 피킹 | `Required/WorldRule` | `OrderPickingTransition`<br>StockReserved → Picked<br>효과: OrderStockPicked | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-ORDER-04` | 주문 상품 포장 | `Required/WorldRule` | `OrderPackingTransition`<br>Picked → Packed<br>효과: OrderPacked | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-ORDER-05` | 주문 상품 수령 준비 | `Required/WorldRule` | `OrderPickupReadyTransition`<br>Packed → ReadyForPickup<br>효과: OrderReadyForPickup | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-ORDER-06` | 주민 주문 상품 수령 | `Required/NpcActor` | `ResidentOrderPickup`<br>ReadyForPickup → Fulfilled<br>효과: OrderFulfilled | 목(진괘) | 수(감괘) | 대상 객체 승계 | - | - | `ReviewedExplicit` |
+| `WI-ORDER-07` | 주민 상품 소비 | `Required/NpcActor` | `ResidentConsumption`<br>Fulfilled → Consumed<br>효과: ResidentConsumed | 목(진괘) | 대상 객체 승계 | 대상 객체 승계 | - | - | `ReviewedExplicit` |
+| `WI-NATURE-01` | 자연 지역 위험 징후 확인 | `Required/PlayerActor` | `RegionalThreatObservation`<br>Stable, Warning, Threatened, Infested → ThreatObserved<br>효과: NatureThreatObserved | 수(감괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-02` | 안전 거점으로 긴급 후퇴 | `Required/PlayerActor` | `EmergencyRetreat`<br>ThreatObserved, EncounterActive → RetreatedToSafeCore<br>효과: PartyRetreatedToSafeCore | 목(진괘) | 금(태괘) | 금(태괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-03` | 훼손된 자연 경로 복원 | `Required/PlayerActor` | `NatureRestoration`<br>ThreatObserved, CauseResolved → NatureRouteRestored<br>효과: NatureRouteRestored | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-04` | 탐사대 안전 회복 | `Required/PlayerActor` | `PartyRecovery`<br>RetreatedToSafeCore, NatureRouteRestored → PartyRecovered<br>효과: PartyRecovered | 토(간괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-05` | 벌목 도끼 획득 | `Required/PlayerActor` | `AcquireAxe`<br>AxeAvailable, PlayerWithoutAxe → AxeOwnedInInventory<br>효과: AxeAcquired | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-06` | 나무 벌목 작업 시작 | `Required/PlayerActor` | `BeginHarvest`<br>WoodcuttingCapabilityEquipped, TreeStanding, PlayerIdle → HarvestWorkScheduled<br>효과: TreeFelled, TimberCreated | 목(진괘) | 금(태괘) | 목(진괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-07` | 오두막을 지을 터 선정 | `Required/PlayerActor` | `PlaceCabinBlueprint`<br>CabinPlanned, BuildingSiteAvailable → CabinBlueprintPlaced<br>효과: CabinBlueprintPlaced | 금(태괘) | - | 금(태괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-08` | 오두막 건설 작업 시작 | `Required/PlayerActor` | `BeginCabinBuild`<br>CabinBlueprintPlaced, TimberAvailable, PlayerIdle → CabinBuildScheduled<br>효과: CabinOperational, CabinRecoveryEnabled, CabinDefenseEnabled | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-09` | 오두막 안으로 들어가기 | `Required/PlayerActor` | `EnterCabin`<br>CabinOperational, PlayerOutsideCabin → PlayerInsideCabin<br>효과: PlayerEnteredCabin | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-10` | 오두막 밖으로 나가기 | `Required/PlayerActor` | `LeaveCabin`<br>PlayerInsideCabin → PlayerOutsideCabin<br>효과: PlayerLeftCabin | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-11` | 황혼 위협 대응 방식 확정 | `Required/PlayerActor` | `ResolveEncounter`<br>EncounterPending, CombatActive → EncounterResolved, BattleHandoffRequested, PlayerRetreated, PlayerDefeated<br>효과: BattleHandoffRequested, EncounterVictoryRewarded, PlayerRetreated, CarriedMaterialsLost, EncounterResolved | 화(리괘) | - | 토(간괘) | 토(간괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-12` | 진행 중 작업 취소 | `Required/PlayerActor` | `CancelActiveWork`<br>WorkActive → WorkCancelled, SafeChoiceAvailable<br>효과: WorkCancelled, SpatialReservationReleased, ReservedMaterialReturned | 화(리괘) | - | 진행 WI 대상 승계 | - | - | `ReviewedExplicit` |
+| `WI-NATURE-13` | 획득 자원 거점 보관 | `Required/PlayerActor` | `StoreAtCabin`<br>CabinOperational, PlayerInsideCabin, TimberCarried → TimberStored<br>효과: TimberStored, CabinStorageTransferRecorded | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-14` | 오두막에서 수면·새벽 맞기 | `Required/PlayerActor` | `SleepInCabin`<br>Night, PlayerInsideCabin, EncounterResolved → Sleeping, DawnReached<br>효과: SleepStarted, DawnReached, SleepReleased | 토(간괘) | 금(태괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-15` | 다음 날 거점 확장 계획 선택 | `Required/PlayerActor` | `SelectExpansionPlan`<br>Dawn, PlanUnselected → Day2Ready, ExpansionPlanSelected<br>효과: ExpansionPlanSelected, Day2Ready | 토(간괘) | 금(태괘) | 토(간괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-NATURE-16` | 현장 보급 꾸러미 제작 | `Required/PlayerActor` | `PrepareFieldSupply`<br>Day2Ready, NatureWorkbenchOperational, PlayerInsideCabin → NatureFieldSupplyPackAdded, FieldExpeditionChoiceAvailable<br>효과: NatureFieldSupplyPackAdded, ExpeditionPrepared, OneCarriedMaterialStackProtected | 목(진괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-17` | 현장 보급 제작 업무 위임 | `Required/NpcActor` | `PrepareFieldSupplyDelegated`<br>Day2Ready, NatureWorkbenchOperational, NpcFieldSupplyPolicyEnabled → NatureFieldSupplyPackAdded, FieldExpeditionChoiceAvailable<br>효과: NpcFieldSupplyPolicySelected, NatureFieldSupplyPackAdded, FieldExpeditionChoiceAvailable | 화(리괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-18` | 벌목 통나무 줍기 | `Required/PlayerActor` | `CollectDroppedTimber`<br>DroppedTimberAvailable, InventoryCapacityAvailable → DroppedTimberCollected, TimberCarried<br>효과: TimberCollected, DroppedTimberRemoved | 목(진괘) | 수(감괘) | 목(진괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-19` | 한스 농장 부러진 손도끼 줍기 | `Required/PlayerActor` | `AcquireHansBrokenAxe`<br>HansBrokenAxeAvailable → HansBrokenAxeCarried, WoodcuttingChoiceAvailable<br>효과: HansBrokenAxeCarried | 목(진괘) | - | 목(진괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-NATURE-20` | 한스 농장 울타리 일괄 수리 | `Required/PlayerActor` | `RepairHansFarmFence`<br>HansBrokenAxeCarried, HansFarmFenceDamaged, TimberCarried → HansFarmFenceRepaired, HansFarmLifeOrTravelChoiceAvailable<br>효과: HansFarmFenceRepaired, HansFarmLifeOrTravelChoiceAvailable | 목(진괘) | - | 목(진괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-REFLECT-01` | 승인 자료로 거점 성찰 확정 | `Required/PlayerActor` | `ConfirmBaseReflection`<br>ReturnedToBase, NatureSafeChoiceAvailable, ReflectionChoiceAvailable → InnerLearningPending<br>효과: InnerLearningPending | 토(간괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-CARD-01` | 현재 세계의 메이저 아르카나 활성화 | `Required/PlayerActor` | `ActivateMajorArcana`<br>MajorArcanaChoiceAvailable → MajorArcanaActivationFrozen, TownLifeChoiceAvailable<br>효과: MajorArcanaActivated, ArcanaOrientationFrozen, ArcanaInfluenceSnapshotsCreated | 목(진괘) | 수(감괘) | 수(감괘) | 상황별 토(간괘) | - | `ReviewedByMeaningRule` |
+| `WI-CON-01` | 영역 건물 건설 확정 | `Required/PlayerActor` | `BeginBuildingConstruction`<br>Available → Building, Operational<br>효과: AreaBuildingOperational | 목(진괘) | 금(태괘) | 금(태괘) | 수(감괘) | - | `ReviewedExplicit` |
+| `WI-CITY-01` | 도심 서비스 수요 확정 | `Required/NpcActor` | `CityDemandConfirm`<br>CityDemandChoiceAvailable → CityDemandConfirmed<br>효과: CityDemandConfirmed | 화(리괘) | 수(감괘) | 수(감괘) | - | - | `ReviewedExplicit` |
+| `WI-CITY-02` | 도심 서비스용 지역 재고 배정 | `Required/WorldRule` | `CityInventoryAllocationTransition`<br>CityDemandConfirmed → CityInventoryAllocated, CityInventoryShortage<br>효과: CityInventoryAllocated, CityInventoryShortage | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-CITY-03` | 도심 주민 서비스 처리 | `Required/NpcActor` | `CityServiceProcess`<br>CityInventoryAllocated, CityInventoryShortage → CityServiceCompleted, CityServiceDeferred<br>효과: CityServiceCompleted, CityServiceDeferred | 목(진괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-CITY-04` | 도심 서비스 결과 확인 | `Required/NpcActor` | `CityServiceResultAcknowledge`<br>CityServiceCompleted, CityServiceDeferred → CityServiceChoiceAvailable<br>효과: CityServiceChoiceAvailable | 수(감괘) | - | 수(감괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-WORLD-01` | NPC에게 반복 업무 배정 | `Required/WorldRule` | `NpcAssignmentPolicy`<br>Available → Assigned<br>효과: NpcAssigned | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-02` | NPC에게 업무 역량 위임 | `Required/NpcActor` | `NpcCapabilityGrant`<br>NotGranted → Granted<br>효과: NpcCapabilityGranted | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-03` | 진행 중 세계 업무 취소 | `Required/PlayerActor` | `TaskCancel`<br>Scheduled, Blocked → Cancelled<br>효과: TaskCancelled, ReservationsReleased | 화(리괘) | - | 진행 WI 대상 승계 | - | - | `ReviewedExplicit` |
+| `WI-WORLD-04` | 손상된 시설 수리 | `Required/ResolvedExecutionObject` | `FacilityRepair`<br>Damaged → Repaired<br>효과: FacilityRepaired | 목(진괘) | 금(태괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-05` | 새로운 지역 발견 | `Required/PlayerActor` | `RegionDiscovery`<br>Undiscovered → Discovered<br>효과: RegionDiscovered | 목(진괘) | 수(감괘) | 금(태괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-06` | 일행 역할 카드 장착 | `Required/PlayerActor` | `TeamRoleCardEquip`<br>Unequipped → Equipped<br>효과: TeamRoleCardEquipped | 화(리괘) | - | 토(간괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-07` | 세계 활동 상태 변경 | `Required/PlayerActor` | `TeamActivityLifecycle`<br>Available, Active → Active, Completed<br>효과: TeamActivityStarted, TeamActivityEnded | 화(리괘) | - | 화(리괘) | - | - | `ReviewedExplicit` |
+| `WI-WORLD-08` | 하루 운영 턴 마감 | `Required/PlayerActor` | `TurnClosing`<br>TurnOpen → TurnClosed<br>효과: TurnClosed | 화(리괘) | 수(감괘) | 화(리괘) | - | - | `ReviewedExplicit` |
+| `WI-NATURE-HANS-BOUNDARY-PATROL` | 한스와 농장 경계 순찰 | `Required/ResolvedExecutionObject` | `PatrolHansFarmBoundary`<br>HansGuestRightsGranted, FarmBoundaryPatrolAvailable → FarmBoundaryPatrolCompleted, HansAndPlayerReturnedTogether<br>효과: FarmBoundaryPatrolCompleted, HansAndPlayerReturnedTogether, PromiseFulfillmentRecorded | 목(진괘) | - | 목(진괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-WORLD-BOUNDED-MANAGEMENT-GRANT` | 제한된 생활 거점 관리권 부여 | `Required/PlayerActor` | `GrantBoundedFarmManagementAuthority`<br>TrustEvidenceAccepted, ManagementGrantAvailable → BoundedManagementAuthorityGranted<br>효과: BoundedManagementAuthorityGranted | 화(리괘) | - | 화(리괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF` | 한스 농장 위기 사후 성찰 | `Required/PlayerActor` | `ReflectHansFarmCrisis`<br>FarmDefenseReturned, FarmRecoveryOutcomeAvailable → HansFarmCrisisDebriefCompleted, LearningNeedRecognized<br>효과: HansFarmCrisisDebriefCompleted, LearningNeedRecognized, Hex04CampaignEntryAvailable | 토(간괘) | 수(감괘) | 토(간괘) | - | - | `ReviewedByMeaningRule` |
+| `WI-REVIEW-01` | NPC 업무 결과 검토 확정 | `Required/PlayerActor` | `NpcWorkReviewConfirm`<br>NpcWorkCompleted, ReviewPending → NpcWorkReviewConfirmed<br>효과: NpcWorkReviewConfirmed, PlayerOperationalProficiencyChanged | 수(감괘) | - | 토(간괘) | 화(리괘) | - | `ReviewedExplicit` |
+
+## 역할 객체·행위 E5 표본
+
+| 프로필 | 상태 | 순서 | 열린 결손 |
+| --- | --- | --- | --- |
+| `role-action-profile:farm-crop-cycle.v1`<br>농부·토양·작물의 농사 오행 순환 | `Conditional` | 1. FarmerOrFarmWorker / Action / 목(진괘) / WI-FARM-01<br>2. SeedAndCultivationUnit / Action / 목(진괘) / WI-FARM-02<br>3. GrowingCrop / Action / 토(간괘) / WI-FARM-03<br>4. HarvestReadyCrop / Action / 금(태괘) / WI-FARM-04 | E5에서는 실제 농부 또는 작업 NPC·토양·작물·도구 인스턴스와 같은 Revision의 행위 기록을 결속해야 한다. |
+| `role-action-profile:urban-motorcycle-parcel.v1`<br>도심 물류 거점 오토바이 소포 배송 오행 순환 | `Blocked` | 1. CourierOrLoader / Gap / 목(진괘) / WI-HUB-06<br>2. CourierOrLoader / Action / 화(리괘) / WI-HUB-06<br>3. MotorcycleCargoCarrier / ResultState / 토(간괘) / WI-HUB-06<br>4. MotorcycleCargoCarrier / Gap / 금(태괘) / WI-MARKET-01<br>5. MotorcycleCargoCarrier / Action / 수(감괘) / WI-MARKET-01<br>6. DestinationReceivingPoint / Action / 목(진괘) / WI-MARKET-02 | 수령인 부재·화물 파손·경로 차단 뒤 재시도 또는 Hub 반품으로 귀환하는 WI와 권위 상태가 없다.<br>정확 오토바이·기사·소포·상차장·출구·반품 지점의 동결 배치 맵과 자산 후보가 없다. |
+
+> 역할 객체 표본은 기존 WI와 권위 코드를 대조한 E4 준비 자료다. `Gap` 단계나 실제 객체·상태·표현 결속이 남아 있으면 E5가 아니다.

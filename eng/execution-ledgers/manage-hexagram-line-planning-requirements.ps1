@@ -39,6 +39,23 @@ function Get-Sha256([string] $Path) {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToUpperInvariant()
 }
 
+function Get-TextSha256([string] $Text) {
+    $bytes = [Text.Encoding]::UTF8.GetBytes((Normalize-Text $Text))
+    return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
+}
+
+function Get-LineSectionText([string] $DocumentText, [string] $LineStableId) {
+    $normalized = $DocumentText -replace "`r`n", "`n"
+    $startMarker = "<!-- line-section:$LineStableId`:start -->"
+    $endMarker = "<!-- line-section:$LineStableId`:end -->"
+    Require (($normalized.Split($startMarker).Count - 1) -eq 1) "LineSectionStartMarker:$LineStableId"
+    Require (($normalized.Split($endMarker).Count - 1) -eq 1) "LineSectionEndMarker:$LineStableId"
+    $startIndex = $normalized.IndexOf($startMarker, [StringComparison]::Ordinal)
+    $endIndex = $normalized.IndexOf($endMarker, [StringComparison]::Ordinal)
+    Require ($startIndex -lt $endIndex) "LineSectionMarkerOrder:$LineStableId"
+    return $normalized.Substring($startIndex, ($endIndex + $endMarker.Length) - $startIndex)
+}
+
 function Get-FileSnapshot([string] $RepositoryPath) {
     $resolved = Resolve-RepositoryFile $RepositoryPath "Snapshot:$RepositoryPath"
     return [ordered]@{ path = $RepositoryPath; sha256 = Get-Sha256 $resolved }
@@ -48,13 +65,22 @@ function Escape-Cell($Value) {
     return ([string] $Value).Replace('|', '\|').Replace("`r", ' ').Replace("`n", '<br>')
 }
 
+function Get-GeneratedRelativeLink([string] $RepositoryPath) {
+    if ($RepositoryPath.StartsWith('docs/AI/', [StringComparison]::OrdinalIgnoreCase)) {
+        return '../' + $RepositoryPath.Substring('docs/AI/'.Length)
+    }
+    return '../../../' + $RepositoryPath
+}
+
 $resolvedInput = Resolve-RepositoryFile $InputPath 'Input'
 $source = Get-Content -LiteralPath $resolvedInput -Raw -Encoding UTF8 | ConvertFrom-Json
 
-Require ([string] $source.schemaVersion -eq 'mirror-hexagram-line-planning-requirements.v1') 'SchemaVersion'
-Require ([string] $source.revision -eq 'hexagram-line-planning-requirements.r6') 'Revision'
+Require ([string] $source.schemaVersion -eq 'mirror-hexagram-line-planning-requirements.v2') 'SchemaVersion'
+Require ([string] $source.revision -eq 'hexagram-line-planning-requirements.r7') 'Revision'
 Require ([bool] $source.principles.allLinesHaveStablePlanIds) 'AllLinesHaveStablePlanIds'
-Require ([bool] $source.principles.onlyStudiedLinesRequireDocuments) 'OnlyStudiedLinesRequireDocuments'
+Require ([bool] $source.principles.onlyOpenedHexagramsRequireCanonicalDocuments) 'OnlyOpenedHexagramsRequireCanonicalDocuments'
+Require ([bool] $source.principles.lineRequirementsBindToCanonicalDocumentSections) 'LineRequirementsBindToCanonicalDocumentSections'
+Require ([bool] $source.principles.legacyLineDocumentsAreCompatibilityPointers) 'LegacyLineDocumentsAreCompatibilityPointers'
 Require ([bool] $source.principles.atMostOneActiveStudy) 'AtMostOneActiveStudy'
 Require ([bool] $source.principles.storyApprovalAndDevelopmentReadinessAreSeparate) 'StoryAndDevelopmentBoundary'
 Require ([bool] $source.principles.linePlanDeclaresButDoesNotCreateWorldInteractionsOrH) 'DeclarationBoundary'
@@ -107,8 +133,13 @@ for ($index = 0; $index -lt $items.Count; $index++) {
     $ordinal = $index + 1
     $expectedLinePlanId = 'PLAN-STORY-HEX03-LINE-{0:D3}' -f $ordinal
     $expectedLineId = 'HEX-03-ZHUN-L{0}' -f $ordinal
+    $expectedHexagramPlanId = 'PLAN-STORY-HEX03-CAMPAIGN-001'
+    $expectedDocumentRef = 'docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md'
+    $expectedSectionAnchor = 'hex-03-zhun-l{0}' -f $ordinal
+    $expectedCompatibilityRef = 'docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-{0:D3}/README.md' -f $ordinal
     Require ([string] $item.linePlanId -eq $expectedLinePlanId) "LinePlanSequence:$expectedLinePlanId"
     Require ([string] $item.hexagramLineStableId -eq $expectedLineId) "HexagramLineSequence:$expectedLineId"
+    Require ([string] $item.hexagramPlanId -eq $expectedHexagramPlanId) "HexagramPlanSequence:$expectedLineId"
     Require ($allLinePlanIds -contains [string] $item.linePlanId) "LinePlanUnknown:$($item.linePlanId)"
     $parentLine = @($allParentLines | Where-Object { [string] $_.stableId -eq [string] $item.hexagramLineStableId })
     Require ($parentLine.Count -eq 1) "ParentLineUnknown:$($item.hexagramLineStableId)"
@@ -127,12 +158,22 @@ for ($index = 0; $index -lt $items.Count; $index++) {
     if ([string] $item.planningStatusCode -eq 'Seeded') {
         Require ([string]::IsNullOrWhiteSpace([string] $item.documentRef)) "SeededDocumentRef:$($item.linePlanId)"
         Require ([string]::IsNullOrWhiteSpace([string] $item.documentRevisionCode)) "SeededDocumentRevision:$($item.linePlanId)"
-        Require ([string]::IsNullOrWhiteSpace([string] $item.documentExpectedSha256)) "SeededDocumentHash:$($item.linePlanId)"
+        Require ([string]::IsNullOrWhiteSpace([string] $item.sectionAnchor)) "SeededSectionAnchor:$($item.linePlanId)"
+        Require ([string]::IsNullOrWhiteSpace([string] $item.sectionExpectedSha256)) "SeededSectionHash:$($item.linePlanId)"
+        Require ([string]::IsNullOrWhiteSpace([string] $item.compatibilityDocumentRef)) "SeededCompatibilityDocument:$($item.linePlanId)"
     } else {
+        Require ([string] $item.documentRef -eq $expectedDocumentRef) "HexagramCanonicalDocument:$($item.linePlanId)"
         $documentPath = Resolve-RepositoryFile ([string] $item.documentRef) "LineDocument:$($item.linePlanId)"
         Require-Text $item.documentRevisionCode "LineDocumentRevision:$($item.linePlanId)"
-        Require ([string] $item.documentExpectedSha256 -match '^[0-9A-F]{64}$') "LineDocumentHashFormat:$($item.linePlanId)"
-        Require ((Get-Sha256 $documentPath) -eq [string] $item.documentExpectedSha256) "LineDocumentHashMismatch:$($item.linePlanId)"
+        Require ([string] $item.sectionAnchor -eq $expectedSectionAnchor) "LineSectionAnchor:$($item.linePlanId)"
+        Require ([string] $item.sectionExpectedSha256 -match '^[0-9A-F]{64}$') "LineSectionHashFormat:$($item.linePlanId)"
+        $documentText = Get-Content -LiteralPath $documentPath -Raw -Encoding UTF8
+        $sectionText = Get-LineSectionText $documentText ([string] $item.hexagramLineStableId)
+        Require ((Get-TextSha256 $sectionText) -eq [string] $item.sectionExpectedSha256) "LineSectionHashMismatch:$($item.linePlanId)"
+        Require ([string] $item.compatibilityDocumentRef -eq $expectedCompatibilityRef) "CompatibilityDocumentRef:$($item.linePlanId)"
+        $compatibilityPath = Resolve-RepositoryFile ([string] $item.compatibilityDocumentRef) "CompatibilityDocument:$($item.linePlanId)"
+        $compatibilityText = Get-Content -LiteralPath $compatibilityPath -Raw -Encoding UTF8
+        Require ($compatibilityText.Contains("../PLAN-STORY-HEX03-CAMPAIGN-001/README.md#$expectedSectionAnchor")) "CompatibilityPointer:$($item.linePlanId)"
     }
 
     foreach ($requirement in @($item.subjectRequirements)) {
@@ -196,9 +237,9 @@ for ($index = 0; $index -lt $items.Count; $index++) {
     }
 }
 
-$documentSnapshots = @($items | Where-Object { -not [string]::IsNullOrWhiteSpace([string] $_.documentRef) } | ForEach-Object { Get-FileSnapshot ([string] $_.documentRef) })
+$documentSnapshots = @($items | ForEach-Object { @([string] $_.documentRef, [string] $_.compatibilityDocumentRef) } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique | ForEach-Object { Get-FileSnapshot $_ })
 $result = [ordered]@{
-    schemaVersion = 'mirror-hexagram-line-planning-requirements-index.v1'
+    schemaVersion = 'mirror-hexagram-line-planning-requirements-index.v2'
     revision = [string] $source.revision
     sourceSnapshots = @(
         (Get-FileSnapshot $InputPath),
@@ -232,7 +273,8 @@ $builder = [Text.StringBuilder]::new()
 [void] $builder.AppendLine('| 효사 기획 | 효 | 기획 | 요구사항 | 인계 | 원문 적합 | Graph Map | 배치 맵 | 공백 |')
 [void] $builder.AppendLine('| --- | --- | --- | --- | --- | --- | --- | --- | --- |')
 foreach ($item in $items) {
-    [void] $builder.AppendLine("| ``$($item.linePlanId)`` | ``$($item.hexagramLineStableId)`` | ``$($item.planningStatusCode)`` | ``$($item.requirementStateCode)`` | ``$($item.handoffStateCode)`` | ``$($item.originalFitCode)`` | ``$($item.graphMapImpactCode)`` | ``$($item.placementMapRequirementCode)`` | $(Escape-Cell (@($item.openGaps) -join ', ')) |")
+    $documentLink = if ([string]::IsNullOrWhiteSpace([string] $item.documentRef)) { "``미개방``" } else { "[$($item.hexagramLineStableId)]($(Get-GeneratedRelativeLink ([string] $item.documentRef))#$($item.sectionAnchor))" }
+    [void] $builder.AppendLine("| ``$($item.linePlanId)`` | $documentLink | ``$($item.planningStatusCode)`` | ``$($item.requirementStateCode)`` | ``$($item.handoffStateCode)`` | ``$($item.originalFitCode)`` | ``$($item.graphMapImpactCode)`` | ``$($item.placementMapRequirementCode)`` | $(Escape-Cell (@($item.openGaps) -join ', ')) |")
 }
 [void] $builder.AppendLine()
 [void] $builder.AppendLine('## 요구사항 요약')
@@ -240,6 +282,8 @@ foreach ($item in $items) {
     [void] $builder.AppendLine()
     [void] $builder.AppendLine("### ``$($item.linePlanId)``")
     [void] $builder.AppendLine()
+    [void] $builder.AppendLine("- 정본 효 절: [$($item.hexagramLineStableId)]($(Get-GeneratedRelativeLink ([string] $item.documentRef))#$($item.sectionAnchor))")
+    [void] $builder.AppendLine("- 호환 문서: ``$($item.compatibilityDocumentRef)``")
     [void] $builder.AppendLine("- Story Beat: ``$($item.primaryStoryBeatStableId)``")
     [void] $builder.AppendLine("- 주체: $(@($item.subjectRequirements | ForEach-Object { "``$($_.roleCode)``=$($_.necessityCode)/$($_.resolutionCode)" }) -join ', ')")
     [void] $builder.AppendLine("- WI: $(@($item.worldInteractionRequirements | ForEach-Object { "``$($_.roleCode)``=$($_.necessityCode)/$($_.resolutionCode)" }) -join ', ')")

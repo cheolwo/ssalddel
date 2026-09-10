@@ -5,7 +5,7 @@
 > 이 문서는 `hexagram-story-production.json`에서 자동 생성된다. 직접 수정하지 않는다.
 
 - 공부·저작 순서: `MainCampaignKingWenHexagramAndBottomToTopLineOrder`
-- 문답 방식: `BroadHexagramStoryThenOneLineAdaptationAtATime` / 기존 기획 참조: `TechnicalAppendixReferenceOnly`
+- 문답 방식: `WholeHexagramArcThenLineSectionRefinement` / 기존 기획 참조: `TechnicalAppendixReferenceOnly`
 - 문답 순서: 괘의 의미와 큰 이야기 제안 → 사용자와 줄기 합의 → 효사 원문·의미 대조 → 각색 차이를 기록한 사건 문답 → 주체·WI·H 요구사항.
 - [64괘 플레이 스토리 큰 줄기 제안](../Planning/스토리/PLAN-STORY-HEXAGRAM-SEQUENCE-001/괘의미별-플레이스토리-큰줄기.md)은 Proposed이며 기존 승인 효·제작 커서·Runtime·Evidence를 자동 변경하지 않는다.
 - 정식 제작 커서: `HEX-01-QIAN`

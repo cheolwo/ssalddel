@@ -2,8 +2,8 @@
 
 > 괘·효는 영감과 원문 대조를 위한 참고 색인이다. 사건 수·제작 순서·플레이 진행은 이야기의 인과로 정한다. 아래 제작 상태는 이전 배정 이력이다. [현행 기준](../../Architecture/스토리영감과플레이진행분리.md). 이 문서는 자동 생성된다.
 
-- 괘: **64** / 효: **384** / 실제 열린 효사 문서: **12** / 요구사항 선언 효: **6** / 기존 플레이 기획 분류: **27**
-- 물리 `README.md`는 실제로 연 효사에만 둔다. 미개방 효 링크는 이 문서 안의 안정 상세 앵커로 연결한다.
+- 괘: **64** / 효: **384** / 열린 괘 정본: **2** / 열린 효 절: **12** / 요구사항 선언 효: **6** / 기존 플레이 기획 분류: **27**
+- 물리 `README.md`는 실제로 연 괘에 하나만 둔다. 효 ID는 그 정본 안의 절 앵커로 연결하고, 옛 효별 경로는 호환 안내만 유지한다.
 
 ## 64괘 목차
 
@@ -96,7 +96,7 @@
 <a id="hex-01-qian-l1"></a>
 ### 初九 · `PLAN-STORY-HEX01-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -106,7 +106,7 @@
 <a id="hex-01-qian-l2"></a>
 ### 九二 · `PLAN-STORY-HEX01-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -116,7 +116,7 @@
 <a id="hex-01-qian-l3"></a>
 ### 九三 · `PLAN-STORY-HEX01-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -126,7 +126,7 @@
 <a id="hex-01-qian-l4"></a>
 ### 九四 · `PLAN-STORY-HEX01-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -136,7 +136,7 @@
 <a id="hex-01-qian-l5"></a>
 ### 九五 · `PLAN-STORY-HEX01-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -146,7 +146,7 @@
 <a id="hex-01-qian-l6"></a>
 ### 上九 · `PLAN-STORY-HEX01-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -177,7 +177,7 @@
 <a id="hex-02-kun-l1"></a>
 ### 初六 · `PLAN-STORY-HEX02-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -187,7 +187,7 @@
 <a id="hex-02-kun-l2"></a>
 ### 六二 · `PLAN-STORY-HEX02-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -197,7 +197,7 @@
 <a id="hex-02-kun-l3"></a>
 ### 六三 · `PLAN-STORY-HEX02-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -207,7 +207,7 @@
 <a id="hex-02-kun-l4"></a>
 ### 六四 · `PLAN-STORY-HEX02-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -217,7 +217,7 @@
 <a id="hex-02-kun-l5"></a>
 ### 六五 · `PLAN-STORY-HEX02-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -227,7 +227,7 @@
 <a id="hex-02-kun-l6"></a>
 ### 上六 · `PLAN-STORY-HEX02-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -242,23 +242,25 @@
 - 주체·압박: 플레이어와 한스·생활주택·감자밭·울타리·밀려난 야수 무리 / 부족한 시간·자원, 숲 경계의 흔적과 첫 방어의 필연적 부분 손실
 - 고유 규칙 조합: 공동 행동 기록과 제한 관리권 안에서 밭과 집을 회복하고 실제 행동으로 세 방어 대상 중 둘을 지킨다. (`FOUND_FARM_TRUST_SMALL_ORDER_LIMIT`)
 - 완주 변화: 한스 농장을 공동 생활 거점으로 만들고 정식 운영·전투 학습의 필요를 자각한다.
+- 괘 정본: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md)
 - 기존 기획 주괘 배치: [한스 농장 첫 벌목·울타리 수리](../한스농장-첫벌목과울타리수리-기획-2026-09-02.md) (`Confirmed`); [첫 플레이 체감·반복](../../../docs/Architecture/PlayableLoops/PlanningSessions/첫플레이체감/first-play-experience.inquiry.r1.md) (`Candidate`)
 - 기존 기획 보조 후보: 없음
 
 | 효 | 기획 ID | 문서 | 이야기 | 요구사항 | 인계 |
 | --- | --- | --- | --- | --- | --- |
-| [初九](../Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md) | `PLAN-STORY-HEX03-LINE-001` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
-| [六二](../Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md) | `PLAN-STORY-HEX03-LINE-002` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
-| [六三](../Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md) | `PLAN-STORY-HEX03-LINE-003` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
-| [六四](../Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md) | `PLAN-STORY-HEX03-LINE-004` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
-| [九五](../Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md) | `PLAN-STORY-HEX03-LINE-005` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
-| [上六](../Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md) | `PLAN-STORY-HEX03-LINE-006` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [初九](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l1) | `PLAN-STORY-HEX03-LINE-001` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [六二](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l2) | `PLAN-STORY-HEX03-LINE-002` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [六三](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l3) | `PLAN-STORY-HEX03-LINE-003` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [六四](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l4) | `PLAN-STORY-HEX03-LINE-004` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [九五](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l5) | `PLAN-STORY-HEX03-LINE-005` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
+| [上六](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l6) | `PLAN-STORY-HEX03-LINE-006` | `Opened` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` |
 
 
 <a id="hex-03-zhun-l1"></a>
 ### 初九 · `PLAN-STORY-HEX03-LINE-001`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l1)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md`
 - 주체: `PlayerActor` → `subject:player-controlled-actor.v1` (ExistingReused); `HansNpc` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `HansGuestRightsGrant` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `FarmhouseGuestSpace` → `subject:hans-farm-residential-home.v1` (ExistingReused)
 - WI: `ConfirmFenceRepairAttributionAndGrantGuestRights` → [WI-GUEST-PERMISSION-SET](#ref-wi-wi-guest-permission-set) (ExistingReused); `RecoverBrokenFarmAxePrerequisite` → [WI-NATURE-19](#ref-wi-wi-nature-19) (ExistingReused); `FirstWoodcuttingPrerequisite` → [WI-NATURE-06](#ref-wi-wi-nature-06) (ExistingReused); `CollectRepairTimberPrerequisite` → [WI-NATURE-18](#ref-wi-wi-nature-18) (ExistingReused); `RepairFarmFencePrerequisite` → [WI-NATURE-20](#ref-wi-wi-nature-20) (ExistingReused); `StorePersonalResourcesFollowUp` → [WI-NATURE-13](#ref-wi-wi-nature-13) (CandidateNeedsReview)
 - H: `FarmLivingHomeWithGuestAnchors` → [H1 h1-stock:farm-residential-home](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-residential-home); `FarmProductionPlotContext` → [H1 h1-stock:farm-production](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-production); `ForestEdgeFarm` → [H2 h2-candidate:forest-edge-living-farm](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-forest-edge-living-farm); `H3` `NoHigherAreaRequired` → 미정 (NotApplicable); `H4` `NoHigherAreaRequired` → 미정 (NotApplicable)
@@ -268,7 +270,8 @@
 <a id="hex-03-zhun-l2"></a>
 ### 六二 · `PLAN-STORY-HEX03-LINE-002`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l2)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md`
 - 주체: `PlayerActor` → `subject:player-controlled-actor.v1` (ExistingReused); `HansNpc` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `FarmBoundaryPatrolRoute` → `subject:authoritative-interaction-target.v1` (ExistingReused)
 - WI: `PatrolFarmBoundaryLoopWithHans` → [WI-NATURE-HANS-BOUNDARY-PATROL](#ref-wi-wi-nature-hans-boundary-patrol) (ExistingReused); `RecordReturnTogetherBeforeDusk` → [WI-NATURE-HANS-BOUNDARY-PATROL](#ref-wi-wi-nature-hans-boundary-patrol) (ExistingReused)
 - H: `FarmToolStorage` → [H1 h1-stock:farm-tool-storage](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-tool-storage); `ForestEdgeFarm` → [H2 h2-candidate:forest-edge-living-farm](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-forest-edge-living-farm); `H3` `NoHigherAreaRequired` → 미정 (NotApplicable); `H4` `NoHigherAreaRequired` → 미정 (NotApplicable)
@@ -278,7 +281,8 @@
 <a id="hex-03-zhun-l3"></a>
 ### 六三 · `PLAN-STORY-HEX03-LINE-003`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l3)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md`
 - 주체: `PlayerActor` → `subject:player-controlled-actor.v1` (ExistingReused); `ThreatTraceTarget` → `subject:authoritative-interaction-target.v1` (ExistingReused)
 - WI: `InvestigateTrace` → [WI-NATURE-TRACE-INVESTIGATE](#ref-wi-wi-nature-trace-investigate) (ExistingReused); `ChooseThreatResponse` → [WI-NATURE-11](#ref-wi-wi-nature-11) (ExistingReused)
 - H: `IncidentTrace` → [H1 h1-stock:nature-incident-trace](hexagram-h-reference-index.md#ref-h-h1-h1-stock-nature-incident-trace); `EmergencyRetreat` → [H1 h1-stock:nature-emergency-retreat](hexagram-h-reference-index.md#ref-h-h1-h1-stock-nature-emergency-retreat); `ThreatResponse` → [H2 h2-candidate:nature-threat-response](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-nature-threat-response); `H3` `NoHigherAreaRequired` → 미정 (NotApplicable); `H4` `NoHigherAreaRequired` → 미정 (NotApplicable)
@@ -288,7 +292,8 @@
 <a id="hex-03-zhun-l4"></a>
 ### 六四 · `PLAN-STORY-HEX03-LINE-004`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l4)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md`
 - 주체: `PlayerActor` → `subject:player-controlled-actor.v1` (ExistingReused); `HansNpcAuthorityGrantor` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `FarmhouseManagementAuthorityTarget` → `subject:hans-farm-residential-home.v1` (ExistingReused); `PotatoPlotManagementAuthorityTarget` → `subject:hans-farm-potato-plot.v1` (ExistingReused)
 - WI: `GrantBoundedFarmhouseAndPlotManagementAuthority` → [WI-WORLD-BOUNDED-MANAGEMENT-GRANT](#ref-wi-wi-world-bounded-management-grant) (ExistingReused); `InvestigateThreatTraceAndReturnPrerequisite` → [WI-NATURE-TRACE-INVESTIGATE](#ref-wi-wi-nature-trace-investigate) (ExistingReused)
 - H: `FarmLivingHomeAuthorityBoundary` → [H1 h1-stock:farm-residential-home](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-residential-home); `PotatoCultivationPlotAuthorityBoundary` → [H1 h1-stock:farm-production](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-production); `ForestEdgeFarm` → [H2 h2-candidate:forest-edge-living-farm](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-forest-edge-living-farm); `H3` `NoHigherAreaRequired` → 미정 (NotApplicable); `H4` `NoHigherAreaRequired` → 미정 (NotApplicable)
@@ -298,7 +303,8 @@
 <a id="hex-03-zhun-l5"></a>
 ### 九五 · `PLAN-STORY-HEX03-LINE-005`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l5)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md`
 - 주체: `PlayerWorkActor` → `subject:player-controlled-actor.v1` (ExistingReused); `HansFarmhouseRepairPartner` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `NeglectedPotatoPlotTarget` → `subject:hans-farm-potato-plot.v1` (ExistingReused); `DamagedFarmhouseTarget` → `subject:hans-farm-residential-home.v1` (ExistingReused)
 - WI: `RestoreNeglectedPotatoPlot` → [WI-FARM-01](#ref-wi-wi-farm-01) (ExistingReused); `RepairFarmhouseTogether` → [WI-WORLD-04](#ref-wi-wi-world-04) (ExistingReused); `CompleteSmallFarmOrder` → 미정 (NotApplicable); `OptionalForestFowlDomestication` → 미정 (NewDefinitionRequired)
 - H: `ManagedPotatoCultivationPlot` → [H1 h1-stock:farm-production](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-production); `FullyRepairedFarmLivingHome` → [H1 h1-stock:farm-residential-home](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-residential-home); `ForestEdgeFarm` → [H2 h2-candidate:forest-edge-living-farm](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-forest-edge-living-farm); `H3` `NoHigherAreaRequired` → 미정 (NotApplicable); `H4` `NoRegionalAggregateRequired` → 미정 (NotApplicable)
@@ -308,7 +314,8 @@
 <a id="hex-03-zhun-l6"></a>
 ### 上六 · `PLAN-STORY-HEX03-LINE-006`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l6)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md`
 - 주체: `PlayerActor` → `subject:player-controlled-actor.v1` (ExistingReused); `HansDefenseAndDebriefNpc` → `subject:hans-farm-owner-npc.v1` (ExistingReused); `DisplacedBeastGroup` → `subject:hans-farm-displaced-beast-group.v1` (ExistingReused); `FarmhouseDefenseObjectiveTarget` → `subject:hans-farm-residential-home.v1` (ExistingReused); `FarmProductionObjectiveTarget` → `subject:hans-farm-potato-plot.v1` (ExistingReused); `FenceDefenseObjectiveTarget` → `subject:hans-farm-fence-defense-objective.v1` (ExistingReused); `WorldThreatRule` → `subject:world-automatic-rule.v1` (ExistingReused)
 - WI: `ChooseThreatResponse` → [WI-NATURE-11](#ref-wi-wi-nature-11) (ExistingReused); `PrepareOneTickFarmMultiObjectiveDefense` → [WI-FARM-DEFENSE-MOBILIZE](#ref-wi-wi-farm-defense-mobilize) (ExistingReused); `ResolvePartialFarmDefenseLoss` → [WI-FARM-DEFENSE-RESOLVE](#ref-wi-wi-farm-defense-resolve) (ExistingReused); `RecoverAndReturnAfterPartialDefense` → [WI-FARM-DEFENSE-RETURN](#ref-wi-wi-farm-defense-return) (ExistingReused); `DebriefFarmCrisisLearningNeeds` → [WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF](#ref-wi-wi-reflect-hans-farm-crisis-debrief) (ExistingReused)
 - H: `FarmhouseDefenseObjective` → [H1 h1-stock:farm-residential-home](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-residential-home); `FarmProductionObjective` → [H1 h1-stock:farm-production](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-production); `FarmFenceDefenseChokepoint` → [H1 h1-stock:farm-fence-edge](hexagram-h-reference-index.md#ref-h-h1-h1-stock-farm-fence-edge); `FarmBoundaryDefenseRecovery` → [H2 h2-candidate:farm-boundary-defense-recovery](hexagram-h-reference-index.md#ref-h-h2-h2-candidate-farm-boundary-defense-recovery); `ForestEdgeLivingFarmCampaign` → [H3 h3-candidate:forest-edge-living-farm-campaign](hexagram-h-reference-index.md#ref-h-h3-h3-candidate-forest-edge-living-farm-campaign); `H4` `NoRegionalAggregateRequired` → 미정 (NotApplicable)
@@ -323,23 +330,24 @@
 - 주체·압박: 플레이어와 한스·알렉스·경비대 멘토 / 오해·반복 실패와 실제 재현 과제
 - 고유 규칙 조합: 질문·교정·재시도 뒤 실제 행동으로 재현한 경우에만 학습을 확정한다. (`LEARN_MENTOR_CORRECTION_REENACTMENT`)
 - 완주 변화: 공격·방어와 세계 지리의 기초를 이데아 맵에 연결한다.
+- 괘 정본: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md)
 - 기존 기획 주괘 배치: 없음
 - 기존 기획 보조 후보: [한스 농장 첫 벌목·울타리 수리](../한스농장-첫벌목과울타리수리-기획-2026-09-02.md); [첫 플레이 체감·반복](../../../docs/Architecture/PlayableLoops/PlanningSessions/첫플레이체감/first-play-experience.inquiry.r1.md)
 
 | 효 | 기획 ID | 문서 | 이야기 | 요구사항 | 인계 |
 | --- | --- | --- | --- | --- | --- |
-| [初六](../Planning/스토리/PLAN-STORY-HEX04-LINE-001/README.md) | `PLAN-STORY-HEX04-LINE-001` | `Opened` | `StoryApproved` | `NotDeclared` | `NotEligible` |
-| [九二](../Planning/스토리/PLAN-STORY-HEX04-LINE-002/README.md) | `PLAN-STORY-HEX04-LINE-002` | `Opened` | `StoryApproved` | `NotDeclared` | `NotEligible` |
-| [六三](../Planning/스토리/PLAN-STORY-HEX04-LINE-003/README.md) | `PLAN-STORY-HEX04-LINE-003` | `Opened` | `ActiveStoryDialogue` | `NotDeclared` | `NotEligible` |
-| [六四](../Planning/스토리/PLAN-STORY-HEX04-LINE-004/README.md) | `PLAN-STORY-HEX04-LINE-004` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
-| [六五](../Planning/스토리/PLAN-STORY-HEX04-LINE-005/README.md) | `PLAN-STORY-HEX04-LINE-005` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
-| [上九](../Planning/스토리/PLAN-STORY-HEX04-LINE-006/README.md) | `PLAN-STORY-HEX04-LINE-006` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
+| [初六](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l1) | `PLAN-STORY-HEX04-LINE-001` | `Opened` | `StoryApproved` | `NotDeclared` | `NotEligible` |
+| [九二](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l2) | `PLAN-STORY-HEX04-LINE-002` | `Opened` | `StoryApproved` | `NotDeclared` | `NotEligible` |
+| [六三](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l3) | `PLAN-STORY-HEX04-LINE-003` | `Opened` | `ActiveStoryDialogue` | `NotDeclared` | `NotEligible` |
+| [六四](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l4) | `PLAN-STORY-HEX04-LINE-004` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
+| [六五](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l5) | `PLAN-STORY-HEX04-LINE-005` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
+| [上九](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l6) | `PLAN-STORY-HEX04-LINE-006` | `Opened` | `StorySeeded` | `NotDeclared` | `NotEligible` |
 
 
 <a id="hex-04-meng-l1"></a>
 ### 初六 · `PLAN-STORY-HEX04-LINE-001`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-001/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l1)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -349,7 +357,7 @@
 <a id="hex-04-meng-l2"></a>
 ### 九二 · `PLAN-STORY-HEX04-LINE-002`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-002/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l2)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -359,7 +367,7 @@
 <a id="hex-04-meng-l3"></a>
 ### 六三 · `PLAN-STORY-HEX04-LINE-003`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-003/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l3)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -369,7 +377,7 @@
 <a id="hex-04-meng-l4"></a>
 ### 六四 · `PLAN-STORY-HEX04-LINE-004`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-004/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l4)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -379,7 +387,7 @@
 <a id="hex-04-meng-l5"></a>
 ### 六五 · `PLAN-STORY-HEX04-LINE-005`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-005/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l5)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -389,7 +397,7 @@
 <a id="hex-04-meng-l6"></a>
 ### 上九 · `PLAN-STORY-HEX04-LINE-006`
 
-- 기획 문서: [열기](../Planning/스토리/PLAN-STORY-HEX04-LINE-006/README.md)
+- 기획 정본 효 절: [열기](../Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md#hex-04-meng-l6)
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -420,7 +428,7 @@
 <a id="hex-05-xu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX05-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -430,7 +438,7 @@
 <a id="hex-05-xu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX05-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -440,7 +448,7 @@
 <a id="hex-05-xu-l3"></a>
 ### 九三 · `PLAN-STORY-HEX05-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -450,7 +458,7 @@
 <a id="hex-05-xu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX05-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -460,7 +468,7 @@
 <a id="hex-05-xu-l5"></a>
 ### 九五 · `PLAN-STORY-HEX05-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -470,7 +478,7 @@
 <a id="hex-05-xu-l6"></a>
 ### 上六 · `PLAN-STORY-HEX05-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -501,7 +509,7 @@
 <a id="hex-06-song-l1"></a>
 ### 初六 · `PLAN-STORY-HEX06-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -511,7 +519,7 @@
 <a id="hex-06-song-l2"></a>
 ### 九二 · `PLAN-STORY-HEX06-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -521,7 +529,7 @@
 <a id="hex-06-song-l3"></a>
 ### 六三 · `PLAN-STORY-HEX06-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -531,7 +539,7 @@
 <a id="hex-06-song-l4"></a>
 ### 九四 · `PLAN-STORY-HEX06-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -541,7 +549,7 @@
 <a id="hex-06-song-l5"></a>
 ### 九五 · `PLAN-STORY-HEX06-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -551,7 +559,7 @@
 <a id="hex-06-song-l6"></a>
 ### 上九 · `PLAN-STORY-HEX06-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -582,7 +590,7 @@
 <a id="hex-07-shi-l1"></a>
 ### 初六 · `PLAN-STORY-HEX07-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -592,7 +600,7 @@
 <a id="hex-07-shi-l2"></a>
 ### 九二 · `PLAN-STORY-HEX07-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -602,7 +610,7 @@
 <a id="hex-07-shi-l3"></a>
 ### 六三 · `PLAN-STORY-HEX07-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -612,7 +620,7 @@
 <a id="hex-07-shi-l4"></a>
 ### 六四 · `PLAN-STORY-HEX07-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -622,7 +630,7 @@
 <a id="hex-07-shi-l5"></a>
 ### 六五 · `PLAN-STORY-HEX07-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -632,7 +640,7 @@
 <a id="hex-07-shi-l6"></a>
 ### 上六 · `PLAN-STORY-HEX07-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -663,7 +671,7 @@
 <a id="hex-08-bi-l1"></a>
 ### 初六 · `PLAN-STORY-HEX08-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -673,7 +681,7 @@
 <a id="hex-08-bi-l2"></a>
 ### 六二 · `PLAN-STORY-HEX08-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -683,7 +691,7 @@
 <a id="hex-08-bi-l3"></a>
 ### 六三 · `PLAN-STORY-HEX08-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -693,7 +701,7 @@
 <a id="hex-08-bi-l4"></a>
 ### 六四 · `PLAN-STORY-HEX08-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -703,7 +711,7 @@
 <a id="hex-08-bi-l5"></a>
 ### 九五 · `PLAN-STORY-HEX08-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -713,7 +721,7 @@
 <a id="hex-08-bi-l6"></a>
 ### 上六 · `PLAN-STORY-HEX08-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -744,7 +752,7 @@
 <a id="hex-09-xiao-chu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX09-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -754,7 +762,7 @@
 <a id="hex-09-xiao-chu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX09-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -764,7 +772,7 @@
 <a id="hex-09-xiao-chu-l3"></a>
 ### 九三 · `PLAN-STORY-HEX09-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -774,7 +782,7 @@
 <a id="hex-09-xiao-chu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX09-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -784,7 +792,7 @@
 <a id="hex-09-xiao-chu-l5"></a>
 ### 九五 · `PLAN-STORY-HEX09-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -794,7 +802,7 @@
 <a id="hex-09-xiao-chu-l6"></a>
 ### 上九 · `PLAN-STORY-HEX09-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -825,7 +833,7 @@
 <a id="hex-10-lu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX10-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -835,7 +843,7 @@
 <a id="hex-10-lu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX10-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -845,7 +853,7 @@
 <a id="hex-10-lu-l3"></a>
 ### 六三 · `PLAN-STORY-HEX10-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -855,7 +863,7 @@
 <a id="hex-10-lu-l4"></a>
 ### 九四 · `PLAN-STORY-HEX10-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -865,7 +873,7 @@
 <a id="hex-10-lu-l5"></a>
 ### 九五 · `PLAN-STORY-HEX10-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -875,7 +883,7 @@
 <a id="hex-10-lu-l6"></a>
 ### 上九 · `PLAN-STORY-HEX10-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -906,7 +914,7 @@
 <a id="hex-11-tai-l1"></a>
 ### 初九 · `PLAN-STORY-HEX11-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -916,7 +924,7 @@
 <a id="hex-11-tai-l2"></a>
 ### 九二 · `PLAN-STORY-HEX11-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -926,7 +934,7 @@
 <a id="hex-11-tai-l3"></a>
 ### 九三 · `PLAN-STORY-HEX11-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -936,7 +944,7 @@
 <a id="hex-11-tai-l4"></a>
 ### 六四 · `PLAN-STORY-HEX11-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -946,7 +954,7 @@
 <a id="hex-11-tai-l5"></a>
 ### 六五 · `PLAN-STORY-HEX11-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -956,7 +964,7 @@
 <a id="hex-11-tai-l6"></a>
 ### 上六 · `PLAN-STORY-HEX11-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -987,7 +995,7 @@
 <a id="hex-12-pi-l1"></a>
 ### 初六 · `PLAN-STORY-HEX12-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -997,7 +1005,7 @@
 <a id="hex-12-pi-l2"></a>
 ### 六二 · `PLAN-STORY-HEX12-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1007,7 +1015,7 @@
 <a id="hex-12-pi-l3"></a>
 ### 六三 · `PLAN-STORY-HEX12-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1017,7 +1025,7 @@
 <a id="hex-12-pi-l4"></a>
 ### 九四 · `PLAN-STORY-HEX12-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1027,7 +1035,7 @@
 <a id="hex-12-pi-l5"></a>
 ### 九五 · `PLAN-STORY-HEX12-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1037,7 +1045,7 @@
 <a id="hex-12-pi-l6"></a>
 ### 上九 · `PLAN-STORY-HEX12-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1068,7 +1076,7 @@
 <a id="hex-13-tong-ren-l1"></a>
 ### 初九 · `PLAN-STORY-HEX13-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1078,7 +1086,7 @@
 <a id="hex-13-tong-ren-l2"></a>
 ### 六二 · `PLAN-STORY-HEX13-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1088,7 +1096,7 @@
 <a id="hex-13-tong-ren-l3"></a>
 ### 九三 · `PLAN-STORY-HEX13-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1098,7 +1106,7 @@
 <a id="hex-13-tong-ren-l4"></a>
 ### 九四 · `PLAN-STORY-HEX13-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1108,7 +1116,7 @@
 <a id="hex-13-tong-ren-l5"></a>
 ### 九五 · `PLAN-STORY-HEX13-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1118,7 +1126,7 @@
 <a id="hex-13-tong-ren-l6"></a>
 ### 上九 · `PLAN-STORY-HEX13-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1149,7 +1157,7 @@
 <a id="hex-14-da-you-l1"></a>
 ### 初九 · `PLAN-STORY-HEX14-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1159,7 +1167,7 @@
 <a id="hex-14-da-you-l2"></a>
 ### 九二 · `PLAN-STORY-HEX14-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1169,7 +1177,7 @@
 <a id="hex-14-da-you-l3"></a>
 ### 九三 · `PLAN-STORY-HEX14-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1179,7 +1187,7 @@
 <a id="hex-14-da-you-l4"></a>
 ### 九四 · `PLAN-STORY-HEX14-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1189,7 +1197,7 @@
 <a id="hex-14-da-you-l5"></a>
 ### 六五 · `PLAN-STORY-HEX14-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1199,7 +1207,7 @@
 <a id="hex-14-da-you-l6"></a>
 ### 上九 · `PLAN-STORY-HEX14-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1230,7 +1238,7 @@
 <a id="hex-15-qian-modesty-l1"></a>
 ### 初六 · `PLAN-STORY-HEX15-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1240,7 +1248,7 @@
 <a id="hex-15-qian-modesty-l2"></a>
 ### 六二 · `PLAN-STORY-HEX15-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1250,7 +1258,7 @@
 <a id="hex-15-qian-modesty-l3"></a>
 ### 九三 · `PLAN-STORY-HEX15-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1260,7 +1268,7 @@
 <a id="hex-15-qian-modesty-l4"></a>
 ### 六四 · `PLAN-STORY-HEX15-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1270,7 +1278,7 @@
 <a id="hex-15-qian-modesty-l5"></a>
 ### 六五 · `PLAN-STORY-HEX15-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1280,7 +1288,7 @@
 <a id="hex-15-qian-modesty-l6"></a>
 ### 上六 · `PLAN-STORY-HEX15-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1311,7 +1319,7 @@
 <a id="hex-16-yu-l1"></a>
 ### 初六 · `PLAN-STORY-HEX16-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1321,7 +1329,7 @@
 <a id="hex-16-yu-l2"></a>
 ### 六二 · `PLAN-STORY-HEX16-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1331,7 +1339,7 @@
 <a id="hex-16-yu-l3"></a>
 ### 六三 · `PLAN-STORY-HEX16-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1341,7 +1349,7 @@
 <a id="hex-16-yu-l4"></a>
 ### 九四 · `PLAN-STORY-HEX16-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1351,7 +1359,7 @@
 <a id="hex-16-yu-l5"></a>
 ### 六五 · `PLAN-STORY-HEX16-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1361,7 +1369,7 @@
 <a id="hex-16-yu-l6"></a>
 ### 上六 · `PLAN-STORY-HEX16-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1392,7 +1400,7 @@
 <a id="hex-17-sui-l1"></a>
 ### 初九 · `PLAN-STORY-HEX17-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1402,7 +1410,7 @@
 <a id="hex-17-sui-l2"></a>
 ### 六二 · `PLAN-STORY-HEX17-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1412,7 +1420,7 @@
 <a id="hex-17-sui-l3"></a>
 ### 六三 · `PLAN-STORY-HEX17-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1422,7 +1430,7 @@
 <a id="hex-17-sui-l4"></a>
 ### 九四 · `PLAN-STORY-HEX17-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1432,7 +1440,7 @@
 <a id="hex-17-sui-l5"></a>
 ### 九五 · `PLAN-STORY-HEX17-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1442,7 +1450,7 @@
 <a id="hex-17-sui-l6"></a>
 ### 上六 · `PLAN-STORY-HEX17-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1473,7 +1481,7 @@
 <a id="hex-18-gu-l1"></a>
 ### 初六 · `PLAN-STORY-HEX18-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1483,7 +1491,7 @@
 <a id="hex-18-gu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX18-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1493,7 +1501,7 @@
 <a id="hex-18-gu-l3"></a>
 ### 九三 · `PLAN-STORY-HEX18-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1503,7 +1511,7 @@
 <a id="hex-18-gu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX18-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1513,7 +1521,7 @@
 <a id="hex-18-gu-l5"></a>
 ### 六五 · `PLAN-STORY-HEX18-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1523,7 +1531,7 @@
 <a id="hex-18-gu-l6"></a>
 ### 上九 · `PLAN-STORY-HEX18-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1554,7 +1562,7 @@
 <a id="hex-19-lin-l1"></a>
 ### 初九 · `PLAN-STORY-HEX19-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1564,7 +1572,7 @@
 <a id="hex-19-lin-l2"></a>
 ### 九二 · `PLAN-STORY-HEX19-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1574,7 +1582,7 @@
 <a id="hex-19-lin-l3"></a>
 ### 六三 · `PLAN-STORY-HEX19-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1584,7 +1592,7 @@
 <a id="hex-19-lin-l4"></a>
 ### 六四 · `PLAN-STORY-HEX19-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1594,7 +1602,7 @@
 <a id="hex-19-lin-l5"></a>
 ### 六五 · `PLAN-STORY-HEX19-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1604,7 +1612,7 @@
 <a id="hex-19-lin-l6"></a>
 ### 上六 · `PLAN-STORY-HEX19-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1635,7 +1643,7 @@
 <a id="hex-20-guan-l1"></a>
 ### 初六 · `PLAN-STORY-HEX20-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1645,7 +1653,7 @@
 <a id="hex-20-guan-l2"></a>
 ### 六二 · `PLAN-STORY-HEX20-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1655,7 +1663,7 @@
 <a id="hex-20-guan-l3"></a>
 ### 六三 · `PLAN-STORY-HEX20-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1665,7 +1673,7 @@
 <a id="hex-20-guan-l4"></a>
 ### 六四 · `PLAN-STORY-HEX20-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1675,7 +1683,7 @@
 <a id="hex-20-guan-l5"></a>
 ### 九五 · `PLAN-STORY-HEX20-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1685,7 +1693,7 @@
 <a id="hex-20-guan-l6"></a>
 ### 上九 · `PLAN-STORY-HEX20-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1716,7 +1724,7 @@
 <a id="hex-21-shi-he-l1"></a>
 ### 初九 · `PLAN-STORY-HEX21-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1726,7 +1734,7 @@
 <a id="hex-21-shi-he-l2"></a>
 ### 六二 · `PLAN-STORY-HEX21-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1736,7 +1744,7 @@
 <a id="hex-21-shi-he-l3"></a>
 ### 六三 · `PLAN-STORY-HEX21-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1746,7 +1754,7 @@
 <a id="hex-21-shi-he-l4"></a>
 ### 九四 · `PLAN-STORY-HEX21-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1756,7 +1764,7 @@
 <a id="hex-21-shi-he-l5"></a>
 ### 六五 · `PLAN-STORY-HEX21-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1766,7 +1774,7 @@
 <a id="hex-21-shi-he-l6"></a>
 ### 上九 · `PLAN-STORY-HEX21-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1797,7 +1805,7 @@
 <a id="hex-22-bi-grace-l1"></a>
 ### 初九 · `PLAN-STORY-HEX22-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1807,7 +1815,7 @@
 <a id="hex-22-bi-grace-l2"></a>
 ### 六二 · `PLAN-STORY-HEX22-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1817,7 +1825,7 @@
 <a id="hex-22-bi-grace-l3"></a>
 ### 九三 · `PLAN-STORY-HEX22-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1827,7 +1835,7 @@
 <a id="hex-22-bi-grace-l4"></a>
 ### 六四 · `PLAN-STORY-HEX22-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1837,7 +1845,7 @@
 <a id="hex-22-bi-grace-l5"></a>
 ### 六五 · `PLAN-STORY-HEX22-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1847,7 +1855,7 @@
 <a id="hex-22-bi-grace-l6"></a>
 ### 上九 · `PLAN-STORY-HEX22-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1878,7 +1886,7 @@
 <a id="hex-23-bo-l1"></a>
 ### 初六 · `PLAN-STORY-HEX23-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1888,7 +1896,7 @@
 <a id="hex-23-bo-l2"></a>
 ### 六二 · `PLAN-STORY-HEX23-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1898,7 +1906,7 @@
 <a id="hex-23-bo-l3"></a>
 ### 六三 · `PLAN-STORY-HEX23-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1908,7 +1916,7 @@
 <a id="hex-23-bo-l4"></a>
 ### 六四 · `PLAN-STORY-HEX23-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1918,7 +1926,7 @@
 <a id="hex-23-bo-l5"></a>
 ### 六五 · `PLAN-STORY-HEX23-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1928,7 +1936,7 @@
 <a id="hex-23-bo-l6"></a>
 ### 上九 · `PLAN-STORY-HEX23-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1959,7 +1967,7 @@
 <a id="hex-24-fu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX24-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1969,7 +1977,7 @@
 <a id="hex-24-fu-l2"></a>
 ### 六二 · `PLAN-STORY-HEX24-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1979,7 +1987,7 @@
 <a id="hex-24-fu-l3"></a>
 ### 六三 · `PLAN-STORY-HEX24-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1989,7 +1997,7 @@
 <a id="hex-24-fu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX24-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -1999,7 +2007,7 @@
 <a id="hex-24-fu-l5"></a>
 ### 六五 · `PLAN-STORY-HEX24-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2009,7 +2017,7 @@
 <a id="hex-24-fu-l6"></a>
 ### 上六 · `PLAN-STORY-HEX24-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2040,7 +2048,7 @@
 <a id="hex-25-wu-wang-l1"></a>
 ### 初九 · `PLAN-STORY-HEX25-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2050,7 +2058,7 @@
 <a id="hex-25-wu-wang-l2"></a>
 ### 六二 · `PLAN-STORY-HEX25-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2060,7 +2068,7 @@
 <a id="hex-25-wu-wang-l3"></a>
 ### 六三 · `PLAN-STORY-HEX25-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2070,7 +2078,7 @@
 <a id="hex-25-wu-wang-l4"></a>
 ### 九四 · `PLAN-STORY-HEX25-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2080,7 +2088,7 @@
 <a id="hex-25-wu-wang-l5"></a>
 ### 九五 · `PLAN-STORY-HEX25-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2090,7 +2098,7 @@
 <a id="hex-25-wu-wang-l6"></a>
 ### 上九 · `PLAN-STORY-HEX25-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2121,7 +2129,7 @@
 <a id="hex-26-da-chu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX26-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2131,7 +2139,7 @@
 <a id="hex-26-da-chu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX26-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2141,7 +2149,7 @@
 <a id="hex-26-da-chu-l3"></a>
 ### 九三 · `PLAN-STORY-HEX26-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2151,7 +2159,7 @@
 <a id="hex-26-da-chu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX26-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2161,7 +2169,7 @@
 <a id="hex-26-da-chu-l5"></a>
 ### 六五 · `PLAN-STORY-HEX26-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2171,7 +2179,7 @@
 <a id="hex-26-da-chu-l6"></a>
 ### 上九 · `PLAN-STORY-HEX26-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2202,7 +2210,7 @@
 <a id="hex-27-yi-l1"></a>
 ### 初九 · `PLAN-STORY-HEX27-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2212,7 +2220,7 @@
 <a id="hex-27-yi-l2"></a>
 ### 六二 · `PLAN-STORY-HEX27-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2222,7 +2230,7 @@
 <a id="hex-27-yi-l3"></a>
 ### 六三 · `PLAN-STORY-HEX27-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2232,7 +2240,7 @@
 <a id="hex-27-yi-l4"></a>
 ### 六四 · `PLAN-STORY-HEX27-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2242,7 +2250,7 @@
 <a id="hex-27-yi-l5"></a>
 ### 六五 · `PLAN-STORY-HEX27-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2252,7 +2260,7 @@
 <a id="hex-27-yi-l6"></a>
 ### 上九 · `PLAN-STORY-HEX27-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2283,7 +2291,7 @@
 <a id="hex-28-da-guo-l1"></a>
 ### 初六 · `PLAN-STORY-HEX28-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2293,7 +2301,7 @@
 <a id="hex-28-da-guo-l2"></a>
 ### 九二 · `PLAN-STORY-HEX28-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2303,7 +2311,7 @@
 <a id="hex-28-da-guo-l3"></a>
 ### 九三 · `PLAN-STORY-HEX28-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2313,7 +2321,7 @@
 <a id="hex-28-da-guo-l4"></a>
 ### 九四 · `PLAN-STORY-HEX28-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2323,7 +2331,7 @@
 <a id="hex-28-da-guo-l5"></a>
 ### 九五 · `PLAN-STORY-HEX28-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2333,7 +2341,7 @@
 <a id="hex-28-da-guo-l6"></a>
 ### 上六 · `PLAN-STORY-HEX28-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2364,7 +2372,7 @@
 <a id="hex-29-kan-l1"></a>
 ### 初六 · `PLAN-STORY-HEX29-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2374,7 +2382,7 @@
 <a id="hex-29-kan-l2"></a>
 ### 九二 · `PLAN-STORY-HEX29-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2384,7 +2392,7 @@
 <a id="hex-29-kan-l3"></a>
 ### 六三 · `PLAN-STORY-HEX29-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2394,7 +2402,7 @@
 <a id="hex-29-kan-l4"></a>
 ### 六四 · `PLAN-STORY-HEX29-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2404,7 +2412,7 @@
 <a id="hex-29-kan-l5"></a>
 ### 九五 · `PLAN-STORY-HEX29-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2414,7 +2422,7 @@
 <a id="hex-29-kan-l6"></a>
 ### 上六 · `PLAN-STORY-HEX29-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2445,7 +2453,7 @@
 <a id="hex-30-li-l1"></a>
 ### 初九 · `PLAN-STORY-HEX30-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2455,7 +2463,7 @@
 <a id="hex-30-li-l2"></a>
 ### 六二 · `PLAN-STORY-HEX30-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2465,7 +2473,7 @@
 <a id="hex-30-li-l3"></a>
 ### 九三 · `PLAN-STORY-HEX30-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2475,7 +2483,7 @@
 <a id="hex-30-li-l4"></a>
 ### 九四 · `PLAN-STORY-HEX30-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2485,7 +2493,7 @@
 <a id="hex-30-li-l5"></a>
 ### 六五 · `PLAN-STORY-HEX30-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2495,7 +2503,7 @@
 <a id="hex-30-li-l6"></a>
 ### 上九 · `PLAN-STORY-HEX30-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2526,7 +2534,7 @@
 <a id="hex-31-xian-l1"></a>
 ### 初六 · `PLAN-STORY-HEX31-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2536,7 +2544,7 @@
 <a id="hex-31-xian-l2"></a>
 ### 六二 · `PLAN-STORY-HEX31-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2546,7 +2554,7 @@
 <a id="hex-31-xian-l3"></a>
 ### 九三 · `PLAN-STORY-HEX31-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2556,7 +2564,7 @@
 <a id="hex-31-xian-l4"></a>
 ### 九四 · `PLAN-STORY-HEX31-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2566,7 +2574,7 @@
 <a id="hex-31-xian-l5"></a>
 ### 九五 · `PLAN-STORY-HEX31-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2576,7 +2584,7 @@
 <a id="hex-31-xian-l6"></a>
 ### 上六 · `PLAN-STORY-HEX31-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2607,7 +2615,7 @@
 <a id="hex-32-heng-l1"></a>
 ### 初六 · `PLAN-STORY-HEX32-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2617,7 +2625,7 @@
 <a id="hex-32-heng-l2"></a>
 ### 九二 · `PLAN-STORY-HEX32-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2627,7 +2635,7 @@
 <a id="hex-32-heng-l3"></a>
 ### 九三 · `PLAN-STORY-HEX32-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2637,7 +2645,7 @@
 <a id="hex-32-heng-l4"></a>
 ### 九四 · `PLAN-STORY-HEX32-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2647,7 +2655,7 @@
 <a id="hex-32-heng-l5"></a>
 ### 六五 · `PLAN-STORY-HEX32-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2657,7 +2665,7 @@
 <a id="hex-32-heng-l6"></a>
 ### 上六 · `PLAN-STORY-HEX32-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2688,7 +2696,7 @@
 <a id="hex-33-dun-l1"></a>
 ### 初六 · `PLAN-STORY-HEX33-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2698,7 +2706,7 @@
 <a id="hex-33-dun-l2"></a>
 ### 六二 · `PLAN-STORY-HEX33-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2708,7 +2716,7 @@
 <a id="hex-33-dun-l3"></a>
 ### 九三 · `PLAN-STORY-HEX33-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2718,7 +2726,7 @@
 <a id="hex-33-dun-l4"></a>
 ### 九四 · `PLAN-STORY-HEX33-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2728,7 +2736,7 @@
 <a id="hex-33-dun-l5"></a>
 ### 九五 · `PLAN-STORY-HEX33-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2738,7 +2746,7 @@
 <a id="hex-33-dun-l6"></a>
 ### 上九 · `PLAN-STORY-HEX33-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2769,7 +2777,7 @@
 <a id="hex-34-da-zhuang-l1"></a>
 ### 初九 · `PLAN-STORY-HEX34-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2779,7 +2787,7 @@
 <a id="hex-34-da-zhuang-l2"></a>
 ### 九二 · `PLAN-STORY-HEX34-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2789,7 +2797,7 @@
 <a id="hex-34-da-zhuang-l3"></a>
 ### 九三 · `PLAN-STORY-HEX34-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2799,7 +2807,7 @@
 <a id="hex-34-da-zhuang-l4"></a>
 ### 九四 · `PLAN-STORY-HEX34-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2809,7 +2817,7 @@
 <a id="hex-34-da-zhuang-l5"></a>
 ### 六五 · `PLAN-STORY-HEX34-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2819,7 +2827,7 @@
 <a id="hex-34-da-zhuang-l6"></a>
 ### 上六 · `PLAN-STORY-HEX34-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2850,7 +2858,7 @@
 <a id="hex-35-jin-l1"></a>
 ### 初六 · `PLAN-STORY-HEX35-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2860,7 +2868,7 @@
 <a id="hex-35-jin-l2"></a>
 ### 六二 · `PLAN-STORY-HEX35-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2870,7 +2878,7 @@
 <a id="hex-35-jin-l3"></a>
 ### 六三 · `PLAN-STORY-HEX35-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2880,7 +2888,7 @@
 <a id="hex-35-jin-l4"></a>
 ### 九四 · `PLAN-STORY-HEX35-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2890,7 +2898,7 @@
 <a id="hex-35-jin-l5"></a>
 ### 六五 · `PLAN-STORY-HEX35-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2900,7 +2908,7 @@
 <a id="hex-35-jin-l6"></a>
 ### 上九 · `PLAN-STORY-HEX35-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2931,7 +2939,7 @@
 <a id="hex-36-ming-yi-l1"></a>
 ### 初九 · `PLAN-STORY-HEX36-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2941,7 +2949,7 @@
 <a id="hex-36-ming-yi-l2"></a>
 ### 六二 · `PLAN-STORY-HEX36-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2951,7 +2959,7 @@
 <a id="hex-36-ming-yi-l3"></a>
 ### 九三 · `PLAN-STORY-HEX36-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2961,7 +2969,7 @@
 <a id="hex-36-ming-yi-l4"></a>
 ### 六四 · `PLAN-STORY-HEX36-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2971,7 +2979,7 @@
 <a id="hex-36-ming-yi-l5"></a>
 ### 六五 · `PLAN-STORY-HEX36-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -2981,7 +2989,7 @@
 <a id="hex-36-ming-yi-l6"></a>
 ### 上六 · `PLAN-STORY-HEX36-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3012,7 +3020,7 @@
 <a id="hex-37-jia-ren-l1"></a>
 ### 初九 · `PLAN-STORY-HEX37-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3022,7 +3030,7 @@
 <a id="hex-37-jia-ren-l2"></a>
 ### 六二 · `PLAN-STORY-HEX37-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3032,7 +3040,7 @@
 <a id="hex-37-jia-ren-l3"></a>
 ### 九三 · `PLAN-STORY-HEX37-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3042,7 +3050,7 @@
 <a id="hex-37-jia-ren-l4"></a>
 ### 六四 · `PLAN-STORY-HEX37-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3052,7 +3060,7 @@
 <a id="hex-37-jia-ren-l5"></a>
 ### 九五 · `PLAN-STORY-HEX37-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3062,7 +3070,7 @@
 <a id="hex-37-jia-ren-l6"></a>
 ### 上九 · `PLAN-STORY-HEX37-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3093,7 +3101,7 @@
 <a id="hex-38-kui-l1"></a>
 ### 初九 · `PLAN-STORY-HEX38-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3103,7 +3111,7 @@
 <a id="hex-38-kui-l2"></a>
 ### 九二 · `PLAN-STORY-HEX38-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3113,7 +3121,7 @@
 <a id="hex-38-kui-l3"></a>
 ### 六三 · `PLAN-STORY-HEX38-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3123,7 +3131,7 @@
 <a id="hex-38-kui-l4"></a>
 ### 九四 · `PLAN-STORY-HEX38-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3133,7 +3141,7 @@
 <a id="hex-38-kui-l5"></a>
 ### 六五 · `PLAN-STORY-HEX38-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3143,7 +3151,7 @@
 <a id="hex-38-kui-l6"></a>
 ### 上九 · `PLAN-STORY-HEX38-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3174,7 +3182,7 @@
 <a id="hex-39-jian-l1"></a>
 ### 初六 · `PLAN-STORY-HEX39-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3184,7 +3192,7 @@
 <a id="hex-39-jian-l2"></a>
 ### 六二 · `PLAN-STORY-HEX39-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3194,7 +3202,7 @@
 <a id="hex-39-jian-l3"></a>
 ### 九三 · `PLAN-STORY-HEX39-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3204,7 +3212,7 @@
 <a id="hex-39-jian-l4"></a>
 ### 六四 · `PLAN-STORY-HEX39-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3214,7 +3222,7 @@
 <a id="hex-39-jian-l5"></a>
 ### 九五 · `PLAN-STORY-HEX39-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3224,7 +3232,7 @@
 <a id="hex-39-jian-l6"></a>
 ### 上六 · `PLAN-STORY-HEX39-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3255,7 +3263,7 @@
 <a id="hex-40-xie-l1"></a>
 ### 初六 · `PLAN-STORY-HEX40-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3265,7 +3273,7 @@
 <a id="hex-40-xie-l2"></a>
 ### 九二 · `PLAN-STORY-HEX40-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3275,7 +3283,7 @@
 <a id="hex-40-xie-l3"></a>
 ### 六三 · `PLAN-STORY-HEX40-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3285,7 +3293,7 @@
 <a id="hex-40-xie-l4"></a>
 ### 九四 · `PLAN-STORY-HEX40-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3295,7 +3303,7 @@
 <a id="hex-40-xie-l5"></a>
 ### 六五 · `PLAN-STORY-HEX40-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3305,7 +3313,7 @@
 <a id="hex-40-xie-l6"></a>
 ### 上六 · `PLAN-STORY-HEX40-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3336,7 +3344,7 @@
 <a id="hex-41-sun-l1"></a>
 ### 初九 · `PLAN-STORY-HEX41-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3346,7 +3354,7 @@
 <a id="hex-41-sun-l2"></a>
 ### 九二 · `PLAN-STORY-HEX41-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3356,7 +3364,7 @@
 <a id="hex-41-sun-l3"></a>
 ### 六三 · `PLAN-STORY-HEX41-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3366,7 +3374,7 @@
 <a id="hex-41-sun-l4"></a>
 ### 六四 · `PLAN-STORY-HEX41-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3376,7 +3384,7 @@
 <a id="hex-41-sun-l5"></a>
 ### 六五 · `PLAN-STORY-HEX41-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3386,7 +3394,7 @@
 <a id="hex-41-sun-l6"></a>
 ### 上九 · `PLAN-STORY-HEX41-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3417,7 +3425,7 @@
 <a id="hex-42-yi-benefit-l1"></a>
 ### 初九 · `PLAN-STORY-HEX42-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3427,7 +3435,7 @@
 <a id="hex-42-yi-benefit-l2"></a>
 ### 六二 · `PLAN-STORY-HEX42-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3437,7 +3445,7 @@
 <a id="hex-42-yi-benefit-l3"></a>
 ### 六三 · `PLAN-STORY-HEX42-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3447,7 +3455,7 @@
 <a id="hex-42-yi-benefit-l4"></a>
 ### 六四 · `PLAN-STORY-HEX42-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3457,7 +3465,7 @@
 <a id="hex-42-yi-benefit-l5"></a>
 ### 九五 · `PLAN-STORY-HEX42-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3467,7 +3475,7 @@
 <a id="hex-42-yi-benefit-l6"></a>
 ### 上九 · `PLAN-STORY-HEX42-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3498,7 +3506,7 @@
 <a id="hex-43-guai-l1"></a>
 ### 初九 · `PLAN-STORY-HEX43-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3508,7 +3516,7 @@
 <a id="hex-43-guai-l2"></a>
 ### 九二 · `PLAN-STORY-HEX43-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3518,7 +3526,7 @@
 <a id="hex-43-guai-l3"></a>
 ### 九三 · `PLAN-STORY-HEX43-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3528,7 +3536,7 @@
 <a id="hex-43-guai-l4"></a>
 ### 九四 · `PLAN-STORY-HEX43-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3538,7 +3546,7 @@
 <a id="hex-43-guai-l5"></a>
 ### 九五 · `PLAN-STORY-HEX43-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3548,7 +3556,7 @@
 <a id="hex-43-guai-l6"></a>
 ### 上六 · `PLAN-STORY-HEX43-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3579,7 +3587,7 @@
 <a id="hex-44-gou-l1"></a>
 ### 初六 · `PLAN-STORY-HEX44-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3589,7 +3597,7 @@
 <a id="hex-44-gou-l2"></a>
 ### 九二 · `PLAN-STORY-HEX44-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3599,7 +3607,7 @@
 <a id="hex-44-gou-l3"></a>
 ### 九三 · `PLAN-STORY-HEX44-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3609,7 +3617,7 @@
 <a id="hex-44-gou-l4"></a>
 ### 九四 · `PLAN-STORY-HEX44-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3619,7 +3627,7 @@
 <a id="hex-44-gou-l5"></a>
 ### 九五 · `PLAN-STORY-HEX44-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3629,7 +3637,7 @@
 <a id="hex-44-gou-l6"></a>
 ### 上九 · `PLAN-STORY-HEX44-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3660,7 +3668,7 @@
 <a id="hex-45-cui-l1"></a>
 ### 初六 · `PLAN-STORY-HEX45-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3670,7 +3678,7 @@
 <a id="hex-45-cui-l2"></a>
 ### 六二 · `PLAN-STORY-HEX45-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3680,7 +3688,7 @@
 <a id="hex-45-cui-l3"></a>
 ### 六三 · `PLAN-STORY-HEX45-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3690,7 +3698,7 @@
 <a id="hex-45-cui-l4"></a>
 ### 九四 · `PLAN-STORY-HEX45-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3700,7 +3708,7 @@
 <a id="hex-45-cui-l5"></a>
 ### 九五 · `PLAN-STORY-HEX45-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3710,7 +3718,7 @@
 <a id="hex-45-cui-l6"></a>
 ### 上六 · `PLAN-STORY-HEX45-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3741,7 +3749,7 @@
 <a id="hex-46-sheng-l1"></a>
 ### 初六 · `PLAN-STORY-HEX46-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3751,7 +3759,7 @@
 <a id="hex-46-sheng-l2"></a>
 ### 九二 · `PLAN-STORY-HEX46-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3761,7 +3769,7 @@
 <a id="hex-46-sheng-l3"></a>
 ### 九三 · `PLAN-STORY-HEX46-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3771,7 +3779,7 @@
 <a id="hex-46-sheng-l4"></a>
 ### 六四 · `PLAN-STORY-HEX46-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3781,7 +3789,7 @@
 <a id="hex-46-sheng-l5"></a>
 ### 六五 · `PLAN-STORY-HEX46-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3791,7 +3799,7 @@
 <a id="hex-46-sheng-l6"></a>
 ### 上六 · `PLAN-STORY-HEX46-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3822,7 +3830,7 @@
 <a id="hex-47-kun-distress-l1"></a>
 ### 初六 · `PLAN-STORY-HEX47-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3832,7 +3840,7 @@
 <a id="hex-47-kun-distress-l2"></a>
 ### 九二 · `PLAN-STORY-HEX47-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3842,7 +3850,7 @@
 <a id="hex-47-kun-distress-l3"></a>
 ### 六三 · `PLAN-STORY-HEX47-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3852,7 +3860,7 @@
 <a id="hex-47-kun-distress-l4"></a>
 ### 九四 · `PLAN-STORY-HEX47-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3862,7 +3870,7 @@
 <a id="hex-47-kun-distress-l5"></a>
 ### 九五 · `PLAN-STORY-HEX47-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3872,7 +3880,7 @@
 <a id="hex-47-kun-distress-l6"></a>
 ### 上六 · `PLAN-STORY-HEX47-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3903,7 +3911,7 @@
 <a id="hex-48-jing-l1"></a>
 ### 初六 · `PLAN-STORY-HEX48-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3913,7 +3921,7 @@
 <a id="hex-48-jing-l2"></a>
 ### 九二 · `PLAN-STORY-HEX48-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3923,7 +3931,7 @@
 <a id="hex-48-jing-l3"></a>
 ### 九三 · `PLAN-STORY-HEX48-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3933,7 +3941,7 @@
 <a id="hex-48-jing-l4"></a>
 ### 六四 · `PLAN-STORY-HEX48-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3943,7 +3951,7 @@
 <a id="hex-48-jing-l5"></a>
 ### 九五 · `PLAN-STORY-HEX48-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3953,7 +3961,7 @@
 <a id="hex-48-jing-l6"></a>
 ### 上六 · `PLAN-STORY-HEX48-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3984,7 +3992,7 @@
 <a id="hex-49-ge-l1"></a>
 ### 初九 · `PLAN-STORY-HEX49-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -3994,7 +4002,7 @@
 <a id="hex-49-ge-l2"></a>
 ### 六二 · `PLAN-STORY-HEX49-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4004,7 +4012,7 @@
 <a id="hex-49-ge-l3"></a>
 ### 九三 · `PLAN-STORY-HEX49-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4014,7 +4022,7 @@
 <a id="hex-49-ge-l4"></a>
 ### 九四 · `PLAN-STORY-HEX49-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4024,7 +4032,7 @@
 <a id="hex-49-ge-l5"></a>
 ### 九五 · `PLAN-STORY-HEX49-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4034,7 +4042,7 @@
 <a id="hex-49-ge-l6"></a>
 ### 上六 · `PLAN-STORY-HEX49-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4065,7 +4073,7 @@
 <a id="hex-50-ding-l1"></a>
 ### 初六 · `PLAN-STORY-HEX50-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4075,7 +4083,7 @@
 <a id="hex-50-ding-l2"></a>
 ### 九二 · `PLAN-STORY-HEX50-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4085,7 +4093,7 @@
 <a id="hex-50-ding-l3"></a>
 ### 九三 · `PLAN-STORY-HEX50-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4095,7 +4103,7 @@
 <a id="hex-50-ding-l4"></a>
 ### 九四 · `PLAN-STORY-HEX50-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4105,7 +4113,7 @@
 <a id="hex-50-ding-l5"></a>
 ### 六五 · `PLAN-STORY-HEX50-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4115,7 +4123,7 @@
 <a id="hex-50-ding-l6"></a>
 ### 上九 · `PLAN-STORY-HEX50-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4146,7 +4154,7 @@
 <a id="hex-51-zhen-l1"></a>
 ### 初九 · `PLAN-STORY-HEX51-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4156,7 +4164,7 @@
 <a id="hex-51-zhen-l2"></a>
 ### 六二 · `PLAN-STORY-HEX51-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4166,7 +4174,7 @@
 <a id="hex-51-zhen-l3"></a>
 ### 六三 · `PLAN-STORY-HEX51-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4176,7 +4184,7 @@
 <a id="hex-51-zhen-l4"></a>
 ### 九四 · `PLAN-STORY-HEX51-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4186,7 +4194,7 @@
 <a id="hex-51-zhen-l5"></a>
 ### 六五 · `PLAN-STORY-HEX51-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4196,7 +4204,7 @@
 <a id="hex-51-zhen-l6"></a>
 ### 上六 · `PLAN-STORY-HEX51-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4227,7 +4235,7 @@
 <a id="hex-52-gen-l1"></a>
 ### 初六 · `PLAN-STORY-HEX52-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4237,7 +4245,7 @@
 <a id="hex-52-gen-l2"></a>
 ### 六二 · `PLAN-STORY-HEX52-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4247,7 +4255,7 @@
 <a id="hex-52-gen-l3"></a>
 ### 九三 · `PLAN-STORY-HEX52-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4257,7 +4265,7 @@
 <a id="hex-52-gen-l4"></a>
 ### 六四 · `PLAN-STORY-HEX52-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4267,7 +4275,7 @@
 <a id="hex-52-gen-l5"></a>
 ### 六五 · `PLAN-STORY-HEX52-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4277,7 +4285,7 @@
 <a id="hex-52-gen-l6"></a>
 ### 上九 · `PLAN-STORY-HEX52-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4308,7 +4316,7 @@
 <a id="hex-53-jian-gradual-l1"></a>
 ### 初六 · `PLAN-STORY-HEX53-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4318,7 +4326,7 @@
 <a id="hex-53-jian-gradual-l2"></a>
 ### 六二 · `PLAN-STORY-HEX53-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4328,7 +4336,7 @@
 <a id="hex-53-jian-gradual-l3"></a>
 ### 九三 · `PLAN-STORY-HEX53-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4338,7 +4346,7 @@
 <a id="hex-53-jian-gradual-l4"></a>
 ### 六四 · `PLAN-STORY-HEX53-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4348,7 +4356,7 @@
 <a id="hex-53-jian-gradual-l5"></a>
 ### 九五 · `PLAN-STORY-HEX53-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4358,7 +4366,7 @@
 <a id="hex-53-jian-gradual-l6"></a>
 ### 上九 · `PLAN-STORY-HEX53-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4389,7 +4397,7 @@
 <a id="hex-54-gui-mei-l1"></a>
 ### 初九 · `PLAN-STORY-HEX54-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4399,7 +4407,7 @@
 <a id="hex-54-gui-mei-l2"></a>
 ### 九二 · `PLAN-STORY-HEX54-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4409,7 +4417,7 @@
 <a id="hex-54-gui-mei-l3"></a>
 ### 六三 · `PLAN-STORY-HEX54-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4419,7 +4427,7 @@
 <a id="hex-54-gui-mei-l4"></a>
 ### 九四 · `PLAN-STORY-HEX54-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4429,7 +4437,7 @@
 <a id="hex-54-gui-mei-l5"></a>
 ### 六五 · `PLAN-STORY-HEX54-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4439,7 +4447,7 @@
 <a id="hex-54-gui-mei-l6"></a>
 ### 上六 · `PLAN-STORY-HEX54-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4470,7 +4478,7 @@
 <a id="hex-55-feng-l1"></a>
 ### 初九 · `PLAN-STORY-HEX55-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4480,7 +4488,7 @@
 <a id="hex-55-feng-l2"></a>
 ### 六二 · `PLAN-STORY-HEX55-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4490,7 +4498,7 @@
 <a id="hex-55-feng-l3"></a>
 ### 九三 · `PLAN-STORY-HEX55-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4500,7 +4508,7 @@
 <a id="hex-55-feng-l4"></a>
 ### 九四 · `PLAN-STORY-HEX55-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4510,7 +4518,7 @@
 <a id="hex-55-feng-l5"></a>
 ### 六五 · `PLAN-STORY-HEX55-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4520,7 +4528,7 @@
 <a id="hex-55-feng-l6"></a>
 ### 上六 · `PLAN-STORY-HEX55-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4551,7 +4559,7 @@
 <a id="hex-56-lu-traveler-l1"></a>
 ### 初六 · `PLAN-STORY-HEX56-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4561,7 +4569,7 @@
 <a id="hex-56-lu-traveler-l2"></a>
 ### 六二 · `PLAN-STORY-HEX56-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4571,7 +4579,7 @@
 <a id="hex-56-lu-traveler-l3"></a>
 ### 九三 · `PLAN-STORY-HEX56-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4581,7 +4589,7 @@
 <a id="hex-56-lu-traveler-l4"></a>
 ### 九四 · `PLAN-STORY-HEX56-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4591,7 +4599,7 @@
 <a id="hex-56-lu-traveler-l5"></a>
 ### 六五 · `PLAN-STORY-HEX56-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4601,7 +4609,7 @@
 <a id="hex-56-lu-traveler-l6"></a>
 ### 上九 · `PLAN-STORY-HEX56-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4632,7 +4640,7 @@
 <a id="hex-57-xun-l1"></a>
 ### 初六 · `PLAN-STORY-HEX57-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4642,7 +4650,7 @@
 <a id="hex-57-xun-l2"></a>
 ### 九二 · `PLAN-STORY-HEX57-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4652,7 +4660,7 @@
 <a id="hex-57-xun-l3"></a>
 ### 九三 · `PLAN-STORY-HEX57-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4662,7 +4670,7 @@
 <a id="hex-57-xun-l4"></a>
 ### 六四 · `PLAN-STORY-HEX57-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4672,7 +4680,7 @@
 <a id="hex-57-xun-l5"></a>
 ### 九五 · `PLAN-STORY-HEX57-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4682,7 +4690,7 @@
 <a id="hex-57-xun-l6"></a>
 ### 上九 · `PLAN-STORY-HEX57-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4713,7 +4721,7 @@
 <a id="hex-58-dui-l1"></a>
 ### 初九 · `PLAN-STORY-HEX58-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4723,7 +4731,7 @@
 <a id="hex-58-dui-l2"></a>
 ### 九二 · `PLAN-STORY-HEX58-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4733,7 +4741,7 @@
 <a id="hex-58-dui-l3"></a>
 ### 六三 · `PLAN-STORY-HEX58-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4743,7 +4751,7 @@
 <a id="hex-58-dui-l4"></a>
 ### 九四 · `PLAN-STORY-HEX58-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4753,7 +4761,7 @@
 <a id="hex-58-dui-l5"></a>
 ### 九五 · `PLAN-STORY-HEX58-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4763,7 +4771,7 @@
 <a id="hex-58-dui-l6"></a>
 ### 上六 · `PLAN-STORY-HEX58-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4794,7 +4802,7 @@
 <a id="hex-59-huan-l1"></a>
 ### 初六 · `PLAN-STORY-HEX59-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4804,7 +4812,7 @@
 <a id="hex-59-huan-l2"></a>
 ### 九二 · `PLAN-STORY-HEX59-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4814,7 +4822,7 @@
 <a id="hex-59-huan-l3"></a>
 ### 六三 · `PLAN-STORY-HEX59-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4824,7 +4832,7 @@
 <a id="hex-59-huan-l4"></a>
 ### 六四 · `PLAN-STORY-HEX59-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4834,7 +4842,7 @@
 <a id="hex-59-huan-l5"></a>
 ### 九五 · `PLAN-STORY-HEX59-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4844,7 +4852,7 @@
 <a id="hex-59-huan-l6"></a>
 ### 上九 · `PLAN-STORY-HEX59-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4875,7 +4883,7 @@
 <a id="hex-60-jie-l1"></a>
 ### 初九 · `PLAN-STORY-HEX60-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4885,7 +4893,7 @@
 <a id="hex-60-jie-l2"></a>
 ### 九二 · `PLAN-STORY-HEX60-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4895,7 +4903,7 @@
 <a id="hex-60-jie-l3"></a>
 ### 六三 · `PLAN-STORY-HEX60-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4905,7 +4913,7 @@
 <a id="hex-60-jie-l4"></a>
 ### 六四 · `PLAN-STORY-HEX60-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4915,7 +4923,7 @@
 <a id="hex-60-jie-l5"></a>
 ### 九五 · `PLAN-STORY-HEX60-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4925,7 +4933,7 @@
 <a id="hex-60-jie-l6"></a>
 ### 上六 · `PLAN-STORY-HEX60-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4956,7 +4964,7 @@
 <a id="hex-61-zhong-fu-l1"></a>
 ### 初九 · `PLAN-STORY-HEX61-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4966,7 +4974,7 @@
 <a id="hex-61-zhong-fu-l2"></a>
 ### 九二 · `PLAN-STORY-HEX61-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4976,7 +4984,7 @@
 <a id="hex-61-zhong-fu-l3"></a>
 ### 六三 · `PLAN-STORY-HEX61-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4986,7 +4994,7 @@
 <a id="hex-61-zhong-fu-l4"></a>
 ### 六四 · `PLAN-STORY-HEX61-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -4996,7 +5004,7 @@
 <a id="hex-61-zhong-fu-l5"></a>
 ### 九五 · `PLAN-STORY-HEX61-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5006,7 +5014,7 @@
 <a id="hex-61-zhong-fu-l6"></a>
 ### 上九 · `PLAN-STORY-HEX61-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5037,7 +5045,7 @@
 <a id="hex-62-xiao-guo-l1"></a>
 ### 初六 · `PLAN-STORY-HEX62-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5047,7 +5055,7 @@
 <a id="hex-62-xiao-guo-l2"></a>
 ### 六二 · `PLAN-STORY-HEX62-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5057,7 +5065,7 @@
 <a id="hex-62-xiao-guo-l3"></a>
 ### 九三 · `PLAN-STORY-HEX62-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5067,7 +5075,7 @@
 <a id="hex-62-xiao-guo-l4"></a>
 ### 九四 · `PLAN-STORY-HEX62-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5077,7 +5085,7 @@
 <a id="hex-62-xiao-guo-l5"></a>
 ### 六五 · `PLAN-STORY-HEX62-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5087,7 +5095,7 @@
 <a id="hex-62-xiao-guo-l6"></a>
 ### 上六 · `PLAN-STORY-HEX62-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5118,7 +5126,7 @@
 <a id="hex-63-ji-ji-l1"></a>
 ### 初九 · `PLAN-STORY-HEX63-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5128,7 +5136,7 @@
 <a id="hex-63-ji-ji-l2"></a>
 ### 六二 · `PLAN-STORY-HEX63-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5138,7 +5146,7 @@
 <a id="hex-63-ji-ji-l3"></a>
 ### 九三 · `PLAN-STORY-HEX63-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5148,7 +5156,7 @@
 <a id="hex-63-ji-ji-l4"></a>
 ### 六四 · `PLAN-STORY-HEX63-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5158,7 +5166,7 @@
 <a id="hex-63-ji-ji-l5"></a>
 ### 九五 · `PLAN-STORY-HEX63-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5168,7 +5176,7 @@
 <a id="hex-63-ji-ji-l6"></a>
 ### 上六 · `PLAN-STORY-HEX63-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5199,7 +5207,7 @@
 <a id="hex-64-wei-ji-l1"></a>
 ### 初六 · `PLAN-STORY-HEX64-LINE-001`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5209,7 +5217,7 @@
 <a id="hex-64-wei-ji-l2"></a>
 ### 九二 · `PLAN-STORY-HEX64-LINE-002`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5219,7 +5227,7 @@
 <a id="hex-64-wei-ji-l3"></a>
 ### 六三 · `PLAN-STORY-HEX64-LINE-003`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5229,7 +5237,7 @@
 <a id="hex-64-wei-ji-l4"></a>
 ### 九四 · `PLAN-STORY-HEX64-LINE-004`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5239,7 +5247,7 @@
 <a id="hex-64-wei-ji-l5"></a>
 ### 六五 · `PLAN-STORY-HEX64-LINE-005`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언
@@ -5249,7 +5257,7 @@
 <a id="hex-64-wei-ji-l6"></a>
 ### 上九 · `PLAN-STORY-HEX64-LINE-006`
 
-- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.
+- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.
 - 주체: 미선언
 - WI: 미선언
 - H: 미선언

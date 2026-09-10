@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "simulation-e7-vertical-work-order.v2",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
+  "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
+  "workOrderId": "E7-WO-PLAYER-IDEA-MAP",
+  "title": "플레이어 이데아 맵 파생 조회 E3",
+  "playableUnitStableId": "playable-loop:nature-base-reflection.v1",
+  "activeWorldInteractionId": "WI-REFLECT-01",
+  "targetEvidenceStage": "E7",
+  "currentEvidenceStage": "E3",
+  "promotionEligible": false,
+  "planningGate": {
+    "statusCode": "Approved",
+    "designDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-IDEA-MAP-LEARNING-001/README.md",
+    "designRevision": "idea-map-learning-transition.r1",
+    "designHashSha256": "F009C1CD063CBFB6D79455A079FC6E99BA8861BCB9DBE04209C6F43AC18D64DE",
+    "approvalEvidenceRef": "docs/AI/PLANNING.md"
+  },
+  "deliveryCap": {
+    "currentDispatchTargetStage": "E3",
+    "promotionBeyondStageAllowed": false,
+    "reason": "기존 권위 기록에서 파생되는 계약·Core·Local/HTTP 조회와 결정성 시험만 닫는다."
+  },
+  "iterationState": {
+    "currentPass": "UpwardAssemblyAndValidation",
+    "nextReopenCondition": "학습 필요·원인 가설·교정 관계를 새 권위 사실로 저장하거나 UI가 권위 값을 변경하면 Logic E1을 다시 연다."
+  },
+  "trackPlans": {
+    "logic": {
+      "trackCode": "Logic",
+      "currentEvidenceStage": "E3",
+      "downwardPlan": [
+        { "code": "E7", "disposition": "Blocked", "summary": "실제 입력과 전체 학습 귀환은 후속이다." },
+        { "code": "E6", "disposition": "Blocked", "summary": "산수몽 교정·가설 검증의 권위 상태는 후속이다." },
+        { "code": "E5", "disposition": "Blocked", "summary": "실제 World·Unity 결속은 수행하지 않는다." },
+        { "code": "E4", "disposition": "Blocked", "summary": "정확한 그래프 UI 판독 계약은 후속이다." },
+        { "code": "E3", "disposition": "Affected", "summary": "행위 필터·멘토 효과·파생 hash·Save/Replay 동등성을 시험한다." },
+        { "code": "E2", "disposition": "Affected", "summary": "행위·명상·분야·학습중점 사본을 읽는 결정적 파생 Core와 Adapter를 구현한다." },
+        { "code": "E1", "disposition": "Defined", "summary": "이데아 맵은 읽기 모델이며 첫 유효 행동 전에는 사실을 만들지 않는다." }
+      ],
+      "upwardValidation": [
+        { "code": "E1", "status": "Passed", "evidenceRefs": ["docs/AI/Planning/스토리/PLAN-STORY-IDEA-MAP-LEARNING-001/README.md"] },
+        { "code": "E2", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Contracts/UnityPackage/Runtime/SimulationPlayerIdeaMapContracts.cs", "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationPlayerIdeaMap.cs"] },
+        { "code": "E3", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs", "test:SimulationPlayerLearningFocusTests:19/19"] },
+        { "code": "E4", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E5", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E6", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E7", "status": "Blocked", "evidenceRefs": [] }
+      ]
+    },
+    "presentation": {
+      "trackCode": "Presentation",
+      "currentEvidenceStage": "E3",
+      "downwardPlan": [
+        { "code": "E7", "disposition": "Blocked", "summary": "실제 입력·Game View는 후속이다." },
+        { "code": "E6", "disposition": "Blocked", "summary": "그래프 전환·접근성 정제는 후속이다." },
+        { "code": "E5", "disposition": "Blocked", "summary": "Unity UI 배치는 수행하지 않는다." },
+        { "code": "E4", "disposition": "Blocked", "summary": "노드·엣지 판독 순간과 시각 언어를 별도 승인한다." },
+        { "code": "E3", "disposition": "Affected", "summary": "LocalProcess와 HTTP가 같은 읽기 모델·revision·hash를 반환한다." },
+        { "code": "E2", "disposition": "Affected", "summary": "노드·엣지 종류와 전역 명상·분야 숙련 분리 계약을 제공한다." },
+        { "code": "E1", "disposition": "Defined", "summary": "플레이어는 기록으로 확인된 경험과 관계만 읽을 수 있다." }
+      ],
+      "upwardValidation": [
+        { "code": "E1", "status": "Passed", "evidenceRefs": ["docs/AI/Planning/스토리/PLAN-STORY-IDEA-MAP-LEARNING-001/README.md"] },
+        { "code": "E2", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Server/Controllers/SimulationPlayerIdeaMapController.cs"] },
+        { "code": "E3", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs", "test:SimulationPlayerLearningFocusTests:19/19"] },
+        { "code": "E4", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E5", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E6", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E7", "status": "Blocked", "evidenceRefs": [] }
+      ]
+    }
+  },
+  "integratedGate": {
+    "currentEvidenceStage": "E3",
+    "status": "Passed",
+    "candidateRevision": "player-idea-map.r1",
+    "evidenceRefs": [
+      "docs/AI/Planning/스토리/PLAN-STORY-IDEA-MAP-LEARNING-001/README.md",
+      "Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs",
+      "test:SimulationPlayerLearningFocusTests:19/19"
+    ],
+    "openFeedbackRefs": [
+      "상육의 두 학습 필요를 기록할 권위 WI, 산수몽 교정 관계, 실제 그래프 UI와 Unity 실행은 후속이다."
+    ]
+  }
+}

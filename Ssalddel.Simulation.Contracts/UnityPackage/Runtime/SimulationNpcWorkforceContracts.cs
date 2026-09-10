@@ -115,6 +115,7 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class SimulationNpcWorkPolicyInitialRequest
     {
+        public int? CookingSlots { get; set; }
         public string PolicyStableId { get; set; } = string.Empty;
         public string OrganizationStableId { get; set; } = string.Empty;
         public string FacilityStableId { get; set; } = string.Empty;
@@ -134,6 +135,11 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class SimulationNpcPolicyChangeRequest
     {
+        public int? ObserverWorkingTicks { get; set; }
+        public int? ObserverRestTicks { get; set; }
+        public int? ObserverRestockThreshold { get; set; }
+        public int? CookingSlots { get; set; }
+        public int? CookingDurationTicks { get; set; }
         public string CommandId { get; set; } = string.Empty;
         public long ExpectedRevision { get; set; }
         public string PolicyStableId { get; set; } = string.Empty;
@@ -203,6 +209,7 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class SimulationNpcWorkPolicySnapshot
     {
+        public int? CookingSlots { get; set; }
         public string PolicyStableId { get; set; } = string.Empty;
         public string OrganizationStableId { get; set; } = string.Empty;
         public string FacilityStableId { get; set; } = string.Empty;

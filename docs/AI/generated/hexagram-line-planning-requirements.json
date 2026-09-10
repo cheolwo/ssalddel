@@ -1,46 +1,50 @@
 {
-  "schemaVersion": "mirror-hexagram-line-planning-requirements-index.v1",
-  "revision": "hexagram-line-planning-requirements.r6",
+  "schemaVersion": "mirror-hexagram-line-planning-requirements-index.v2",
+  "revision": "hexagram-line-planning-requirements.r7",
   "sourceSnapshots": [
     {
       "path": "eng/execution-ledgers/hexagram-line-planning-requirements.json",
-      "sha256": "8493B28970A3350BF9D21847227968834324732B4F35A22C8716B517EA580968"
+      "sha256": "07811A741954ADF38BDDD0F4B4C0A35EE1210451E0772F9D50AA10AEE40C4AD9"
     },
     {
       "path": "eng/execution-ledgers/hexagram-story-production.json",
-      "sha256": "27D35262016DBD873245460A792C469243FCE876C2B1D93F9D0D36B33A5F8D88"
+      "sha256": "C005B00D4F26332777E20018DB1AF18C828D0AE823E437098D9640027C38F0CD"
     },
     {
       "path": "eng/execution-ledgers/gameplay-subjects.json",
-      "sha256": "34767D82080E1058640C863704A9E561126CDE5C0632BE10EABBC6298849E9DB"
+      "sha256": "7FDE9D43C7B4DC02BE9DD4B7E08E65F2F8DF8E29B917785008C78B5D922F8E0F"
     },
     {
       "path": "eng/execution-ledgers/world-interactions.json",
-      "sha256": "AF745AA42BF837ED9277E0435503D4123F65ECA93FD122F967CB448D517E8E2A"
+      "sha256": "75383697365C145BD0ABEAD0FF8DC36C3BDAB6A36C9F252720480BF41BB9B097"
+    },
+    {
+      "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "sha256": "938DE55F56D99CA1B733739B3D09CFFCF1C549D5D940394A2E2BFE9BEF6BBFFF"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md",
-      "sha256": "0C0BAE19FD020E4549D282D2E9E32DA742EDA7C74920C515D114FCBB000C1844"
+      "sha256": "A382D8438CAAE59AF952A29CE2DC8989C450692E004227CA890B53BCD82AC408"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md",
-      "sha256": "66F24DE834610A6413B1494ED19F709E435937B8604A13F652DD5452FDB6A2F1"
+      "sha256": "C93ED9185579FC0054DA7DD67C01A1D623DCEC943E85AFE3BE9F438F149E57C1"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md",
-      "sha256": "EFC260B2B4CD06FD9F9D3997683798B7709F5615874869E217603BCEE7540C83"
+      "sha256": "976349D897519BEDB068E5DD2AF4638ED6FFF484BDCF77CBC28E6AAE10A0BCEF"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md",
-      "sha256": "F6D417CB18B4AF10C4C02716CD595F8D6DBB7E69A45A2AA5E855BBE13FD804F9"
+      "sha256": "9B6759BEC1157F3D786025B72CBB2809A8BD3D5C257117211C093BD63EAD42A5"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md",
-      "sha256": "D7310F04D88EF8E7378983E8C0D60C823094A05A1D7C568B0B505B003E4DE21F"
+      "sha256": "E6F34296300098D6E92ECCCDB04B37B8A016AC9F6895C738EA448044FD4F82C3"
     },
     {
       "path": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md",
-      "sha256": "700A451AF693B2AA68329E515F12367340B6D1F491A45EAF3B708CBEC6183973"
+      "sha256": "2D0FD01766C72EEE6CE35EE31AE41F775586B583FB8656F91C9C84EF6D187D9B"
     }
   ],
   "counts": {
@@ -52,7 +56,9 @@
   },
   "principles": {
     "allLinesHaveStablePlanIds": true,
-    "onlyStudiedLinesRequireDocuments": true,
+    "onlyOpenedHexagramsRequireCanonicalDocuments": true,
+    "lineRequirementsBindToCanonicalDocumentSections": true,
+    "legacyLineDocumentsAreCompatibilityPointers": true,
     "atMostOneActiveStudy": true,
     "storyApprovalAndDevelopmentReadinessAreSeparate": true,
     "linePlanDeclaresButDoesNotCreateWorldInteractionsOrH": true,
@@ -64,12 +70,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-001",
       "hexagramLineStableId": "HEX-03-ZHUN-L1",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md",
-      "documentRevisionCode": "hex03-line001.r6",
-      "documentExpectedSha256": "0C0BAE19FD020E4549D282D2E9E32DA742EDA7C74920C515D114FCBB000C1844",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l1",
+      "sectionExpectedSha256": "F670275A409B99B37703D56673C851E5830B6F24DDDCECBA41D4220CD823F260",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md",
       "originalText": "初九：磐桓，利居貞，利建侯。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#初九",
@@ -193,12 +202,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-002",
       "hexagramLineStableId": "HEX-03-ZHUN-L2",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md",
-      "documentRevisionCode": "hex03-line002.r5",
-      "documentExpectedSha256": "66F24DE834610A6413B1494ED19F709E435937B8604A13F652DD5452FDB6A2F1",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l2",
+      "sectionExpectedSha256": "47AD7A34651643CC8FBC41412CA684F42F42E792214062A437FC8BAB5AB85C5F",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md",
       "originalText": "六二：屯如邅如，乘馬班如，匪寇婚媾，女子貞不字，十年乃字。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#六二",
@@ -284,12 +296,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-003",
       "hexagramLineStableId": "HEX-03-ZHUN-L3",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md",
-      "documentRevisionCode": "hex03-line003.r4",
-      "documentExpectedSha256": "EFC260B2B4CD06FD9F9D3997683798B7709F5615874869E217603BCEE7540C83",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l3",
+      "sectionExpectedSha256": "AEF09E306496A48875D71C3DF2FB8013103DEE955ED59DB3CBB8EE9D0DEC882F",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md",
       "originalText": "六三：即鹿无虞，惟入于林中，君子幾不如舍，往吝。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#六三",
@@ -376,12 +391,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-004",
       "hexagramLineStableId": "HEX-03-ZHUN-L4",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md",
-      "documentRevisionCode": "hex03-line004.r5",
-      "documentExpectedSha256": "F6D417CB18B4AF10C4C02716CD595F8D6DBB7E69A45A2AA5E855BBE13FD804F9",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l4",
+      "sectionExpectedSha256": "1B990EF4FAAE713967CB1B54BDD2954F0D26BBA85E85A24880413BBF32A00D94",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md",
       "originalText": "六四：乘馬班如，求婚媾，往，吉无不利。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#六四",
@@ -481,12 +499,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-005",
       "hexagramLineStableId": "HEX-03-ZHUN-L5",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md",
-      "documentRevisionCode": "hex03-line005.r5",
-      "documentExpectedSha256": "D7310F04D88EF8E7378983E8C0D60C823094A05A1D7C568B0B505B003E4DE21F",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l5",
+      "sectionExpectedSha256": "9D5902356F9EAFECBCE2AAD49CFA0CA34BD17DF3A6476824E131B033BBCAB3D4",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md",
       "originalText": "九五：屯其膏；小貞吉，大貞凶。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#九五",
@@ -598,12 +619,15 @@
     {
       "linePlanId": "PLAN-STORY-HEX03-LINE-006",
       "hexagramLineStableId": "HEX-03-ZHUN-L6",
+      "hexagramPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
       "planningStatusCode": "StoryApproved",
       "requirementStateCode": "Resolved",
       "handoffStateCode": "ReadyForDevelopment",
-      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md",
-      "documentRevisionCode": "hex03-line006.r5",
-      "documentExpectedSha256": "700A451AF693B2AA68329E515F12367340B6D1F491A45EAF3B708CBEC6183973",
+      "documentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+      "documentRevisionCode": "hex03-campaign.r11",
+      "sectionAnchor": "hex-03-zhun-l6",
+      "sectionExpectedSha256": "FF6F9C56A0E87CBCE9C6BD7F3F3F46A612C44698EB10FE30DB4FFBDB3D58960A",
+      "compatibilityDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md",
       "originalText": "上六：乘馬班如，泣血漣如。",
       "originalSourceId": "wikisource-zhouyi-traditional",
       "originalSourceLocator": "周易/屯#上六",

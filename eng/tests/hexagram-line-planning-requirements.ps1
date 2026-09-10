@@ -66,7 +66,11 @@ $fixture.items[0].worldInteractionRequirements[0].resolutionCode = 'CandidateNee
 Expect-ValidationFailure 'premature-development' $fixture 'DevelopmentReadyRequiredUnresolved'
 
 $fixture = New-SourceCopy
-$fixture.items[0].documentExpectedSha256 = ('0' * 64)
-Expect-ValidationFailure 'stale-document' $fixture 'LineDocumentHashMismatch'
+$fixture.items[0].sectionExpectedSha256 = ('0' * 64)
+Expect-ValidationFailure 'stale-section' $fixture 'LineSectionHashMismatch'
 
-Write-Output 'HexagramLinePlanningRequirementsTests:OK:Cases=13'
+$fixture = New-SourceCopy
+$fixture.items[0].sectionAnchor = 'hex-03-zhun-wrong'
+Expect-ValidationFailure 'section-anchor' $fixture 'LineSectionAnchor'
+
+Write-Output 'HexagramLinePlanningRequirementsTests:OK:Cases=14'

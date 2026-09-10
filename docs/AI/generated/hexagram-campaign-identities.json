@@ -1,7 +1,7 @@
 {
   "schemaVersion": "mirror-hexagram-campaign-identities-index.v1",
   "revision": "hexagram-campaign-identities.r1",
-  "parentProductionRevision": "hexagram-story-production.r14",
+  "parentProductionRevision": "hexagram-story-production.r15",
   "sourceSnapshots": [
     {
       "path": "eng/execution-ledgers/hexagram-campaign-identities.json",
@@ -9,7 +9,7 @@
     },
     {
       "path": "eng/execution-ledgers/hexagram-story-production.json",
-      "sha256": "27D35262016DBD873245460A792C469243FCE876C2B1D93F9D0D36B33A5F8D88"
+      "sha256": "C005B00D4F26332777E20018DB1AF18C828D0AE823E437098D9640027C38F0CD"
     }
   ],
   "policy": {

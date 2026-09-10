@@ -42,8 +42,8 @@ function Get-ReferenceAnchor([string] $Prefix, [string] $Value) {
 
 $inputFile = if ([IO.Path]::IsPathRooted($InputPath)) { [IO.Path]::GetFullPath($InputPath) } else { Resolve-RepositoryPath $InputPath 'Input' $true }
 $source = Get-Content -LiteralPath $inputFile -Raw -Encoding UTF8 | ConvertFrom-Json
-Require ([string] $source.schemaVersion -eq 'mirror-hexagram-story-tree.v1') 'SchemaVersion'
-Require ([string] $source.revision -eq 'hexagram-story-tree.r2') 'Revision'
+Require ([string] $source.schemaVersion -eq 'mirror-hexagram-story-tree.v2') 'SchemaVersion'
+Require ([string] $source.revision -eq 'hexagram-story-tree.r3') 'Revision'
 
 $production = Get-Content -LiteralPath (Resolve-RepositoryPath ([string] $source.productionLedgerPath) 'Production' $true) -Raw -Encoding UTF8 | ConvertFrom-Json
 $campaignIdentities = Get-Content -LiteralPath (Resolve-RepositoryPath ([string] $source.campaignIdentityLedgerPath) 'CampaignIdentities' $true) -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -52,20 +52,21 @@ $existingPlanning = Get-Content -LiteralPath (Resolve-RepositoryPath ([string] $
 $requirements = Get-Content -LiteralPath (Resolve-RepositoryPath ([string] $source.lineRequirementLedgerPath) 'Requirements' $true) -Raw -Encoding UTF8 | ConvertFrom-Json
 $worldInteractions = Get-Content -LiteralPath (Resolve-RepositoryPath ([string] $source.worldInteractionCatalogPath) 'WorldInteractions' $true) -Raw -Encoding UTF8 | ConvertFrom-Json
 
-Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v3') 'ProductionSchema'
+Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v4') 'ProductionSchema'
 Require ([string] $campaignIdentities.schemaVersion -eq 'mirror-hexagram-campaign-identities.v1') 'CampaignIdentitySchema'
 Require ([string] $seeds.schemaVersion -eq 'mirror-hexagram-story-seeds.v1') 'SeedSchema'
 Require ([string] $existingPlanning.schemaVersion -eq 'mirror-hexagram-existing-planning-classifications.v1') 'ExistingPlanningSchema'
-Require ([string] $requirements.schemaVersion -eq 'mirror-hexagram-line-planning-requirements.v1') 'RequirementSchema'
+Require ([string] $requirements.schemaVersion -eq 'mirror-hexagram-line-planning-requirements.v2') 'RequirementSchema'
 
 $policy = $source.policy
 Require ([int] $policy.hexagramCount -eq 64) 'HexagramCountPolicy'
 Require ([int] $policy.lineCountPerHexagram -eq 6) 'LineCountPolicy'
-Require ([string] $policy.physicalDocumentPolicyCode -eq 'OpenedLinesOnly') 'PhysicalDocumentPolicy'
+Require ([string] $policy.physicalDocumentPolicyCode -eq 'OpenedHexagramDocumentsOnly') 'PhysicalDocumentPolicy'
+Require ([string] $policy.storyAuthorityCode -eq 'ApprovedHexagramLineSectionsOnly') 'StoryAuthorityPolicy'
 Require ([string] $policy.unopenedLinePolicyCode -eq 'GeneratedStableAnchor') 'UnopenedLinePolicy'
 Require ([string] $policy.existingPlanningScopeCode -eq 'PlayerExperienceOnly') 'PlanningScopePolicy'
 Require ([string] $policy.formalStudyOrderCode -eq 'StrictKingWen01To64') 'StudyOrderPolicy'
-foreach ($flag in @('doesNotCreateLineDocuments', 'doesNotCreateWorldInteractionsOrH', 'doesNotActivateDevelopment', 'doesNotPromoteEvidence')) {
+foreach ($flag in @('doesNotCreateHexagramDocuments', 'doesNotCreateWorldInteractionsOrH', 'doesNotActivateDevelopment', 'doesNotPromoteEvidence')) {
     Require ([bool] $policy.$flag) "PolicyFlag:$flag"
 }
 
@@ -133,16 +134,25 @@ foreach ($hexagram in $hexagrams) {
     $hexSeeds = @($seeds.seeds | Where-Object { [string] $_.primaryHexagramStableId -eq [string] $hexagram.stableId })
     $primaryPlanning = @($planningItems | Where-Object { [string] $_.primaryHexagramStableId -eq [string] $hexagram.stableId })
     $secondaryPlanning = @($planningItems | Where-Object { @($_.secondaryCandidates | ForEach-Object { [string] $_.hexagramStableId }) -contains [string] $hexagram.stableId })
+    $canonicalDocumentProperty = $hexagram.PSObject.Properties['canonicalDocumentRef']
+    $hexagramPlanProperty = $hexagram.PSObject.Properties['hexagramPlanId']
+    $canonicalDocumentRef = if ($null -eq $canonicalDocumentProperty) { '' } else { [string] $canonicalDocumentProperty.Value }
+    $hexagramPlanId = if ($null -eq $hexagramPlanProperty) { '' } else { [string] $hexagramPlanProperty.Value }
+    $canonicalDocumentPath = if ([string]::IsNullOrWhiteSpace($canonicalDocumentRef)) { '' } else { Resolve-RepositoryPath $canonicalDocumentRef "HexagramDocument:$($hexagram.stableId)" $false }
+    $canonicalDocumentExists = -not [string]::IsNullOrWhiteSpace($canonicalDocumentPath) -and (Test-Path -LiteralPath $canonicalDocumentPath -PathType Leaf)
+    $canonicalDocumentText = if ($canonicalDocumentExists) { Get-Content -LiteralPath $canonicalDocumentPath -Raw -Encoding UTF8 } else { '' }
     $treeLines = @()
     foreach ($line in @($hexagram.lineStories | Sort-Object ordinal)) {
         $lineAnchor = ([string] $line.stableId).ToLowerInvariant()
         Require ($allAnchors.Add($lineAnchor)) "AnchorDuplicate:$lineAnchor"
-        $conventionalDocumentRef = "$($source.lineDocumentRootPath)/$($line.linePlanId)/README.md"
-        $conventionalDocumentPath = Resolve-RepositoryPath $conventionalDocumentRef "LineDocument:$($line.stableId)" $false
-        $documentExists = Test-Path -LiteralPath $conventionalDocumentPath -PathType Leaf
         $requirement = if ($requirementByLine.ContainsKey([string] $line.stableId)) { $requirementByLine[[string] $line.stableId] } else { $null }
+        $sectionAnchor = if ($null -ne $requirement) { [string] $requirement.sectionAnchor } else { $lineAnchor }
+        $startMarker = "<!-- line-section:$($line.stableId)`:start -->"
+        $endMarker = "<!-- line-section:$($line.stableId)`:end -->"
+        $documentExists = $canonicalDocumentExists -and $canonicalDocumentText.Contains($startMarker) -and $canonicalDocumentText.Contains($endMarker)
         if ($null -ne $requirement -and -not [string]::IsNullOrWhiteSpace([string] $requirement.documentRef)) {
-            Require ([string] $requirement.documentRef -eq $conventionalDocumentRef) "LineDocumentConvention:$($line.stableId)"
+            Require ([string] $requirement.documentRef -eq $canonicalDocumentRef) "LineDocumentConvention:$($line.stableId)"
+            Require ([string] $requirement.sectionAnchor -eq $lineAnchor) "LineSectionConvention:$($line.stableId)"
             Require $documentExists "RequiredLineDocumentMissing:$($line.stableId)"
         }
 
@@ -186,7 +196,8 @@ foreach ($hexagram in $hexagrams) {
             traditionalName = [string] $line.traditionalName
             storyStatusCode = [string] $line.storyStatusCode
             documentStateCode = if ($documentExists) { 'Opened' } else { 'GeneratedDetail' }
-            documentRef = if ($documentExists) { $conventionalDocumentRef } else { '' }
+            documentRef = if ($documentExists) { "$canonicalDocumentRef#$sectionAnchor" } else { '' }
+            compatibilityDocumentRef = if ($null -ne $requirement) { [string] $requirement.compatibilityDocumentRef } else { '' }
             planningStatusCode = if ($null -ne $requirement) { [string] $requirement.planningStatusCode } else { 'NotOpened' }
             requirementStateCode = if ($null -ne $requirement) { [string] $requirement.requirementStateCode } else { 'NotDeclared' }
             handoffStateCode = if ($null -ne $requirement) { [string] $requirement.handoffStateCode } else { 'NotEligible' }
@@ -206,6 +217,8 @@ foreach ($hexagram in $hexagrams) {
         nameHanja = [string] $hexagram.nameHanja
         nameKorean = [string] $hexagram.nameKorean
         productionStatusCode = [string] $hexagram.productionStatusCode
+        hexagramPlanId = $hexagramPlanId
+        canonicalDocumentRef = if ($canonicalDocumentExists) { $canonicalDocumentRef } else { '' }
         campaignIdentity = [ordered]@{
             campaignScaleCode = [string] $campaignIdentity.campaignScaleCode
             identityStatusCode = [string] $campaignIdentity.identityStatusCode
@@ -241,7 +254,7 @@ $wiIndexItems = @($wiReferences.GetEnumerator() | Sort-Object Name | ForEach-Obj
 $result = [ordered]@{
     authorityCode = 'ReferenceOnlyNotStoryOrRuntimeOrder'
     currentPolicyRef = 'docs/Architecture/스토리영감과플레이진행분리.md'
-    schemaVersion = 'mirror-hexagram-story-tree-index.v1'
+    schemaVersion = 'mirror-hexagram-story-tree-index.v2'
     revision = [string] $source.revision
     productionRevision = [string] $production.revision
     campaignIdentityRevision = [string] $campaignIdentities.revision
@@ -249,7 +262,7 @@ $result = [ordered]@{
     existingPlanningRevision = [string] $existingPlanning.revision
     lineRequirementRevision = [string] $requirements.revision
     policy = $policy
-    counts = [ordered]@{ hexagrams = $treeHexagrams.Count; lines = @($treeHexagrams.lines).Count; openedLineDocuments = @($treeHexagrams.lines | Where-Object documentStateCode -eq 'Opened').Count; declaredLineRequirements = $requirementByLine.Count; classifiedExistingPlans = $planningItems.Count; confirmedExistingPlans = @($planningItems | Where-Object classificationStateCode -eq 'Confirmed').Count; hReferences = $hIndexItems.Count; worldInteractionReferences = $wiIndexItems.Count }
+    counts = [ordered]@{ hexagrams = $treeHexagrams.Count; lines = @($treeHexagrams.lines).Count; openedHexagramDocuments = @($treeHexagrams | Where-Object { -not [string]::IsNullOrWhiteSpace([string] $_.canonicalDocumentRef) }).Count; openedLineSections = @($treeHexagrams.lines | Where-Object documentStateCode -eq 'Opened').Count; openedLineDocuments = @($treeHexagrams.lines | Where-Object documentStateCode -eq 'Opened').Count; declaredLineRequirements = $requirementByLine.Count; classifiedExistingPlans = $planningItems.Count; confirmedExistingPlans = @($planningItems | Where-Object classificationStateCode -eq 'Confirmed').Count; hReferences = $hIndexItems.Count; worldInteractionReferences = $wiIndexItems.Count }
     hexagrams = $treeHexagrams
     worldInteractionReferences = $wiIndexItems
     hReferences = $hIndexItems
@@ -262,8 +275,8 @@ $builder = [Text.StringBuilder]::new()
 [void] $builder.AppendLine()
 [void] $builder.AppendLine('> 괘·효는 영감과 원문 대조를 위한 참고 색인이다. 사건 수·제작 순서·플레이 진행은 이야기의 인과로 정한다. 아래 제작 상태는 이전 배정 이력이다. [현행 기준](../../Architecture/스토리영감과플레이진행분리.md). 이 문서는 자동 생성된다.')
 [void] $builder.AppendLine()
-[void] $builder.AppendLine("- 괘: **$($result.counts.hexagrams)** / 효: **$($result.counts.lines)** / 실제 열린 효사 문서: **$($result.counts.openedLineDocuments)** / 요구사항 선언 효: **$($result.counts.declaredLineRequirements)** / 기존 플레이 기획 분류: **$($result.counts.classifiedExistingPlans)**")
-[void] $builder.AppendLine('- 물리 `README.md`는 실제로 연 효사에만 둔다. 미개방 효 링크는 이 문서 안의 안정 상세 앵커로 연결한다.')
+[void] $builder.AppendLine("- 괘: **$($result.counts.hexagrams)** / 효: **$($result.counts.lines)** / 열린 괘 정본: **$($result.counts.openedHexagramDocuments)** / 열린 효 절: **$($result.counts.openedLineSections)** / 요구사항 선언 효: **$($result.counts.declaredLineRequirements)** / 기존 플레이 기획 분류: **$($result.counts.classifiedExistingPlans)**")
+[void] $builder.AppendLine('- 물리 `README.md`는 실제로 연 괘에 하나만 둔다. 효 ID는 그 정본 안의 절 앵커로 연결하고, 옛 효별 경로는 호환 안내만 유지한다.')
 [void] $builder.AppendLine()
 [void] $builder.AppendLine('## 64괘 목차')
 [void] $builder.AppendLine()
@@ -281,6 +294,7 @@ foreach ($hexagram in $treeHexagrams) {
     [void] $builder.AppendLine("- 주체·압박: $(Escape-Cell $hexagram.campaignIdentity.subjectRelation) / $(Escape-Cell $hexagram.campaignIdentity.pressureModel)")
     [void] $builder.AppendLine("- 고유 규칙 조합: $(Escape-Cell $hexagram.campaignIdentity.signatureRuleCombination) (``$($hexagram.campaignIdentity.combinationFingerprint)``)")
     [void] $builder.AppendLine("- 완주 변화: $(Escape-Cell $hexagram.campaignIdentity.completionTransformation)")
+    if (-not [string]::IsNullOrWhiteSpace([string] $hexagram.canonicalDocumentRef)) { [void] $builder.AppendLine("- 괘 정본: [열기]($(Get-GeneratedRelativeLink $hexagram.canonicalDocumentRef))") }
     $primaryPlanText = if (@($hexagram.primaryPlanningRefs).Count -gt 0) { @($hexagram.primaryPlanningRefs | ForEach-Object { "[$($_.title)]($(Get-GeneratedRelativeLink $_.documentRef)) (``$($_.classificationStateCode)``)" }) -join '; ' } else { '없음' }
     $secondaryPlanText = if (@($hexagram.secondaryPlanningRefs).Count -gt 0) { @($hexagram.secondaryPlanningRefs | ForEach-Object { "[$($_.title)]($(Get-GeneratedRelativeLink $_.documentRef))" }) -join '; ' } else { '없음' }
     [void] $builder.AppendLine("- 기존 기획 주괘 배치: $primaryPlanText")
@@ -298,7 +312,10 @@ foreach ($hexagram in $treeHexagrams) {
         [void] $builder.AppendLine("<a id=`"$($line.anchor)`"></a>")
         [void] $builder.AppendLine("### $($line.traditionalName) · ``$($line.linePlanId)``")
         [void] $builder.AppendLine()
-        if ($line.documentStateCode -eq 'Opened') { [void] $builder.AppendLine("- 기획 문서: [열기]($(Get-GeneratedRelativeLink $line.documentRef))") } else { [void] $builder.AppendLine('- 기획 문서: 미개방. 이 상세 앵커가 향후 문서 생성 전의 안정 링크다.') }
+        if ($line.documentStateCode -eq 'Opened') {
+            [void] $builder.AppendLine("- 기획 정본 효 절: [열기]($(Get-GeneratedRelativeLink $line.documentRef))")
+            if (-not [string]::IsNullOrWhiteSpace([string] $line.compatibilityDocumentRef)) { [void] $builder.AppendLine("- 호환 문서: ``$($line.compatibilityDocumentRef)``") }
+        } else { [void] $builder.AppendLine('- 기획 문서: 미개방. 이 상세 앵커가 향후 괘 정본 생성 전의 안정 링크다.') }
         $subjectText = if (@($line.subjects).Count -gt 0) { @($line.subjects | ForEach-Object { $target = if ([string]::IsNullOrWhiteSpace($_.targetRef)) { '미정' } else { $_.targetRef }; "``$($_.roleCode)`` → ``$target`` ($($_.resolutionCode))" }) -join '; ' } else { '미선언' }
         $wiText = if (@($line.worldInteractions).Count -gt 0) { @($line.worldInteractions | ForEach-Object { if ([string]::IsNullOrWhiteSpace($_.targetRef)) { "``$($_.roleCode)`` → 미정 ($($_.resolutionCode))" } else { "``$($_.roleCode)`` → [$($_.targetRef)](#$(Get-ReferenceAnchor 'wi' $_.targetRef)) ($($_.resolutionCode))" } }) -join '; ' } else { '미선언' }
         $hText = if (@($line.hRequirements).Count -gt 0) { @($line.hRequirements | ForEach-Object { if ([string]::IsNullOrWhiteSpace($_.targetRef)) { "``$($_.levelCode)`` ``$($_.roleCode)`` → 미정 ($($_.resolutionCode))" } else { "``$($_.roleCode)`` → [$($_.levelCode) $($_.targetRef)](hexagram-h-reference-index.md#$(Get-ReferenceAnchor 'h' "$($_.levelCode)-$($_.targetRef)"))" } }) -join '; ' } else { '미선언' }

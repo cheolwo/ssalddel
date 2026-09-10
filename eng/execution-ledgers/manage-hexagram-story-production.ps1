@@ -78,11 +78,11 @@ function Get-FileSnapshot([string] $Path) {
 $resolvedInput = Resolve-InputFile $InputPath 'Input'
 $source = Get-Content -LiteralPath $resolvedInput -Raw -Encoding UTF8 | ConvertFrom-Json
 
-Require ([string] $source.schemaVersion -eq 'mirror-hexagram-story-production.v3') 'SchemaVersion'
-Require ([string] $source.revision -eq 'hexagram-story-production.r14') 'Revision'
+Require ([string] $source.schemaVersion -eq 'mirror-hexagram-story-production.v4') 'SchemaVersion'
+Require ([string] $source.revision -eq 'hexagram-story-production.r15') 'Revision'
 Require ([string] $source.canonicalPlan.planId -eq 'PLAN-STORY-HEXAGRAM-SEQUENCE-001') 'CanonicalPlanId'
 Require ([string] $source.canonicalPlan.displayTitle -eq '역경 64괘 기반 게임 스토리 기획') 'CanonicalDisplayTitle'
-Require ([string] $source.canonicalPlan.responseHeaderTemplate -eq '[기획 · 역경 384효 스토리 · {planId} · 제{hexagramOrdinal}괘 {hexagramName}/{lineName} · {revision}]') 'ResponseHeaderTemplate'
+Require ([string] $source.canonicalPlan.responseHeaderTemplate -eq '[기획 · 역경 64괘 스토리 · {planId} · 제{hexagramOrdinal}괘 {hexagramName}/{lineName} · {revision}]') 'ResponseHeaderTemplate'
 
 $canonicalPlanPath = Resolve-RepositoryFile ([string] $source.canonicalPlan.documentRef) 'CanonicalPlan'
 $broadStoryOutlinePath = Resolve-RepositoryFile ([string] $source.canonicalPlan.broadStoryOutlineRef) 'BroadStoryOutline'
@@ -90,7 +90,7 @@ $handoffPath = Resolve-RepositoryFile ([string] $source.canonicalPlan.handoffDoc
 $mainStoryPath = Resolve-RepositoryFile ([string] $source.canonicalPlan.mainStoryDocumentRef) 'MainStoryDocument'
 $planningIndexPath = Resolve-RepositoryFile 'docs/AI/PLANNING.md' 'PlanningIndex'
 $planningText = Get-Content -LiteralPath $planningIndexPath -Raw -Encoding UTF8
-Require ($planningText.Contains('`PLAN-STORY-HEXAGRAM-SEQUENCE-001`')) 'PlanningIndexRegistrationMissing'
+Require ($planningText.Contains('`PLAN-STORY-HEXAGRAM-SEQUENCE-001`') -or $planningText.Contains('compatibility-id: PLAN-STORY-HEXAGRAM-SEQUENCE-001')) 'PlanningIndexRegistrationMissing'
 
 $sourceIds = @($source.sources | ForEach-Object { [string] $_.sourceId })
 Require ($sourceIds.Count -eq 2) 'SourceCount'
@@ -106,7 +106,10 @@ foreach ($sourceRef in @($source.sources)) {
 
 $policy = $source.policy
 Require ([string] $policy.productionOrderCode -eq 'MainCampaignKingWenHexagramAndBottomToTopLineOrder') 'ProductionOrderPolicy'
-Require ([string] $policy.planningIntakePolicyCode -eq 'BroadHexagramStoryThenOneLineAdaptationAtATime') 'PlanningIntakePolicy'
+Require ([string] $policy.planningIntakePolicyCode -eq 'WholeHexagramArcThenLineSectionRefinement') 'PlanningIntakePolicy'
+Require ([string] $policy.canonicalDocumentPolicyCode -eq 'OneCanonicalDocumentPerOpenedHexagram') 'CanonicalDocumentPolicy'
+Require ([string] $policy.lineIdentityPolicyCode -eq 'StableLineIdsBoundToCanonicalDocumentSections') 'LineIdentityPolicy'
+Require ([string] $policy.legacyLineDocumentPolicyCode -eq 'CompatibilityPointerOnly') 'LegacyLineDocumentPolicy'
 Require ([string] $policy.broadStoryOutlineStatusCode -eq 'Proposed') 'BroadStoryOutlineStatus'
 Require ([string] $policy.lineAdaptationPolicyCode -eq 'PreserveOriginalMeaningAndRecordCreativeDifferences') 'LineAdaptationPolicy'
 Require ([string] $policy.existingPlanningReferencePolicyCode -eq 'TechnicalAppendixReferenceOnly') 'ExistingPlanningReferencePolicy'
@@ -199,6 +202,27 @@ for ($index = 0; $index -lt $hexagrams.Count; $index++) {
     Require ([string] $hexagram.productionStatusCode -in $allowedProduction) "ProductionStatus:$stableId"
     Require ([string] $hexagram.storyArcStatusCode -in $allowedStoryArcs) "StoryArcStatus:$stableId"
 
+    $canonicalDocumentProperty = $hexagram.PSObject.Properties['canonicalDocumentRef']
+    $hexagramPlanProperty = $hexagram.PSObject.Properties['hexagramPlanId']
+    $canonicalDocumentRef = if ($null -eq $canonicalDocumentProperty) { '' } else { [string] $canonicalDocumentProperty.Value }
+    $hexagramPlanId = if ($null -eq $hexagramPlanProperty) { '' } else { [string] $hexagramPlanProperty.Value }
+    $hasCanonicalDocument = -not [string]::IsNullOrWhiteSpace($canonicalDocumentRef)
+    if ($hasCanonicalDocument) {
+        $expectedCampaignPlanId = 'PLAN-STORY-HEX{0:D2}-CAMPAIGN-001' -f $ordinal
+        Require ($hexagramPlanId -eq $expectedCampaignPlanId) "HexagramPlanId:$stableId"
+        $canonicalDocumentPath = Resolve-RepositoryFile $canonicalDocumentRef "HexagramCanonicalDocument:$stableId"
+        $canonicalDocumentText = Get-Content -LiteralPath $canonicalDocumentPath -Raw -Encoding UTF8
+        for ($lineOrdinal = 1; $lineOrdinal -le 6; $lineOrdinal++) {
+            $lineStableId = "$stableId-L$lineOrdinal"
+            $startMarker = "<!-- line-section:$lineStableId`:start -->"
+            $endMarker = "<!-- line-section:$lineStableId`:end -->"
+            Require (($canonicalDocumentText.Split($startMarker).Count - 1) -eq 1) "LineSectionStartMarker:$lineStableId"
+            Require (($canonicalDocumentText.Split($endMarker).Count - 1) -eq 1) "LineSectionEndMarker:$lineStableId"
+            Require ($canonicalDocumentText.IndexOf($startMarker, [StringComparison]::Ordinal) -lt $canonicalDocumentText.IndexOf($endMarker, [StringComparison]::Ordinal)) "LineSectionMarkerOrder:$lineStableId"
+        }
+    }
+    if ($ordinal -in @(3, 4)) { Require $hasCanonicalDocument "RequiredCanonicalDocument:$stableId" }
+
     $expectedPredecessor = if ($ordinal -eq 1) { '' } else { [string] $hexagrams[$index - 1].stableId }
     $expectedSuccessor = if ($ordinal -eq 64) { '' } else { [string] $hexagrams[$index + 1].stableId }
     Require ([string] $hexagram.predecessorStableId -eq $expectedPredecessor) "Predecessor:$stableId"
@@ -235,7 +259,8 @@ for ($index = 0; $index -lt $hexagrams.Count; $index++) {
         Require ([string] $mapping.mappingCode -in $allowedMappings) "LegacyMappingCode:$stableId"
         Require-Text $mapping.planId "LegacyMappingPlan:$stableId"
         [void] (Resolve-RepositoryFile ([string] $mapping.documentRef) "LegacyMappingDocument:$stableId")
-        Require ($planningText.Contains(('`{0}`' -f [string] $mapping.planId))) "LegacyMappingPlanUnknown:$stableId"
+        $mappingPlanId = [string] $mapping.planId
+        Require ($planningText.Contains(('`{0}`' -f $mappingPlanId)) -or $planningText.Contains("compatibility-id: $mappingPlanId")) "LegacyMappingPlanUnknown:$stableId"
         if ([string] $hexagram.productionStatusCode -eq 'Locked') {
             Require ([string] $mapping.mappingCode -ne 'Accepted') "LockedAcceptedMapping:$stableId"
         }
@@ -286,10 +311,17 @@ Require ([string] $presentation.glyphFallbackCode -eq 'BundledSpriteForU4DC0ToU4
 Require (-not [bool] $presentation.actualUnityImplementationIncluded) 'PresentationUnityBoundary'
 Require (-not [bool] $presentation.evidencePromotionIncluded) 'PresentationEvidenceBoundary'
 
+$hexagramDocumentSnapshots = @($hexagrams | ForEach-Object {
+    $property = $_.PSObject.Properties['canonicalDocumentRef']
+    if ($null -ne $property -and -not [string]::IsNullOrWhiteSpace([string] $property.Value)) {
+        Get-FileSnapshot ([string] $property.Value)
+    }
+})
+
 $result = [ordered]@{
     authorityCode = 'ReferenceOnlyNotStoryOrRuntimeOrder'
     currentPolicyRef = 'docs/Architecture/스토리영감과플레이진행분리.md'
-    schemaVersion = 'mirror-hexagram-story-production-index.v3'
+    schemaVersion = 'mirror-hexagram-story-production-index.v4'
     revision = [string] $source.revision
     sourceSnapshots = @(
         [ordered]@{ path = $InputPath; sha256 = (Get-FileHash -LiteralPath $resolvedInput -Algorithm SHA256).Hash.ToUpperInvariant() },
@@ -298,7 +330,7 @@ $result = [ordered]@{
         (Get-FileSnapshot ([string] $source.canonicalPlan.handoffDocumentRef)),
         (Get-FileSnapshot ([string] $source.canonicalPlan.mainStoryDocumentRef)),
         (Get-FileSnapshot 'docs/AI/PLANNING.md')
-    )
+    ) + $hexagramDocumentSnapshots
     counts = [ordered]@{
         hexagrams = $hexagrams.Count
         lineStories = @($hexagrams | ForEach-Object { @($_.lineStories) }).Count

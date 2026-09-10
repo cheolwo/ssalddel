@@ -1,9 +1,41 @@
 {
-  "schemaVersion": "mirror-world-interaction-gwae-classification-output.v1",
-  "sourceRevision": "mirror-world-interaction-gwae-classifications.r7",
-  "worldInteractionCatalogRevision": "simulation-world-interactions.r43",
-  "classificationMeaning": "기획 탐색·비교·그래프 표시용 괘성 메타데이터이며 WI 권위, 구현 승인, E/G/H 성숙도, 실행 규칙과 순서를 변경하지 않는다.",
+  "schemaVersion": "mirror-world-interaction-gwae-classification-output.v3",
+  "sourceRevision": "mirror-world-interaction-gwae-classifications.r10",
+  "worldInteractionCatalogRevision": "simulation-world-interactions.r48",
+  "workflowLineagePath": "eng/work-areas/simulation-unity.json",
+  "workflowLineageFeatureKey": "food-workflow-lineage",
+  "classificationMeaning": "업무 의미 대표 괘와 원자 WI의 역할·행위·대상·전환을 서로 다른 층으로 추적하는 비권위 괘성 메타데이터다. 대표 괘는 원자 WI 분류를 덮어쓰지 않으며 괘성은 WI 권위, 보상, 실행 순서 또는 E5 실제 증거를 대신하지 않는다.",
   "displayFormat": "{element}({name})",
+  "e5RoleObjectActionGatePolicy": {
+    "requiredFromEvidenceStageCode": "E5",
+    "applicabilityRuleCode": "AnyWorldObjectRoleOwningOrCausingAuthorityStateTransition",
+    "worldObjectScopeCode": "AllWorldObjects",
+    "allowedRoleObjectKindCodes": [
+      "PlayerActor",
+      "NpcActor",
+      "Vehicle",
+      "Equipment",
+      "Facility",
+      "NaturalObject",
+      "Environment",
+      "WorldRule",
+      "ResolvedExecutionObject"
+    ],
+    "allowedApplicabilityCodes": [
+      "Required",
+      "NotApplicable"
+    ],
+    "defaultRoleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+    "requiredTransitionFields": [
+      "actionCode",
+      "startStateCodes",
+      "completionStateCodes",
+      "effectCodes"
+    ],
+    "passiveObjectRule": "권위 상태 변화를 소유하거나 일으키지 않는 객체는 역할 행위를 만들지 않고 대상·도구·배경 문맥으로만 분류한다.",
+    "notApplicableRule": "비행위·표현 전용 항목만 구체 사유와 함께 NotApplicable을 사용할 수 있다.",
+    "promotionBoundary": "오행 역할·행위 정의는 E5 진입 필수 조건이지만 E5를 자동 승격하지 않는다. 같은 Goal·WI·Session·객체·Revision의 권위 상태와 실제 표현 결속을 별도로 입증해야 한다."
+  },
   "gwaeDefinitions": [
     {
       "code": "JIN",
@@ -72,12 +104,1032 @@
       "meaning": "한 작용이 다른 작용을 제한·절단·분리·조절한다."
     }
   ],
-  "counts": {
-    "total": 105,
-    "reviewedExplicit": 77,
-    "reviewedByMeaningRule": 28
+  "engineCompositionProfile": {
+    "engineCode": "FiveElementWorkflow",
+    "meaningRevision": "five-element-workflow-engine-meaning.r1",
+    "displayName": "오행 업무 규칙 엔진",
+    "primaryGwae": "GAN",
+    "supportGwae": "GAM",
+    "stablePurpose": "산처럼 업무 모듈의 경계와 전이 질서를 고정하고, 물처럼 서버·로컬·Unity 사이의 요청과 상태 사본 흐름을 보조한다.",
+    "sourceStableIds": [
+      "workflow-engine:five-element.r1",
+      "meaning-revision:five-element-workflow-engine-meaning.r1"
+    ],
+    "isExecutionAuthority": false
   },
+  "counts": {
+    "total": 133,
+    "reviewedExplicit": 81,
+    "reviewedByMeaningRule": 52,
+    "e5RoleObjectActionRequired": 133,
+    "roleObjectActionProfiles": 2,
+    "workflowMeaningProfiles": 5,
+    "engineCompositionProfiles": 1
+  },
+  "workflowMeaningProfiles": [
+    {
+      "profileId": "workflow-meaning:restaurant.r1",
+      "meaningRevision": "restaurant-workflow-meaning.r1",
+      "displayName": "음식점 운영",
+      "primaryGwae": "RI",
+      "codeStepKeys": [
+        "domain.restaurant-response-adaptation",
+        "domain.restaurant-cooking-adaptation"
+      ],
+      "stablePurpose": "등록한 상품의 주문을 수락·거절하고 조리와 픽업 준비 사실을 이어 가는 운영 의미를 설명한다.",
+      "isExecutionAuthority": false
+    },
+    {
+      "profileId": "workflow-meaning:order.r1",
+      "meaningRevision": "order-workflow-meaning.r1",
+      "displayName": "주문",
+      "primaryGwae": "JIN",
+      "codeStepKeys": [
+        "domain.food-order-adaptation"
+      ],
+      "stablePurpose": "주문자가 수요를 실제 주문 원장으로 열고 이후 이행 흐름의 대상을 식별하는 의미를 설명한다.",
+      "isExecutionAuthority": false
+    },
+    {
+      "profileId": "workflow-meaning:dispatch.r1",
+      "meaningRevision": "dispatch-workflow-meaning.r2",
+      "supersedesMeaningRevision": "dispatch-workflow-meaning.r1",
+      "displayName": "배차",
+      "primaryGwae": "GAN",
+      "codeStepKeys": [
+        "domain.food-dispatch-shared-rule",
+        "domain.freight-dispatch-shared-rule"
+      ],
+      "stablePurpose": "운송 요청과 기사·차량 후보를 읽어 담당 운송 주체와 인계 대상을 연결하는 의미를 설명한다.",
+      "isExecutionAuthority": false
+    },
+    {
+      "profileId": "workflow-meaning:delivery.r1",
+      "meaningRevision": "delivery-workflow-meaning.r1",
+      "displayName": "배달·운송",
+      "primaryGwae": "GAM",
+      "codeStepKeys": [
+        "domain.freight-transport-adaptation"
+      ],
+      "stablePurpose": "배정된 주체가 픽업지에서 인수한 대상을 목적지까지 이동하고 전달하는 흐름의 의미를 설명한다.",
+      "isExecutionAuthority": false
+    },
+    {
+      "profileId": "workflow-meaning:warehouse.r1",
+      "meaningRevision": "warehouse-workflow-meaning.r1",
+      "displayName": "창고 운영",
+      "primaryGwae": "TAE",
+      "codeStepKeys": [
+        "domain.warehouse-put-away-adaptation",
+        "domain.warehouse-outbound-shared-rule"
+      ],
+      "stablePurpose": "입고 대상을 검수·적재하고 출고 대상을 분리·배분해 시설의 입구와 출구를 유지하는 의미를 설명한다.",
+      "isExecutionAuthority": false
+    }
+  ],
   "items": [
+    {
+      "wiId": "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+      "groupCode": "CITY",
+      "title": "근무 복귀",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticLIFESHIFT",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Working"
+        ],
+        "effectCodes": [
+          "Working"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-LIFE-REST",
+      "groupCode": "CITY",
+      "title": "인계 후 휴식",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticLIFEREST",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Resting"
+        ],
+        "effectCodes": [
+          "Resting"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-INSPECT",
+      "groupCode": "CITY",
+      "title": "보충창고 입고 검수",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTINSPECT",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Inspected"
+        ],
+        "effectCodes": [
+          "Inspected"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-PUTAWAY",
+      "groupCode": "CITY",
+      "title": "검수 물품 적치",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTPUTAWAY",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Stored"
+        ],
+        "effectCodes": [
+          "Stored"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-RESERVE",
+      "groupCode": "CITY",
+      "title": "보충 출고 예약",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTRESERVE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Reserved"
+        ],
+        "effectCodes": [
+          "Reserved"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-PICK",
+      "groupCode": "CITY",
+      "title": "보충 물품 피킹",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTPICK",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Picked"
+        ],
+        "effectCodes": [
+          "Picked"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-PACK",
+      "groupCode": "CITY",
+      "title": "보충 물품 포장",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTPACK",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Packed"
+        ],
+        "effectCodes": [
+          "Packed"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DEPOT-STAGE",
+      "groupCode": "CITY",
+      "title": "보충 물품 상차대 인계",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDEPOTSTAGE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Ready"
+        ],
+        "effectCodes": [
+          "Ready"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-FREIGHT-LOAD",
+      "groupCode": "CITY",
+      "title": "화물차 상차",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticFREIGHTLOAD",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Loaded"
+        ],
+        "effectCodes": [
+          "Loaded"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-FREIGHT-UNLOAD",
+      "groupCode": "CITY",
+      "title": "마트 화물 하차",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticFREIGHTUNLOAD",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Unloaded"
+        ],
+        "effectCodes": [
+          "Unloaded"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MART-INBOUND",
+      "groupCode": "CITY",
+      "title": "마트 검수 입고",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticMARTINBOUND",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Received"
+        ],
+        "effectCodes": [
+          "Received"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-neighborhood-workforce.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MART-RESERVE",
+      "groupCode": "CITY",
+      "title": "마트 예약",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticMartRESERVE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Reserved"
+        ],
+        "effectCodes": [
+          "Reserved"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-mart-worker.v1",
+          "subject:synthetic-mart-stock.v1",
+          "subject:synthetic-mart-order.v1",
+          "subject:npc-routine-actor.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MART-PICK",
+      "groupCode": "CITY",
+      "title": "마트 피킹",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticMartPICK",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Picked"
+        ],
+        "effectCodes": [
+          "Picked"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-mart-worker.v1",
+          "subject:synthetic-mart-stock.v1",
+          "subject:synthetic-mart-order.v1",
+          "subject:npc-routine-actor.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MART-PACK",
+      "groupCode": "CITY",
+      "title": "마트 포장",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticMartPACK",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Packed"
+        ],
+        "effectCodes": [
+          "Packed"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-mart-worker.v1",
+          "subject:synthetic-mart-stock.v1",
+          "subject:synthetic-mart-order.v1",
+          "subject:npc-routine-actor.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MART-STAGE",
+      "groupCode": "CITY",
+      "title": "마트 인계대 적치",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticMartSTAGE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "ReadyForCourier"
+        ],
+        "effectCodes": [
+          "ReadyForCourier"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-mart-worker.v1",
+          "subject:synthetic-mart-stock.v1",
+          "subject:synthetic-mart-order.v1",
+          "subject:npc-routine-actor.v1",
+          "subject:authoritative-interaction-target.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-ASSIGN",
+      "groupCode": "CITY",
+      "title": "기사 배정",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryASSIGN",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Assigned"
+        ],
+        "effectCodes": [
+          "Assigned"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-MOVE",
+      "groupCode": "CITY",
+      "title": "도로·출입구 이동",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryMOVE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "PositionAdvanced"
+        ],
+        "effectCodes": [
+          "PositionAdvanced"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-PICKUP",
+      "groupCode": "CITY",
+      "title": "음식 픽업",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryPICKUP",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "PickedUp"
+        ],
+        "effectCodes": [
+          "PickedUp"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-DELIVER",
+      "groupCode": "CITY",
+      "title": "주택 전달",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryDELIVER",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Delivered"
+        ],
+        "effectCodes": [
+          "Delivered"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-RECEIVE",
+      "groupCode": "CITY",
+      "title": "주문자 수령",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryRECEIVE",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Received"
+        ],
+        "effectCodes": [
+          "Received"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-SYNTHETIC-RETURN",
+      "groupCode": "CITY",
+      "title": "기사 복귀",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SyntheticDeliveryRETURN",
+        "startStateCodes": [
+          "SyntheticProfilePreconditions"
+        ],
+        "completionStateCodes": [
+          "Returned"
+        ],
+        "effectCodes": [
+          "Returned"
+        ],
+        "actorRequirementRefs": [
+          "subject:synthetic-delivery-courier.v1",
+          "subject:synthetic-delivery-order.v1",
+          "subject:synthetic-delivery-vehicle.v1",
+          "subject:synthetic-delivery-recipient.v1"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-RESTAURANT-COOK",
+      "groupCode": "CITY",
+      "title": "음식점 조리 자리 배정",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "RestaurantCooking",
+        "startStateCodes": [
+          "FoodOrderCookingQueued"
+        ],
+        "completionStateCodes": [
+          "ReadyForPickup"
+        ],
+        "effectCodes": [
+          "RestaurantCookingScheduled"
+        ],
+        "actorRequirementRefs": [
+          "음식점 시설과 조직에 결속된 RestaurantCooking 권한 NPC"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
+    {
+      "wiId": "WI-CITY-RESTAURANT-ACCEPT",
+      "groupCode": "CITY",
+      "title": "음식점 NPC 주문 자동 수락",
+      "subjectKind": "Npc",
+      "actionGwae": "GAM",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAM",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "RestaurantAutoAccept",
+        "startStateCodes": [
+          "FoodOrderNpcSubmission"
+        ],
+        "completionStateCodes": [
+          "FoodOrderCookingQueued"
+        ],
+        "effectCodes": [
+          "RestaurantResponseRecorded"
+        ],
+        "actorRequirementRefs": [
+          "음식점 시설과 조직에 결속된 RestaurantCooking 권한 NPC"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "city-service-information-flow",
+      "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
+    },
     {
       "wiId": "WI-ACTOR-CONSUME",
       "groupCode": "ACTOR",
@@ -93,6 +1145,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ActorConsume",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ItemConsumed"
+        ],
+        "effectCodes": [
+          "ItemConsumed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "actor-direct-item-action",
       "reason": "섭취는 직접 행위이고 물품 종류에 따라 작용괘와 대상괘가 달라진다."
@@ -112,6 +1184,26 @@
       "supportMode": "Contextual",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ActorPlanSet",
+        "startStateCodes": [
+          "PersonalPlanPolicyReady"
+        ],
+        "completionStateCodes": [
+          "PersonalPlanSet"
+        ],
+        "effectCodes": [
+          "PersonalPlanSet"
+        ],
+        "actorRequirementRefs": [
+          "현재 플레이어 본인"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "actor-direct-item-action",
       "reason": "계획은 산처럼 목표를 세우고 고정하는 간괘이며 조사·정보가 상황별로 보조한다."
@@ -131,6 +1223,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CombatDirectControlSet",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ActorDirectControlChanged"
+        ],
+        "effectCodes": [
+          "ActorDirectControlChanged"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "자기 Actor의 조종 질서를 전환한다."
@@ -150,6 +1262,26 @@
       "supportMode": "Contextual",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CombatTacticalCommand",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "SquadTacticalOrderConfirmed"
+        ],
+        "effectCodes": [
+          "SquadTacticalOrderConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "분대에 역할과 전술 명령을 확정하고 전장 정보가 작용하며 집중은 상황별 보조다."
@@ -169,6 +1301,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunityCooperationPropose",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "CooperationProposed"
+        ],
+        "effectCodes": [
+          "CooperationProposed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "community-role-and-relationship",
       "reason": "수락 전 협력 제안은 약속 확정보다 대화·공감에 가깝다."
@@ -188,6 +1340,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunityEntrancePolicySet",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "EntrancePolicySet"
+        ],
+        "effectCodes": [
+          "EntrancePolicySet"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -207,6 +1379,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunityHire",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "NpcEmploymentConfirmed"
+        ],
+        "effectCodes": [
+          "NpcEmploymentConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -226,6 +1418,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunityMembershipConfirm",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "CommunityMembershipConfirmed"
+        ],
+        "effectCodes": [
+          "CommunityMembershipConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -245,6 +1457,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunityRemoteResponse",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "RemoteResponseOrderConfirmed"
+        ],
+        "effectCodes": [
+          "RemoteResponseOrderConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -264,6 +1496,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CommunitySupportMissionJoin",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "SupportMissionParticipationConfirmed"
+        ],
+        "effectCodes": [
+          "SupportMissionParticipationConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -283,6 +1535,26 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ConBlueprintPlace",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ConstructionBlueprintPlaced"
+        ],
+        "effectCodes": [
+          "ConstructionBlueprintPlaced"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "physical-construction-action",
       "reason": "청사진은 산처럼 건설 계획을 세우고 고정하며 공간 조건과 검증 정보가 작용한다."
@@ -302,6 +1574,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ConDemolish",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ConstructionDemolished"
+        ],
+        "effectCodes": [
+          "ConstructionDemolished"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "physical-construction-action",
       "reason": "시설을 직접 해체하는 행동이다."
@@ -321,6 +1613,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ConMaterialDeposit",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ConstructionMaterialDeposited"
+        ],
+        "effectCodes": [
+          "ConstructionMaterialDeposited"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "physical-construction-action",
       "reason": "건설 시설에 자연·가공 재료를 직접 투입한다."
@@ -340,6 +1652,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ConWorkContribute",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ConstructionWorkContributed"
+        ],
+        "effectCodes": [
+          "ConstructionWorkContributed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "physical-construction-action",
       "reason": "시설 시공에 직접 기여한다."
@@ -359,6 +1691,26 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CraftBrew",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "BrewBatchCompleted"
+        ],
+        "effectCodes": [
+          "BrewBatchCompleted"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "배합물을 직접 달이고 불·열의 리괘가 작용하며 솥·열원 시설과 제조법 정보가 보조한다."
@@ -378,6 +1730,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ExpeditionDispatch",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "ExpeditionDispatched"
+        ],
+        "effectCodes": [
+          "ExpeditionDispatched"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "탐사 인력의 역할과 파견 질서를 확정하고 목적지·보급 판단을 사용한다."
@@ -397,6 +1769,26 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "FarmFieldBoundaryConfirm",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "FieldBoundaryConfirmed"
+        ],
+        "effectCodes": [
+          "FieldBoundaryConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "밭 경계 계획을 세우고 고정하며 공간 범위와 검증 정보가 작용한다."
@@ -416,6 +1808,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "FarmSoilAmend",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "SoilAmended"
+        ],
+        "effectCodes": [
+          "SoilAmended"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "farm-production-action",
       "reason": "검토된 영역 의미 규칙 'farm-production-action'을 적용했다."
@@ -435,6 +1847,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "FarmWaterTransfer",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "IrrigationWaterTransferred"
+        ],
+        "effectCodes": [
+          "IrrigationWaterTransferred"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "농업 생산을 위해 용수 흐름과 수용처를 관리한다."
@@ -454,6 +1886,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "GuestPermissionSet",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "GuestPermissionSet"
+        ],
+        "effectCodes": [
+          "GuestPermissionSet"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "community-role-and-relationship",
       "reason": "검토된 영역 의미 규칙 'community-role-and-relationship'을 적용했다."
@@ -477,6 +1929,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HeatSourceStateChange",
+        "startStateCodes": [
+          "Off",
+          "Smoldering",
+          "Burning"
+        ],
+        "completionStateCodes": [
+          "HeatSourceStateChanged"
+        ],
+        "effectCodes": [
+          "HeatSourceStateChanged"
+        ],
+        "actorRequirementRefs": [
+          "신뢰된 단일 플레이어·열원 접근 권한",
+          "점화 시 기초 생존 능력"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "열원 시설에 대한 점화·연료 보충·소화의 작용괘가 작업 코드별로 달라진다."
@@ -496,6 +1971,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HubDemandAllocate",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "HubDemandInventoryAllocated"
+        ],
+        "effectCodes": [
+          "HubDemandInventoryAllocated"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "hub-logistics-action",
       "reason": "수요와 재고 정보를 비교해 할당 상태를 확정한다."
@@ -515,6 +2010,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HubSupplyTaskAccept",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "HubSupplyTaskAccepted"
+        ],
+        "effectCodes": [
+          "HubSupplyTaskAccepted"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "hub-logistics-action",
       "reason": "조달 과제의 조건을 판단하고 수행 약속을 확정한다."
@@ -534,6 +2049,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "InventoryBelowReserveSaleConfirm",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "BelowReserveSaleConfirmed"
+        ],
+        "effectCodes": [
+          "BelowReserveSaleConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "비축 위험과 재고 정보를 확인한 뒤 판매 약속을 확정한다."
@@ -553,6 +2088,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NatureHerbGather",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "HerbGathered"
+        ],
+        "effectCodes": [
+          "HerbGathered"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "약초 자연자원을 직접 채집한다."
@@ -572,6 +2127,26 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NatureTraceInvestigate",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "NatureTraceInvestigated"
+        ],
+        "effectCodes": [
+          "NatureTraceInvestigated"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "자연 흔적을 조사·추론하며 직관이 보조할 수 있다."
@@ -591,6 +2166,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SurvivalRationPolicySet",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "RationPolicySet"
+        ],
+        "effectCodes": [
+          "RationPolicySet"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "생존 집단의 배급 질서를 정하고 재고 판단을 사용한다."
@@ -600,7 +2195,7 @@
       "groupCode": "MARKET",
       "title": "Town 납품 검수",
       "subjectKind": "Variable",
-      "actionGwae": "GAM",
+      "actionGwae": "RI",
       "operationMode": "Fixed",
       "operationGwae": "GAM",
       "operationGwaeByActionCode": null,
@@ -610,9 +2205,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TownDeliveryInspect",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "TownDeliveryInspected"
+        ],
+        "effectCodes": [
+          "TownDeliveryInspected"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
-      "reason": "도착 물품의 수량·품질 정보를 검수한다."
+      "reason": "도착 물품의 수량·품질 정보를 읽고 인수 가능 여부를 질서 있게 판정한다."
     },
     {
       "wiId": "WI-TOWN-DELIVERY-RECEIVE",
@@ -628,10 +2243,39 @@
       "additionalTargetGwae": null,
       "supportMode": "None",
       "supportGwae": null,
-      "elementRelations": [],
-      "classificationStatus": "ReviewedByMeaningRule",
+      "elementRelations": [
+        {
+          "relationCode": "SHENG",
+          "sourceGwae": "GAM",
+          "targetGwae": "JIN",
+          "displayName": "수생목",
+          "applicationMode": "Outcome",
+          "functionalMeaning": "목적지·주문·수량·봉인 또는 파손 상태를 확인해 인수된 동일 화물만 수령 측의 새 입고 작업을 연다."
+        }
+      ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TownDeliveryReceive",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "TownDeliveryReceived"
+        ],
+        "effectCodes": [
+          "TownDeliveryReceived"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
-      "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
+      "reason": "도착만으로 입고를 열지 않고 검수된 동일 화물을 수령 측 업무의 새 입구로 인수한다."
     },
     {
       "wiId": "WI-TOWN-STOCK-PUTAWAY",
@@ -648,6 +2292,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TownStockPutaway",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "TownStockPutAway"
+        ],
+        "effectCodes": [
+          "TownStockPutAway"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "market-logistics-action",
       "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
@@ -667,6 +2331,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TownStockReplenish",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "TownReplenishmentOrderConfirmed"
+        ],
+        "effectCodes": [
+          "TownReplenishmentOrderConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
       "reason": "부족 재고를 판단하고 보충 주문을 확정한다."
@@ -686,6 +2370,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TownSupplyDispatch",
+        "startStateCodes": [
+          "RegistrationOnly:PreconditionsRequireApprovedDesign"
+        ],
+        "completionStateCodes": [
+          "TownSupplyDispatched"
+        ],
+        "effectCodes": [
+          "TownSupplyDispatched"
+        ],
+        "actorRequirementRefs": [
+          "승인된 실행 주체·대상 권한 필요"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
       "reason": "운송 출발 질서를 확정하고 화물·경로 정보를 사용한다."
@@ -705,6 +2409,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WorldResourceRegenerate",
+        "startStateCodes": [
+          "TrustedResourcePolicyReady",
+          "ConsecutiveWorldTickAvailable"
+        ],
+        "completionStateCodes": [
+          "ResourceAvailabilityRestored",
+          "ResourceAvailabilityUnchanged"
+        ],
+        "effectCodes": [
+          "ResourceAvailabilityRestored",
+          "ResourceAvailabilityUnchanged"
+        ],
+        "actorRequirementRefs": [
+          "권위 WorldTick 평가"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "세계 자원의 생장·재생이며 시간·판본 조건 판단을 사용한다."
@@ -724,6 +2451,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "AcquireItem",
+        "startStateCodes": [
+          "WorldItemAvailable",
+          "ActorDoesNotOwnItem"
+        ],
+        "completionStateCodes": [
+          "ItemOwnedInInventory"
+        ],
+        "effectCodes": [
+          "ItemAcquired"
+        ],
+        "actorRequirementRefs": [
+          "물품을 획득할 수 있는 Player 또는 NPC"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "actor-direct-item-action",
       "reason": "물품 획득은 직접 행위이고 대상 물품의 괘상을 승계한다."
@@ -743,6 +2491,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ChangeEquipment",
+        "startStateCodes": [
+          "ItemOwnedInInventory",
+          "ItemEquipped"
+        ],
+        "completionStateCodes": [
+          "EquipmentStateChanged"
+        ],
+        "effectCodes": [
+          "ItemEquipmentChanged"
+        ],
+        "actorRequirementRefs": [
+          "장착 원장을 가진 Player 또는 NPC"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "actor-direct-item-action",
       "reason": "장착·해제는 직접 행위이고 장착 구성과 사용 역할을 리괘로 세분한다."
@@ -762,6 +2531,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "AcquireRecipeKnowledge",
+        "startStateCodes": [
+          "ReadableKnowledgeSourceAvailable",
+          "RecipeNotKnown"
+        ],
+        "completionStateCodes": [
+          "RecipeKnown"
+        ],
+        "effectCodes": [
+          "RecipeKnowledgeAdded"
+        ],
+        "actorRequirementRefs": [
+          "플레이어 지식 원장을 가진 Player"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "actor-direct-item-action",
       "reason": "지식 출처에서 제조법 지식을 습득한다."
@@ -781,6 +2571,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "DecideCommunityVisitorTemporaryStay",
+        "startStateCodes": [
+          "NatureCampVisitorAwaitingDecision"
+        ],
+        "completionStateCodes": [
+          "CommunityVisitorTemporaryStayAccepted",
+          "CommunityVisitorRejected"
+        ],
+        "effectCodes": [
+          "CommunityVisitorStayDecisionRecorded",
+          "CommunityMindTraceRecorded"
+        ],
+        "actorRequirementRefs": [
+          "Nature 야영지 공동체를 응대할 수 있는 Player"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "community-role-and-relationship",
       "reason": "방문자와 대면해 의사를 확인하고 임시 체류 질서를 확정한다."
@@ -800,6 +2612,29 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "MobilizeFarmDefenseSquad",
+        "startStateCodes": [
+          "FarmDefenseThreatApproaching",
+          "FarmDefenseSquadReady"
+        ],
+        "completionStateCodes": [
+          "FarmDefenseSquadMobilized",
+          "FarmProductionContributionSuspended"
+        ],
+        "effectCodes": [
+          "FarmDefenseSquadMobilized",
+          "FarmProductionContributionSuspended"
+        ],
+        "actorRequirementRefs": [
+          "준비 상태의 Farm 방위 분대"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "방위 분대를 소집하고 생산 중단·출동 조건을 판단한다."
@@ -819,6 +2654,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "AssignFarmDefenseSquad",
+        "startStateCodes": [
+          "FarmDefenseOutpostSlotEmpty",
+          "FarmDefenseSquadUnassigned"
+        ],
+        "completionStateCodes": [
+          "FarmDefenseSquadAssignedToOutpostSlot"
+        ],
+        "effectCodes": [
+          "FarmDefenseSquadAssigned"
+        ],
+        "actorRequirementRefs": [
+          "Farm 방위 편성 권한이 있는 Host Player",
+          "미배정 Farm 방위 분대"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "경비 분대의 역할과 배치 슬롯을 확정한다."
@@ -838,6 +2695,27 @@
       "supportMode": "Fixed",
       "supportGwae": "RI",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SupplyFarmDefenseSquad",
+        "startStateCodes": [
+          "FarmDefenseSquadSupplyRequired"
+        ],
+        "completionStateCodes": [
+          "FarmDefenseSquadSupplied"
+        ],
+        "effectCodes": [
+          "FarmDefenseSquadSupplied"
+        ],
+        "actorRequirementRefs": [
+          "Farm 방위 보급 권한이 있는 Host Player",
+          "보급이 필요한 Farm 방위 분대"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "분대에 물자를 직접 보급하고 필요량·재고 판단과 보급 질서가 작용한다."
@@ -857,6 +2735,31 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ResolveFarmDefenseResult",
+        "startStateCodes": [
+          "FarmDefenseResultConfirmed"
+        ],
+        "completionStateCodes": [
+          "FarmDefenseResultManifested"
+        ],
+        "effectCodes": [
+          "FarmDefenseResolved",
+          "FarmThreatReduced",
+          "FarmSafePeriodExtended",
+          "FarmProductionRecoveryModified",
+          "FarmDefenseLootAdded"
+        ],
+        "actorRequirementRefs": [
+          "전투 권위가 확정한 결과",
+          "결과를 만든 Farm 방위 분대"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "전투 권위가 확정한 결과를 질서 있게 한 번 발현하고 위협·회복 정보를 적용한다."
@@ -876,6 +2779,27 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ReturnFarmDefenseSquad",
+        "startStateCodes": [
+          "FarmDefenseResultResolved",
+          "FarmDefenseReturnPending"
+        ],
+        "completionStateCodes": [
+          "FarmDefenseSquadReturned"
+        ],
+        "effectCodes": [
+          "FarmDefenseSquadReturned"
+        ],
+        "actorRequirementRefs": [
+          "결과가 확정된 Farm 방위 분대"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "방위 분대 귀환 질서를 확정하고 부상자 회복을 인계한다."
@@ -895,6 +2819,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "Tilling",
+        "startStateCodes": [
+          "Untilled"
+        ],
+        "completionStateCodes": [
+          "Tilled"
+        ],
+        "effectCodes": [
+          "SoilTilled"
+        ],
+        "actorRequirementRefs": [
+          "Player 또는 농장 작업 NPC"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "밭갈이는 농업 직접 행동이며 도구와 작업 공간의 태괘 작용을 사용한다."
@@ -914,6 +2858,26 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "Sowing",
+        "startStateCodes": [
+          "Tilled"
+        ],
+        "completionStateCodes": [
+          "Growing"
+        ],
+        "effectCodes": [
+          "CultivationStarted"
+        ],
+        "actorRequirementRefs": [
+          "파종 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "파종은 씨앗을 밭의 위치와 간격에 직접 배치하며 절기·품종·파종 조건 정보가 보조한다."
@@ -966,6 +2930,27 @@
           "functionalMeaning": "씨앗·토양·수분과 필요한 관리 조건이 충족되면 온전한 생육과 성숙 전환이 발동한다."
         }
       ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CropCare",
+        "startStateCodes": [
+          "Growing"
+        ],
+        "completionStateCodes": [
+          "Growing",
+          "HarvestReady"
+        ],
+        "effectCodes": [
+          "CropCareApplied"
+        ],
+        "actorRequirementRefs": [
+          "재배 관리 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "생육 운영은 토(간괘)를 중심으로 씨앗·토양 적합성, 수생목, 토극수와 조건부 금극목을 검사하고 충족 결과를 목생화로 표현한다."
@@ -994,6 +2979,28 @@
           "functionalMeaning": "성장이 끝난 작물을 절단·분리해 수확물로 완결한다."
         }
       ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "Harvesting",
+        "startStateCodes": [
+          "HarvestReady"
+        ],
+        "completionStateCodes": [
+          "Harvested",
+          "HarvestedAtField"
+        ],
+        "effectCodes": [
+          "HarvestLotCreated",
+          "CultivationHarvested"
+        ],
+        "actorRequirementRefs": [
+          "FarmHarvest"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "열매 따기·베기·수확의 주 행위는 금(태괘), 성장한 작물 대상은 목(진괘)이며 금극목의 분리·완결 작용으로 읽는다."
@@ -1013,6 +3020,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HarvestCollection",
+        "startStateCodes": [
+          "HarvestedAtField"
+        ],
+        "completionStateCodes": [
+          "CollectedAtYard"
+        ],
+        "effectCodes": [
+          "HarvestLotCollected"
+        ],
+        "actorRequirementRefs": [
+          "FarmCollection"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "수확 Lot을 집하 위치로 직접 옮겨 재고 흐름에 넣는다."
@@ -1032,6 +3059,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "OutboundPacking",
+        "startStateCodes": [
+          "CollectedAtYard"
+        ],
+        "completionStateCodes": [
+          "PackedForShipment",
+          "PreparedForShipment"
+        ],
+        "effectCodes": [
+          "PackageLotCreated",
+          "CargoPrepared"
+        ],
+        "actorRequirementRefs": [
+          "FarmPacking"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "farm-production-action",
       "reason": "수확 Lot을 직접 포장해 화물 정보로 전환한다."
@@ -1051,6 +3100,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CargoRouteMovement",
+        "startStateCodes": [
+          "PreparedForShipment"
+        ],
+        "completionStateCodes": [
+          "Reserved"
+        ],
+        "effectCodes": [
+          "CargoTransportReserved"
+        ],
+        "actorRequirementRefs": [
+          "운송 담당 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "cargo-movement-action",
       "reason": "검토된 영역 의미 규칙 'cargo-movement-action'을 적용했다."
@@ -1070,6 +3139,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CargoDepartureTransition",
+        "startStateCodes": [
+          "Reserved"
+        ],
+        "completionStateCodes": [
+          "InTransit"
+        ],
+        "effectCodes": [
+          "CargoDeparted"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "cargo-movement-action",
       "reason": "검토된 영역 의미 규칙 'cargo-movement-action'을 적용했다."
@@ -1089,6 +3176,25 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CargoRouteProgressTransition",
+        "startStateCodes": [
+          "InTransit"
+        ],
+        "completionStateCodes": [
+          "InTransit",
+          "ArrivedAtDestination"
+        ],
+        "effectCodes": [
+          "CargoRouteProgressed"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "cargo-movement-action",
       "reason": "검토된 영역 의미 규칙 'cargo-movement-action'을 적용했다."
@@ -1108,6 +3214,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CargoUnloadTransition",
+        "startStateCodes": [
+          "InTransit"
+        ],
+        "completionStateCodes": [
+          "ArrivedAtDestination"
+        ],
+        "effectCodes": [
+          "CargoUnloaded"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "cargo-movement-action",
       "reason": "검토된 영역 의미 규칙 'cargo-movement-action'을 적용했다."
@@ -1127,6 +3251,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "FreightReceiptTransition",
+        "startStateCodes": [
+          "ArrivedAtDestination",
+          "PendingInspection"
+        ],
+        "completionStateCodes": [
+          "Received",
+          "StorageEligible"
+        ],
+        "effectCodes": [
+          "FreightReceived",
+          "StorageEligible"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "cargo-movement-action",
       "reason": "검토된 영역 의미 규칙 'cargo-movement-action'을 적용했다."
@@ -1146,6 +3291,30 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WarehouseInboundInspection",
+        "startStateCodes": [
+          "ArrivedAtDestination",
+          "PendingInspection"
+        ],
+        "completionStateCodes": [
+          "StorageEligible",
+          "Received"
+        ],
+        "effectCodes": [
+          "InspectionWorkAreaReleased",
+          "StorageEligible",
+          "FreightReceived"
+        ],
+        "actorRequirementRefs": [
+          "WarehouseInspection"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "hub-logistics-action",
       "reason": "도착 화물의 수량·품질 정보를 검수한다."
@@ -1165,6 +3334,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WarehouseStorageMove",
+        "startStateCodes": [
+          "StorageEligible"
+        ],
+        "completionStateCodes": [
+          "PutAwayCompleted"
+        ],
+        "effectCodes": [
+          "SpatialStorageCapacityConsumed",
+          "SpatialWorkAreaReleased",
+          "PutAwayCompleted"
+        ],
+        "actorRequirementRefs": [
+          "WarehousePutAway"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "hub-logistics-action",
       "reason": "검토된 영역 의미 규칙 'hub-logistics-action'을 적용했다."
@@ -1184,6 +3375,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WarehouseOutboundRequest",
+        "startStateCodes": [
+          "PutAwayCompleted"
+        ],
+        "completionStateCodes": [
+          "OutboundRequested"
+        ],
+        "effectCodes": [
+          "OutboundRequested"
+        ],
+        "actorRequirementRefs": [
+          "출고 권한 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "hub-logistics-action",
       "reason": "목적지 출고 요청을 확정하고 재고 정보를 대상으로 삼는다."
@@ -1203,6 +3414,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WarehousePickingTransition",
+        "startStateCodes": [
+          "OutboundRequested"
+        ],
+        "completionStateCodes": [
+          "Picked"
+        ],
+        "effectCodes": [
+          "StockPicked"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "hub-logistics-action",
       "reason": "검토된 영역 의미 규칙 'hub-logistics-action'을 적용했다."
@@ -1222,6 +3451,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "WarehouseOutboundPreparationTransition",
+        "startStateCodes": [
+          "Picked"
+        ],
+        "completionStateCodes": [
+          "OutboundReady"
+        ],
+        "effectCodes": [
+          "OutboundCargoPrepared"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "hub-logistics-action",
       "reason": "검토된 영역 의미 규칙 'hub-logistics-action'을 적용했다."
@@ -1231,38 +3478,96 @@
       "groupCode": "HUB",
       "title": "출고 차량 상차",
       "subjectKind": "Npc",
-      "actionGwae": "JIN",
+      "actionGwae": "RI",
       "operationMode": "Fixed",
-      "operationGwae": "GAM",
+      "operationGwae": "TAE",
       "operationGwaeByActionCode": null,
       "targetMode": "Fixed",
       "targetGwae": "GAM",
       "additionalTargetGwae": null,
       "supportMode": "None",
       "supportGwae": null,
-      "elementRelations": [],
-      "classificationStatus": "ReviewedByMeaningRule",
+      "elementRelations": [
+        {
+          "relationCode": "SHENG",
+          "sourceGwae": "RI",
+          "targetGwae": "GAN",
+          "displayName": "화생토",
+          "applicationMode": "Outcome",
+          "functionalMeaning": "화물의 적재 순서와 차량 역할을 확정한 상차 행위가 적재 완료의 안정 상태를 만든다."
+        }
+      ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HubVehicleLoading",
+        "startStateCodes": [
+          "OutboundReady"
+        ],
+        "completionStateCodes": [
+          "Reserved"
+        ],
+        "effectCodes": [
+          "HubCargoLoaded"
+        ],
+        "actorRequirementRefs": [
+          "운송 담당 행위자"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedExplicit",
       "reviewRule": "hub-logistics-action",
-      "reason": "검토된 영역 의미 규칙 'hub-logistics-action'을 적용했다."
+      "reason": "출고 차량 상차의 주행위는 화물·차량의 순서를 밝히는 화(리괘)이고 적재 장치의 분리·고정은 금(태괘) 작용이며 완료 상태는 토(간괘)로 읽는다."
     },
     {
       "wiId": "WI-MARKET-01",
       "groupCode": "MARKET",
       "title": "물류 거점에서 마트로 운송",
       "subjectKind": "Npc",
-      "actionGwae": "JIN",
+      "actionGwae": "GAM",
       "operationMode": "Fixed",
-      "operationGwae": "GAM",
+      "operationGwae": "TAE",
       "operationGwaeByActionCode": null,
       "targetMode": "Fixed",
       "targetGwae": "GAM",
       "additionalTargetGwae": null,
       "supportMode": "None",
       "supportGwae": null,
-      "elementRelations": [],
-      "classificationStatus": "ReviewedByMeaningRule",
+      "elementRelations": [
+        {
+          "relationCode": "SHENG",
+          "sourceGwae": "TAE",
+          "targetGwae": "GAM",
+          "displayName": "금생수",
+          "applicationMode": "RequiredInput",
+          "functionalMeaning": "출차 확인으로 Hub 권역에서 분리된 동일 화물만 등록 경로의 운송 흐름에 들어간다."
+        }
+      ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "HubToMarketTransport",
+        "startStateCodes": [
+          "Reserved"
+        ],
+        "completionStateCodes": [
+          "ArrivedAtDestination"
+        ],
+        "effectCodes": [
+          "MarketCargoArrived"
+        ],
+        "actorRequirementRefs": [
+          "운송 담당 행위자"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
-      "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
+      "reason": "Hub에서 목적지까지 화물과 차량이 등록 경로를 따라 이동하는 운송은 수(감괘)이며 출차·권역 분리는 금(태괘)의 선행 작용이다."
     },
     {
       "wiId": "WI-MARKET-02",
@@ -1278,10 +3583,39 @@
       "additionalTargetGwae": null,
       "supportMode": "None",
       "supportGwae": null,
-      "elementRelations": [],
-      "classificationStatus": "ReviewedByMeaningRule",
+      "elementRelations": [
+        {
+          "relationCode": "SHENG",
+          "sourceGwae": "GAM",
+          "targetGwae": "JIN",
+          "displayName": "수생목",
+          "applicationMode": "Outcome",
+          "functionalMeaning": "도착 화물의 목적지·수량·상태를 확인한 인수만 마트 입고 작업을 새로 연다."
+        }
+      ],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "MarketFreightReceipt",
+        "startStateCodes": [
+          "ArrivedAtDestination"
+        ],
+        "completionStateCodes": [
+          "MarketReceived"
+        ],
+        "effectCodes": [
+          "MarketFreightReceived"
+        ],
+        "actorRequirementRefs": [
+          "마트 입고 담당"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
-      "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
+      "reason": "마트 도착 화물 인수는 운송 완료를 그대로 복제하지 않고 수령 측 업무의 새 입구를 여는 목(진괘) 행위다."
     },
     {
       "wiId": "WI-MARKET-03",
@@ -1298,6 +3632,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "MarketInboundInspection",
+        "startStateCodes": [
+          "MarketReceived"
+        ],
+        "completionStateCodes": [
+          "MarketStorageEligible"
+        ],
+        "effectCodes": [
+          "MarketStorageEligible"
+        ],
+        "actorRequirementRefs": [
+          "마트 검수 담당"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "market-logistics-action",
       "reason": "마트 입고 상품의 품질·수량 정보를 검수한다."
@@ -1317,6 +3671,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "MarketBackroomPutAway",
+        "startStateCodes": [
+          "MarketStorageEligible"
+        ],
+        "completionStateCodes": [
+          "MarketBackroomStored"
+        ],
+        "effectCodes": [
+          "MarketBackroomStored"
+        ],
+        "actorRequirementRefs": [
+          "마트 적재 담당"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "market-logistics-action",
       "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
@@ -1336,6 +3710,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "MarketDisplayReplenishment",
+        "startStateCodes": [
+          "MarketBackroomStored"
+        ],
+        "completionStateCodes": [
+          "Displayed"
+        ],
+        "effectCodes": [
+          "DisplayStockReplenished"
+        ],
+        "actorRequirementRefs": [
+          "진열 담당"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "market-logistics-action",
       "reason": "검토된 영역 의미 규칙 'market-logistics-action'을 적용했다."
@@ -1355,6 +3749,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "IndividualOrderConfirm",
+        "startStateCodes": [
+          "DemandCandidate"
+        ],
+        "completionStateCodes": [
+          "OrderConfirmed"
+        ],
+        "effectCodes": [
+          "OrderConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "주문자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "order-fulfillment-action",
       "reason": "주민 수요 정보를 확인하고 주문 약속을 확정한다."
@@ -1374,6 +3788,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "OrderStockReservationTransition",
+        "startStateCodes": [
+          "OrderConfirmed"
+        ],
+        "completionStateCodes": [
+          "StockReserved"
+        ],
+        "effectCodes": [
+          "OrderStockReserved"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "order-fulfillment-action",
       "reason": "주문과 재고 정보를 비교해 예약 상태를 확정한다."
@@ -1393,6 +3825,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "OrderPickingTransition",
+        "startStateCodes": [
+          "StockReserved"
+        ],
+        "completionStateCodes": [
+          "Picked"
+        ],
+        "effectCodes": [
+          "OrderStockPicked"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "order-fulfillment-action",
       "reason": "검토된 영역 의미 규칙 'order-fulfillment-action'을 적용했다."
@@ -1412,6 +3862,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "OrderPackingTransition",
+        "startStateCodes": [
+          "Picked"
+        ],
+        "completionStateCodes": [
+          "Packed"
+        ],
+        "effectCodes": [
+          "OrderPacked"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "order-fulfillment-action",
       "reason": "검토된 영역 의미 규칙 'order-fulfillment-action'을 적용했다."
@@ -1431,6 +3899,24 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "OrderPickupReadyTransition",
+        "startStateCodes": [
+          "Packed"
+        ],
+        "completionStateCodes": [
+          "ReadyForPickup"
+        ],
+        "effectCodes": [
+          "OrderReadyForPickup"
+        ],
+        "actorRequirementRefs": [],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "order-fulfillment-action",
       "reason": "검토된 영역 의미 규칙 'order-fulfillment-action'을 적용했다."
@@ -1450,6 +3936,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ResidentOrderPickup",
+        "startStateCodes": [
+          "ReadyForPickup"
+        ],
+        "completionStateCodes": [
+          "Fulfilled"
+        ],
+        "effectCodes": [
+          "OrderFulfilled"
+        ],
+        "actorRequirementRefs": [
+          "주문자 또는 승인된 수령자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "order-fulfillment-action",
       "reason": "주민이 주문 물품을 직접 수령하며 대상 물품 괘상을 승계한다."
@@ -1469,6 +3975,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ResidentConsumption",
+        "startStateCodes": [
+          "Fulfilled"
+        ],
+        "completionStateCodes": [
+          "Consumed"
+        ],
+        "effectCodes": [
+          "ResidentConsumed"
+        ],
+        "actorRequirementRefs": [
+          "주문 수령 주민"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "order-fulfillment-action",
       "reason": "주민이 물품을 직접 소비하며 작용과 대상은 물품 괘상을 승계한다."
@@ -1488,6 +4014,29 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "RegionalThreatObservation",
+        "startStateCodes": [
+          "Stable",
+          "Warning",
+          "Threatened",
+          "Infested"
+        ],
+        "completionStateCodes": [
+          "ThreatObserved"
+        ],
+        "effectCodes": [
+          "NatureThreatObserved"
+        ],
+        "actorRequirementRefs": [
+          "탐사 또는 관찰 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "위험 징후를 조사하며 정신적 위협을 관찰한다."
@@ -1507,6 +4056,27 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "EmergencyRetreat",
+        "startStateCodes": [
+          "ThreatObserved",
+          "EncounterActive"
+        ],
+        "completionStateCodes": [
+          "RetreatedToSafeCore"
+        ],
+        "effectCodes": [
+          "PartyRetreatedToSafeCore"
+        ],
+        "actorRequirementRefs": [
+          "후퇴 가능한 플레이어 또는 파티"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "플레이어와 동료가 안전 공간으로 직접 후퇴하며 위협 극복이 보조한다."
@@ -1526,6 +4096,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NatureRestoration",
+        "startStateCodes": [
+          "ThreatObserved",
+          "CauseResolved"
+        ],
+        "completionStateCodes": [
+          "NatureRouteRestored"
+        ],
+        "effectCodes": [
+          "NatureRouteRestored"
+        ],
+        "actorRequirementRefs": [
+          "복원 작업 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "훼손된 자연 경로 공간을 직접 정화·복원한다."
@@ -1545,6 +4136,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "PartyRecovery",
+        "startStateCodes": [
+          "RetreatedToSafeCore",
+          "NatureRouteRestored"
+        ],
+        "completionStateCodes": [
+          "PartyRecovered"
+        ],
+        "effectCodes": [
+          "PartyRecovered"
+        ],
+        "actorRequirementRefs": [
+          "회복 대상 플레이어 또는 파티"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "플레이어와 동료의 안전·정신 회복을 다룬다."
@@ -1564,6 +4176,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "AcquireAxe",
+        "startStateCodes": [
+          "AxeAvailable",
+          "PlayerWithoutAxe"
+        ],
+        "completionStateCodes": [
+          "AxeOwnedInInventory"
+        ],
+        "effectCodes": [
+          "AxeAcquired"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "자연 행동에 사용할 금속 도구를 획득한다."
@@ -1583,6 +4216,29 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "BeginHarvest",
+        "startStateCodes": [
+          "WoodcuttingCapabilityEquipped",
+          "TreeStanding",
+          "PlayerIdle"
+        ],
+        "completionStateCodes": [
+          "HarvestWorkScheduled"
+        ],
+        "effectCodes": [
+          "TreeFelled",
+          "TimberCreated"
+        ],
+        "actorRequirementRefs": [
+          "capability:woodcutting을 장착 상태에서 가진 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "벌목은 진괘 행위이고 도끼 절단은 태괘 작용이며 집중은 간괘 보조다."
@@ -1602,6 +4258,27 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "PlaceCabinBlueprint",
+        "startStateCodes": [
+          "CabinPlanned",
+          "BuildingSiteAvailable"
+        ],
+        "completionStateCodes": [
+          "CabinBlueprintPlaced"
+        ],
+        "effectCodes": [
+          "CabinBlueprintPlaced"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "오두막 위치와 방향을 계획해 공간에 확정한다."
@@ -1621,6 +4298,30 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "BeginCabinBuild",
+        "startStateCodes": [
+          "CabinBlueprintPlaced",
+          "TimberAvailable",
+          "PlayerIdle"
+        ],
+        "completionStateCodes": [
+          "CabinBuildScheduled"
+        ],
+        "effectCodes": [
+          "CabinOperational",
+          "CabinRecoveryEnabled",
+          "CabinDefenseEnabled"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "자연 재료를 사용해 오두막 공간시설을 직접 건설한다."
@@ -1640,6 +4341,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "EnterCabin",
+        "startStateCodes": [
+          "CabinOperational",
+          "PlayerOutsideCabin"
+        ],
+        "completionStateCodes": [
+          "PlayerInsideCabin"
+        ],
+        "effectCodes": [
+          "PlayerEnteredCabin"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "완성된 오두막 내부로 직접 이동해 점유한다."
@@ -1659,6 +4381,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "LeaveCabin",
+        "startStateCodes": [
+          "PlayerInsideCabin"
+        ],
+        "completionStateCodes": [
+          "PlayerOutsideCabin"
+        ],
+        "effectCodes": [
+          "PlayerLeftCabin"
+        ],
+        "actorRequirementRefs": [
+          "오두막 내부의 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "오두막 점유를 해제하고 외부 공간으로 직접 이동한다."
@@ -1678,6 +4420,34 @@
       "supportMode": "Fixed",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ResolveEncounter",
+        "startStateCodes": [
+          "EncounterPending",
+          "CombatActive"
+        ],
+        "completionStateCodes": [
+          "EncounterResolved",
+          "BattleHandoffRequested",
+          "PlayerRetreated",
+          "PlayerDefeated"
+        ],
+        "effectCodes": [
+          "BattleHandoffRequested",
+          "EncounterVictoryRewarded",
+          "PlayerRetreated",
+          "CarriedMaterialsLost",
+          "EncounterResolved"
+        ],
+        "actorRequirementRefs": [
+          "조우 중인 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "위협 대응 선택을 확정하며 위협 극복 역량이 보조한다."
@@ -1697,6 +4467,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CancelActiveWork",
+        "startStateCodes": [
+          "WorkActive"
+        ],
+        "completionStateCodes": [
+          "WorkCancelled",
+          "SafeChoiceAvailable"
+        ],
+        "effectCodes": [
+          "WorkCancelled",
+          "SpatialReservationReleased",
+          "ReservedMaterialReturned"
+        ],
+        "actorRequirementRefs": [
+          "진행 작업을 소유한 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "진행 중인 WI의 점유·예약 질서를 취소하고 대상은 해당 WI에서 승계한다."
@@ -1716,6 +4509,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "StoreAtCabin",
+        "startStateCodes": [
+          "CabinOperational",
+          "PlayerInsideCabin",
+          "TimberCarried"
+        ],
+        "completionStateCodes": [
+          "TimberStored"
+        ],
+        "effectCodes": [
+          "TimberStored",
+          "CabinStorageTransferRecorded"
+        ],
+        "actorRequirementRefs": [
+          "오두막에 접근한 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "획득 자원을 시설 보관함으로 직접 옮겨 재고화한다."
@@ -1735,6 +4551,31 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SleepInCabin",
+        "startStateCodes": [
+          "Night",
+          "PlayerInsideCabin",
+          "EncounterResolved"
+        ],
+        "completionStateCodes": [
+          "Sleeping",
+          "DawnReached"
+        ],
+        "effectCodes": [
+          "SleepStarted",
+          "DawnReached",
+          "SleepReleased"
+        ],
+        "actorRequirementRefs": [
+          "오두막 내부의 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "오두막을 이용해 수면하고 심신을 회복한다."
@@ -1754,6 +4595,29 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "SelectExpansionPlan",
+        "startStateCodes": [
+          "Dawn",
+          "PlanUnselected"
+        ],
+        "completionStateCodes": [
+          "Day2Ready",
+          "ExpansionPlanSelected"
+        ],
+        "effectCodes": [
+          "ExpansionPlanSelected",
+          "Day2Ready"
+        ],
+        "actorRequirementRefs": [
+          "첫날을 마친 Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "다음 날 거점 확장 계획을 세우고 고정하며 시설 후보와 현재 정보를 검토한다."
@@ -1776,6 +4640,31 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "PrepareFieldSupply",
+        "startStateCodes": [
+          "Day2Ready",
+          "NatureWorkbenchOperational",
+          "PlayerInsideCabin"
+        ],
+        "completionStateCodes": [
+          "NatureFieldSupplyPackAdded",
+          "FieldExpeditionChoiceAvailable"
+        ],
+        "effectCodes": [
+          "NatureFieldSupplyPackAdded",
+          "ExpeditionPrepared",
+          "OneCarriedMaterialStackProtected"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생활 거점의 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "작업대와 재료를 사용해 보급 꾸러미를 직접 제작한다."
@@ -1795,6 +4684,31 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "PrepareFieldSupplyDelegated",
+        "startStateCodes": [
+          "Day2Ready",
+          "NatureWorkbenchOperational",
+          "NpcFieldSupplyPolicyEnabled"
+        ],
+        "completionStateCodes": [
+          "NatureFieldSupplyPackAdded",
+          "FieldExpeditionChoiceAvailable"
+        ],
+        "effectCodes": [
+          "NpcFieldSupplyPolicySelected",
+          "NatureFieldSupplyPackAdded",
+          "FieldExpeditionChoiceAvailable"
+        ],
+        "actorRequirementRefs": [
+          "현장보급제작 역량을 가진 Nature 거점 NPC"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "NPC에게 제작 역할을 위임하고 우선 정책을 적용한다."
@@ -1814,9 +4728,115 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CollectDroppedTimber",
+        "startStateCodes": [
+          "DroppedTimberAvailable",
+          "InventoryCapacityAvailable"
+        ],
+        "completionStateCodes": [
+          "DroppedTimberCollected",
+          "TimberCarried"
+        ],
+        "effectCodes": [
+          "TimberCollected",
+          "DroppedTimberRemoved"
+        ],
+        "actorRequirementRefs": [
+          "Nature 생존 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "nature-direct-action",
       "reason": "벌목 통나무를 직접 주워 인벤토리 흐름에 넣는다."
+    },
+    {
+      "wiId": "WI-NATURE-19",
+      "groupCode": "NATURE",
+      "title": "한스 농장 부러진 손도끼 줍기",
+      "subjectKind": "Player",
+      "actionGwae": "JIN",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "JIN",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "AcquireHansBrokenAxe",
+        "startStateCodes": [
+          "HansBrokenAxeAvailable"
+        ],
+        "completionStateCodes": [
+          "HansBrokenAxeCarried",
+          "WoodcuttingChoiceAvailable"
+        ],
+        "effectCodes": [
+          "HansBrokenAxeCarried"
+        ],
+        "actorRequirementRefs": [
+          "한스 농장에 도달한 Nature 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "nature-direct-action",
+      "reason": "검토된 영역 의미 규칙 'nature-direct-action'을 적용했다."
+    },
+    {
+      "wiId": "WI-NATURE-20",
+      "groupCode": "NATURE",
+      "title": "한스 농장 울타리 일괄 수리",
+      "subjectKind": "Player",
+      "actionGwae": "JIN",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "JIN",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "RepairHansFarmFence",
+        "startStateCodes": [
+          "HansBrokenAxeCarried",
+          "HansFarmFenceDamaged",
+          "TimberCarried"
+        ],
+        "completionStateCodes": [
+          "HansFarmFenceRepaired",
+          "HansFarmLifeOrTravelChoiceAvailable"
+        ],
+        "effectCodes": [
+          "HansFarmFenceRepaired",
+          "HansFarmLifeOrTravelChoiceAvailable"
+        ],
+        "actorRequirementRefs": [
+          "한스 농장 첫 사건을 확인한 Nature 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "nature-direct-action",
+      "reason": "검토된 영역 의미 규칙 'nature-direct-action'을 적용했다."
     },
     {
       "wiId": "WI-REFLECT-01",
@@ -1833,6 +4853,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ConfirmBaseReflection",
+        "startStateCodes": [
+          "ReturnedToBase",
+          "NatureSafeChoiceAvailable",
+          "ReflectionChoiceAvailable"
+        ],
+        "completionStateCodes": [
+          "InnerLearningPending"
+        ],
+        "effectCodes": [
+          "InnerLearningPending"
+        ],
+        "actorRequirementRefs": [
+          "Nature 거점에 귀환한 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "inner-reflection",
       "reason": "승인 자료를 바탕으로 명상·성찰하고 내면 학습을 확정한다."
@@ -1852,6 +4894,29 @@
       "supportMode": "Contextual",
       "supportGwae": "GAN",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ActivateMajorArcana",
+        "startStateCodes": [
+          "MajorArcanaChoiceAvailable"
+        ],
+        "completionStateCodes": [
+          "MajorArcanaActivationFrozen",
+          "TownLifeChoiceAvailable"
+        ],
+        "effectCodes": [
+          "MajorArcanaActivated",
+          "ArcanaOrientationFrozen",
+          "ArcanaInfluenceSnapshotsCreated"
+        ],
+        "actorRequirementRefs": [
+          "메이저 아르카나 선택 권한 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "symbolic-world-state-activation",
       "reason": "검토된 영역 의미 규칙 'symbolic-world-state-activation'을 적용했다."
@@ -1871,6 +4936,27 @@
       "supportMode": "Fixed",
       "supportGwae": "GAM",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "BeginBuildingConstruction",
+        "startStateCodes": [
+          "Available"
+        ],
+        "completionStateCodes": [
+          "Building",
+          "Operational"
+        ],
+        "effectCodes": [
+          "AreaBuildingOperational"
+        ],
+        "actorRequirementRefs": [
+          "해당 영역 건설 권한 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "physical-construction-action",
       "reason": "재료와 배치 계획을 사용해 H1 건물을 직접 운영 상태로 만든다."
@@ -1890,6 +4976,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CityDemandConfirm",
+        "startStateCodes": [
+          "CityDemandChoiceAvailable"
+        ],
+        "completionStateCodes": [
+          "CityDemandConfirmed"
+        ],
+        "effectCodes": [
+          "CityDemandConfirmed"
+        ],
+        "actorRequirementRefs": [
+          "City 운영 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "city-service-information-flow",
       "reason": "도심 수요 정보를 확인하고 이번 처리 대상을 확정한다."
@@ -1909,6 +5015,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CityInventoryAllocationTransition",
+        "startStateCodes": [
+          "CityDemandConfirmed"
+        ],
+        "completionStateCodes": [
+          "CityInventoryAllocated",
+          "CityInventoryShortage"
+        ],
+        "effectCodes": [
+          "CityInventoryAllocated",
+          "CityInventoryShortage"
+        ],
+        "actorRequirementRefs": [
+          "Simulation Core"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "city-service-information-flow",
       "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
@@ -1928,6 +5056,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CityServiceProcess",
+        "startStateCodes": [
+          "CityInventoryAllocated",
+          "CityInventoryShortage"
+        ],
+        "completionStateCodes": [
+          "CityServiceCompleted",
+          "CityServiceDeferred"
+        ],
+        "effectCodes": [
+          "CityServiceCompleted",
+          "CityServiceDeferred"
+        ],
+        "actorRequirementRefs": [
+          "City 운영 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "city-service-information-flow",
       "reason": "배정 재고를 사용해 주민 서비스를 직접 처리한다."
@@ -1947,6 +5098,27 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "CityServiceResultAcknowledge",
+        "startStateCodes": [
+          "CityServiceCompleted",
+          "CityServiceDeferred"
+        ],
+        "completionStateCodes": [
+          "CityServiceChoiceAvailable"
+        ],
+        "effectCodes": [
+          "CityServiceChoiceAvailable"
+        ],
+        "actorRequirementRefs": [
+          "City 운영 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedByMeaningRule",
       "reviewRule": "city-service-information-flow",
       "reason": "검토된 영역 의미 규칙 'city-service-information-flow'을 적용했다."
@@ -1966,6 +5138,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "WorldRule",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NpcAssignmentPolicy",
+        "startStateCodes": [
+          "Available"
+        ],
+        "completionStateCodes": [
+          "Assigned"
+        ],
+        "effectCodes": [
+          "NpcAssigned"
+        ],
+        "actorRequirementRefs": [
+          "ActionCode별 NPC capability"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "NPC에게 반복 업무 역할을 배정한다."
@@ -1985,6 +5177,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "NpcActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NpcCapabilityGrant",
+        "startStateCodes": [
+          "NotGranted"
+        ],
+        "completionStateCodes": [
+          "Granted"
+        ],
+        "effectCodes": [
+          "NpcCapabilityGranted"
+        ],
+        "actorRequirementRefs": [
+          "위임 권한 주체"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "NPC에게 업무 역량과 책임을 위임한다."
@@ -2004,6 +5216,28 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TaskCancel",
+        "startStateCodes": [
+          "Scheduled",
+          "Blocked"
+        ],
+        "completionStateCodes": [
+          "Cancelled"
+        ],
+        "effectCodes": [
+          "TaskCancelled",
+          "ReservationsReleased"
+        ],
+        "actorRequirementRefs": [
+          "취소 권한 주체"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "진행 중인 세계 업무의 계보·예약 질서를 취소하고 대상은 해당 WI에서 승계한다."
@@ -2023,6 +5257,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "FacilityRepair",
+        "startStateCodes": [
+          "Damaged"
+        ],
+        "completionStateCodes": [
+          "Repaired"
+        ],
+        "effectCodes": [
+          "FacilityRepaired"
+        ],
+        "actorRequirementRefs": [
+          "수리 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "재료와 작업을 사용해 손상된 시설을 직접 수리한다."
@@ -2042,6 +5296,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "RegionDiscovery",
+        "startStateCodes": [
+          "Undiscovered"
+        ],
+        "completionStateCodes": [
+          "Discovered"
+        ],
+        "effectCodes": [
+          "RegionDiscovered"
+        ],
+        "actorRequirementRefs": [
+          "탐사 가능 행위자"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "탐사·관찰로 새로운 지역 공간을 발견한다."
@@ -2061,6 +5335,26 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TeamRoleCardEquip",
+        "startStateCodes": [
+          "Unequipped"
+        ],
+        "completionStateCodes": [
+          "Equipped"
+        ],
+        "effectCodes": [
+          "TeamRoleCardEquipped"
+        ],
+        "actorRequirementRefs": [
+          "팀 역할 관리 권한"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "일행의 역할과 편성을 명시적으로 정한다."
@@ -2080,6 +5374,29 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TeamActivityLifecycle",
+        "startStateCodes": [
+          "Available",
+          "Active"
+        ],
+        "completionStateCodes": [
+          "Active",
+          "Completed"
+        ],
+        "effectCodes": [
+          "TeamActivityStarted",
+          "TeamActivityEnded"
+        ],
+        "actorRequirementRefs": [
+          "활동 관리 권한"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "팀 활동의 시작·종료 질서를 변경한다."
@@ -2099,9 +5416,158 @@
       "supportMode": "None",
       "supportGwae": null,
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "TurnClosing",
+        "startStateCodes": [
+          "TurnOpen"
+        ],
+        "completionStateCodes": [
+          "TurnClosed"
+        ],
+        "effectCodes": [
+          "TurnClosed"
+        ],
+        "actorRequirementRefs": [
+          "턴 마감 권한"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "world-policy-and-control",
       "reason": "현재 턴의 결정·효과 정보를 마감하고 다음 세계 질서를 연다."
+    },
+    {
+      "wiId": "WI-NATURE-HANS-BOUNDARY-PATROL",
+      "groupCode": "NATURE",
+      "title": "한스와 농장 경계 순찰",
+      "subjectKind": "Variable",
+      "actionGwae": "JIN",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "JIN",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "ResolvedExecutionObject",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "PatrolHansFarmBoundary",
+        "startStateCodes": [
+          "HansGuestRightsGranted",
+          "FarmBoundaryPatrolAvailable"
+        ],
+        "completionStateCodes": [
+          "FarmBoundaryPatrolCompleted",
+          "HansAndPlayerReturnedTogether"
+        ],
+        "effectCodes": [
+          "FarmBoundaryPatrolCompleted",
+          "HansAndPlayerReturnedTogether",
+          "PromiseFulfillmentRecorded"
+        ],
+        "actorRequirementRefs": [
+          "플레이어",
+          "한스 동행 가능 상태"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "nature-direct-action",
+      "reason": "검토된 영역 의미 규칙 'nature-direct-action'을 적용했다."
+    },
+    {
+      "wiId": "WI-WORLD-BOUNDED-MANAGEMENT-GRANT",
+      "groupCode": "WORLD",
+      "title": "제한된 생활 거점 관리권 부여",
+      "subjectKind": "Player",
+      "actionGwae": "RI",
+      "operationMode": "None",
+      "operationGwae": null,
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "RI",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "GrantBoundedFarmManagementAuthority",
+        "startStateCodes": [
+          "TrustEvidenceAccepted",
+          "ManagementGrantAvailable"
+        ],
+        "completionStateCodes": [
+          "BoundedManagementAuthorityGranted"
+        ],
+        "effectCodes": [
+          "BoundedManagementAuthorityGranted"
+        ],
+        "actorRequirementRefs": [
+          "권한 부여자 한스",
+          "수령자 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "world-policy-and-control",
+      "reason": "검토된 영역 의미 규칙 'world-policy-and-control'을 적용했다."
+    },
+    {
+      "wiId": "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF",
+      "groupCode": "REFLECT",
+      "title": "한스 농장 위기 사후 성찰",
+      "subjectKind": "Player",
+      "actionGwae": "GAN",
+      "operationMode": "Fixed",
+      "operationGwae": "GAM",
+      "operationGwaeByActionCode": null,
+      "targetMode": "Fixed",
+      "targetGwae": "GAN",
+      "additionalTargetGwae": null,
+      "supportMode": "None",
+      "supportGwae": null,
+      "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "ReflectHansFarmCrisis",
+        "startStateCodes": [
+          "FarmDefenseReturned",
+          "FarmRecoveryOutcomeAvailable"
+        ],
+        "completionStateCodes": [
+          "HansFarmCrisisDebriefCompleted",
+          "LearningNeedRecognized"
+        ],
+        "effectCodes": [
+          "HansFarmCrisisDebriefCompleted",
+          "LearningNeedRecognized",
+          "Hex04CampaignEntryAvailable"
+        ],
+        "actorRequirementRefs": [
+          "플레이어",
+          "한스"
+        ],
+        "notApplicableReason": ""
+      },
+      "classificationStatus": "ReviewedByMeaningRule",
+      "reviewRule": "inner-reflection",
+      "reason": "검토된 영역 의미 규칙 'inner-reflection'을 적용했다."
     },
     {
       "wiId": "WI-REVIEW-01",
@@ -2118,9 +5584,148 @@
       "supportMode": "Fixed",
       "supportGwae": "RI",
       "elementRelations": [],
+      "e5RoleObjectActionGate": {
+        "applicabilityCode": "Required",
+        "worldObjectScopeCode": "AllWorldObjects",
+        "roleObjectKindCode": "PlayerActor",
+        "roleObjectBindingModeCode": "ResolveFromAuthorityExecutionContext",
+        "actionCode": "NpcWorkReviewConfirm",
+        "startStateCodes": [
+          "NpcWorkCompleted",
+          "ReviewPending"
+        ],
+        "completionStateCodes": [
+          "NpcWorkReviewConfirmed"
+        ],
+        "effectCodes": [
+          "NpcWorkReviewConfirmed",
+          "PlayerOperationalProficiencyChanged"
+        ],
+        "actorRequirementRefs": [
+          "위임을 발의한 플레이어"
+        ],
+        "notApplicableReason": ""
+      },
       "classificationStatus": "ReviewedExplicit",
       "reviewRule": "delegated-result-review",
       "reason": "위임한 NPC 결과를 검토하고 운영 학습 근거를 확정한다."
+    }
+  ],
+  "roleObjectActionProfiles": [
+    {
+      "profileId": "role-action-profile:farm-crop-cycle.v1",
+      "title": "농부·토양·작물의 농사 오행 순환",
+      "e5ReadinessCode": "Conditional",
+      "steps": [
+        {
+          "sequence": 1,
+          "wiId": "WI-FARM-01",
+          "roleObjectKindCode": "ResolvedExecutionObject",
+          "roleCode": "FarmerOrFarmWorker",
+          "bindingKindCode": "Action",
+          "authorityCode": "Tilling",
+          "gwaeCode": "JIN"
+        },
+        {
+          "sequence": 2,
+          "wiId": "WI-FARM-02",
+          "roleObjectKindCode": "NaturalObject",
+          "roleCode": "SeedAndCultivationUnit",
+          "bindingKindCode": "Action",
+          "authorityCode": "Sowing",
+          "gwaeCode": "JIN"
+        },
+        {
+          "sequence": 3,
+          "wiId": "WI-FARM-03",
+          "roleObjectKindCode": "NaturalObject",
+          "roleCode": "GrowingCrop",
+          "bindingKindCode": "Action",
+          "authorityCode": "CropCare",
+          "gwaeCode": "GAN"
+        },
+        {
+          "sequence": 4,
+          "wiId": "WI-FARM-04",
+          "roleObjectKindCode": "NaturalObject",
+          "roleCode": "HarvestReadyCrop",
+          "bindingKindCode": "Action",
+          "authorityCode": "Harvesting",
+          "gwaeCode": "TAE"
+        }
+      ],
+      "openGapRefs": [
+        "E5에서는 실제 농부 또는 작업 NPC·토양·작물·도구 인스턴스와 같은 Revision의 행위 기록을 결속해야 한다."
+      ],
+      "boundary": "이 프로필은 기존 Farm WI의 오행 역할 관계를 고정하지만 실제 Unity 배치·입력 또는 E5 증거가 아니다."
+    },
+    {
+      "profileId": "role-action-profile:urban-motorcycle-parcel.v1",
+      "title": "도심 물류 거점 오토바이 소포 배송 오행 순환",
+      "e5ReadinessCode": "Blocked",
+      "steps": [
+        {
+          "sequence": 1,
+          "wiId": "WI-HUB-06",
+          "roleObjectKindCode": "NpcActor",
+          "roleCode": "CourierOrLoader",
+          "bindingKindCode": "Gap",
+          "authorityCode": "",
+          "gwaeCode": "JIN",
+          "openGapRef": "출고 화물을 배달 기사가 인수했다는 독립 권위 상태가 현행 WI에 없다."
+        },
+        {
+          "sequence": 2,
+          "wiId": "WI-HUB-06",
+          "roleObjectKindCode": "NpcActor",
+          "roleCode": "CourierOrLoader",
+          "bindingKindCode": "Action",
+          "authorityCode": "HubVehicleLoading",
+          "gwaeCode": "RI"
+        },
+        {
+          "sequence": 3,
+          "wiId": "WI-HUB-06",
+          "roleObjectKindCode": "Vehicle",
+          "roleCode": "MotorcycleCargoCarrier",
+          "bindingKindCode": "ResultState",
+          "authorityCode": "HubCargoLoaded",
+          "gwaeCode": "GAN"
+        },
+        {
+          "sequence": 4,
+          "wiId": "WI-MARKET-01",
+          "roleObjectKindCode": "Vehicle",
+          "roleCode": "MotorcycleCargoCarrier",
+          "bindingKindCode": "Gap",
+          "authorityCode": "",
+          "gwaeCode": "TAE",
+          "openGapRef": "오토바이 출차·Hub 권역 분리의 독립 권위 상태와 차량 종류 계약이 없다."
+        },
+        {
+          "sequence": 5,
+          "wiId": "WI-MARKET-01",
+          "roleObjectKindCode": "Vehicle",
+          "roleCode": "MotorcycleCargoCarrier",
+          "bindingKindCode": "Action",
+          "authorityCode": "HubToMarketTransport",
+          "gwaeCode": "GAM"
+        },
+        {
+          "sequence": 6,
+          "wiId": "WI-MARKET-02",
+          "roleObjectKindCode": "Facility",
+          "roleCode": "DestinationReceivingPoint",
+          "bindingKindCode": "Action",
+          "authorityCode": "MarketFreightReceipt",
+          "gwaeCode": "JIN"
+        }
+      ],
+      "openGapRefs": [
+        "수령인 부재·화물 파손·경로 차단 뒤 재시도 또는 Hub 반품으로 귀환하는 WI와 권위 상태가 없다.",
+        "정확 오토바이·기사·소포·상차장·출구·반품 지점의 동결 배치 맵과 자산 후보가 없다."
+      ],
+      "boundary": "정상 운송의 기존 WI를 재사용한 E4 준비 표본이며 누락 상태를 임의로 만들거나 실제 배송·Scene·E5를 주장하지 않는다."
     }
   ]
 }

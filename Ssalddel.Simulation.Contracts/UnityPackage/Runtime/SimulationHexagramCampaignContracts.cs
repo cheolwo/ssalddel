@@ -9,6 +9,7 @@ namespace Ssalddel.Simulation.Contracts
         public const string RetryWorldInteractionId =
             "WI-STORY-HEXAGRAM-CAMPAIGN-RETRY";
         public const string ZhunStableId = "HEX-03-ZHUN";
+        public const string MengStableId = "HEX-04-MENG";
         public const string Active = "Active";
         public const string FreeRoam = "FreeRoam";
         public const string Completed = "Completed";

@@ -62,6 +62,15 @@ namespace Ssalddel.Simulation.Domain
                     }
                 }
 
+                if ((request.CookingSlots.HasValue || request.CookingDurationTicks.HasValue)
+                    && policy.ActionCode != SimulationNpcActionCodes.RestaurantCooking)
+                    throw new SimulationContractException("SimulationRestaurantPolicyRequired");
+                if ((request.CookingSlots.HasValue || policy.CookingSlots.HasValue)
+                    && (request.CookingDurationTicks ?? policy.WorkDurationTicks) > 14)
+                    throw new SimulationContractException("SimulationRestaurantCookingPolicyInvalid");
+                ApplyNeighborhoodPolicy(request);
+                if (request.CookingSlots.HasValue) policy.CookingSlots = request.CookingSlots.Value;
+                if (request.CookingDurationTicks.HasValue) policy.WorkDurationTicks = request.CookingDurationTicks.Value;
                 policy.AutomationEnabled = request.AutomationEnabled;
                 policy.Priority = request.Priority;
                 policy.PreferredActorStableId = preferredActorStableId;
@@ -152,6 +161,7 @@ namespace Ssalddel.Simulation.Domain
                     AutoDelegationBacklogThreshold = policy.AutoDelegationBacklogThreshold,
                     TravelDurationTicks = policy.TravelDurationTicks,
                     WorkDurationTicks = policy.WorkDurationTicks,
+                    CookingSlots = policy.CookingSlots,
                     InteractionPointKey = policy.InteractionPointKey.Trim(),
                     ActionVisualKey = policy.ActionVisualKey.Trim(),
                     Revision = 1,
@@ -722,6 +732,7 @@ namespace Ssalddel.Simulation.Domain
         private static SimulationNpcWorkPolicySnapshot CloneNpcWorkPolicy(SimulationNpcWorkPolicySnapshot source)
             => new SimulationNpcWorkPolicySnapshot
             {
+                CookingSlots = source.CookingSlots,
                 PolicyStableId = source.PolicyStableId,
                 OrganizationStableId = source.OrganizationStableId,
                 FacilityStableId = source.FacilityStableId,
@@ -850,6 +861,7 @@ namespace Ssalddel.Simulation.Domain
                 }).ToArray(),
                 Policies = source.Policies.Select(value => new SimulationNpcWorkPolicyInitialRequest
                 {
+                    CookingSlots = value.CookingSlots,
                     PolicyStableId = value.PolicyStableId,
                     OrganizationStableId = value.OrganizationStableId,
                     FacilityStableId = value.FacilityStableId,
@@ -912,7 +924,8 @@ namespace Ssalddel.Simulation.Domain
                         + value.AutoDelegationBacklogThreshold.ToString(CultureInfo.InvariantCulture) + "|"
                         + value.TravelDurationTicks.ToString(CultureInfo.InvariantCulture) + "|"
                         + value.WorkDurationTicks.ToString(CultureInfo.InvariantCulture) + "|"
-                        + value.InteractionPointKey + "|" + value.ActionVisualKey)),
+                        + value.InteractionPointKey + "|" + value.ActionVisualKey
+                        + (value.CookingSlots.HasValue ? "|restaurant-slots:" + value.CookingSlots.Value.ToString(CultureInfo.InvariantCulture) : string.Empty))),
                 includeInitialInventories
                     ? string.Join("\u001f", normalized.Inventories.OrderBy(
                             value => value.InventoryStableId, StringComparer.Ordinal)
@@ -934,7 +947,11 @@ namespace Ssalddel.Simulation.Domain
                 request.Priority.ToString(CultureInfo.InvariantCulture),
                 request.PreferredActorStableId.Trim(),
                 request.AutoDelegationEnabled.ToString(),
-            });
+            }) + (request.CookingSlots.HasValue || request.CookingDurationTicks.HasValue
+                ? "\u001erestaurant:" + request.CookingSlots?.ToString(CultureInfo.InvariantCulture)
+                    + ":" + request.CookingDurationTicks?.ToString(CultureInfo.InvariantCulture) : string.Empty)
+                + (request.ObserverWorkingTicks.HasValue || request.ObserverRestTicks.HasValue || request.ObserverRestockThreshold.HasValue
+                    ? "\u001elife:"+request.ObserverWorkingTicks?.ToString(CultureInfo.InvariantCulture)+":"+request.ObserverRestTicks?.ToString(CultureInfo.InvariantCulture)+":"+request.ObserverRestockThreshold?.ToString(CultureInfo.InvariantCulture) : string.Empty);
 
         internal static void ValidateNpcPolicyChangeRequest(SimulationNpcPolicyChangeRequest request)
         {
@@ -943,8 +960,14 @@ namespace Ssalddel.Simulation.Domain
             RequireStableId(request.PolicyStableId, "SimulationNpcPolicyStableIdInvalid");
             if (request.ExpectedRevision < 0)
                 throw new SimulationContractException("SimulationExpectedRevisionInvalid");
+            if(request.ObserverWorkingTicks<=0 || request.ObserverWorkingTicks>1800 || request.ObserverRestTicks<=0 || request.ObserverRestTicks>1800
+                || request.ObserverRestockThreshold<1 || request.ObserverRestockThreshold>4)
+                throw new SimulationContractException("NeighborhoodLifePolicyInvalid");
             if (request.Priority < 0 || request.Priority > 1000)
                 throw new SimulationContractException("SimulationNpcPolicyPriorityInvalid");
+            if (request.CookingSlots <= 0 || request.CookingSlots > 32
+                || request.CookingDurationTicks <= 0 || request.CookingDurationTicks > 14)
+                throw new SimulationContractException("SimulationRestaurantCookingPolicyInvalid");
             if (!string.IsNullOrWhiteSpace(request.PreferredActorStableId))
                 RequireStableId(request.PreferredActorStableId, "SimulationNpcPreferredActorStableIdInvalid");
         }
@@ -1010,6 +1033,9 @@ namespace Ssalddel.Simulation.Domain
             foreach (var policy in request.Policies)
             {
                 if (policy == null) throw new SimulationContractException("SimulationNpcPolicyInvalid");
+                if (policy.CookingSlots.HasValue && (policy.CookingSlots <= 0 || policy.CookingSlots > 32
+                    || policy.ActionCode != SimulationNpcActionCodes.RestaurantCooking || policy.WorkDurationTicks > 14))
+                    throw new SimulationContractException("SimulationRestaurantCookingPolicyInvalid");
                 RequireStableId(policy.PolicyStableId, "SimulationNpcPolicyStableIdInvalid");
                 RequireStableId(policy.OrganizationStableId, "SimulationNpcPolicyOrganizationInvalid");
                 RequireStableId(policy.FacilityStableId, "SimulationNpcPolicyFacilityInvalid");

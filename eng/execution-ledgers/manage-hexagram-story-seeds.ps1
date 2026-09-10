@@ -45,7 +45,7 @@ Require ([string] $source.schemaVersion -eq 'mirror-hexagram-story-seeds.v1') 'S
 Require ([string] $source.revision -eq 'hexagram-story-seeds.r1') 'Revision'
 $productionPath = Resolve-RepositoryPath ([string] $source.parentProductionLedgerPath) 'ParentProductionLedger' $true
 $production = Get-Content -LiteralPath $productionPath -Raw -Encoding UTF8 | ConvertFrom-Json
-Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v3') 'ParentSchemaVersion'
+Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v4') 'ParentSchemaVersion'
 $hexagrams = @($production.hexagrams)
 $hexagramIds = @($hexagrams | ForEach-Object { [string] $_.stableId })
 $lineIds = @($hexagrams | ForEach-Object { @($_.lineStories) } | ForEach-Object { [string] $_.stableId })

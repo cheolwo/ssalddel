@@ -1,7 +1,7 @@
 {
   "schemaVersion": "mirror-hexagram-story-seeds-index.v1",
   "revision": "hexagram-story-seeds.r1",
-  "parentProductionRevision": "hexagram-story-production.r14",
+  "parentProductionRevision": "hexagram-story-production.r15",
   "formalAuthoringHexagramStableId": "HEX-01-QIAN",
   "prototypeDialogueLineStableId": "HEX-04-MENG-L3",
   "policy": {

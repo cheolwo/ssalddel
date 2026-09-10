@@ -43,6 +43,29 @@ namespace Ssalddel.Simulation.Domain
         private int collectibleCoverageCenterY;
         private bool collectibleRewardsConfigured;
 
+        private static readonly MapKnowledgeDefinition[] MengEscortMapKnowledge =
+        {
+            new MapKnowledgeDefinition("map-place:hans-farm",
+                SimulationMapKnowledgeKindCodes.Place, "한스 농장",
+                new[] { "kr5186:l2:700:1145" }),
+            new MapKnowledgeDefinition("area:nature",
+                SimulationMapKnowledgeKindCodes.Place, "북쪽 숲길",
+                new[] { "kr5186:l2:701:1145" }),
+            new MapKnowledgeDefinition("map-place:town-outskirts",
+                SimulationMapKnowledgeKindCodes.Place, "타운 외곽",
+                new[] { "kr5186:l2:702:1145" }),
+            new MapKnowledgeDefinition("district:logistics",
+                SimulationMapKnowledgeKindCodes.Place, "허브",
+                new[] { "kr5186:l2:703:1145" }),
+            new MapKnowledgeDefinition("route:meng:hans-farm-to-hub",
+                SimulationMapKnowledgeKindCodes.Route, "산수몽 호송로",
+                new[]
+                {
+                    "kr5186:l2:700:1145", "kr5186:l2:701:1145",
+                    "kr5186:l2:702:1145", "kr5186:l2:703:1145",
+                }),
+        };
+
         private static readonly SimulationCollectibleCardDefinitionSnapshot[] CollectibleCatalog =
         {
             Definition("collectible-card:farm:soil-reading", SimulationCollectibleCardRewardCodes.Farm,
@@ -430,6 +453,7 @@ namespace Ssalddel.Simulation.Domain
                 RevealedL1AreaKeys = collectibleRevealedL1Areas.OrderBy(value => value,
                     StringComparer.Ordinal).ToArray(),
                 DiscoveryEvents = collectibleDiscoveryEvents.Select(CloneDiscoveryEvent).ToArray(),
+                MapKnowledgeEntries = CreateMapKnowledgeEntries(),
                 SimulationOnly = true,
                 IsOperationalState = false,
             };
@@ -646,7 +670,17 @@ namespace Ssalddel.Simulation.Domain
                     StringComparer.Ordinal)),
                 string.Join(";", state.DiscoveryEvents.Select(value => string.Join("|",
                     value.EventStableId, value.ActorStableId, value.TriggerCode,
-                    value.SpatialUnitKey, value.WorldTick))), state.SimulationOnly,
+                    value.SpatialUnitKey, value.WorldTick))),
+                string.Join(";", (state.MapKnowledgeEntries
+                        ?? Array.Empty<SimulationMapKnowledgeEntrySnapshot>())
+                    .OrderBy(value => value.SpatialStableId, StringComparer.Ordinal)
+                    .Select(value => string.Join("|", value.SpatialStableId,
+                        value.KindCode, value.KoreanLabel, value.KnowledgeLevelCode,
+                        value.SourceCode, value.FirstKnownWorldTick,
+                        value.ConfirmedWorldTick?.ToString(CultureInfo.InvariantCulture)
+                            ?? string.Empty,
+                        string.Join(",", value.RelatedL2TileKeys.OrderBy(tile => tile,
+                            StringComparer.Ordinal))))), state.SimulationOnly,
                 state.IsOperationalState);
 
         internal static string BuildCollectibleCardRewardStatePayloadKey(
@@ -706,6 +740,9 @@ namespace Ssalddel.Simulation.Domain
                 RevealedL2TileKeys = source.RevealedL2TileKeys.ToArray(),
                 RevealedL1AreaKeys = source.RevealedL1AreaKeys.ToArray(),
                 DiscoveryEvents = source.DiscoveryEvents.Select(CloneDiscoveryEvent).ToArray(),
+                MapKnowledgeEntries = (source.MapKnowledgeEntries
+                        ?? Array.Empty<SimulationMapKnowledgeEntrySnapshot>())
+                    .Select(CloneMapKnowledgeEntry).ToArray(),
                 SimulationOnly = source.SimulationOnly,
                 IsOperationalState = source.IsOperationalState,
             };
@@ -875,6 +912,85 @@ namespace Ssalddel.Simulation.Domain
                 WorldTick = source.WorldTick,
             };
 
+        private SimulationMapKnowledgeEntrySnapshot[] CreateMapKnowledgeEntries()
+        {
+            var briefingTick = ResolveMengBriefingTick();
+            var briefingAvailable = briefingTick.HasValue;
+            return MengEscortMapKnowledge
+                .Where(value => value.SpatialStableId == "map-place:hans-farm"
+                    || briefingAvailable)
+                .Select(value =>
+                {
+                    var confirmedTicks = value.RelatedL2TileKeys
+                        .Select(ResolveConfirmedTileTick).ToArray();
+                    var confirmed = confirmedTicks.All(tick => tick.HasValue);
+                    return new SimulationMapKnowledgeEntrySnapshot
+                    {
+                        SpatialStableId = value.SpatialStableId,
+                        KindCode = value.KindCode,
+                        KoreanLabel = value.KoreanLabel,
+                        KnowledgeLevelCode = confirmed
+                            ? SimulationMapKnowledgeLevelCodes.Confirmed
+                            : SimulationMapKnowledgeLevelCodes.KnownOutline,
+                        SourceCode = confirmed
+                            ? value.SpatialStableId == "map-place:hans-farm"
+                                ? SimulationMapKnowledgeSourceCodes.InitialLocation
+                                : SimulationMapKnowledgeSourceCodes.EscortTraversal
+                            : SimulationMapKnowledgeSourceCodes.AlexBriefing,
+                        FirstKnownWorldTick = value.SpatialStableId == "map-place:hans-farm"
+                            ? 0 : briefingTick!.Value,
+                        ConfirmedWorldTick = confirmed
+                            ? confirmedTicks.Max(tick => tick!.Value) : null,
+                        RelatedL2TileKeys = value.RelatedL2TileKeys.ToArray(),
+                    };
+                })
+                .OrderBy(value => value.SpatialStableId, StringComparer.Ordinal)
+                .ToArray();
+        }
+
+        private int? ResolveMengBriefingTick()
+        {
+            if (hexagramCampaignState == null
+                || !string.Equals(hexagramCampaignState.HexagramStableId,
+                    SimulationHexagramCampaignCodes.MengStableId,
+                    StringComparison.Ordinal)
+                || hexagramCampaignState.CurrentLineOrdinal < 3)
+                return null;
+            var eventTick = (hexagramCampaignState.Events
+                    ?? Array.Empty<SimulationHexagramCampaignEventSnapshot>())
+                .Where(value => value.LineOrdinal >= 3)
+                .Select(value => (int?)value.WorldTick)
+                .OrderBy(value => value)
+                .FirstOrDefault();
+            return eventTick ?? CurrentTick;
+        }
+
+        private int? ResolveConfirmedTileTick(string tileKey)
+        {
+            if (!collectibleRevealedL2Tiles.Contains(tileKey)) return null;
+            var tick = collectibleDiscoveryEvents
+                .Where(value => string.Equals(value.SpatialUnitKey, tileKey,
+                    StringComparison.Ordinal))
+                .Select(value => (int?)value.WorldTick)
+                .OrderBy(value => value)
+                .FirstOrDefault();
+            return tick ?? 0;
+        }
+
+        private static SimulationMapKnowledgeEntrySnapshot CloneMapKnowledgeEntry(
+            SimulationMapKnowledgeEntrySnapshot source)
+            => new SimulationMapKnowledgeEntrySnapshot
+            {
+                SpatialStableId = source.SpatialStableId,
+                KindCode = source.KindCode,
+                KoreanLabel = source.KoreanLabel,
+                KnowledgeLevelCode = source.KnowledgeLevelCode,
+                SourceCode = source.SourceCode,
+                FirstKnownWorldTick = source.FirstKnownWorldTick,
+                ConfirmedWorldTick = source.ConfirmedWorldTick,
+                RelatedL2TileKeys = source.RelatedL2TileKeys.ToArray(),
+            };
+
         private static SimulationTileTraversalConfirmResponse CloneTraversalResponse(
             SimulationTileTraversalConfirmResponse source) => new SimulationTileTraversalConfirmResponse
             {
@@ -884,6 +1000,23 @@ namespace Ssalddel.Simulation.Domain
                 WasNewL1Area = source.WasNewL1Area,
                 CreatedOpportunityStableIds = source.CreatedOpportunityStableIds.ToArray(),
             };
+
+        private sealed class MapKnowledgeDefinition
+        {
+            public MapKnowledgeDefinition(string spatialStableId, string kindCode,
+                string koreanLabel, string[] relatedL2TileKeys)
+            {
+                SpatialStableId = spatialStableId;
+                KindCode = kindCode;
+                KoreanLabel = koreanLabel;
+                RelatedL2TileKeys = relatedL2TileKeys;
+            }
+
+            public string SpatialStableId { get; }
+            public string KindCode { get; }
+            public string KoreanLabel { get; }
+            public string[] RelatedL2TileKeys { get; }
+        }
 
         private static SimulationCollectibleCardDrawResponse CloneDrawResponse(
             SimulationCollectibleCardDrawResponse source) => new SimulationCollectibleCardDrawResponse

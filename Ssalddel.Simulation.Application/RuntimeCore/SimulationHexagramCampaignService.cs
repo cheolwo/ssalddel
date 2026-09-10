@@ -5,6 +5,11 @@ using Ssalddel.Simulation.Domain;
 
 namespace Ssalddel.Simulation.Application
 {
+    [Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+        Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E1,
+        "이야기 재시도 번호와 저장본 복원 허용 여부를 관리하는 계약을 정의한다.",
+        SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E1저장재생계약,
+        Boundary = "계약만으로 영속 저장·서버 동시성·저장 재생 성공을 증명하지 않는다.")]
     public interface ISimulationHexagramCampaignAttemptStore
     {
         int RegisterEntry(string sessionStableId, string hexagramStableId,
@@ -16,6 +21,11 @@ namespace Ssalddel.Simulation.Application
             SimulationHexagramCampaignStateSnapshot? packageState);
     }
 
+    [Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+        Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E2,
+        "프로세스 내 이야기 재시도 번호와 저장본의 유효성을 기록·검사한다.",
+        SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E2세션실행,
+        Boundary = "메모리 저장이며 프로세스 재시작·분산 Host의 내구성을 보장하지 않는다.")]
     public sealed class InMemorySimulationHexagramCampaignAttemptStore
         : ISimulationHexagramCampaignAttemptStore
     {
@@ -68,9 +78,26 @@ namespace Ssalddel.Simulation.Application
             => (sessionStableId ?? string.Empty).Trim() + "|"
                 + (hexagramStableId ?? string.Empty).Trim();
 
-        private sealed record SaveAttempt(string Key, int AttemptOrdinal);
+        // Unity의 .NET Standard 소비 경로는 IsExternalInit을 제공하지 않는다.
+        // 값 비교나 with 복사를 사용하지 않는 내부 저장 항목만 불변 클래스로 둔다.
+        private sealed class SaveAttempt
+        {
+            public string Key { get; }
+            public int AttemptOrdinal { get; }
+
+            public SaveAttempt(string key, int attemptOrdinal)
+            {
+                Key = key;
+                AttemptOrdinal = attemptOrdinal;
+            }
+        }
     }
 
+    [Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+        Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E2,
+        "이야기 진입·단계 진행·재시도와 권위 세션 저장·복원을 조율한다.",
+        SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E2세계상호작용실행,
+        Boundary = "실제 플레이 완주·Hosted 연결·E 승격은 별도 검증한다.")]
     public sealed class SimulationHexagramCampaignService
     {
         private readonly 경영SimulationSessionAccessor sessions;

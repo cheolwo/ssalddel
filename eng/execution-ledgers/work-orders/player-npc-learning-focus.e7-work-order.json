@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "simulation-e7-vertical-work-order.v2",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
+  "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
+  "workOrderId": "E7-WO-PLAYER-NPC-LEARNING-FOCUS",
+  "title": "플레이어 NPC 학습 중점 E3",
+  "playableUnitStableId": "playable-loop:player-npc-learning-focus.v1",
+  "activeWorldInteractionId": "WI-NATURE-06",
+  "targetEvidenceStage": "E7",
+  "currentEvidenceStage": "E3",
+  "promotionEligible": false,
+  "planningGate": {
+    "statusCode": "Approved",
+    "designDocumentRef": "docs/Architecture/PlayableLoops/플레이어NPC학습중점.md",
+    "designRevision": "player-npc-learning-focus.design.r1",
+    "designHashSha256": "B58E884BF20BFDC77D18914702BC6AB5F050C406A6E2701FDDCCBBF737A51EAB",
+    "approvalEvidenceRef": "docs/AI/PLANNING.md"
+  },
+  "deliveryCap": {
+    "currentDispatchTargetStage": "E3",
+    "promotionBeyondStageAllowed": false,
+    "reason": "NPC 학습 중점의 계약·Core·상태 투영·Local/HTTP·Save/Replay만 먼저 닫고 실제 UI와 Unity 실행은 분리한다."
+  },
+  "iterationState": {
+    "currentPass": "UpwardAssemblyAndValidation",
+    "nextReopenCondition": "카드 효과가 이해도 외 생산량·속도·피해·회복·위협·이데아 확률을 바꾸거나 카드 취득·공유 권한을 추가하면 Logic E1을 다시 연다."
+  },
+  "trackPlans": {
+    "logic": {
+      "trackCode": "Logic",
+      "currentEvidenceStage": "E3",
+      "downwardPlan": [
+        { "code": "E7", "disposition": "Blocked", "summary": "실제 입력·Game View·전체 절기 폐루프는 이번 묶음 밖이다." },
+        { "code": "E6", "disposition": "Blocked", "summary": "장기 성장 단계·멘토 판본·관계 취득 정제는 후속이다." },
+        { "code": "E5", "disposition": "Blocked", "summary": "실제 World 배치·카드 UI 발현은 수행하지 않는다." },
+        { "code": "E4", "disposition": "Blocked", "summary": "정확 UI 판독 순간·입력·VisualKey는 별도 승인한다." },
+        { "code": "E3", "disposition": "Affected", "summary": "멱등 기여·구간 변경·Local/HTTP 동등성·Save/Replay v30을 자동시험한다." },
+        { "code": "E2", "disposition": "Affected", "summary": "한 슬롯 학습 상태·한스 카드 catalog·도메인 기여·Application Service를 구현한다." },
+        { "code": "E1", "disposition": "Defined", "summary": "외부 초중후반 일정, 다음 구간 적용, 결속된 플레이어 행위의 이해도 +1만 허용한다." }
+      ],
+      "upwardValidation": [
+        { "code": "E1", "status": "Passed", "evidenceRefs": ["docs/Architecture/PlayableLoops/PlanningSessions/플레이어내면명상/player-mind-meditation.inquiry.r1.md", "docs/AI/절기전략턴-타로카드-기획-2026-09-02.md"] },
+        { "code": "E2", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Contracts/UnityPackage/Runtime/SimulationPlayerLearningFocusContracts.cs", "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationPlayerLearningFocus.cs", "Ssalddel.Simulation.Application/RuntimeCore/SimulationPlayerLearningFocusService.cs"] },
+        { "code": "E3", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs", "test:SimulationPlayerLearningFocusTests:13/13"] },
+        { "code": "E4", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E5", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E6", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E7", "status": "Blocked", "evidenceRefs": [] }
+      ]
+    },
+    "presentation": {
+      "trackCode": "Presentation",
+      "currentEvidenceStage": "E3",
+      "downwardPlan": [
+        { "code": "E7", "disposition": "Blocked", "summary": "실제 입력·Game View·귀환 판독은 이번 묶음 밖이다." },
+        { "code": "E6", "disposition": "Blocked", "summary": "카드 슬롯 크기·애니메이션·접근성 정제는 후속이다." },
+        { "code": "E5", "disposition": "Blocked", "summary": "Unity UI와 실제 WorldTick 입력 결속은 수행하지 않는다." },
+        { "code": "E4", "disposition": "Blocked", "summary": "주 슬롯·보유 카드·다음 구간 예고의 실제 표현 계약은 후속이다." },
+        { "code": "E3", "disposition": "Affected", "summary": "현재 카드·보유 카드·구간·다음 변경·revision의 읽기 전용 투영을 검증한다." },
+        { "code": "E2", "disposition": "Affected", "summary": "권위 상태에서 Local/HTTP가 같은 투영을 읽도록 Adapter 경계를 구현한다." },
+        { "code": "E1", "disposition": "Defined", "summary": "플레이어는 현재 중점·빈 슬롯·적용 구간·다음 변경 시점을 읽을 수 있어야 한다." }
+      ],
+      "upwardValidation": [
+        { "code": "E1", "status": "Passed", "evidenceRefs": ["docs/AI/절기전략턴-타로카드-기획-2026-09-02.md"] },
+        { "code": "E2", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Contracts/UnityPackage/Runtime/SimulationPlayerLearningFocusContracts.cs", "Ssalddel.Simulation.Server/Controllers/SimulationPlayerLearningFocusController.cs"] },
+        { "code": "E3", "status": "Passed", "evidenceRefs": ["Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs", "test:SimulationPlayerLearningFocusTests:13/13"] },
+        { "code": "E4", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E5", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E6", "status": "Blocked", "evidenceRefs": [] },
+        { "code": "E7", "status": "Blocked", "evidenceRefs": [] }
+      ]
+    }
+  },
+  "integratedGate": {
+    "currentEvidenceStage": "E3",
+    "status": "Passed",
+    "candidateRevision": "player-npc-learning-focus.r1",
+    "evidenceRefs": [
+      "docs/Architecture/PlayableLoops/PlanningSessions/플레이어내면명상/player-mind-meditation.inquiry.r1.md",
+      "Ssalddel.Simulation.Tests/SimulationPlayerLearningFocusTests.cs",
+      "test:SimulationPlayerLearningFocusTests:13/13"
+    ],
+    "openFeedbackRefs": [
+      "E4 실제 카드 판독·입력 계약, 관계 기반 카드 취득, 플레이어 멘토 공유는 별도 승인한다."
+    ]
+  }
+}

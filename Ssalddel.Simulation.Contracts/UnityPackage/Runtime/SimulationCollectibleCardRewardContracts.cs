@@ -19,6 +19,25 @@ namespace Ssalddel.Simulation.Contracts
         public const string ScenarioEvidence = "Scenario";
     }
 
+    public static class SimulationMapKnowledgeLevelCodes
+    {
+        public const string KnownOutline = "KnownOutline";
+        public const string Confirmed = "Confirmed";
+    }
+
+    public static class SimulationMapKnowledgeSourceCodes
+    {
+        public const string InitialLocation = "InitialLocation";
+        public const string AlexBriefing = "AlexBriefing";
+        public const string EscortTraversal = "EscortTraversal";
+    }
+
+    public static class SimulationMapKnowledgeKindCodes
+    {
+        public const string Place = "Place";
+        public const string Route = "Route";
+    }
+
     public sealed class SimulationTileTraversalConfirmRequest
     {
         public string CommandId { get; set; } = string.Empty;
@@ -84,8 +103,22 @@ namespace Ssalddel.Simulation.Contracts
         public string[] RevealedL1AreaKeys { get; set; } = Array.Empty<string>();
         public SimulationWorldDiscoveryEventSnapshot[] DiscoveryEvents { get; set; }
             = Array.Empty<SimulationWorldDiscoveryEventSnapshot>();
+        public SimulationMapKnowledgeEntrySnapshot[] MapKnowledgeEntries { get; set; }
+            = Array.Empty<SimulationMapKnowledgeEntrySnapshot>();
         public bool SimulationOnly { get; set; }
         public bool IsOperationalState { get; set; }
+    }
+
+    public sealed class SimulationMapKnowledgeEntrySnapshot
+    {
+        public string SpatialStableId { get; set; } = string.Empty;
+        public string KindCode { get; set; } = string.Empty;
+        public string KoreanLabel { get; set; } = string.Empty;
+        public string KnowledgeLevelCode { get; set; } = string.Empty;
+        public string SourceCode { get; set; } = string.Empty;
+        public int FirstKnownWorldTick { get; set; }
+        public int? ConfirmedWorldTick { get; set; }
+        public string[] RelatedL2TileKeys { get; set; } = Array.Empty<string>();
     }
 
     public sealed class SimulationActorTilePositionSnapshot

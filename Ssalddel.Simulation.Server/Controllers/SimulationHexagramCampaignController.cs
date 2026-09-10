@@ -8,6 +8,11 @@ namespace Ssalddel.Simulation.Server.Controllers;
 
 [ApiController]
 [Route("api/simulation/v1/sessions/{sessionStableId}/hexagram-campaign")]
+[Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+    Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E2,
+    "HTTP 이야기 요청을 권위 서비스로 전달하고 계약·충돌·조회 오류를 응답한다.",
+    SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E2원격HostAdapter,
+    Boundary = "HTTP 경계 구현이며 실제 서버 접속·인증 검증·플레이 완료는 별개다.")]
 public sealed class SimulationHexagramCampaignController(
     SimulationHexagramCampaignService service) : ControllerBase
 {

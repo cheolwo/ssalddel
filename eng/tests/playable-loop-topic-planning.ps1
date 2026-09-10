@@ -33,6 +33,60 @@ if ($approved.Count -lt 2) { throw 'TwoApprovedFixturesRequired' }
 # All actually active goals must be checked, not only the display focus.
 foreach ($unit in $approved[0..1]) { ($goals.items | Where-Object loopStableId -eq $unit.loopStableId).goalStateCode = 'Active' }
 Invoke-Case 'multiple-approved' $loops $goals
+
+$storyBeatId = 'story-beat:test-development-bridge.v1'
+$storyRevision = 'story-beat.test-development-bridge.r1'
+$storyDocumentRef = 'artifacts/local/validation/playable-loop-topic-planning/story-beat-document.md'
+$storyDocumentPath = Join-Path $repositoryRoot $storyDocumentRef
+[IO.File]::WriteAllText($storyDocumentPath, "# Story Beat fixture`n`n- StoryBeatStableId: ``$storyBeatId```n- revision: ``$storyRevision```n", $utf8)
+$storyDocumentHash = (Get-FileHash -LiteralPath $storyDocumentPath -Algorithm SHA256).Hash
+
+function New-HexagramFixture([string] $Name, [string] $LineStatus, [string] $RegisteredStoryBeatId) {
+    $source = Get-Content (Join-Path $repositoryRoot 'eng/execution-ledgers/hexagram-story-production.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $line = $source.hexagrams[0].lineStories[0]
+    $line.storyStatusCode = $LineStatus
+    $line.primaryStoryBeatRef = $RegisteredStoryBeatId
+    $reference = "artifacts/local/validation/playable-loop-topic-planning/$Name-hexagrams.json"
+    [IO.File]::WriteAllText((Join-Path $repositoryRoot $reference), ($source | ConvertTo-Json -Depth 100), $utf8)
+    return $reference
+}
+function New-StoryBindingLoops([string] $HexagramRef) {
+    $catalog = Read-Loops
+    $catalog.designDocumentationPolicy.storyBeatBindingPolicy.hexagramStoryProductionLedgerRef = $HexagramRef
+    $unit = @($catalog.items | Where-Object { $_.loopStableId -eq $approved[0].loopStableId })[0]
+    $unit | Add-Member -NotePropertyName storyBeatBindings -NotePropertyValue @([PSCustomObject]@{
+        storyBeatStableId = $storyBeatId
+        hexagramStableId = 'HEX-01-QIAN'
+        lineStoryStableId = 'HEX-01-QIAN-L1'
+        bindingRoleCode = 'PrimaryExperience'
+        statusCode = 'Accepted'
+        storyDocumentRef = $storyDocumentRef
+        storyRevision = $storyRevision
+        storyHashSha256 = $storyDocumentHash
+    })
+    return $catalog
+}
+
+$acceptedHexagramRef = New-HexagramFixture 'accepted-story' 'Approved' $storyBeatId
+$storyBound = New-StoryBindingLoops $acceptedHexagramRef
+Invoke-Case 'accepted-story-binding' $storyBound (Read-Goals)
+
+$unapprovedLineRef = New-HexagramFixture 'unapproved-line' 'Reviewed' $storyBeatId
+$unapprovedLine = New-StoryBindingLoops $unapprovedLineRef
+Invoke-Case 'accepted-binding-unapproved-line' $unapprovedLine (Read-Goals) 'AcceptedStoryBeatLineNotApproved'
+
+$unregisteredBeatRef = New-HexagramFixture 'unregistered-beat' 'Approved' ''
+$unregisteredBeat = New-StoryBindingLoops $unregisteredBeatRef
+Invoke-Case 'unregistered-story-beat' $unregisteredBeat (Read-Goals) 'StoryBeatNotRegisteredInLineStory'
+
+$badStoryHash = New-StoryBindingLoops $acceptedHexagramRef
+(@($badStoryHash.items | Where-Object { $_.loopStableId -eq $approved[0].loopStableId })[0].storyBeatBindings)[0].storyHashSha256 = ('0' * 64)
+Invoke-Case 'story-beat-hash-drift' $badStoryHash (Read-Goals) 'StoryBeatDocumentHashMismatch'
+
+$badStoryRole = New-StoryBindingLoops $acceptedHexagramRef
+(@($badStoryRole.items | Where-Object { $_.loopStableId -eq $approved[0].loopStableId })[0].storyBeatBindings)[0].bindingRoleCode = 'Implicit'
+Invoke-Case 'story-beat-role-invalid' $badStoryRole (Read-Goals) 'StoryBeatBindingRoleInvalid'
+
 $unapproved = Read-Loops
 $other = @($unapproved.items | Where-Object { $_.loopLevelCode -eq 'PlayableUnit' -and $_.planningGate.statusCode -eq 'NotStarted' })[0]
 $goals2 = Read-Goals
@@ -56,4 +110,4 @@ Invoke-Case 'no-approval' $noApproval (Read-Goals) 'ApprovalEvidenceMissing'
 $aggregate = Read-Loops
 ($aggregate.items | Where-Object loopLevelCode -ne PlayableUnit | Select-Object -First 1) | Add-Member -NotePropertyName planningGate -NotePropertyValue @{}
 Invoke-Case 'aggregate-gate' $aggregate (Read-Goals) 'AggregateHasPlanningGate'
-Write-Output 'PlayableLoopTopicPlanningTestsPassed:Positive=3;Negative=7;MultiActivePlanning=Verified'
+Write-Output 'PlayableLoopTopicPlanningTestsPassed:Positive=4;Negative=11;MultiActivePlanning=Verified;StoryBeatBridge=Verified'

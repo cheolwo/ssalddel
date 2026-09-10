@@ -10,17 +10,19 @@
 
 | 효사 기획 | 효 | 기획 | 요구사항 | 인계 | 원문 적합 | Graph Map | 배치 맵 | 공백 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `PLAN-STORY-HEX03-LINE-001` | `HEX-03-ZHUN-L1` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
-| `PLAN-STORY-HEX03-LINE-002` | `HEX-03-ZHUN-L2` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Partial` | `UpdateExisting` | `Required` |  |
-| `PLAN-STORY-HEX03-LINE-003` | `HEX-03-ZHUN-L3` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
-| `PLAN-STORY-HEX03-LINE-004` | `HEX-03-ZHUN-L4` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Partial` | `UpdateExisting` | `Required` |  |
-| `PLAN-STORY-HEX03-LINE-005` | `HEX-03-ZHUN-L5` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
-| `PLAN-STORY-HEX03-LINE-006` | `HEX-03-ZHUN-L6` | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `CreateSubgraph` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-001` | [HEX-03-ZHUN-L1](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l1) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-002` | [HEX-03-ZHUN-L2](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l2) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Partial` | `UpdateExisting` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-003` | [HEX-03-ZHUN-L3](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l3) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-004` | [HEX-03-ZHUN-L4](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l4) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Partial` | `UpdateExisting` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-005` | [HEX-03-ZHUN-L5](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l5) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `UpdateExisting` | `Required` |  |
+| `PLAN-STORY-HEX03-LINE-006` | [HEX-03-ZHUN-L6](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l6) | `StoryApproved` | `Resolved` | `ReadyForDevelopment` | `Aligned` | `CreateSubgraph` | `Required` |  |
 
 ## 요구사항 요약
 
 ### `PLAN-STORY-HEX03-LINE-001`
 
+- 정본 효 절: [HEX-03-ZHUN-L1](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l1)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-001/README.md`
 - Story Beat: `story-beat:hex03-line001:establish-guest-place-through-fence-repair`
 - 주체: `PlayerActor`=Required/ExistingReused, `HansNpc`=Required/ExistingReused, `HansGuestRightsGrant`=Required/ExistingReused, `FarmhouseGuestSpace`=Required/ExistingReused
 - WI: `ConfirmFenceRepairAttributionAndGrantGuestRights`=Required/ExistingReused, `RecoverBrokenFarmAxePrerequisite`=Required/ExistingReused, `FirstWoodcuttingPrerequisite`=Required/ExistingReused, `CollectRepairTimberPrerequisite`=Required/ExistingReused, `RepairFarmFencePrerequisite`=Required/ExistingReused, `StorePersonalResourcesFollowUp`=Optional/CandidateNeedsReview
@@ -28,6 +30,8 @@
 
 ### `PLAN-STORY-HEX03-LINE-002`
 
+- 정본 효 절: [HEX-03-ZHUN-L2](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l2)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md`
 - Story Beat: `story-beat:hex03-line002:return-together-after-boundary-patrol`
 - 주체: `PlayerActor`=Required/ExistingReused, `HansNpc`=Required/ExistingReused, `FarmBoundaryPatrolRoute`=Required/ExistingReused
 - WI: `PatrolFarmBoundaryLoopWithHans`=Required/ExistingReused, `RecordReturnTogetherBeforeDusk`=Required/ExistingReused
@@ -35,6 +39,8 @@
 
 ### `PLAN-STORY-HEX03-LINE-003`
 
+- 정본 효 절: [HEX-03-ZHUN-L3](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l3)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-003/README.md`
 - Story Beat: `story-beat:hex03-line003:refuse-unguided-pursuit`
 - 주체: `PlayerActor`=Required/ExistingReused, `ThreatTraceTarget`=Required/ExistingReused
 - WI: `InvestigateTrace`=Required/ExistingReused, `ChooseThreatResponse`=Required/ExistingReused
@@ -42,6 +48,8 @@
 
 ### `PLAN-STORY-HEX03-LINE-004`
 
+- 정본 효 절: [HEX-03-ZHUN-L4](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l4)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md`
 - Story Beat: `story-beat:hex03-line004:receive-bounded-house-and-plot-authority`
 - 주체: `PlayerActor`=Required/ExistingReused, `HansNpcAuthorityGrantor`=Required/ExistingReused, `FarmhouseManagementAuthorityTarget`=Required/ExistingReused, `PotatoPlotManagementAuthorityTarget`=Required/ExistingReused
 - WI: `GrantBoundedFarmhouseAndPlotManagementAuthority`=Required/ExistingReused, `InvestigateThreatTraceAndReturnPrerequisite`=Required/ExistingReused
@@ -49,6 +57,8 @@
 
 ### `PLAN-STORY-HEX03-LINE-005`
 
+- 정본 효 절: [HEX-03-ZHUN-L5](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l5)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-005/README.md`
 - Story Beat: `story-beat:hex03-line005:restore-one-plot-and-farmhouse`
 - 주체: `PlayerWorkActor`=Required/ExistingReused, `HansFarmhouseRepairPartner`=Required/ExistingReused, `NeglectedPotatoPlotTarget`=Required/ExistingReused, `DamagedFarmhouseTarget`=Required/ExistingReused
 - WI: `RestoreNeglectedPotatoPlot`=Required/ExistingReused, `RepairFarmhouseTogether`=Required/ExistingReused, `CompleteSmallFarmOrder`=NotApplicable/NotApplicable, `OptionalForestFowlDomestication`=Optional/NewDefinitionRequired
@@ -56,6 +66,8 @@
 
 ### `PLAN-STORY-HEX03-LINE-006`
 
+- 정본 효 절: [HEX-03-ZHUN-L6](../Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md#hex-03-zhun-l6)
+- 호환 문서: `docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md`
 - Story Beat: `story-beat:hex03-line006:recognize-limit-after-partial-farm-loss`
 - 주체: `PlayerActor`=Required/ExistingReused, `HansDefenseAndDebriefNpc`=Required/ExistingReused, `DisplacedBeastGroup`=Required/ExistingReused, `FarmhouseDefenseObjectiveTarget`=Required/ExistingReused, `FarmProductionObjectiveTarget`=Required/ExistingReused, `FenceDefenseObjectiveTarget`=Required/ExistingReused, `WorldThreatRule`=Required/ExistingReused
 - WI: `ChooseThreatResponse`=Required/ExistingReused, `PrepareOneTickFarmMultiObjectiveDefense`=Required/ExistingReused, `ResolvePartialFarmDefenseLoss`=Required/ExistingReused, `RecoverAndReturnAfterPartialDefense`=Required/ExistingReused, `DebriefFarmCrisisLearningNeeds`=Required/ExistingReused

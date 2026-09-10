@@ -9,6 +9,11 @@ using Ssalddel.Simulation.Infrastructure;
 
 namespace Ssalddel.Simulation.Tests;
 
+[Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+    Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E3,
+    "이야기 단계·실패·재시도와 저장본의 호환·재생·변조 거부를 검증한다.",
+    SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E3저장재생검증,
+    Boundary = "자동 시험이며 Unity 입력·Game View·운영 저장소의 내구성 증거가 아니다.")]
 public sealed class SimulationHexagramCampaignTests
 {
     [Theory]

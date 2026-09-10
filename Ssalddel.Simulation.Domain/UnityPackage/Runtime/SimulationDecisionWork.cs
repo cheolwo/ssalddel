@@ -119,6 +119,7 @@ namespace Ssalddel.Simulation.Domain
                 var groupOrder = PrepareGroupOrder(request.Preview);
                 var foodDelivery = PrepareFoodDelivery(request.Preview);
                 var foodDeliveryReceipt = PrepareFoodDeliveryReceipt(request.Preview);
+                var restaurantResponse = PrepareRestaurantResponse(request.Preview);
                 var marketConsumption = PrepareMarketConsumption(request.Preview);
                 var supplyChainInventory = PrepareSupplyChainWork(request.Preview);
                 var exportPreparation = Prepare수출준비(request.Preview, preview);
@@ -174,6 +175,7 @@ namespace Ssalddel.Simulation.Domain
                 ScheduleGroupOrder(groupOrder, decision, task);
                 ScheduleFoodDelivery(foodDelivery, decision, task);
                 ScheduleFoodDeliveryReceipt(foodDeliveryReceipt, decision, task);
+                ScheduleRestaurantResponse(restaurantResponse, decision, task);
                 ScheduleMarketConsumption(marketConsumption, decision, task);
                 ScheduleSupplyChainWork(supplyChainInventory, task);
                 Schedule수출준비(exportPreparation);

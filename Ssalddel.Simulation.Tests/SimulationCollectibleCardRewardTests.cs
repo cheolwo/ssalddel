@@ -50,6 +50,92 @@ public sealed class SimulationCollectibleCardRewardTests
     }
 
     [Fact]
+    public void 산수몽삼단계_알렉스설명은윤곽을열고_실제호송통과가장소와경로를확정한다()
+    {
+        var session = CreateSession(815);
+        session.BeginHexagramCampaign(new SimulationHexagramCampaignEnterRequest
+        {
+            CommandId = "meng:enter",
+            ExpectedRevision = session.Revision,
+            HexagramStableId = SimulationHexagramCampaignCodes.MengStableId,
+            StoryStageCount = 6,
+        }, "save:meng-entry");
+        for (var stage = 1; stage < 3; stage++)
+            session.CompleteHexagramLine(new SimulationHexagramCampaignLineCompleteRequest
+            {
+                CommandId = "meng:stage:" + stage,
+                ExpectedRevision = session.Revision,
+                ExpectedLineOrdinal = stage,
+            });
+
+        var briefing = session.GetWorldExplorationState();
+        Assert.Equal(5, briefing.MapKnowledgeEntries.Length);
+        Assert.Equal(SimulationMapKnowledgeLevelCodes.Confirmed,
+            Assert.Single(briefing.MapKnowledgeEntries, value =>
+                value.SpatialStableId == "map-place:hans-farm").KnowledgeLevelCode);
+        Assert.All(briefing.MapKnowledgeEntries.Where(value =>
+                value.SpatialStableId != "map-place:hans-farm"),
+            value => Assert.Equal(SimulationMapKnowledgeLevelCodes.KnownOutline,
+                value.KnowledgeLevelCode));
+
+        var from = StartTile;
+        foreach (var x in new[] { 701, 702, 703 })
+        {
+            var to = $"kr5186:l2:{x}:1145";
+            session.ConfirmTileTraversal(Traversal(session.Revision,
+                "meng:escort:" + x, from, to));
+            from = to;
+        }
+
+        var confirmed = session.GetWorldExplorationState();
+        Assert.All(confirmed.MapKnowledgeEntries,
+            value => Assert.Equal(SimulationMapKnowledgeLevelCodes.Confirmed,
+                value.KnowledgeLevelCode));
+        Assert.Equal(SimulationMapKnowledgeSourceCodes.EscortTraversal,
+            Assert.Single(confirmed.MapKnowledgeEntries, value =>
+                value.SpatialStableId == "route:meng:hans-farm-to-hub").SourceCode);
+    }
+
+    [Fact]
+    public void 산수몽지도지식은_같은명령재시도와저장재생에서결정적이다()
+    {
+        var session = CreateSession(815);
+        session.BeginHexagramCampaign(new SimulationHexagramCampaignEnterRequest
+        {
+            CommandId = "meng:save:enter",
+            ExpectedRevision = session.Revision,
+            HexagramStableId = SimulationHexagramCampaignCodes.MengStableId,
+            StoryStageCount = 6,
+        }, "save:meng-map-entry");
+        for (var stage = 1; stage < 3; stage++)
+            session.CompleteHexagramLine(new SimulationHexagramCampaignLineCompleteRequest
+            {
+                CommandId = "meng:save:stage:" + stage,
+                ExpectedRevision = session.Revision,
+                ExpectedLineOrdinal = stage,
+            });
+        var request = Traversal(session.Revision, "meng:save:checkpoint",
+            StartTile, "kr5186:l2:701:1145");
+        var first = session.ConfirmTileTraversal(request);
+        var retry = session.ConfirmTileTraversal(request);
+        Assert.Equal(
+            경영SimulationSessionAggregate.BuildWorldExplorationStatePayloadKey(first.Exploration),
+            경영SimulationSessionAggregate.BuildWorldExplorationStatePayloadKey(retry.Exploration));
+
+        var saved = session.CreateSavePackage(new SimulationSessionSaveRequest
+        {
+            SaveStableId = "save:meng-map",
+            ExpectedRevision = session.Revision,
+        });
+        var restored = SimulationSessionReplay.Restore(saved);
+        Assert.Equal(
+            경영SimulationSessionAggregate.BuildWorldExplorationStatePayloadKey(
+                session.GetWorldExplorationState()),
+            경영SimulationSessionAggregate.BuildWorldExplorationStatePayloadKey(
+                restored.GetWorldExplorationState()));
+    }
+
+    [Fact]
     public void 활성탐험역할은_새L2보상확률에정확히10퍼센트포인트를더한다()
     {
         var session = CreateSession(815);

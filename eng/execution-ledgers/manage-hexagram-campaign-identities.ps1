@@ -51,8 +51,8 @@ Require ([string] $source.revision -eq 'hexagram-campaign-identities.r1') 'Revis
 
 $productionPath = Resolve-InputFile ([string] $source.parentProductionLedgerPath) 'ProductionLedger'
 $production = Get-Content -LiteralPath $productionPath -Raw -Encoding UTF8 | ConvertFrom-Json
-Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v3') 'ProductionSchemaVersion'
-Require ([string] $production.revision -eq 'hexagram-story-production.r14') 'ProductionRevision'
+Require ([string] $production.schemaVersion -eq 'mirror-hexagram-story-production.v4') 'ProductionSchemaVersion'
+Require ([string] $production.revision -eq 'hexagram-story-production.r15') 'ProductionRevision'
 Require ([string] $production.policy.campaignIdentityLedgerPath -eq [string] $source.parentProductionLedgerPath.Replace('hexagram-story-production.json', 'hexagram-campaign-identities.json')) 'ProductionIdentityLink'
 
 $policy = $source.policy

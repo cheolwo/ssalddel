@@ -15,6 +15,226 @@ namespace Ssalddel.Simulation.Tests;
 public sealed class SimulationNpcWorkforceTests
 {
     [Fact]
+    public async System.Threading.Tasks.Task LocalRuntime음식점포트는_접수와조리완료를같은Core에서실행한다()
+    {
+        using var runtime = new LocalSimulationRuntime(new InMemory경영SimulationSessionStore(),
+            new InMemorySimulationSessionSaveStore(), new 카드시험SaveSlotStore());
+        var current = await runtime.Sessions.CreateAsync(CreateSessionRequest());
+        var food = new Simulation음식배달PreviewRequest
+        {
+            RestaurantPreparationOnly = true, FoodOrderStableId = "food-order:restaurant:local",
+            MenuItemStableId = "menu-item:restaurant:sample", RestaurantFacilityStableId = "facility:restaurant:sample",
+            DestinationFacilityStableId = "facility:residence:sample", DeliveryScopeStableId = "delivery-scope:sample",
+            OrdererStableId = "participant:customer:sample", ActorStableId = "actor:restaurant:sample", Quantity = 1,
+            SourceStableIds = new[] { "source:fixture:restaurant:local" },
+        };
+        ISimulationFoodOrderRuntime orders = runtime;
+        var preview = await orders.PreviewFoodDeliveryAsync(current.SessionStableId, food);
+        Assert.Contains("RestaurantPreparationOnly", preview.BoundaryCodes);
+        Assert.Empty((await runtime.Sessions.GetAsync(current.SessionStableId)).FoodDeliveries);
+        current = await orders.ConfirmFoodDeliveryAsync(current.SessionStableId,
+            new Simulation음식배달ConfirmRequest
+            { CommandId = "command:restaurant:local", ExpectedRevision = current.Revision, FoodDelivery = food });
+        for (var i = 0; i < 4; i++) current = await runtime.AdvanceWorldTickAsync(current.SessionStableId,
+            new 경영SimulationTick진행Request { CommandId = $"command:restaurant:tick:{i}", ExpectedRevision = current.Revision, TickCount = 1 });
+        Assert.Equal("픽업대기", Assert.Single(current.FoodDeliveries).StateCode);
+        Assert.Null(Assert.Single(current.FoodDeliveries).DeliveredTick);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async System.Threading.Tasks.Task 독립출고표본은_정책재개후_피킹포장을한번완료하고운송하지않는다(bool disableAfterStart)
+    {
+        var store = new InMemory경영SimulationSessionStore();
+        var saves = new InMemorySimulationSessionSaveStore();
+        using var runtime = new LocalSimulationRuntime(store, saves, new 카드시험SaveSlotStore());
+        var creation = 창고출고관찰표본.Create(Guid.NewGuid());
+        Assert.DoesNotContain(creation.SpatialWorld!.Definitions, value =>
+            value.SpatialStableId == PyeongchangSimulation공간StableIds.HubTown운송회랑);
+        var current = await runtime.Sessions.CreateAsync(creation);
+        var inboundCards = new Ssalddel.Unity.Warehouse.창고정책카드Presenter(runtime,
+            current.SessionStableId, PyeongchangSimulationWorldStableIds.진부Hub시설);
+        await inboundCards.조회Async();
+        Assert.Empty(inboundCards.카드목록);
+        var cards = new Ssalddel.Unity.Warehouse.창고정책카드Presenter(runtime,
+            current.SessionStableId, PyeongchangSimulationWorldStableIds.진부Hub시설, includeOutbound: true);
+        await cards.조회Async();
+        var policyId = Assert.Single(cards.카드목록);
+        Assert.Equal("출고·피킹·포장", cards.제목(policyId));
+        var draft = cards.편집시작(policyId);
+        draft.AutomationEnabled = false;
+        await cards.적용Async(draft, "command:outbound:pause");
+        current = await runtime.GetPolicySessionAsync(current.SessionStableId);
+        current = await runtime.AdvanceWorldTickAsync(current.SessionStableId,
+            new 경영SimulationTick진행Request { CommandId = "command:outbound:paused", ExpectedRevision = current.Revision, TickCount = 1 });
+        Assert.Empty(current.Tasks);
+        Assert.Equal(SimulationNpcInventoryStateCodes.PutAwayCompleted, Assert.Single(current.NpcFacilityInventories).StateCode);
+        await cards.조회Async();
+        draft = cards.편집시작(policyId);
+        draft.AutomationEnabled = true;
+        draft.Priority = 333;
+        await cards.적용Async(draft, "command:outbound:resume");
+        current = await runtime.GetPolicySessionAsync(current.SessionStableId);
+        var states = new System.Collections.Generic.List<string>();
+        for (var i = 0; i < 10; i++)
+        {
+            current = await runtime.AdvanceWorldTickAsync(current.SessionStableId,
+                new 경영SimulationTick진행Request { CommandId = $"command:outbound:tick:{i}", ExpectedRevision = current.Revision, TickCount = 1 });
+            states.Add(Assert.Single(current.NpcFacilityInventories).StateCode);
+            if (i == 0 && disableAfterStart)
+            {
+                await cards.조회Async();
+                draft = cards.편집시작(policyId);
+                draft.AutomationEnabled = false;
+                await cards.적용Async(draft, "command:outbound:disable-running");
+                current = await runtime.GetPolicySessionAsync(current.SessionStableId);
+            }
+        }
+        Assert.Contains(SimulationNpcInventoryStateCodes.OutboundRequested, states);
+        Assert.Contains(SimulationNpcInventoryStateCodes.Picked, states);
+        Assert.Equal(SimulationNpcInventoryStateCodes.OutboundReady, states.Last());
+        Assert.Single(current.Tasks);
+        Assert.Equal(new[] { "WI-HUB-03", "WI-HUB-04", "WI-HUB-05" },
+            current.NpcRoutineExecutions.Select(value => value.WorldInteractionId));
+        Assert.DoesNotContain(current.Tasks, value => value.ActionCode == SimulationNpcActionCodes.FreightTransport);
+        Assert.Equal(300m, Assert.Single(current.NpcFacilityInventories).Quantity);
+        await cards.조회Async();
+        Assert.Contains(cards.재고상태, value => value.Contains("포장 완료·출고 대기"));
+        var service = new 경영SimulationSessionService(store, saves);
+        var save = service.Save(current.SessionStableId, new SimulationSessionSaveRequest
+        { SaveStableId = "save:outbound:card", ExpectedRevision = current.Revision });
+        var restored = new 경영SimulationSessionService(new InMemory경영SimulationSessionStore(), saves)
+            .Restore(new SimulationSessionRestoreRequest { SaveStableId = save.SaveStableId });
+        Assert.Equal(save.ReplayHash, restored.ReplayHash);
+        Assert.Equal(333, Assert.Single(restored.Session.NpcWorkPolicies).Priority);
+        Assert.Equal(!disableAfterStart, Assert.Single(restored.Session.NpcWorkPolicies).AutomationEnabled);
+    }
+
+    [Fact]
+    public async System.Threading.Tasks.Task 독립관찰표본은_직접작업Confirm없이_검수적치후출고하지않는다()
+    {
+        var store = new InMemory경영SimulationSessionStore();
+        var saves = new InMemorySimulationSessionSaveStore();
+        using var runtime = new LocalSimulationRuntime(store, saves, new 카드시험SaveSlotStore());
+        var current = await runtime.Sessions.CreateAsync(창고입고관찰표본.Create(Guid.NewGuid()));
+        var cards = new Ssalddel.Unity.Warehouse.창고정책카드Presenter(
+            runtime, current.SessionStableId, PyeongchangSimulationWorldStableIds.진부Hub시설);
+        await cards.조회Async();
+        var draft = cards.편집시작(PyeongchangSimulationNpcStableIds.진부입고검수정책);
+        draft.AutomationEnabled = false;
+        await cards.적용Async(draft, "command:observer:pause");
+        current = await runtime.GetPolicySessionAsync(current.SessionStableId);
+        current = await runtime.AdvanceWorldTickAsync(current.SessionStableId,
+            new 경영SimulationTick진행Request { CommandId = "command:observer:paused-tick", ExpectedRevision = current.Revision, TickCount = 1 });
+        Assert.Empty(current.Tasks);
+        await cards.조회Async();
+        draft = cards.편집시작(draft.PolicyStableId);
+        draft.AutomationEnabled = true;
+        await cards.적용Async(draft, "command:observer:resume");
+        current = await runtime.GetPolicySessionAsync(current.SessionStableId);
+        for (var i = 0; i < 16; i++)
+            current = await runtime.AdvanceWorldTickAsync(current.SessionStableId,
+                new 경영SimulationTick진행Request { CommandId = $"command:observer:tick:{i}", ExpectedRevision = current.Revision, TickCount = 1 });
+        Assert.Equal(SimulationNpcInventoryStateCodes.PutAwayCompleted, Assert.Single(current.NpcFacilityInventories).StateCode);
+        Assert.Equal(new[] { "WI-001", "WI-002" }, current.NpcRoutineExecutions.Select(value => value.WorldInteractionId));
+        Assert.Equal(300m, Assert.Single(current.NpcFacilityInventories).Quantity);
+        await cards.조회Async();
+        Assert.Contains(cards.재고상태, value => value.Contains("적치 완료"));
+        Assert.Equal(2, current.Tasks.Length);
+    }
+
+    [Fact]
+    public async System.Threading.Tasks.Task 정책카드는_검수차단과재개후_같은재고의적치완료를관찰한다()
+    {
+        var store = new InMemory경영SimulationSessionStore();
+        var saves = new InMemorySimulationSessionSaveStore();
+        var context = new TestContext(new 경영SimulationSessionService(store, saves));
+        var current = context.Service.Create(CreateSessionRequest());
+        using var runtime = new LocalSimulationRuntime(store, saves, new 카드시험SaveSlotStore());
+        var cards = new Ssalddel.Unity.Warehouse.창고정책카드Presenter(
+            runtime, current.SessionStableId, PyeongchangSimulationWorldStableIds.진부Hub시설);
+        await cards.조회Async();
+        Assert.Equal(2, cards.카드목록.Length);
+        var draft = cards.편집시작(PyeongchangSimulationNpcStableIds.진부입고검수정책);
+        draft.AutomationEnabled = false;
+        // 초안 편집은 권위 원장을 바꾸지 않는다.
+        Assert.True(context.Service.Get(current.SessionStableId).NpcWorkPolicies.Single(
+            value => value.PolicyStableId == draft.PolicyStableId).AutomationEnabled);
+        await cards.적용Async(draft, "command:card:disable");
+        current = context.Service.Get(current.SessionStableId);
+        current = Confirm(context, current, InboundInspection("card"), "command:card:inbound");
+        current = Advance(context, current, "command:card:blocked");
+        await cards.조회Async();
+        Assert.Contains(cards.작업상태, value => value.Contains("차단"));
+        Assert.Empty(current.NpcFacilityInventories);
+
+        draft = cards.편집시작(PyeongchangSimulationNpcStableIds.진부입고검수정책);
+        draft.AutomationEnabled = true;
+        draft.Priority = 321;
+        await cards.적용Async(draft, "command:card:enable");
+        current = context.Service.Get(current.SessionStableId);
+        for (var i = 0; i < 4; i++) current = Advance(context, current, $"command:card:inspection:{i}");
+        var inventory = Assert.Single(current.NpcFacilityInventories);
+        Assert.Equal(SimulationNpcInventoryStateCodes.StorageEligible, inventory.StateCode);
+        current = context.Service.ConfirmWarehousePutAway(current.SessionStableId,
+            new SimulationWarehousePutAwayConfirmRequest
+            {
+                CommandId = "command:card:putaway", ExpectedRevision = current.Revision,
+                PutAway = new SimulationWarehousePutAwayPreviewRequest
+                {
+                    InventoryStableId = inventory.InventoryStableId, InventoryRevision = inventory.Revision,
+                    ActorStableId = PyeongchangSimulationNpcStableIds.진부적재담당,
+                    PutAwayDurationTicks = 2, SourceStableIds = new[] { inventory.InventoryStableId },
+                },
+            });
+        for (var i = 0; i < 3; i++) current = Advance(context, current, $"command:card:putaway:{i}");
+        await cards.조회Async();
+        Assert.Equal(SimulationNpcInventoryStateCodes.PutAwayCompleted,
+            Assert.Single(current.NpcFacilityInventories).StateCode);
+        Assert.Contains(cards.재고상태, value => value.Contains("100 KGM"));
+        Assert.Contains(cards.작업상태, value => value.Contains("완료"));
+        var save = context.Service.Save(current.SessionStableId, new SimulationSessionSaveRequest
+        { SaveStableId = "save:card:warehouse", ExpectedRevision = current.Revision });
+        var restored = new 경영SimulationSessionService(new InMemory경영SimulationSessionStore(), saves)
+            .Restore(new SimulationSessionRestoreRequest { SaveStableId = save.SaveStableId });
+        Assert.Equal(save.ReplayHash, restored.ReplayHash);
+        Assert.Equal(321, restored.Session.NpcWorkPolicies.Single(
+            value => value.PolicyStableId == draft.PolicyStableId).Priority);
+    }
+
+    [Fact]
+    public async System.Threading.Tasks.Task 오래된카드초안은_최신설정을덮지않고_재조회한다()
+    {
+        var store = new InMemory경영SimulationSessionStore();
+        var saves = new InMemorySimulationSessionSaveStore();
+        var service = new 경영SimulationSessionService(store, saves);
+        var session = service.Create(CreateSessionRequest());
+        using var runtime = new LocalSimulationRuntime(store, saves, new 카드시험SaveSlotStore());
+        var cards = new Ssalddel.Unity.Warehouse.창고정책카드Presenter(
+            runtime, session.SessionStableId, PyeongchangSimulationWorldStableIds.진부Hub시설);
+        await cards.조회Async();
+        var stale = cards.편집시작(PyeongchangSimulationNpcStableIds.진부입고검수정책);
+        var fresh = cards.편집시작(stale.PolicyStableId);
+        fresh.Priority = 250;
+        await cards.적용Async(fresh, "command:card:fresh");
+        stale.Priority = 999;
+        await Assert.ThrowsAsync<SimulationConflictException>(() => cards.적용Async(stale, "command:card:stale"));
+        Assert.Equal(250, cards.편집시작(stale.PolicyStableId).Priority);
+        Assert.Contains("다시 선택", cards.마지막안내);
+        var invalid = cards.편집시작(stale.PolicyStableId);
+        invalid.Priority = 1001;
+        await Assert.ThrowsAsync<SimulationContractException>(() => cards.적용Async(invalid, "command:card:invalid"));
+        Assert.Equal(250, cards.편집시작(stale.PolicyStableId).Priority);
+    }
+
+    private sealed class 카드시험SaveSlotStore : ISimulationLocalSaveSlotStore
+    {
+        public void Write(string id, SimulationSessionSavePackage package) => throw new NotSupportedException();
+        public SimulationLocalSaveSlotPackage Read(string id) => throw new NotSupportedException();
+    }
+
+    [Fact]
     public void 진부Hub입고검수는_이동과작업을거쳐_보관가능재고가된다()
     {
         var context = CreateContext();

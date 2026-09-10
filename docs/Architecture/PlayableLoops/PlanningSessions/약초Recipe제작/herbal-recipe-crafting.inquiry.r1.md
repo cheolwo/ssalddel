@@ -2,19 +2,26 @@
 
 - 기획 ID: `PLAN-GAMEPLAY-HERBAL-CRAFTING-001`
 - 기획 분야: `게임플레이 / 약초·Recipe 제작`
-- 기획 판본: `herbal-recipe-crafting.inquiry.r30`
+- 기획 판본: `herbal-recipe-crafting.inquiry.r31`
 - 상태: `Refining / SourceRecoveryGapQ272To274`
 - 상위 기획: `PLAN-GAMEPLAY-MULTI-AREA-CHOICE-001`
+- 관련 스토리 적용: `PLAN-STORY-HEX03-CAMPAIGN-001`의 선택형 약초 생활
 - 관련 하위 기획: 없음
 - 관련 결정·기준: 과거 Q-045~Q-377과 HB-01 계보, 현행 기준은 이 문서와 [Nature 기초 약초 회복](../../Nature기초약초회복.md)
 - 관련 WI·PlayableLoop: `playable-loop:nature-basic-herbal-recovery.v1`과 약초 식별·채집·Recipe·달이기·음용 후보
 - Graph Map 영향: 약초 자원·야영지·물·열원·용기·귀환 관계를 레벨 1 후보로 제공하며 자산 배치를 자동 확정하지 않음
 - 다음 질문 또는 인계 상태: `Q-272~Q-274` 원문 소실은 복구 전까지 `EvidenceMissing`; 다음 미정 묶음은 별도 질문으로 정밀화
 
+## 스토리 적용과 기능 소유권
+
+주인공이 한스 농장에서 마음 편히 살기 위해 약초를 재배하고 남는 생산물을 판매한다는 욕망·해금 시점은 `PLAN-STORY-MIRROR-MAIN-001`과 `PLAN-STORY-HEX03-CAMPAIGN-001`이 소유한다. 이 문서는 약초 식별·재배 이후 가공·Recipe·달이기·음용·용기와 결과 판정 같은 재사용 가능한 게임 규칙만 소유한다.
+
+현재 HB-01 첫 약초차 검토를 곧바로 농장 약초 경제 전체로 확대하지 않는다. 대표 재배 약초, 판매 가능한 형태, 첫 구매자, 가격·수요·반복 수익은 후속 문답에서 별도로 확정한다.
+
 ## 식별
 
 - 문답 고유 식별자: `inquiry:herbal-recipe-crafting.r1`
-- 내용 개정: `herbal-recipe-crafting.inquiry.r30` (2026-08-30, 파일명·고유 식별자 호환 유지)
+- 내용 개정: `herbal-recipe-crafting.inquiry.r31` (2026-09-05, 파일명·고유 식별자 호환 유지)
 - 대상 PlayableLoop: `playable-loop:nature-basic-herbal-recovery.v1`
 - 이관 질문: `Q-045~Q-050`, `Q-061~Q-064`, `Q-068~Q-071`, `Q-131`, `Q-133`, `Q-142`, `Q-150`, `Q-157`, `Q-269~Q-296`, `Q-340~Q-347`
 - 상세 원문·조사 계보: [동결 통합 아카이브](../nature-night-day2.inquiry.r1.md)

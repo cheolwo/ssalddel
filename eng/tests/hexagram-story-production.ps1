@@ -37,10 +37,16 @@ function Expect-ValidationFailure([string] $CaseName, [object] $Fixture, [string
 $source = New-SourceCopy
 $zhun = @($source.hexagrams | Where-Object stableId -eq 'HEX-03-ZHUN')
 Require ($zhun.Count -eq 1) 'ZhunMissing'
+Require ([string] $zhun[0].hexagramPlanId -eq 'PLAN-STORY-HEX03-CAMPAIGN-001') 'ZhunCanonicalPlanId'
+Require ([string] $zhun[0].canonicalDocumentRef -eq 'docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md') 'ZhunCanonicalDocument'
 Require ((@($zhun[0].lineStories | ForEach-Object primaryStoryBeatRef) -join ',') -match 'establish-guest-place-through-fence-repair') 'ZhunLine1Beat'
 Require ((@($zhun[0].lineStories | ForEach-Object primaryStoryBeatRef) -join ',') -match 'receive-bounded-house-and-plot-authority') 'ZhunLine4Beat'
 Require ((@($zhun[0].lineStories | ForEach-Object primaryStoryBeatRef) -join ',') -match 'restore-one-plot-and-farmhouse') 'ZhunLine5Beat'
 Require (@($zhun[0].lineStories | Where-Object { @($_.planningRefs) -notcontains 'PLAN-STORY-HEX03-CAMPAIGN-001' }).Count -eq 0) 'ZhunCampaignPlanRef'
+$meng = @($source.hexagrams | Where-Object stableId -eq 'HEX-04-MENG')
+Require ($meng.Count -eq 1) 'MengMissing'
+Require ([string] $meng[0].hexagramPlanId -eq 'PLAN-STORY-HEX04-CAMPAIGN-001') 'MengCanonicalPlanId'
+Require ([string] $meng[0].canonicalDocumentRef -eq 'docs/AI/Planning/스토리/PLAN-STORY-HEX04-CAMPAIGN-001/README.md') 'MengCanonicalDocument'
 
 $fixture = New-SourceCopy
 $fixture.hexagrams = @($fixture.hexagrams | Select-Object -First 63)
@@ -111,4 +117,8 @@ $fixture = New-SourceCopy
 $fixture.hexagrams[2].lineStories[0].linePlanId = 'PLAN-STORY-HEX03-LINE-999'
 Expect-ValidationFailure 'line-plan-id' $fixture 'LinePlanId:HEX-03-ZHUN-L1'
 
-Write-Output 'HexagramStoryProductionTests:OK:Cases=21'
+$fixture = New-SourceCopy
+$fixture.hexagrams[2].canonicalDocumentRef = ''
+Expect-ValidationFailure 'canonical-document' $fixture 'RequiredCanonicalDocument:HEX-03-ZHUN'
+
+Write-Output 'HexagramStoryProductionTests:OK:Cases=22'

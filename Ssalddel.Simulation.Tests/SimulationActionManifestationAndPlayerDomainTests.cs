@@ -166,13 +166,26 @@ public sealed class SimulationActionManifestationAndPlayerDomainTests
     }
 
     [Fact]
-    public void 기본Catalog는_계획_열원_세계자원재생을포함한68개를_중복없이결속한다()
+    public void 기본Catalog는_가상동네생활을포함한91개를_중복없이결속한다()
     {
         var catalog = Simulation기본플레이어분야Catalog.Create();
 
-        Assert.Equal(68, catalog.Wi결속들.Length);
-        Assert.Equal(68, catalog.Wi결속들.Select(value => value.WorldInteractionId)
+        Assert.Equal(91, catalog.Wi결속들.Length);
+        Assert.Equal(91, catalog.Wi결속들.Select(value => value.WorldInteractionId)
             .Distinct(StringComparer.Ordinal).Count());
+        foreach (var action in new[] { "RESERVE", "PICK", "PACK", "STAGE" })
+        {
+            var binding = Assert.Single(catalog.Wi결속들, x => x.WorldInteractionId == "WI-CITY-SYNTHETIC-MART-" + action);
+            Assert.Equal(Simulation분야기여방식Codes.None, binding.기여방식Code);
+            Assert.Equal("SyntheticNpcObservationHasNoPlayerProgress", binding.NoPlayerProgressReason);
+        }
+        foreach (var id in new[] { SimulationNatureSurvivalCodes.AcquireHansBrokenAxeWorldInteractionId,
+            SimulationNatureSurvivalCodes.RepairHansFarmFenceWorldInteractionId })
+        {
+            var binding = Assert.Single(catalog.Wi결속들, value => value.WorldInteractionId == id);
+            Assert.Equal(Simulation분야기여방식Codes.None, binding.기여방식Code);
+            Assert.Equal("HansFenceE5GrowthProfileNotApproved", binding.NoPlayerProgressReason);
+        }
         Assert.Contains(catalog.Wi결속들,
             value => value.WorldInteractionId == "WI-REVIEW-01");
         Assert.Contains(catalog.Wi결속들,
