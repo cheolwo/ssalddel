@@ -7,6 +7,11 @@ using Ssalddel.Simulation.Contracts;
 
 namespace Ssalddel.Simulation.Tests;
 
+[Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+    Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E3,
+    "공통 업무 흐름 Runtime의 Local·Remote 조립과 실행 위치 경계를 회귀 검증한다.",
+    Boundary = "자동 시험은 실제 서버 연결·Unity Play Mode·Game View 증거가 아니다.",
+    SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E3계약회귀)]
 public sealed class BusinessWorkflowRuntimeCompositionTests
 {
     [Fact]

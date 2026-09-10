@@ -1,9 +1,15 @@
 using System;
 using Ssalddel.BusinessWorkflow;
+using Ssalddel.Contracts.Common.Metadata;
 using Ssalddel.WorkflowRules.Contracts;
 
 namespace Ssalddel.Simulation.Application
 {
+    [SsalddelEvidenceResponsibility(
+        SsalddelEvidenceStage.E2,
+        "LocalProcess의 기존 Simulation Core를 공통 업무 흐름 Runtime으로 조립한다.",
+        Boundary = "새 상태 권위를 만들지 않고 같은 LocalSimulationRuntime과 Session을 공유한다.",
+        SubmoduleKey = SsalddelEvidenceSubmoduleKeys.E2로컬권위Adapter)]
     public static class LocalBusinessWorkflowRuntimeFactory
     {
         public const string ContractRevision = "business-workflow-runtime.r1";

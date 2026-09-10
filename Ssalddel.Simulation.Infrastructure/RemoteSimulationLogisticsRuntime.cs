@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Ssalddel.Contracts.Common.Metadata;
 using Ssalddel.Simulation.Application;
 using Ssalddel.Simulation.Contracts;
 
@@ -12,6 +13,11 @@ namespace Ssalddel.Simulation.Infrastructure
     /// Hosted Simulation의 화물 배차와 시설 간 물류 이동을 HTTP로 전달한다.
     /// 업무 규칙이나 상태를 재구현하지 않는다.
     /// </summary>
+    [SsalddelEvidenceResponsibility(
+        SsalddelEvidenceStage.E2,
+        "RemoteHost의 배차·배송·창고 물류 포트를 기존 Simulation API로 전달한다.",
+        Boundary = "업무 규칙·상태 권위를 재구현하지 않는 HTTP Adapter다.",
+        SubmoduleKey = SsalddelEvidenceSubmoduleKeys.E2원격HostAdapter)]
     public sealed class RemoteSimulationLogisticsRuntime : ISimulationLogisticsRuntime
     {
         private readonly RemoteSimulationHttpJsonClient transport;
