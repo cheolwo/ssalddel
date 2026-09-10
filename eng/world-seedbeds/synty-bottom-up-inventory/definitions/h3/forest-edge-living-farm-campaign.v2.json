@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "simulation-world-spatial-design-knowledge-h3.v2",
+  "stableId": "h3-candidate:forest-edge-living-farm-campaign",
+  "revision": 2,
+  "hierarchyLevelCode": "H3",
+  "title": "숲 경계 생활 농장 수뢰둔 경관",
+  "summary": "생활·생산 H2와 경계 방어·회복 H2를 조립해 수뢰둔 여섯 효의 머무름, 순찰, 조사, 관리, 작은 질서, 위기와 성찰을 이어주는 H3 후보이다.",
+  "knowledgeStateCode": "ExploratoryInventory",
+  "topologyCode": "CampaignClosedReturn",
+  "requiredH2Refs": ["h2-candidate:forest-edge-living-farm", "h2-candidate:farm-boundary-defense-recovery"],
+  "optionalH2Refs": [],
+  "connectorRoleCodes": ["GuestToPatrol", "PatrolToTrace", "TraceToManagement", "ManagementToDefense", "DefenseToRecovery", "RecoveryToNextCampaign"],
+  "targetAreaRoleCodes": ["Hex03CampaignLandscape"],
+  "authoredDocument": "authored/h3/forest-edge-living-farm-campaign.v2.md",
+  "sourceReferences": ["docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md", "eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json"],
+  "unresolvedItems": ["H3는 실제 AreaSet이나 canonical SimulationWorldShell 배치를 뜻하지 않으며 정확 좌표·경로·Prefab은 후속 E5에서 검증한다."],
+  "presentationOnly": true,
+  "isOperationalState": false
+}

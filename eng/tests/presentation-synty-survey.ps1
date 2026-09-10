@@ -14,7 +14,8 @@ $catalog = Read-Json 'eng/execution-ledgers/playable-loop-presentation-validatio
 $e2 = @($catalog.modules | Where-Object moduleCode -eq 'presentation-projection-lifecycle')[0]
 $e4 = @($catalog.modules | Where-Object moduleCode -eq 'presentation-binding')[0]
 $e5 = @($catalog.modules | Where-Object moduleCode -eq 'visual-source-bounds')[0]
-Assert-Survey ($catalog.modules.Count -eq 18 -and $catalog.commonModuleCodes.Count -eq 8) 'NoNewModuleAxis'
+$actorActionE6 = @($catalog.modules | Where-Object moduleCode -eq 'actor-action-animation-readability')[0]
+Assert-Survey ($catalog.modules.Count -eq 19 -and $catalog.commonModuleCodes.Count -eq 8) 'AnimationRefinementModuleAddedWithoutNewStage'
 Assert-Survey (($catalog.allowedEvidenceStageCodes -join ',') -ceq 'E1,E2,E3,E4,E5,E6,E7') 'VerticalStagesUnchanged'
 Assert-Survey ($e2.evidenceStageCode -ceq 'E2' -and $e4.evidenceStageCode -ceq 'E4' -and $e5.evidenceStageCode -ceq 'E5') 'ExistingStageOwnership'
 Assert-Survey (($e2.reads -join ' ').Contains('가벼운 파일 선행 조회')) 'LightweightLookup'
@@ -26,6 +27,11 @@ foreach ($decision in @('그대로 재사용','연결·설정 보완','형상·�
 Assert-Survey (($e4.outputs -join ' ').Contains('동일 자산/판본/문맥 근거 재사용·변경분만 재검증')) 'ReuseContextBoundEvidence'
 Assert-Survey (($e4.outputs -join ' ').Contains('사유 있는 NotApplicable')) 'NonAssetExclusion'
 Assert-Survey (($e5.outputs -join ' ').Contains('파일 존재·E4 조사만으로 E5 통과하지 않음')) 'NoSurveyPromotion'
+Assert-Survey ($catalog.principles.e5RequiresMinimalReadableWorldManifestationNotFinalAnimation -and
+    $catalog.principles.staticPoseProgressOrStateSwapMaySatisfyE5 -and
+    $catalog.principles.actorActionAnimationBindingBelongsToE6) 'E5E6AnimationBoundary'
+Assert-Survey ($actorActionE6.evidenceStageCode -ceq 'E6' -and
+    $actorActionE6.requiredFeatureCodes -contains 'ActorAction') 'ActorActionAnimationOwnedByE6'
 $guidance = 'repo:docs/AI/Presentation단계별Synty자산조사-2026-08-31.md'
 Assert-Survey ($e2.implementationRefs -contains $guidance -and $e4.implementationRefs -contains $guidance) 'GuidanceBound'
 $template = Read-Json 'eng/execution-ledgers/work-orders/e7-vertical-work-order.template.json'

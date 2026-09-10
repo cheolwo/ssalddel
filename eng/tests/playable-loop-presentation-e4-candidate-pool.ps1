@@ -39,9 +39,11 @@ $catalog = Get-Content $sourceCatalog -Raw -Encoding UTF8 | ConvertFrom-Json
 $output = $fixtureRelative + '/generated.md'
 $machine = $fixtureRelative + '/generated.json'
 $result = @(& $manager -Mode Write -OutputPath $output -MachineOutputPath $machine -UnityProjectRoot 'C:/Users/user/ssalddel')
-Assert-Case (($result -join "`n").Contains('Plans=47;Frozen=11;Provisional=23;NotApplicable=13;WI=22')) 'CurrentCatalogWrites'
+Assert-Case (($result -join "`n").Contains('Plans=59;Frozen=14;Provisional=31;NotApplicable=14;WI=22;Transitions=3')) 'CurrentCatalogWrites'
 & $manager -Mode Check -OutputPath $output -MachineOutputPath $machine -UnityProjectRoot 'C:/Users/user/ssalddel' | Out-Null
-Assert-Case ((Get-Content (Join-Path $repositoryRoot $machine) -Raw -Encoding UTF8 | ConvertFrom-Json).items.Count -eq 22) 'MachineViewHasAllWis'
+$machineView = Get-Content (Join-Path $repositoryRoot $machine) -Raw -Encoding UTF8 | ConvertFrom-Json
+Assert-Case ($machineView.items.Count -eq 22) 'MachineViewHasAllWis'
+Assert-Case ($machineView.stateTransitionVisualItems.Count -eq 3) 'MachineViewHasAllTransitions'
 $beforeHash = (Get-FileHash (Join-Path $repositoryRoot $machine) -Algorithm SHA256).Hash
 & $manager -Mode Write -OutputPath $output -MachineOutputPath $machine -UnityProjectRoot 'C:/Users/user/ssalddel' | Out-Null
 Assert-Case ((Get-FileHash (Join-Path $repositoryRoot $machine) -Algorithm SHA256).Hash -ceq $beforeHash) 'WriteIsDeterministic'
@@ -49,6 +51,8 @@ $farm = & $manager -Mode Query -QueryKind Area -QueryValue Farm | ConvertFrom-Js
 Assert-Case ($farm.count -eq 4 -and @($farm.items | Where-Object readinessCode -ne 'Blocked').Count -eq 0) 'FarmQueryIsBlocked'
 $blocked = & $manager -Mode Query -QueryKind Readiness -QueryValue Blocked | ConvertFrom-Json
 Assert-Case ($blocked.count -eq 22) 'AllFirstBatchWisBlocked'
+$transition = & $manager -Mode Query -QueryKind Transition -QueryValue 'presentation-transition:farm-residential-home-repair.v1' | ConvertFrom-Json
+Assert-Case ($transition.count -eq 1 -and $transition.items[0].representationCandidates.Count -eq 3) 'TransitionQueryIncludesRepresentations'
 
 $bad = Copy-Value $catalog
 $bad.planningIndex.sha256 = '0' * 64
@@ -87,4 +91,16 @@ $bad.areaPreparations[1].placementMapRef = $fixtureRelative + '/ready-placement.
 $bad.areaPreparations[1].worldInteractions[0] | Add-Member -NotePropertyName subjectKindCode -NotePropertyValue 'Actor'
 Assert-Rejected $bad 'actor-ready-without-contract' 'ReadyActorPreparationMissing'
 
-Write-Output "PresentationE4CandidatePoolTestsPassed:Cases=$script:cases;Plans=47;FirstBatchWI=22"
+$bad = Copy-Value $catalog
+$bad.stateTransitionVisualPreparations[0].resultStateCodes = @()
+Assert-Rejected $bad 'transition-result-state-missing' 'TransitionResultStateMissing'
+
+$bad = Copy-Value $catalog
+$bad.stateTransitionVisualPreparations[0].representationCandidates[0].strategyCode = 'FiveElementModel'
+Assert-Rejected $bad 'transition-strategy-invalid' 'TransitionStrategyInvalid'
+
+$bad = Copy-Value $catalog
+$bad.stateTransitionVisualPreparations[2].readinessCode = 'Ready'
+Assert-Rejected $bad 'ready-transition-with-missing-coverage' 'ReadyTransitionCoverageMissing'
+
+Write-Output "PresentationE4CandidatePoolTestsPassed:Cases=$script:cases;Plans=59;FirstBatchWI=22;Transitions=3"

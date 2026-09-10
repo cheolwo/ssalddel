@@ -127,4 +127,3 @@ namespace Ssalddel.Simulation.Application
 
     }
 }
-

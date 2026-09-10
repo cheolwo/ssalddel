@@ -37,11 +37,14 @@
 - 재고 상태: `ExploratoryInventory`
 - 공간 계층: `H1`
 - 실제 지역 권위: 없음
-- 보유 Synty 적합 후보: 미동결
+- 보유 Synty 기준 원본: `Assets/Synty/PolygonFarm/Models/SM_Bld_Farmhouse_02.fbx`
+- 프로젝트 소유 손상 파생형: `ArtSource/Blender/workflows/farm-residential-home-damaged-variant.r1.json`
+- Blender 상태: `BlenderValidatedCopy`(원본 불변, `.blend` 재열기와 FBX 왕복 통과)
+- Unity 상태: Import·Prefab·Collider·Bounds·배치·Game View 미검증
 
 ## 미해결
 
-- 정확 주택 Prefab, footprint 크기, 출입구 방향과 관찰 시야 수치는 개별 배치 맵과 Presentation E4에서 동결한다.
+- 기준 원본 후보는 Farmhouse_02로 동결했다. 프로젝트 소유 FBX의 Unity Import, Prefab, footprint, 출입구 방향, Collider·Bounds와 관찰 시야는 개별 배치 맵과 Presentation E5에서 검증한다.
 - 한스 집은 일반 H1 정의가 아니라 별도 배치 프로필의 특정 인스턴스로 결속한다.
 
 이 문서는 상향식 공간 설계 지식이며 실제 좌표·AreaSet·LandscapeGraph·Unity 자산 권위를 만들지 않는다.

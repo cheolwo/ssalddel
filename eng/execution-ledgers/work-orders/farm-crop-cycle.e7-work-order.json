@@ -211,7 +211,7 @@
     "remaining": "저장Scene binary MonoScript GUID 매핑 미확정. guard/누락삭제/일괄대체하지 않고 정확 참조/생성주체 수리범위 검토. 동일Play차단반복 대신 독립 D382 자산검토·D383 이동후보준비 진행."
   },
   "schemaVersion": "simulation-e7-vertical-work-order.v2",
-  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r5",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
   "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
   "workOrderId": "E7-WO-FARM-CROP-CYCLE",
   "title": "Farm 경작 세계 발현 E5 승인 실행",

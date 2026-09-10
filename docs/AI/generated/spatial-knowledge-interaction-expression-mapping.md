@@ -3,6 +3,7 @@
 | 행동 공간 H1 | 표현 H1 후보 |
 | --- | --- |
 | `h1-stock:farm-exposure-inspection` | h1-expression:farm:농산물-집하-직판장, h1-expression:farm:헛간-작업마당 |
+| `h1-stock:farm-fence-edge` | h1-expression:farm:헛간-작업마당 |
 | `h1-stock:farm-harvest-staging` | h1-expression:farm:농산물-집하-직판장, h1-expression:farm:헛간-작업마당 |
 | `h1-stock:farm-hub-corridor` |  |
 | `h1-stock:farm-incident-quarantine` | h1-expression:farm:농산물-집하-직판장, h1-expression:farm:헛간-작업마당 |

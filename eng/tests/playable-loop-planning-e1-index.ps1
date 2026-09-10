@@ -20,8 +20,8 @@ if ((Get-FileHash $jsonPath -Algorithm SHA256).Hash -ne $firstJsonHash -or (Get-
 if ((Get-FileHash $markdownPath -Algorithm SHA256).Hash -ne $firstMarkdownHash -or (Get-Item $markdownPath).LastWriteTimeUtc.Ticks -ne $firstMarkdownTicks) { throw 'PlanningE1MarkdownNotDeterministic' }
 
 $result = Get-Content -LiteralPath $jsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([int] $result.counts.plans -ne 47) { throw 'PlanningE1PlanCountInvalid' }
-if ([int] $result.counts.playableUnits -ne 20) { throw 'PlanningE1PlayableUnitCountInvalid' }
+if ([int] $result.counts.plans -ne 59) { throw 'PlanningE1PlanCountInvalid' }
+if ([int] $result.counts.playableUnits -ne 23) { throw 'PlanningE1PlayableUnitCountInvalid' }
 if (@($result.plans | Where-Object classificationCode -eq 'E1CandidateNeeded').Count -eq 0) { throw 'PlanningE1GapFixtureMissing' }
 if (@($result.playableUnitE1Contracts | Where-Object e1State -eq 'Established').Count -eq 0) { throw 'PlanningE1EstablishedFixtureMissing' }
 if (-not [bool] $result.policy.planningDocumentAloneIsNotE1) { throw 'PlanningDocumentBoundaryMissing' }
@@ -35,8 +35,12 @@ if ([int] $result.counts.e1Assemblies -ne 2) { throw 'PlanningE1AssemblyCountInv
 if ([int] $result.counts.reviewedAtomicPlans -ne 2) { throw 'PlanningAtomicReviewedPlanCountInvalid' }
 if ([int] $result.counts.outlinedAtomicPlans -ne 34) { throw 'PlanningAtomicOutlinePlanCountInvalid' }
 if ([int] $result.counts.atomicOutlineCandidates -ne 182) { throw 'PlanningAtomicOutlineCandidateCountInvalid' }
-if ([int] $result.counts.decompositionNeeded -ne 0) { throw 'PlanningAtomicDecompositionQueueNotCovered' }
-if ([int] $result.counts.atomicReviewNeeded -ne 0) { throw 'PlanningAtomicReviewQueueNotOutlined' }
+if ([int] $result.counts.decompositionNeeded -ne 9) { throw 'PlanningAtomicDecompositionQueueCountInvalid' }
+if ([int] $result.counts.atomicReviewNeeded -ne 1) { throw 'PlanningAtomicReviewQueueCountInvalid' }
+$hexagramStoryPlan = @($result.plans | Where-Object planId -eq 'PLAN-STORY-HEXAGRAM-SEQUENCE-001')
+if ($hexagramStoryPlan.Count -ne 1 -or [string] $hexagramStoryPlan[0].classificationCode -ne 'CrossCuttingContext' -or [string] $hexagramStoryPlan[0].decompositionStateCode -ne 'ContextOnly') { throw 'HexagramStoryPlanBoundaryInvalid' }
+$h1SyntyPlan = @($result.plans | Where-Object planId -eq 'PLAN-PRESENTATION-H1-SYNTY-STATE-001')
+if ($h1SyntyPlan.Count -ne 1 -or [string] $h1SyntyPlan[0].classificationCode -ne 'NoDirectE1Impact') { throw 'H1SyntyPlanE1BoundaryInvalid' }
 $hans = @($result.plans | Where-Object planId -eq 'PLAN-STORY-FIRST-FARM-DISCOVERY-001')
 if ($hans.Count -ne 1 -or [string] $hans[0].decompositionStateCode -ne 'ReviewedAtomicModules') { throw 'HansAtomicReviewMissing' }
 $woodcutting = @($result.atomicModules | Where-Object moduleId -eq 'play-transaction:hans-farm.voluntary-woodcutting.v1')

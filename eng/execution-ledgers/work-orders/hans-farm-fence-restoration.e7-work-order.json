@@ -1,6 +1,6 @@
 {
   "schemaVersion": "simulation-e7-vertical-work-order.v2",
-  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r6",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
   "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
   "workOrderId": "E7-WO-HANS-FARM-FENCE-RESTORATION",
   "title": "한스 농장 첫 울타리 수리 E5",
@@ -11,22 +11,32 @@
   "promotionEligible": false,
   "planningGate": {
     "statusCode": "Approved",
-    "designDocumentRef": "docs/AI/한스농장-첫벌목과울타리수리-기획-2026-09-02.md",
-    "designRevision": "hans-farm-first-lumber-repair.r27",
-    "designHashSha256": "ADC540046294B02E12FB2D329A8E75E3AD6FF5354DA1DCBD0247AFD47AAF6D2A",
+    "designDocumentRef": "docs/Architecture/PlayableLoops/Nature한스농장첫울타리수리.md",
+    "designRevision": "nature-hans-farm-fence-restoration.design.r1",
+    "designHashSha256": "62F743887EAA79628507BA5D81C26C62FA80F1F1527CF0DAA925B182B2F57A5E",
     "approvalEvidenceRef": "docs/AI/한스농장-첫벌목과울타리수리-기획-2026-09-02.md"
   },
   "deliveryCap": {
     "currentDispatchTargetStage": "E5",
     "promotionBeyondStageAllowed": false,
-    "reason": "이번 범위는 최소 World 표현 E5까지이며 실제 AnimationClip 결속은 E6, 실제 입력·Play Mode·Game View는 E7에서 별도 수행한다."
+    "reason": "이번 범위는 최소 World 표현 E5와 짧은 실제 입력 체험 검토다. 체험 검토만으로 E7을 인증하지 않으며 실제 AnimationClip 결속은 E6에 둔다."
   },
   "iterationState": {
     "currentPass": "StableOrExplicitlyBlocked",
-    "nextReopenCondition": "다른 작업 소유의 미추적 AreaSet배치AuthoringPipeline.cs가 Unity 전체 컴파일을 통과하면 동일 Presenter EditMode 검증부터 재개한다."
+    "nextReopenCondition": "Unity 컴파일과 Presenter·Local Runtime EditMode 18개는 통과했다. 독립 HansFenceE5 저장 슬롯으로 canonical World의 배치·입력·판독을 검증한 뒤 E5를 재판정한다."
   },
   "presentationE4Preparation": {
     "applicabilityCode": "Required",
+    "supportingPlanningRefs": [
+      {
+        "planId": "PLAN-VISUAL-HANS-FARM-001",
+        "documentRef": "docs/AI/Planning/표현/PLAN-VISUAL-HANS-FARM-001/README.md",
+        "revision": "hans-farm-refined-stylized.r1",
+        "sha256": "9840C56585A142EC45B22D1949B16AFF2E73E5049956EB38B8EF8CA86CD634E8",
+        "scopeCode": "PresentationRefinementSupport",
+        "authorityBoundary": "재질·조명·접지·길 경계·프로젝트 소유 H1 보강·식생 군집의 시각 지원 계획이며 기존 WI 의미, Simulation 상태, E 단계 또는 planningGate를 바꾸지 않는다."
+      }
+    ],
     "notApplicableReason": "",
     "playerReadableMoment": "줍기 전 부러진 도끼와 손상 울타리 세 구간, 줍기 후 도끼 제거, 수리 후 세 구간 정렬을 읽는다.",
     "requiredHCapabilities": [
@@ -51,9 +61,9 @@
     "candidateRevisionOrFingerprint": "hans-farm-fence-restoration.presentation-e5.r1",
     "e5ReadinessCode": "Blocked",
     "openGapRefs": [
-      "SimulationPlayerLearningFocusService를 RuntimeCore 패키지 경로로 옮겨 기존 결손은 해소했으나 Unity 프로젝트 컴파일은 다른 작업 소유의 미추적 AreaSet배치AuthoringPipeline.cs:473 Application.dataPath 이름 충돌로 차단됨",
-      "실제 Prefab 결속과 canonical SimulationWorldShell 배치는 컴파일 복구 후 검증 필요",
-      "Play Mode·Game View·실제 입력 재생은 E7 범위이며 이번 작업에서 수행하지 않음"
+      "컴파일 차단은 해소했고 실제 Local Runtime 명령 경로와 저장 재개를 EditMode에서 검증했다. canonical World의 실제 배치·접지·입력은 아직 미검증",
+      "현재 구현은 fallback 표현이며 Synty Prefab 실제 결속과 H2·H3 시각 승인을 뜻하지 않음",
+      "월드·공간·배치 담당에게 짧은 입력·Game View 검토를 인계했다. 반환 전 Presentation E5 승격 금지"
     ],
     "animationReadinessCode": "DeferredToE6",
     "animationBoundary": "E5는 정적 자세·진행 표식·상태 교체를 허용하고 실제 Actor 애니메이션은 E6에서 검증한다."
@@ -114,8 +124,8 @@
       "eng/world-seedbeds/placement-map-profiles/hans-farm-first-fence-restoration-e5.v1.json"
     ],
     "openFeedbackRefs": [
-      "학습 중점 서비스 경로 결손은 해소했지만 별도 AreaSet authoring 파일의 컴파일 오류를 해당 소유자가 정리한 뒤 Presenter EditMode를 재실행해야 Presentation·통합 E5가 닫힌다.",
-      "애니메이션은 E6, 실제 입력·Play Mode·Game View는 E7에서 별도 검증한다."
+      "Unity 컴파일·EditMode 18개 통과와 실제 World 배치 증거를 구분한다. 상세는 docs/Reports/한스울타리-E5연결결손보완-2026-09-05.md를 따른다.",
+      "애니메이션은 E6로 유지한다. 짧은 입력·Game View 체험 검토는 E7 전체 인증을 대신하지 않는다."
     ]
   }
 }

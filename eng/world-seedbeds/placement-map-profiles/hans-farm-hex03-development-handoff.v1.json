@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "simulation-world-placement-map-preparation-profile.v1",
+  "profileStableId": "placement-map-profile:hans-farm:hex03-development-handoff.v1",
+  "revision": 1,
+  "title": "수뢰둔 한스 농장 개발 인계 배치 준비",
+  "stateCode": "H1VisualCandidatesOnly_H2H3Undecided",
+  "planningRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+  "graphMapRef": "eng/world-seedbeds/graph-maps/hans-farm-hex03-campaign.v1.json",
+  "visualCatalogRef": "eng/execution-ledgers/hex03-h-visual-catalog.json",
+  "requiredHRefs": [
+    "h1-stock:farm-residential-home",
+    "h1-stock:farm-production",
+    "h1-stock:farm-fence-edge",
+    "h1-stock:nature-incident-trace",
+    "h1-stock:nature-emergency-retreat",
+    "h2-candidate:forest-edge-living-farm",
+    "h2-candidate:nature-threat-response",
+    "h2-candidate:farm-boundary-defense-recovery",
+    "h3-candidate:forest-edge-living-farm-campaign"
+  ],
+  "acceptedVisualHRefs": [
+    "h1-stock:farm-residential-home",
+    "h1-stock:farm-production",
+    "h1-stock:farm-fence-edge"
+  ],
+  "pendingVisualHRefs": [
+    "h2-candidate:forest-edge-living-farm",
+    "h2-candidate:nature-threat-response",
+    "h2-candidate:farm-boundary-defense-recovery",
+    "h3-candidate:forest-edge-living-farm-campaign"
+  ],
+  "placementRules": [
+    "생활 주택·감자 구획·울타리는 같은 숲 경계 생활 농장 H2 안에 둔다.",
+    "울타리 안쪽 순찰로는 생활 주택에서 출발해 농장 경계를 돌고 같은 귀환 anchor로 닫힌다.",
+    "위협 흔적은 울타리 바깥에 두며 경계표지 너머 추격을 필수 경로로 만들지 않는다.",
+    "방어 주 진입로는 울타리 병목을 통과하고, 돌파는 울타리 손상 상태에서만 열린다.",
+    "생활 주택과 감자 구획의 관리권 경계는 서로 독립적으로 판정한다.",
+    "상육 뒤 후퇴·복구 경로는 생활 주택 회복 anchor로 돌아온다."
+  ],
+  "requiredDevelopmentChecks": [
+    "ExactStableNodeAndInstanceIds",
+    "PrefabOrFallbackBoundToAuthorityRevision",
+    "RendererColliderBoundsActive",
+    "GroundingAndReachability",
+    "PatrolLoopClosure",
+    "ConditionalBreachAndRecoveryReturn",
+    "WorldInteractionManifestation"
+  ],
+  "optionalBranchRefs": ["ForestFowlDomestication"],
+  "evidenceBoundary": "H1 시각 후보 세 건만 유지한다. H2·H3 시각 구성은 품질 재검토 전까지 미정이므로 공간 표현 개발 준비가 완료되지 않았다. 실제 Prefab·World 배치·Play Mode·Game View·E5 승격은 수행하지 않았다.",
+  "presentationOnly": true,
+  "isOperationalState": false
+}

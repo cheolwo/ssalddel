@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "simulation-world-graph-map.v1",
+  "graphStableId": "graph-map:hans-farm:hex03-campaign.v1",
+  "revision": "hans-farm-hex03-campaign.r2",
+  "planningRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+  "authorityBoundary": "기획 관계와 공간 제약을 표현하는 Graph Map이다. 권위 상태, 실제 좌표, Unity Scene 또는 Evidence 승격을 만들지 않는다.",
+  "nodes": [
+    {"nodeStableId": "gm-node:hex03-player", "nodeKindCode": "Subject", "subjectRef": "subject:player-controlled-actor.v1"},
+    {"nodeStableId": "gm-node:hex03-hans", "nodeKindCode": "Subject", "subjectRef": "subject:hans-farm-owner-npc.v1"},
+    {"nodeStableId": "gm-node:hex03-home", "nodeKindCode": "H1", "hRef": "h1-stock:farm-residential-home"},
+    {"nodeStableId": "gm-node:hex03-plot", "nodeKindCode": "H1", "hRef": "h1-stock:farm-production"},
+    {"nodeStableId": "gm-node:hex03-fence", "nodeKindCode": "H1", "hRef": "h1-stock:farm-fence-edge"},
+    {"nodeStableId": "gm-node:hex03-work-yard", "nodeKindCode": "H1", "hRef": "h1-stock:farm-work-yard"},
+    {"nodeStableId": "gm-node:hex03-forest-trail", "nodeKindCode": "H1", "hRef": "h1-expression:nature:숲-가장자리"},
+    {"nodeStableId": "gm-node:hex03-forest-entry", "nodeKindCode": "H1", "hRef": "h1-stock:nature-farm-edge"},
+    {"nodeStableId": "gm-node:hex03-trace", "nodeKindCode": "H1", "hRef": "h1-stock:nature-incident-trace"},
+    {"nodeStableId": "gm-node:hex03-retreat", "nodeKindCode": "H1", "hRef": "h1-stock:nature-emergency-retreat"},
+    {"nodeStableId": "gm-node:hex03-beasts", "nodeKindCode": "Subject", "subjectRef": "subject:hans-farm-displaced-beast-group.v1"},
+    {"nodeStableId": "gm-node:hex03-living-farm", "nodeKindCode": "H2", "hRef": "h2-candidate:forest-edge-living-farm"},
+    {"nodeStableId": "gm-node:hex03-defense-recovery", "nodeKindCode": "H2", "hRef": "h2-candidate:farm-boundary-defense-recovery"},
+    {"nodeStableId": "gm-node:hex03-campaign-landscape", "nodeKindCode": "H3", "hRef": "h3-candidate:forest-edge-living-farm-campaign"}
+  ],
+  "edges": [
+    {"edgeStableId": "gm-edge:hex03-l1-repair-to-stay", "fromNodeRef": "gm-node:hex03-player", "toNodeRef": "gm-node:hex03-home", "relationCode": "GuestRightsAfterFenceRepair", "wiRefs": ["WI-NATURE-19", "WI-NATURE-06", "WI-NATURE-18", "WI-NATURE-20", "WI-GUEST-PERMISSION-SET"]},
+    {"edgeStableId": "gm-edge:hex03-l2-patrol-loop", "fromNodeRef": "gm-node:hex03-home", "toNodeRef": "gm-node:hex03-fence", "relationCode": "ClosedBoundaryPatrolAndReturn", "wiRefs": ["WI-NATURE-HANS-BOUNDARY-PATROL"]},
+    {"edgeStableId": "gm-edge:hex03-l3-investigate-return", "fromNodeRef": "gm-node:hex03-fence", "toNodeRef": "gm-node:hex03-trace", "relationCode": "InvestigateWithoutUnguidedPursuit", "wiRefs": ["WI-NATURE-TRACE-INVESTIGATE", "WI-NATURE-11"]},
+    {"edgeStableId": "gm-edge:hex03-l3-retreat-home", "fromNodeRef": "gm-node:hex03-retreat", "toNodeRef": "gm-node:hex03-home", "relationCode": "SafeReturn", "wiRefs": ["WI-NATURE-11"]},
+    {"edgeStableId": "gm-edge:hex03-l4-bounded-grant-home", "fromNodeRef": "gm-node:hex03-hans", "toNodeRef": "gm-node:hex03-home", "relationCode": "BoundedManagementGrant", "wiRefs": ["WI-WORLD-BOUNDED-MANAGEMENT-GRANT"]},
+    {"edgeStableId": "gm-edge:hex03-l4-bounded-grant-plot", "fromNodeRef": "gm-node:hex03-hans", "toNodeRef": "gm-node:hex03-plot", "relationCode": "BoundedManagementGrant", "wiRefs": ["WI-WORLD-BOUNDED-MANAGEMENT-GRANT"]},
+    {"edgeStableId": "gm-edge:hex03-l5-small-order", "fromNodeRef": "gm-node:hex03-plot", "toNodeRef": "gm-node:hex03-home", "relationCode": "SmallOrderDerivedFromTwoResults", "wiRefs": ["WI-FARM-01", "WI-WORLD-04"]},
+    {"edgeStableId": "gm-edge:hex03-l6-threat-ingress", "fromNodeRef": "gm-node:hex03-beasts", "toNodeRef": "gm-node:hex03-fence", "relationCode": "ThreatIngress", "wiRefs": ["WI-FARM-DEFENSE-MOBILIZE", "WI-FARM-DEFENSE-RESOLVE"]},
+    {"edgeStableId": "gm-edge:hex03-l6-recovery-debrief", "fromNodeRef": "gm-node:hex03-defense-recovery", "toNodeRef": "gm-node:hex03-home", "relationCode": "RecoveryReturnAndDebrief", "wiRefs": ["WI-FARM-DEFENSE-RETURN", "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF"]},
+    {"edgeStableId": "gm-edge:hex03-h1-to-h2-living", "fromNodeRef": "gm-node:hex03-home", "toNodeRef": "gm-node:hex03-living-farm", "relationCode": "Composes"},
+    {"edgeStableId": "gm-edge:hex03-h1-to-h2-defense", "fromNodeRef": "gm-node:hex03-fence", "toNodeRef": "gm-node:hex03-defense-recovery", "relationCode": "Composes"},
+    {"edgeStableId": "gm-edge:hex03-h2-to-h3", "fromNodeRef": "gm-node:hex03-living-farm", "toNodeRef": "gm-node:hex03-campaign-landscape", "relationCode": "ComposesWithDefenseRecovery"},
+    {"edgeStableId": "gm-edge:forest-trail-to-farm-entry", "fromNodeRef": "gm-node:hex03-forest-trail", "toNodeRef": "gm-node:hex03-forest-entry", "relationCode": "TraversablePlacementRoute"},
+    {"edgeStableId": "gm-edge:farm-entry-to-hans-house", "fromNodeRef": "gm-node:hex03-forest-entry", "toNodeRef": "gm-node:hex03-home", "relationCode": "TraversablePlacementRoute"},
+    {"edgeStableId": "gm-edge:farm-entry-to-production", "fromNodeRef": "gm-node:hex03-forest-entry", "toNodeRef": "gm-node:hex03-plot", "relationCode": "TraversablePlacementRoute"},
+    {"edgeStableId": "gm-edge:farm-home-to-work-yard", "fromNodeRef": "gm-node:hex03-home", "toNodeRef": "gm-node:hex03-work-yard", "relationCode": "WorkHandoffRoute"},
+    {"edgeStableId": "gm-edge:farm-return-to-forest", "fromNodeRef": "gm-node:hex03-home", "toNodeRef": "gm-node:hex03-forest-trail", "relationCode": "TraversableReturnRoute"}
+  ],
+  "lineBindings": [
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-001", "edgeRefs": ["gm-edge:hex03-l1-repair-to-stay"]},
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-002", "edgeRefs": ["gm-edge:hex03-l2-patrol-loop"]},
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-003", "edgeRefs": ["gm-edge:hex03-l3-investigate-return", "gm-edge:hex03-l3-retreat-home"]},
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-004", "edgeRefs": ["gm-edge:hex03-l4-bounded-grant-home", "gm-edge:hex03-l4-bounded-grant-plot"]},
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-005", "edgeRefs": ["gm-edge:hex03-l5-small-order"]},
+    {"linePlanId": "PLAN-STORY-HEX03-LINE-006", "edgeRefs": ["gm-edge:hex03-l6-threat-ingress", "gm-edge:hex03-l6-recovery-debrief"]}
+  ],
+  "placementMapBinding": {
+    "stateCode": "UnapprovedCandidate",
+    "profileRef": "eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json",
+    "planningRef": "docs/AI/숲경계농장-H1-H2-배치맵-기획-2026-09-02.md",
+    "planningRevision": "forest-edge-farm-placement-map-planning.r25",
+    "planningSha256": "4DE86716F33D5512EC5BFDB1710640DB86AF66A80A4AD9D82B9FCD3A724C5373",
+    "approvalReportRef": "docs/Reports/한스농장-인접숲-자연경관조립-2026-09-05.md",
+    "approvalReportSha256": "302A5DF82F5C1B7E0C1267184A144349DAE6556F6A08628401F0115E88CA3805",
+    "draftRevision": "hans-farm-adjacent-forest.natural-world.r3",
+    "draftHashSha256": "3F1A275C722351C21345541CC1C7590F6870FA9F5D7F5729A40B3D0734C98C92",
+    "validatedPlanFileSha256": "CD8B55EDF811879CB84259F26B1667C3ECD43C06555B8C8580A720999E71039E",
+    "coordinateSpaceCode": "ScenarioLocalMeters",
+    "axisCode": "XRightYUpZForward",
+    "metersPerUnit": 1.0,
+    "unitySceneValidated": false,
+    "visualApprovalStateCode": "Pending"
+  },
+  "lineage": {
+    "previousRevision": "hans-farm-hex03-campaign.r1",
+    "previousFileSha256": "635BFCE36938BB6455CF3FD86FB7BF23096DCB5D0B2029FBFF75863A2C2E27AE"
+  },
+  "validationBoundary": {"logicTarget": "DevelopmentHandoff", "presentationTarget": "E5", "animationTarget": "E6", "actualInputTarget": "E7", "unityVerified": false}
+}

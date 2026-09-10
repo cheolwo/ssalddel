@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "h1-synty-representation-assignment-policy.v1",
+  "revision": "h1-synty-representation-assignment-policy.r1",
+  "purpose": "기획과 H 의미를 보존하면서 H1별 정확 Synty Prefab 후보와 자연스러운 상태 변화 검토 대상을 결정적으로 조사한다.",
+  "candidateLimit": 3,
+  "authorityBoundary": {
+    "hDefinitionsRemainAssetPathFree": true,
+    "candidateIsNotSelectionApproval": true,
+    "candidateIsNotWorldPlacement": true,
+    "candidateIsNotEvidencePromotion": true,
+    "syntySourceModificationAllowed": false
+  },
+  "packRoots": {
+    "Farm": ["Assets/Synty/PolygonFarm"],
+    "Nature": ["Assets/Synty/PolygonNature", "Assets/Synty/PolygonNatureBiomes"],
+    "Town": ["Assets/Synty/PolygonTown"],
+    "City": ["Assets/Synty/PolygonCity"],
+    "Network": ["Assets/Synty/PolygonFarm", "Assets/Synty/PolygonTown", "Assets/Synty/PolygonCity", "Assets/Synty/PolygonNature"],
+    "Transition": ["Assets/Synty/PolygonFarm", "Assets/Synty/PolygonTown", "Assets/Synty/PolygonCity", "Assets/Synty/PolygonNature"]
+  },
+  "stateCategories": {
+    "Static": {
+      "before": [], "active": [], "after": [], "recovery": [],
+      "reason": "현재 H1 의미만으로 권위 상태 변화를 만들지 않는다."
+    },
+    "Growth": {
+      "before": ["UnpreparedOrDormant"], "active": ["GrowingOrCultivated"], "after": ["MatureOrHarvested"], "recovery": ["FallowOrRegenerating"],
+      "reason": "생산·식생의 생육과 수확 전후를 같은 대상의 변화로 검토한다."
+    },
+    "Condition": {
+      "before": ["DamagedOrUnavailable"], "active": ["RepairingOrRestoring"], "after": ["OperationalOrRecovered"], "recovery": ["SafePauseOrDegraded"],
+      "reason": "손상·정비·복구의 외형 연속성을 검토한다."
+    },
+    "Occupancy": {
+      "before": ["EmptyOrAvailable"], "active": ["HandlingOrOccupied"], "after": ["LoadedStoredOrTransferred"], "recovery": ["ClearedOrReturned"],
+      "reason": "입고·적치·상하차·보관의 점유 변화를 검토한다."
+    },
+    "Inspection": {
+      "before": ["AwaitingInspection"], "active": ["InspectingOrIsolating"], "after": ["ReleasedOrQuarantined"], "recovery": ["ReworkOrCleanup"],
+      "reason": "점검·격리·반품 결과를 동일 화물과 공간의 상태 변화로 검토한다."
+    },
+    "Seasonal": {
+      "before": ["PreviousSeasonAppearance"], "active": ["SeasonTransition"], "after": ["CurrentSeasonAppearance"], "recovery": ["NextSeasonCandidate"],
+      "reason": "식생·환경의 절기 변화는 권위 날짜와 분리된 표현 후보로 검토한다."
+    }
+  },
+  "assignmentRules": [
+    {"ruleId":"residential-home","matchPattern":"residential|home|주택|공동주택","roleCode":"PrimaryStructure","stateCategoryCode":"Condition","candidateNamePatterns":["Farmhouse","Apartment_01","SM_Bld_House_ExteriorWall_GroundFloor_01","Residential"]},
+    {"ruleId":"greenhouse","matchPattern":"greenhouse|시설하우스","roleCode":"PrimaryStructure","stateCategoryCode":"Growth","candidateNamePatterns":["Greenhouse"]},
+    {"ruleId":"barn-yard","matchPattern":"barn|헛간","roleCode":"PrimaryStructure","stateCategoryCode":"Condition","candidateNamePatterns":["Barn"]},
+    {"ruleId":"produce-stand","matchPattern":"produce|직판장|집하","roleCode":"PrimaryStructure","stateCategoryCode":"Occupancy","candidateNamePatterns":["ProduceStand","Market_Stall","Stall"]},
+    {"ruleId":"orchard","matchPattern":"orchard|과수원","roleCode":"PrimaryVegetation","stateCategoryCode":"Growth","candidateNamePatterns":["Tree_Apple","Tree_Apricot","Tree_Cherry"]},
+    {"ruleId":"farm-field","matchPattern":"potato|감자밭|작물밭|production|생산구획|논-필지|농업","roleCode":"PrimarySurface","stateCategoryCode":"Growth","candidateNamePatterns":["Dirt_Rows_01","Dirt_Rows_Center","Crop_","Potato"]},
+    {"ruleId":"water-service","matchPattern":"irrigation|washing|water|농수로|세척|수변|개울","roleCode":"PrimaryEnvironment","stateCategoryCode":"Occupancy","candidateNamePatterns":["Well_01","WaterTower","River_Plane","Terrain_RiverSide","Water_Plane","Pond_01","WaterTank"]},
+    {"ruleId":"cold-storage","matchPattern":"cold-storage|저온","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","additionalRoots":["Assets/Synty/PolygonTown"],"candidateNamePatterns":["Fridge","Freezer","Cooler","Cold","Storage"]},
+    {"ruleId":"storage-staging","matchPattern":"storage|staging|보관|적치","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","candidateNamePatterns":["Pallet","Crate","Box","Shelf"]},
+    {"ruleId":"loading-dock-yard","matchPattern":"loading|dock|vehicle-yard|상차|하차|차량|화물-대기","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","candidateNamePatterns":["Pallet","Crate","Container","Truck","Forklift"]},
+    {"ruleId":"market-shop-display","matchPattern":"market-(?:display|receiving|transfer)|shop|마트(?!\\s*반품)|상점|판매|display","roleCode":"PrimaryStructure","stateCategoryCode":"Occupancy","candidateNamePatterns":["Shop_01","Market","Shelf","ProduceStand"]},
+    {"ruleId":"packing-sorting","matchPattern":"packing|sorting|포장|선별|재작업","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","candidateNamePatterns":["Table","Crate","Box","Workbench"]},
+    {"ruleId":"inspection","matchPattern":"inspection|점검|검수","roleCode":"PrimaryFixture","stateCategoryCode":"Inspection","candidateNamePatterns":["Table","Desk","Crate","Barrier"]},
+    {"ruleId":"quarantine","matchPattern":"quarantine|격리|오염","roleCode":"Boundary","stateCategoryCode":"Inspection","candidateNamePatterns":["Barrier","Fence","Gate","Cone"]},
+    {"ruleId":"returns-waste","matchPattern":"returns|waste|반품|폐기","roleCode":"PrimaryFixture","stateCategoryCode":"Inspection","candidateNamePatterns":["Dumpster","Trash","(?:^|_)Bin(?:_|$)","Crate"]},
+    {"ruleId":"maintenance-restoration","matchPattern":"maintenance|restoration|repair|정비|복구|수리","roleCode":"PrimaryFixture","stateCategoryCode":"Condition","additionalRoots":["Assets/Synty/PolygonConstruction"],"candidateNamePatterns":["Workbench","ToolBox","Tool_","Crate"]},
+    {"ruleId":"rest-waiting","matchPattern":"rest|waiting|recovery|휴게|대기|회복","roleCode":"PrimaryFixture","stateCategoryCode":"Static","candidateNamePatterns":["Bench","Shelter","Bed","Camp_Tent"]},
+    {"ruleId":"shelter-camp","matchPattern":"shelter|camp|대피|야영","roleCode":"PrimaryStructure","stateCategoryCode":"Condition","candidateNamePatterns":["Shelter_01","Camp_Tent","Tent_"]},
+    {"ruleId":"lookout-watch","matchPattern":"lookout|watch|전망|초소|관찰","roleCode":"PrimaryStructure","stateCategoryCode":"Static","candidateNamePatterns":["WatchTower","Tower_","Lookout"]},
+    {"ruleId":"road-corridor-access","matchPattern":"corridor|trailhead|retreat|access|station-진입|회랑|길목|도로|진입|전환","roleCode":"PrimarySurface","stateCategoryCode":"Static","additionalRoots":["Assets/Synty/PolygonFarm"],"candidateNamePatterns":["Road_.*Straight","DirtRoad_Straight","GrassPath_Straight","Path_Straight"]},
+    {"ruleId":"forest-conifer","matchPattern":"침엽수림|pine","roleCode":"PrimaryVegetation","stateCategoryCode":"Seasonal","candidateNamePatterns":["Tree_Pine"]},
+    {"ruleId":"forest-deadwood","matchPattern":"고사목|빈터","roleCode":"PrimaryVegetation","stateCategoryCode":"Seasonal","candidateNamePatterns":["Tree_Dead","Grass_Patch"]},
+    {"ruleId":"forest-general","matchPattern":"숲|forest|혼효림|활엽수림|exploration-buffer|farm-edge","roleCode":"PrimaryVegetation","stateCategoryCode":"Seasonal","candidateNamePatterns":["Tree_01","Tree_02","Bush_01","Grass_Patch"]},
+    {"ruleId":"mountain-rock","matchPattern":"고지대|절개지|산-능선|산길|바위","roleCode":"PrimaryEnvironment","stateCategoryCode":"Static","candidateNamePatterns":["Rock_Cliff","Rock_Peak","Rock_01"]},
+    {"ruleId":"meadow-flower","matchPattern":"초지|야생화","roleCode":"PrimaryVegetation","stateCategoryCode":"Seasonal","candidateNamePatterns":["FlowerPatch","Flowers_01","Grass_Patch"]},
+    {"ruleId":"playground","matchPattern":"놀이터","roleCode":"PrimaryFixture","stateCategoryCode":"Static","candidateNamePatterns":["Playground","Swing","Slide"]},
+    {"ruleId":"bus-stop","matchPattern":"버스-정류장|bus","roleCode":"PrimaryStructure","stateCategoryCode":"Static","candidateNamePatterns":["Bus_Stop","BusStop","Shelter"]},
+    {"ruleId":"public-square","matchPattern":"광장|square","roleCode":"PrimarySurface","stateCategoryCode":"Static","candidateNamePatterns":["Plaza","OfficeSquare","Sidewalk_Straight","Pavement"]},
+    {"ruleId":"garden-fence","matchPattern":"정원|담장|fence","roleCode":"Boundary","stateCategoryCode":"Condition","candidateNamePatterns":["Fence_Wood","Fence_White","Gardenbox"]},
+    {"ruleId":"seed-preparation","matchPattern":"seed-preparation|종자-준비|종자 준비","roleCode":"PrimaryFixture","stateCategoryCode":"Growth","candidateNamePatterns":["SeedPacket","GrainBag","Plant_Potato"]},
+    {"ruleId":"relief-handoff","matchPattern":"relief|지원-인계|지원 인계","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","candidateNamePatterns":["Cart_01","CardboardBox","Outdoor_Table","Crate"]},
+    {"ruleId":"information-service","matchPattern":"service|안내|수령|pickup","roleCode":"PrimaryFixture","stateCategoryCode":"Occupancy","candidateNamePatterns":["Counter","Desk","Table","Shop"]},
+    {"ruleId":"incident-trace","matchPattern":"incident-trace|사건-흔적","roleCode":"StateOverlay","stateCategoryCode":"Inspection","candidateNamePatterns":["Rubble","Debris","Rock_Small"]}
+  ]
+}

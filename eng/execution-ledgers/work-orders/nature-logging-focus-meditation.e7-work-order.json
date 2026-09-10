@@ -1,6 +1,6 @@
 {
   "schemaVersion": "simulation-e7-vertical-work-order.v2",
-  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r4",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
   "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
   "workOrderId": "E7-WO-NATURE-LOGGING-FOCUS-MEDITATION",
   "title": "Nature 벌목 집중과 명상 숙련",
@@ -15,16 +15,16 @@
   },
   "planningGate": {
     "statusCode": "Approved",
-    "designDocumentRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md",
-    "designRevision": "dual-possession-alchemist-succession.r65",
-    "designHashSha256": "9FAE03C1CF38A2A73D2B4E29E3E1C34ACEBA97B9AC9784D56D2B16CFEAFA7EA9",
-    "approvalEvidenceRef": "docs/AI/소가주-연금술-가주승계-메인스토리기획-2026-09-01.md"
+    "designDocumentRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md",
+    "designRevision": "hex03-campaign.r11",
+    "designHashSha256": "938DE55F56D99CA1B733739B3D09CFFCF1C549D5D940394A2E2BFE9BEF6BBFFF",
+    "approvalEvidenceRef": "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
   },
   "firstLoggingReflectionP0": {
     "revision": "first-logging-reflection-seed.r1",
     "scope": "플레이어 본인의 실제 첫 WI-NATURE-06 완료 ActionRecord와 한스 집 첫날밤의 검증된 안전 휴식을 입력으로 결정적 성찰 씨앗을 준비하고 관찰→원인→개선 진행·중단 재개·기존 성장 계보의 한 번 적용을 검증한다.",
     "sourcePlanIds": [
-      "PLAN-STORY-DUAL-PROTAGONIST-001",
+      "PLAN-STORY-HEX03-CAMPAIGN-001",
       "PLAN-GAMEPLAY-MEDITATION-ACTION-001"
     ],
     "writePaths": [

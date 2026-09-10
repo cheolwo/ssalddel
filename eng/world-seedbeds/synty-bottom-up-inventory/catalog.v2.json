@@ -15,6 +15,14 @@
       "documentSha256": "f7a3933609007633e9028c105b92e9a6e0008774969810cae8f8b7393024bc3a"
     },
     {
+      "stableId": "h1-stock:farm-fence-edge",
+      "revision": 2,
+      "definitionPath": "definitions/h1/farm-fence-edge.v2.json",
+      "definitionSha256": "55288829cd2f23187944189e4ca5589b5188adf48111569553f100cca65065e4",
+      "documentPath": "authored/h1/farm-fence-edge.v2.md",
+      "documentSha256": "7d9c559b35b97237860d30a52462215e33c38cae2e1e218884c7a6f62d79b7c3"
+    },
+    {
       "stableId": "h1-stock:farm-harvest-staging",
       "revision": 1,
       "definitionPath": "definitions/h1/farm-harvest-staging.v2.json",
@@ -68,15 +76,15 @@
       "definitionPath": "definitions/h1/farm-production.v2.json",
       "definitionSha256": "e02d835f921f717ab72fdaac5f5a67c83cceeffdf3df555f25d6db0a150b84d5",
       "documentPath": "authored/h1/farm-production.v2.md",
-      "documentSha256": "9091acdffbf875cca841a5c557f1351d726a738e46ea31aa4705ca634ff9ef8a"
+      "documentSha256": "181cce29798cbb941710b7315a21ae0c4fcc881c5395dfa14a4ade475f16cc01"
     },
     {
       "stableId": "h1-stock:farm-residential-home",
-      "revision": 1,
+      "revision": 2,
       "definitionPath": "definitions/h1/farm-residential-home.v2.json",
-      "definitionSha256": "63d4a8395d2516d38547646542c14f8c1a955b13fa2d4b4abfebd4567645d15d",
+      "definitionSha256": "cc3adeb7e62dcb1298a9479c506b3dd868130ec0bc8664553141405bc773a060",
       "documentPath": "authored/h1/farm-residential-home.v2.md",
-      "documentSha256": "f7086e3d890b5383f84131654e118900d254d686fc158de601c2101547679bf6"
+      "documentSha256": "2b7fb2ea020a6448640cdb1bc93b5dfc47ef1f250d810cb1faee7f840c04e31c"
     },
     {
       "stableId": "h1-stock:farm-restoration-supply",
@@ -433,6 +441,14 @@
   ],
   "h2DefinitionRefs": [
     {
+      "stableId": "h2-candidate:farm-boundary-defense-recovery",
+      "revision": 2,
+      "definitionPath": "definitions/h2/farm-boundary-defense-recovery.v2.json",
+      "definitionSha256": "0f2eac5f1a62ea215497fa1e9161256dbb1d6b1629899ea6c521be0423bc57a0",
+      "documentPath": "authored/h2/farm-boundary-defense-recovery.v2.md",
+      "documentSha256": "24740421998df92473214bcc26ecb02db2412bdd0334ba68fc610abfc6229fc1"
+    },
+    {
       "stableId": "h2-candidate:farm-harvest-throughput",
       "revision": 1,
       "definitionPath": "definitions/h2/farm-harvest-throughput.v2.json",
@@ -511,6 +527,14 @@
       "definitionSha256": "44ed5494dceb09230756a6a3efd3fc4ac5207e859232c403bc391bd1796255cb",
       "documentPath": "authored/h2/forest-edge-farm.v2.md",
       "documentSha256": "4a021dcc1df68ff64babee49055aff5c8d758f9bc7b3144eb13e2a376bd6acbf"
+    },
+    {
+      "stableId": "h2-candidate:forest-edge-living-farm",
+      "revision": 2,
+      "definitionPath": "definitions/h2/forest-edge-living-farm.v2.json",
+      "definitionSha256": "a7d93ac039d002c9c04d6d8fb5c6bf4ffa0ddf6418ceaa3af032b146678ab165",
+      "documentPath": "authored/h2/forest-edge-living-farm.v2.md",
+      "documentSha256": "e2eba620f87cfbf8d00ed18521b3ef501ca6bb3c24ffb22b13a88bf6aec64c44"
     },
     {
       "stableId": "h2-candidate:highland-production",
@@ -777,6 +801,14 @@
       "definitionSha256": "c1f7c9c845a23add069b5e622702c29e3dd17bd8646d60277a59a36884d9cf1f",
       "documentPath": "authored/h3/farm-seasonal-production-loop.v2.md",
       "documentSha256": "c8146df024d1a1d48f1666f6d3397a11ac64a28335e2c1dd3ce3677124d8cac3"
+    },
+    {
+      "stableId": "h3-candidate:forest-edge-living-farm-campaign",
+      "revision": 2,
+      "definitionPath": "definitions/h3/forest-edge-living-farm-campaign.v2.json",
+      "definitionSha256": "8c2ca26400b9616ed60050f98dc7f135f4f6d5e28315cf8b217d5f1307544c05",
+      "documentPath": "authored/h3/forest-edge-living-farm-campaign.v2.md",
+      "documentSha256": "93ddb6bc94b5d15f47e17b9f681a469eebd2063c43f1b97cae707e805d8918f3"
     },
     {
       "stableId": "h3-candidate:highland-farm",

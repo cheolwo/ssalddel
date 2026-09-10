@@ -117,6 +117,12 @@ namespace Ssalddel.Simulation.Application
             Create(SimulationNatureSurvivalCodes.BeginHarvestWorldInteractionId,
                 nameof(ISimulationNatureSurvivalRuntime.PreviewAsync),
                 nameof(ISimulationNatureSurvivalRuntime.ConfirmAsync)),
+            Create(SimulationNatureSurvivalCodes.AcquireHansBrokenAxeWorldInteractionId,
+                nameof(ISimulationNatureSurvivalRuntime.PreviewAsync),
+                nameof(ISimulationNatureSurvivalRuntime.ConfirmAsync)),
+            Create(SimulationNatureSurvivalCodes.RepairHansFarmFenceWorldInteractionId,
+                nameof(ISimulationNatureSurvivalRuntime.PreviewAsync),
+                nameof(ISimulationNatureSurvivalRuntime.ConfirmAsync)),
             Create(SimulationNatureSurvivalCodes
                     .CollectDroppedTimberWorldInteractionId,
                 nameof(ISimulationNatureSurvivalRuntime.PreviewAsync),

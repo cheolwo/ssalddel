@@ -10,9 +10,10 @@
 | `H1` | `h1-stock:nature-safe-recovery-camp` 자연권 안전 회복 야영지 | `CandidateForReview` | E2에서 파티 회복 시간·보급과 동시 회복 단위를 확정한다. |
 | `H1` | `h1-stock:nature-threat-watch` 자연권 위협 관찰 초소 | `CandidateForReview` | E2에서 관찰 대상 경로 선택과 예약 단위를 확정한다. |
 | `H1` | `h1-stock:farm-exposure-inspection` 농장 수확물 노출 점검 공간 | `ExploratoryInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
+| `H1` | `h1-stock:farm-fence-edge` 농장 울타리 경계 구간 | `ExploratoryInventory` | 정확 Prefab·Collider·Bounds·통과 폭과 실제 상태 교체는 Presentation E5에서 검증한다. |
 | `H1` | `h1-stock:farm-harvest-staging` 수확물 임시 적치 공간 | `ExploratoryInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
 | `H1` | `h1-stock:farm-maintenance-yard` 농장 시설 정비 공간 | `ExploratoryInventory` | 공간 능력·용량·연결구를 검토한 뒤 CandidateForReview로 승격한다. |
-| `H1` | `h1-stock:farm-residential-home` 농장 생활 주택 | `ExploratoryInventory` | 정확 주택 Prefab, footprint 크기, 출입구 방향과 관찰 시야 수치는 개별 배치 맵과 Presentation E4에서 동결한다.; 귀환·휴식·작업자 대기, 농기구 보관, 생산, 수확·집하 WI는 각각 기존 H1이 계속 소유한다. |
+| `H1` | `h1-stock:farm-residential-home` 농장 생활 주택 | `ExploratoryInventory` | 기준 원본 후보는 Farmhouse_02로 동결했지만 프로젝트 소유 FBX의 Unity Import, Prefab, footprint, 출입구 방향, Collider·Bounds와 관찰 시야는 개별 배치 맵과 Presentation E5에서 검증한다.; 귀환·휴식·작업자 대기, 농기구 보관, 생산, 수확·집하 WI는 각각 기존 H1이 계속 소유한다. |
 | `H1` | `h1-stock:farm-restoration-supply` 농장 자연권 복구 자재 인계 공간 | `ExploratoryInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
 | `H1` | `h1-stock:farm-seed-preparation` 종자 준비 공간 | `ExploratoryInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
 | `H1` | `h1-stock:farm-weather-protection` 농장 기상 보호 적치 공간 | `ExploratoryInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
@@ -51,6 +52,7 @@
 | `H1` | `h1-stock:town-waste` 생활권 폐기물 처리 공간 | `IdeaInventory` | 실제 업무 용량과 연결구 방향은 공식 H1 승격 전에 검토한다. |
 | `H2` | `h2-candidate:nature-restoration-recovery` 자연 복원·안전 회복 블록 | `CandidateForReview` | E2에서 복원 완료와 파티 회복이 재탐색을 여는 상태 계약을 확정한다. |
 | `H2` | `h2-candidate:nature-threat-response` 자연 위협 추적·대피 블록 | `CandidateForReview` | E2에서 위협 관찰 결과가 후퇴·복원 분기로 전달되는 상태 계약을 확정한다. |
+| `H2` | `h2-candidate:farm-boundary-defense-recovery` 농장 경계 방어·회복 블록 | `ExploratoryInventory` | 조건부 돌파·후퇴 가능 여부·실제 이동과 회복 귀환은 Unity E5~E7에서 별도 검증한다. |
 | `H2` | `h2-candidate:farm-harvest-throughput` 농장 집중 수확·집하 블록 | `ExploratoryInventory` | 기준 크기·배치 방향과 연결구 조합은 설계 검토에서 확정한다. |
 | `H2` | `h2-candidate:farm-hub-corridor` Farm–Hub 회랑 블록 | `ExploratoryInventory` | 필수 H1 사이 연결구와 내부 도달 가능성을 검토한다. |
 | `H2` | `h2-candidate:farm-incident-containment` 농장 사건 점검·격리 블록 | `ExploratoryInventory` | 실제 Block 경계와 배치 방향은 현실 근거 적용 단계에서 결정한다. |
@@ -59,6 +61,7 @@
 | `H2` | `h2-candidate:farm-processing-shipping` 농장 작업·출하 블록 | `ExploratoryInventory` | 필수 H1 사이 연결구와 내부 도달 가능성을 검토한다. |
 | `H2` | `h2-candidate:farm-seed-and-tools` 종자·농기구 준비 블록 | `ExploratoryInventory` | 실제 Block 경계와 배치 방향은 현실 근거 적용 단계에서 결정한다. |
 | `H2` | `h2-candidate:forest-edge-farm` 숲 경계 농장 블록 | `ExploratoryInventory` | 필수 H1 사이 연결구와 내부 도달 가능성을 검토한다.; 농장 생활 주택은 일반 H2에서 선택 관계이며, 한스 생활 농장처럼 이를 필수로 하는 개별 배치 프로필은 별도 배치 맵에서 판정한다. |
+| `H2` | `h2-candidate:forest-edge-living-farm` 숲 경계 생활 농장 블록 | `ExploratoryInventory` | 실제 Graph 좌표·지면 접지·내부 도달 가능성과 Unity 배치는 E5에서 검증한다. |
 | `H2` | `h2-candidate:highland-production` 고지대 생산 블록 | `ExploratoryInventory` | 필수 H1 사이 연결구와 내부 도달 가능성을 검토한다. |
 | `H2` | `h2-candidate:hub-emergency-power` Hub 비상 전력·보관 유지 블록 | `ExploratoryInventory` | 기준 크기·배치 방향과 연결구 조합은 설계 검토에서 확정한다. |
 | `H2` | `h2-candidate:hub-fulfillment` Hub 피킹·출고준비 작업 블록 | `ExploratoryInventory` | 기준 크기·배치 방향과 연결구 조합은 설계 검토에서 확정한다. |
@@ -89,6 +92,7 @@
 | `H3` | `h3-candidate:farm-hub-logistics` 농장–물류 거점 연결 경관 | `ExploratoryInventory` | AreaSet 적용 전에는 실제 Graph Node·Edge·좌표를 부여하지 않는다. |
 | `H3` | `h3-candidate:farm-incident-recovery` 농장 사건 격리·회복 경관 | `ExploratoryInventory` | 실제 AreaSet과 공공데이터 근거를 적용하기 전까지 조립 후보로 유지한다. |
 | `H3` | `h3-candidate:farm-seasonal-production-loop` Farm 계절 생산·출하 순환 경관 | `ExploratoryInventory` | 실제 AreaSet과 공공데이터 근거를 적용하기 전까지 조립 후보로 유지한다. |
+| `H3` | `h3-candidate:forest-edge-living-farm-campaign` 숲 경계 생활 농장 수뢰둔 경관 | `ExploratoryInventory` | H3는 실제 AreaSet이나 canonical SimulationWorldShell 배치를 뜻하지 않으며 정확 좌표·경로·Prefab은 후속 E5에서 검증한다. |
 | `H3` | `h3-candidate:highland-farm` 고지대 농장 경관 | `ExploratoryInventory` | AreaSet 적용 전에는 실제 Graph Node·Edge·좌표를 부여하지 않는다. |
 | `H3` | `h3-candidate:hub-fulfillment-operations` City/Hub 보관·피킹·상차 운영 경관 | `ExploratoryInventory` | 실제 AreaSet과 공공데이터 근거를 적용하기 전까지 조립 후보로 유지한다. |
 | `H3` | `h3-candidate:hub-maintenance-emergency-loop` City/Hub 정비·비상운영 회복 경관 | `ExploratoryInventory` | 실제 AreaSet과 공공데이터 근거를 적용하기 전까지 조립 후보로 유지한다. |

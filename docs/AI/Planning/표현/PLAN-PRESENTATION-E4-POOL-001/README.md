@@ -2,8 +2,8 @@
 
 - 기획 ID: `PLAN-PRESENTATION-E4-POOL-001`
 - 분야: 표현
-- 판본: `presentation-e4-candidate-pool.plan.r1`
-- 상태: `ApprovedPlanningBaseline / BroadE4CandidatePoolConfirmed / E5SelectionPolicyPending`
+- 판본: `presentation-e4-candidate-pool.plan.r2`
+- 상태: `ApprovedPlanningBaseline / BroadE4CandidatePoolConfirmed / StateTransitionVisualGateConfirmed / E5SelectionPolicyPending`
 - 승인 근거: 2026-09-03 사용자가 여러 후보를 먼저 Presentation E4까지 넓게 준비하는 방향을 확정했다.
 
 ## 지금·여기·나·너·이렇게
@@ -26,6 +26,26 @@
 6. `Ready`는 E5 착수 후보라는 뜻일 뿐 E5 완료가 아니다. `Conditional`은 미확보 관측을, `Blocked`는 확인된 불일치·결손과 가장 이른 재개 E를 기록한다.
 7. E5 선택은 하위 E1~E4를 같은 Goal·Session·객체·Revision으로 소비할 수 있고, 실제 World 결속·입력·결과 재조회·Save/Replay·Game View를 좁게 검증할 수 있는 후보를 우선한다.
 8. E5가 막혀도 다른 E4 후보의 준비를 중단하지 않는다. 차단 후보는 원인을 보존하고 해당하는 가장 이른 E로 돌아가며, 준비된 다른 후보가 다음 선택 대상이 된다.
+9. E4의 상태 표현 준비는 오행별 독립 모델 수를 세지 않는다. 실제 WI의 시작·진행·결과와 필요한 중단·회복이 같은 대상으로 자연스럽게 판독되는지를 확인한다.
+10. 오행은 상태 변화 관계의 성격과 결손을 읽는 선택적 진단 메타데이터다. 오행 분류나 자산 존재만으로 상태 변화·Unity 배치·Evidence를 성립시키지 않는다.
+11. 기존 Prefab·프로젝트 소유 조립·재질·Animation으로 변화를 충분히 판독할 수 있으면 재사용한다. Blender는 그 방법으로 부족한 메시·피벗·실루엣·접촉·키프레임만 프로젝트 소유 파생형으로 보완한다.
+
+## 상태 변화 표현 범위
+
+E4 후보는 필요한 경우 `stateTransitionVisualCoverage`로 다음을 함께 준비한다.
+
+| 항목 | 확인 내용 |
+| --- | --- |
+| 대상 | 역할 객체·WI·상태 판본·H·Graph Map·배치 맵 |
+| 상태 | 시작, 진행, 결과, 필요한 중단·회복 상태와 안전한 교체 시점 |
+| 판독 | 플레이어가 변화를 알아차릴 순간과 상태별 `VisualKey` |
+| 표현 | 기존 Prefab, Unity 조립, 재질, Animation, Blender 파생형, fallback 가운데 최소 수단 |
+| 연속성 | 동일 객체 정체성, 위치·피벗·크기·재질 스타일, Actor Rig·접촉·귀환의 보존 |
+| 결손 | 누락 표현, 차단 사유, 담당과 가장 이른 재개 E |
+
+건물·시설은 손상/복구 상태의 위치·출입구·실루엣, Actor 작업은 준비/접촉/반복/완료·중단/Idle 복귀, 나무·물체는 피벗과 결과물 연속성, 작물·식생은 품종·위치·LOD·재질 연속성을 우선 검사한다. 즉시 교체가 적절한 상태는 권위 결과가 확정된 안전 경계에서 원자적으로 바꾸며, 실제 연속 동작이 필요한 상태만 Animation·Blend·Transform을 사용한다.
+
+첫 표본은 `벌목 접촉`, `나무 낙하`, `농장 생활주택 수리`다. 생활주택 손상형은 이미 준비된 프로젝트 소유 Blender 파생형을 재사용하고, 벌목·낙하·망치질은 기존 Unity 조립 가능성을 먼저 확인한다. 이 등록은 제작 승인이나 E5가 아니다.
 
 ## 후보 풀 조회 항목
 
@@ -39,6 +59,7 @@
 | 기술 준비 | Presenter·Adapter·Catalog·Animator 등 기존 재사용 경로와 누락 |
 | 승격 조건 | 실제 Prefab/fallback, Renderer·Collider·Bounds, 통행·가시성, 입력·재조회, Save/Replay, Game View |
 | 실패 처리 | `Conditional` 또는 `Blocked`, 원인, 담당, 가장 이른 재개 E |
+| 변화 표현 | 시작·진행·결과·중단/회복의 판독 범위, 최소 표현 방식, 동일 객체 연속성 |
 
 ## 현재 첫 E5 실행 묶음과의 관계
 

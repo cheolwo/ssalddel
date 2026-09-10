@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "simulation-world-h1-placement-rule.v1",
+  "ruleStableId": "placement-rule:farm:cultivation-plot-seed-center.v1",
+  "revision": 1,
+  "title": "경작 구획 H1 중앙 파종 배치 규칙",
+  "planningRef": "docs/AI/Planning/표현/PLAN-PRESENTATION-H1-SYNTY-STATE-001/README.md",
+  "targetH1Ref": "h1-stock:farm-production",
+  "targetVariantCode": "cultivation-plot-2.5x2.5m",
+  "plotDimensionsMeters": {
+    "width": 2.5,
+    "length": 2.5
+  },
+  "coordinateSpaceCode": "NormalizedH1LocalSurface",
+  "primarySeedAnchor": {
+    "u": 0.5,
+    "v": 0.5,
+    "meaning": "첫 파종 대상은 경작 구획의 기하학적 중앙에서 시작한다."
+  },
+  "alignmentRules": {
+    "snapToNearestFurrowCenterline": true,
+    "multiSeedExpansionCode": "SymmetricFromCenterAlongFurrow",
+    "directEdgePlacementAllowed": false,
+    "outsidePlotPlacementAllowed": false,
+    "explicitSpecialCropOverrideRequired": true
+  },
+  "validation": {
+    "stateCode": "ApprovedPlanningRule_ImplementationNotBound",
+    "requiredAtPresentationEvidence": "E4",
+    "failureCodes": [
+      "SeedAnchorOutsidePlot",
+      "SeedNotAlignedToFurrowCenterline",
+      "SeedExpansionNotSymmetricFromCenter"
+    ]
+  },
+  "authorityBoundary": "배치 맵의 결정적 중앙 정렬 규칙이다. 작물 상태·성장·보상 권위를 만들지 않고 Unity 실제 입력·Prefab 배치·E5를 증명하지 않는다."
+}

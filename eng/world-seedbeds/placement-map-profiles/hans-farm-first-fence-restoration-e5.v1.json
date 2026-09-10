@@ -65,10 +65,10 @@
     "woodcuttingActualAnimationStage": "E6",
     "requiredAtE6": ["AnimationRole", "ActionCue", "AnimationClip", "RigAvatar", "ControllerInputTransition", "InterruptReturn", "RootMotionPolicy"]
   },
-  "validationStateCode": "ImplementedPendingCanonicalUnityCompile",
+  "validationStateCode": "ImplementedPendingCanonicalWorldValidation",
   "blockingReasons": [
-    "The SimulationPlayerLearningFocusService package-path gap is resolved, but Unity compilation is blocked by an unrelated untracked AreaSet authoring source error",
-    "PlayMode and GameView belong to E7 and were not requested"
+    "Unity compilation and 18 targeted EditMode tests passed; canonical World placement and contact are not yet verified",
+    "A short input and GameView review was handed off; this is not E7 certification"
   ],
   "presentationOnly": true,
   "isOperationalState": false

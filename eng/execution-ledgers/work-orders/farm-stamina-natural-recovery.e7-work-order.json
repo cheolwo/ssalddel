@@ -1,6 +1,6 @@
 {
   "schemaVersion": "simulation-e7-vertical-work-order.v2",
-  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r5",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
   "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
   "workOrderId": "E7-WO-FARM-STAMINA-NATURAL-RECOVERY",
   "title": "Farm 행동 체력 자연 회복 — D-319 독립 논리 작업",

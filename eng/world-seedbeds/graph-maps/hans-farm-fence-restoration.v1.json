@@ -6,8 +6,8 @@
   "planningGate": {
     "planId": "PLAN-STORY-FIRST-FARM-DISCOVERY-001",
     "documentRef": "docs/AI/한스농장-첫벌목과울타리수리-기획-2026-09-02.md",
-    "revision": "hans-farm-first-lumber-repair.r27",
-    "sha256": "ADC540046294B02E12FB2D329A8E75E3AD6FF5354DA1DCBD0247AFD47AAF6D2A"
+    "revision": "hans-farm-first-lumber-repair.r28",
+    "sha256": "9BBB26318D6B5EF4CA3920E926ACD9646023D9D1402CC5346EE081A588828DD8"
   },
   "playableLoopStableId": "playable-loop:nature-hans-farm-fence-restoration.v1",
   "level1": {

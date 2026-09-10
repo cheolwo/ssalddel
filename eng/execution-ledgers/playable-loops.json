@@ -58,6 +58,13 @@
   "designDocumentationPolicy": {
     "statusSnapshotAuthorityPath": "eng/execution-ledgers/playable-loops.json",
     "detailedDesignRoot": "docs/Architecture/PlayableLoops",
+    "independentPlanningRoot": "docs/AI/Planning",
+    "independentPlanningRequiredHeadings": [
+      "## 플레이어 약속",
+      "## 권위 상태와 명령",
+      "## 구현·검증 상한",
+      "## 승인 근거"
+    ],
     "topicDesignTemplateRef": "docs/ProjectOverview/templates/PlayableLoop주제기획서템플릿.md",
     "topicPlanningRequiredForRegisteredPlayableUnits": true,
     "registeredPlayableLoopKeepsDedicatedTopicGate": true,
@@ -2577,7 +2584,7 @@
           "statusCode": "Blocked",
           "evidencePackageRefs": [],
           "blockers": [
-            "학습 중점 서비스의 RuntimeCore 패키지 경로 결손은 해소했지만 Unity 전체 컴파일은 별도 미추적 AreaSet authoring 파일 오류로 중단됐다."
+            "Unity 컴파일과 Presenter·Core Runtime Adapter EditMode 18개는 통과했다. canonical World 배치·접지·입력·판독은 아직 미검증이며 Presentation E4를 유지한다."
           ]
         }
       },
@@ -2601,7 +2608,7 @@
         "Presentation E5의 최종 Unity EditMode 실행 검증이 외부 컴파일 결손으로 차단됐다.",
         "Play Mode·Game View E7은 이번 범위가 아니다."
       ],
-      "nextAction": "별도 AreaSet authoring 파일의 컴파일 오류가 해당 소유 경계에서 해소되면 한스 농장 울타리 Presenter EditMode를 재실행해 Presentation E5만 닫고, 애니메이션은 E6에서 다룬다."
+      "nextAction": "월드·공간·배치 담당에게 요청한 HansFenceE5 독립 슬롯의 실제 배치·짧은 입력 체험 증거를 검토한 뒤 Presentation E5를 재판정한다. 애니메이션은 E6로 유지하며 체험 검토를 E7 인증으로 확대하지 않는다."
     },
     {
       "priority": 90,

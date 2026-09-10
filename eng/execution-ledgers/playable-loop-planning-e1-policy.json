@@ -1,7 +1,7 @@
 {
   "schemaVersion": "ssalddel-playable-loop-planning-e1-policy.v1",
-  "revision": "ssalddel-playable-loop-planning-e1-policy.r1",
-  "expectedPlanCount": 47,
+  "revision": "ssalddel-playable-loop-planning-e1-policy.r2",
+  "expectedPlanCount": 59,
   "planningIndexRef": "docs/AI/PLANNING.md",
   "playableLoopCatalogRef": "eng/execution-ledgers/playable-loops.json",
   "atomicModuleLedgerRef": "eng/execution-ledgers/playable-loop-planning-atomic-e1-modules.json",
@@ -9,7 +9,8 @@
   "crossCuttingPlanIds": [
     "PLAN-GAME-COMMON-PURPOSE-001",
     "PLAN-PLANNING-PLAYER-CONTEXT-001",
-    "PLAN-PLANNING-WI-GWAE-001"
+    "PLAN-PLANNING-WI-GWAE-001",
+    "PLAN-STORY-HEXAGRAM-SEQUENCE-001"
   ],
   "noDirectE1ImpactPlanIds": [
     "PLAN-PLANNING-MIGRATION-001",
@@ -19,7 +20,8 @@
     "PLAN-DATA-GAMEOBJECT-ASSET-001",
     "PLAN-DATA-REALITY-MYSQL-001",
     "PLAN-PRESENTATION-SYNTY-SURVEY-001",
-    "PLAN-PRESENTATION-E4-POOL-001"
+    "PLAN-PRESENTATION-E4-POOL-001",
+    "PLAN-PRESENTATION-H1-SYNTY-STATE-001"
   ],
   "classificationMeaning": {
     "ContractOwner": "기획 문서가 한 PlayableUnit의 planningGate.designDocumentRef와 정확히 일치해 E1 계약을 직접 소유한다.",

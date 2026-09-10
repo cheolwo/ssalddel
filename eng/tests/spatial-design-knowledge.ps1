@@ -17,8 +17,8 @@ $write = & pwsh -NoProfile -File $manager -Mode Write
 $afterHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $catalogPath).Hash
 $afterTicks = (Get-Item -LiteralPath $catalogPath).LastWriteTimeUtc.Ticks
 
-if ($check -notmatch "SpatialDesignKnowledgeValid:H1=53;H2=38;H3=20") { throw "SpatialDesignKnowledgeCheckFailed" }
-if ($write -notmatch "SpatialDesignKnowledgeGenerated:H1=53;H2=38;H3=20") { throw "SpatialDesignKnowledgeWriteFailed" }
+if ($check -notmatch "SpatialDesignKnowledgeValid:H1=54;H2=40;H3=21") { throw "SpatialDesignKnowledgeCheckFailed" }
+if ($write -notmatch "SpatialDesignKnowledgeGenerated:H1=54;H2=40;H3=21") { throw "SpatialDesignKnowledgeWriteFailed" }
 if ($beforeHash -ne $afterHash) { throw "SpatialDesignKnowledgeCatalogHashChangedWithoutInputChange" }
 if ($beforeTicks -ne $afterTicks) { throw "SpatialDesignKnowledgeCatalogWasRewrittenWithoutInputChange" }
 
@@ -28,8 +28,8 @@ $checkV3 = & pwsh -NoProfile -File $managerV3 -Mode Check
 $writeV3 = & pwsh -NoProfile -File $managerV3 -Mode Write
 $afterV3Hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $catalogV3Path).Hash
 $afterV3Ticks = (Get-Item -LiteralPath $catalogV3Path).LastWriteTimeUtc.Ticks
-if ($checkV3 -notmatch "SpatialDesignKnowledgeV3Valid:Grammar=52/156;H1=85\(53\+32\);H2=38;H3=20;H4=6") { throw "SpatialDesignKnowledgeV3CheckFailed" }
-if ($writeV3 -notmatch "SpatialDesignKnowledgeV3Generated:Grammar=52/156;H1=85\(53\+32\);H2=38;H3=20;H4=6") { throw "SpatialDesignKnowledgeV3WriteFailed" }
+if ($checkV3 -notmatch "SpatialDesignKnowledgeV3Valid:Grammar=52/156;H1=86\(54\+32\);H2=40;H3=21;H4=6") { throw "SpatialDesignKnowledgeV3CheckFailed" }
+if ($writeV3 -notmatch "SpatialDesignKnowledgeV3Generated:Grammar=52/156;H1=86\(54\+32\);H2=40;H3=21;H4=6") { throw "SpatialDesignKnowledgeV3WriteFailed" }
 if ($beforeV3Hash -ne $afterV3Hash) { throw "SpatialDesignKnowledgeV3CatalogHashChangedWithoutInputChange" }
 if ($beforeV3Ticks -ne $afterV3Ticks) { throw "SpatialDesignKnowledgeV3CatalogWasRewrittenWithoutInputChange" }
 
@@ -79,26 +79,43 @@ if (@($forestEdgeFarm.requiredH1Refs) -contains "h1-stock:farm-residential-home"
 }
 $placementProfilePath = Join-Path $repositoryRoot "eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json"
 $placementProfile = Get-Content -LiteralPath $placementProfilePath -Raw -Encoding UTF8 | ConvertFrom-Json
+$placementGraphPath = Join-Path $repositoryRoot ([string] $placementProfile.graphMapRef)
+if (-not (Test-Path -LiteralPath $placementGraphPath)) { throw "SpatialDesignKnowledgeHansGraphMissing" }
+$placementGraph = Get-Content -LiteralPath $placementGraphPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$placementGraphNodeIds = @($placementGraph.nodes.nodeStableId)
 $homeInstances = @($placementProfile.requiredPlacementInstances | Where-Object placementInstanceId -eq "placement-instance:forest-edge-farm:hans-residential-home")
 if ($homeInstances.Count -ne 1 -or
     [string] $homeInstances[0].hDefinitionRef -ne "h1-stock:farm-residential-home" -or
-    $null -ne $homeInstances[0].graphNodeRef -or
-    [string] $homeInstances[0].intendedGraphNodeRef -ne "gm-node:hans-house" -or
-    [string] $homeInstances[0].graphBindingStateCode -ne "PendingStableNode" -or
-    [int] $placementProfile.revision -ne 3 -or
+    [string] $homeInstances[0].graphNodeRef -ne "gm-node:hex03-home" -or
+    [string] $homeInstances[0].intendedGraphNodeRef -ne "gm-node:hex03-home" -or
+    [string] $homeInstances[0].graphBindingStateCode -ne "ExistingNode" -or
+    $placementGraphNodeIds -notcontains [string] $homeInstances[0].graphNodeRef -or
+    [int] $placementProfile.revision -ne 5 -or
     [bool] $placementProfile.globalH2Requirement -or
     [string] $placementProfile.artifactGwaeCode -ne "TAE" -or
     $null -ne $placementProfile.relationGwaeCode -or
     [string] $placementProfile.dataSourceKindCode -ne "ManualPlanning" -or
-    [string] $placementProfile.planningRevision -ne "forest-edge-farm-placement-map-planning.r24" -or
-    [string] $placementProfile.planningSha256 -ne "71DC5B47F34F23E5FC5119650C18EA8C699D92729EBF61569F13C18A89C27113" -or
+    [string] $placementProfile.planningRevision -ne "forest-edge-farm-placement-map-planning.r25" -or
+    [string] $placementProfile.planningSha256 -ne "4DE86716F33D5512EC5BFDB1710640DB86AF66A80A4AD9D82B9FCD3A724C5373" -or
     [string] $placementProfile.primarySyntyPackCode -ne "Farm" -or
     @($placementProfile.requiredPlacementInstances).Count -ne 5 -or
     [string] $placementProfile.traceabilityStateCode -ne "BalancedDraft" -or
-    [string] $placementProfile.graphMapRef -ne "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json" -or
-    $null -ne $placementProfile.placementMapRef -or
+    [string] $placementProfile.graphMapRef -ne "eng/world-seedbeds/graph-maps/hans-farm-hex03-campaign.v1.json" -or
+    [string] $placementProfile.placementMapRef -ne "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/placement-map.r5.r3.json" -or
     [string] $placementProfile.validationResultCode -ne "Blocked" -or
-    $null -ne $placementProfile.frozenPlacementMapRef) {
+    [string] $placementProfile.frozenPlacementMapRef -ne "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/validated-placement-plan.r3.json" -or
+    [string] $placementProfile.candidateBinding.stateCode -ne "UnapprovedCandidate" -or
+    [string] $placementProfile.candidateBinding.visualApprovalStateCode -ne "Pending" -or
+    [bool] $placementProfile.candidateBinding.unitySceneValidated -or
+    [string] $placementProfile.targetH4RegistrationStateCode -ne "E4PreparationOnly" -or
+    [int] $placementProfile.lineage.previousProfileRevision -ne 4 -or
+    [string] $placementProfile.lineage.previousPlanningRevision -ne "forest-edge-farm-placement-map-planning.r24" -or
+    [string] $placementGraph.schemaVersion -ne "simulation-world-graph-map.v1" -or
+    [string] $placementGraph.revision -ne "hans-farm-hex03-campaign.r2" -or
+    [string] $placementGraph.placementMapBinding.stateCode -ne "UnapprovedCandidate" -or
+    [string] $placementGraph.placementMapBinding.visualApprovalStateCode -ne "Pending" -or
+    [bool] $placementGraph.placementMapBinding.unitySceneValidated -or
+    [string] $placementGraph.lineage.previousRevision -ne "hans-farm-hex03-campaign.r1") {
     throw "SpatialDesignKnowledgeHansResidentialHomeInstanceInvalid"
 }
 $natureH1Refs = @(
@@ -174,4 +191,4 @@ foreach ($relation in @($areaSetPriority.interAreaSetRelations)) {
 }
 if (-not [bool] $areaSetPriority.authorityBoundary.h4CandidateIsNotActualAreaSet) { throw "SpatialDesignKnowledgeAreaSetAuthorityBoundaryMissing" }
 
-Write-Output "SpatialDesignKnowledgeTestsPassed:Grammar=52/156;H1=85(53+32);H2=38;H3=20;H4=6;PriorityH2=6;AreaSets=4;HansHomeProfile=Blocked"
+Write-Output "SpatialDesignKnowledgeTestsPassed:Grammar=52/156;H1=86(54+32);H2=40;H3=21;H4=6;PriorityH2=6;AreaSets=4;HansHomeProfile=Blocked"

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "simulation-world-h4-e4-preparation-profile.v1",
+  "profileStableId": "h4-e4-profile:forest-edge-living-farm-defense-region",
+  "revision": 1,
+  "targetH4BlueprintStableId": "h4-blueprint:forest-edge-living-farm-defense-region",
+  "title": "숲 경계 생활농장 방어 지역 E4 준비",
+  "registrationStateCode": "CatalogRegistrationPending",
+  "instanceProfiles": [
+    "placement-map-profile:forest-edge-farm:hans-living-farm"
+  ],
+  "requiredH3Roles": [
+    {
+      "roleCode": "LivingProduction",
+      "h3DefinitionRef": "h3-candidate:highland-farm"
+    },
+    {
+      "roleCode": "AccessDefense",
+      "h3DefinitionRef": "h3-candidate:nature-home-encounter-defense"
+    },
+    {
+      "roleCode": "DamageRecoveryReturn",
+      "h3DefinitionRef": "h3-candidate:nature-threat-recovery"
+    }
+  ],
+  "requiredGraphRouteCodes": [
+    "EnemyPrimaryIngress",
+    "EnemyConditionalBreach",
+    "PlayerHansDefenseTraversal",
+    "SupplyRepairHandoff",
+    "RetreatRecoveryReturn"
+  ],
+  "conditionalRouteRules": [
+    {
+      "routeCode": "EnemyConditionalBreach",
+      "closedWhenCode": "FenceDamageStateIsNotBreached",
+      "openWhenCode": "FenceDamageStateIsBreached",
+      "fallbackRouteCode": "EnemyPrimaryIngress"
+    }
+  ],
+  "blenderReviewContract": {
+    "sourceDraftStableId": "area-set-placement-draft:forest-edge-farm:hans-living-farm.r3",
+    "masterDraftStableId": "area-set-placement-draft:forest-edge-farm:hans-living-farm-defense.r4",
+    "collectionCodes": ["H4", "H3_LivingProduction", "H3_AccessDefense", "H3_DamageRecoveryReturn"],
+    "viewLayerCodes": ["Normal", "Defense", "BreachRecovery"],
+    "unapprovedH1RepresentationCode": "TranslucentPlaceholder",
+    "requiredReviewPairCodes": ["IndividualH1", "H4FocusedOverview"],
+    "allowedTransformCodes": ["HorizontalPosition", "Yaw", "UniformScale"],
+    "forbiddenAuthorityClaims": ["CanonicalWorldPlacement", "RuntimeConditionalRoute", "UnityE5"]
+  },
+  "e4Checks": [
+    "H3RoleCoverage",
+    "GraphReferenceExistence",
+    "ConditionalRouteFallback",
+    "PlaceholderReadability",
+    "SyntySourceFingerprintPreserved",
+    "BlenderNoOpRoundTrip",
+    "UnityGroundingRecalculationRequired"
+  ],
+  "presentationOnly": true,
+  "isOperationalState": false,
+  "authorityBoundary": "재사용 H4 후보와 한스 AreaSet 인스턴스의 E4 저작·검토 계약이다. 공식 H4 대장 등록, canonical SimulationWorldShell 배치, 실제 조건부 경로 실행, Renderer·Collider·입력·결과 결속과 E5를 만들지 않는다."
+}

@@ -1,15 +1,15 @@
 {
-  "schemaVersion": "playable-loop-presentation-e4-candidate-pool.v1",
-  "revision": "playable-loop-presentation-e4-candidate-pool.r1",
+  "schemaVersion": "playable-loop-presentation-e4-candidate-pool.v2",
+  "revision": "playable-loop-presentation-e4-candidate-pool.r2",
   "planningBaseline": {
     "planId": "PLAN-PRESENTATION-E4-POOL-001",
     "path": "docs/AI/Planning/표현/PLAN-PRESENTATION-E4-POOL-001/README.md",
-    "sha256": "82D796C6AB4F49E4821C6B99C28E076DEA3F4CECF9518D804BD90A6BE2315A56"
+    "sha256": "D006A85BDF5BEED4F2F6C6B24CF1F9B1C9D3E5805FFF7A31417C5560A7B5F519"
   },
   "planningIndex": {
     "path": "docs/AI/PLANNING.md",
-    "sha256": "69F0A4D18028239C1780F6975FD5D7A8F40268276A8AFC856EE4BDF5E9DDB6CC",
-    "expectedPlanCount": 47
+    "sha256": "E2969BF6504C940ABF60525D22DCF52D975ECCC39E9C76EE28969CD5C654EB4E",
+    "expectedPlanCount": 59
   },
   "sourceCatalogs": {
     "playableLoops": "eng/execution-ledgers/playable-loops.json",
@@ -19,7 +19,7 @@
     "hCatalog": "eng/world-seedbeds/synty-bottom-up-inventory/catalog.v3.json"
   },
   "classificationPolicy": {
-    "frozenPrimaryStatusPrefixes": ["Approved", "Confirmed"],
+    "frozenPrimaryStatusPrefixes": ["Approved", "Confirmed", "SupportingSlice"],
     "notApplicablePlanIds": [
       "PLAN-GAME-COMMON-PURPOSE-001",
       "PLAN-PLANNING-PLAYER-CONTEXT-001",
@@ -33,19 +33,167 @@
       "PLAN-DATA-GAMEOBJECT-ASSET-001",
       "PLAN-DATA-REALITY-MYSQL-001",
       "PLAN-PRESENTATION-SYNTY-SURVEY-001",
-      "PLAN-PRESENTATION-E4-POOL-001"
+      "PLAN-PRESENTATION-E4-POOL-001",
+      "PLAN-PRESENTATION-H1-SYNTY-STATE-001"
     ],
     "notApplicableReason": "플레이 판독 대상 자체가 아니라 공통 목적·관리·검색·자료·검증 절차이므로 독립 E4 후보를 만들지 않는다. 소비 기획의 근거로만 재사용한다."
   },
   "normalization": {
     "workOrderDirectory": "eng/execution-ledgers/work-orders",
-    "expectedExistingPresentationE4PreparationCount": 12,
+    "expectedExistingPresentationE4PreparationCount": 13,
     "expectedExistingSyntyLoopModuleCount": 4,
     "requiredPreparationIdentity": "workOrderRef+playableLoop+worldInteraction+visualKey",
     "notApplicableIdentity": "workOrderRef+scopeReason",
-    "doesNotPromoteEvidence": true
+    "doesNotPromoteEvidence": true,
+    "expectedTransitionPreparationCount": 3
+  },
+  "stateTransitionVisualPolicy": {
+    "purpose": "WI의 권위 상태 변화가 시작·진행·결과·중단 또는 회복에서 같은 대상으로 자연스럽게 판독될 표현 수단을 E4에서 준비한다.",
+    "representationStrategyCodes": [
+      "ExistingPrefab",
+      "UnityComposition",
+      "MaterialTransition",
+      "AnimationTransition",
+      "BlenderOwnedVariant",
+      "ExplicitFallback"
+    ],
+    "coverageStatusCodes": ["Prepared", "Conditional", "Missing", "NotApplicable"],
+    "blenderStatusCodes": [
+      "NotRequired",
+      "PlanningOnly",
+      "ReadyForLocalEdit",
+      "Edited",
+      "BlenderValidatedCopy",
+      "UnityImportCandidate",
+      "BlockedByAssetSelection",
+      "BlockedByApprovalOrContract",
+      "ConditionalOnUnityAssemblyFailure"
+    ],
+    "fiveElementMetadataPolicy": "OptionalDiagnosticMetadataOnly",
+    "fiveElementNotice": "오행은 변화 관계의 성격과 결손을 읽는 보조 메타데이터다. 오행별 독립 모델을 요구하거나 자산 존재만으로 상태 변화·Evidence를 성립시키지 않는다.",
+    "readyRule": "적용 상태의 전후 판독, 필요한 진행·중단·회복, 동결 후보/fallback, H·배치·Anchor가 모두 준비된 경우에만 E5 착수 후보가 된다."
   },
   "graphMapRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
+  "stateTransitionVisualPreparations": [
+    {
+      "transitionStableId": "presentation-transition:nature-woodcutting-contact.v1",
+      "planId": "PLAN-STORY-FIRST-FARM-DISCOVERY-001",
+      "worldInteractionId": "WI-NATURE-06",
+      "subjectStableId": "role-object:nature-woodcutting-player",
+      "subjectKindCode": "Actor",
+      "startStateCodes": ["TreeStanding", "PlayerIdle", "WoodcuttingCapabilityEquipped"],
+      "activeStateCodes": ["HarvestWorkScheduled", "AxeContactLoop"],
+      "resultStateCodes": ["TreeFelled", "TimberCreated"],
+      "recoveryStateCodes": ["PlayerIdle", "WorkCancelled"],
+      "playerReadableMoment": "도끼를 든 준비 자세에서 손·도끼·나무 접촉이 이어지고 완료 또는 취소 뒤 안전하게 Idle로 돌아오는 순간",
+      "visualKeys": ["animation:nature:axe-swing"],
+      "interactionAnchorIntent": "기존 나무 접촉점과 MainHand 도끼 Socket을 보존한다.",
+      "placementMapRef": null,
+      "representationCandidates": [
+        {
+          "strategyCode": "AnimationTransition",
+          "coverageStatusCode": "Conditional",
+          "candidateRef": "docs/Architecture/PlayableLoops/Nature벌목동작-애니메이션적용연구.md",
+          "blenderStatusCode": "ConditionalOnUnityAssemblyFailure",
+          "fingerprint": "PendingCurrentActorAvatarAxeClipRebind"
+        },
+        {
+          "strategyCode": "ExplicitFallback",
+          "coverageStatusCode": "Prepared",
+          "candidateRef": "Assets/Ssalddel/Presentation/World/Nature감각표현Presenter.cs",
+          "blenderStatusCode": "NotRequired",
+          "fingerprint": "ExistingProceduralFallback"
+        }
+      ],
+      "continuityRequirements": ["SameActorIdentity", "MainHandGrip", "AxeTreeContact", "FootLock", "SafeInterrupt", "ReturnIdle"],
+      "fiveElementMetadata": {"applicabilityCode": "Applicable", "primaryElementCode": "Metal", "purpose": "벌목의 절단 작용을 탐색할 때만 사용하는 보조 분류"},
+      "readinessCode": "Blocked",
+      "earliestReopenStage": "E4",
+      "missing": ["CurrentActorAvatarAxeClipFingerprint", "UnityRetargetOrIkSuitability", "ContactAndReturnValidation"],
+      "nextOwner": "애니메이션: 기존 Clip·IK 적합성 조사; 개발: 현재 Actor/상태 연결; 공간: 실제 접촉 화면"
+    },
+    {
+      "transitionStableId": "presentation-transition:nature-tree-fall.v1",
+      "planId": "PLAN-STORY-FIRST-FARM-DISCOVERY-001",
+      "worldInteractionId": "WI-NATURE-06",
+      "subjectStableId": "role-object:nature-standing-tree",
+      "subjectKindCode": "WorldObject",
+      "startStateCodes": ["TreeStanding"],
+      "activeStateCodes": ["FinalAxeContact", "TreeFalling"],
+      "resultStateCodes": ["TreeFelled", "TimberCreated"],
+      "recoveryStateCodes": ["NotApplicable:completed world-object transition"],
+      "playerReadableMoment": "마지막 도끼 접촉 뒤 같은 나무가 밑동 기준으로 넘어지고 결과 통나무 상태로 이어지는 순간",
+      "visualKeys": ["presentation:nature:tree-fall"],
+      "interactionAnchorIntent": "기존 ResourceNode와 밑동 pivot 휴리스틱을 보존하고 새 접촉점을 추정하지 않는다.",
+      "placementMapRef": null,
+      "representationCandidates": [
+        {
+          "strategyCode": "UnityComposition",
+          "coverageStatusCode": "Conditional",
+          "candidateRef": "docs/Architecture/PlayableLoops/Nature벌목타격음-나무넘어짐-적용연구.md",
+          "blenderStatusCode": "NotRequired",
+          "fingerprint": "AcceptedA1A2aNeedsActualPinePreflight"
+        },
+        {
+          "strategyCode": "BlenderOwnedVariant",
+          "coverageStatusCode": "Missing",
+          "candidateRef": "ArtSource/Blender/workflows/planned-variants.r2.json#nature-tree-fall-state-transition",
+          "blenderStatusCode": "BlockedByApprovalOrContract",
+          "fingerprint": "PendingTreePivotCutSurfaceAndAnimationApproval"
+        }
+      ],
+      "continuityRequirements": ["SameTreeIdentity", "InitialWorldTransform", "StumpPivot", "NoGroundPenetration", "SingleCompletionEffect", "TimberResultContinuity"],
+      "fiveElementMetadata": {"applicabilityCode": "Applicable", "primaryElementCode": "Metal", "purpose": "절단 완료 관계를 탐색할 때만 사용하는 보조 분류"},
+      "readinessCode": "Blocked",
+      "earliestReopenStage": "E4",
+      "missing": ["ActualPineReadOnlyPreflight", "ActualMarkerTransformAndSurfaceEvidence", "BlenderProductionApprovalIfUnityCompositionFails"],
+      "nextOwner": "애니메이션: Unity 오브젝트 전환과 Blender 필요성 비교; 개발: 완료 상태 단일 소비; 공간: 낙하·지면 판독"
+    },
+    {
+      "transitionStableId": "presentation-transition:farm-residential-home-repair.v1",
+      "planId": "PLAN-STORY-FIRST-FARM-DISCOVERY-001",
+      "worldInteractionId": "WI-WORLD-04",
+      "subjectStableId": "h1-stock:farm-residential-home",
+      "subjectKindCode": "Facility",
+      "startStateCodes": ["Damaged"],
+      "activeStateCodes": ["RepairWorkScheduled", "HammerContactLoop"],
+      "resultStateCodes": ["Repaired"],
+      "recoveryStateCodes": ["SafePause", "ReturnIdle"],
+      "playerReadableMoment": "같은 생활주택이 손상 상태에서 수리 작업을 거쳐 운영 가능한 복구 상태로 바뀌는 순간",
+      "visualKeys": ["FarmResidentialHome.Damaged.ScatteredRoofHolesAndDust", "FarmResidentialHome.Repaired"],
+      "interactionAnchorIntent": "주택 위치·출입구·실루엣을 유지하고 RepairWorkArea 안에서 망치 접촉을 판독한다.",
+      "placementMapRef": "eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json",
+      "representationCandidates": [
+        {
+          "strategyCode": "BlenderOwnedVariant",
+          "coverageStatusCode": "Prepared",
+          "candidateRef": "ArtSource/Blender/workflows/farm-residential-home-damaged-variant.r1.json",
+          "blenderStatusCode": "BlenderValidatedCopy",
+          "fingerprint": "farm-residential-home-damaged-variant.r1"
+        },
+        {
+          "strategyCode": "ExistingPrefab",
+          "coverageStatusCode": "Conditional",
+          "candidateRef": "Assets/Synty/PolygonFarm/Models/SM_Bld_Farmhouse_02.fbx",
+          "blenderStatusCode": "NotRequired",
+          "fingerprint": "ea1ba4b74f4bce84d977ef4f2cdaceb3"
+        },
+        {
+          "strategyCode": "AnimationTransition",
+          "coverageStatusCode": "Missing",
+          "candidateRef": "ArtSource/Blender/workflows/planned-variants.r2.json#farm-residential-home-repair-hammer-motion",
+          "blenderStatusCode": "PlanningOnly",
+          "fingerprint": "PendingActorHammerClipAndRepairContact"
+        }
+      ],
+      "continuityRequirements": ["SameFacilityIdentity", "SamePlacementTransform", "EntrancePreserved", "ReadableDamageDifference", "HammerRepairContact", "SafeInterrupt", "ToolReturn"],
+      "fiveElementMetadata": {"applicabilityCode": "NotRequired", "primaryElementCode": null, "purpose": "시설 수리의 자연스러운 전후 판독이 우선이며 오행 모델을 강제하지 않는다."},
+      "readinessCode": "Blocked",
+      "earliestReopenStage": "E4",
+      "missing": ["RepairedCandidateFingerprint", "RepairActorAndHammerClip", "ExactStateSwapBoundary", "UnityImportAndPlacementEvidence"],
+      "nextOwner": "애니메이션: 망치질 후보 조사; 개발: Damaged/Repaired 상태 교체; 공간: 동일 위치·통행·Game View"
+    }
+  ],
   "areaPreparations": [
     {
       "areaCode": "Nature",

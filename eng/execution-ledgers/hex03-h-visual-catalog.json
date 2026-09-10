@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "mirror-hex03-h-visual-catalog.v1",
+  "revision": "hex03-h-visual-catalog.r2",
+  "campaignPlanId": "PLAN-STORY-HEX03-CAMPAIGN-001",
+  "evidenceBoundary": "PresentationE4Only",
+  "principles": {
+    "oneEntryPerStableHId": true,
+    "h1ReviewedBeforeH2": true,
+    "h2ReviewedBeforeH3": true,
+    "onlyH1VisualsCurrentlyAccepted": true,
+    "higherLevelVisualsRequireNewReview": true,
+    "repoPngIsPortableDocumentationNotRuntimeAsset": true,
+    "blenderOrImageDoesNotProveUnityE5": true
+  },
+  "items": [
+    {
+      "hStableId": "h1-stock:farm-residential-home",
+      "levelCode": "H1",
+      "title": "농장 생활 주택 손상 상태",
+      "statusCode": "BlenderValidatedCopy",
+      "repoImageRef": "docs/assets/planning/hexagrams/hex03/h1-farm-residential-home-damaged.png",
+      "repoImageSha256": "903C162CD2A3B08CC45C4263DFAE6355A0D7DAF32D0BA546809C4168BB2E4335",
+      "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/source/farm-residential-home-damaged-variant/farm-residential-home-damaged-variant.blend",
+      "sourceBlendSha256": "A1A164613564944586F0FD5FC3CF4667AE9E955275CA7F20D1CF6A17AC54C8E7",
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-001", "PLAN-STORY-HEX03-LINE-004", "PLAN-STORY-HEX03-LINE-005", "PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["손상 상태 후보이며 완전 수리 상태는 동일 계보의 후속 표현으로 검증한다."]
+    },
+    {
+      "hStableId": "h1-stock:farm-production",
+      "levelCode": "H1",
+      "title": "2.5m x 2.5m 감자 경작 구획",
+      "statusCode": "E4VisualCandidate",
+      "repoImageRef": "docs/assets/planning/hexagrams/hex03/h1-farm-production-mature.png",
+      "repoImageSha256": "F7518AAACAE267A67F2795C67546745EA29F327FE4A43C40D4B3F828AE3510F0",
+      "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/H1-시각자료/농장/경작구획-2.5x2.5m/경작구획-H1-2.5x2.5m.blend",
+      "sourceBlendSha256": "EB14843489DA0947A12EF18BB493F275BA63E43FED3072F3EB59D472740023EA",
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-004", "PLAN-STORY-HEX03-LINE-005", "PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["빈 고랑·발아·성숙·부분 수확 상태는 로컬 Blender 계보에 별도 보존한다."]
+    },
+    {
+      "hStableId": "h1-stock:farm-fence-edge",
+      "levelCode": "H1",
+      "title": "농장 울타리 방어 병목",
+      "statusCode": "E4VisualCandidate",
+      "repoImageRef": "docs/assets/planning/hexagrams/hex03/h1-farm-fence-edge.png",
+      "repoImageSha256": "C498E326D4FA4A89E7131E5F273FDBC8425EF0004B86B0A6E2CAC4B7DC8B280B",
+      "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/H1-시각자료/농장/울타리-방어-병목지점/울타리-방어-병목지점-H1-r2.blend",
+      "sourceBlendSha256": "26B8F906A2FC5836140398990678D00F00ED9FFCFB33CF0771434C462946DCF6",
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-001", "PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["중앙 통과부를 포함한 시각 후보이며 실제 통행·Collider는 미검증이다."]
+    },
+    {
+      "hStableId": "h1-stock:nature-incident-trace",
+      "levelCode": "H1",
+      "title": "자연 사건 흔적",
+      "statusCode": "DefinitionOnly",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-003", "PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["기존 H 정의를 재사용하며 수뢰둔 전용 Blender 파생형은 요구하지 않는다."]
+    },
+    {
+      "hStableId": "h1-stock:nature-emergency-retreat",
+      "levelCode": "H1",
+      "title": "긴급 후퇴 지점",
+      "statusCode": "DefinitionOnly",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-003", "PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["기존 H 정의를 재사용하며 실제 후퇴 가능성은 Runtime 경로 검증 대상이다."]
+    },
+    {
+      "hStableId": "h2-candidate:forest-edge-living-farm",
+      "levelCode": "H2",
+      "title": "숲 경계 생활 농장 조립 문맥",
+      "statusCode": "VisualUndecided",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "historyRefs": {
+        "repoImageRef": "docs/assets/planning/hexagrams/hex03/h2-forest-edge-living-farm-context.png",
+        "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r4/forest-edge-living-farm-defense-h4-r4.blend"
+      },
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-001", "PLAN-STORY-HEX03-LINE-002", "PLAN-STORY-HEX03-LINE-004", "PLAN-STORY-HEX03-LINE-005"],
+      "notes": ["기존 조립 문맥 이미지는 품질 기준을 충족하지 못해 이력으로만 보존한다.", "H2 시각 구성은 새 시안 검토 전까지 미정이다."]
+    },
+    {
+      "hStableId": "h2-candidate:nature-threat-response",
+      "levelCode": "H2",
+      "title": "자연 위협 대응",
+      "statusCode": "VisualUndecided",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-003"],
+      "notes": ["의미 정의는 유지하지만 수뢰둔 캠페인용 H2 시각 구성은 미정이다."]
+    },
+    {
+      "hStableId": "h2-candidate:farm-boundary-defense-recovery",
+      "levelCode": "H2",
+      "title": "농장 경계 방어·회복 조립 문맥",
+      "statusCode": "VisualUndecided",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "historyRefs": {
+        "repoImageRef": "docs/assets/planning/hexagrams/hex03/h2-farm-boundary-defense-context.png",
+        "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r4/forest-edge-living-farm-defense-h4-r4.blend"
+      },
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["기존 방어 문맥 이미지는 품질 기준을 충족하지 못해 이력으로만 보존한다.", "H2 시각 구성은 새 시안 검토 전까지 미정이다."]
+    },
+    {
+      "hStableId": "h3-candidate:forest-edge-living-farm-campaign",
+      "levelCode": "H3",
+      "title": "수뢰둔 생활 농장 캠페인 경관 문맥",
+      "statusCode": "VisualUndecided",
+      "repoImageRef": null,
+      "repoImageSha256": null,
+      "sourceBlendRef": null,
+      "sourceBlendSha256": null,
+      "historyRefs": {
+        "repoImageRef": "docs/assets/planning/hexagrams/hex03/h3-hex03-campaign-context.png",
+        "sourceBlendRef": "C:/Users/user/ssalddel/ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r4/forest-edge-living-farm-defense-h4-r4.blend"
+      },
+      "linePlanIds": ["PLAN-STORY-HEX03-LINE-006"],
+      "notes": ["기존 캠페인 문맥 이미지는 품질 기준을 충족하지 못해 이력으로만 보존한다.", "H3 시각 구성은 H2 확정 뒤 다시 검토한다."]
+    }
+  ]
+}

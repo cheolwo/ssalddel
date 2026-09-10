@@ -160,6 +160,19 @@ Clip 수는 실제 Unity `AssetDatabase`에서 읽은 원천 재고다. Clip이 
 
 ## WI·H에서 자산을 채택하는 절차
 
+### H1 전수 배당과 상태 변화 선행 조사
+
+현행 H1 전체에 대한 자산 조사는 `eng/execution-ledgers/h1-synty-representation-assignments.json`이 소유한다.
+이 대장은 H 정의를 바꾸지 않고 H1별 역할 슬롯에 정확 Prefab 경로·GUID·파일/meta hash와
+주 후보·대안을 기록한다. `manage-h1-synty-representation-assignments.ps1`은 기획→H 직접 참조,
+WI를 통한 간접 참조, H2의 필수 H1 결손과 상태 변화 질문을 함께 검사한다.
+
+- `PendingVisualReview`는 파일 신원까지 확인된 검색 후보이지 자산 선택 승인이나 E5가 아니다.
+- H2는 구성 H1의 후보 충족을 검사하되 Prefab을 직접 배당하지 않는다.
+- 기존 상태 계약이 없는 H1의 전·중·후는 `PendingStateContract`이며 Simulation 상태를 자동 생성하지 않는다.
+- 시각 검토를 통과한 `ExactCandidate`만 기존 게임 객체 역할별 시각 구성에 `Draft / NotApplied`로 반입한다.
+- 기존 수단으로 상태 변화가 판독되지 않을 때만 Blender 프로젝트 소유 파생형을 연다.
+
 환경·소품 WI는 다음 순서를 따른다.
 
 ```text
@@ -198,6 +211,17 @@ Presentation E4 준비 기록에는 최소한 다음을 남긴다.
 - `Ready / Conditional / Blocked`와 열린 결함
 
 공간 배치가 필요한 경우 이 기록은 [Graph Map 기획 인계 순환 체계의 배치 맵 Synty 표현 조사 태그](GraphMap기획인계순환체계.md#배치-맵의-synty-표현-조사-태그)와 같은 후보를 참조한다. Synty 대장의 기능 분류를 배치 맵에 복제하지 않고 안정 코드·자산 계열·Prefab GUID·fingerprint만 연결한다. Graph Map은 필요한 시각 역할을, 배치 맵은 후보와 상대 배치 적합성을, Presentation E4 대장은 WI 판독 순간과 후보 동결을 각각 소유한다.
+
+### 기획 조건과 기존 후보를 보존하며 결속한다
+
+효·캠페인 기획이 `지금·여기·나·너·이렇게 → 결과·다음 선택`을 확정한 경우, 공간·자산 담당은 [플레이어 중심 게임 개발 업무 구조의 표현 요구 카드](플레이어중심게임개발업무구조.md#다섯-조건을-모델링배치-표현-요구-카드로-내린다)를 먼저 만든다. 이 카드의 `ModelIdentity`와 `RequiredStateVariants`를 H1 배당 대장에 있는 기존 후보와 대조한 뒤에만 신규 Blender 파생형을 제안한다.
+
+- 기존 Prefab·`.blend`·렌더·배치 시안은 `ExistingCandidate / LegacyCandidate`로 보존한다.
+- 현재 요구를 충족하지 못한 후보는 삭제하지 않고 요구 카드별 부적합 사유와 대체 후보를 연결한다.
+- Blender 파생형은 원천 GUID·원천 fingerprint·변형 상태·파생 판본을 남기며 Synty 원본과 `.meta`를 변경하지 않는다.
+- 같은 H1의 전·중·후 모델은 별도 H를 임의 생성하기보다 먼저 동일 `ModelIdentity`의 상태 변형으로 검토한다. 기능·충돌·상호작용 능력이 달라질 때만 H 계약 변경을 기획으로 돌려보낸다.
+- 배치 맵은 `AreaSet + H 안정 ID + 배치 인스턴스`를 연결하고, 상대 위치·방향·지지면·통로·이격을 소유한다. Blender 장면의 임시 좌표를 Unity World 권위 좌표로 간주하지 않는다.
+- 정적 상태 변형과 배치 판독 후보는 E4, 실제 Prefab·Renderer·Collider·Bounds·WI 상태 결속은 E5, Rig·AnimationClip·IK·전이·중단·귀환은 E6로 분리한다.
 
 애니메이션이 필요 없는 정적 WI에 억지로 AnimationRole을 만들지 않는다. 반대로 이동·전투·
 도구 접촉·수면 기상처럼 동작이 플레이 결과의 판독과 입력 복귀에 영향을 주면 단순

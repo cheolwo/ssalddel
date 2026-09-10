@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "simulation-world-spatial-design-knowledge-h2.v2",
+  "stableId": "h2-candidate:farm-boundary-defense-recovery",
+  "revision": 2,
+  "hierarchyLevelCode": "H2",
+  "title": "농장 경계 방어·회복 블록",
+  "summary": "울타리 병목, 위협 흔적, 긴급 후퇴와 생활 주택 귀환을 결속해 방어·피해·복구·성찰을 판독하는 H2 후보이다.",
+  "knowledgeStateCode": "ExploratoryInventory",
+  "topologyCode": "BottleneckWithRecoveryReturn",
+  "requiredH1Refs": ["h1-stock:farm-fence-edge", "h1-stock:nature-incident-trace", "h1-stock:nature-emergency-retreat", "h1-stock:farm-residential-home"],
+  "optionalH1Refs": ["h1-stock:farm-restoration-supply"],
+  "connectorRoleCodes": ["ThreatIngress", "ConditionalBreach", "RetreatRecoveryReturn", "RepairSupplyHandoff"],
+  "sizeVariantCodes": ["Compact", "Standard", "Expanded"],
+  "authoredDocument": "authored/h2/farm-boundary-defense-recovery.v2.md",
+  "sourceReferences": ["eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json", "docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md"],
+  "unresolvedItems": ["조건부 돌파·후퇴 가능 여부·실제 이동과 회복 귀환은 Unity E5~E7에서 별도 검증한다."],
+  "presentationOnly": true,
+  "isOperationalState": false
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "simulation-world-placement-map-preparation-profile.v1",
   "profileStableId": "placement-map-profile:forest-edge-farm:hans-living-farm",
-  "revision": 3,
+  "revision": 5,
   "title": "숲 경계 한스 생활 농장 배치 준비 프로필",
   "artifactGwaeCode": "TAE",
   "relationGwaeCode": null,
@@ -9,11 +9,51 @@
   "stateCode": "ExactConstraintPending",
   "traceabilityStateCode": "BalancedDraft",
   "planningRef": "docs/AI/숲경계농장-H1-H2-배치맵-기획-2026-09-02.md",
-  "planningRevision": "forest-edge-farm-placement-map-planning.r24",
-  "planningSha256": "71DC5B47F34F23E5FC5119650C18EA8C699D92729EBF61569F13C18A89C27113",
-  "graphMapRef": "eng/world-seedbeds/graph-maps/northern-life-hub-discovery.v1.json",
-  "placementMapRef": null,
+  "planningRevision": "forest-edge-farm-placement-map-planning.r25",
+  "planningSha256": "4DE86716F33D5512EC5BFDB1710640DB86AF66A80A4AD9D82B9FCD3A724C5373",
+  "graphMapRef": "eng/world-seedbeds/graph-maps/hans-farm-hex03-campaign.v1.json",
+  "placementMapRef": "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/placement-map.r5.r3.json",
+  "lineage": {
+    "previousProfileRevision": 4,
+    "previousPlanningRevision": "forest-edge-farm-placement-map-planning.r24",
+    "previousPlanningSha256": "71DC5B47F34F23E5FC5119650C18EA8C699D92729EBF61569F13C18A89C27113",
+    "approvalReportRef": "docs/Reports/한스농장-인접숲-자연경관조립-2026-09-05.md",
+    "approvalReportSha256": "302A5DF82F5C1B7E0C1267184A144349DAE6556F6A08628401F0115E88CA3805"
+  },
+  "candidateBinding": {
+    "stateCode": "UnapprovedCandidate",
+    "draftStableId": "area-set-placement-draft:forest-edge-farm:hans-living-farm.r5-natural-world",
+    "draftRevision": "hans-farm-adjacent-forest.natural-world.r3",
+    "draftHashSha256": "3F1A275C722351C21345541CC1C7590F6870FA9F5D7F5729A40B3D0734C98C92",
+    "placementMapFileSha256": "A5BCDB56E8C287AE4B376C8DC0618BC1078CF05A87AAD43A28713349CC0D3FE6",
+    "validatedPlanRef": "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/validated-placement-plan.r3.json",
+    "validatedPlanFileSha256": "CD8B55EDF811879CB84259F26B1667C3ECD43C06555B8C8580A720999E71039E",
+    "surfaceSnapshotRef": "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/surface-snapshot.r3.json",
+    "surfaceSnapshotFileSha256": "DA583E613E258FFCEA0C2E0972FE5460EBF270ECD6623C0F6092F3F8CD884D75",
+    "validatorResultCode": "CanStage",
+    "unitySceneValidated": false,
+    "visualApprovalStateCode": "Pending"
+  },
   "h2DefinitionRef": "h2-candidate:forest-edge-farm",
+  "targetH4BlueprintStableId": "h4-blueprint:forest-edge-living-farm-defense-region",
+  "targetH4RegistrationStateCode": "E4PreparationOnly",
+  "h3RoleBindings": [
+    {
+      "roleCode": "LivingProduction",
+      "h3DefinitionRef": "h3-candidate:highland-farm",
+      "label": "생활·생산 경관"
+    },
+    {
+      "roleCode": "AccessDefense",
+      "h3DefinitionRef": "h3-candidate:nature-home-encounter-defense",
+      "label": "접근·방어 경관"
+    },
+    {
+      "roleCode": "DamageRecoveryReturn",
+      "h3DefinitionRef": "h3-candidate:nature-threat-recovery",
+      "label": "피해·회복·복귀 경관"
+    }
+  ],
   "primarySyntyPackCode": "Farm",
   "firstImpressionCode": "AgedButOperatingLivingFarm",
   "supportPackPolicies": [
@@ -42,9 +82,9 @@
     {
       "placementInstanceId": "placement-instance:forest-edge-farm:hans-residential-home",
       "hDefinitionRef": "h1-stock:farm-residential-home",
-      "graphNodeRef": null,
-      "intendedGraphNodeRef": "gm-node:hans-house",
-      "graphBindingStateCode": "PendingStableNode",
+      "graphNodeRef": "gm-node:hex03-home",
+      "intendedGraphNodeRef": "gm-node:hex03-home",
+      "graphBindingStateCode": "ExistingNode",
       "requirementCode": "RequiredForThisProfile",
       "relativePlacementIntent": [
         "InsideDamagedFenceBoundary",
@@ -92,8 +132,8 @@
     {
       "placementInstanceId": "placement-instance:forest-edge-farm:mixed-crop-field",
       "hDefinitionRef": "h1-expression:farm:혼합-작물밭",
-      "graphNodeRef": "gm-node:farm-production",
-      "intendedGraphNodeRef": "gm-node:farm-production",
+      "graphNodeRef": "gm-node:hex03-plot",
+      "intendedGraphNodeRef": "gm-node:hex03-plot",
       "graphBindingStateCode": "ExistingNode",
       "requirementCode": "RequiredForThisProfile",
       "relativePlacementIntent": ["VisibleAfterBoundaryEntry", "SecondaryOpenRoute", "ProductionAreaReadable"],
@@ -113,8 +153,8 @@
     {
       "placementInstanceId": "placement-instance:forest-edge-farm:damaged-fence-entry",
       "hDefinitionRef": "h1-stock:nature-farm-edge",
-      "graphNodeRef": "gm-node:hans-broken-fence",
-      "intendedGraphNodeRef": "gm-node:hans-broken-fence",
+      "graphNodeRef": "gm-node:hex03-fence",
+      "intendedGraphNodeRef": "gm-node:hex03-fence",
       "graphBindingStateCode": "ExistingNode",
       "requirementCode": "RequiredForThisProfile",
       "relativePlacementIntent": ["NatureFarmBoundary", "PrimaryEntryReadable", "RepairBeforeAfterComparable"],
@@ -134,8 +174,8 @@
     {
       "placementInstanceId": "placement-instance:forest-edge-farm:barn-work-yard",
       "hDefinitionRef": "h1-expression:farm:헛간-작업마당",
-      "graphNodeRef": "gm-node:farm-work-yard",
-      "intendedGraphNodeRef": "gm-node:farm-work-yard",
+      "graphNodeRef": "gm-node:hex03-work-yard",
+      "intendedGraphNodeRef": "gm-node:hex03-work-yard",
       "graphBindingStateCode": "ExistingNode",
       "requirementCode": "RequiredForThisProfile",
       "relativePlacementIntent": ["SideOrRearOfHome", "HomeEntranceSightlineClear", "HarvestRouteBypassesInterior"],
@@ -161,8 +201,8 @@
     {
       "placementInstanceId": "placement-instance:forest-edge-farm:forest-buffer",
       "hDefinitionRef": "h1-expression:nature:숲-가장자리",
-      "graphNodeRef": "gm-node:nature-farm-edge",
-      "intendedGraphNodeRef": "gm-node:nature-farm-edge",
+      "graphNodeRef": "gm-node:hex03-forest-entry",
+      "intendedGraphNodeRef": "gm-node:hex03-forest-entry",
       "graphBindingStateCode": "ExistingNode",
       "requirementCode": "RequiredForThisProfile",
       "relativePlacementIntent": ["OutsideFarmBoundary", "PartialOcclusionWithoutTraversalBlock", "RoofAndFenceCluesRemainReadable"],
@@ -187,28 +227,90 @@
       }
     }
   ],
+  "graphRouteBindings": [
+    {
+      "routeCode": "EnemyPrimaryIngress",
+      "edgeKindCode": "ThreatRoute",
+      "graphRefs": [
+        "gm-node:hex03-beasts",
+        "gm-node:hex03-fence"
+      ],
+      "activationConditionCode": "AlwaysAvailableWhenDefenseEncounterActive",
+      "authoringStateCode": "E4RouteIntent"
+    },
+    {
+      "routeCode": "EnemyConditionalBreach",
+      "edgeKindCode": "ConditionalThreatRoute",
+      "graphRefs": [
+        "gm-node:hex03-fence",
+        "gm-node:hex03-defense-recovery"
+      ],
+      "activationConditionCode": "FenceDamageStateIsBreached",
+      "authoringStateCode": "E4ConditionalRouteIntent"
+    },
+    {
+      "routeCode": "PlayerHansDefenseTraversal",
+      "edgeKindCode": "PlayerCompanionRoute",
+      "graphRefs": [
+        "gm-node:hex03-player",
+        "gm-node:hex03-home",
+        "gm-node:hex03-fence"
+      ],
+      "activationConditionCode": "DefensePreparationAvailable",
+      "authoringStateCode": "E4RouteIntent"
+    },
+    {
+      "routeCode": "SupplyRepairHandoff",
+      "edgeKindCode": "SupplyRepairRoute",
+      "graphRefs": [
+        "gm-node:hex03-work-yard",
+        "gm-node:hex03-fence",
+        "gm-node:hex03-home"
+      ],
+      "activationConditionCode": "RepairOrSupplyWorkSelected",
+      "authoringStateCode": "E4RouteIntent"
+    },
+    {
+      "routeCode": "RetreatRecoveryReturn",
+      "edgeKindCode": "RecoveryRoute",
+      "graphRefs": [
+        "gm-node:hex03-retreat",
+        "gm-node:hex03-home"
+      ],
+      "activationConditionCode": "RetreatAvailableAndRouteNotBlocked",
+      "authoringStateCode": "E4RouteIntent"
+    }
+  ],
+  "h4AuthoringReview": {
+    "masterSceneRequired": true,
+    "masterSceneRef": "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r4/forest-edge-living-farm-defense-h4-r4.blend",
+    "viewLayerCodes": ["Normal", "Defense", "BreachRecovery"],
+    "individualH1ApprovalStillRequired": true,
+    "unapprovedH1RepresentationCode": "TranslucentPlaceholder",
+    "reviewPairRuleCode": "IndividualH1AndH4FocusedOverview",
+    "blenderAllowedTransformCodes": ["HorizontalPosition", "Yaw", "UniformScale"],
+    "unityGroundingRecalculationRequired": true
+  },
   "globalH2Requirement": false,
-  "frozenPlacementMapRef": null,
+  "frozenPlacementMapRef": "ArtSource/Blender/AreaSet-배치초안/숲경계-한스-생활농장/r5-natural-world/validated-placement-plan.r3.json",
   "validationResultCode": "Blocked",
   "blockingReasons": [
-    "CurrentGraphMapRevisionHasUnintegratedFederationReferences",
-    "DedicatedHansHouseGraphNodePending",
-    "GraphVisualRequirementTagsPending",
-    "ExactInstanceCountPending",
-    "ExactConstraintValuesPending",
-    "AssetCandidateFingerprintPending",
-    "FrozenPlacementMapNotCreated"
+    "CanonicalSceneRuntimeValidationPending",
+    "PlayerTraversalAndColliderValidationPending",
+    "VisualQualityApprovalPending",
+    "H4BlueprintCatalogRegistrationPending"
+    ,"ConditionalBreachRuntimeStateBindingPending"
   ],
   "assetSurveyBoundary": {
     "inventoryMatchIsAssignment": false,
-    "visualReviewCompleted": false,
-    "staticCompatibilityVerified": false,
+    "visualReviewCompleted": true,
+    "staticCompatibilityVerified": true,
     "unityVerified": false,
     "automaticPrefabAssignment": false,
     "syntySourceModificationAllowed": false,
-    "blenderExecutionApproved": false
+    "blenderExecutionApproved": true
   },
-  "authorityBoundary": "이 프로필은 한스 생활 농장의 다섯 표현 역할과 보유 재고 조사 상태만 준비한다. InventoryMatched는 정확 Prefab 선택·배치·통행·Unity 검증·일반 H2·WI·Simulation 상태·E5를 승인하지 않는다.",
+  "authorityBoundary": "이 프로필은 재사용 가능한 숲 경계 생활농장 방어 H4 후보의 한스 AreaSet 인스턴스와 세 H3 역할, 다섯 경로 의도, E4 Blender 검토 장면을 준비한다. InventoryMatched와 Blender 시안은 정확 Prefab 선택·canonical World 배치·실제 조건부 경로·통행·입력·Simulation 상태·E5를 승인하지 않는다.",
   "presentationOnly": true,
   "isOperationalState": false
 }

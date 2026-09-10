@@ -36,7 +36,8 @@ $goals = Read-Json 'eng/execution-ledgers/codex-playable-loop-goals.json'
 $planningPath = Join-Path $root $graph.planningGate.documentRef
 $planningHash = Get-CanonicalLfSha256 $planningPath
 Assert-FenceE5 ($planningHash -ceq $graph.planningGate.sha256) 'PlanningHash'
-Assert-FenceE5 ($graph.planningGate.revision -ceq 'hans-farm-first-lumber-repair.r27') 'PlanningRevision'
+Assert-FenceE5 ((Get-Content -LiteralPath $planningPath -Raw -Encoding UTF8).Contains(
+    $graph.planningGate.revision)) 'PlanningRevision'
 Assert-FenceE5 ($graph.playableLoopStableId -ceq $placement.playableLoopStableId) 'GraphPlacementLoop'
 $placementRef = $placement.profileStableId
 Assert-FenceE5 ($placementRef -ceq
@@ -78,14 +79,31 @@ Assert-FenceE5 ($actorActionModule.evidenceStageCode -ceq 'E6' -and
     $actorActionModule.requiredFeatureCodes -contains 'ActorAction') 'ActorActionModuleAtE6'
 
 $loop = @($loops.items | Where-Object loopStableId -eq $graph.playableLoopStableId)[0]
-Assert-FenceE5 ($loop.planningGate.designHashSha256 -ceq $planningHash) 'LoopPlanningHash'
+$designHash = Get-CanonicalLfSha256 (Join-Path $root $loop.planningGate.designDocumentRef)
+Assert-FenceE5 ($loop.planningGate.designHashSha256 -ceq $designHash -and
+    $order.planningGate.designHashSha256 -ceq $designHash) 'LoopPlanningHash'
 Assert-FenceE5 (($loop.worldInteractionIds -join ',') -ceq
     'WI-NATURE-19,WI-NATURE-06,WI-NATURE-18,WI-NATURE-20') 'LoopWorldInteractions'
+$presentationStage = $order.trackPlans.presentation.currentEvidenceStage
 Assert-FenceE5 ($loop.maturityTracks.logic.currentStage -ceq 'E5' -and
-    $loop.maturityTracks.presentation.currentStage -ceq 'E4') 'HonestDualMaturity'
+    $presentationStage -in @('E4', 'E5') -and
+    $loop.maturityTracks.presentation.currentStage -ceq $presentationStage) 'HonestDualMaturity'
 Assert-FenceE5 ($order.trackPlans.logic.currentEvidenceStage -ceq 'E5' -and
-    $order.trackPlans.presentation.currentEvidenceStage -ceq 'E4' -and
-    -not $order.promotionEligible) 'WorkOrderDualMaturity'
+    $order.integratedGate.currentEvidenceStage -ceq $presentationStage -and
+    $order.deliveryCap.currentDispatchTargetStage -ceq 'E5' -and
+    -not $order.deliveryCap.promotionBeyondStageAllowed) 'WorkOrderDualMaturity'
+$e5Result = @($order.trackPlans.presentation.upwardValidation | Where-Object code -eq 'E5')[0]
+if ($presentationStage -ceq 'E5') {
+    Assert-FenceE5 ($e5Result.status -ceq 'Passed' -and
+        @($e5Result.evidenceRefs).Count -gt 0 -and
+        $order.integratedGate.status -ne 'Blocked') 'E5RequiresEvidence'
+    foreach ($evidenceRef in $e5Result.evidenceRefs) {
+        Assert-FenceE5 (Test-Path -LiteralPath (Join-Path $root $evidenceRef) -PathType Leaf) 'E5EvidenceFile'
+    }
+} else {
+    Assert-FenceE5 ($e5Result.status -ne 'Passed' -and
+        -not $order.promotionEligible) 'NoUnprovenPromotion'
+}
 
 foreach ($worldInteractionId in @('WI-NATURE-19','WI-NATURE-20')) {
     $worldInteraction = @($wi.items | Where-Object {
@@ -124,4 +142,4 @@ Assert-FenceE5 ($presenterTest.Contains('GetComponentsInChildren<Animator>') -an
     $presenterTest.Contains('HasVisibleBoundsAndCollider') -and
     $presenterTest.Contains('기존World표현을지우기전에거부된다')) 'PresenterTestE5Checks'
 
-Write-Output "HansFarmFenceRestorationE5TestsPassed:Cases=$script:cases;LogicE5=True;PresentationE5=False;UnityCompileBlocked=True;PlayMode=False;GameView=False"
+Write-Output "HansFarmFenceRestorationE5TestsPassed:Cases=$script:cases;RecordedPresentation=$presentationStage;Validation=StaticContractsOnly;UnityCompile=NotRun;PlayMode=NotRun;GameView=NotRun"

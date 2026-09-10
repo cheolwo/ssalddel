@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "simulation-world-spatial-design-knowledge-h2.v2",
+  "stableId": "h2-candidate:forest-edge-living-farm",
+  "revision": 2,
+  "hierarchyLevelCode": "H2",
+  "title": "숲 경계 생활 농장 블록",
+  "summary": "생활 주택·경작 구획·울타리 경계를 묶어 머무름, 생산, 순찰과 제한된 관리가 이어지는 한스 농장 전용 H2 후보이다.",
+  "knowledgeStateCode": "ExploratoryInventory",
+  "topologyCode": "ContourAdaptive",
+  "requiredH1Refs": ["h1-stock:farm-residential-home", "h1-stock:farm-production", "h1-stock:farm-fence-edge"],
+  "optionalH1Refs": ["h1-stock:farm-tool-storage", "h1-stock:farm-work-yard"],
+  "connectorRoleCodes": ["FarmBoundaryPatrolLoop", "FarmHomeReturn", "FarmProductionAccess"],
+  "sizeVariantCodes": ["Compact", "Standard", "Expanded"],
+  "authoredDocument": "authored/h2/forest-edge-living-farm.v2.md",
+  "sourceReferences": ["eng/world-seedbeds/placement-map-profiles/forest-edge-farm-hans-living-farm.v1.json", "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"],
+  "unresolvedItems": ["실제 Graph 좌표·지면 접지·내부 도달 가능성과 Unity 배치는 E5에서 검증한다."],
+  "presentationOnly": true,
+  "isOperationalState": false
+}

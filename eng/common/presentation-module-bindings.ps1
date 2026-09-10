@@ -35,7 +35,12 @@ function Get-PresentationRequiredModules([object] $Catalog, [string] $LoopId) {
 function Test-PresentationModuleBindings(
     [object] $WorkOrder, [object] $Catalog, [string] $RepositoryRoot,
     [string] $UnityProjectRoot = '', [object] $EvidenceCatalog = $null) {
-    $required = @(Get-PresentationRequiredModules $Catalog ([string] $WorkOrder.playableUnitStableId))
+    $loopProperty = $WorkOrder.PSObject.Properties['playableUnitStableId']
+    $loopId = if ($null -ne $loopProperty) { [string] $loopProperty.Value } else { '' }
+    $goalProperty = $WorkOrder.PSObject.Properties['interactionGoalStableId']
+    $subjectRef = if (-not [string]::IsNullOrWhiteSpace($loopId)) { $loopId }
+        elseif ($null -ne $goalProperty) { [string] $goalProperty.Value } else { '' }
+    $required = @(Get-PresentationRequiredModules $Catalog $loopId)
     $property = $WorkOrder.PSObject.Properties['presentationModuleBindings']
     # 과거 명세는 읽기 호환한다. 기존 증거·E를 자동 이관하거나 재판정하지 않는다.
     if ($null -eq $property) {
@@ -95,7 +100,7 @@ function Test-PresentationModuleBindings(
                 # subjectRefs의 기존 폐루프 의미는 보존하고 세부 모듈/WI 범위는 별도 연결한다.
                 $evidenceScope = $package.PSObject.Properties['presentationModuleScope']
                 Assert-PresentationBinding ($null -ne $evidenceScope) "EvidenceModuleScopeMissing:$code"
-                Assert-PresentationBinding (@($package.subjectRefs) -contains $WorkOrder.playableUnitStableId -and
+                Assert-PresentationBinding (@($package.subjectRefs) -contains $subjectRef -and
                     @($evidenceScope.Value.moduleCodes) -contains $code -and
                     @($package.evidenceStageCodes) -contains $module.evidenceStageCode) "EvidenceScopeMismatch:$code"
                 $scopeProperty = $WorkOrder.PSObject.Properties['presentationModuleScope']

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "simulation-world-spatial-design-knowledge-h1.v2",
   "stableId": "h1-stock:farm-residential-home",
-  "revision": 1,
+  "revision": 2,
   "hierarchyLevelCode": "H1",
   "title": "농장 생활 주택",
   "summary": "농장 안에서 영속적인 생활 주택의 건물 정체성, footprint, 출입구, 내외부 경계, 관찰 시야와 소유·이용 허락 경계를 제공하는 공간이다.",
@@ -48,15 +48,16 @@
     "requiredByExistingWi": false,
     "likelyFutureGameplay": true,
     "reusableAcrossWorlds": true,
-    "representableByOwnedSynty": false
+    "representableByOwnedSynty": true
   },
   "authoredDocument": "authored/h1/farm-residential-home.v2.md",
   "sourceReferences": [
     "eng/world-seedbeds/synty-bottom-up-inventory/expansion.v2.json#h1-stock:farm-residential-home",
-    "docs/AI/숲경계농장-H1-H2-배치맵-기획-2026-09-02.md#기존-h1-재사용-조사-반환"
+    "docs/AI/숲경계농장-H1-H2-배치맵-기획-2026-09-02.md#기존-h1-재사용-조사-반환",
+    "docs/Reports/H1생활주택-Blender손상파생형-2026-09-03.md"
   ],
   "unresolvedItems": [
-    "정확 주택 Prefab, footprint 크기, 출입구 방향과 관찰 시야 수치는 개별 배치 맵과 Presentation E4에서 동결한다.",
+    "기준 원본 후보는 Farmhouse_02로 동결했지만 프로젝트 소유 FBX의 Unity Import, Prefab, footprint, 출입구 방향, Collider·Bounds와 관찰 시야는 개별 배치 맵과 Presentation E5에서 검증한다.",
     "귀환·휴식·작업자 대기, 농기구 보관, 생산, 수확·집하 WI는 각각 기존 H1이 계속 소유한다."
   ],
   "presentationOnly": true,
