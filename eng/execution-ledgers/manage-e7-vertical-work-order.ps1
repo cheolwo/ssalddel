@@ -3,6 +3,8 @@ param(
     [string] $InputPath = "eng/execution-ledgers/work-orders/e7-vertical-work-order.template.json",
     [string] $ProtocolPath = "eng/execution-ledgers/e7-vertical-implementation-protocol.json",
     [string] $PlayableLoopPath = "eng/execution-ledgers/playable-loops.json",
+    [string] $GwaeClassificationPath = "docs/AI/generated/world-interaction-gwae-classifications.json",
+    [string] $InteractionGoalPath = "eng/execution-ledgers/subject-interaction-development.json",
     [string] $UnityProjectRoot = ''
 )
 
@@ -33,7 +35,8 @@ Require ([string] $protocol.evidenceModelRevision -eq
 foreach ($principleName in @(
     "presentationE4PreparesApplicableAssetPlacementHandoff",
     "assetResearchAloneNeverPromotesE5",
-    "nonSpatialOrNonVisualWorkCanDeclareNotApplicable")) {
+    "nonSpatialOrNonVisualWorkCanDeclareNotApplicable",
+    "roleObjectActionClassificationRequiredBeforeE5")) {
     $principle = $protocol.principles.PSObject.Properties[$principleName]
     Require ($null -ne $principle -and [bool] $principle.Value) `
         "ProtocolPrincipleMissing:$principleName"
@@ -57,6 +60,30 @@ foreach ($fieldName in @(
     Require (@($presentationHandoff.requiredFieldsWhenApplicable) -contains
         $fieldName) "PresentationHandoffFieldMissing:$fieldName"
 }
+$roleActionProtocolGate = $protocol.roleObjectActionE5Gate
+Require ($null -ne $roleActionProtocolGate) "RoleObjectActionE5GateMissing"
+Require ([string] $roleActionProtocolGate.requiredFromEvidenceStageCode -eq "E5") `
+    "RoleObjectActionE5GateStageInvalid"
+Require ([string] $roleActionProtocolGate.worldObjectScopeCode -eq "AllWorldObjects") `
+    "RoleObjectActionScopeInvalid"
+Require-Text $roleActionProtocolGate.classificationOutputPath `
+    "RoleObjectActionClassificationPathMissing"
+Require-Text $roleActionProtocolGate.classificationSourcePath `
+    "RoleObjectActionClassificationSourcePathMissing"
+Require-Text $roleActionProtocolGate.worldInteractionCatalogPath `
+    "RoleObjectActionCatalogPathMissing"
+Require-Text $roleActionProtocolGate.outputSchemaVersion `
+    "RoleObjectActionOutputSchemaMissing"
+foreach ($applicabilityCode in @("Required", "NotApplicable")) {
+    Require (@($roleActionProtocolGate.allowedApplicabilityCodes) -contains
+        $applicabilityCode) "RoleObjectActionApplicabilityMissing:$applicabilityCode"
+}
+foreach ($fieldName in @(
+    "roleObjectKindCode", "roleObjectBindingModeCode", "actionCode",
+    "startStateCodes", "completionStateCodes", "effectCodes")) {
+    Require (@($roleActionProtocolGate.requiredFieldsWhenApplicable) -contains
+        $fieldName) "RoleObjectActionFieldMissing:$fieldName"
+}
 Require ([string] $workOrder.schemaVersion -eq
     [string] $protocol.workOrderSchemaVersion) "WorkOrderSchemaInvalid"
 Require ([string] $workOrder.protocolRevision -eq
@@ -66,7 +93,12 @@ Require ([string] $workOrder.evidenceModelRevision -eq
 Require-Text $workOrder.workOrderId "WorkOrderIdMissing"
 Require ([string] $workOrder.workOrderId -match '^E7-WO-') "WorkOrderIdInvalid"
 Require-Text $workOrder.title "TitleMissing"
-Require-Text $workOrder.playableUnitStableId "PlayableUnitMissing"
+$nativeGoalProperty = $workOrder.PSObject.Properties['interactionGoalStableId']
+$isNativeGoal = $null -ne $nativeGoalProperty -and
+    -not [string]::IsNullOrWhiteSpace([string] $nativeGoalProperty.Value)
+if (-not $isNativeGoal) {
+    Require-Text $workOrder.playableUnitStableId "PlayableUnitMissing"
+}
 Require-Text $workOrder.activeWorldInteractionId "WorldInteractionMissing"
 Require ([string] $workOrder.targetEvidenceStage -eq "E7") "TargetMustBeE7"
 Require ([string] $workOrder.currentEvidenceStage -match '^E[0-7]$') `
@@ -119,6 +151,104 @@ Require (@($protocol.allowedStatuses) -contains [string] $workOrder.integratedGa
 Require ($presentationStageNumber -lt 5 -or $logicStageNumber -ge 5) `
     "PresentationE5RequiresLogicE5"
 
+$highestTrackStageNumber = [Math]::Max($logicStageNumber, $presentationStageNumber)
+if ($highestTrackStageNumber -ge 5) {
+    $classificationOutputFullPath = Join-Path $repositoryRoot $GwaeClassificationPath
+    Require (Test-Path -LiteralPath $classificationOutputFullPath) `
+        "RoleObjectActionClassificationOutputMissing"
+    $classificationOutput = Get-Content -LiteralPath $classificationOutputFullPath `
+        -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require ([string] $classificationOutput.schemaVersion -eq
+        [string] $roleActionProtocolGate.outputSchemaVersion) `
+        "RoleObjectActionClassificationSchemaInvalid"
+    Require-Text $classificationOutput.sourceRevision `
+        "RoleObjectActionClassificationRevisionMissing"
+
+    $classificationSourceFullPath = Join-Path $repositoryRoot `
+        ([string] $roleActionProtocolGate.classificationSourcePath)
+    Require (Test-Path -LiteralPath $classificationSourceFullPath) `
+        "RoleObjectActionClassificationSourceMissing"
+    $classificationSource = Get-Content -LiteralPath $classificationSourceFullPath `
+        -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require ([string] $classificationOutput.sourceRevision -eq
+        [string] $classificationSource.revision) `
+        "RoleObjectActionClassificationSourceStale"
+
+    $classificationPolicyProperty = $classificationOutput.PSObject.Properties[
+        "e5RoleObjectActionGatePolicy"]
+    Require ($null -ne $classificationPolicyProperty) `
+        "RoleObjectActionClassificationPolicyMissing"
+    $classificationPolicy = $classificationPolicyProperty.Value
+    Require ([string] $classificationPolicy.requiredFromEvidenceStageCode -eq "E5") `
+        "RoleObjectActionClassificationStageInvalid"
+    Require ([string] $classificationPolicy.worldObjectScopeCode -eq "AllWorldObjects") `
+        "RoleObjectActionClassificationScopeInvalid"
+
+    $worldInteractionCatalogFullPath = Join-Path $repositoryRoot `
+        ([string] $roleActionProtocolGate.worldInteractionCatalogPath)
+    Require (Test-Path -LiteralPath $worldInteractionCatalogFullPath) `
+        "RoleObjectActionWorldInteractionCatalogMissing"
+    $worldInteractionCatalog = Get-Content -LiteralPath $worldInteractionCatalogFullPath `
+        -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require ([string] $classificationOutput.worldInteractionCatalogRevision -eq
+        [string] $worldInteractionCatalog.revision) `
+        "RoleObjectActionClassificationStale"
+
+    $activeWorldInteractionId = [string] $workOrder.activeWorldInteractionId
+    $worldInteraction = @($worldInteractionCatalog.items | Where-Object {
+        [string] $_.id -eq $activeWorldInteractionId
+    })
+    Require ($worldInteraction.Count -eq 1) `
+        "RoleObjectActionWorldInteractionUnknown:$activeWorldInteractionId"
+    $classification = @($classificationOutput.items | Where-Object {
+        [string] $_.wiId -eq $activeWorldInteractionId
+    })
+    Require ($classification.Count -eq 1) `
+        "RoleObjectActionClassificationMissing:$activeWorldInteractionId"
+    $gateProperty = $classification[0].PSObject.Properties["e5RoleObjectActionGate"]
+    Require ($null -ne $gateProperty) `
+        "RoleObjectActionClassificationGateMissing:$activeWorldInteractionId"
+    $classificationGate = $gateProperty.Value
+    $applicabilityCode = [string] $classificationGate.applicabilityCode
+    Require (@($roleActionProtocolGate.allowedApplicabilityCodes) -contains
+        $applicabilityCode) `
+        "RoleObjectActionApplicabilityInvalid:$activeWorldInteractionId"
+
+    if ($applicabilityCode -eq "Required") {
+        foreach ($fieldName in @(
+            "roleObjectKindCode", "roleObjectBindingModeCode", "actionCode",
+            "startStateCodes", "completionStateCodes", "effectCodes")) {
+            Require ($null -ne $classificationGate.PSObject.Properties[$fieldName]) `
+                "RoleObjectActionBindingFieldMissing:${activeWorldInteractionId}:$fieldName"
+        }
+        Require (@($classificationPolicy.allowedRoleObjectKindCodes) -contains
+            [string] $classificationGate.roleObjectKindCode) `
+            "RoleObjectActionKindInvalid:$activeWorldInteractionId"
+        Require-Text $classificationGate.roleObjectBindingModeCode `
+            "RoleObjectActionBindingModeMissing:$activeWorldInteractionId"
+        Require ([string] $classificationGate.actionCode -eq
+            [string] $worldInteraction[0].actionCode) `
+            "RoleObjectActionCodeMismatch:$activeWorldInteractionId"
+        foreach ($transitionFieldName in @(
+            "startStateCodes", "completionStateCodes", "effectCodes")) {
+            $classifiedValues = @($classificationGate.$transitionFieldName |
+                ForEach-Object { [string] $_ })
+            $catalogValues = @($worldInteraction[0].$transitionFieldName |
+                ForEach-Object { [string] $_ })
+            Require ($classifiedValues.Count -gt 0) `
+                "RoleObjectActionTransitionMissing:${activeWorldInteractionId}:$transitionFieldName"
+            Require (($classifiedValues -join ',') -eq ($catalogValues -join ',')) `
+                "RoleObjectActionTransitionMismatch:${activeWorldInteractionId}:$transitionFieldName"
+        }
+    }
+    else {
+        $reasonProperty = $classificationGate.PSObject.Properties["notApplicableReason"]
+        Require ($null -ne $reasonProperty -and
+            -not [string]::IsNullOrWhiteSpace([string] $reasonProperty.Value)) `
+            "RoleObjectActionNotApplicableReasonMissing:$activeWorldInteractionId"
+    }
+}
+
 $isTemplate = [string] $workOrder.workOrderId -eq "E7-WO-TEMPLATE"
 if ($null -ne $workOrder.PSObject.Properties['presentationModuleBindings']) {
     $presentationModules = Get-Content -LiteralPath (Join-Path $repositoryRoot 'eng/execution-ledgers/playable-loop-presentation-validation-modules.json') -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -141,7 +271,47 @@ if ($isTemplate -or $null -ne $preparationProperty) {
     Require ($null -ne $preparation.PSObject.Properties["notApplicableReason"]) `
         "PresentationNotApplicableReasonMissing"
 }
-if (-not $isTemplate) {
+if (-not $isTemplate -and $isNativeGoal) {
+    $goalCatalog = Get-Content -LiteralPath (Join-Path $repositoryRoot $InteractionGoalPath) -Raw -Encoding UTF8 | ConvertFrom-Json
+    $goals = @($goalCatalog.nativeInteractionGoals | Where-Object goalStableId -eq $nativeGoalProperty.Value)
+    Require ($goals.Count -eq 1) "InteractionGoalUnknown"
+    $goal = $goals[0]
+    Require ([string] $goal.worldInteractionId -eq [string] $workOrder.activeWorldInteractionId) "InteractionGoalWiMismatch"
+    $wiCatalog = Get-Content -LiteralPath (Join-Path $repositoryRoot $goalCatalog.worldInteractionCatalogPath) -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require (@($wiCatalog.items | Where-Object id -eq $workOrder.activeWorldInteractionId).Count -eq 1) "InteractionGoalWiUnknown"
+    $subjects = Get-Content -LiteralPath (Join-Path $repositoryRoot $goalCatalog.subjectCatalogPath) -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require (@($workOrder.subjectBindingRefs).Count -gt 0) "InteractionSubjectsMissing"
+    Require ((@($workOrder.subjectBindingRefs | Sort-Object) -join '|') -eq
+        (@($goal.subjectBindingRefs | Sort-Object) -join '|')) "InteractionSubjectsMismatch"
+    foreach ($subjectId in @($workOrder.subjectBindingRefs)) {
+        $subject = @($subjects.items | Where-Object subjectStableId -eq $subjectId)
+        Require ($subject.Count -eq 1 -and [string] $subject[0].statusCode -eq 'Ready') "InteractionSubjectNotReady:$subjectId"
+    }
+    $planning = $workOrder.planningGate
+    Require ([string] $planning.statusCode -eq 'Approved' -and [string] $goal.planningGate.statusCode -eq 'Approved') "InteractionPlanningNotApproved"
+    foreach ($field in @('designDocumentRef', 'designRevision', 'designHashSha256', 'approvalEvidenceRef')) {
+        Require-Text $planning.$field "InteractionPlanningFieldMissing:$field"
+        Require ([string] $planning.$field -eq [string] $goal.planningGate.$field) "InteractionPlanningMismatch:$field"
+    }
+    $designPath = Join-Path $repositoryRoot $planning.designDocumentRef
+    Require (Test-Path -LiteralPath $designPath) "InteractionDesignMissing"
+    Require ((Get-FileHash -LiteralPath $designPath -Algorithm SHA256).Hash -eq [string] $planning.designHashSha256) "InteractionDesignHashMismatch"
+    Require (Test-Path -LiteralPath (Join-Path $repositoryRoot $planning.approvalEvidenceRef)) "InteractionApprovalMissing"
+    $registeredOrderPath = Join-Path $repositoryRoot $goal.workOrderRef
+    Require (Test-Path -LiteralPath $registeredOrderPath) "InteractionWorkOrderMissing"
+    $registeredOrder = Get-Content -LiteralPath $registeredOrderPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    Require ([string] $registeredOrder.workOrderId -eq [string] $workOrder.workOrderId) "InteractionWorkOrderMismatch"
+    Require ($highestTrackStageNumber -le [int] ([string] $goal.deliveryCap).Substring(1)) "InteractionDeliveryCapExceeded"
+    $optionalLoop = [string] $goal.optionalPlayableLoopValidationRef
+    $orderLoop = $workOrder.PSObject.Properties['playableUnitStableId']
+    Require (($null -eq $orderLoop -and [string]::IsNullOrEmpty($optionalLoop)) -or
+        ($null -ne $orderLoop -and [string] $orderLoop.Value -eq $optionalLoop)) "InteractionOptionalLoopMismatch"
+    if (-not [string]::IsNullOrEmpty($optionalLoop)) {
+        $bundle = @($loops.items | Where-Object loopStableId -eq $optionalLoop)
+        Require ($bundle.Count -eq 1 -and @($bundle[0].worldInteractionIds) -contains $workOrder.activeWorldInteractionId) "InteractionOptionalLoopInvalid"
+    }
+}
+if (-not $isTemplate -and -not $isNativeGoal) {
     $loop = @($loops.items | Where-Object {
         [string] $_.loopStableId -eq [string] $workOrder.playableUnitStableId
     })

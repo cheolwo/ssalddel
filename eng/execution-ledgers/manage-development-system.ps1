@@ -67,6 +67,9 @@ function Visit-Loop([string] $LoopId) {
 }
 
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+$subjectInteractionManager = Resolve-RepositoryPath `
+    "eng/execution-ledgers/manage-subject-interaction-development.ps1"
+& $subjectInteractionManager -Mode Validate | Out-Null
 $resolvedLoops = (Resolve-Path (Resolve-RepositoryPath $PlayableLoopPath)).Path
 $resolvedEvidence = (Resolve-Path (Resolve-RepositoryPath $EvidencePackagePath)).Path
 $loops = Get-Content -LiteralPath $resolvedLoops -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -134,7 +137,9 @@ foreach ($principle in @(
     "playableUnitHorizontalStabilityUsesE8",
     "areaAggregateHarmonyStartsAtE9",
     "topicDesignPrecedesGoalActivation",
-    "topicMapsToExactlyOnePlayableUnit")) {
+    "subjectFoundationPrecedesInteractionGoal",
+    "interactionGoalMayExistWithoutPlayableLoop",
+    "registeredPlayableLoopKeepsDedicatedTopicGate")) {
     $property = $loops.principles.PSObject.Properties[$principle]
     Require ($null -ne $property -and [bool] $property.Value) `
         "PlayableLoopPrincipleMissing:$principle"

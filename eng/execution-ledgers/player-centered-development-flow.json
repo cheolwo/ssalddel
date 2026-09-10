@@ -1,6 +1,6 @@
 {
   "schemaVersion": "player-centered-development-flow.v4",
-  "revision": "player-centered-development-flow.r6",
+  "revision": "player-centered-development-flow.r7",
   "worldInteractionPolarityQuadrantCatalogPath": "eng/execution-ledgers/world-interaction-polarity-quadrants.json",
   "purpose": "플레이어의 인지, 선택, 재료 획득, 조립, 결과 체감과 다음 선택을 E, WI, H, Simulation, Unity 작업에 끝까지 연결한다.",
   "authority": {
@@ -8,6 +8,48 @@
     "authoritativeStateOwner": "SharedSimulationCore",
     "unityRole": "InputAndPresentation",
     "playerCenteredDoesNotGrantUnityStateAuthority": true
+  },
+  "specializedWorkflowRouting": {
+    "commonPlanningFirst": true,
+    "commonPlanningFrameCodes": [
+      "Now",
+      "Here",
+      "Self",
+      "Other",
+      "AppropriateAction",
+      "Result",
+      "NextChoice"
+    ],
+    "spaceSpecialization": {
+      "code": "SpatialPlanningPipeline",
+      "conditional": true,
+      "triggerCodes": [
+        "PositionChangesChoiceOrResult",
+        "AccessRouteBoundaryOrVisibilityMatters",
+        "HCompositionOrRepeatedPlacementRequired",
+        "AssetGeometryAffectsPlay",
+        "StateChangeRequiresSpatialAppearance"
+      ],
+      "defaultWorkUnit": {
+        "areaSetCount": 1,
+        "representativeWorldInteractionCount": 1,
+        "hScope": "MinimumRequiredH1H2"
+      },
+      "stageCodes": [
+        "GraphMap",
+        "PlacementMap",
+        "AssetSurvey",
+        "BlenderOptional",
+        "UnityBinding"
+      ],
+      "graphMapOwnsConcretePlacement": false,
+      "placementMapOwnsNewPlayMeaning": false,
+      "blenderRequired": false,
+      "blenderConditionCode": "ExistingAssetInsufficientForReadableStateChange",
+      "unityE5RequiresSameRevisionBinding": true
+    },
+    "nonSpatialMaySkipSpaceSpecialization": true,
+    "feedbackReturnsToEarliestResponsibleStage": true
   },
   "activityTracks": {
     "classificationOnly": true,
@@ -191,6 +233,7 @@
   ],
   "sourceDocuments": [
     "docs/Architecture/플레이어중심게임개발업무구조.md",
+    "docs/Architecture/GraphMap기획인계순환체계.md",
     "docs/Architecture/플레이폐루프와증거묶음개발체계.md",
     "docs/Architecture/게임개발업무순서기준.md",
     "docs/Architecture/E성숙도와G관리체계.md",

@@ -1,0 +1,510 @@
+{
+  "schemaVersion": "mirror-gameplay-subject-catalog.v1",
+  "revision": "mirror-gameplay-subject-catalog.r2",
+  "principles": {
+    "subjectDefinitionPrecedesInteractionGoal": true,
+    "subjectDefinitionIsNotRuntimeInstanceEvidence": true,
+    "subjectMayParticipateInManyInteractions": true,
+    "objectPersonFacilityAndWorldRuleMayBeSubjects": true
+  },
+  "allowedStatusCodes": [
+    "Candidate",
+    "Ready",
+    "Blocked",
+    "Retired"
+  ],
+  "allowedSubjectKindCodes": [
+    "PlayerActor",
+    "NpcActor",
+    "ResolvedExecutionObject",
+    "Vehicle",
+    "Equipment",
+    "Facility",
+    "NaturalObject",
+    "Environment",
+    "WorldRule"
+  ],
+  "requiredReadyFields": [
+    "subjectStableId",
+    "subjectKindCode",
+    "roleCodes",
+    "authorityStateOwnerCode",
+    "initialStateResolutionCode",
+    "persistenceBoundaryRefs",
+    "runtimeResolutionRefs",
+    "saveReplayIdentityRefs",
+    "sourceRefs"
+  ],
+  "items": [
+    {
+      "subjectStableId": "subject:synthetic-neighborhood-workforce.v1",
+      "title": "합성 도심 생활 주체·화물 작업자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Resident",
+        "RestaurantOperator",
+        "WarehouseWorker",
+        "Courier",
+        "FreightDriver"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.NeighborhoodLife",
+      "initialStateResolutionCode": "SyntheticNeighborhoodLifeR1Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "Actor/시설/화물 고유 ID와 기존 업무 원장 참조 계약. Scene 배치 증거 아님."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-worker.v1",
+      "title": "마트 작업자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "WarehouseWorker"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-stock.v1",
+      "title": "마트 적재대 재고",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "StockHolder"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-order.v1",
+      "title": "마트 주문 물품",
+      "subjectKindCode": "Equipment",
+      "roleCodes": [
+        "OrderParcel"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "title": "플레이어 직접 조작 Actor",
+      "subjectKindCode": "PlayerActor",
+      "roleCodes": [
+        "PlayerDirectActor"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.PlayerActorState",
+      "initialStateResolutionCode": "ResolvePlayerActorFromAuthoritySession",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "플레이어 Actor의 계약상 주체 정의이며 실제 로그인 사용자·Scene GameObject·Runtime 인스턴스가 아니다."
+    },
+    {
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "title": "NPC 자율 업무 Actor",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "NpcRoutineActor"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NpcActorState",
+      "initialStateResolutionCode": "ResolveNpcActorFromAuthorityRoutine",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "NPC 업무 수행자의 계약상 주체 정의이며 특정 NPC의 성격·능력·Runtime 인스턴스를 자동 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "title": "권위 실행 문맥에서 결정되는 작업 Actor",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "PlayerOrNpcExecutionActor"
+      ],
+      "authorityStateOwnerCode": "SimulationExecutionContext.ResolvedActorState",
+      "initialStateResolutionCode": "ResolvePlayerOrNpcFromAuthorityExecutionContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "PlayerOrNpc 정책의 실행 시점 주체 해석 계약이며 플레이어와 NPC의 동시 수행이나 구체 인스턴스 생성을 뜻하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "title": "세계 자동 전이 규칙",
+      "subjectKindCode": "WorldRule",
+      "roleCodes": [
+        "WorldAutomaticTransitionOwner"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WorldState",
+      "initialStateResolutionCode": "ResolveWorldRuleFromAuthorityTickContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "세계 Tick이나 규칙이 일으키는 권위 전이 주체이며 Unity 표현이나 별도 NPC로 해석하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:authoritative-interaction-target.v1",
+      "title": "권위 WI 계약에서 결정되는 직접 대상",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "DirectInteractionTarget"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WorldInteractionTargetState",
+      "initialStateResolutionCode": "ResolveDirectTargetFromWorldInteractionContract",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "WI의 직접 대상 역할 계약이다. 실행 시 같은 Actor·물체·시설·환경·세계 규칙 중 하나로 해석될 수 있으며 특정 Runtime 인스턴스나 Unity GameObject를 미리 생성하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-owner-npc.v1",
+      "title": "한스 농장주 NPC",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "HansNpc",
+        "FarmOwner",
+        "GuestRightsGrantor",
+        "BoundedManagementGrantor",
+        "DefenseCompanion",
+        "MentorIntroducer"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NpcActorState",
+      "initialStateResolutionCode": "ResolveHansFromApprovedHex03CampaignContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "수뢰둔 기획에서 재사용하는 한스의 계약상 주체다. 성격·대사·모델·Runtime 인스턴스와 운영 권한의 실제 구현을 자동 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-displaced-beast-group.v1",
+      "title": "숲 경계로 밀려난 마수 무리",
+      "subjectKindCode": "NaturalObject",
+      "roleCodes": [
+        "DisplacedBeastGroup",
+        "FarmBoundaryThreat",
+        "TraceOrigin"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NatureIncidentState",
+      "initialStateResolutionCode": "ResolveDisplacedBeastGroupFromHex03ThreatContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationNatureSurvival.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [
+        "ExactSpeciesAndDomesticationBranchRemainOptional"
+      ],
+      "boundary": "농장 경계 사건의 원인 주체 계약이다. 종·개체 수·가축화 가능성은 별도 승인 전까지 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-residential-home.v1",
+      "title": "한스 농장 생활 주택 목표",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "FarmhouseGuestSpace",
+        "FarmhouseManagementAuthorityTarget",
+        "RepairObjective",
+        "RecoveryBase"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FacilityState",
+      "initialStateResolutionCode": "ResolveHansFarmHomeFromStableFacilityIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/synty-bottom-up-inventory/definitions/h1/farm-residential-home.v2.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "생활 주택의 권위 목표 계약이며 H1 정의나 Blender 파생형, Unity GameObject를 상태 권위로 만들지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-potato-plot.v1",
+      "title": "한스 농장 감자 경작 구획 목표",
+      "subjectKindCode": "Environment",
+      "roleCodes": [
+        "PotatoPlotManagementAuthorityTarget",
+        "CultivationObjective",
+        "RecoveryObjective"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FarmPlotState",
+      "initialStateResolutionCode": "ResolveHansFarmPotatoPlotFromStablePlotIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationFarmSurvival.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/synty-bottom-up-inventory/definitions/h1/farm-production.v2.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "2.5m x 2.5m 감자 경작 구획의 권위 목표 계약이다. 작물 모델이나 실제 Scene 배치를 뜻하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-fence-defense-objective.v1",
+      "title": "한스 농장 울타리 방어 목표",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "FenceRepairObjective",
+        "FarmBoundaryDefenseObjective",
+        "BreachStateTarget"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FacilityState",
+      "initialStateResolutionCode": "ResolveHansFarmFenceAggregateFromStableIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationHansFarmFenceRestoration.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/graph-maps/hans-farm-fence-restoration.v1.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "손상·수리·돌파 상태를 가진 울타리 aggregate의 권위 목표 계약이다. Blender 울타리 후보나 Collider를 상태 권위로 만들지 않는다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-courier.v1",
+      "title": "가상 배달 기사",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Courier"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:courier",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-vehicle.v1",
+      "title": "가상 배달 차량",
+      "subjectKindCode": "Vehicle",
+      "roleCodes": [
+        "Vehicle"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:vehicle",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-order.v1",
+      "title": "가상 배달 주문",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "FoodOrder"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:order",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-recipient.v1",
+      "title": "가상 주문자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Recipient"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:recipient",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    }
+  ]
+}

@@ -1,0 +1,5205 @@
+{
+  "schemaVersion": "mirror-subject-interaction-development-output.v1",
+  "sourceRevision": "mirror-subject-interaction-development.r3",
+  "subjectCatalogRevision": "mirror-gameplay-subject-catalog.r2",
+  "worldInteractionCatalogRevision": "simulation-world-interactions.r48",
+  "legacyGoalLedgerRevision": "codex-playable-loop-goals.r143",
+  "optionalPlayableLoopCatalogRevision": "playable-loops.r44",
+  "developmentOrder": [
+    "SubjectFoundation",
+    "InteractionCore",
+    "DirectResult",
+    "DerivedEffects",
+    "OptionalPlayableLoopValidation"
+  ],
+  "counts": {
+    "readySubjects": 18,
+    "worldInteractions": 133,
+    "interactionGoals": 60,
+    "nativeLooplessGoals": 37,
+    "legacyProjectedGoals": 22,
+    "optionalLoopBindings": 23
+  },
+  "subjects": [
+    {
+      "subjectStableId": "subject:synthetic-neighborhood-workforce.v1",
+      "title": "합성 도심 생활 주체·화물 작업자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Resident",
+        "RestaurantOperator",
+        "WarehouseWorker",
+        "Courier",
+        "FreightDriver"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.NeighborhoodLife",
+      "initialStateResolutionCode": "SyntheticNeighborhoodLifeR1Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "Actor/시설/화물 고유 ID와 기존 업무 원장 참조 계약. Scene 배치 증거 아님."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-worker.v1",
+      "title": "마트 작업자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "WarehouseWorker"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-stock.v1",
+      "title": "마트 적재대 재고",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "StockHolder"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-mart-order.v1",
+      "title": "마트 주문 물품",
+      "subjectKindCode": "Equipment",
+      "roleCodes": [
+        "OrderParcel"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WaitingFleet.Mart",
+      "initialStateResolutionCode": "SyntheticMartR3Fixture",
+      "persistenceBoundaryRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "r3 합성 계약 준비. Scene 및 실제 운영 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "title": "플레이어 직접 조작 Actor",
+      "subjectKindCode": "PlayerActor",
+      "roleCodes": [
+        "PlayerDirectActor"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.PlayerActorState",
+      "initialStateResolutionCode": "ResolvePlayerActorFromAuthoritySession",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "플레이어 Actor의 계약상 주체 정의이며 실제 로그인 사용자·Scene GameObject·Runtime 인스턴스가 아니다."
+    },
+    {
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "title": "NPC 자율 업무 Actor",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "NpcRoutineActor"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NpcActorState",
+      "initialStateResolutionCode": "ResolveNpcActorFromAuthorityRoutine",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "NPC 업무 수행자의 계약상 주체 정의이며 특정 NPC의 성격·능력·Runtime 인스턴스를 자동 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "title": "권위 실행 문맥에서 결정되는 작업 Actor",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "PlayerOrNpcExecutionActor"
+      ],
+      "authorityStateOwnerCode": "SimulationExecutionContext.ResolvedActorState",
+      "initialStateResolutionCode": "ResolvePlayerOrNpcFromAuthorityExecutionContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "PlayerOrNpc 정책의 실행 시점 주체 해석 계약이며 플레이어와 NPC의 동시 수행이나 구체 인스턴스 생성을 뜻하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "title": "세계 자동 전이 규칙",
+      "subjectKindCode": "WorldRule",
+      "roleCodes": [
+        "WorldAutomaticTransitionOwner"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WorldState",
+      "initialStateResolutionCode": "ResolveWorldRuleFromAuthorityTickContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interaction-gwae-classifications.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "세계 Tick이나 규칙이 일으키는 권위 전이 주체이며 Unity 표현이나 별도 NPC로 해석하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:authoritative-interaction-target.v1",
+      "title": "권위 WI 계약에서 결정되는 직접 대상",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "DirectInteractionTarget"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.WorldInteractionTargetState",
+      "initialStateResolutionCode": "ResolveDirectTargetFromWorldInteractionContract",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "WI의 직접 대상 역할 계약이다. 실행 시 같은 Actor·물체·시설·환경·세계 규칙 중 하나로 해석될 수 있으며 특정 Runtime 인스턴스나 Unity GameObject를 미리 생성하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-owner-npc.v1",
+      "title": "한스 농장주 NPC",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "HansNpc",
+        "FarmOwner",
+        "GuestRightsGrantor",
+        "BoundedManagementGrantor",
+        "DefenseCompanion",
+        "MentorIntroducer"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NpcActorState",
+      "initialStateResolutionCode": "ResolveHansFromApprovedHex03CampaignContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/경영SimulationSession.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "수뢰둔 기획에서 재사용하는 한스의 계약상 주체다. 성격·대사·모델·Runtime 인스턴스와 운영 권한의 실제 구현을 자동 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-displaced-beast-group.v1",
+      "title": "숲 경계로 밀려난 마수 무리",
+      "subjectKindCode": "NaturalObject",
+      "roleCodes": [
+        "DisplacedBeastGroup",
+        "FarmBoundaryThreat",
+        "TraceOrigin"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.NatureIncidentState",
+      "initialStateResolutionCode": "ResolveDisplacedBeastGroupFromHex03ThreatContext",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationNatureSurvival.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/스토리/PLAN-STORY-HEX03-CAMPAIGN-001/README.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [
+        "ExactSpeciesAndDomesticationBranchRemainOptional"
+      ],
+      "boundary": "농장 경계 사건의 원인 주체 계약이다. 종·개체 수·가축화 가능성은 별도 승인 전까지 확정하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-residential-home.v1",
+      "title": "한스 농장 생활 주택 목표",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "FarmhouseGuestSpace",
+        "FarmhouseManagementAuthorityTarget",
+        "RepairObjective",
+        "RecoveryBase"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FacilityState",
+      "initialStateResolutionCode": "ResolveHansFarmHomeFromStableFacilityIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Application/RuntimeCore/SimulationRuntime.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/synty-bottom-up-inventory/definitions/h1/farm-residential-home.v2.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "생활 주택의 권위 목표 계약이며 H1 정의나 Blender 파생형, Unity GameObject를 상태 권위로 만들지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-potato-plot.v1",
+      "title": "한스 농장 감자 경작 구획 목표",
+      "subjectKindCode": "Environment",
+      "roleCodes": [
+        "PotatoPlotManagementAuthorityTarget",
+        "CultivationObjective",
+        "RecoveryObjective"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FarmPlotState",
+      "initialStateResolutionCode": "ResolveHansFarmPotatoPlotFromStablePlotIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationFarmSurvival.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/synty-bottom-up-inventory/definitions/h1/farm-production.v2.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "2.5m x 2.5m 감자 경작 구획의 권위 목표 계약이다. 작물 모델이나 실제 Scene 배치를 뜻하지 않는다."
+    },
+    {
+      "subjectStableId": "subject:hans-farm-fence-defense-objective.v1",
+      "title": "한스 농장 울타리 방어 목표",
+      "subjectKindCode": "Facility",
+      "roleCodes": [
+        "FenceRepairObjective",
+        "FarmBoundaryDefenseObjective",
+        "BreachStateTarget"
+      ],
+      "authorityStateOwnerCode": "SimulationSession.FacilityState",
+      "initialStateResolutionCode": "ResolveHansFarmFenceAggregateFromStableIdentity",
+      "persistenceBoundaryRefs": [
+        "eng/execution-ledgers/world-interactions.json"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationHansFarmFenceRestoration.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplay.cs"
+      ],
+      "sourceRefs": [
+        "eng/world-seedbeds/graph-maps/hans-farm-fence-restoration.v1.json"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "손상·수리·돌파 상태를 가진 울타리 aggregate의 권위 목표 계약이다. Blender 울타리 후보나 Collider를 상태 권위로 만들지 않는다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-courier.v1",
+      "title": "가상 배달 기사",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Courier"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:courier",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-vehicle.v1",
+      "title": "가상 배달 차량",
+      "subjectKindCode": "Vehicle",
+      "roleCodes": [
+        "Vehicle"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:vehicle",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-order.v1",
+      "title": "가상 배달 주문",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "roleCodes": [
+        "FoodOrder"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:order",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    },
+    {
+      "subjectStableId": "subject:synthetic-delivery-recipient.v1",
+      "title": "가상 주문자",
+      "subjectKindCode": "NpcActor",
+      "roleCodes": [
+        "Recipient"
+      ],
+      "authorityStateOwnerCode": "SimulationSession",
+      "initialStateResolutionCode": "SyntheticDeliveryProfile:recipient",
+      "persistenceBoundaryRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "runtimeResolutionRefs": [
+        "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상배달관찰Contracts.cs"
+      ],
+      "saveReplayIdentityRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "sourceRefs": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "statusCode": "Ready",
+      "openGapRefs": [],
+      "boundary": "합성 프로필의 계약 준비. 실제 Runtime 인스턴스·운영 기사·화면 증거가 아니다."
+    }
+  ],
+  "worldInteractions": [
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+      "title": "근무 복귀",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Working"
+      ],
+      "directEffectCodes": [
+        "Working"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-LIFE-REST",
+      "title": "인계 후 휴식",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Resting"
+      ],
+      "directEffectCodes": [
+        "Resting"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-INSPECT",
+      "title": "보충창고 입고 검수",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Inspected"
+      ],
+      "directEffectCodes": [
+        "Inspected"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PUTAWAY",
+      "title": "검수 물품 적치",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Stored"
+      ],
+      "directEffectCodes": [
+        "Stored"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-RESERVE",
+      "title": "보충 출고 예약",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Reserved"
+      ],
+      "directEffectCodes": [
+        "Reserved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PICK",
+      "title": "보충 물품 피킹",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Picked"
+      ],
+      "directEffectCodes": [
+        "Picked"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PACK",
+      "title": "보충 물품 포장",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Packed"
+      ],
+      "directEffectCodes": [
+        "Packed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-STAGE",
+      "title": "보충 물품 상차대 인계",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Ready"
+      ],
+      "directEffectCodes": [
+        "Ready"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-FREIGHT-LOAD",
+      "title": "화물차 상차",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Loaded"
+      ],
+      "directEffectCodes": [
+        "Loaded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-FREIGHT-UNLOAD",
+      "title": "마트 화물 하차",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Unloaded"
+      ],
+      "directEffectCodes": [
+        "Unloaded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-INBOUND",
+      "title": "마트 검수 입고",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Received"
+      ],
+      "directEffectCodes": [
+        "Received"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-RESERVE",
+      "title": "마트 예약",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Reserved"
+      ],
+      "directEffectCodes": [
+        "Reserved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PICK",
+      "title": "마트 피킹",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Picked"
+      ],
+      "directEffectCodes": [
+        "Picked"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PACK",
+      "title": "마트 포장",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Packed"
+      ],
+      "directEffectCodes": [
+        "Packed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-STAGE",
+      "title": "마트 인계대 적치",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ReadyForCourier"
+      ],
+      "directEffectCodes": [
+        "ReadyForCourier"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-ASSIGN",
+      "title": "기사 배정",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Assigned"
+      ],
+      "directEffectCodes": [
+        "Assigned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MOVE",
+      "title": "도로·출입구 이동",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PositionAdvanced"
+      ],
+      "directEffectCodes": [
+        "PositionAdvanced"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-PICKUP",
+      "title": "음식 픽업",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PickedUp"
+      ],
+      "directEffectCodes": [
+        "PickedUp"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DELIVER",
+      "title": "주택 전달",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Delivered"
+      ],
+      "directEffectCodes": [
+        "Delivered"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RECEIVE",
+      "title": "주문자 수령",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Received"
+      ],
+      "directEffectCodes": [
+        "Received"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RETURN",
+      "title": "기사 복귀",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Returned"
+      ],
+      "directEffectCodes": [
+        "Returned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-RESTAURANT-COOK",
+      "title": "음식점 조리 자리 배정",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ReadyForPickup"
+      ],
+      "directEffectCodes": [
+        "RestaurantCookingScheduled"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-RESTAURANT-ACCEPT",
+      "title": "음식점 NPC 주문 자동 수락",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FoodOrderCookingQueued"
+      ],
+      "directEffectCodes": [
+        "RestaurantResponseRecorded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ACTOR-CONSUME",
+      "title": "물품 섭취",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ItemConsumed"
+      ],
+      "directEffectCodes": [
+        "ItemConsumed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ACTOR-PLAN-SET",
+      "title": "개인 계획 설정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PersonalPlanSet"
+      ],
+      "directEffectCodes": [
+        "PersonalPlanSet"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMBAT-DIRECT-CONTROL-SET",
+      "title": "직접 전투 조종 전환",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ActorDirectControlChanged"
+      ],
+      "directEffectCodes": [
+        "ActorDirectControlChanged"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMBAT-TACTICAL-COMMAND",
+      "title": "분대 전술 명령 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "SquadTacticalOrderConfirmed"
+      ],
+      "directEffectCodes": [
+        "SquadTacticalOrderConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-COOPERATION-PROPOSE",
+      "title": "공동체 협력 제안",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CooperationProposed"
+      ],
+      "directEffectCodes": [
+        "CooperationProposed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-ENTRANCE-POLICY-SET",
+      "title": "공동체 출입 정책 설정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "EntrancePolicySet"
+      ],
+      "directEffectCodes": [
+        "EntrancePolicySet"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-HIRE",
+      "title": "NPC 고용 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NpcEmploymentConfirmed"
+      ],
+      "directEffectCodes": [
+        "NpcEmploymentConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-MEMBERSHIP-CONFIRM",
+      "title": "공동체 정식 편입 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CommunityMembershipConfirmed"
+      ],
+      "directEffectCodes": [
+        "CommunityMembershipConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-REMOTE-RESPONSE",
+      "title": "원격 응대 지시 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "RemoteResponseOrderConfirmed"
+      ],
+      "directEffectCodes": [
+        "RemoteResponseOrderConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-SUPPORT-MISSION-JOIN",
+      "title": "공동 지원 임무 참여",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "SupportMissionParticipationConfirmed"
+      ],
+      "directEffectCodes": [
+        "SupportMissionParticipationConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CON-BLUEPRINT-PLACE",
+      "title": "건설 청사진 배치",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ConstructionBlueprintPlaced"
+      ],
+      "directEffectCodes": [
+        "ConstructionBlueprintPlaced"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CON-DEMOLISH",
+      "title": "건설물 해체",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ConstructionDemolished"
+      ],
+      "directEffectCodes": [
+        "ConstructionDemolished"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CON-MATERIAL-DEPOSIT",
+      "title": "건설 재료 투입",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ConstructionMaterialDeposited"
+      ],
+      "directEffectCodes": [
+        "ConstructionMaterialDeposited"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CON-WORK-CONTRIBUTE",
+      "title": "건설 시공 기여",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ConstructionWorkContributed"
+      ],
+      "directEffectCodes": [
+        "ConstructionWorkContributed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CRAFT-BREW",
+      "title": "배합물 달이기",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "BrewBatchCompleted"
+      ],
+      "directEffectCodes": [
+        "BrewBatchCompleted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-EXPEDITION-DISPATCH",
+      "title": "탐사 임무 파견",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ExpeditionDispatched"
+      ],
+      "directEffectCodes": [
+        "ExpeditionDispatched"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-FIELD-BOUNDARY-CONFIRM",
+      "title": "밭 경계 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FieldBoundaryConfirmed"
+      ],
+      "directEffectCodes": [
+        "FieldBoundaryConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-SOIL-AMEND",
+      "title": "토양 개량",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "SoilAmended"
+      ],
+      "directEffectCodes": [
+        "SoilAmended"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-WATER-TRANSFER",
+      "title": "농업 용수 이송",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "IrrigationWaterTransferred"
+      ],
+      "directEffectCodes": [
+        "IrrigationWaterTransferred"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-GUEST-PERMISSION-SET",
+      "title": "손님 활동 권한 설정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "GuestPermissionSet"
+      ],
+      "directEffectCodes": [
+        "GuestPermissionSet"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HEAT-SOURCE-STATE-CHANGE",
+      "title": "열원 상태 변경",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HeatSourceStateChanged"
+      ],
+      "directEffectCodes": [
+        "HeatSourceStateChanged"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-DEMAND-ALLOCATE",
+      "title": "Hub 수요 재고 할당",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HubDemandInventoryAllocated"
+      ],
+      "directEffectCodes": [
+        "HubDemandInventoryAllocated"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-SUPPLY-TASK-ACCEPT",
+      "title": "Hub 조달 과제 수락",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HubSupplyTaskAccepted"
+      ],
+      "directEffectCodes": [
+        "HubSupplyTaskAccepted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-INVENTORY-BELOW-RESERVE-SALE-CONFIRM",
+      "title": "목표 비축 미달 판매 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "BelowReserveSaleConfirmed"
+      ],
+      "directEffectCodes": [
+        "BelowReserveSaleConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-HERB-GATHER",
+      "title": "약초 채집",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HerbGathered"
+      ],
+      "directEffectCodes": [
+        "HerbGathered"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-TRACE-INVESTIGATE",
+      "title": "자연 흔적 조사",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NatureTraceInvestigated"
+      ],
+      "directEffectCodes": [
+        "NatureTraceInvestigated"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-SURVIVAL-RATION-POLICY-SET",
+      "title": "생존 배급 정책 설정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "RationPolicySet"
+      ],
+      "directEffectCodes": [
+        "RationPolicySet"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-TOWN-DELIVERY-INSPECT",
+      "title": "Town 납품 검수",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TownDeliveryInspected"
+      ],
+      "directEffectCodes": [
+        "TownDeliveryInspected"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-TOWN-DELIVERY-RECEIVE",
+      "title": "Town 납품 인수",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TownDeliveryReceived"
+      ],
+      "directEffectCodes": [
+        "TownDeliveryReceived"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-TOWN-STOCK-PUTAWAY",
+      "title": "Town 후방 재고 적재",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TownStockPutAway"
+      ],
+      "directEffectCodes": [
+        "TownStockPutAway"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-TOWN-STOCK-REPLENISH",
+      "title": "Town 재고 보충 주문",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TownReplenishmentOrderConfirmed"
+      ],
+      "directEffectCodes": [
+        "TownReplenishmentOrderConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-TOWN-SUPPLY-DISPATCH",
+      "title": "Town 공급 운송 출발 확정",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TownSupplyDispatched"
+      ],
+      "directEffectCodes": [
+        "TownSupplyDispatched"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-RESOURCE-REGENERATE",
+      "title": "세계 자원 재생",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ResourceAvailabilityRestored",
+        "ResourceAvailabilityUnchanged"
+      ],
+      "directEffectCodes": [
+        "ResourceAvailabilityRestored",
+        "ResourceAvailabilityUnchanged"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ACTOR-01",
+      "title": "물품 획득",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ItemOwnedInInventory"
+      ],
+      "directEffectCodes": [
+        "ItemAcquired"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ACTOR-02",
+      "title": "장착 상태 변경",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "EquipmentStateChanged"
+      ],
+      "directEffectCodes": [
+        "ItemEquipmentChanged"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ACTOR-03",
+      "title": "지식 습득",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "RecipeKnown"
+      ],
+      "directEffectCodes": [
+        "RecipeKnowledgeAdded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-COMMUNITY-VISITOR-STAY",
+      "title": "방문자 임시 체류 결정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CommunityVisitorTemporaryStayAccepted",
+        "CommunityVisitorRejected"
+      ],
+      "directEffectCodes": [
+        "CommunityVisitorStayDecisionRecorded",
+        "CommunityMindTraceRecorded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-DEFENSE-MOBILIZE",
+      "title": "방위 분대 소집",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmDefenseSquadMobilized",
+        "FarmProductionContributionSuspended"
+      ],
+      "directEffectCodes": [
+        "FarmDefenseSquadMobilized",
+        "FarmProductionContributionSuspended"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-SQUAD-ASSIGN",
+      "title": "경비 초소 분대 배정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmDefenseSquadAssignedToOutpostSlot"
+      ],
+      "directEffectCodes": [
+        "FarmDefenseSquadAssigned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-SQUAD-SUPPLY",
+      "title": "경비 분대 식량·장비 보급",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmDefenseSquadSupplied"
+      ],
+      "directEffectCodes": [
+        "FarmDefenseSquadSupplied"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-DEFENSE-RESOLVE",
+      "title": "Farm 방어 성공 결과 발현",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmDefenseResultManifested"
+      ],
+      "directEffectCodes": [
+        "FarmDefenseResolved",
+        "FarmThreatReduced",
+        "FarmSafePeriodExtended",
+        "FarmProductionRecoveryModified",
+        "FarmDefenseLootAdded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-DEFENSE-RETURN",
+      "title": "Farm 방위 분대 초소 귀환 인계",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmDefenseSquadReturned"
+      ],
+      "directEffectCodes": [
+        "FarmDefenseSquadReturned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-01",
+      "title": "경작지 밭갈이",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Tilled"
+      ],
+      "directEffectCodes": [
+        "SoilTilled"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-02",
+      "title": "경작지 씨앗 파종",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Growing"
+      ],
+      "directEffectCodes": [
+        "CultivationStarted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-03",
+      "title": "농작물 생육 관리",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Growing",
+        "HarvestReady"
+      ],
+      "directEffectCodes": [
+        "CropCareApplied"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-04",
+      "title": "익은 농작물 수확",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Harvested",
+        "HarvestedAtField"
+      ],
+      "directEffectCodes": [
+        "HarvestLotCreated",
+        "CultivationHarvested"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-05",
+      "title": "수확물 집하장 모으기",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CollectedAtYard"
+      ],
+      "directEffectCodes": [
+        "HarvestLotCollected"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-FARM-06",
+      "title": "출하 물량 포장",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PackedForShipment",
+        "PreparedForShipment"
+      ],
+      "directEffectCodes": [
+        "PackageLotCreated",
+        "CargoPrepared"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-LOG-01",
+      "title": "출하 차량 상차 확정",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Reserved"
+      ],
+      "directEffectCodes": [
+        "CargoTransportReserved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-LOG-02",
+      "title": "농장에서 출발",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "InTransit"
+      ],
+      "directEffectCodes": [
+        "CargoDeparted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-LOG-03",
+      "title": "농장에서 물류 거점으로 화물 이동",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "InTransit",
+        "ArrivedAtDestination"
+      ],
+      "directEffectCodes": [
+        "CargoRouteProgressed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-LOG-04",
+      "title": "물류 거점 도착 화물 하차",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ArrivedAtDestination"
+      ],
+      "directEffectCodes": [
+        "CargoUnloaded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-LOG-05",
+      "title": "물류 거점 도착 화물 인수",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Received",
+        "StorageEligible"
+      ],
+      "directEffectCodes": [
+        "FreightReceived",
+        "StorageEligible"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-001",
+      "title": "입고 화물 검수",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "StorageEligible",
+        "Received"
+      ],
+      "directEffectCodes": [
+        "InspectionWorkAreaReleased",
+        "StorageEligible",
+        "FreightReceived"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-002",
+      "title": "검수 완료 화물 창고 적재",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PutAwayCompleted"
+      ],
+      "directEffectCodes": [
+        "SpatialStorageCapacityConsumed",
+        "SpatialWorkAreaReleased",
+        "PutAwayCompleted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-03",
+      "title": "출고 대상 재고 요청",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "OutboundRequested"
+      ],
+      "directEffectCodes": [
+        "OutboundRequested"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-04",
+      "title": "출고 대상 재고 피킹",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Picked"
+      ],
+      "directEffectCodes": [
+        "StockPicked"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-05",
+      "title": "피킹 화물 포장",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "OutboundReady"
+      ],
+      "directEffectCodes": [
+        "OutboundCargoPrepared"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-HUB-06",
+      "title": "출고 차량 상차",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Reserved"
+      ],
+      "directEffectCodes": [
+        "HubCargoLoaded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-MARKET-01",
+      "title": "물류 거점에서 마트로 운송",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ArrivedAtDestination"
+      ],
+      "directEffectCodes": [
+        "MarketCargoArrived"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-MARKET-02",
+      "title": "마트 도착 화물 인수",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "MarketReceived"
+      ],
+      "directEffectCodes": [
+        "MarketFreightReceived"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-MARKET-03",
+      "title": "마트 입고 상품 검수",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "MarketStorageEligible"
+      ],
+      "directEffectCodes": [
+        "MarketStorageEligible"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-MARKET-04",
+      "title": "검수 상품 후방 창고 적재",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "MarketBackroomStored"
+      ],
+      "directEffectCodes": [
+        "MarketBackroomStored"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-MARKET-05",
+      "title": "매장 진열대 상품 보충",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Displayed"
+      ],
+      "directEffectCodes": [
+        "DisplayStockReplenished"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-01",
+      "title": "주민 주문 확정",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "OrderConfirmed"
+      ],
+      "directEffectCodes": [
+        "OrderConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-02",
+      "title": "주문 상품 재고 예약",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "StockReserved"
+      ],
+      "directEffectCodes": [
+        "OrderStockReserved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-03",
+      "title": "주문 상품 피킹",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Picked"
+      ],
+      "directEffectCodes": [
+        "OrderStockPicked"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-04",
+      "title": "주문 상품 포장",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Packed"
+      ],
+      "directEffectCodes": [
+        "OrderPacked"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-05",
+      "title": "주문 상품 수령 준비",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ReadyForPickup"
+      ],
+      "directEffectCodes": [
+        "OrderReadyForPickup"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-06",
+      "title": "주민 주문 상품 수령",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Fulfilled"
+      ],
+      "directEffectCodes": [
+        "OrderFulfilled"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-ORDER-07",
+      "title": "주민 상품 소비",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Consumed"
+      ],
+      "directEffectCodes": [
+        "ResidentConsumed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-01",
+      "title": "자연 지역 위험 징후 확인",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "ThreatObserved"
+      ],
+      "directEffectCodes": [
+        "NatureThreatObserved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-02",
+      "title": "안전 거점으로 긴급 후퇴",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "RetreatedToSafeCore"
+      ],
+      "directEffectCodes": [
+        "PartyRetreatedToSafeCore"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-03",
+      "title": "훼손된 자연 경로 복원",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NatureRouteRestored"
+      ],
+      "directEffectCodes": [
+        "NatureRouteRestored"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-04",
+      "title": "탐사대 안전 회복",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PartyRecovered"
+      ],
+      "directEffectCodes": [
+        "PartyRecovered"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-05",
+      "title": "벌목 도끼 획득",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "AxeOwnedInInventory"
+      ],
+      "directEffectCodes": [
+        "AxeAcquired"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-06",
+      "title": "나무 벌목 작업 시작",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HarvestWorkScheduled"
+      ],
+      "directEffectCodes": [
+        "TreeFelled",
+        "TimberCreated"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-07",
+      "title": "오두막을 지을 터 선정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CabinBlueprintPlaced"
+      ],
+      "directEffectCodes": [
+        "CabinBlueprintPlaced"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-08",
+      "title": "오두막 건설 작업 시작",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CabinBuildScheduled"
+      ],
+      "directEffectCodes": [
+        "CabinOperational",
+        "CabinRecoveryEnabled",
+        "CabinDefenseEnabled"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-09",
+      "title": "오두막 안으로 들어가기",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PlayerInsideCabin"
+      ],
+      "directEffectCodes": [
+        "PlayerEnteredCabin"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-10",
+      "title": "오두막 밖으로 나가기",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "PlayerOutsideCabin"
+      ],
+      "directEffectCodes": [
+        "PlayerLeftCabin"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-11",
+      "title": "황혼 위협 대응 방식 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "EncounterResolved",
+        "BattleHandoffRequested",
+        "PlayerRetreated",
+        "PlayerDefeated"
+      ],
+      "directEffectCodes": [
+        "BattleHandoffRequested",
+        "EncounterVictoryRewarded",
+        "PlayerRetreated",
+        "CarriedMaterialsLost",
+        "EncounterResolved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-12",
+      "title": "진행 중 작업 취소",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "WorkCancelled",
+        "SafeChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "WorkCancelled",
+        "SpatialReservationReleased",
+        "ReservedMaterialReturned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-13",
+      "title": "획득 자원 거점 보관",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TimberStored"
+      ],
+      "directEffectCodes": [
+        "TimberStored",
+        "CabinStorageTransferRecorded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-14",
+      "title": "오두막에서 수면·새벽 맞기",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Sleeping",
+        "DawnReached"
+      ],
+      "directEffectCodes": [
+        "SleepStarted",
+        "DawnReached",
+        "SleepReleased"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-15",
+      "title": "다음 날 거점 확장 계획 선택",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Day2Ready",
+        "ExpansionPlanSelected"
+      ],
+      "directEffectCodes": [
+        "ExpansionPlanSelected",
+        "Day2Ready"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-16",
+      "title": "현장 보급 꾸러미 제작",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NatureFieldSupplyPackAdded",
+        "FieldExpeditionChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "NatureFieldSupplyPackAdded",
+        "ExpeditionPrepared",
+        "OneCarriedMaterialStackProtected"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-17",
+      "title": "현장 보급 제작 업무 위임",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NatureFieldSupplyPackAdded",
+        "FieldExpeditionChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "NpcFieldSupplyPolicySelected",
+        "NatureFieldSupplyPackAdded",
+        "FieldExpeditionChoiceAvailable"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-18",
+      "title": "벌목 통나무 줍기",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "DroppedTimberCollected",
+        "TimberCarried"
+      ],
+      "directEffectCodes": [
+        "TimberCollected",
+        "DroppedTimberRemoved"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-19",
+      "title": "한스 농장 부러진 손도끼 줍기",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HansBrokenAxeCarried",
+        "WoodcuttingChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "HansBrokenAxeCarried"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-20",
+      "title": "한스 농장 울타리 일괄 수리",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HansFarmFenceRepaired",
+        "HansFarmLifeOrTravelChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "HansFarmFenceRepaired",
+        "HansFarmLifeOrTravelChoiceAvailable"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-REFLECT-01",
+      "title": "승인 자료로 거점 성찰 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "InnerLearningPending"
+      ],
+      "directEffectCodes": [
+        "InnerLearningPending"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CARD-01",
+      "title": "현재 세계의 메이저 아르카나 활성화",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "MajorArcanaActivationFrozen",
+        "TownLifeChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "MajorArcanaActivated",
+        "ArcanaOrientationFrozen",
+        "ArcanaInfluenceSnapshotsCreated"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CON-01",
+      "title": "영역 건물 건설 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Building",
+        "Operational"
+      ],
+      "directEffectCodes": [
+        "AreaBuildingOperational"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-01",
+      "title": "도심 서비스 수요 확정",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CityDemandConfirmed"
+      ],
+      "directEffectCodes": [
+        "CityDemandConfirmed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-02",
+      "title": "도심 서비스용 지역 재고 배정",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CityInventoryAllocated",
+        "CityInventoryShortage"
+      ],
+      "directEffectCodes": [
+        "CityInventoryAllocated",
+        "CityInventoryShortage"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-03",
+      "title": "도심 주민 서비스 처리",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CityServiceCompleted",
+        "CityServiceDeferred"
+      ],
+      "directEffectCodes": [
+        "CityServiceCompleted",
+        "CityServiceDeferred"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-CITY-04",
+      "title": "도심 서비스 결과 확인",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "CityServiceChoiceAvailable"
+      ],
+      "directEffectCodes": [
+        "CityServiceChoiceAvailable"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-01",
+      "title": "NPC에게 반복 업무 배정",
+      "controlPolicyCode": "WorldAutomatic",
+      "subjectStableId": "subject:world-automatic-rule.v1",
+      "subjectKindCode": "WorldRule",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:world-automatic-rule.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Assigned"
+      ],
+      "directEffectCodes": [
+        "NpcAssigned"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-02",
+      "title": "NPC에게 업무 역량 위임",
+      "controlPolicyCode": "NpcRoutine",
+      "subjectStableId": "subject:npc-routine-actor.v1",
+      "subjectKindCode": "NpcActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:npc-routine-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Granted"
+      ],
+      "directEffectCodes": [
+        "NpcCapabilityGranted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-03",
+      "title": "진행 중 세계 업무 취소",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Cancelled"
+      ],
+      "directEffectCodes": [
+        "TaskCancelled",
+        "ReservationsReleased"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-04",
+      "title": "손상된 시설 수리",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Repaired"
+      ],
+      "directEffectCodes": [
+        "FacilityRepaired"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-05",
+      "title": "새로운 지역 발견",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Discovered"
+      ],
+      "directEffectCodes": [
+        "RegionDiscovered"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-06",
+      "title": "일행 역할 카드 장착",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Equipped"
+      ],
+      "directEffectCodes": [
+        "TeamRoleCardEquipped"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-07",
+      "title": "세계 활동 상태 변경",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "Active",
+        "Completed"
+      ],
+      "directEffectCodes": [
+        "TeamActivityStarted",
+        "TeamActivityEnded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-08",
+      "title": "하루 운영 턴 마감",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "TurnClosed"
+      ],
+      "directEffectCodes": [
+        "TurnClosed"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-NATURE-HANS-BOUNDARY-PATROL",
+      "title": "한스와 농장 경계 순찰",
+      "controlPolicyCode": "PlayerOrNpc",
+      "subjectStableId": "subject:resolved-player-or-npc-actor.v1",
+      "subjectKindCode": "ResolvedExecutionObject",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:resolved-player-or-npc-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "FarmBoundaryPatrolCompleted",
+        "HansAndPlayerReturnedTogether"
+      ],
+      "directEffectCodes": [
+        "FarmBoundaryPatrolCompleted",
+        "HansAndPlayerReturnedTogether",
+        "PromiseFulfillmentRecorded"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-WORLD-BOUNDED-MANAGEMENT-GRANT",
+      "title": "제한된 생활 거점 관리권 부여",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "BoundedManagementAuthorityGranted"
+      ],
+      "directEffectCodes": [
+        "BoundedManagementAuthorityGranted"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF",
+      "title": "한스 농장 위기 사후 성찰",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "HansFarmCrisisDebriefCompleted",
+        "LearningNeedRecognized"
+      ],
+      "directEffectCodes": [
+        "HansFarmCrisisDebriefCompleted",
+        "LearningNeedRecognized",
+        "Hex04CampaignEntryAvailable"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    },
+    {
+      "worldInteractionId": "WI-REVIEW-01",
+      "title": "NPC 업무 결과 검토 확정",
+      "controlPolicyCode": "PlayerDirect",
+      "subjectStableId": "subject:player-controlled-actor.v1",
+      "subjectKindCode": "PlayerActor",
+      "subjectBindings": [
+        {
+          "roleCode": "Actor",
+          "subjectStableId": "subject:player-controlled-actor.v1"
+        },
+        {
+          "roleCode": "DirectTarget",
+          "subjectStableId": "subject:authoritative-interaction-target.v1"
+        }
+      ],
+      "directCompletionStateCodes": [
+        "NpcWorkReviewConfirmed"
+      ],
+      "directEffectCodes": [
+        "NpcWorkReviewConfirmed",
+        "PlayerOperationalProficiencyChanged"
+      ],
+      "subjectFoundationStatusCode": "Ready"
+    }
+  ],
+  "interactionGoals": [
+    {
+      "goalStableId": "interaction-goal:nature-shelter-foundation.wi-nature-06.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-NATURE-06",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-shelter-foundation.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-twilight-return.wi-nature-11.v1",
+      "goalStateCode": "Completed",
+      "worldInteractionId": "WI-NATURE-11",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-twilight-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-tactical-self-navigation.wi-nature-05.v1",
+      "goalStateCode": "Completed",
+      "worldInteractionId": "WI-NATURE-05",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-tactical-self-navigation.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-night-day2.wi-world-resource-regenerate.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-WORLD-RESOURCE-REGENERATE",
+      "subjectBindingRefs": [
+        "subject:world-automatic-rule.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-night-day2.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-workbench-foundation.wi-con-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-CON-01",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-workbench-foundation.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-field-supply-return.wi-nature-16.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-NATURE-16",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-field-supply-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-basic-herbal-recovery.wi-actor-03.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-ACTOR-03",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-basic-herbal-recovery.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-camp-visitor-stay.wi-community-visitor-stay.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-COMMUNITY-VISITOR-STAY",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-camp-visitor-stay.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:farm-crop-cycle.wi-farm-01.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-FARM-01",
+      "subjectBindingRefs": [
+        "subject:resolved-player-or-npc-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:farm-crop-cycle.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:farm-pack-store-return.wi-farm-05.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-FARM-05",
+      "subjectBindingRefs": [
+        "subject:resolved-player-or-npc-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:farm-pack-store-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:farm-barracks-defense.wi-farm-defense-return.v1",
+      "goalStateCode": "Deferred",
+      "worldInteractionId": "WI-FARM-DEFENSE-RETURN",
+      "subjectBindingRefs": [
+        "subject:world-automatic-rule.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:farm-barracks-defense.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:hub-inbound-putaway.wi-001.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-001",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:hub-inbound-putaway.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:hub-outbound-ready-return.wi-hub-03.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-HUB-03",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:hub-outbound-ready-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:town-order-consume-return.wi-order-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-ORDER-01",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:town-order-consume-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:city-demand-service-return.wi-city-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-CITY-01",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:city-demand-service-return.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-base-reflection.wi-reflect-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-REFLECT-01",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-base-reflection.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-building-learning.wi-con-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-CON-01",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-building-learning.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-regional-threat-recovery.wi-nature-02.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-NATURE-02",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-regional-threat-recovery.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:player-npc-learning-focus.wi-nature-06.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-NATURE-06",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:player-npc-learning-focus.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:farm-player-placement.wi-world-03.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-WORLD-03",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:farm-player-placement.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:nature-hans-farm-fence-restoration.wi-nature-19.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-NATURE-19",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-hans-farm-fence-restoration.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:town-arcana-context.wi-card-01.v1",
+      "goalStateCode": "Queued",
+      "worldInteractionId": "WI-CARD-01",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:town-arcana-context.v1",
+      "compatibilitySourceCode": "LegacyPlayableLoopGoalProjection",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "effectCodes": [],
+        "hopDepthCode": "None",
+        "causalEvidenceRefs": [],
+        "idempotencyRefs": [],
+        "saveReplayRefs": [],
+        "notApplicableReason": "기존 Goal은 현행 WI의 completionStateCodes와 effectCodes를 직접 결과로 보존하며 별도 1-hop 파생 작용을 자동 생성하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-life-shift.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-life-rest.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-LIFE-REST",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-inspect.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-INSPECT",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-putaway.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PUTAWAY",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-reserve.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-RESERVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-pick.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PICK",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-pack.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-PACK",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-depot-stage.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DEPOT-STAGE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-freight-load.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-FREIGHT-LOAD",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-freight-unload.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-FREIGHT-UNLOAD",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-mart-inbound.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-INBOUND",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-accept.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-RESTAURANT-ACCEPT",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-cook.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-RESTAURANT-COOK",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-assign.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-ASSIGN",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-move.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MOVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-pickup.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-PICKUP",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-deliver.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DELIVER",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-receive.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RECEIVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-return.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RETURN",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-mart-reserve.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-RESERVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-mart-pick.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PICK",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-mart-pack.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PACK",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:neighborhood-life-mart-stage.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-STAGE",
+      "subjectBindingRefs": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+        "designRevision": "neighborhood-life.r1",
+        "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "해당 WI 직접 결과만 소유. 후속 업무는 각 WI가 검증하며 자동 E 승격 없음."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-order-accept-r4.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-RESTAURANT-ACCEPT",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/order-ledger.r4.md",
+        "designRevision": "order-ledger.r4",
+        "designHashSha256": "D66B7F6FC0F78469B4F93327F8007AC1DFC3CEB13AA47717AD41726C5DD22153",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/order-ledger.r4.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "수락의 직접 결과만 다루며 조리·배차를 파생 실행하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-order-assign-r4.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-ASSIGN",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/order-ledger.r4.md",
+        "designRevision": "order-ledger.r4",
+        "designHashSha256": "D66B7F6FC0F78469B4F93327F8007AC1DFC3CEB13AA47717AD41726C5DD22153",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/order-ledger.r4.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-mart-reserve.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-RESERVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md",
+        "designRevision": "mart-center.r3",
+        "designHashSha256": "9DD5F03FFF1D6072E57C51AC7720ACC50E8AEBFCB900AA61D287BAD47B806EF1",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-mart-pick.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PICK",
+      "subjectBindingRefs": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md",
+        "designRevision": "mart-center.r3",
+        "designHashSha256": "9DD5F03FFF1D6072E57C51AC7720ACC50E8AEBFCB900AA61D287BAD47B806EF1",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-mart-pack.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PACK",
+      "subjectBindingRefs": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md",
+        "designRevision": "mart-center.r3",
+        "designHashSha256": "9DD5F03FFF1D6072E57C51AC7720ACC50E8AEBFCB900AA61D287BAD47B806EF1",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-mart-stage.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MART-STAGE",
+      "subjectBindingRefs": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md",
+        "designRevision": "mart-center.r3",
+        "designHashSha256": "9DD5F03FFF1D6072E57C51AC7720ACC50E8AEBFCB900AA61D287BAD47B806EF1",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-assign.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-ASSIGN",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-move.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-MOVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-pickup.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-PICKUP",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-deliver.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-DELIVER",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-receive.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RECEIVE",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:synthetic-delivery-return.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-SYNTHETIC-RETURN",
+      "subjectBindingRefs": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:synthetic-delivery.v1",
+        "statusCode": "Approved",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "designRevision": "complete-delivery-work.r1",
+        "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "파생효과 없이 직접 결과만 구현"
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:restaurant-cooking.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-RESTAURANT-COOK",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md",
+        "designRevision": "restaurant-npc-operation.r3",
+        "designHashSha256": "410C8CF0501C1256C5ACA39BF311A21B46B559F95FE373BF96ECD30F3E4ECF08",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "조리 자리 배정의 직접 작업 결과만 다루고 배차는 실행하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:restaurant-auto-accept.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-CITY-RESTAURANT-ACCEPT",
+      "subjectBindingRefs": [
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "",
+      "planningGate": {
+        "topicStableId": "topic:restaurant-npc-operation.v1",
+        "designDocumentRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md",
+        "designRevision": "restaurant-npc-operation.r3",
+        "designHashSha256": "410C8CF0501C1256C5ACA39BF311A21B46B559F95FE373BF96ECD30F3E4ECF08",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "수락의 직접 결과만 다루며 조리·배차를 파생 실행하지 않는다."
+      }
+    },
+    {
+      "goalStableId": "interaction-goal:hans-farm-fence-repair.wi-nature-20.v1",
+      "goalStateCode": "Active",
+      "worldInteractionId": "WI-NATURE-20",
+      "subjectBindingRefs": [
+        "subject:player-controlled-actor.v1",
+        "subject:authoritative-interaction-target.v1",
+        "subject:hans-farm-fence-defense-objective.v1"
+      ],
+      "optionalPlayableLoopValidationRef": "playable-loop:nature-hans-farm-fence-restoration.v1",
+      "planningGate": {
+        "topicStableId": "topic:nature-hans-farm-fence-restoration.v1",
+        "designDocumentRef": "docs/Architecture/PlayableLoops/Nature한스농장첫울타리수리.md",
+        "designRevision": "nature-hans-farm-fence-restoration.design.r1",
+        "designHashSha256": "62F743887EAA79628507BA5D81C26C62FA80F1F1527CF0DAA925B182B2F57A5E",
+        "statusCode": "Approved",
+        "approvalEvidenceRef": "docs/AI/한스농장-첫벌목과울타리수리-기획-2026-09-02.md"
+      },
+      "compatibilitySourceCode": "NativeInteractionGoal",
+      "derivedEffectBinding": {
+        "applicabilityCode": "NotApplicable",
+        "statusCode": "NotApplicable",
+        "notApplicableReason": "이번 마감은 목재 소비와 울타리 세 구간 복구의 직접 결과다. 한스 신뢰와 농장 운영권은 후속 기획으로 유지한다."
+      }
+    }
+  ],
+  "boundaries": [
+    "주체 Ready는 계약 준비이며 실제 Runtime 인스턴스·Unity 배치·E5 증거가 아니다.",
+    "WI Goal은 Loop 없이 존재할 수 있고 PlayableLoop는 선택적 폐쇄성 검증 묶음이다.",
+    "기존 Loop Goal 투영은 읽기 호환이며 새 파생 효과나 E 승격을 만들지 않는다."
+  ]
+}

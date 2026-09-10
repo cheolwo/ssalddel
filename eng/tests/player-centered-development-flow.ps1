@@ -63,6 +63,38 @@ if (-not [bool] $ledger.authority.playerCenteredDoesNotGrantUnityStateAuthority 
     throw 'PlayerCenteredDevelopmentAuthorityBoundaryInvalid'
 }
 
+$workflowRouting = $ledger.specializedWorkflowRouting
+$spaceSpecialization = $workflowRouting.spaceSpecialization
+if (-not [bool] $workflowRouting.commonPlanningFirst -or
+    (@($workflowRouting.commonPlanningFrameCodes) -join ',') -ne
+        'Now,Here,Self,Other,AppropriateAction,Result,NextChoice' -or
+    -not [bool] $spaceSpecialization.conditional -or
+    [string] $spaceSpecialization.code -ne 'SpatialPlanningPipeline' -or
+    (@($spaceSpecialization.stageCodes) -join ',') -ne
+        'GraphMap,PlacementMap,AssetSurvey,BlenderOptional,UnityBinding' -or
+    [int] $spaceSpecialization.defaultWorkUnit.areaSetCount -ne 1 -or
+    [int] $spaceSpecialization.defaultWorkUnit.representativeWorldInteractionCount -ne 1 -or
+    [bool] $spaceSpecialization.graphMapOwnsConcretePlacement -or
+    [bool] $spaceSpecialization.placementMapOwnsNewPlayMeaning -or
+    [bool] $spaceSpecialization.blenderRequired -or
+    -not [bool] $spaceSpecialization.unityE5RequiresSameRevisionBinding -or
+    -not [bool] $workflowRouting.nonSpatialMaySkipSpaceSpecialization -or
+    -not [bool] $workflowRouting.feedbackReturnsToEarliestResponsibleStage) {
+    throw 'PlayerCenteredDevelopmentSpecializedWorkflowRoutingInvalid'
+}
+
+$expectedSpatialTriggers = @(
+    'PositionChangesChoiceOrResult',
+    'AccessRouteBoundaryOrVisibilityMatters',
+    'HCompositionOrRepeatedPlacementRequired',
+    'AssetGeometryAffectsPlay',
+    'StateChangeRequiresSpatialAppearance'
+)
+if ((@($spaceSpecialization.triggerCodes) -join ',') -ne
+    ($expectedSpatialTriggers -join ',')) {
+    throw 'PlayerCenteredDevelopmentSpatialTriggerInvalid'
+}
+
 $expectedLoop = @(
     'ObserveSituation',
     'UnderstandGoal',
@@ -123,6 +155,8 @@ foreach ($expected in @(
     'E1~E7 수직 폐루프와 E8~E10 수평 증거를 플레이어 관점에서 검토한다',
     'H1~H5와 플레이어 조립',
     '재료·조립·표현을 분리한다',
+    '공통 기획에서 공간 특화 절차를 조건부로 연다',
+    'Graph Map·배치 맵·Blender를 모든 WI의 의무 통과 단계로 만들지 않는다',
     '세 활동 경로는 역할이나 모드가 아니다',
     '발산(陽)·수렴(陰)은 행동 목적의 순환이다',
     '플레이어 중심은 상태 권위를 플레이어 또는 Unity'

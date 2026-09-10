@@ -1,6 +1,6 @@
 {
   "schemaVersion": "simulation-e7-vertical-implementation-protocol.v2",
-  "revision": "simulation-e7-vertical-implementation-protocol.r6",
+  "revision": "simulation-e7-vertical-implementation-protocol.r7",
   "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
   "workOrderSchemaVersion": "simulation-e7-vertical-work-order.v2",
   "evidenceStageCatalogPath": "eng/execution-ledgers/evidence-stages.json",
@@ -21,6 +21,7 @@
     "presentationE4PreparesApplicableAssetPlacementHandoff": true,
     "assetResearchAloneNeverPromotesE5": true,
     "nonSpatialOrNonVisualWorkCanDeclareNotApplicable": true,
+    "roleObjectActionClassificationRequiredBeforeE5": true,
     "animationCandidatesFrozenAtE4": true,
     "minimalReadableActionCueSatisfiesE5": true,
     "actualAnimationBindingRequiredAtE6WhenActorAction": true
@@ -40,8 +41,8 @@
   "stagePlans": [
     { "code": "E7", "question": "사람이 실제 입력으로 성공·실패·회복·귀환까지 폐루프를 완주하는가?", "requiredDimensions": ["playerLoop", "authorityModes", "canonicalScene", "runtimeEvidence"] },
     { "code": "E6", "question": "실제 플레이 전에 의미·인과·배치·통행·표현과 필요한 Actor 애니메이션 결속을 판독할 수 있는가?", "requiredDimensions": ["worldStateExplanation", "presentationReadability", "actorAnimationBindingWhenApplicable", "provenanceLimitations", "causalQuestionMatrix"] },
-    { "code": "E5", "question": "WI가 권위 전이·Task·Effect·결과·후속 선택과 최소 판독 표현으로 세계에 발현되는가?", "requiredDimensions": ["triggerOccurrence", "authorityTransition", "taskEffectResult", "minimalReadablePresentation", "successorOrReturnPath"] },
-    { "code": "E4", "question": "WI 발생원과 주체·대상·자료·자원·시간·선택적 공간 문맥, 적용 가능한 E5 표현 준비 인계가 결속됐는가?", "requiredDimensions": ["allowedTriggerSources", "subjectAndTargetBindings", "dataResourceTimeBindings", "spatialApplicability", "presentationPreparationApplicability"] },
+    { "code": "E5", "question": "WI가 권위 전이·Task·Effect·결과·후속 선택과 최소 판독 표현으로 세계에 발현되는가?", "requiredDimensions": ["triggerOccurrence", "roleObjectActionClassification", "authorityTransition", "taskEffectResult", "minimalReadablePresentation", "successorOrReturnPath"] },
+    { "code": "E4", "question": "WI 발생원과 주체·대상·자료·자원·시간·선택적 공간 문맥, 적용 가능한 E5 표현 준비 인계가 결속됐는가?", "requiredDimensions": ["allowedTriggerSources", "subjectAndTargetBindings", "roleObjectActionClassification", "dataResourceTimeBindings", "spatialApplicability", "presentationPreparationApplicability"] },
     { "code": "E3", "question": "계약·결정성·저장·재생과 소비자 자동 회귀가 통과하는가?", "requiredDimensions": ["contractTests", "determinism", "saveReplayRegression", "consumerRegression"] },
     { "code": "E2", "question": "공통 Core와 Local·Remote Adapter, Unity 투영 코드가 준비됐는가?", "requiredDimensions": ["contracts", "applicationDomain", "adapters", "unityProjection"] },
     { "code": "E1", "question": "플레이어 약속·권위·StableId·Revision·완료·제외 경계가 확정됐는가?", "requiredDimensions": ["playerPromiseAndReturn", "authorityAndTriggers", "stableIdsAndRevision", "acceptanceAndExclusions"] }
@@ -73,5 +74,18 @@
     "requiredBindings": ["animationRole", "actionCue", "animationClip", "targetRigOrAvatar", "controllerTransition", "inputBinding", "interruptAndReturn", "rootMotionPolicy"],
     "notApplicableRule": "즉시 상태 교체로 의도된 WI는 AnimationRole NotApplicable 사유와 결과 판독성을 기록한다.",
     "promotionBoundary": "E5의 정적 자세·진행 표시·상태 교체 fallback은 E6 애니메이션 결속 증거를 대신하지 않는다."
+  },
+  "roleObjectActionE5Gate": {
+    "classificationSourcePath": "eng/execution-ledgers/world-interaction-gwae-classifications.json",
+    "classificationOutputPath": "docs/AI/generated/world-interaction-gwae-classifications.json",
+    "worldInteractionCatalogPath": "eng/execution-ledgers/world-interactions.json",
+    "outputSchemaVersion": "mirror-world-interaction-gwae-classification-output.v2",
+    "requiredFromEvidenceStageCode": "E5",
+    "worldObjectScopeCode": "AllWorldObjects",
+    "allowedApplicabilityCodes": ["Required", "NotApplicable"],
+    "requiredFieldsWhenApplicable": ["roleObjectKindCode", "roleObjectBindingModeCode", "actionCode", "startStateCodes", "completionStateCodes", "effectCodes"],
+    "notApplicableRule": "권위 상태 전환을 소유하거나 일으키지 않는 정적 배경·장식·설명 전용 객체만 구체 사유와 함께 NotApplicable로 둘 수 있다.",
+    "reopenRule": "분류 누락·오래됨·공식 WI 전환 불일치는 E5를 차단하고 역할·행위 문맥을 소유한 가장 이른 E1~E4를 다시 연다.",
+    "promotionBoundary": "역할 객체 행위 오행 분류는 E5 진입 필수조건이지만 실제 권위 상태·행위 기록·World 객체·입력·표현 결속 증거를 대신하지 않는다."
   }
 }
