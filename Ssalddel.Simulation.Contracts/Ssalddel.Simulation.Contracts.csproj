@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ssalddel.CodeMetadata\Ssalddel.CodeMetadata.csproj" />
+    <ProjectReference Include="..\Ssalddel.WorkflowRules.Contracts\Ssalddel.WorkflowRules.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

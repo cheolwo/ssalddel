@@ -50,6 +50,7 @@
     <Project Path="Ssalddel.Simulation.Server/Ssalddel.Simulation.Server.csproj" />
   </Folder>
   <Folder Name="/Simulation/">
+    <Project Path="Ssalddel.BusinessWorkflow/Ssalddel.BusinessWorkflow.csproj" />
     <Project Path="Ssalddel.Simulation.Application/Ssalddel.Simulation.Application.csproj" />
     <Project Path="Ssalddel.Simulation.Contracts/Ssalddel.Simulation.Contracts.csproj" />
     <Project Path="Ssalddel.Simulation.Domain/Ssalddel.Simulation.Domain.csproj" />

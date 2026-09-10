@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ssalddel.BusinessWorkflow\Ssalddel.BusinessWorkflow.csproj" />
+    <ProjectReference Include="..\Ssalddel.Unity\Ssalddel.Unity.csproj" />
+    <ProjectReference Include="..\Ssalddel.Client.Infrastructure\Ssalddel.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Ssalddel.Interior.Contracts\Ssalddel.Interior.Contracts.csproj" />
     <ProjectReference Include="..\Ssalddel.Interior.Domain\Ssalddel.Interior.Domain.csproj" />
     <ProjectReference Include="..\Ssalddel.Domain\Ssalddel.Domain.csproj" />
@@ -39,6 +42,13 @@
     <None Update="Fixtures/FarmH2/*.plan.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Fixtures/FarmH2ExpandedR2/**/*.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Fixtures/FarmLandscapeLS01/**/*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="../eng/neighborhood/fixtures/synthetic-block.v1.json"
+                      LogicalName="Ssalddel.Simulation.Tests.synthetic-block.v1.json" />
+    <EmbeddedResource Include="../eng/neighborhood/fixtures/synthetic-delivery-block.v1.json"
+                      LogicalName="Ssalddel.Simulation.Tests.synthetic-delivery-block.v1.json" />
   </ItemGroup>
 
 </Project>

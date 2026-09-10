@@ -123,6 +123,11 @@ namespace Ssalddel.Simulation.Application
         ISimulationHexagramCampaignRuntime HexagramCampaigns { get; }
     }
 
+    [Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceResponsibility(
+        Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceStage.E2,
+        "이야기 진행·실패·재시도를 공통 권위 실행 포트로 노출한다.",
+        SubmoduleKey = Ssalddel.Contracts.Common.Metadata.SsalddelEvidenceSubmoduleKeys.E2세계상호작용실행,
+        Boundary = "포트 선언만으로 로컬·원격 구현의 동등성이나 플레이 완료를 주장하지 않는다.")]
     public interface ISimulationHexagramCampaignRuntime
     {
         ValueTask<SimulationHexagramCampaignStateSnapshot> GetHexagramCampaignAsync(
@@ -428,33 +433,6 @@ namespace Ssalddel.Simulation.Application
         ValueTask<경영SimulationSessionSnapshot> ConfirmFarmChoiceAsync(
             string sessionStableId,
             SimulationFarmChoiceConfirmRequest request,
-            CancellationToken cancellationToken = default);
-    }
-
-    [SsalddelEvidenceResponsibility(
-        SsalddelEvidenceStage.E2,
-        "Simulation 물류 Preview·Confirm 실행 경계를 제공한다.",
-        Boundary = "독립 영역 준비 전 연결 경로를 암묵적으로 열지 않는다.")]
-    public interface ISimulationLogisticsRuntime
-    {
-        ValueTask<SimulationLogisticsMovementPreviewSnapshot>
-            PreviewLogisticsMovementAsync(
-            string sessionStableId,
-            SimulationLogisticsMovementPreviewRequest request,
-            CancellationToken cancellationToken = default);
-        ValueTask<경영SimulationSessionSnapshot> ConfirmLogisticsMovementAsync(
-            string sessionStableId,
-            SimulationLogisticsMovementConfirmRequest request,
-            CancellationToken cancellationToken = default);
-
-        ValueTask<SimulationFreightDispatchPreviewSnapshot>
-            PreviewFreightDispatchAsync(
-            string sessionStableId,
-            SimulationFreightDispatchPreviewRequest request,
-            CancellationToken cancellationToken = default);
-        ValueTask<경영SimulationSessionSnapshot> ConfirmFreightDispatchAsync(
-            string sessionStableId,
-            SimulationFreightDispatchConfirmRequest request,
             CancellationToken cancellationToken = default);
     }
 

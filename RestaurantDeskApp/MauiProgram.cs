@@ -9,6 +9,7 @@ using RestaurantDeskApp.Services;
 using RestaurantDeskApp.Services.Security;
 using RestaurantDeskApp.ViewModels;
 using Ssalddel.Client.Infrastructure.Security;
+using Ssalddel.Client.Infrastructure.Simulation;
 
 namespace RestaurantDeskApp;
 
@@ -65,6 +66,7 @@ public static class MauiProgram
             var options = sp.GetRequiredService<IOptions<RestaurantDeskOptions>>().Value;
             return options.GetServerBaseAddress();
         });
+        builder.Services.AddRemoteBusinessWorkflowRuntime();
         builder.Services.AddMudServices();
         builder.Services.AddMauiBlazorWebView();
 

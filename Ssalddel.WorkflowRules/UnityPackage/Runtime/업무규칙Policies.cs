@@ -11,62 +11,20 @@ namespace Ssalddel.WorkflowRules
             string 현재상태코드,
             string 목표상태코드)
         {
-            업무흐름규칙Snapshot rule;
-            try
+            var decision = BusinessWorkflowRuleEngine.기본.판정(
+                new BusinessWorkflowTransitionRequest
             {
-                rule = 업무흐름규칙Catalog.조회(업무코드);
-            }
-            catch (ArgumentException)
-            {
-                return Blocked(업무규칙차단사유코드.지원하지않는업무);
-            }
-
-            var current = 현재상태코드?.Trim() ?? string.Empty;
-            var target = 목표상태코드?.Trim() ?? string.Empty;
-            if (!rule.상태코드목록.Contains(current, StringComparer.Ordinal))
-                return Blocked(rule, 업무규칙차단사유코드.알수없는현재상태);
-
-            if (string.Equals(current, target, StringComparison.Ordinal))
-            {
-                return new 업무상태전이판정
-                {
-                    허용여부 = true,
-                    멱등재시도여부 = true,
-                    RuleRevision = rule.RuleRevision,
-                    SourceStableIds = rule.SourceStableIds.ToArray(),
-                };
-            }
-
-            var allowed = rule.허용전이목록.Any(x =>
-                string.Equals(x.현재상태코드, current, StringComparison.Ordinal)
-                && string.Equals(x.목표상태코드, target, StringComparison.Ordinal));
-            return allowed
-                ? new 업무상태전이판정
-                {
-                    허용여부 = true,
-                    RuleRevision = rule.RuleRevision,
-                    SourceStableIds = rule.SourceStableIds.ToArray(),
-                }
-                : Blocked(rule, 업무규칙차단사유코드.허용되지않은상태전이);
-        }
-
-        private static 업무상태전이판정 Blocked(string reason)
-        {
+                업무흐름코드 = 업무코드,
+                현재상태코드 = 현재상태코드,
+                목표상태코드 = 목표상태코드,
+            });
             return new 업무상태전이판정
             {
-                차단사유코드목록 = new[] { reason },
-            };
-        }
-
-        private static 업무상태전이판정 Blocked(
-            업무흐름규칙Snapshot rule,
-            string reason)
-        {
-            return new 업무상태전이판정
-            {
-                RuleRevision = rule.RuleRevision,
-                SourceStableIds = rule.SourceStableIds.ToArray(),
-                차단사유코드목록 = new[] { reason },
+                허용여부 = decision.허용여부,
+                멱등재시도여부 = decision.멱등재시도여부,
+                RuleRevision = decision.RuleRevision,
+                SourceStableIds = decision.SourceStableIds.ToArray(),
+                차단사유코드목록 = decision.차단사유코드목록.ToArray(),
             };
         }
     }

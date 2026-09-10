@@ -1,4 +1,5 @@
 using Ssalddel.Application.Driver.Transport;
+using Ssalddel.Contracts.Common.Metadata;
 using Ssalddel.Contracts.Common.Orderer;
 using Ssalddel.Contracts.Food;
 using Ssalddel.Services.Community;
@@ -8,6 +9,9 @@ using Ssalddel.WorkflowRules.Contracts;
 
 namespace Ssalddel.Tests.Application.WorkflowRules;
 
+[SsalddelEvidenceResponsibility(SsalddelEvidenceStage.E3,
+    "운영 서버 계약·정책과 Simulation 공통 업무 규칙의 상태·전이·제외 효과 차이를 검사한다.",
+    Boundary = "순수 규칙 비교이며 운영 DB 호출, 실제 배차, Unity 화면 증거가 아니다.")]
 public sealed class 업무흐름규칙ParityTests
 {
     [Fact]
@@ -158,6 +162,26 @@ public sealed class 업무흐름규칙ParityTests
                     target).허용여부;
                 Assert.Equal(expected, actual);
             }
+        }
+    }
+
+    [Fact]
+    public void Simulation에_이관하지않는_운영효과는_업무별로_명시되어있다()
+    {
+        var expected = new Dictionary<string, string[]>(StringComparer.Ordinal)
+        {
+            [업무흐름코드.음식배달] =
+                ["OperationalOrderWrite", "RealDriverDispatch", "PersonalAddress", "RealTimeNotification"],
+            [업무흐름코드.화물운송] =
+                ["RealDriverAssignment", "GpsLocationWrite", "OperationalFreightSettlement", "CarrierNotification"],
+            [업무흐름코드.창고입고] =
+                ["OperationalInventoryWrite", "OperationalAuditLog", "OperationalWarehouseEvent", "OperationalEmployeeAuthorization"],
+        };
+
+        foreach (var pair in expected)
+        {
+            Assert.Equal(pair.Value,
+                업무흐름규칙Catalog.조회(pair.Key).Simulation제외운영효과코드목록);
         }
     }
 

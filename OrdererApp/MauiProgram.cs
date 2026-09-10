@@ -5,6 +5,7 @@ using Ssalddel.Ui.Common.Areas.App.ViewModels;
 using MudBlazor.Services;
 using OrdererApp.Services;
 using OrdererApp.ViewModels;
+using Ssalddel.Client.Infrastructure.Simulation;
 
 namespace OrdererApp;
 
@@ -36,6 +37,7 @@ public static class MauiProgram
                 builder.Configuration[SsalddelApiEndpoint.ConfigurationKey],
                 new Uri(SsalddelApiEndpoint.LocalDevelopmentBaseAddress)),
             ServiceLifetime.Singleton);
+        builder.Services.AddRemoteBusinessWorkflowRuntime();
         builder.Services.AddScoped<IGroupPurchaseShipmentTrackingService, HttpGroupPurchaseShipmentTrackingService>();
 
 #if DEBUG

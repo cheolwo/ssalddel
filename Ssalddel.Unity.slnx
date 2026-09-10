@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Shared/">
+    <Project Path="Ssalddel.BusinessWorkflow/Ssalddel.BusinessWorkflow.csproj" />
     <Project Path="Ssalddel.CodeMetadata/Ssalddel.CodeMetadata.csproj" />
   </Folder>
   <Folder Name="/Simulation Contracts/">

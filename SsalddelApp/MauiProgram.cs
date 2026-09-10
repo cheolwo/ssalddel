@@ -7,6 +7,7 @@ using SsalddelApp.Services;
 using SsalddelApp.Services.Localization;
 using SsalddelApp.Services.Samples;
 using Ssalddel.Ui.Common.Areas.App.Services;
+using Ssalddel.Client.Infrastructure.Simulation;
 
 namespace SsalddelApp;
 
@@ -25,6 +26,7 @@ public static class MauiProgram
 		builder.Services.AddSsalddelApiHttpClient(SsalddelApiEndpoint.ResolveBaseAddress(
 			builder.Configuration[SsalddelApiEndpoint.ConfigurationKey],
 			new Uri(SsalddelApiEndpoint.LocalDevelopmentBaseAddress)));
+		builder.Services.AddRemoteBusinessWorkflowRuntime();
 		builder.Services.AddSsalddelAppServices(builder.Configuration);
 		builder.Services.AddSingleton<IPlatformCommunityNodeNavigationResolver, SsalddelAppPlatformCommunityNodeNavigationResolver>();
 		builder.Services.AddSingleton<IPlatformHomeWorkspaceNavigationResolver, SsalddelAppPlatformHomeWorkspaceNavigationResolver>();
