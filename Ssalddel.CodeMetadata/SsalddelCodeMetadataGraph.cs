@@ -104,6 +104,14 @@ public static class SsalddelCodeMetadataValidator
 
         foreach (var step in steps)
         {
+            var hasLineage = step.SourceCodeRefs.Count > 0 || step.SharedRuleRefs.Count > 0
+                || step.ReuseKind.Length > 0 || step.Adaptation.Length > 0;
+            if (hasLineage && (step.SourceCodeRefs.Count == 0 || string.IsNullOrWhiteSpace(step.Adaptation)
+                || (step.ReuseKind != "SemanticAdaptation" && step.ReuseKind != "SharedRuleCall"
+                    && step.ReuseKind != "ProjectionConsumption")))
+                AddError(diagnostics, "CODEMAP040", step, "출처에는 원천 코드·재사용 종류·변형 경계가 필요합니다.");
+            if (step.ReuseKind == "SharedRuleCall" && step.SharedRuleRefs.Count == 0)
+                AddError(diagnostics, "CODEMAP041", step, "공통 규칙 호출에는 실제 공유 규칙 참조가 필요합니다.");
             foreach (var dependencyKey in step.DependsOnStepKeys)
             {
                 if (!keyedSteps.TryGetValue(dependencyKey, out var dependencies))

@@ -2,7 +2,7 @@
 
 - 판본: `operations-unity-transfer.r1`
 - 기획: [PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001](../Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md)
-- 기획 SHA-256: `d44402511d87b0bb4fee644f885344bc64127637b58f3db4ef78838679581c88`
+- 기획 SHA-256: `02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31`
 - 페이지 기능: 241개
 - EF Core DbSet: 271개
 - MongoDB collection 호출: 28개

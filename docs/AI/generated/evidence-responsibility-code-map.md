@@ -2,19 +2,19 @@
 
 > 이 문서는 C# E 책임 Attribute와 현재 E 책임 모듈 대장에서 자동 생성된다. 직접 수정하지 않는다.
 
-- 후보 타입: `772`
-- 책임 지정: `769`
+- 후보 타입: `829`
+- 책임 지정: `813`
 - 사유 있는 제외: `3`
-- 미분류: `0`
+- 미분류: `13`
 - 메서드 책임: `17`
 
 ## E 단계별 책임
 
 | E | G | 모듈 | 대표 | 보조 |
 | --- | --- | --- | ---: | ---: |
-| `E1` | `G1` | `E1핵심계약Module` 핵심 계약 | 105 | 0 |
-| `E2` | `G1` | `E2실행경계Module` 실행 경계 | 241 | 0 |
-| `E3` | `G1` | `E3회귀증거Module` 회귀 증거 | 246 | 1 |
+| `E1` | `G1` | `E1핵심계약Module` 핵심 계약 | 128 | 0 |
+| `E2` | `G1` | `E2실행경계Module` 실행 경계 | 266 | 0 |
+| `E3` | `G1` | `E3회귀증거Module` 회귀 증거 | 268 | 1 |
 | `E4` | `G1` | `E4실행문맥결속Module` 실행 문맥 결속 | 51 | 0 |
 | `E5` | `G1` | `E5세계발현Module` 세계 발현 | 7 | 0 |
 | `E6` | `G1` | `E6세계정제Module` 세계 정제 | 21 | 0 |
@@ -30,31 +30,45 @@
 | E | 하위 모듈 | 안정 key | 책임 | 대표 결속 | 보조 결속 |
 | --- | --- | --- | --- | ---: | ---: |
 | `E1` | `E1전투위협계약Module` 전투·위협 계약 | `E1.CombatThreatContract` | 전투 입력·관찰·위협 압력과 결과 경계를 정의한다. | 1 | 0 |
-| `E1` | `E1저장재생계약Module` 저장·재생 계약 | `E1.SaveReplayContract` | Save schema·Command Log·Replay hash의 호환 계약을 정의한다. | 2 | 0 |
-| `E1` | `E1세션권위계약Module` 세션 권위 계약 | `E1.SessionAuthorityContract` | Session 식별자·Revision·시간과 상태 권위의 불변 경계를 정의한다. | 4 | 0 |
-| `E1` | `E1공간계약Module` 공간 계약 | `E1.SpatialContract` | H·AreaSet·Graph·Handover의 안정 식별자와 구조 계약을 정의한다. | 11 | 0 |
+| `E1` | `E1저장재생계약Module` 저장·재생 계약 | `E1.SaveReplayContract` | Save schema·Command Log·Replay hash의 호환 계약을 정의한다. | 3 | 0 |
+| `E1` | `E1세션권위계약Module` 세션 권위 계약 | `E1.SessionAuthorityContract` | Session 식별자·Revision·시간과 상태 권위의 불변 경계를 정의한다. | 6 | 0 |
+| `E1` | `E1공간계약Module` 공간 계약 | `E1.SpatialContract` | H·AreaSet·Graph·Handover의 안정 식별자와 구조 계약을 정의한다. | 18 | 0 |
 | `E1` | `E1세계상호작용계약Module` 세계 상호작용 계약 | `E1.WorldInteractionContract` | WI 목적·StableId·허용 발생원과 Preview·Confirm 계약을 정의한다. | 29 | 0 |
 | `E2` | `E2로컬권위AdapterModule` 로컬 권위 Adapter | `E2.LocalAuthorityAdapter` | Solo LocalProcess에서 공통 Simulation Core를 실행한다. | 1 | 0 |
-| `E2` | `E2원격HostAdapterModule` 원격 Host Adapter | `E2.RemoteHostAdapter` | Hosted Server에서 같은 Core를 HTTP 경계로 노출한다. | 11 | 0 |
-| `E2` | `E2세션실행Module` 세션 실행 | `E2.SessionExecution` | Session 생성·조회·Tick·Save/Load의 공통 실행 포트를 제공한다. | 4 | 0 |
-| `E2` | `E2공간실행Module` 공간 실행 | `E2.SpatialExecution` | H·LH·배치 계획의 준비·활성·캐시·해제 실행 경계를 제공한다. | 9 | 0 |
-| `E2` | `E2Unity권위ClientModule` Unity 권위 Client | `E2.UnityAuthorityClient` | Unity 입력을 Local 또는 Remote 권위 포트에 전달한다. | 1 | 0 |
-| `E2` | `E2세계상호작용실행Module` 세계 상호작용 실행 | `E2.WorldInteractionExecution` | Farm·Nature WI Preview·Confirm 실행 포트를 제공한다. | 45 | 0 |
-| `E3` | `E3계약회귀Module` 계약 회귀 | `E3.ContractRegression` | StableId·요청·응답·WI metadata 계약의 회귀를 검증한다. | 30 | 0 |
-| `E3` | `E3결정성검증Module` 결정성 검증 | `E3.DeterminismRegression` | 같은 Seed·명령·시간이 같은 canonical 상태를 만드는지 검증한다. | 15 | 0 |
+| `E2` | `E2원격HostAdapterModule` 원격 Host Adapter | `E2.RemoteHostAdapter` | Hosted Server에서 같은 Core를 HTTP 경계로 노출한다. | 12 | 0 |
+| `E2` | `E2세션실행Module` 세션 실행 | `E2.SessionExecution` | Session 생성·조회·Tick·Save/Load의 공통 실행 포트를 제공한다. | 5 | 0 |
+| `E2` | `E2공간실행Module` 공간 실행 | `E2.SpatialExecution` | H·LH·배치 계획의 준비·활성·캐시·해제 실행 경계를 제공한다. | 11 | 0 |
+| `E2` | `E2Unity권위ClientModule` Unity 권위 Client | `E2.UnityAuthorityClient` | Unity 입력을 Local 또는 Remote 권위 포트에 전달한다. | 3 | 0 |
+| `E2` | `E2세계상호작용실행Module` 세계 상호작용 실행 | `E2.WorldInteractionExecution` | Farm·Nature WI Preview·Confirm 실행 포트를 제공한다. | 49 | 0 |
+| `E3` | `E3계약회귀Module` 계약 회귀 | `E3.ContractRegression` | StableId·요청·응답·WI metadata 계약의 회귀를 검증한다. | 32 | 0 |
+| `E3` | `E3결정성검증Module` 결정성 검증 | `E3.DeterminismRegression` | 같은 Seed·명령·시간이 같은 canonical 상태를 만드는지 검증한다. | 18 | 0 |
 | `E3` | `E3로컬원격동등성Module` 로컬·원격 동등성 | `E3.LocalRemoteParityRegression` | LocalProcess와 RemoteHost가 같은 권위 결과를 만드는지 검증한다. | 2 | 0 |
-| `E3` | `E3저장재생검증Module` 저장·재생 검증 | `E3.SaveReplayRegression` | Save schema 호환·복원·Replay hash 회귀를 검증한다. | 4 | 1 |
-| `E3` | `E3Unity소비자회귀Module` Unity 소비자 회귀 | `E3.UnityConsumerRegression` | Unity Adapter·Projection이 권위 계약을 임의 변경하지 않는지 검증한다. | 6 | 0 |
+| `E3` | `E3저장재생검증Module` 저장·재생 검증 | `E3.SaveReplayRegression` | Save schema 호환·복원·Replay hash 회귀를 검증한다. | 5 | 1 |
+| `E3` | `E3Unity소비자회귀Module` Unity 소비자 회귀 | `E3.UnityConsumerRegression` | Unity Adapter·Projection이 권위 계약을 임의 변경하지 않는지 검증한다. | 9 | 0 |
 
 ### 아직 하위 모듈을 지정하지 않은 기존 책임
 
-- `E1`: `58`개
-- `E2`: `170`개
-- `E3`: `189`개
+- `E1`: `71`개
+- `E2`: `185`개
+- `E3`: `202`개
 
 ## 미분류 후보
 
-미분류 후보가 없다.
+| 구성 요소 | 소스 |
+| --- | --- |
+| `Ssalddel.Simulation.Application.LocalBusinessWorkflowRuntimeFactory` | `Ssalddel.Simulation.Application/RuntimeCore/LocalBusinessWorkflowRuntimeFactory.cs` |
+| `Ssalddel.Simulation.Contracts.Simulation음식배달수명주기Adapter` | `Ssalddel.Simulation.Contracts/UnityPackage/Runtime/Simulation음식배달수명주기Adapter.cs` |
+| `Ssalddel.Simulation.Infrastructure.RemoteBusinessWorkflowRuntimeFactory` | `Ssalddel.Simulation.Infrastructure/RemoteBusinessWorkflowRuntimeFactory.cs` |
+| `Ssalddel.Simulation.Infrastructure.RemoteSimulationFoodOrderRuntime` | `Ssalddel.Simulation.Infrastructure/RemoteSimulationFoodOrderRuntime.cs` |
+| `Ssalddel.Simulation.Infrastructure.RemoteSimulationLogisticsRuntime` | `Ssalddel.Simulation.Infrastructure/RemoteSimulationLogisticsRuntime.cs` |
+| `Ssalddel.Simulation.Tests.BusinessWorkflowRuntimeCompositionTests` | `Ssalddel.Simulation.Tests/BusinessWorkflowRuntimeCompositionTests.cs` |
+| `Ssalddel.Simulation.Tests.SimulationFoodOrderRuntimeAdapterTests` | `Ssalddel.Simulation.Tests/SimulationFoodOrderRuntimeAdapterTests.cs` |
+| `Ssalddel.Simulation.Tests.가상동네배치기준Tests` | `Ssalddel.Simulation.Tests/가상동네배치기준Tests.cs` |
+| `Ssalddel.Simulation.Tests.가상동네하루Tests` | `Ssalddel.Simulation.Tests/가상동네하루Tests.cs` |
+| `Ssalddel.Simulation.Tests.로컬생활시작자료Tests` | `Ssalddel.Simulation.Tests/로컬생활시작자료Tests.cs` |
+| `Ssalddel.Simulation.Tests.오행음식배달생활관찰Tests` | `Ssalddel.Simulation.Tests/오행음식배달생활관찰Tests.cs` |
+| `Ssalddel.Unity.Tests.음식배달수명주기표현Tests` | `Ssalddel.Unity.Tests/음식배달수명주기표현Tests.cs` |
+| `Ssalddel.Unity.Observation.운영지도AreaViewModel` | `Ssalddel.Unity/Runtime/Observation/동네관찰Presenter.cs` |
 
 ## 분류된 구성 요소
 
@@ -80,9 +94,10 @@
 | `Ssalddel.Simulation.Application.ISimulationFarm방위소집Store` | `E2` | `` | `` | `WI-FARM-DEFENSE-MOBILIZE` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationFarm분대배정Store` | `E2` | `` | `` | `WI-SQUAD-ASSIGN` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationFarm분대보급Store` | `E2` | `` | `` | `WI-SQUAD-SUPPLY` | `Annotated` |
+| `Ssalddel.Simulation.Application.ISimulationHexagramCampaignAttemptStore` | `E1` | `E1.SaveReplayContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.ISimulationHexagramCampaignRuntime` | `E2` | `E2.WorldInteractionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationLhWindowPlanner` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationLocalSaveSlotStore` | `E3` | `` | `` | `` | `Annotated` |
-| `Ssalddel.Simulation.Application.ISimulationLogisticsRuntime` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationNatureSurvivalRuntime` | `E2` | `E2.WorldInteractionExecution` | `` | `WI-CON-01,WI-NATURE-05,WI-NATURE-06,WI-NATURE-07,WI-NATURE-08,WI-NATURE-09,WI-NATURE-10,WI-NATURE-11,WI-NATURE-13,WI-NATURE-14,WI-NATURE-15,WI-NATURE-16,WI-NATURE-17` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationNatureSurvivalRuntime.AdvanceRealtimeAsync` | `E2` | `` | `` | `WI-NATURE-17` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationNatureSurvivalRuntime.ConfirmAsync` | `E2` | `` | `` | `WI-CON-01,WI-NATURE-05,WI-NATURE-06,WI-NATURE-07,WI-NATURE-08,WI-NATURE-09,WI-NATURE-10,WI-NATURE-11,WI-NATURE-13,WI-NATURE-14,WI-NATURE-15,WI-NATURE-16` | `Annotated` |
@@ -97,7 +112,9 @@
 | `Ssalddel.Simulation.Application.ISimulationNatureWorldInteractionRuntime.PreviewNatureRestorationAsync` | `E2` | `` | `` | `WI-NATURE-03` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationNatureWorldInteractionRuntime.PreviewNatureThreatObservationAsync` | `E2` | `` | `` | `WI-NATURE-01` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationOnlineWorldCheckpointStore` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.ISimulationPlayerIdeaMapRuntime` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationPlayerKnowledgeRuntime` | `E4` | `` | `` | `WI-ACTOR-03` | `Annotated` |
+| `Ssalddel.Simulation.Application.ISimulationPlayerLearningFocusRuntime` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationRuntime` | `E2` | `E2.SessionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationRuntimeModules` | `E2` | `E2.SessionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.ISimulationSessionGameplayRuntime` | `E2` | `E2.SessionExecution` | `` | `` | `Annotated` |
@@ -127,6 +144,7 @@
 | `Ssalddel.Simulation.Application.InMemorySimulationFarm방위소집Store` | `E2` | `` | `` | `WI-FARM-DEFENSE-MOBILIZE` | `Annotated` |
 | `Ssalddel.Simulation.Application.InMemorySimulationFarm분대배정Store` | `E2` | `` | `` | `WI-SQUAD-ASSIGN` | `Annotated` |
 | `Ssalddel.Simulation.Application.InMemorySimulationFarm분대보급Store` | `E2` | `` | `` | `WI-SQUAD-SUPPLY` | `Annotated` |
+| `Ssalddel.Simulation.Application.InMemorySimulationHexagramCampaignAttemptStore` | `E2` | `E2.SessionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.InMemorySimulationPlayableLoopEngineTraceSink` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.InMemorySimulationTeamMemberPoseStore` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.InMemorySimulationTeamObservationPolicyStore` | `E2` | `` | `` | `` | `Annotated` |
@@ -169,6 +187,7 @@
 | `Ssalddel.Simulation.Application.SimulationFarm분대배정Service` | `E2` | `E2.WorldInteractionExecution` | `` | `WI-SQUAD-ASSIGN` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationFarm분대보급Service` | `E2` | `E2.WorldInteractionExecution` | `` | `WI-SQUAD-SUPPLY` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationFreight렌더링의도Projector` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.SimulationHexagramCampaignService` | `E2` | `E2.WorldInteractionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationLhAssetPlanLifecycleService` | `E2` | `E2.SpatialExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationLhAssetPlanWindowReconciler` | `E2` | `E2.SpatialExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationLhInteriorPlanHandleService` | `E2` | `` | `` | `` | `Annotated` |
@@ -184,6 +203,8 @@
 | `Ssalddel.Simulation.Application.SimulationOnlineNatureSessionProvisioningService` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationOnlineWorldService` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationPlayableLoopEngineInteractionValidator` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.SimulationPlayerIdeaMapService` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.SimulationPlayerLearningFocusService` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationRealityContextService` | `E6` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationRegionalIncidentService` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.SimulationRuntimeWorldPresentationService` | `E2` | `` | `` | `` | `Annotated` |
@@ -243,8 +264,25 @@
 | `Ssalddel.Simulation.Application.경영Simulation주문소비Service` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.경영Simulation턴결정Service` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.경영Simulation통합생활세계Service` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.관찰세계실행구간` | `E1` | `E1.SessionAuthorityContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.관찰세계진행Policy` | `E1` | `E1.SessionAuthorityContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.관찰시간누적기` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네건물윤곽` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네공간ImportService` | `E2` | `E2.SpatialExecution` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네공간Snapshot` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네공간노드` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네공간도로` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네공간출처` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네이동경로Engine` | `E2` | `E2.SpatialExecution` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네이동경로후보` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네이동진행Engine` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네이동진행후보` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Application.동네평면좌표` | `E1` | `E1.SpatialContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.세계상호작용ExecutionHeadCatalog` | `E1` | `E1.WorldInteractionContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Application.세계상호작용실행Pipeline` | `E5` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.ISimulationFoodOrderRuntime` | `E2` | `E2.WorldInteractionExecution` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.ISimulationLogisticsRuntime` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.ISimulationNpcPolicyRuntime` | `E2` | `E2.WorldInteractionExecution` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.ISimulation세계자산배치Engine` | `E1` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.ISimulation지도구성Engine` | `E1` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.ISimulation환경발생DecisionEngine` | `E1` | `` | `` | `` | `Annotated` |
@@ -319,11 +357,24 @@
 | `Ssalddel.Simulation.Contracts.Simulation파티공명중첩CandidateSnapshot` | `E1` | `E1.WorldInteractionContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation파티공명회복CandidateSnapshot` | `E1` | `E1.WorldInteractionContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation파티근접공명CandidateSnapshot` | `E1` | `E1.WorldInteractionContract` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.Simulation플레이어이데아맵ProjectionSnapshot` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation플레이어지식InitialStateRequest` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.Simulation학습중점InitialState` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.Simulation학습중점StateSnapshot` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation행동체력자연회복Policy` | `E1` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation행동체력회복Cursor` | `E1` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation행동체력회복계산Result` | `E1` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.Simulation행동체력회복구간` | `E1` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상동네생활Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상마트Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상마트주문Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상배달기사Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상배달대기Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상배달대기기사Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상보충운송Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상보충창고Snapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상생활NpcSnapshot` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Contracts.가상주문흐름Snapshot` | `E1` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Contracts.경영SimulationSession생성Request` | `E1` | `E1.SessionAuthorityContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.SimulationBattleInstanceState` | `E1` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.SimulationCombatScalePolicy` | `E1` | `` | `` | `` | `Annotated` |
@@ -381,6 +432,7 @@
 | `Ssalddel.Simulation.Domain.Simulation작업참여PolicyCatalog` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.Simulation집중판정Policy` | `E1` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.Simulation플레이어지식Aggregate` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Domain.Simulation학습중점State` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.Simulation행동체력자연회복Calculator` | `E2` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
 | `Ssalddel.Simulation.Domain.경영SimulationSessionAggregate` | `E1` | `E1.SessionAuthorityContract` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Domain.경영SimulationSessionAggregate.ExecuteWorldInteraction` | `E5` | `` | `` | `` | `Annotated` |
@@ -417,11 +469,14 @@
 | `Ssalddel.Simulation.Server.Controllers.SimulationFarmConstructionPlacementController` | `E4` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationFarmRealityEvidenceController` | `E6` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationFarmSurvivalController` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Server.Controllers.SimulationHexagramCampaignController` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationIntegratedWorldController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationLhWorldController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationNatureSurvivalController` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationOnlineWorldsController` | `E2` | `E2.RemoteHostAdapter` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Server.Controllers.SimulationPlayerIdeaMapController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationPlayerKnowledgeController` | `E4` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Server.Controllers.SimulationPlayerLearningFocusController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationRealityContextController` | `E6` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationSurvivalTarotController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Server.Controllers.SimulationTeamObservationController` | `E2` | `` | `` | `` | `Annotated` |
@@ -481,7 +536,9 @@
 | `Ssalddel.Simulation.Tests.SimulationGwangbokResonanceEntryCapCandidateTests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationGwangbokResonanceMaintenanceCandidateTests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationGwangbokSelfRecoveryActionCandidateTests` | `E3` | `E3.ContractRegression` | `` | `WI-NATURE-06,WI-NATURE-14,WI-REFLECT-01` | `Annotated` |
+| `Ssalddel.Simulation.Tests.SimulationHansFarmFenceRestorationTests` | `E3` | `E3.DeterminismRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationHarvestDispositionImpactTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.SimulationHexagramCampaignTests` | `E3` | `E3.SaveReplayRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationIndividualOrderTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationIntegratedWorldTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationLayerBoundaryTests` | `E3` | `` | `` | `` | `Annotated` |
@@ -519,6 +576,7 @@
 | `Ssalddel.Simulation.Tests.SimulationPlayableLoopEngineInteractionTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationPlayerGrowthHintProjectionTests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationPlayerKnowledgeTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.SimulationPlayerLearningFocusTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationRealityContextTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationRegionalIncidentTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.SimulationRuntimeRenderingPipelineTests` | `E3` | `` | `` | `` | `Annotated` |
@@ -586,7 +644,15 @@
 | `Ssalddel.Simulation.Tests.Simulation타로화물운송조립Tests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.Simulation행동체력자연회복Tests` | `E3` | `` | `` | `WI-FARM-01,WI-FARM-02,WI-FARM-03,WI-FARM-04` | `Annotated` |
 | `Ssalddel.Simulation.Tests.WorldInteractionDownwardModuleSkeletonTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상동네생활Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상동네이동Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상마트배송Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상배달관찰연결관문Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상배달완주Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.가상주문흐름Tests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.경영SimulationSessionTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.관찰세계진행PolicyTests` | `E3` | `E3.DeterminismRegression` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.다중기사공통규칙Tests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.도심마트감자공급SimulationFixtureTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.도심마트공급경영PerspectivePresentationTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.도심마트공급경영SimulationContractTests` | `E3` | `` | `` | `` | `Annotated` |
@@ -597,7 +663,13 @@
 | `Ssalddel.Simulation.Tests.도심마트주문자집단PerspectiveTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.도심마트주문자집단SimulationWorldGraphTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.도심마트지역수요SimulationTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.동네공간Tests` | `E3` | `E3.DeterminismRegression` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.마트도로변대기Tests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Simulation.Tests.상품특성효과DerivationEngineTests` | `E3` | `E3.DeterminismRegression` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.운영업무출처MetadataTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.운영엔진공통규칙이관Tests` | `E3` | `E3.ContractRegression` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.음식점관찰표본Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Simulation.Tests.음식점조리인계Tests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Tests.UnityData.CargoJourneyPresentationTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Tests.UnityData.CommunityMarketSquareVerticalSliceTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Tests.UnityData.FarmProducerVerticalSliceTests` | `E3` | `` | `` | `` | `Annotated` |
@@ -678,10 +750,14 @@
 | `Ssalddel.Unity.Tests.UrbanMarketResidentialGroupConceptCardTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.UrbanMarketResidentialRepresentativeNpcTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.UrbanMarketSupplyManagementUnityBindingTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Tests.동네관찰Tests` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.몰입WorldLayoutTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.상품근거ItemDetailProjectionTests` | `E3` | `E3.UnityConsumerRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.수출항만인수학당PreviewAdapterTests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Tests.음식배달관찰Tests` | `E3` | `E3.UnityConsumerRegression` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Tests.음식점정책카드Tests` | `E3` | `E3.UnityConsumerRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.저녁학당업무Preview보강Tests` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Tests.창고정책카드Tests` | `E3` | `E3.UnityConsumerRegression` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.턴마감CoordinatorTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.통합전시관MapperTests` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Tests.표현연결PreflightTests` | `E3` | `` | `` | `` | `Annotated` |
@@ -781,6 +857,8 @@
 | `Ssalddel.Unity.Npcs.NpcMovementMapper` | `E8` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Npcs.NpcMovementPresenter` | `E8` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Npcs.NpcMovementQueryUseCase` | `E8` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Observation.동네관찰Presenter` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Observation.동네관찰SessionController` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Perspectives.IRolePerspectiveApiClient` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Perspectives.I역할관점Repository` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Perspectives.RoleExperienceCoordinator` | `E7` | `` | `` | `` | `Annotated` |
@@ -807,6 +885,7 @@
 | `Ssalddel.Unity.PotatoJourney.PotatoJourneyQueryUseCase` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.PotatoJourney.PotatoProductionDistributionWorldMemoryProjector` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.PotatoJourney.PotatoProductionDistributionWorldMemoryStore` | `E7` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Presentation.음식배달관찰상태` | `E3` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.PresentationContracts.Cargo.CargoJourneyProjector` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.PresentationContracts.LearningCards.ConceptCardDeckProjector` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.PresentationContracts.Reconciliation.StableIdReconciliationPolicy`1` | `E7` | `` | `` | `` | `Annotated` |
@@ -894,6 +973,11 @@
 | `Ssalddel.Unity.Warehouse.WarehouseWorldMapper` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Warehouse.WarehouseWorldQueryUseCase` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.Warehouse.WarehouseWorldSelectionService` | `E4` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Warehouse.가상배달관찰표본` | `E1` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Warehouse.음식점관찰표본` | `E3` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Warehouse.음식점정책카드Presenter` | `E2` | `E2.UnityAuthorityClient` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Warehouse.음식점주문표시Model` | `E2` | `` | `` | `` | `Annotated` |
+| `Ssalddel.Unity.Warehouse.창고정책카드Presenter` | `E2` | `E2.UnityAuthorityClient` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.WorldEvents.ISimulationWorldEventApiClient` | `E2` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.WorldEvents.I세계사건ProjectionRepository` | `E7` | `` | `` | `` | `Annotated` |
 | `Ssalddel.Unity.WorldEvents.SimulationWorldEventApiRepository` | `E2` | `` | `` | `` | `Annotated` |

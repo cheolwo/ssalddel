@@ -4,10 +4,21 @@
 
 ```text
 Simulation·Unity
+├─ 운영 주문·음식점·배차·화물·창고의 Simulation 재사용 계보 [food-workflow-lineage]
+│  ├─ 010 domain.food-order-adaptation · Domain · Confirm
+│  ├─ 020 domain.food-dispatch-shared-rule · Domain · Tick
+│  ├─ 020 domain.restaurant-response-adaptation · Domain · Confirm
+│  ├─ 025 domain.restaurant-cooking-adaptation · Domain · Tick
+│  ├─ 030 unity.food-state-projection · ViewModel · Presentation
+│  ├─ 040 domain.freight-dispatch-shared-rule · Domain · Confirm
+│  ├─ 045 domain.freight-transport-adaptation · Domain · Tick
+│  ├─ 050 domain.warehouse-put-away-adaptation · Domain · Confirm
+│  └─ 055 domain.warehouse-outbound-shared-rule · Domain · Tick
 ├─ Simulation 세션 생명주기 [simulation-session-lifecycle]
 │  ├─ 010 contract.base-reflection-learning-material · Contract · Definition
 │  ├─ 010 contract.online-world · Contract · Query
 │  ├─ 010 contract.session-create · Contract · Definition
+│  ├─ 015 application.observer-tick-request · Application · Preview
 │  ├─ 020 api.session-lifecycle · Api · Confirm
 │  ├─ 020 api.world-gameplay · Api · Confirm
 │  ├─ 020 domain.approved-learning-ledger · Domain · Persistence
@@ -118,7 +129,10 @@ Simulation·Unity
 │  ├─ 040 domain.dark-age-mindfulness-effect-strength-candidate · Domain · Query
 │  ├─ 041 unity.marketplace-grounded-item-detail · ViewModel · Presentation
 │  ├─ 042 domain.landscape-graph-assembler · Domain · Projection
-│  └─ 044 application.landscape-graph-job · Application · Projection
+│  ├─ 044 application.landscape-graph-job · Application · Projection
+│  ├─ 100 application.neighborhood-import · Application · Projection
+│  ├─ 110 application.neighborhood-route · Application · Preview
+│  └─ 120 application.neighborhood-movement-candidate · Application · Preview
 ├─ 독립 Synty 경관 처리 [simulation-synty-landscape]
 │  ├─ 010 domain.synty-ledger · Domain · Definition
 │  ├─ 030 application.synty-job · Application · Projection
@@ -154,6 +168,91 @@ Simulation·Unity
 
 기능 하나만 보려면 `dotnet run --project eng/Ssalddel.CodeMap -- --feature <기능키>`를 사용한다.
 
+## 운영 주문·음식점·배차·화물·창고의 Simulation 재사용 계보 (`food-workflow-lineage`)
+
+- **010 domain.food-order-adaptation** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식배달.cs) · 운영 주문 등록·수령 확인 의미를 세션 주문 상태로 재구성
+  - 계층/단계: `Domain / Confirm`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: SimulationState만 변경; 실제 주문·결제·운영 원장 생성 없음
+  - 재사용 종류: `SemanticAdaptation`
+  - 원천 코드: [음식주문등록CommandHandler.cs](../../../Ssalddel/Application/Food/Handlers/음식주문등록CommandHandler.cs)
+  - 원천 코드: [주문자음식주문수령확인CommandHandler.cs](../../../Ssalddel/Application/Food/Handlers/주문자음식주문수령확인CommandHandler.cs)
+  - 공유 규칙: [업무흐름규칙Catalog.cs](../../../Ssalddel.WorkflowRules/UnityPackage/Runtime/업무흐름규칙Catalog.cs)
+  - 변형/제외: 업무 의미 대응이며 Handler 직접 호출이나 동일 구현 주장이 아니다. 세션 CommandId/Revision/Tick과 가상 주문을 사용하고 운영 메뉴·개인정보·DB·Event를 소비하지 않는다.
+- **020 domain.food-dispatch-shared-rule** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상배달대기.cs) · 가상 기사 후보 선정에서 운영과 공유하는 픽업 평가 규칙 사용
+  - 계층/단계: `Domain / Tick`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: 평가 결과를 세션에서 재검사·배정; 운영 배차·알림·위치 조회 없음
+  - 재사용 종류: `SharedRuleCall`
+  - 원천 코드: [음식배달배차업무정책.cs](../../../Ssalddel/Services/Dispatch/Queue/음식배달배차업무정책.cs)
+  - 공유 규칙: [음식배달픽업평가Policy.cs](../../../Ssalddel.WorkflowRules/UnityPackage/Runtime/음식배달픽업평가Policy.cs)
+  - 변형/제외: 음식배달후보선정Policy를 통해 공유 픽업 평가·정렬을 호출한다. 운영은 경로서비스/UTC/기사Store, 가상은 표본 경로/세션 시간/기사 사본을 사용한다. 후보 정책 전체나 배차 확정은 동일 코드가 아니다.
+- **020 domain.restaurant-response-adaptation** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식점응답.cs) · 운영 음식점의 주문 수락·거절 의미를 세션 결정과 작업으로 재구성
+  - 계층/단계: `Domain / Confirm`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: Simulation 결정/작업만 변경; 운영 음식점 주문·계정·알림 없음
+  - 재사용 종류: `SemanticAdaptation`
+  - 원천 코드: [음식점주문수락CommandHandler.cs](../../../Ssalddel/Application/Food/Handlers/음식점주문수락CommandHandler.cs)
+  - 원천 코드: [음식점주문진행변경CommandHandler.cs](../../../Ssalddel/Application/Food/Handlers/음식점주문진행변경CommandHandler.cs)
+  - 원천 코드: [음식점주문진행Policy.cs](../../../Ssalddel/Services/Food/음식점주문진행Policy.cs)
+  - 변형/제외: 운영의 주문 상태 의미를 사용하지만 사용자·음식점 접근권한, UTC 이력, Store/Event를 호출하지 않는다. 세션 Actor capability와 ExpectedRevision으로 별도 판정한다.
+- **025 domain.restaurant-cooking-adaptation** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식점조리.cs) · 음식점 진행의 조리중·픽업대기 의미를 NPC 조리 슬롯과 Tick 작업으로 재구성
+  - 계층/단계: `Domain / Tick`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: 조리 완료는 픽업 대기만 만들며 기사 배정·전달을 자동 확정하지 않음
+  - 재사용 종류: `SemanticAdaptation`
+  - 원천 코드: [음식점주문진행Policy.cs](../../../Ssalddel/Services/Food/음식점주문진행Policy.cs)
+  - 변형/제외: 운영 조리예상분 대신 WorkDurationTicks/CookingSlots/NPC capability를 사용한다. 메뉴·가격·리뷰·운영자 계정은 이관하지 않는다.
+- **030 unity.food-state-projection** — [음식배달관찰상태](../../../Ssalddel.Unity/Presentation/음식배달관찰경로.cs) · 음식배달 상태 사본을 읽기 전용 표시 문구로 변환
+  - 계층/단계: `ViewModel / Presentation`
+  - 읽기/쓰기: `SimulationState → None`
+  - 부수효과: `None`
+  - 경계: 표현값만 생성; 원본 상태 변경·주문/배차/수령 확정 없음
+  - 재사용 종류: `ProjectionConsumption`
+  - 원천 코드: [Simulation음식배달.cs](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식배달.cs)
+  - 변형/제외: Simulation음식배달Snapshot의 주문 ID/Revision/상태를 읽는다. 경로 이동·MonoBehaviour 생성·운영 서버 연결은 이 클래스의 책임이 아니다.
+- **040 domain.freight-dispatch-shared-rule** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationFreightDispatch.cs) · 운영 화물 배차와 공유하는 추천 점수·기사 대기 계산으로 가상 후보를 판정
+  - 계층/단계: `Domain / Confirm`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: Preview는 비변경 후보, Confirm만 SimulationState 변경; 실제 기사 배정 없음
+  - 재사용 종류: `SharedRuleCall`
+  - 원천 코드: [기사대기Aging점수정책.cs](../../../Ssalddel/Services/Dispatch/Queue/기사대기Aging점수정책.cs)
+  - 원천 코드: [배차추천평가Service.Scoring.cs](../../../Ssalddel/Services/Dispatch/Recommendation/배차추천평가Service.Scoring.cs)
+  - 공유 규칙: [화물배차후보판정Policies.cs](../../../Ssalddel.WorkflowRules/UnityPackage/Runtime/화물배차후보판정Policies.cs)
+  - 변형/제외: 공통 후보 점수·대기 보정을 사용하되 가상 cargo/vehicle/location snapshot을 입력으로 삼는다. 운영 조회·기사 알림·배차 원장은 호출하지 않는다.
+- **045 domain.freight-transport-adaptation** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationFreightTransport.cs) · 운영 기사 운송의 상차·하차·인수 상태 의미를 가상 이동과 별도 Confirm으로 재구성
+  - 계층/단계: `Domain / Tick`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: 운영 운송원장·위치·정산을 쓰지 않고 세션 이력/SaveReplay만 변경
+  - 재사용 종류: `SemanticAdaptation`
+  - 원천 코드: [기사운송상태전이Service.cs](../../../Ssalddel/Application/Driver/Transport/Services/기사운송상태전이Service.cs)
+  - 원천 코드: [기사운송진행Controller.cs](../../../Ssalddel/Controllers/Driver/05_Settings/기사운송진행Controller.cs)
+  - 공유 규칙: [업무흐름규칙Catalog.cs](../../../Ssalddel.WorkflowRules/UnityPackage/Runtime/업무흐름규칙Catalog.cs)
+  - 변형/제외: 공통 화물운송 상태/허용 전이를 사용하지만 운영 UTC·사용자 명령·GPS·문제신고 대신 WorldTick·가상 이동·ExpectedRevision을 사용한다.
+- **050 domain.warehouse-put-away-adaptation** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationWarehousePutAway.cs) · 운영 창고의 검수 후 적치 의미를 세션 재고와 NPC 작업으로 재구성
+  - 계층/단계: `Domain / Confirm`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: 검수된 Simulation 재고만 적치; 운영 입고·재고·재위탁 변경 없음
+  - 재사용 종류: `SemanticAdaptation`
+  - 원천 코드: [창고작업Controller.cs](../../../Ssalddel/Controllers/Common/창고작업Controller.cs)
+  - 변형/제외: 운영 창고입고 상태 의미에 대응하지만 현재 구현은 공통 Catalog를 직접 호출하지 않는다. 운영 창고/사용자 CRUD·입고 원장·권한·EF 저장 대신 세션 inventory/task/effect를 사용한다.
+- **055 domain.warehouse-outbound-shared-rule** — [경영SimulationSessionAggregate](../../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네보충.cs) · 가상 보충창고 출고 예약에서 운영과 같은 재고 배분 계산 사용
+  - 계층/단계: `Domain / Tick`
+  - 읽기/쓰기: `SimulationState → SimulationState`
+  - 부수효과: `StateMutation`
+  - 경계: 가상 동네 보충 재고만 변경; 운영 창고·화물 생성 없음
+  - 재사용 종류: `SharedRuleCall`
+  - 원천 코드: [OutboundBatchEngine.cs](../../../Ssalddel/Services/LogisticsProcessing/Warehouse/OutboundBatchEngine.cs)
+  - 공유 규칙: [창고출고배분Policy.cs](../../../Ssalddel.WorkflowRules/UnityPackage/Runtime/창고출고배분Policy.cs)
+  - 변형/제외: 공통 배분 계산만 공유한다. 가상은 유한 합성 재고/고정 보충량/세션 예약을 사용하며 운영 DB 후보 조회·서비스 권역·출고 원장 저장을 수행하지 않는다.
+
 ## Simulation 세션 생명주기 (`simulation-session-lifecycle`)
 
 - **010 contract.base-reflection-learning-material** — [SimulationYouTube학습원문관측Snapshot](../../../Ssalddel.Simulation.Contracts/UnityPackage/Runtime/SimulationBaseReflectionContracts.cs) · YouTube 원문 관측에서 사람 승인 학습자료까지의 3계층 계약을 정의한다.
@@ -171,6 +270,11 @@ Simulation·Unity
   - 읽기/쓰기: `None → None`
   - 부수효과: `None`
   - 경계: 운영 업무 생성 계약이 아니라 결정적 Simulation 세션 입력 계약이다.
+- **015 application.observer-tick-request** — [관찰시간누적기](../../../Ssalddel.Simulation.Application/Neighborhood/관찰시간누적기.cs) · 재생 중 경과 시간으로 단일 Tick 요청 시점을 준비한다.
+  - 계층/단계: `Application / Preview`
+  - 읽기/쓰기: `None → None`
+  - 부수효과: `None`
+  - 경계: 요청 준비만 하며 Runtime 호출·권위 Tick 진행·앱 종료 시간 따라잡기를 하지 않는다.
 - **020 api.session-lifecycle** — [경영SimulationSessionsController](../../../Ssalddel.Simulation.Server/Controllers/경영SimulationSessionsController.cs) · 세션 생성·조회·Tick HTTP 경계를 제공한다.
   - 계층/단계: `Api / Confirm`
   - 읽기/쓰기: `SimulationState → SimulationState`
@@ -724,6 +828,21 @@ Simulation·Unity
   - 읽기/쓰기: `DerivedWorld → DerivedWorld`
   - 부수효과: `PersistentRead | PersistentWrite`
   - 경계: 자료가 없는 타일은 꾸며내지 않고 대기 상태로 저장하며 Unity Prefab을 해석하지 않는다.
+- **100 application.neighborhood-import** — [동네공간ImportService](../../../Ssalddel.Simulation.Application/Neighborhood/동네공간ImportService.cs) · 전처리된 동네 도형을 검증하고 불변 공간 후보로 읽는다.
+  - 계층/단계: `Application / Projection`
+  - 읽기/쓰기: `SharedPublicData → None`
+  - 부수효과: `None`
+  - 경계: 주어진 바이트만 읽는다. 실제 자료 확보·좌표 재투영·DB/World 적용은 별도다.
+- **110 application.neighborhood-route** — [동네이동경로Engine](../../../Ssalddel.Simulation.Application/Neighborhood/동네이동경로Engine.cs) · 정규화 동네 공간의 방향·통행 조건에 맞는 경로 후보를 반환한다.
+  - 계층/단계: `Application / Preview`
+  - 읽기/쓰기: `DerivedWorld → None`
+  - 부수효과: `None`
+  - 경계: 불변 공간 후보를 읽는 순수 계산이며 실제 배차·Actor 이동·주문 상태는 변경하지 않는다.
+- **120 application.neighborhood-movement-candidate** — [동네이동진행Engine](../../../Ssalddel.Simulation.Application/Neighborhood/동네이동진행Engine.cs) · 경로 후보의 거리 진행·차단·복원 후보를 계산한다.
+  - 계층/단계: `Application / Preview`
+  - 읽기/쓰기: `DerivedWorld → None`
+  - 부수효과: `None`
+  - 경계: 기존 Actor/주문/Session 상태를 변경하지 않는 후보 계산이다.
 
 ## 독립 Synty 경관 처리 (`simulation-synty-landscape`)
 
@@ -883,5 +1002,5 @@ Simulation·Unity
 ## 진단 요약
 
 - 오류: 0
-- 경고: 5
+- 경고: 6
 - 일반 공개 타입의 미표기는 경고이며, 필수 단계·권위 위반·오래된 생성 파일만 검증을 차단한다.

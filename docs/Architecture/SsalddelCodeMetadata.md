@@ -200,6 +200,30 @@ dotnet run --project eng/Ssalddel.CodeMap -- --check
 
 ## 경계
 
+### 운영 업무에서 Simulation·Unity로 이어지는 코드 출처
+
+`food-workflow-lineage`는 서버 주문·음식점·배차·화물 운송·창고 업무를 중심으로 현재 코드의 의미 대응과 공통 계산 재사용, Unity 상태 사본 소비를 조회하는 첫 묶음이다. 기존 attribute/reader/코드 지도에 다음 **선택적** 필드를 사용한다. 별도 대장이나 실행 엔진은 만들지 않는다.
+
+| 필드 | 의미 |
+| --- | --- |
+| `SourceCodeRefs` | 확인한 원천 C# 파일의 저장소 상대 경로. 런타임 참조나 운영 데이터 조회가 아니다. |
+| `ReuseKind` | `SemanticAdaptation` 업무 의미 재구성 / `SharedRuleCall` 실제 공통 규칙 호출 / `ProjectionConsumption` 상태 사본 소비 |
+| `SharedRuleRefs` | 양쪽에서 실제 사용하는 순수 규칙 파일. `SharedRuleCall`에는 필수다. |
+| `Adaptation` | 원천과 달라진 입력·시간·상태 및 재사용하지 않는 효과 |
+
+네 필드가 모두 없으면 기존 표기로 읽는다. 출처를 표기할 때 원천·유효한 종류·변형 경계가 빠지면 `CODEMAP040`, 공유 규칙 호출에 규칙이 없으면 `CODEMAP041`, 지도 생성에서 원천 경로가 없거나 저장소 상대 C# 경로가 아니면 `CODEMAP042`로 거부한다. `DependsOnStepKeys`는 호출/처리 의존성이고 출처 관계를 대신 기록하는 필드가 아니다. 여러 partial 선언은 정확한 `StepKey`로 소스 위치를 구분한다.
+
+- 주문: [운영 등록](../../Ssalddel/Application/Food/Handlers/음식주문등록CommandHandler.cs)·[수령 확인](../../Ssalddel/Application/Food/Handlers/주문자음식주문수령확인CommandHandler.cs)의 의미를 [세션 음식배달](../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식배달.cs)과 대조하고, 공통 상태 Catalog를 읽는다. 동일 Handler나 운영 원장 재사용으로 주장하지 않는다.
+- 음식점: 운영 수락·진행 Handler와 [진행 Policy](../../Ssalddel/Services/Food/음식점주문진행Policy.cs)의 상태 의미를 `Simulation음식점응답`·`Simulation음식점조리`가 세션 권한·Tick·조리 슬롯으로 재구성한다. 운영 계정·메뉴·가격·Event를 호출하지 않는다.
+- 음식 배차: [운영 정책](../../Ssalddel/Services/Dispatch/Queue/음식배달배차업무정책.cs)과 [가상 배달 대기](../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상배달대기.cs)는 [픽업 평가 규칙](../../Ssalddel.WorkflowRules/UnityPackage/Runtime/음식배달픽업평가Policy.cs)을 공유한다. 가상 측은 `음식배달후보선정Policy`를 경유하며 운영의 거리/속도 입력과 가상의 경로 소요시간 입력은 다르다. 평가·정렬 공유가 후보 탐색/확정/저장 전체의 동일성을 뜻하지 않는다.
+- 화물: 운영 추천 점수·기사 대기 계산과 `SimulationFreightDispatch`는 공통 화물 후보 판정 정책을 사용한다. [운영 운송 상태 전이](../../Ssalddel/Application/Driver/Transport/Services/기사운송상태전이Service.cs)와 `SimulationFreightTransport`는 상태·허용 전이를 대조하되 UTC·GPS·정산과 Tick·가상 이동을 분리한다.
+- 창고: [운영 출고 계획](../../Ssalddel/Services/LogisticsProcessing/Warehouse/OutboundBatchEngine.cs)과 [가상 보충](../../Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네보충.cs)은 [출고 배분 규칙](../../Ssalddel.WorkflowRules/UnityPackage/Runtime/창고출고배분Policy.cs)을 실제 공유한다. 반면 `SimulationWarehousePutAway`의 적치는 현재 공통 Catalog 직접 호출이 아닌 운영 창고 의미의 재구성이므로 같은 종류로 표기하지 않는다.
+- Unity: [음식배달관찰상태](../../Ssalddel.Unity/Presentation/음식배달관찰경로.cs)는 세션 상태 사본을 표시값으로 바꾼다. 그 클래스 자체가 MonoBehaviour 생성이나 기사 이동을 실행하는 것은 아니다.
+
+조회: `dotnet run --project eng/Ssalddel.CodeMap -- --feature food-workflow-lineage`. 기존 JSON 지도에도 같은 선택적 필드가 생성되며 원천은 코드 특성 하나다.
+
+이 표기는 **현행 코드에서 확인한 대응**이다. Git 역사상 최초 작성 원인, 배포된 서버/DB 판본, 코드 동등성이나 실제 연결 성공을 자동 증명하지 않는다. 의미 변경 시 참조와 `Adaptation`, 관련 회귀를 함께 검토한다. 검증 결과의 당시 판본은 검증 산출물/보고에 남긴다. 운영의 인증·개인정보·결제·DB·Event는 서버가 소유하고, Simulation은 세션/Tick/Revision, Unity는 읽기 표현을 소유한다. 이후 기능도 서버 업무 확인 → 효과 없는 규칙의 실제 재사용 여부 확인 → Simulation 변형 기록 → Unity 사본 소비 순으로 검토하되 운영 Handler를 Unity에서 호출하지 않는다.
+
 이 특성은 권한 검사, 트랜잭션, validation 또는 보안 통제를 대신하지 않는다. 코드가 실제로 수행하는 효과와 특성이 다르면 코드를 기준으로 즉시 특성을 고치고 테스트로 차이를 드러낸다. secret, 실제 개인정보, Prefab·Material의 원본 경로는 메타데이터 문자열에 기록하지 않는다.
 
 ## 제품 모듈 특성

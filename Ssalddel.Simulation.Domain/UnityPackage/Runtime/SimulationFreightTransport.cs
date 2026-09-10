@@ -8,6 +8,20 @@ using Ssalddel.WorkflowRules.Contracts;
 
 namespace Ssalddel.Simulation.Domain
 {
+    [Ssalddel.Contracts.Common.Metadata.SsalddelCodeMetadata(
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeFeatureKeys.FoodWorkflowLineage,
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeLayer.Domain,
+        "운영 기사 운송의 상차·하차·인수 상태 의미를 가상 이동과 별도 Confirm으로 재구성",
+        StepKey = "domain.freight-transport-adaptation", FlowOrder = 45,
+        ExecutionStage = Ssalddel.Contracts.Common.Metadata.SsalddelCodeExecutionStage.Tick,
+        ReadsFrom = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        WritesTo = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        Effects = Ssalddel.Contracts.Common.Metadata.SsalddelCodeEffect.StateMutation,
+        SourceCodeRefs = new[] { "Ssalddel/Controllers/Driver/05_Settings/기사운송진행Controller.cs", "Ssalddel/Application/Driver/Transport/Services/기사운송상태전이Service.cs" },
+        ReuseKind = "SemanticAdaptation",
+        SharedRuleRefs = new[] { "Ssalddel.WorkflowRules/UnityPackage/Runtime/업무흐름규칙Catalog.cs" },
+        Adaptation = "공통 화물운송 상태/허용 전이를 사용하지만 운영 UTC·사용자 명령·GPS·문제신고 대신 WorldTick·가상 이동·ExpectedRevision을 사용한다.",
+        Boundary = "운영 운송원장·위치·정산을 쓰지 않고 세션 이력/SaveReplay만 변경")]
     public sealed partial class 경영SimulationSessionAggregate
     {
         private const string 화물인수수량EffectCode = "FreightReceiptQuantity";

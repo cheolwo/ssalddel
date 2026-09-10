@@ -2,7 +2,7 @@
 
 > 상태: 기준 설계와 현재 저장소 적용 상태
 >
-> 적용 대상: `Ssalddel.Unity` engine-independent package와 향후 Unity presentation project
+> 적용 대상: Hongdal의 `Ssalddel.Unity` 공통 package와 별도 `ssalddel` Unity 프로젝트
 >
 > 상위 제품 기준: [Unity 생산·유통·협력 경험 플랫폼](UnityCooperativeExperiencePlatformProposal.md)
 >
@@ -11,6 +11,56 @@
 > 데이터·시뮬레이션 기준: [Unity 농업·유통 시뮬레이션](UnityAgricultureDistributionSimulationProposal.md)
 >
 > Unity 읽기 데이터의 기본 변환 기준: [Unity Data·Interpretation·Presentation 기준 아키텍처](UnityDataInterpretationPresentationArchitecture.md)
+
+## 먼저 보기 — 웹·MAUI에서 Unity로
+
+웹에서 이해한 DI·API·ViewModel 구조를 그대로 출발점으로 삼으면 된다. 차이는 **상태를 결정하는 Core와 화면·물체를 표시하는 Unity 코드가 분리**된다는 것이다. DbContext를 Unity에 주입하지 않는다.
+
+| 웹·MAUI에서 익숙한 역할 | Unity 대응 | 바꾸지 않는 것 |
+| --- | --- | --- |
+| 앱 시작과 DI | Bootstrap / CompositionRoot에서 생성 후 Initialize·Configure로 주입 | 업무 규칙 |
+| API 호출 서비스 | Runtime 포트 또는 API Client·Repository | UI에서 DB 직접 접근하지 않음 |
+| 서버 UseCase·Domain | Simulation Core의 명령 검증·NPC 규칙·Tick | 화면이 주문 완료를 결정하지 않음 |
+| 응답 DTO | 특정 판본의 Snapshot | Unity 표시와 권위 원본은 별개 |
+| ViewModel | 일반 C# Presenter와 읽기 전용 표시 Model | GameObject·애니메이션과 독립 |
+| Razor·XAML | View / MonoBehaviour / Prefab | 입력 전달과 표시만 담당 |
+
+읽기는 `권위 상태 → Snapshot → 관점·표시 Model → View`, 변경은 `View 입력 → Controller/Presenter → 명령 → Core 검증·변경 → 최신 재조회 → View`다. CompositionRoot는 이 순서 중 매번 통과하는 계층이 아니라 **시작할 때 연결하는 코드**다. NPC 자동 행동도 Core의 Tick이 실행하며 Animator 종료가 업무 완료를 뜻하지 않는다.
+
+Solo는 `LocalSimulationRuntime`이 같은 Core를 Unity 프로세스 안에서 실행한다. Hosted는 HTTP를 거쳐 원격 Simulation Host가 실행한다. 운영 서버의 실제 주문·재고는 별개이며, 로컬 예제 성공은 HTTP·인증·운영 DB 연결 증거가 아니다. 모든 기능의 Local/Remote 어댑터가 이미 완성된 것은 아니다.
+
+### 두 저장소와 음식점 한 기능의 코드 안내
+
+- **Hongdal**: `Ssalddel.Simulation.Application/RuntimeCore`, `Ssalddel.Simulation.Domain/UnityPackage/Runtime`, `Ssalddel.Unity/Runtime/Warehouse`. 공통 Core·계약·표시 연결을 소유한다.
+- **별도 Unity 저장소 `C:\Users\user\ssalddel`**: `Assets/Ssalddel/{Bootstrap,Infrastructure,Presentation}`와 공식 `SimulationWorldShell`. `Packages/manifest.json`의 로컬 package 참조가 Hongdal 코드를 연결한다.
+
+| 음식점에서 찾을 책임 | 실제 코드 시작점 | 다음에 확인할 대상 |
+| --- | --- | --- |
+| 예제 선택·조립 | Unity `음식점관찰ProfileMenu`, `음식점관찰AutoBootstrap` | `SimulationWorldLocalRuntimeScope`의 프로필·저장 슬롯 |
+| 입력 순서·중복 방지·수명 | Unity `음식점관찰SceneController` | 주입된 세션/주문 포트와 Presenter |
+| 모의 초기 입력 | [음식점관찰표본](../../Ssalddel.Unity/Runtime/Warehouse/음식점관찰표본.cs) | 세션 생성 요청, 명시적 주문 Confirm 요청 |
+| 정책 조회·변경·표시 행 | [음식점정책카드Presenter](../../Ssalddel.Unity/Runtime/Warehouse/음식점정책카드Presenter.cs) | `ISimulationNpcPolicyRuntime`, `음식점주문표시Model` |
+| 권위 호출 | [LocalSimulationRuntime](../../Ssalddel.Simulation.Application/RuntimeCore/LocalSimulationRuntime.cs) | 세션 생명주기·Aggregate |
+| 접수·조리 규칙 | `Simulation음식점응답.cs`, `Simulation음식점조리.cs` | 권한, FIFO, 자리, 작업 시작/종료 Tick |
+| 화면 표시 | Unity `음식점관찰View` | 텍스트·입력·버튼·스크롤 목록, 업무 규칙 없음 |
+| 검증 | `음식점관찰표본Tests`, `음식점정책카드Tests`, Unity `음식점관찰Tests` | 공통 규칙·표시·UI 결속의 서로 다른 증거 |
+
+예를 들어 ‘조리 시간 변경’은 View 입력 → SceneController → Presenter.적용Async → LocalRuntime.UpdateNpcPolicyAsync → Aggregate 정책 변경 → GetPolicySessionAsync 재조회 → 표시 순이다. ‘1 Tick 진행’은 SceneController → 세션 포트 → Core의 접수·진행 중 조리·새 자리 배정 → Presenter 재조회 → 표시 순이다. 진행 중 작업의 종료 시간을 View가 다시 계산하지 않는다.
+
+`Presenter`라는 기존 이름에는 일반 C#과 MonoBehaviour가 혼재한다. 이름만 보지 말고 상속과 생성 위치를 확인한다. 신규 음식점은 일반 C# Presenter와 Unity SceneController/View로 구별한다. 위 표는 책임 안내이지 모든 기능에 빈 Repository·UseCase 클래스를 추가하라는 규칙이 아니다.
+
+E1~E7은 기능 검증 단계, WI는 상호작용, H는 공간 의미 계층이다. 데이터가 `E1 → H1 → WI → E2`처럼 통과하는 실행 모듈이 아니다.
+
+### 음식점 예제 사용법과 제한
+
+1. 별도 Unity 프로젝트에서 공식 `Assets/Ssalddel/Scenes/SimulationWorldShell.unity`를 연다.
+2. Play 중이 아닐 때 `Ssalddel > 실행 프로필 > 음식점 관찰 (수동 Tick)`을 선택하고 직접 Play한다. 메뉴는 Scene을 저장하거나 자동 실행하지 않으며 현재 Editor 프로세스에만 적용된다. 독립 실행 환경은 `SSALDDEL_RESTAURANT_OBSERVER=1`을 사용한다.
+3. 샘플 주문을 여러 건 추가하고 `1 Tick 진행`으로 접수 대기 → 조리 배정/대기 → 조리 중 → 픽업 준비를 확인한다. 새 표본은 자리 1개·시간 2 Tick이며 Tick을 초로 해석하지 않는다.
+4. 설정 적용은 미배정 작업부터 반영한다. ‘새 조리 배정’ 해제는 접수 거절이나 진행 중 조리 취소가 아니다. 실패하면 최신 상태를 확인하고 다시 입력한다.
+5. `저장`은 `restaurant-observer-r1-primary` 슬롯에 저장한다. 다시 실행하면 마지막 저장 상태를 복원하며 오프라인 시간·자동 주문·자동 Tick을 보충하지 않는다. 저장하지 않은 변경은 재시작 시 보존되지 않는다. 표본 상한 100 Tick 뒤에는 새 주문·진행을 막는다.
+6. 종료 후 `기존 기본 프로필` 메뉴로 복귀한다. 음식점 슬롯과 기존 자연 생존 슬롯을 삭제·변환하지 않는다.
+
+현재 범위는 로컬 설정·주문 카드 연결이다. 3D NPC 조리·도로·배차·원격 서버는 포함하지 않는다. 실제 Play Mode·Game View 완주 여부는 [현재 작업](../AI/CURRENT_WORK.md)의 별도 검증 결과를 확인한다.
 
 ## 1. 목적
 
@@ -24,23 +74,24 @@ Unity는 서버 응답을 GameObject에 직접 넣지 않는다. transport, mapp
 
 ## 2. 현재 저장소 적용 상태
 
-2026-08-08 현재 이 체크아웃에서 확인된 상태다.
+2026-09-06 두 저장소 소스 기준이다. 아래의 구현 존재와 실제 실행 검증은 구별한다.
 
 | 영역 | 상태 | 근거와 제한 |
 | --- | --- | --- |
 | engine-independent Unity package | 구현 | `Ssalddel.Unity`, `netstandard2.1`, C# 9 |
 | UnityEngine 격리 | 구현 | `Ssalddel.Unity.Data.asmdef`의 `noEngineReferences=true` |
-| ApiModel·Mapper·DataManager | 구현 | 서버 contract assembly를 직접 참조하지 않음 |
+| ApiModel·Mapper·DataManager | 구현 | 기능별 계약을 사용하며 공통 package는 Simulation.Contracts도 참조 |
 | 결정적 농업 simulation | 구현·headless 검증 | golden fixture와 .NET tests |
 | World projection core | 구현 | page catalog, stable-ID/revision reconcile |
 | 연구 근거·센서 계약 | 초기 구현 | engine-independent model과 validator |
-| UnityWebRequest API Client | 현재 체크아웃에서 미확인 | 사용자가 P2 실행을 검증한 별도 Unity runtime 소스 위치를 먼저 확정해야 함 |
-| VContainer | 채택·sample 적용 | 1.18.0, Zone `LifetimeScope`, method injection, Unity 6 Editor compile 검증 |
-| UniTask·Unity Newtonsoft·Input System | 미선언 | 현재 core·sample 필수 의존성이 아님 |
+| UnityWebRequest API Client | 별도 Unity 소스 확인 | `Infrastructure/Transport/UnityWebRequestApiClient.cs`와 기능별 ServerRepository. 소스 존재는 서버 연결 증거가 아님 |
+| 의존성 연결 | 기능별 방식 혼재 | 기존 sample의 VContainer와 별도 Unity의 생성자·Initialize/Configure 수동 주입을 구별. 전역 새 DI 프레임워크 도입 없음 |
+| Unity 전용 의존성 | 별도 프로젝트가 소유 | 실제 Input System·Newtonsoft 사용. 엔진 독립 package와 동일 의존성으로 설명하지 않음 |
 | Unity presentation sample | 구현·Editor 검증 | Urban Market·Traditional Market Hub Scene 생성·reload wiring; PlayMode·built player 미검증 |
-| Synty asset | 미도입 | 구매·license·실제 import 검증 없음 |
+| 시각 자산 | 별도 Unity에서 관리 | `VisualRoot` 아래 대체 가능한 표현. 음식점 카드 작업은 자산 가공·라이선스 검증을 하지 않음 |
+| 음식점 관찰 카드 | 로컬 연결 코드 | 기존 Presenter + 실제 Unity View/Controller, 수동 Tick·별도 슬롯. 실행 검증은 CURRENT_WORK 참조 |
 
-따라서 이 문서는 이미 확인된 P2 runtime을 다시 구현했다고 주장하지 않는다. 현재 core와 별도 Unity runtime을 결합할 기준을 제공한다.
+기존 진부 Hub 입고는 `진부Hub입고UiSceneCompositionRoot → ServerRepository → Coordinator → UiPresenter`를 통해 HTTP 연결 역할을 확인할 수 있다. 해당 어댑터에는 Local 미지원 차단도 남아 있으므로 모든 기능이 자동으로 두 모드를 지원한다고 설명하지 않는다.
 
 ## 3. 핵심 경계
 

@@ -8,6 +8,7 @@ namespace Ssalddel.Contracts.Common.Metadata
 
 public static class SsalddelCodeFeatureKeys
 {
+    public const string FoodWorkflowLineage = "food-workflow-lineage";
     public const string ApifyActorIntegration = "apify-actor-integration";
     public const string AppContextImageBatch = "app-context-image-batch";
     public const string AppContextImageAsset = "app-context-image-asset";
@@ -133,6 +134,11 @@ public sealed class SsalddelCodeMetadataAttribute : Attribute
     public SsalddelCodeExecutionStage ExecutionStage { get; set; }
     public SsalddelCodeDataScope ReadsFrom { get; set; }
     public SsalddelCodeDataScope WritesTo { get; set; }
+    // 코드 출처이며 런타임 호출·데이터 읽기 권한을 뜻하지 않는다.
+    public string[] SourceCodeRefs { get; set; } = Array.Empty<string>();
+    public string ReuseKind { get; set; } = string.Empty;
+    public string[] SharedRuleRefs { get; set; } = Array.Empty<string>();
+    public string Adaptation { get; set; } = string.Empty;
 }
 
 public sealed record SsalddelCodeMetadataDescriptor(
@@ -150,6 +156,10 @@ public sealed record SsalddelCodeMetadataDescriptor(
     public SsalddelCodeExecutionStage ExecutionStage { get; init; }
     public SsalddelCodeDataScope ReadsFrom { get; init; }
     public SsalddelCodeDataScope WritesTo { get; init; }
+    public IReadOnlyList<string> SourceCodeRefs { get; init; } = Array.Empty<string>();
+    public string ReuseKind { get; init; } = string.Empty;
+    public IReadOnlyList<string> SharedRuleRefs { get; init; } = Array.Empty<string>();
+    public string Adaptation { get; init; } = string.Empty;
 }
 
 public static class SsalddelCodeMetadataReader
@@ -213,7 +223,11 @@ public static class SsalddelCodeMetadataReader
                 DependsOnStepKeys = NormalizeStepKeys(attribute.DependsOnStepKeys),
                 ExecutionStage = attribute.ExecutionStage,
                 ReadsFrom = attribute.ReadsFrom,
-                WritesTo = attribute.WritesTo
+                WritesTo = attribute.WritesTo,
+                SourceCodeRefs = NormalizeStepKeys(attribute.SourceCodeRefs),
+                ReuseKind = (attribute.ReuseKind ?? string.Empty).Trim(),
+                SharedRuleRefs = NormalizeStepKeys(attribute.SharedRuleRefs),
+                Adaptation = (attribute.Adaptation ?? string.Empty).Trim()
             });
 
     private static IReadOnlyList<string> NormalizeStepKeys(IEnumerable<string>? stepKeys)

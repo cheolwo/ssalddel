@@ -228,6 +228,26 @@ static Dictionary<(string FeatureKey, string StepKey), string?> BuildSourceIndex
             if (preferred.Length == 1) candidates = preferred;
         }
 
+        // 같은 partial 타입의 여러 기능/단계는 선언된 StepKey로 구분한다.
+        if (candidates.Length > 1 && !string.IsNullOrWhiteSpace(step.StepKey))
+        {
+            var exactSteps = candidates.Where(path => Regex.IsMatch(contents[path],
+                @"\bStepKey\s*=\s*""" + Regex.Escape(step.StepKey) + @"""",
+                RegexOptions.CultureInvariant)).ToArray();
+            if (exactSteps.Length == 1) candidates = exactSteps;
+        }
+
+        foreach (var reference in step.SourceCodeRefs.Concat(step.SharedRuleRefs))
+        {
+            var segments = reference.Split('/');
+            if (Path.IsPathRooted(reference) || reference.Contains('\\') || reference.Contains(':')
+                || segments.Any(segment => segment is "" or "." or "..")
+                || !reference.EndsWith(".cs", StringComparison.Ordinal)
+                || !File.Exists(Path.Combine(repositoryRoot, reference)))
+                diagnostics.Add(Error("CODEMAP042", step.FeatureKey, step.StepKey,
+                    $"출처는 존재하는 저장소 상대 C# 파일이어야 합니다: {reference}"));
+        }
+
         string? relativePath = candidates.Length == 1
             ? Path.GetRelativePath(repositoryRoot, candidates[0]).Replace('\\', '/')
             : null;
@@ -325,6 +345,10 @@ static CodeMapDocument BuildDocument(
                 ReadsFrom = FlagNames(step.ReadsFrom),
                 WritesTo = FlagNames(step.WritesTo),
                 Boundary = step.Boundary,
+                SourceCodeRefs = step.SourceCodeRefs.Count == 0 ? null : step.SourceCodeRefs.ToArray(),
+                ReuseKind = step.ReuseKind.Length == 0 ? null : step.ReuseKind,
+                SharedRuleRefs = step.SharedRuleRefs.Count == 0 ? null : step.SharedRuleRefs.ToArray(),
+                Adaptation = step.Adaptation.Length == 0 ? null : step.Adaptation,
             }).ToArray(),
     }).ToArray();
 
@@ -412,6 +436,17 @@ static string BuildMarkdown(CodeMapDocument document)
             builder.Append("  - 읽기/쓰기: `").Append(JoinOrNone(step.ReadsFrom)).Append(" → ").Append(JoinOrNone(step.WritesTo)).AppendLine("`");
             builder.Append("  - 부수효과: `").Append(JoinOrNone(step.Effects)).AppendLine("`");
             builder.Append("  - 경계: ").AppendLine(step.Boundary);
+            if (step.ReuseKind is not null)
+            {
+                builder.Append("  - 재사용 종류: `").Append(step.ReuseKind).AppendLine("`");
+                foreach (var reference in step.SourceCodeRefs ?? Array.Empty<string>())
+                    builder.Append("  - 원천 코드: [").Append(Path.GetFileName(reference))
+                        .Append("](../../../").Append(reference).AppendLine(")");
+                foreach (var reference in step.SharedRuleRefs ?? Array.Empty<string>())
+                    builder.Append("  - 공유 규칙: [").Append(Path.GetFileName(reference))
+                        .Append("](../../../").Append(reference).AppendLine(")");
+                builder.Append("  - 변형/제외: ").AppendLine(step.Adaptation);
+            }
         }
         builder.AppendLine();
     }
@@ -436,6 +471,13 @@ static string BuildFeatureTree(CodeMapFeature feature)
         builder.Append(index == feature.Steps.Length - 1 ? "└─ " : "├─ ")
             .Append(step.FlowOrder.ToString("D3")).Append(' ')
             .Append(step.StepKey).Append(" · ").Append(step.ComponentType).AppendLine();
+        if (step.ReuseKind is not null)
+        {
+            builder.Append("   재사용: ").AppendLine(step.ReuseKind);
+            builder.Append("   원천: ").AppendLine(string.Join(" | ", step.SourceCodeRefs ?? Array.Empty<string>()));
+            builder.Append("   공유 규칙: ").AppendLine(string.Join(" | ", step.SharedRuleRefs ?? Array.Empty<string>()));
+            builder.Append("   변형/제외: ").AppendLine(step.Adaptation);
+        }
     }
     return builder.ToString();
 }
@@ -486,6 +528,10 @@ internal sealed class CodeMapFeature
 
 internal sealed class CodeMapStep
 {
+    public string[]? SourceCodeRefs { get; set; }
+    public string? ReuseKind { get; set; }
+    public string[]? SharedRuleRefs { get; set; }
+    public string? Adaptation { get; set; }
     public int FlowOrder { get; set; }
     public string StepKey { get; set; } = string.Empty;
     public string[] DependsOnStepKeys { get; set; } = Array.Empty<string>();

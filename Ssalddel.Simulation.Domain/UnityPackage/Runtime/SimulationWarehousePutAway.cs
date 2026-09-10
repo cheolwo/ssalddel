@@ -5,6 +5,19 @@ using Ssalddel.Simulation.Contracts;
 
 namespace Ssalddel.Simulation.Domain
 {
+    [Ssalddel.Contracts.Common.Metadata.SsalddelCodeMetadata(
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeFeatureKeys.FoodWorkflowLineage,
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeLayer.Domain,
+        "운영 창고의 검수 후 적치 의미를 세션 재고와 NPC 작업으로 재구성",
+        StepKey = "domain.warehouse-put-away-adaptation", FlowOrder = 50,
+        ExecutionStage = Ssalddel.Contracts.Common.Metadata.SsalddelCodeExecutionStage.Confirm,
+        ReadsFrom = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        WritesTo = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        Effects = Ssalddel.Contracts.Common.Metadata.SsalddelCodeEffect.StateMutation,
+        SourceCodeRefs = new[] { "Ssalddel/Controllers/Common/창고작업Controller.cs" },
+        ReuseKind = "SemanticAdaptation",
+        Adaptation = "운영 창고입고 상태 의미에 대응하지만 현재 구현은 공통 Catalog를 직접 호출하지 않는다. 운영 창고/사용자 CRUD·입고 원장·권한·EF 저장 대신 세션 inventory/task/effect를 사용한다.",
+        Boundary = "검수된 Simulation 재고만 적치; 운영 입고·재고·재위탁 변경 없음")]
     public sealed partial class 경영SimulationSessionAggregate
     {
         private const string 창고적재수량EffectCode = "WarehousePutAwayQuantity";

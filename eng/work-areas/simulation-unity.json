@@ -39,6 +39,22 @@
   ],
   "features": [
     {
+      "key": "food-workflow-lineage",
+      "label": "운영 주문·음식점·배차·화물·창고의 Simulation 재사용 계보",
+      "dependsOnFeatures": [],
+      "requiredStepKeys": [
+        "domain.food-order-adaptation",
+        "domain.restaurant-response-adaptation",
+        "domain.restaurant-cooking-adaptation",
+        "domain.food-dispatch-shared-rule",
+        "domain.freight-dispatch-shared-rule",
+        "domain.freight-transport-adaptation",
+        "domain.warehouse-put-away-adaptation",
+        "domain.warehouse-outbound-shared-rule",
+        "unity.food-state-projection"
+      ]
+    },
+    {
       "key": "simulation-session-lifecycle",
       "label": "Simulation 세션 생명주기",
       "dependsOnFeatures": [],

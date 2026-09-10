@@ -8,6 +8,20 @@ using Ssalddel.WorkflowRules.Contracts;
 
 namespace Ssalddel.Simulation.Domain
 {
+    [Ssalddel.Contracts.Common.Metadata.SsalddelCodeMetadata(
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeFeatureKeys.FoodWorkflowLineage,
+        Ssalddel.Contracts.Common.Metadata.SsalddelCodeLayer.Domain,
+        "운영 화물 배차와 공유하는 추천 점수·기사 대기 계산으로 가상 후보를 판정",
+        StepKey = "domain.freight-dispatch-shared-rule", FlowOrder = 40,
+        ExecutionStage = Ssalddel.Contracts.Common.Metadata.SsalddelCodeExecutionStage.Confirm,
+        ReadsFrom = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        WritesTo = Ssalddel.Contracts.Common.Metadata.SsalddelCodeDataScope.SimulationState,
+        Effects = Ssalddel.Contracts.Common.Metadata.SsalddelCodeEffect.StateMutation,
+        SourceCodeRefs = new[] { "Ssalddel/Services/Dispatch/Recommendation/배차추천평가Service.Scoring.cs", "Ssalddel/Services/Dispatch/Queue/기사대기Aging점수정책.cs" },
+        ReuseKind = "SharedRuleCall",
+        SharedRuleRefs = new[] { "Ssalddel.WorkflowRules/UnityPackage/Runtime/화물배차후보판정Policies.cs" },
+        Adaptation = "공통 후보 점수·대기 보정을 사용하되 가상 cargo/vehicle/location snapshot을 입력으로 삼는다. 운영 조회·기사 알림·배차 원장은 호출하지 않는다.",
+        Boundary = "Preview는 비변경 후보, Confirm만 SimulationState 변경; 실제 기사 배정 없음")]
     public sealed partial class 경영SimulationSessionAggregate
     {
         public SimulationFreightDispatchPreviewSnapshot PreviewFreightDispatch(

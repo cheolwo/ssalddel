@@ -4,8 +4,8 @@
   "planning": {
     "planningId": "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
     "documentRef": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
-    "revision": "operations-unity-transfer.r1",
-    "documentSha256": "d44402511d87b0bb4fee644f885344bc64127637b58f3db4ef78838679581c88"
+    "revision": "operations-unity-transfer.r2",
+    "documentSha256": "02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31"
   },
   "summary": {
     "pageCapabilityCount": 241,
@@ -16800,7 +16800,7 @@
     },
     {
       "path": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
-      "sha256": "d44402511d87b0bb4fee644f885344bc64127637b58f3db4ef78838679581c88"
+      "sha256": "02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31"
     },
     {
       "path": "eng/Ssalddel.OperationalUnityTransfer/Program.cs",
@@ -16812,7 +16812,7 @@
     },
     {
       "path": "eng/execution-ledgers/operational-unity-transfer-policy.json",
-      "sha256": "e412212e48aa9029f8f17c308c0df39f452f45dee3bfe4e784cf62246ddf3f37"
+      "sha256": "51939e002d865a73e4ee2236f1f93920cb07a9911fa9df6cb7d01e7adf810a44"
     },
     {
       "path": "eng/execution-ledgers/playable-loops.json",
