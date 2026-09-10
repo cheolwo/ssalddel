@@ -15,11 +15,19 @@ docs/AI/Planning/<기획 분야>/<PLAN-ID>/README.md
 
 필요한 경우에만 같은 디렉터리에 `lineage.md`를 두어 과거 문서·Q·D·의미 ID와 유지·부분 대체·참조 관계를 설명한다. 빈 계보 파일이나 판본별 본문 복제는 만들지 않는다. 판본은 정본 `README.md`의 머리말과 Git 이력으로 관리한다.
 
+### 정본 하나 우선 원칙
+
+- 같은 기획의 질문 답변, 전수 점검, 열린 결손, 인계 준비와 판본 변경 사유는 기본적으로 같은 `README.md`에 통합한다.
+- `점검.r1.md`, `질문.r2.md`, `현행화.r3.md`처럼 같은 기획의 진행 상태만 떼어 낸 보조 문서는 만들지 않는다.
+- 별도 파일은 다른 담당이나 도구가 독립적으로 소비해야 하는 동결 명세·증거·기계 대장처럼 책임과 생명주기가 실제로 다른 경우에만 둔다.
+- 역경 기획은 실제 공부를 시작한 괘마다 캠페인 정본 `README.md` 하나만 연다. 괘 전체 약속과 육효의 상세 기획은 같은 문서의 안정 절 앵커로 관리하고, 효별 변경 검증은 절 해시로 분리한다.
+- `LINE-001..006`은 육효의 실제 위치를 구분하는 안정 번호이므로 유지한다. 일반 표시명의 관행적 `-001`이나 판본별 파일 증식과는 구별한다.
+
 분야 디렉터리는 `공통`, `스토리`, `게임플레이`, `시간`, `월드`, `그래프맵`, `배치맵`, `자료`, `표현`, `시스템`을 기본으로 한다. 기획 분야가 더 세밀해져도 안정 `PLAN-*` ID와 정본 주소를 불필요하게 바꾸지 않는다.
 
 ## 기존 경로를 존중하는 전환 규칙
 
-현재 [기획 목차](../PLANNING.md)에 등록된 기획은 47개다. 기존 경로에서 관리하는 43개는 그 파일이 계속 정본이고, Town·City 첫 발견·Presentation E4 후보 풀·운영 서버→Unity 이관 4개는 이 표준 경로에서 새로 시작한 정본이다. 이 디렉터리를 만들었다는 이유만으로 기존 문서를 복사·이동하거나 링크를 바꾸지 않는다.
+현재 안정 `PLAN-*` ID의 목록과 수는 [기획 목차](../PLANNING.md)가 소유한다. 일부는 기존 경로가 계속 정본이고 일부는 이 표준 경로에서 시작했으므로, 이 디렉터리를 만들었다는 이유만으로 기존 문서를 복사·이동하거나 링크를 바꾸지 않는다. 기획 증감 때마다 목차의 실제 ID를 현재 기준으로 삼는다.
 
 기획 하나를 새 경로로 이관할 때만 다음을 함께 수행한다.
 
@@ -32,11 +40,26 @@ docs/AI/Planning/<기획 분야>/<PLAN-ID>/README.md
 
 본문을 두 경로에 복제해 동시에 수정하지 않는다. 이관되지 않은 기존 기획은 `ExistingCanonical`, 새 경로로 이관을 준비한 것은 `CanonicalPathPrepared`, 목차와 역링크까지 검증한 것은 `CanonicalPathMigrated`로 구분한다.
 
+## 현재 중복 통합 기준
+
+같은 장면이 여러 기획에 필요할 때 본문을 복제하지 않고 아래 소유권을 따른다.
+
+| 내용 | 단일 현행 소유자 | 다른 문서의 역할 |
+| --- | --- | --- |
+| 주인공의 장기 욕망·빙의 뒤 삶의 방향 | `PLAN-STORY-MIRROR-MAIN`<!-- compatibility-id: PLAN-STORY-MIRROR-MAIN-001 --> | 각 캠페인은 해당 욕망이 드러나는 구체 사건만 기록 |
+| 모험가·소가주 선택과 시작 역량·권한 차이 | `PLAN-STORY-DUAL-PROTAGONIST`<!-- compatibility-id: PLAN-STORY-DUAL-PROTAGONIST-001 --> | 메인 스토리는 한 문장 요약과 링크만 유지 |
+| 한스 농장의 수뢰둔 육효 이야기·한스 관계 | `PLAN-STORY-HEX03-CAMPAIGN`<!-- compatibility-id: PLAN-STORY-HEX03-CAMPAIGN-001 --> | 캠페인 정본이 괘 전체와 육효 절을 함께 소유하고, 옛 효별 경로는 호환 안내만 소유 |
+| 첫 벌목·목재·울타리 수리의 WI·증거 경계 | `PLAN-STORY-FIRST-FARM-DISCOVERY`<!-- compatibility-id: PLAN-STORY-FIRST-FARM-DISCOVERY-001 --> | 수뢰둔 초구가 이야기 인과를 소유하고 이 문서는 구현·검증을 보조 |
+| 약초 식별·재배 이후 가공·달이기·음용 규칙 | `PLAN-GAMEPLAY-HERBAL-CRAFTING`<!-- compatibility-id: PLAN-GAMEPLAY-HERBAL-CRAFTING-001 --> | 스토리는 약초 생활·판매 욕망과 해금 시점만 기록 |
+| 첫 발견·자유 이탈·귀환의 공통 플레이 감각 | `PLAN-GAMEPLAY-FIRST-EXPERIENCE`<!-- compatibility-id: PLAN-GAMEPLAY-FIRST-EXPERIENCE-001 --> | 특정 한스 사건 순서는 수뢰둔 정본을 참조 |
+| 요동성 방어의 장기 위협·영역별 기여 | `PLAN-STORY-YODONG-DEFENSE`<!-- compatibility-id: PLAN-STORY-YODONG-DEFENSE-001 --> | 한스 농장 사건을 다시 서술하지 않고 수뢰둔 결과를 입력으로 참조 |
+
+내용이 겹치면 위 표의 소유 문서를 먼저 개정한다. 다른 문서는 `CanonicalRef`, `SupportingSlice`, `ReferenceOnly`, `SupersededForStory` 중 하나로 관계를 표시하고 현행 문장을 다시 복제하지 않는다.
+
 ## 현재 상태
 
 - 표준 경로와 호환 전환 규칙: 확정
-- 기존 경로 정본 43개: `ExistingCanonical`
-- 표준 경로에서 새로 시작한 정본 4개: `StandardPathCanonical`
+- 기존 경로 정본과 표준 경로 정본: [기획 목차](../PLANNING.md)의 현재 링크가 판정
 - 기존 문서를 새 경로로 실제 이관 완료한 기획: 0개
 - 기존 문답·역사 자료: 원래 경로에서 보존
 - 코드·Graph Map·Unity·Evidence 성숙도 변화: 없음

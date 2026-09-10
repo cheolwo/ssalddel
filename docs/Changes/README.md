@@ -6,6 +6,15 @@
 
 | 날짜 | 기록 | 주요 화면 변화 |
 | --- | --- | --- |
+| 2026-09-08 | [Mongo 공간자료 보관함](2026-09-08-spatial-catalog.md) | 실제 관리자 화면·26문서/레이어/판본 고정 조회. 실제 Mongo 재조회·집중44/44, 전체 회귀7실패·Unity 미연결을 분리. 커밋 전 |
+| 2026-09-07 | [NPC 역할 앱·업무 서버 관찰](2026-09-07-food-observer-server.md) | 격리 Docker·기존 업무 API·NPC 선택 휴대폰·기본5분 검증. 실제 수령확인 화면, 최종 관찰·재연결 결과는 개별 기록 참조. 커밋 전 |
+| 2026-09-07 | [동네 관찰·운영 휴대폰](2026-09-07-observer-phone.md) | 오른쪽 휴대폰·다섯 앱·조회/실행 분리. 코드·시험 확인, 실제 입력과 30분 관찰 결과는 개별 기록 참조. 커밋 전 |
+| 2026-09-07 | [가상 동네 직업 생활 · 30분](2026-09-07-neighborhood-life.md) | 보충창고·화물·근무/휴식·정책·구간별 통행. 코드·시험/실제 Runtime 조회, Game View 판독·시각 마감 미검증, 커밋 전 |
+| 2026-09-07 | [가상 동네 배달 관찰](2026-09-07-synthetic-delivery.md) | r4 주문자 상태·음식점 수신함·수락 후 배차·저장 실패 진행 차단·EditMode5/5. 기존 마트·역할색 유지. 코드·시험 검증, 실제 r4 Play Mode·Game View 미검증, 커밋 전 |
+| 2026-09-06 | [음식점 로컬 관찰 카드와 코드 안내](2026-09-06-restaurant-observer.md) | 간접 확인 — 설정·모의 주문·수동 Tick·전용 저장 UI 연결 코드. 실제 Play Mode·Game View는 미검증, 커밋 전 |
+| 2026-09-05 | [한스 농장 정교한 양식화 후보](2026-09-05-hans-refined-stylized.md) | 재질·기둥·길·식생·현관 조명 후보와 Unity 진단 화면. 사용자 요청으로 추가 개선 중단, 시각 승인·E 승격·커밋 전 |
+| 2026-09-05 | [한스 농장·인접 숲 구조 조립 후보](2026-09-05-hans-natural-world.md) | 실제 Play 진단 화면 확인 — 손상 주택·연속 길·울타리·식생·후보 지면 결속, 집중시험 10/10, 실제 Player 입력/시각 마감/E 승격은 미완료, 커밋 전 |
+| 2026-09-05 | [한스 농장 월드 화면 정리](2026-09-05-hans-world-cleanup.md) | 실제 Play 화면 확인 — 무관한 H계층 전시 Root 비활성화·집과 경작 구획 추가·재개방/재진입 확인, 실제 입력과 수리 완주는 미검증, 커밋 전 |
 | 2026-08-27 | [Nature 자연 방향광과 표면 명암 검증](2026-08-27-nature-directional-lighting.md) | 간접 확인 — URP Lit 방향광과 Nature 핵심물 법선·Lit Shader·그림자 E6 검증을 추가하고 어셈블리 오류 0을 확인; 미저장 Scene 보호와 Pipeline lock 때문에 실제 Test Runner·Play Mode·Game View는 미검증 |
 | 2026-08-27 | [LH 지도와 Nature 세계자산배치 분리](2026-08-27-world-map-asset-placement.md) | 직접 확인·미통과 — Play Mode의 Nature 1인칭·도끼 획득·HUD 전이는 작동했지만 밤 화면의 다음 나무 식별성과 Console 잠금 오류 때문에 표현 E6·E7 및 최종 PNG는 차단 |
 | 2026-08-26 | [Nature Sky Engine 세계 대기 표현](2026-08-26-nature-sky-engine.md) | 간접 확인 — 결정적 맑음·흐림·비·뇌우·새벽 맑음 상태와 `simulation-save.v25`를 추가하고 canonical Scene에 Synty 구름 5·비 Particle 1·번개·음향 Root를 조립; Unity Editor·EditMode 어셈블리 오류 0, 기존 Job lock 때문에 실제 Test Runner·Play Mode·Game View·청음은 미검증 |

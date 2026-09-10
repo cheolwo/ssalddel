@@ -6,6 +6,7 @@
 
 ## 기획과 구조
 
+- [관찰 중심 개인 세계 · 리팩토링 단계](docs/AI/Planning/시스템/PLAN-SYSTEM-OBSERVER-WORLD/README.md)
 - [이야기와 플레이 기획](docs/AI/PLANNING.md)
   - [게임의 상위 목적](docs/AI/게임상위목적-오행순환과광복기-기획-2026-09-02.md)
   - [64괘·384효 기획 트리](docs/AI/generated/hexagram-story-tree.md)
@@ -19,6 +20,7 @@
   - [H1 행동 공간 → H2 블록 → H3 경관 → H4 지역 → H5 세계 배치](docs/Architecture/H1-H5공간포함계층조사.md)
   - [관계 지도(Graph Map)와 배치 맵](docs/Architecture/GraphMap기획인계순환체계.md)
 - 실행과 표현
+  - [웹·MAUI에서 Unity로 — 코드 연결과 음식점 예제](docs/Architecture/UnityClientLayeredArchitecture.md)
   - [Simulation·Unity 코드 지도](docs/AI/generated/simulation-unity-code-map.md)
   - [Unity 프로젝트](https://github.com/cheolwo/unity)
 - 개발과 검증
