@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "simulation-e7-vertical-work-order.v2",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
+  "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
+  "workOrderId": "E7-WO-SYNTHETIC-DELIVERY-DELIVER",
+  "title": "주택 전달",
+  "ownerThreadId": "01a06f87-43c4-7150-8138-3368d9744af5",
+  "handoffNotes": {
+    "purpose": "주택 전달의 직접 결과 Delivered",
+    "excludedScope": "운영·정산·실제 GIS 제외",
+    "moduleRelations": [
+      "공통 Session → 승인 경로 → 직접 결과 → 상태 사본 → Unity"
+    ],
+    "readRefs": [
+      "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+      "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+    ],
+    "firstTask": "주체·기획·연구·공유 파일 확인 후 순차 구현",
+    "completionCriteria": "Delivered 결정성·저장 재진입 검사. 실제 화면 별도",
+    "validationCommands": [
+      "pwsh -NoProfile -File eng/tests/development-handoff.ps1",
+      "pwsh -NoProfile -File eng/execution-ledgers/manage-e7-vertical-work-order.ps1 -InputPath eng/execution-ledgers/work-orders/restaurant-cooking.e7-work-order.json"
+    ],
+    "decisionBoundary": "인계 서식·도구 결함은 제작 담당이 수정한다. 게임 규칙·공유 계약·승인 상한·쓰기 소유권은 임의 변경하지 않고 기존 개발 통합 담당에 반환한다.",
+    "returnInstructions": "기존 개발→기획 반환의 실제 통합, 미통합, 검증 범위, 기획 판단, 다음 작업을 사용한다. 인계 JSON·Markdown 경로와 기준 hash, 차단 코드를 첨부하고 시험·Unity 실행·서버 연결·커밋·푸시는 분리해 기록한다."
+  },
+  "activeWorldInteractionId": "WI-CITY-SYNTHETIC-DELIVER",
+  "targetEvidenceStage": "E7",
+  "currentEvidenceStage": "E0",
+  "promotionEligible": false,
+  "iterationState": {
+    "currentPass": "ImpactReassessment",
+    "nextReopenCondition": "P0 코드·회귀 검증 뒤 실제 카드 화면 결속은 Presentation E2부터 진행한다. 시간·저장 변경 시 Logic E3를 다시 검증한다."
+  },
+  "changeImpactReviewRef": "",
+  "presentationE4Preparation": {
+    "applicabilityCode": "Required",
+    "notApplicableReason": "",
+    "playerReadableMoment": "주택 전달",
+    "requiredHCapabilities": [],
+    "visualKeys": [
+      "visual:synthetic-delivery:basic-shapes.r1"
+    ],
+    "primaryAssetCandidateRefs": [
+      "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+    ],
+    "alternativeAssetCandidateRefs": [],
+    "fallbackPresentationRefs": [],
+    "placementIntent": "canonical SimulationWorldShell의 합성 관찰 프로필",
+    "interactionAnchorIntent": "승인 정차점과 4m 보행 출입구",
+    "candidateRevisionOrFingerprint": "synthetic-spatial.r1",
+    "e5ReadinessCode": "Blocked",
+    "openGapRefs": [
+      "실제 Unity 결속·검증 필요"
+    ]
+  },
+  "presentationModuleBindings": [
+    {
+      "moduleCode": "presentation-requirement-contract",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-projection-lifecycle",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-automated-regression",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-binding",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "visual-source-bounds",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "player-scale-spacing",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "state-difference-readability",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "actual-camera-input-result-return",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    }
+  ],
+  "trackPlans": {
+    "logic": {
+      "trackCode": "Logic",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    "presentation": {
+      "trackCode": "Presentation",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    }
+  },
+  "integratedGate": {
+    "currentEvidenceStage": "E0",
+    "status": "Blocked",
+    "candidateRevision": "",
+    "evidenceRefs": [],
+    "openFeedbackRefs": [
+      "실제 Unity·Hosted 미검증"
+    ]
+  },
+  "planningGate": {
+    "statusCode": "Approved",
+    "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+    "designRevision": "complete-delivery-work.r1",
+    "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+    "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+  },
+  "workOrderStableId": "work-order:synthetic-delivery-deliver.v1",
+  "worldInteractionId": "WI-CITY-SYNTHETIC-DELIVER",
+  "subjectBindingRefs": [
+    "subject:synthetic-delivery-courier.v1",
+    "subject:synthetic-delivery-order.v1",
+    "subject:synthetic-delivery-vehicle.v1",
+    "subject:synthetic-delivery-recipient.v1",
+    "subject:npc-routine-actor.v1",
+    "subject:authoritative-interaction-target.v1"
+  ],
+  "subjectResolution": "합성 프로필 고정 기사·차량 ID와 음식 주문 원장 ID. 같은 Tick 명령 재생으로 복원.",
+  "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+  "designRevision": "complete-delivery-work.r1",
+  "designHashSha256": "BC4C1D38CAE8201D25691B30CB7C10A787A578D833EACC79D177BBDE976E37E6",
+  "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+  "statusCode": "Approved",
+  "deliveryCap": "E3",
+  "implementationScopeRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+  "runtimeBoundary": "LocalProcess와 RemoteHost 공통 Core. 실제 Hosted 연결은 미검증.",
+  "requiredResearch": [{ "requirementCode": "Required", "statusCode": "Accepted", "documentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md", "sha256": "42B94458FD5C26B33A1479A97730BE719E4640DADC451476DA160C26DB1009AD" }],
+  "researchBoundary": "Accepted 연구 docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md 의 승인된 기본 도형·도로·속도만 적용.",
+  "writePaths": [
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상배달관찰.cs",
+    "Ssalddel.Simulation.Tests/가상배달완주Tests.cs"
+  ],
+  "openFeedbackItems": [
+    "단일 담당의 순차 수정. 동일 파일 동시 쓰기 금지. 실제 Unity·Hosted 미검증."
+  ],
+  "reopenCondition": "저장·도착·인계 조건 변경시 Logic 재검토",
+  "detailedWorkOrderRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+  "interactionGoalStableId": "interaction-goal:synthetic-delivery-deliver.v1"
+}

@@ -2,16 +2,16 @@
 
 > 이 문서는 `eng/execution-ledgers/world-interactions.json`와 참조된 단일 책임·조립 흐름·음양 사분면 대장에서 자동 생성된다. 직접 수정하지 않는다.
 
-- 대장 개정: `simulation-world-interactions.r43`
-- 증거 단계 개정: `simulation-evidence-stages.r13`
+- 대장 개정: `simulation-world-interactions.r48`
+- 증거 단계 개정: `simulation-evidence-stages.r14`
 - WI 발생원 개정: `world-interaction-trigger-sources.r11`
-- WI 단일 책임 개정: `simulation-world-interaction-responsibilities.r13`
-- WI 조립 흐름 개정: `simulation-world-interaction-flows.r3`
-- WI 음양·수행주체 사분면 개정: `world-interaction-polarity-quadrants.r12`
-- 마지막 확인일: `2026-08-29`
+- WI 단일 책임 개정: `simulation-world-interaction-responsibilities.r16`
+- WI 조립 흐름 개정: `simulation-world-interaction-flows.r4`
+- WI 음양·수행주체 사분면 개정: `world-interaction-polarity-quadrants.r15`
+- 마지막 확인일: `2026-09-07`
 - 기본 구현 완료선: `E3 자동 시험 통과`
 - 실제 공간·공공데이터·Unity 통합 목표선: `E7 실제 플레이 폐루프`
-- 전체 항목: `105`
+- 전체 항목: `133`
 
 ## 읽는 법
 
@@ -25,7 +25,7 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 
 | 분류 | 수 |
 | --- | ---: |
-| 명시적 명령 | 92 |
+| 명시적 명령 | 120 |
 | 자동 상태 전이 | 12 |
 | 공유 정책 | 1 |
 
@@ -37,9 +37,9 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 | 장착 상태 변경 · `WI-ACTOR-02` | 2 | 행위자 의도 | 단일 책임 | 음(陰) | `ItemEquipmentChanged` | PlayerOrNpc | PlayerDriven, NpcDriven | ItemOwnedInInventory, ItemEquipped → EquipmentStateChanged | 완료 · `E3→E3` | 진행 중 · `E5→E7` |
 | 지식 습득 · `WI-ACTOR-03` | 3 | 행위자 의도 | 단일 책임 | 음(陰) | `RecipeKnowledgeAdded` | PlayerDirect | PlayerDriven, NpcDriven | ReadableKnowledgeSourceAvailable, RecipeNotKnown → RecipeKnown | 완료 · `E3→E3` | 진행 중 · `E4→E7` |
 | 물품 섭취 · `WI-ACTOR-CONSUME` | 4 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `ItemConsumed` | PlayerDirect | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → ItemConsumed | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
-| 개인 계획 설정 · `WI-ACTOR-PLAN-SET` | 5 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `PersonalPlanSet` | PlayerDirect | PlayerDriven, NpcDriven | PersonalPlanPolicyReady → PersonalPlanSet | 완료 · `E3→E3` | 진행 중 · `E1→E7` |
+| 개인 계획 설정 · `WI-ACTOR-PLAN-SET` | 5 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `PersonalPlanSet` | PlayerDirect | PlayerDriven, NpcDriven | PersonalPlanPolicyReady → PersonalPlanSet | 완료 · `E4→E4` | 진행 중 · `E4→E7` |
 
-## 메이저 아르카나 작업군 (`CARD`)
+## 카드 맥락 작업군 (`CARD`)
 
 | 한국어 기능명 · 고유 식별자 | 대장 순번 | 책임 종류 | 단일 책임 판정 | 음양 정의 | 주요 결과 | 조작 정책 | 허용 발생원 | 시작 → 완료 | 구현 | 통합 |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -53,6 +53,29 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 | 도심 서비스용 지역 재고 배정 · `WI-CITY-02` | 2 | 권위 상태 전이 | 배타적 결과 묶음 | 사분면 제외 | `CityInventoryAllocated` | WorldAutomatic | WorldDerived | CityDemandConfirmed → CityInventoryAllocated, CityInventoryShortage | 미착수 · `E1→E3` | 미선정 · `E1→E7` |
 | 도심 주민 서비스 처리 · `WI-CITY-03` | 3 | 행위자 의도 | 배타적 결과 묶음 | 음(陰) | `CityServiceCompleted` | NpcRoutine | PlayerDriven, NpcDriven | CityInventoryAllocated, CityInventoryShortage → CityServiceCompleted, CityServiceDeferred | 미착수 · `E1→E3` | 미선정 · `E1→E7` |
 | 도심 서비스 결과 확인 · `WI-CITY-04` | 4 | 행위자 의도 | 단일 책임 | 음(陰) | `CityServiceChoiceAvailable` | NpcRoutine | PlayerDriven, NpcDriven | CityServiceCompleted, CityServiceDeferred → CityServiceChoiceAvailable | 미착수 · `E1→E3` | 미선정 · `E1→E7` |
+| 음식점 NPC 주문 자동 수락 · `WI-CITY-RESTAURANT-ACCEPT` | 5 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `RestaurantResponseRecorded` | NpcRoutine | PlayerDriven, NpcDriven | FoodOrderNpcSubmission → FoodOrderCookingQueued | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 음식점 조리 자리 배정 · `WI-CITY-RESTAURANT-COOK` | 6 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `RestaurantCookingScheduled` | NpcRoutine | PlayerDriven, NpcDriven | FoodOrderCookingQueued → ReadyForPickup | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 기사 배정 · `WI-CITY-SYNTHETIC-ASSIGN` | 7 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Assigned` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Assigned | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 도로·출입구 이동 · `WI-CITY-SYNTHETIC-MOVE` | 8 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `PositionAdvanced` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → PositionAdvanced | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 음식 픽업 · `WI-CITY-SYNTHETIC-PICKUP` | 9 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `PickedUp` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → PickedUp | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 주택 전달 · `WI-CITY-SYNTHETIC-DELIVER` | 10 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Delivered` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Delivered | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 주문자 수령 · `WI-CITY-SYNTHETIC-RECEIVE` | 11 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Received` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Received | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 기사 복귀 · `WI-CITY-SYNTHETIC-RETURN` | 12 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Returned` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Returned | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 예약 · `WI-CITY-SYNTHETIC-MART-RESERVE` | 13 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Reserved` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Reserved | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 피킹 · `WI-CITY-SYNTHETIC-MART-PICK` | 14 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Picked` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Picked | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 포장 · `WI-CITY-SYNTHETIC-MART-PACK` | 15 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Packed` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Packed | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 인계대 적치 · `WI-CITY-SYNTHETIC-MART-STAGE` | 16 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `ReadyForCourier` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → ReadyForCourier | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 근무 복귀 · `WI-CITY-SYNTHETIC-LIFE-SHIFT` | 17 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Working` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Working | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 인계 후 휴식 · `WI-CITY-SYNTHETIC-LIFE-REST` | 18 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Resting` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Resting | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 보충창고 입고 검수 · `WI-CITY-SYNTHETIC-DEPOT-INSPECT` | 19 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Inspected` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Inspected | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 검수 물품 적치 · `WI-CITY-SYNTHETIC-DEPOT-PUTAWAY` | 20 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Stored` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Stored | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 보충 출고 예약 · `WI-CITY-SYNTHETIC-DEPOT-RESERVE` | 21 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Reserved` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Reserved | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 보충 물품 피킹 · `WI-CITY-SYNTHETIC-DEPOT-PICK` | 22 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Picked` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Picked | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 보충 물품 포장 · `WI-CITY-SYNTHETIC-DEPOT-PACK` | 23 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Packed` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Packed | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 보충 물품 상차대 인계 · `WI-CITY-SYNTHETIC-DEPOT-STAGE` | 24 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Ready` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Ready | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 화물차 상차 · `WI-CITY-SYNTHETIC-FREIGHT-LOAD` | 25 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Loaded` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Loaded | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 화물 하차 · `WI-CITY-SYNTHETIC-FREIGHT-UNLOAD` | 26 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Unloaded` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Unloaded | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 마트 검수 입고 · `WI-CITY-SYNTHETIC-MART-INBOUND` | 27 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `Received` | NpcRoutine | PlayerDriven, NpcDriven | SyntheticProfilePreconditions → Received | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 
 ## 공동체 방문·관계 작업군 (`COMMUNITY`)
 
@@ -157,9 +180,12 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 | 현장 보급 제작 업무 위임 · `WI-NATURE-17` | 17 | 행위자 의도 | 복합 책임·분리 필요 | 음(陰) | `NpcFieldSupplyPolicySelected` | NpcRoutine | PlayerDriven, NpcDriven | Day2Ready, NatureWorkbenchOperational, NpcFieldSupplyPolicyEnabled → NatureFieldSupplyPackAdded, FieldExpeditionChoiceAvailable | 완료 · `E3→E3` | 진행 중 · `E4→E7` |
 | 벌목 통나무 줍기 · `WI-NATURE-18` | 18 | 행위자 의도 | 원자적 부수 효과 | 양(陽) | `TimberCollected` | PlayerDirect | PlayerDriven, NpcDriven | DroppedTimberAvailable, InventoryCapacityAvailable → DroppedTimberCollected, TimberCarried | 완료 · `E3→E3` | 완료 · `E7→E7` |
 | 배합물 달이기 · `WI-CRAFT-BREW` | 19 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `BrewBatchCompleted` | PlayerOrNpc | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → BrewBatchCompleted | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
-| 열원 상태 변경 · `WI-HEAT-SOURCE-STATE-CHANGE` | 20 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `HeatSourceStateChanged` | PlayerOrNpc | PlayerDriven, NpcDriven | Off, Smoldering, Burning → HeatSourceStateChanged | 완료 · `E3→E3` | 진행 중 · `E1→E7` |
+| 열원 상태 변경 · `WI-HEAT-SOURCE-STATE-CHANGE` | 20 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `HeatSourceStateChanged` | PlayerOrNpc | PlayerDriven, NpcDriven | Off, Smoldering, Burning → HeatSourceStateChanged | 완료 · `E4→E4` | 진행 중 · `E4→E7` |
 | 약초 채집 · `WI-NATURE-HERB-GATHER` | 21 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `HerbGathered` | PlayerOrNpc | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → HerbGathered | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 | 자연 흔적 조사 · `WI-NATURE-TRACE-INVESTIGATE` | 22 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `NatureTraceInvestigated` | PlayerOrNpc | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → NatureTraceInvestigated | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
+| 한스 농장 부러진 손도끼 줍기 · `WI-NATURE-19` | 23 | 행위자 의도 | 단일 책임 | 양(陽) | `HansBrokenAxeCarried` | PlayerDirect | PlayerDriven, NpcDriven | HansBrokenAxeAvailable → HansBrokenAxeCarried, WoodcuttingChoiceAvailable | 완료 · `E3→E3` | 진행 중 · `E4→E7` |
+| 한스 농장 울타리 일괄 수리 · `WI-NATURE-20` | 24 | 행위자 의도 | 원자적 부수 효과 | 음(陰) | `HansFarmFenceRepaired` | PlayerDirect | PlayerDriven, NpcDriven | HansBrokenAxeCarried, HansFarmFenceDamaged, TimberCarried → HansFarmFenceRepaired, HansFarmLifeOrTravelChoiceAvailable | 완료 · `E3→E3` | 진행 중 · `E4→E7` |
+| 한스와 농장 경계 순찰 · `WI-NATURE-HANS-BOUNDARY-PATROL` | 25 | 행위자 의도 | 원자적 부수 효과 | 실행 문맥 판정 | `FarmBoundaryPatrolCompleted` | PlayerOrNpc | PlayerDriven, NpcDriven | HansGuestRightsGranted, FarmBoundaryPatrolAvailable → FarmBoundaryPatrolCompleted, HansAndPlayerReturnedTogether | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 
 ## 주민 주문·소비 작업군 (`ORDER`)
 
@@ -178,6 +204,7 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 | 한국어 기능명 · 고유 식별자 | 대장 순번 | 책임 종류 | 단일 책임 판정 | 음양 정의 | 주요 결과 | 조작 정책 | 허용 발생원 | 시작 → 완료 | 구현 | 통합 |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 승인 자료로 거점 성찰 확정 · `WI-REFLECT-01` | 1 | 행위자 의도 | 단일 책임 | 음(陰) | `InnerLearningPending` | PlayerDirect | PlayerDriven | ReturnedToBase, NatureSafeChoiceAvailable, ReflectionChoiceAvailable → InnerLearningPending | 완료 · `E3→E3` | 미선정 · `E3→E7` |
+| 한스 농장 위기 사후 성찰 · `WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF` | 2 | 행위자 의도 | 원자적 부수 효과 | 음(陰) | `HansFarmCrisisDebriefCompleted` | PlayerDirect | PlayerDriven, NpcDriven | FarmDefenseReturned, FarmRecoveryOutcomeAvailable → HansFarmCrisisDebriefCompleted, LearningNeedRecognized | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 
 ## 업무 검토 작업군 (`REVIEW`)
 
@@ -202,7 +229,8 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 | 탐사 임무 파견 · `WI-EXPEDITION-DISPATCH` | 11 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `ExpeditionDispatched` | PlayerOrNpc | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → ExpeditionDispatched | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 | 목표 비축 미달 판매 확정 · `WI-INVENTORY-BELOW-RESERVE-SALE-CONFIRM` | 12 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `BelowReserveSaleConfirmed` | PlayerDirect | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → BelowReserveSaleConfirmed | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 | 생존 배급 정책 설정 · `WI-SURVIVAL-RATION-POLICY-SET` | 13 | 행위자 의도 | 단일 책임 | 실행 문맥 판정 | `RationPolicySet` | PlayerDirect | PlayerDriven, NpcDriven | RegistrationOnly:PreconditionsRequireApprovedDesign → RationPolicySet | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
-| 세계 자원 재생 · `WI-WORLD-RESOURCE-REGENERATE` | 14 | 권위 상태 전이 | 배타적 결과 묶음 | 사분면 제외 | `ResourceAvailabilityRestored` | WorldAutomatic | WorldDerived | TrustedResourcePolicyReady, ConsecutiveWorldTickAvailable → ResourceAvailabilityRestored, ResourceAvailabilityUnchanged | 완료 · `E3→E3` | 진행 중 · `E1→E7` |
+| 세계 자원 재생 · `WI-WORLD-RESOURCE-REGENERATE` | 14 | 권위 상태 전이 | 배타적 결과 묶음 | 사분면 제외 | `ResourceAvailabilityRestored` | WorldAutomatic | WorldDerived | TrustedResourcePolicyReady, ConsecutiveWorldTickAvailable → ResourceAvailabilityRestored, ResourceAvailabilityUnchanged | 완료 · `E4→E4` | 진행 중 · `E4→E7` |
+| 제한된 생활 거점 관리권 부여 · `WI-WORLD-BOUNDED-MANAGEMENT-GRANT` | 15 | 행위자 의도 | 단일 책임 | 음(陰) | `BoundedManagementAuthorityGranted` | PlayerDirect | PlayerDriven, NpcDriven | TrustEvidenceAccepted, ManagementGrantAvailable → BoundedManagementAuthorityGranted | 미착수 · `E0→E3` | 미선정 · `E0→E7` |
 
 ## WI 조립 흐름
 
@@ -300,6 +328,8 @@ WI는 한 행위자의 한 의도와 하나의 주요 권위 결과를 관통하
 - 현장 보급 제작 업무 위임 (`WI-NATURE-17`) → 나무 벌목 작업 시작 (`WI-NATURE-06`)
 - 벌목 통나무 줍기 (`WI-NATURE-18`) → 나무 벌목 작업 시작 (`WI-NATURE-06`)
 - 벌목 통나무 줍기 (`WI-NATURE-18`) → 오두막을 지을 터 선정 (`WI-NATURE-07`)
+- 한스 농장 부러진 손도끼 줍기 (`WI-NATURE-19`) → 나무 벌목 작업 시작 (`WI-NATURE-06`)
+- 벌목 통나무 줍기 (`WI-NATURE-18`) → 한스 농장 울타리 일괄 수리 (`WI-NATURE-20`)
 
 ### 도심 서비스 내부 흐름 (`wi-flow:city-service-internal.r1`)
 

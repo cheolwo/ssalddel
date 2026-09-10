@@ -23,7 +23,7 @@ namespace Ssalddel.Simulation.Application
         ISimulationBattleRuntime, ISimulationActorEquipmentRuntime,
         ISimulationPlayerKnowledgeRuntime, ISimulation방문자체류Runtime,
         ISimulationPlayerLearningFocusRuntime, ISimulationPlayerIdeaMapRuntime,
-        ISimulationHexagramCampaignRuntime,
+        ISimulationHexagramCampaignRuntime, ISimulationNpcPolicyRuntime, ISimulationFoodOrderRuntime,
         IDisposable
     {
         private readonly SemaphoreSlim commandGate = new SemaphoreSlim(1, 1);
@@ -274,6 +274,40 @@ namespace Ssalddel.Simulation.Application
             string sessionStableId,
             CancellationToken cancellationToken)
             => ExecuteAsync(() => lifecycle.Get(sessionStableId), cancellationToken);
+
+        public ValueTask<경영SimulationSessionSnapshot> GetPolicySessionAsync(
+            string sessionStableId, CancellationToken cancellationToken = default)
+            => ExecuteAsync(() => lifecycle.Get(sessionStableId), cancellationToken);
+
+        public ValueTask<Simulation음식배달PreviewSnapshot> PreviewFoodDeliveryAsync(
+            string sessionStableId, Simulation음식배달PreviewRequest request,
+            CancellationToken token = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).PreviewFoodDelivery(request), token);
+
+        public ValueTask<경영SimulationSessionSnapshot> ConfirmRestaurantResponseAsync(
+            string sessionStableId, Simulation음식점응답Request request,
+            CancellationToken token = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).ConfirmRestaurantResponse(request), token);
+
+        public ValueTask<경영SimulationSessionSnapshot> ConfirmFoodDeliveryAsync(
+            string sessionStableId, Simulation음식배달ConfirmRequest request,
+            CancellationToken token = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).ConfirmFoodDelivery(request), token);
+
+        public ValueTask<SimulationDecisionPreviewSnapshot> PreviewFoodDeliveryReceiptAsync(
+            string sessionStableId, Simulation음식배달수령PreviewRequest request,
+            CancellationToken token = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).PreviewFoodDeliveryReceipt(request), token);
+
+        public ValueTask<경영SimulationSessionSnapshot> ConfirmFoodDeliveryReceiptAsync(
+            string sessionStableId, Simulation음식배달수령ConfirmRequest request,
+            CancellationToken token = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).ConfirmFoodDeliveryReceipt(request), token);
+
+        public ValueTask<경영SimulationSessionSnapshot> UpdateNpcPolicyAsync(
+            string sessionStableId, SimulationNpcPolicyChangeRequest request,
+            CancellationToken cancellationToken = default)
+            => ExecuteAsync(() => RequireSession(sessionStableId).UpdateNpcPolicy(request), cancellationToken);
 
         public ValueTask<경영SimulationSessionSnapshot> AdvanceWorldTickAsync(
             string sessionStableId,
@@ -577,6 +611,15 @@ namespace Ssalddel.Simulation.Application
             CancellationToken cancellationToken = default)
             => ExecuteAsync(() => battles.Advance(sessionStableId,
                 battleStableId, request), cancellationToken);
+
+        /// <summary>같은 직렬화 관문에서 읽은 보고 사본. HTTP/DB 저장이나 추가 업무 명령은 실행하지 않는다.</summary>
+        public ValueTask<로컬생활보고> GetLocalLifeReportAsync(string sessionStableId, 로컬생활시작묶음 bundle,
+            CancellationToken cancellationToken = default)
+            => ExecuteAsync(() => {
+                var session = RequireSession(sessionStableId);
+                return 로컬생활보고.Create(session.CreateSavePackage(new SimulationSessionSaveRequest {
+                    SaveStableId = "offline-report:" + sessionStableId, ExpectedRevision = session.Snapshot().Revision }), bundle);
+            }, cancellationToken);
 
         public ValueTask<SimulationLocalSaveSlotResult> SaveSlotAsync(
             string sessionStableId,

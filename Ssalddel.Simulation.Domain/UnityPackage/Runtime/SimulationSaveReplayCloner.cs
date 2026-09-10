@@ -15,6 +15,7 @@ namespace Ssalddel.Simulation.Domain
         public static SimulationSessionSavePackage ClonePackage(SimulationSessionSavePackage source)
             => new SimulationSessionSavePackage
             {
+                TickRuleRevision = source.TickRuleRevision,
                 SchemaVersion = source.SchemaVersion,
                 SaveStableId = source.SaveStableId,
                 SessionStableId = source.SessionStableId,
@@ -167,6 +168,8 @@ namespace Ssalddel.Simulation.Domain
                 TarotOrientationPolicyCode = source.TarotOrientationPolicyCode,
                 TownNpcLifeProfileStableId = source.TownNpcLifeProfileStableId,
                 DurationTicks = source.DurationTicks,
+                NeighborhoodDayEnabled = source.NeighborhoodDayEnabled,
+                LocalLife = source.LocalLife?.Copy(),
                 WorldContext = new SimulationWorldContext생성Request
                 {
                     FactionStableId = source.WorldContext.FactionStableId,
@@ -622,6 +625,11 @@ namespace Ssalddel.Simulation.Domain
             SimulationNpcPolicyChangeRequest source)
             => new SimulationNpcPolicyChangeRequest
             {
+                CookingSlots = source.CookingSlots,
+                CookingDurationTicks = source.CookingDurationTicks,
+                ObserverWorkingTicks = source.ObserverWorkingTicks,
+                ObserverRestTicks = source.ObserverRestTicks,
+                ObserverRestockThreshold = source.ObserverRestockThreshold,
                 CommandId = source.CommandId,
                 ExpectedRevision = source.ExpectedRevision,
                 PolicyStableId = source.PolicyStableId,

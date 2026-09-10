@@ -163,6 +163,19 @@ public sealed class SimulationWorldInteractionSpatialSeedbedTests
         Assert.NotEqual(이전.CatalogHashSha256, 변경.CatalogHashSha256);
     }
 
+    [Fact]
+    public void 음식점WI의_추가등록은_기존공간모판을_자동확장하지않는다()
+    {
+        var catalog = SimulationWorldInteractionSpatialSeedbedTestFixture.Compile();
+        var included = catalog.Definitions.SelectMany(value => value.IncludedWiIds).Distinct().ToArray();
+        Assert.Equal(32, included.Length);
+        Assert.DoesNotContain("WI-CITY-RESTAURANT-ACCEPT", included);
+        Assert.DoesNotContain("WI-CITY-RESTAURANT-COOK", included);
+        Assert.DoesNotContain("WI-CITY-SYNTHETIC-DEPOT-PICK", included);
+        Assert.DoesNotContain("WI-CITY-SYNTHETIC-LIFE-REST", included);
+        Assert.All(catalog.Definitions, definition => Assert.True(definition.PresentationOnly));
+    }
+
     private sealed class MutableSeedbedFixture : IDisposable
     {
         private readonly string root;

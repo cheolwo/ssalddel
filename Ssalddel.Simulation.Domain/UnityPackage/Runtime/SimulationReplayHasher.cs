@@ -201,6 +201,11 @@ namespace Ssalddel.Simulation.Domain
             }
             var canonical = new StringBuilder();
             Add(canonical, package.SchemaVersion);
+            if (!string.IsNullOrEmpty(package.TickRuleRevision))
+            {
+                Add(canonical, "tick-rule-revision");
+                Add(canonical, package.TickRuleRevision);
+            }
             var isV25 = string.Equals(package.SchemaVersion,
                 SimulationSaveSchemaVersions.V25, StringComparison.Ordinal);
             var isV24 = string.Equals(package.SchemaVersion,
@@ -797,6 +802,15 @@ namespace Ssalddel.Simulation.Domain
             }
             using (var sha = SHA256.Create())
             {
+                // 선택 필드 없는 기존 저장 해시는 보존한다.
+                var local = package.SessionCreateRequest.LocalLife;
+                if(local != null) {
+                    Add(canonical,"OfflineLifeR1");Add(canonical,local.Revision);Add(canonical,local.SourceBundleSha256);
+                    foreach(var a in local.Actors.OrderBy(x=>x.SlotKey,StringComparer.Ordinal)) {
+                        Add(canonical,a.SlotKey);Add(canonical,a.ActorStableId);Add(canonical,a.DisplayName);Add(canonical,a.Role);Add(canonical,a.VisualKey); }
+                    foreach(var f in local.Facilities.OrderBy(x=>x.SlotKey,StringComparer.Ordinal)) {
+                        Add(canonical,f.SlotKey);Add(canonical,f.FacilityStableId);Add(canonical,f.DisplayName); }
+                }
                 var bytes = Encoding.UTF8.GetBytes(canonical.ToString());
                 return BitConverter.ToString(sha.ComputeHash(bytes))
                     .Replace("-", string.Empty)
@@ -1496,8 +1510,69 @@ namespace Ssalddel.Simulation.Domain
             foreach (var groupOrder in value.GroupOrders)
                 AddGroupOrder(target, groupOrder);
             Add(target, value.FoodDeliveries.Length);
+            if (value.SyntheticCourier != null)
+            {
+                var courier = value.SyntheticCourier;
+                Add(target, "synthetic-delivery.r1");
+                Add(target, courier.ActorStableId); Add(target, courier.Stage); Add(target, courier.OrderStableId);
+                Add(target, courier.Batch); Add(target, courier.Distance.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                Add(target, courier.X.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                Add(target, courier.Z.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                Add(target, courier.VehicleX.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                Add(target, courier.VehicleZ.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                Add(target, courier.Carrying);
+            }
             foreach (var foodDelivery in value.FoodDeliveries)
                 AddFoodDelivery(target, foodDelivery);
+            if (value.WaitingFleet != null)
+            {
+                AddNeighborhoodLife(target,value.WaitingFleet.NeighborhoodLife);
+                if (value.WaitingFleet.OrderFlow != null)
+                {
+                    Add(target, "synthetic-order-flow.r4");
+                    foreach (var person in value.WaitingFleet.OrderFlow.Orderers)
+                    { Add(target, person.Residence); Add(target, person.NextTick); Add(target, person.Sequence); }
+                    foreach (var entry in value.WaitingFleet.OrderFlow.Entries)
+                    {
+                        Add(target, entry.OrderId); Add(target, entry.SourceKind); Add(target, entry.SubmittedTick);
+                        Add(target, entry.ResponseTick ?? -1); Add(target, entry.ResponseCode); Add(target, entry.QueuedTick ?? -1);
+                        Add(target, entry.DriverId); Add(target, entry.State); Add(target, entry.WaitReason);
+                    }
+                }
+                if (value.WaitingFleet.Mart != null)
+                {
+                    var mart = value.WaitingFleet.Mart;
+                    Add(target, "synthetic-mart.r3");
+                    foreach (var quantity in mart.Stock) Add(target, quantity);
+                    foreach (var quantity in mart.Reserved) Add(target, quantity);
+                    Add(target, mart.WorkerStage); Add(target, mart.WorkerOrderId);
+                    Add(target, mart.X.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, mart.Z.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, mart.Shelf); Add(target, mart.WorkTicks);
+                    foreach (var order in mart.Orders)
+                    {
+                        Add(target, order.OrderId); Add(target, order.DestinationId); Add(target, order.Stage);
+                        Add(target, order.WaitReason); Add(target, order.AcceptedTick); Add(target, order.PickedUnits);
+                        Add(target, order.PackedTick ?? -1); Add(target, order.ReadyTick ?? -1);
+                        Add(target, order.PickedUpTick ?? -1); Add(target, order.DeliveredTick ?? -1);
+                        Add(target, order.ReceivedTick ?? -1);
+                    }
+                }
+                Add(target, "synthetic-delivery.r2"); Add(target, value.WaitingFleet.Batch);
+                Add(target, value.WaitingFleet.TrafficOwner); Add(target, value.WaitingFleet.Decision);
+                foreach (var item in value.WaitingFleet.Drivers)
+                {
+                    var driver = item.Courier;
+                    Add(target, driver.ActorStableId); Add(target, driver.Stage); Add(target, driver.OrderStableId);
+                    Add(target, driver.Distance.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, driver.X.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, driver.Z.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, driver.VehicleX.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, driver.VehicleZ.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
+                    Add(target, driver.Carrying); Add(target, item.Slot); Add(target, item.ReturnSlot);
+                    Add(target, item.AssignedTick); Add(target, item.PendingOrderId); Add(target, item.WaitReason);
+                }
+            }
             Add(target, value.MarketConsumptions.Length);
             foreach (var consumption in value.MarketConsumptions)
                 AddMarketConsumption(target, consumption);
@@ -1754,6 +1829,11 @@ namespace Ssalddel.Simulation.Domain
             Add(target, value.NpcWorkPolicies.Length);
             foreach (var policy in value.NpcWorkPolicies)
             {
+                if (policy.CookingSlots.HasValue)
+                {
+                    Add(target, "restaurant-slots.v1");
+                    Add(target, policy.CookingSlots.Value);
+                }
                 Add(target, policy.PolicyStableId);
                 Add(target, policy.OrganizationStableId);
                 Add(target, policy.FacilityStableId);
@@ -2494,6 +2574,12 @@ namespace Ssalddel.Simulation.Domain
             StringBuilder target,
             Simulation음식배달Snapshot value)
         {
+            if (!string.IsNullOrEmpty(value.RestaurantResponseDecisionStableId) || !string.IsNullOrEmpty(value.RejectionReasonCode))
+            {
+                Add(target, "restaurant-response.v1");
+                Add(target, value.RestaurantResponseDecisionStableId);
+                Add(target, value.RejectionReasonCode);
+            }
             Add(target, value.FoodOrderStableId);
             Add(target, value.MenuItemStableId);
             Add(target, value.RestaurantFacilityStableId);

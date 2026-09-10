@@ -276,7 +276,7 @@ foreach ($item in @($catalog.items)) {
     $itemsById[$id] = $item
 }
 
-Require (@($catalog.items | Where-Object kind -eq "Command").Count -eq 92) "CommandCountMustBe92"
+Require (@($catalog.items | Where-Object kind -eq "Command").Count -eq 120) "CommandCountMustBe120"
 Require (@($catalog.items | Where-Object kind -eq "AutomaticTransition").Count -eq 12) "AutomaticTransitionCountMustBe12"
 Require (@($catalog.items | Where-Object kind -eq "SharedPolicy").Count -eq 1) "SharedPolicyCountMustBe1"
 
@@ -441,12 +441,12 @@ Add-PolarityAssignments @($polarityCatalog.contextualWorldInteractionIds) `
 Add-PolarityAssignments @($polarityCatalog.notApplicableWorldInteractionIds) `
     "NotApplicable" "NotApplicable"
 Require ($polarityByWi.Count -eq $itemsById.Count) "PolarityCoverageMismatch"
-Require (@($polarityCatalog.fixedYangWorldInteractionIds).Count -eq 27) `
-    "FixedYangCountMustBe27"
-Require (@($polarityCatalog.fixedYinWorldInteractionIds).Count -eq 28) `
-    "FixedYinCountMustBe28"
-Require (@($polarityCatalog.contextualWorldInteractionIds).Count -eq 38) `
-    "ContextualPolarityCountMustBe38"
+Require (@($polarityCatalog.fixedYangWorldInteractionIds).Count -eq 28) `
+    "FixedYangCountMustBe28"
+Require (@($polarityCatalog.fixedYinWorldInteractionIds).Count -eq 31) `
+    "FixedYinCountMustBe31"
+Require (@($polarityCatalog.contextualWorldInteractionIds).Count -eq 62) `
+    "ContextualPolarityCountMustBe62"
 Require (@($polarityCatalog.notApplicableWorldInteractionIds).Count -eq 12) `
     "NotApplicablePolarityCountMustBe12"
 
@@ -514,7 +514,7 @@ foreach ($flow in @($workflowCatalog.flows)) {
         }
     }
 }
-Require ($flowEdges.Count -eq 60) "FlowEdgeCountMustBe60"
+Require ($flowEdges.Count -eq 62) "FlowEdgeCountMustBe62"
 
 $stageLabels = @{}
 foreach ($stage in $evidenceStages) { $stageLabels[[string] $stage.code] = [string] $stage.label }

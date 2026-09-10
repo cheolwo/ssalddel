@@ -60,6 +60,14 @@ namespace Ssalddel.Simulation.Domain
     public sealed partial class 경영SimulationSessionAggregate
     {
         private readonly object gate = new object();
+        private string tickRuleRevision = SimulationTickRuleRevisions.SingleStep;
+
+        internal void RestoreTickRuleRevision(string revision)
+        {
+            if (revision != string.Empty && revision != SimulationTickRuleRevisions.SingleStep)
+                throw new SimulationContractException("SimulationTickRuleRevisionUnsupported");
+            tickRuleRevision = revision;
+        }
         private readonly Dictionary<string, 적용된TickCommand> appliedCommands =
             new Dictionary<string, 적용된TickCommand>(StringComparer.Ordinal);
 
@@ -72,10 +80,15 @@ namespace Ssalddel.Simulation.Domain
             SimulationRealityContextSnapshot? frozenRealityContext)
         {
             ValidateCreate(request);
+            localLife = ValidateLocalLife(request);
             SessionStableId = "simulation-session:" + request.ClientRequestId.ToString("N");
             ClientRequestId = request.ClientRequestId;
             ScenarioStableId = request.ScenarioStableId.Trim();
             ScenarioDataRevision = request.ScenarioDataRevision.Trim();
+            neighborhoodDayEnabled = request.NeighborhoodDayEnabled;
+            if (neighborhoodDayEnabled && !NeighborhoodLifeEnabled)
+                throw new SimulationContractException("NeighborhoodDayProfileRequired");
+            if (WaitingFleetEnabled) waitingFleet = CreateWaitingFleet();
             ScenarioSeed = request.ScenarioSeed;
             RuleRevision = request.RuleRevision.Trim();
             RealityContextProfileStableId = (request.RealityContextProfileStableId
@@ -165,7 +178,11 @@ namespace Ssalddel.Simulation.Domain
                 worldStateAdvanceInProgress = true;
                 try
                 {
-                    AdvanceWorldState(request.TickCount);
+                    if (tickRuleRevision == SimulationTickRuleRevisions.SingleStep)
+                    {
+                        for (var step = 0; step < request.TickCount; step++) AdvanceWorldState(1);
+                    }
+                    else AdvanceWorldState(request.TickCount);
                 }
                 finally
                 {
@@ -185,10 +202,12 @@ namespace Ssalddel.Simulation.Domain
         {
             var previousTick = CurrentTick;
             CurrentTick += tickCount;
+            AdvanceNeighborhoodLife();
             AdvanceLearningFocus(previousTick, CurrentTick);
             EvaluateNpcRoutineWork();
             AdvanceNpcWorkforce(CurrentTick);
-            AdvanceDecisionWork(CurrentTick);
+            AdvanceRestaurantAndDecisionWork();
+            AdvanceSyntheticDelivery();
             ExpireActiveTurnCardEffects();
             ExpireTarotContext();
             AdvanceTownNpcLife(previousTick, CurrentTick);
@@ -205,6 +224,7 @@ namespace Ssalddel.Simulation.Domain
         {
             ValidateCreate(request);
             if (ClientRequestId != request.ClientRequestId
+                || !LocalLifeEqual(localLife, request.LocalLife)
                 || !string.Equals(ScenarioStableId, request.ScenarioStableId.Trim(), StringComparison.Ordinal)
                 || !string.Equals(ScenarioDataRevision, request.ScenarioDataRevision.Trim(), StringComparison.Ordinal)
                 || ScenarioSeed != request.ScenarioSeed
@@ -326,6 +346,8 @@ namespace Ssalddel.Simulation.Domain
                 FreightTransports = CreateFreightTransportSnapshots(),
                 GroupOrders = CreateGroupOrderSnapshots(),
                 FoodDeliveries = CreateFoodDeliverySnapshots(),
+                SyntheticCourier = syntheticCourier?.Copy(),
+                WaitingFleet = waitingFleet?.Copy(),
                 MarketConsumptions = CreateMarketConsumptionSnapshots(),
                 IndividualOrders = CreateIndividualOrderSnapshots(),
                 StockReservations = CreateStockReservationSnapshots(),
@@ -411,6 +433,8 @@ namespace Ssalddel.Simulation.Domain
                 FreightTransports = source.FreightTransports.Select(CloneFreightTransport).ToArray(),
                 GroupOrders = source.GroupOrders.Select(CloneGroupOrder).ToArray(),
                 FoodDeliveries = source.FoodDeliveries.Select(CloneFoodDelivery).ToArray(),
+                SyntheticCourier = source.SyntheticCourier?.Copy(),
+                WaitingFleet = source.WaitingFleet?.Copy(),
                 MarketConsumptions = source.MarketConsumptions.Select(CloneMarketConsumption).ToArray(),
                 IndividualOrders = source.IndividualOrders.Select(CloneIndividualOrder).ToArray(),
                 StockReservations = source.StockReservations.Select(CloneStockReservation).ToArray(),
@@ -516,7 +540,8 @@ namespace Ssalddel.Simulation.Domain
                     StringComparison.Ordinal))
                 throw new SimulationContractException(
                     "SimulationSpatialCompositionRuleRevisionInvalid");
-            if (request.DurationTicks <= 0 || request.DurationTicks > 365)
+            if (request.DurationTicks <= 0 || request.DurationTicks >
+                (가상동네생활기준.Matches(request.ScenarioStableId, request.ScenarioDataRevision) ? 가상동네생활기준.DurationTicks : 365))
                 throw new SimulationContractException("SimulationDurationTicksInvalid");
             if (request.WorldContext == null)
                 throw new SimulationContractException("SimulationWorldContextMissing");

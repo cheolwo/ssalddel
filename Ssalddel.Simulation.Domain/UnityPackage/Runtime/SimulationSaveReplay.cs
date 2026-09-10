@@ -56,6 +56,7 @@ namespace Ssalddel.Simulation.Domain
                             StringComparison.Ordinal));
                 var package = new SimulationSessionSavePackage
                 {
+                    TickRuleRevision = tickRuleRevision,
                     SchemaVersion = HasWorldAtmosphere
                         ? SimulationSaveSchemaVersions.V25
                         : IsNatureR5
@@ -525,6 +526,8 @@ namespace Ssalddel.Simulation.Domain
                 TarotOrientationPolicyCode = tarotOrientationPolicyCode,
                 TownNpcLifeProfileStableId = townNpcLifeProfileStableId,
                 DurationTicks = DurationTicks,
+                NeighborhoodDayEnabled = neighborhoodDayEnabled,
+                LocalLife = localLife?.Copy(),
                 WorldContext = new SimulationWorldContext생성Request
                 {
                     FactionStableId = FactionStableId,

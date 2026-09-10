@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "neighborhood-geography.v1",
+  "stableId": "neighborhood:synthetic-delivery-block.v1",
+  "provenance": {
+    "sourceId": "synthetic-fixture", "datasetId": "delivery-block",
+    "sourceVersion": "synthetic-spatial.r1", "observedAtUtc": "2026-09-07T00:00:00Z",
+    "rawContentHashSha256": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "sourceCrs": "LOCAL:SYNTHETIC", "projectedCrs": "LOCAL:SYNTHETIC",
+    "normalizationEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md",
+    "licenseEvidenceRef": "authored-synthetic-fixture", "licenseReviewStatus": "SyntheticTestOnly",
+    "dataKind": "SyntheticFixture"
+  },
+  "coordinates": { "unit": "m", "axisOrder": "EastingNorthing", "origin": [0,0], "bounds": [-10,-10,40,35] },
+  "features": [
+    { "id": "restaurant-building", "kind": "Building", "geometry": { "type": "Polygon", "coordinates": [[[7,4],[13,4],[13,10],[7,10],[7,4]]] }, "properties": { "heightMeters": 4 } },
+    { "id": "residence-a-building", "kind": "Building", "geometry": { "type": "Polygon", "coordinates": [[[27,24],[33,24],[33,30],[27,30],[27,24]]] }, "properties": { "heightMeters": 4 } },
+    { "id": "residence-b-building", "kind": "Building", "geometry": { "type": "Polygon", "coordinates": [[[7,24],[13,24],[13,30],[7,30],[7,24]]] }, "properties": { "heightMeters": 4 } },
+    { "id": "depot", "kind": "Node", "geometry": { "type": "Point", "coordinates": [0,0] }, "properties": { "role": "VehicleStop" } },
+    { "id": "restaurant-stop", "kind": "Node", "geometry": { "type": "Point", "coordinates": [10,0] }, "properties": { "role": "VehicleStop" } },
+    { "id": "east-junction", "kind": "Node", "geometry": { "type": "Point", "coordinates": [20,0] }, "properties": { "role": "Junction" } },
+    { "id": "north-junction", "kind": "Node", "geometry": { "type": "Point", "coordinates": [20,20] }, "properties": { "role": "Junction" } },
+    { "id": "residence-a-stop", "kind": "Node", "geometry": { "type": "Point", "coordinates": [30,20] }, "properties": { "role": "VehicleStop" } },
+    { "id": "residence-b-stop", "kind": "Node", "geometry": { "type": "Point", "coordinates": [10,20] }, "properties": { "role": "VehicleStop" } },
+    { "id": "restaurant-door", "kind": "Node", "geometry": { "type": "Point", "coordinates": [10,4] }, "properties": { "role": "Entrance", "buildingId": "restaurant-building" } },
+    { "id": "residence-a-door", "kind": "Node", "geometry": { "type": "Point", "coordinates": [30,24] }, "properties": { "role": "Entrance", "buildingId": "residence-a-building" } },
+    { "id": "residence-b-door", "kind": "Node", "geometry": { "type": "Point", "coordinates": [10,24] }, "properties": { "role": "Entrance", "buildingId": "residence-b-building" } },
+    { "id": "depot-restaurant", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[0,0],[10,0]] }, "properties": { "fromNodeId": "depot", "toNodeId": "restaurant-stop", "direction": "Both", "modes": ["Vehicle"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 4 } },
+    { "id": "restaurant-east", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[10,0],[20,0]] }, "properties": { "fromNodeId": "restaurant-stop", "toNodeId": "east-junction", "direction": "Both", "modes": ["Vehicle"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 4 } },
+    { "id": "east-north", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[20,0],[20,20]] }, "properties": { "fromNodeId": "east-junction", "toNodeId": "north-junction", "direction": "Both", "modes": ["Vehicle"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 4 } },
+    { "id": "north-a", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[20,20],[30,20]] }, "properties": { "fromNodeId": "north-junction", "toNodeId": "residence-a-stop", "direction": "Both", "modes": ["Vehicle"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 4 } },
+    { "id": "north-b", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[20,20],[10,20]] }, "properties": { "fromNodeId": "north-junction", "toNodeId": "residence-b-stop", "direction": "Both", "modes": ["Vehicle"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 4 } },
+    { "id": "restaurant-access", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[10,0],[10,4]] }, "properties": { "fromNodeId": "restaurant-stop", "toNodeId": "restaurant-door", "direction": "Both", "modes": ["Pedestrian"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 1.5 } },
+    { "id": "a-access", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[30,20],[30,24]] }, "properties": { "fromNodeId": "residence-a-stop", "toNodeId": "residence-a-door", "direction": "Both", "modes": ["Pedestrian"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 1.5 } },
+    { "id": "b-access", "kind": "Road", "geometry": { "type": "LineString", "coordinates": [[10,20],[10,24]] }, "properties": { "fromNodeId": "residence-b-stop", "toNodeId": "residence-b-door", "direction": "Both", "modes": ["Pedestrian"], "accessReview": "Reviewed", "reviewEvidenceRef": "synthetic-spatial.r1", "widthMeters": 1.5 } }
+  ]
+}

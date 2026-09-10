@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "neighborhood-geography.v1",
+  "stableId": "neighborhood:synthetic-block.v1",
+  "provenance": {
+    "dataKind": "SyntheticFixture",
+    "sourceId": "synthetic-fixture",
+    "datasetId": "synthetic-block",
+    "sourceVersion": "r1",
+    "observedAtUtc": "2026-09-06T00:00:00Z",
+    "rawContentHashSha256": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "sourceCrs": "LOCAL:SYNTHETIC",
+    "projectedCrs": "LOCAL:SYNTHETIC",
+    "normalizationEvidenceRef": "synthetic-test-only:no-geographic-source",
+    "licenseEvidenceRef": "synthetic-test-only:no-provider-license",
+    "licenseReviewStatus": "SyntheticTestOnly"
+  },
+  "coordinates": {
+    "unit": "m",
+    "axisOrder": "EastingNorthing",
+    "origin": [1000, 2000],
+    "bounds": [900, 1900, 1400, 2400]
+  },
+  "features": [
+    {"id":"depot","kind":"Node","geometry":{"type":"Point","coordinates":[1000,2000]},"properties":{"role":"VehicleStop"}},
+    {"id":"junction","kind":"Node","geometry":{"type":"Point","coordinates":[1100,2000]},"properties":{"role":"Junction"}},
+    {"id":"restaurant-stop","kind":"Node","geometry":{"type":"Point","coordinates":[1100,2100]},"properties":{"role":"VehicleStop"}},
+    {"id":"restaurant-door","kind":"Node","geometry":{"type":"Point","coordinates":[1105,2100]},"properties":{"role":"Entrance","buildingId":"restaurant-building"}},
+    {"id":"delivery-one-stop","kind":"Node","geometry":{"type":"Point","coordinates":[1200,2100]},"properties":{"role":"VehicleStop"}},
+    {"id":"delivery-one-door","kind":"Node","geometry":{"type":"Point","coordinates":[1205,2100]},"properties":{"role":"Entrance","buildingId":"delivery-one-building"}},
+    {"id":"delivery-two-stop","kind":"Node","geometry":{"type":"Point","coordinates":[1000,2100]},"properties":{"role":"VehicleStop"}},
+    {"id":"delivery-two-door","kind":"Node","geometry":{"type":"Point","coordinates":[995,2100]},"properties":{"role":"Entrance","buildingId":"delivery-two-building"}},
+    {"id":"near-but-disconnected","kind":"Node","geometry":{"type":"Point","coordinates":[1001,2000]},"properties":{"role":"Junction"}},
+    {"id":"road-depot-junction","kind":"Road","geometry":{"type":"LineString","coordinates":[[1000,2000],[1050,2000],[1100,2000]]},"properties":{"fromNodeId":"depot","toNodeId":"junction","direction":"Both","modes":["Vehicle"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only","widthMeters":null}},
+    {"id":"road-junction-restaurant","kind":"Road","geometry":{"type":"LineString","coordinates":[[1100,2000],[1100,2100]]},"properties":{"fromNodeId":"junction","toNodeId":"restaurant-stop","direction":"Both","modes":["Vehicle"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"road-restaurant-one","kind":"Road","geometry":{"type":"LineString","coordinates":[[1100,2100],[1200,2100]]},"properties":{"fromNodeId":"restaurant-stop","toNodeId":"delivery-one-stop","direction":"Both","modes":["Vehicle"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"road-restaurant-two","kind":"Road","geometry":{"type":"LineString","coordinates":[[1100,2100],[1000,2100]]},"properties":{"fromNodeId":"restaurant-stop","toNodeId":"delivery-two-stop","direction":"Both","modes":["Vehicle"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"unreviewed-shortcut","kind":"Road","geometry":{"type":"LineString","coordinates":[[1000,2000],[1100,2100]]},"properties":{"fromNodeId":"depot","toNodeId":"restaurant-stop","direction":"Both","modes":["Vehicle"],"accessReview":"Unknown"}},
+    {"id":"walk-restaurant","kind":"Road","geometry":{"type":"LineString","coordinates":[[1100,2100],[1105,2100]]},"properties":{"fromNodeId":"restaurant-stop","toNodeId":"restaurant-door","direction":"Both","modes":["Pedestrian"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"walk-one","kind":"Road","geometry":{"type":"LineString","coordinates":[[1200,2100],[1205,2100]]},"properties":{"fromNodeId":"delivery-one-stop","toNodeId":"delivery-one-door","direction":"Both","modes":["Pedestrian"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"walk-two","kind":"Road","geometry":{"type":"LineString","coordinates":[[1000,2100],[995,2100]]},"properties":{"fromNodeId":"delivery-two-stop","toNodeId":"delivery-two-door","direction":"Both","modes":["Pedestrian"],"accessReview":"Reviewed","reviewEvidenceRef":"synthetic-test-only"}},
+    {"id":"restaurant-building","kind":"Building","geometry":{"type":"Polygon","coordinates":[[[1105,2090],[1125,2090],[1125,2110],[1105,2110],[1105,2090]]]},"properties":{"heightMeters":null}},
+    {"id":"delivery-one-building","kind":"Building","geometry":{"type":"Polygon","coordinates":[[[1205,2090],[1225,2090],[1225,2110],[1205,2110],[1205,2090]]]},"properties":{"heightMeters":null}},
+    {"id":"delivery-two-building","kind":"Building","geometry":{"type":"Polygon","coordinates":[[[975,2090],[995,2090],[995,2110],[975,2110],[975,2090]]]},"properties":{"heightMeters":null}}
+  ]
+}

@@ -81,7 +81,9 @@ namespace Ssalddel.Simulation.Domain
                     throw new SimulationConflictException("SimulationTurnClosingBlocked");
 
                 CurrentTick++;
-                AdvanceDecisionWork(CurrentTick);
+                if (tickRuleRevision == SimulationTickRuleRevisions.SingleStep)
+                    AdvanceRestaurantAndDecisionWork();
+                else AdvanceDecisionWork(CurrentTick);
                 Revision++;
 
                 var closing = new SimulationTurnClosingSnapshot

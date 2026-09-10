@@ -121,16 +121,18 @@ namespace Ssalddel.Simulation.Infrastructure
         private LocalSaveEnvelope ReadEnvelope(string path, string expectedSlot)
         {
             var json = File.ReadAllText(path, Encoding.UTF8);
+            using var document = JsonDocument.Parse(json);
             var envelope = JsonSerializer.Deserialize<LocalSaveEnvelope>(json, jsonOptions)
                 ?? throw new SimulationContractException("SimulationLocalSaveCorrupted");
             if (!string.Equals(envelope.FileFormatVersion, FileFormatVersion,
                     StringComparison.Ordinal)
                 || !string.Equals(envelope.SlotStableId, expectedSlot,
                     StringComparison.Ordinal)
-                || envelope.Package == null)
+                || envelope.Package == null || !document.RootElement.TryGetProperty("Package", out var storedPackage))
                 throw new SimulationContractException("SimulationLocalSaveCorrupted");
 
-            var packageJson = JsonSerializer.Serialize(envelope.Package, jsonOptions);
+            // 과거 파일에 없던 선택 필드를 추가 직렬화하지 않고 저장 당시 원문을 검증한다.
+            var packageJson = storedPackage.GetRawText();
             if (!string.Equals(envelope.PackageSha256, Hash(packageJson),
                     StringComparison.Ordinal))
                 throw new SimulationContractException("SimulationLocalSaveChecksumMismatch");

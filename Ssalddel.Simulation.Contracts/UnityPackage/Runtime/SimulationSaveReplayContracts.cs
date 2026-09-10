@@ -3,6 +3,11 @@ using Ssalddel.Contracts.Common.Metadata;
 
 namespace Ssalddel.Simulation.Contracts
 {
+    public static class SimulationTickRuleRevisions
+    {
+        // 빈 값은 기존 합산 Tick 재생 규칙이다. 과거 저장을 자동 승격하지 않는다.
+        public const string SingleStep = "world-tick-step.r1";
+    }
     public static class SimulationSaveSchemaVersions
     {
         public const string V1 = "simulation-save.v1";
@@ -184,6 +189,7 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class SimulationSessionSavePackage
     {
+        public string TickRuleRevision { get; set; } = string.Empty;
         public string SchemaVersion { get; set; } = SimulationSaveSchemaVersions.V2;
         public string SaveStableId { get; set; } = string.Empty;
         public string SessionStableId { get; set; } = string.Empty;

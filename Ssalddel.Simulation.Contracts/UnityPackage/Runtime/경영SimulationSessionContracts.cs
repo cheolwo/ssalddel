@@ -42,6 +42,10 @@ namespace Ssalddel.Simulation.Contracts
         public string SpatialCompositionRuleRevision { get; set; }
             = string.Empty;
         public int DurationTicks { get; set; } = 28;
+        /// <summary>합성 동네의 새 표본에만 적용한다. 누락된 기존 저장은 종전 근무 주기를 유지한다.</summary>
+        public bool NeighborhoodDayEnabled { get; set; }
+        /// <summary>명시 오프라인 합성 생활 입력. null인 기존 프로필/저장은 종전 동작을 유지한다.</summary>
+        public 로컬생활구성? LocalLife { get; set; }
         public SimulationWorldContext생성Request WorldContext { get; set; }
             = new SimulationWorldContext생성Request();
         public SimulationSettlementInitialStateRequest? Settlement { get; set; }
@@ -78,6 +82,8 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class 경영SimulationSessionSnapshot
     {
+        public 가상배달기사Snapshot? SyntheticCourier { get; set; }
+        public 가상배달대기Snapshot? WaitingFleet { get; set; }
         public string SessionStableId { get; set; } = string.Empty;
         public Guid ClientRequestId { get; set; }
         public string ScenarioStableId { get; set; } = string.Empty;

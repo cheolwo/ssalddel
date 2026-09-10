@@ -1,8 +1,8 @@
 {
   "catalogKey": "simulation-world-interactions",
   "schemaVersion": "5",
-  "revision": "simulation-world-interactions.r44",
-  "lastVerifiedDate": "2026-09-04",
+  "revision": "simulation-world-interactions.r48",
+  "lastVerifiedDate": "2026-09-07",
   "defaultImplementationTargetStage": "E3",
   "defaultIntegrationTargetStage": "E7",
   "evidenceStageCatalogPath": "eng/execution-ledgers/evidence-stages.json",
@@ -23,7 +23,7 @@
     "ORDER": "주민 주문·소비",
     "NATURE": "자연 탐사·생활 거점",
     "REFLECT": "거점 성찰",
-    "CARD": "메이저 아르카나",
+    "CARD": "카드 맥락",
     "CON": "영역 건설",
     "CITY": "도심 운영",
     "WORLD": "공통 세계 운영",
@@ -31,6 +31,1507 @@
     "COMMUNITY": "공동체 방문·관계"
   },
   "items": [
+    {
+      "id": "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+      "groupCode": "CITY",
+      "sequence": 17,
+      "title": "근무 복귀",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "근무 복귀의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Working"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "근무 복귀",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Working"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticLIFESHIFT",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-LIFE-REST",
+      "groupCode": "CITY",
+      "sequence": 18,
+      "title": "인계 후 휴식",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "인계 후 휴식의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Resting"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "인계 후 휴식",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Resting"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticLIFEREST",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-INSPECT",
+      "groupCode": "CITY",
+      "sequence": 19,
+      "title": "보충창고 입고 검수",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "보충창고 입고 검수의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Inspected"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "보충창고 입고 검수",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Inspected"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTINSPECT",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-PUTAWAY",
+      "groupCode": "CITY",
+      "sequence": 20,
+      "title": "검수 물품 적치",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "검수 물품 적치의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Stored"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "검수 물품 적치",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Stored"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTPUTAWAY",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-RESERVE",
+      "groupCode": "CITY",
+      "sequence": 21,
+      "title": "보충 출고 예약",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "보충 출고 예약의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Reserved"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "보충 출고 예약",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Reserved"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTRESERVE",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-PICK",
+      "groupCode": "CITY",
+      "sequence": 22,
+      "title": "보충 물품 피킹",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "보충 물품 피킹의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Picked"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "보충 물품 피킹",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Picked"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTPICK",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-PACK",
+      "groupCode": "CITY",
+      "sequence": 23,
+      "title": "보충 물품 포장",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "보충 물품 포장의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Packed"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "보충 물품 포장",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Packed"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTPACK",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-DEPOT-STAGE",
+      "groupCode": "CITY",
+      "sequence": 24,
+      "title": "보충 물품 상차대 인계",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "보충 물품 상차대 인계의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Ready"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "보충 물품 상차대 인계",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Ready"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDEPOTSTAGE",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-FREIGHT-LOAD",
+      "groupCode": "CITY",
+      "sequence": 25,
+      "title": "화물차 상차",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "화물차 상차의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Loaded"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "화물차 상차",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Loaded"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticFREIGHTLOAD",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-FREIGHT-UNLOAD",
+      "groupCode": "CITY",
+      "sequence": 26,
+      "title": "마트 화물 하차",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 화물 하차의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Unloaded"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "마트 화물 하차",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Unloaded"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticFREIGHTUNLOAD",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-MART-INBOUND",
+      "groupCode": "CITY",
+      "sequence": 27,
+      "title": "마트 검수 입고",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 검수 입고의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Received"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-neighborhood-workforce.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-neighborhood-life.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "마트 검수 입고",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Received"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticMARTINBOUND",
+      "ruleRevision": "synthetic-neighborhood-life.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-MART-RESERVE",
+      "groupCode": "CITY",
+      "sequence": 13,
+      "title": "마트 예약",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 예약의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Reserved"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r3"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "예약",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Reserved"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticMartRESERVE",
+      "ruleRevision": "synthetic-delivery.r3",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-MART-PICK",
+      "groupCode": "CITY",
+      "sequence": 14,
+      "title": "마트 피킹",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 피킹의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Picked"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r3"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "피킹",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Picked"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticMartPICK",
+      "ruleRevision": "synthetic-delivery.r3",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-MART-PACK",
+      "groupCode": "CITY",
+      "sequence": 15,
+      "title": "마트 포장",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 포장의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Packed"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r3"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "포장",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Packed"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticMartPACK",
+      "ruleRevision": "synthetic-delivery.r3",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-SYNTHETIC-MART-STAGE",
+      "groupCode": "CITY",
+      "sequence": 16,
+      "title": "마트 인계대 적치",
+      "kind": "Command",
+      "originCode": "SimulationNative",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "마트 인계대 적치의 직접 결과",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "ReadyForCourier"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-mart-worker.v1",
+        "subject:synthetic-mart-stock.v1",
+        "subject:synthetic-mart-order.v1",
+        "subject:npc-routine-actor.v1",
+        "subject:authoritative-interaction-target.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r3"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "인계대 적치",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "ReadyForCourier"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticMartSTAGE",
+      "ruleRevision": "synthetic-delivery.r3",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md"
+      ],
+      "notes": [
+        "운영 효과 없음. 자동 E 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-ASSIGN",
+      "groupCode": "CITY",
+      "sequence": 7,
+    "title": "기사 배정",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "기사 배정의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Assigned"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "기사 배정",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Assigned"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryASSIGN",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-MOVE",
+      "groupCode": "CITY",
+      "sequence": 8,
+    "title": "도로·출입구 이동",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "도로·출입구 이동의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "PositionAdvanced"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "도로·출입구 이동",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "PositionAdvanced"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryMOVE",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-PICKUP",
+      "groupCode": "CITY",
+      "sequence": 9,
+    "title": "음식 픽업",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "음식 픽업의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "PickedUp"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "음식 픽업",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "PickedUp"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryPICKUP",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-DELIVER",
+      "groupCode": "CITY",
+      "sequence": 10,
+    "title": "주택 전달",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "주택 전달의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Delivered"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "주택 전달",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Delivered"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryDELIVER",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-RECEIVE",
+      "groupCode": "CITY",
+      "sequence": 11,
+    "title": "주문자 수령",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "주문자 수령의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Received"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "주문자 수령",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Received"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryRECEIVE",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+    "id": "WI-CITY-SYNTHETIC-RETURN",
+      "groupCode": "CITY",
+      "sequence": 12,
+    "title": "기사 복귀",
+    "kind": "Command",
+    "originCode": "SimulationNative",
+    "controlPolicyCode": "NpcRoutine",
+    "worldAction": "기사 복귀의 직접 결과만 확정한다.",
+      "startStateCodes": [
+        "SyntheticProfilePreconditions"
+      ],
+      "completionStateCodes": [
+        "Returned"
+      ],
+      "actorRequirements": [
+        "subject:synthetic-delivery-courier.v1",
+        "subject:synthetic-delivery-order.v1",
+        "subject:synthetic-delivery-vehicle.v1",
+        "subject:synthetic-delivery-recipient.v1"
+      ],
+      "spatialRequirements": [
+        "synthetic-spatial.r1"
+      ],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "합성 프로필·기사/주문 상태·명시적 경로 검사",
+      "confirmRule": "공통 Session 단일 Tick에서만 결과 적용",
+      "taskRule": "기사 복귀",
+      "cancellationPolicy": "정지 시 상태 보존. 재개 시 따라잡기 없음",
+      "effectCodes": [
+        "Returned"
+      ],
+      "blockReasonCodes": [
+        "SyntheticDeliveryUnavailable"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "SyntheticDeliveryRETURN",
+      "ruleRevision": "synthetic-delivery.r1",
+      "saveReplayPayloadCodes": [
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "ExistingSessionTickAndSnapshot"
+      ],
+      "existingImplementationReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/complete-delivery-work.r1.md",
+        "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/synthetic-spatial-study.r1.md"
+      ],
+      "notes": [
+        "단일 통합 담당의 순차 구현. E 자동 승격 없음."
+      ]
+    },
+    {
+      "id": "WI-CITY-RESTAURANT-COOK",
+      "groupCode": "CITY",
+      "sequence": 6,
+      "title": "음식점 조리 자리 배정",
+      "kind": "Command",
+      "originCode": "OperationsDerived",
+      "controlPolicyCode": "NpcRoutine",
+      "worldAction": "수락한 주문을 빈 조리 자리에 접수 순서로 배정하고 음식 준비까지 진행한다.",
+      "startStateCodes": [
+        "FoodOrderCookingQueued"
+      ],
+      "completionStateCodes": [
+        "ReadyForPickup"
+      ],
+      "actorRequirements": [
+        "음식점 시설과 조직에 결속된 RestaurantCooking 권한 NPC"
+      ],
+      "spatialRequirements": [],
+      "resourceRequirements": [],
+      "reservationKinds": [],
+      "previewRule": "미응답 주문과 음식점 NPC 권한을 검사한다.",
+      "confirmRule": "Tick에서 시설·권한·자리 수를 검사하고 주문별 한 조리 작업만 배정한다.",
+      "taskRule": "조리 자리 배정 시 기간을 동결하고 기존 FoodPreparationOnly 작업으로 진행한다.",
+      "effectCodes": [
+        "RestaurantCookingScheduled"
+      ],
+      "cancellationPolicy": "무권한이면 주문을 보존하고 대기한다. 수락 취소는 이 WI에 포함하지 않는다.",
+      "blockReasonCodes": [
+        "SimulationRestaurantOperatorNotAuthorized",
+        "SimulationTaskDurationExceeded"
+      ],
+      "predecessorWiIds": [],
+      "successorWiIds": [],
+      "actionCode": "RestaurantCooking",
+      "ruleRevision": "restaurant-cooking.r1",
+      "saveReplayPayloadCodes": [
+        "DecisionConfirm",
+        "TickAdvance"
+      ],
+      "httpContracts": [
+        "Pending:RemoteHostBinding"
+      ],
+      "existingImplementationReferences": [
+        "Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식점조리.cs"
+      ],
+      "implementation": {
+        "status": "NotStarted",
+        "currentStage": "E0",
+        "targetStage": "E3",
+        "evidence": []
+      },
+      "integration": {
+        "status": "NotSelected",
+        "currentStage": "E0",
+        "targetStage": "E7",
+        "evidence": []
+      },
+      "sourceReferences": [
+        "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md"
+      ],
+      "notes": [
+        "정책 변경은 아직 자리를 배정하지 않은 주문부터 적용한다. 배차 미포함."
+      ]
+    },
+    {
+      "id": "WI-CITY-RESTAURANT-ACCEPT", "groupCode": "CITY", "sequence": 5,
+      "title": "음식점 NPC 주문 자동 수락", "kind": "Command", "originCode": "OperationsDerived", "controlPolicyCode": "NpcRoutine",
+      "worldAction": "모의 주문을 음식점 권한 NPC가 수락하고 조리 대기에 둔다.",
+      "startStateCodes": ["FoodOrderNpcSubmission"], "completionStateCodes": ["FoodOrderCookingQueued"],
+      "actorRequirements": ["음식점 시설과 조직에 결속된 RestaurantCooking 권한 NPC"],
+      "spatialRequirements": [], "resourceRequirements": [], "reservationKinds": [],
+      "previewRule": "미응답 주문과 음식점 NPC 권한을 검사한다.",
+      "confirmRule": "Tick 내 결정적 명령으로 한 번 수락한다. 별도 외부 명령을 중복 재생하지 않는다.",
+      "taskRule": "수락 기록만 완료하며 조리·배차는 별도 WI다.",
+      "effectCodes": ["RestaurantResponseRecorded"], "cancellationPolicy": "무권한이면 주문을 보존하고 대기한다. 수락 취소는 이 WI에 포함하지 않는다.",
+      "blockReasonCodes": ["SimulationRestaurantOperatorNotAuthorized", "SimulationTaskDurationExceeded"],
+      "predecessorWiIds": [], "successorWiIds": [], "actionCode": "RestaurantAutoAccept", "ruleRevision": "restaurant-auto-accept.r1",
+      "saveReplayPayloadCodes": ["DecisionConfirm", "TickAdvance"], "httpContracts": ["Pending:RemoteHostBinding"],
+      "existingImplementationReferences": ["Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식점응답.cs"],
+      "implementation": {"status": "NotStarted", "currentStage": "E0", "targetStage": "E3", "evidence": []},
+      "integration": {"status": "NotSelected", "currentStage": "E0", "targetStage": "E7", "evidence": []},
+      "sourceReferences": ["docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md"],
+      "notes": ["자동 수락의 직접 결과만 소유한다. 조리 자리 배정과 배차는 미구현이다."]
+    },
     {
       "id": "WI-ACTOR-CONSUME",
       "groupCode": "ACTOR",
@@ -3035,6 +4536,66 @@
       "previewRule": "미해결 필수 작업과 마감 조건을 검사한다.", "confirmRule": "ExpectedRevision으로 턴 마감을 확정한다.", "taskRule": "턴 효과와 후속 상태를 결정적으로 계산한다.", "effectCodes": ["TurnClosed"], "cancellationPolicy": "확정된 턴 마감은 취소하지 않고 후속 보정 명령을 사용한다.", "blockReasonCodes": ["TurnClosingBlocked"],
       "predecessorWiIds": [], "successorWiIds": [], "actionCode": "TurnClosing", "ruleRevision": "world-interaction.shared-policy.r1", "saveReplayPayloadCodes": ["TurnClosingConfirm"], "httpContracts": ["기존 turn-closing Preview/Confirm 경로 재사용"], "existingImplementationReferences": ["Ssalddel.Simulation.Domain/SimulationTurnClosing.cs"],
       "implementation": { "status": "Done", "currentStage": "E3", "targetStage": "E3", "evidence": ["Ssalddel.Simulation.Tests/SimulationTurnClosingTests.cs의 Preview·Confirm·개정·저장재생·Controller 시험 통과."] }, "integration": { "status": "NotSelected", "currentStage": "E1", "targetStage": "E7", "evidence": ["Ssalddel.Simulation.Tests/SimulationTurnClosingTests.cs의 Preview·Confirm·개정·저장재생·Controller 시험 통과."] }, "sourceReferences": ["docs/Architecture/세계상호작용단위중심공간Simulation통합.md"], "notes": []
+    },
+    {
+      "id": "WI-NATURE-HANS-BOUNDARY-PATROL", "groupCode": "NATURE", "sequence": 25, "title": "한스와 농장 경계 순찰", "kind": "Command",
+      "originCode": "SimulationNative", "controlPolicyCode": "PlayerOrNpc",
+      "worldAction": "플레이어와 한스가 농장 경계의 닫힌 순찰 경로를 함께 확인하고 해 지기 전 공동 귀환 기록을 남긴다.",
+      "startStateCodes": ["HansGuestRightsGranted", "FarmBoundaryPatrolAvailable"], "completionStateCodes": ["FarmBoundaryPatrolCompleted", "HansAndPlayerReturnedTogether"],
+      "actorRequirements": ["플레이어", "한스 동행 가능 상태"], "spatialRequirements": ["FarmBoundaryPatrolLoop", "FarmHomeReturnAnchor"], "resourceRequirements": ["순찰 가능 시간창"], "reservationKinds": ["PlayerActor", "HansNpc", "PatrolRoute"],
+      "previewRule": "한스 동행 가능 여부, 닫힌 경계 순찰로, 해 지기 전 귀환 가능 시간과 현재 revision을 읽기 전용으로 검사한다.",
+      "confirmRule": "ExpectedRevision과 CommandId로 순찰 시작을 확정하고 동일 인과의 완료·공동 귀환 ActionRecord를 한 번만 남긴다.",
+      "taskRule": "경계 경유점 확인 뒤 농장 생활 주택 귀환 anchor에 함께 도달하면 완료한다.",
+      "effectCodes": ["FarmBoundaryPatrolCompleted", "HansAndPlayerReturnedTogether", "PromiseFulfillmentRecorded"],
+      "cancellationPolicy": "완료 전 중단은 순찰 완료를 만들지 않고 농장 귀환 선택만 다시 연다.",
+      "blockReasonCodes": ["ApprovedDesignRequired", "ImplementationNotStarted"],
+      "predecessorWiIds": ["WI-GUEST-PERMISSION-SET"], "successorWiIds": ["WI-NATURE-TRACE-INVESTIGATE"],
+      "actionCode": "PatrolHansFarmBoundary", "ruleRevision": "registration-only.r1",
+      "saveReplayPayloadCodes": ["NotApproved:SaveReplayContract"], "httpContracts": ["NotApproved:RemoteHostContract"], "existingImplementationReferences": [],
+      "implementation": {"status": "NotStarted", "currentStage": "E0", "targetStage": "E3", "evidence": []},
+      "integration": {"status": "NotSelected", "currentStage": "E0", "targetStage": "E7", "evidence": []},
+      "sourceReferences": ["docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-002/README.md"],
+      "notes": ["등록은 순찰 Runtime·경로 이동·Animation·Unity 배치를 승인하지 않는다."]
+    },
+    {
+      "id": "WI-WORLD-BOUNDED-MANAGEMENT-GRANT", "groupCode": "WORLD", "sequence": 15, "title": "제한된 생활 거점 관리권 부여", "kind": "Command",
+      "originCode": "SimulationNative", "controlPolicyCode": "PlayerDirect",
+      "worldAction": "권한 보유자가 생활 주택과 감자 경작 구획에 한정된 관리권을 플레이어에게 부여한다.",
+      "startStateCodes": ["TrustEvidenceAccepted", "ManagementGrantAvailable"], "completionStateCodes": ["BoundedManagementAuthorityGranted"],
+      "actorRequirements": ["권한 부여자 한스", "수령자 플레이어"], "spatialRequirements": ["FarmResidentialHomeBoundary", "PotatoPlotBoundary"], "resourceRequirements": ["승인된 신뢰·공동 행동 계보"], "reservationKinds": ["ManagementAuthorityGrant"],
+      "previewRule": "부여자의 권한, 수령자, 대상 H1 경계, 승인된 신뢰 계보와 현재 revision을 읽기 전용으로 검사한다.",
+      "confirmRule": "ExpectedRevision과 CommandId로 두 대상에만 적용되는 관리권 grant를 한 번 생성한다.",
+      "taskRule": "즉시 권한 상태를 전이하되 소유권과 농장 전체 운영권은 변경하지 않는다.",
+      "effectCodes": ["BoundedManagementAuthorityGranted"],
+      "cancellationPolicy": "부여 전 Preview는 폐기할 수 있으며 철회·확장은 별도 명령과 revision을 요구한다.",
+      "blockReasonCodes": ["ApprovedDesignRequired", "ImplementationNotStarted"],
+      "predecessorWiIds": ["WI-NATURE-HANS-BOUNDARY-PATROL", "WI-NATURE-TRACE-INVESTIGATE"], "successorWiIds": ["WI-FARM-01", "WI-WORLD-04"],
+      "actionCode": "GrantBoundedFarmManagementAuthority", "ruleRevision": "registration-only.r1",
+      "saveReplayPayloadCodes": ["NotApproved:SaveReplayContract"], "httpContracts": ["NotApproved:RemoteHostContract"], "existingImplementationReferences": [],
+      "implementation": {"status": "NotStarted", "currentStage": "E0", "targetStage": "E3", "evidence": []},
+      "integration": {"status": "NotSelected", "currentStage": "E0", "targetStage": "E7", "evidence": []},
+      "sourceReferences": ["docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-004/README.md"],
+      "notes": ["관리권은 생활 주택·감자 구획에 한정되며 소유권 이전이 아니다."]
+    },
+    {
+      "id": "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF", "groupCode": "REFLECT", "sequence": 2, "title": "한스 농장 위기 사후 성찰", "kind": "Command",
+      "originCode": "SimulationNative", "controlPolicyCode": "PlayerDirect",
+      "worldAction": "농장 방어와 회복 뒤 플레이어와 한스가 공동 행동 기록을 되짚어 플레이어의 한계와 다음 배움 필요를 확정한다.",
+      "startStateCodes": ["FarmDefenseReturned", "FarmRecoveryOutcomeAvailable"], "completionStateCodes": ["HansFarmCrisisDebriefCompleted", "LearningNeedRecognized"],
+      "actorRequirements": ["플레이어", "한스"], "spatialRequirements": ["FarmRecoveryBase", "ReflectionInteractionAnchor"], "resourceRequirements": ["방어·피해·복구·귀환 ActionRecord 계보"], "reservationKinds": ["CrisisDebriefOpportunity"],
+      "previewRule": "동일 사건의 방어·피해·복구·귀환 계보와 미성찰 여부를 읽기 전용으로 검사한다.",
+      "confirmRule": "ExpectedRevision과 CommandId로 사후 성찰과 학습 필요 인식을 같은 revision에 한 번 기록한다.",
+      "taskRule": "즉시 완료하며 기술이나 능력치를 직접 지급하지 않고 산수몽 학습 캠페인의 진입 조건만 연다.",
+      "effectCodes": ["HansFarmCrisisDebriefCompleted", "LearningNeedRecognized", "Hex04CampaignEntryAvailable"],
+      "cancellationPolicy": "확정 전에는 상태를 바꾸지 않으며 확정된 성찰은 새 계보 없이 반복 보상하지 않는다.",
+      "blockReasonCodes": ["ApprovedDesignRequired", "ImplementationNotStarted"],
+      "predecessorWiIds": ["WI-FARM-DEFENSE-RETURN"], "successorWiIds": [],
+      "actionCode": "ReflectHansFarmCrisis", "ruleRevision": "registration-only.r1",
+      "saveReplayPayloadCodes": ["NotApproved:SaveReplayContract"], "httpContracts": ["NotApproved:RemoteHostContract"], "existingImplementationReferences": [],
+      "implementation": {"status": "NotStarted", "currentStage": "E0", "targetStage": "E3", "evidence": []},
+      "integration": {"status": "NotSelected", "currentStage": "E0", "targetStage": "E7", "evidence": []},
+      "sourceReferences": ["docs/AI/Planning/스토리/PLAN-STORY-HEX03-LINE-006/README.md"],
+      "notes": ["산수몽으로의 전환 의미만 열며 해당 캠페인을 자동 시작하지 않는다."]
     },
     {
       "id": "WI-REVIEW-01", "groupCode": "REVIEW", "sequence": 1, "title": "NPC 업무 결과 검토 확정", "kind": "Command",

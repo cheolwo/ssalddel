@@ -289,14 +289,14 @@ public sealed class SimulationWorldInteractionMaturityTests
     }
 
     [Fact]
-    public void WI_105개는_발생원과별개로_원천과조작정책을_분류한다()
+    public void WI_133개는_발생원과별개로_원천과조작정책을_분류한다()
     {
         using var document = JsonDocument.Parse(File.ReadAllText(
             SimulationWorldInteractionSpatialSeedbedTestFixture.WorldInteractionCatalog));
         var items = document.RootElement.GetProperty("items")
             .EnumerateArray().ToArray();
 
-        Assert.Equal(105, items.Length);
+        Assert.Equal(133, items.Length);
         Assert.All(items, item =>
         {
             Assert.Contains(item.GetProperty("originCode").GetString(),
@@ -323,15 +323,17 @@ public sealed class SimulationWorldInteractionMaturityTests
     }
 
     [Fact]
-    public void WI_105개는_절차단계대신_한국어기능명과단일책임을노출한다()
+    public void WI_133개는_절차단계대신_한국어기능명과단일책임을노출한다()
     {
         using var document = JsonDocument.Parse(File.ReadAllText(
             SimulationWorldInteractionSpatialSeedbedTestFixture.WorldInteractionCatalog));
         var root = document.RootElement;
         var items = root.GetProperty("items").EnumerateArray().ToArray();
 
-        Assert.Equal(105, Simulation세계상호작용이름Catalog.All.Count);
-        Assert.Equal(105, items.Length);
+        Assert.Equal(133, Simulation세계상호작용이름Catalog.All.Count);
+        Assert.Equal(133, items.Length);
+        Assert.Equal(items.Select(item => item.GetProperty("id").GetString()).OrderBy(id => id, StringComparer.Ordinal),
+            Simulation세계상호작용이름Catalog.All.Select(item => item.WorldInteractionId).OrderBy(id => id, StringComparer.Ordinal));
         foreach (var item in items)
         {
             var id = item.GetProperty("id").GetString()!;
@@ -367,6 +369,23 @@ public sealed class SimulationWorldInteractionMaturityTests
         Assert.Equal("알 수 없는 세계 상호작용 (WI-UNKNOWN-01)",
             Simulation세계상호작용이름Catalog
                 .한국어표시명("WI-UNKNOWN-01"));
+    }
+
+    [Theory]
+    [InlineData("WI-CITY-RESTAURANT-ACCEPT", "OperationsDerived", "NpcRoutine")]
+    [InlineData("WI-CITY-RESTAURANT-COOK", "OperationsDerived", "NpcRoutine")]
+    [InlineData("WI-NATURE-HANS-BOUNDARY-PATROL", "SimulationNative", "PlayerOrNpc")]
+    [InlineData("WI-WORLD-BOUNDED-MANAGEMENT-GRANT", "SimulationNative", "PlayerDirect")]
+    [InlineData("WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF", "SimulationNative", "PlayerDirect")]
+    public void 추가등록WI는_고유식별자와_원천_조작정책을_유지한다(string id, string origin, string control)
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(
+            SimulationWorldInteractionSpatialSeedbedTestFixture.WorldInteractionCatalog));
+        var item = Assert.Single(document.RootElement.GetProperty("items").EnumerateArray(),
+            value => value.GetProperty("id").GetString() == id);
+        Assert.Equal(origin, item.GetProperty("originCode").GetString());
+        Assert.Equal(control, item.GetProperty("controlPolicyCode").GetString());
+        Assert.NotNull(Simulation세계상호작용이름Catalog.Find(id));
     }
 
     [Fact]

@@ -1,0 +1,684 @@
+{
+  "schemaVersion": "simulation-world-placement-map-preparation-profile.v1",
+  "profileStableId": "placement-map-profile:synthetic-neighborhood.v1",
+  "revision": 1,
+  "title": "현재 도형 동네 전체 배치 기준",
+  "stateCode": "CodeBaselineOnly_VisualReviewPending",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-maps.r1.md",
+  "graphMapRef": "eng/world-seedbeds/graph-maps/synthetic-neighborhood.v1.json",
+  "coordinateSource": "ExistingSyntheticCode_XZ_UnityUnits_NotSurveyed",
+  "instances": [
+    {
+      "id": "facility:sim.restaurant-1",
+      "nodeRef": "facility:sim.restaurant-1",
+      "title": "음식점",
+      "kind": "Facility",
+      "x": 10,
+      "z": 7,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "id": "facility:synthetic:a",
+      "nodeRef": "facility:synthetic:a",
+      "title": "주택 A",
+      "kind": "Facility",
+      "x": 30,
+      "z": 27,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "id": "facility:synthetic:b",
+      "nodeRef": "facility:synthetic:b",
+      "title": "주택 B",
+      "kind": "Facility",
+      "x": 10,
+      "z": 27,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "id": "facility:synthetic:mart",
+      "nodeRef": "facility:synthetic:mart",
+      "title": "살뜰마트",
+      "kind": "Facility",
+      "x": -3,
+      "z": -12,
+      "width": 18,
+      "depth": 10
+    },
+    {
+      "id": "facility:synthetic:depot",
+      "nodeRef": "facility:synthetic:depot",
+      "title": "보충창고",
+      "kind": "Facility",
+      "x": -26,
+      "z": -12,
+      "width": 16,
+      "depth": 10
+    },
+    {
+      "id": "road:east",
+      "nodeRef": "road:east",
+      "title": "동서 도로",
+      "kind": "Road",
+      "x": 4,
+      "z": 0,
+      "width": 36,
+      "depth": 4
+    },
+    {
+      "id": "road:west",
+      "nodeRef": "road:west",
+      "title": "서쪽 보충 도로",
+      "kind": "Road",
+      "x": -25,
+      "z": 0,
+      "width": 22,
+      "depth": 4
+    },
+    {
+      "id": "road:trunk",
+      "nodeRef": "road:trunk",
+      "title": "남북 도로",
+      "kind": "Road",
+      "x": 20,
+      "z": 10,
+      "width": 4,
+      "depth": 24
+    },
+    {
+      "id": "road:homes",
+      "nodeRef": "road:homes",
+      "title": "주택 도로",
+      "kind": "Road",
+      "x": 20,
+      "z": 20,
+      "width": 24,
+      "depth": 4
+    }
+  ],
+  "anchors": [
+    {
+      "id": "restaurant-work",
+      "ownerRef": "facility:sim.restaurant-1",
+      "x": 10,
+      "z": 5,
+      "role": "Work"
+    },
+    {
+      "id": "restaurant-door",
+      "ownerRef": "facility:sim.restaurant-1",
+      "x": 10,
+      "z": 3.95,
+      "role": "Access"
+    },
+    {
+      "id": "restaurant-bay",
+      "ownerRef": "facility:sim.restaurant-1",
+      "x": 10,
+      "z": 2.5,
+      "role": "Parking"
+    },
+    {
+      "id": "home-a-resident",
+      "ownerRef": "facility:synthetic:a",
+      "x": 29,
+      "z": 26,
+      "role": "Life"
+    },
+    {
+      "id": "home-a-door",
+      "ownerRef": "facility:synthetic:a",
+      "x": 30,
+      "z": 23.95,
+      "role": "Access"
+    },
+    {
+      "id": "home-a-receive",
+      "ownerRef": "facility:synthetic:a",
+      "x": 30,
+      "z": 24,
+      "role": "Receive"
+    },
+    {
+      "id": "home-a-bay",
+      "ownerRef": "facility:synthetic:a",
+      "x": 30,
+      "z": 22.5,
+      "role": "Parking"
+    },
+    {
+      "id": "home-b-resident",
+      "ownerRef": "facility:synthetic:b",
+      "x": 9,
+      "z": 26,
+      "role": "Life"
+    },
+    {
+      "id": "home-b-door",
+      "ownerRef": "facility:synthetic:b",
+      "x": 10,
+      "z": 23.95,
+      "role": "Access"
+    },
+    {
+      "id": "home-b-receive",
+      "ownerRef": "facility:synthetic:b",
+      "x": 10,
+      "z": 24,
+      "role": "Receive"
+    },
+    {
+      "id": "home-b-bay",
+      "ownerRef": "facility:synthetic:b",
+      "x": 10,
+      "z": 22.5,
+      "role": "Parking"
+    },
+    {
+      "id": "mart-work",
+      "ownerRef": "facility:synthetic:mart",
+      "x": 0,
+      "z": -14,
+      "role": "Work"
+    },
+    {
+      "id": "mart-turn",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -10,
+      "z": -14,
+      "role": "Access"
+    },
+    {
+      "id": "mart-handoff",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -10,
+      "z": -8,
+      "role": "Handoff"
+    },
+    {
+      "id": "mart-bay",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -10,
+      "z": -2.5,
+      "role": "Parking"
+    },
+    {
+      "id": "mart-inbound",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -14,
+      "z": -8,
+      "role": "Inbound"
+    },
+    {
+      "id": "mart-inbound-bay",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -14,
+      "z": -3,
+      "role": "Parking"
+    },
+    {
+      "id": "mart-inbound-turn",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -14,
+      "z": -14,
+      "role": "Access"
+    },
+    {
+      "id": "mart-shelf-0",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -8,
+      "z": -15,
+      "role": "Fixture"
+    },
+    {
+      "id": "mart-shelf-1",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -4,
+      "z": -15,
+      "role": "Fixture"
+    },
+    {
+      "id": "mart-pack",
+      "ownerRef": "facility:synthetic:mart",
+      "x": 0,
+      "z": -15,
+      "role": "Fixture"
+    },
+    {
+      "id": "mart-counter",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -11,
+      "z": -8,
+      "role": "Fixture"
+    },
+    {
+      "id": "mart-server-inbound",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -9,
+      "z": -9,
+      "role": "OperationalView"
+    },
+    {
+      "id": "mart-server-inspect",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -6,
+      "z": -11,
+      "role": "OperationalView"
+    },
+    {
+      "id": "mart-server-wait",
+      "ownerRef": "facility:synthetic:mart",
+      "x": 0,
+      "z": -12,
+      "role": "OperationalView"
+    },
+    {
+      "id": "mart-server-shelf-access",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -8,
+      "z": -13.5,
+      "role": "OperationalView"
+    },
+    {
+      "id": "depot-work",
+      "ownerRef": "facility:synthetic:depot",
+      "x": -22,
+      "z": -14,
+      "role": "Work"
+    },
+    {
+      "id": "depot-inbound",
+      "ownerRef": "facility:synthetic:depot",
+      "x": -26,
+      "z": -8,
+      "role": "Inbound"
+    },
+    {
+      "id": "depot-bay",
+      "ownerRef": "facility:synthetic:depot",
+      "x": -26,
+      "z": -3,
+      "role": "Parking"
+    },
+    {
+      "id": "depot-turn",
+      "ownerRef": "facility:synthetic:depot",
+      "x": -26,
+      "z": -14,
+      "role": "Access"
+    },
+    {
+      "id": "junction--26",
+      "ownerRef": "road:east",
+      "x": -26,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "junction--14",
+      "ownerRef": "road:east",
+      "x": -14,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "junction--10",
+      "ownerRef": "road:east",
+      "x": -10,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "junction-0",
+      "ownerRef": "road:east",
+      "x": 0,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "junction-10",
+      "ownerRef": "road:east",
+      "x": 10,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "junction-20",
+      "ownerRef": "road:east",
+      "x": 20,
+      "z": 0,
+      "role": "Access"
+    },
+    {
+      "id": "home-junction-10",
+      "ownerRef": "road:homes",
+      "x": 10,
+      "z": 20,
+      "role": "Access"
+    },
+    {
+      "id": "home-junction-20",
+      "ownerRef": "road:homes",
+      "x": 20,
+      "z": 20,
+      "role": "Access"
+    },
+    {
+      "id": "home-junction-30",
+      "ownerRef": "road:homes",
+      "x": 30,
+      "z": 20,
+      "role": "Access"
+    },
+    {
+      "id": "waiting-0",
+      "ownerRef": "facility:synthetic:mart",
+      "x": -6,
+      "z": -4,
+      "role": "Parking"
+    },
+    {
+      "id": "waiting-1",
+      "ownerRef": "facility:synthetic:mart",
+      "x": 0,
+      "z": -4,
+      "role": "Parking"
+    },
+    {
+      "id": "waiting-2",
+      "ownerRef": "facility:synthetic:mart",
+      "x": 6,
+      "z": -4,
+      "role": "Parking"
+    },
+    {
+      "id": "waiting-3",
+      "ownerRef": "road:homes",
+      "x": 10,
+      "z": 16,
+      "role": "Parking"
+    },
+    {
+      "id": "waiting-4",
+      "ownerRef": "road:homes",
+      "x": 30,
+      "z": 16,
+      "role": "Parking"
+    }
+  ],
+  "paths": [
+    {
+      "id": "main-road",
+      "anchorRefs": [
+        "junction--26",
+        "junction--14",
+        "junction--10",
+        "junction-0",
+        "junction-10",
+        "junction-20"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "home-road",
+      "anchorRefs": [
+        "home-junction-10",
+        "home-junction-20",
+        "home-junction-30"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "trunk",
+      "anchorRefs": [
+        "junction-20",
+        "home-junction-20"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "restaurant-exit",
+      "anchorRefs": [
+        "restaurant-work",
+        "restaurant-bay",
+        "junction-10"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "mart-exit",
+      "anchorRefs": [
+        "mart-work",
+        "mart-turn",
+        "mart-handoff",
+        "mart-bay",
+        "junction--10"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "mart-inbound",
+      "anchorRefs": [
+        "mart-work",
+        "mart-inbound-turn",
+        "mart-inbound",
+        "mart-inbound-bay",
+        "junction--14"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "depot-exit",
+      "anchorRefs": [
+        "depot-work",
+        "depot-turn",
+        "depot-inbound",
+        "depot-bay",
+        "junction--26"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "home-a-access",
+      "anchorRefs": [
+        "home-junction-30",
+        "home-a-bay",
+        "home-a-receive"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "home-b-access",
+      "anchorRefs": [
+        "home-junction-10",
+        "home-b-bay",
+        "home-b-receive"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "waiting-0-access",
+      "anchorRefs": [
+        "waiting-0",
+        "junction-0"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "waiting-1-access",
+      "anchorRefs": [
+        "waiting-1",
+        "junction-0"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "waiting-2-access",
+      "anchorRefs": [
+        "waiting-2",
+        "junction-10"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "waiting-3-access",
+      "anchorRefs": [
+        "waiting-3",
+        "home-junction-10"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    },
+    {
+      "id": "waiting-4-access",
+      "anchorRefs": [
+        "waiting-4",
+        "home-junction-30"
+      ],
+      "bidirectional": true,
+      "condition": "ExistingSyntheticAccessAndResourceReservation"
+    }
+  ],
+  "actors": [
+    {
+      "actorId": "actor:sim.restaurant-1",
+      "title": "음식점 주인",
+      "role": "RestaurantOperator",
+      "workNodeRef": "facility:sim.restaurant-1",
+      "initialAnchorRef": "restaurant-work",
+      "homeNodeRef": "facility:synthetic:a",
+      "homeCondition": "NeighborhoodDayEnabled"
+    },
+    {
+      "actorId": "actor:synthetic-mart-worker",
+      "title": "마트 작업자",
+      "role": "WarehouseWorker",
+      "workNodeRef": "facility:synthetic:mart",
+      "initialAnchorRef": "mart-work",
+      "homeNodeRef": "facility:synthetic:a",
+      "homeCondition": "NeighborhoodDayEnabled"
+    },
+    {
+      "actorId": "actor:synthetic-depot-worker",
+      "title": "창고 작업자",
+      "role": "WarehouseWorker",
+      "workNodeRef": "facility:synthetic:depot",
+      "initialAnchorRef": "depot-work",
+      "homeNodeRef": "",
+      "homeCondition": "ExistingOrUnassigned"
+    },
+    {
+      "actorId": "actor:synthetic-freight-driver",
+      "title": "화물 기사",
+      "role": "FreightDriver",
+      "workNodeRef": "facility:synthetic:depot",
+      "initialAnchorRef": "depot-bay",
+      "homeNodeRef": "",
+      "homeCondition": "ExistingOrUnassigned"
+    },
+    {
+      "actorId": "participant:synthetic:a",
+      "title": "주민 A",
+      "role": "Resident",
+      "workNodeRef": "facility:synthetic:a",
+      "initialAnchorRef": "home-a-resident",
+      "homeNodeRef": "facility:synthetic:a",
+      "homeCondition": "ExistingOrUnassigned"
+    },
+    {
+      "actorId": "participant:synthetic:b",
+      "title": "주민 B",
+      "role": "Resident",
+      "workNodeRef": "facility:synthetic:b",
+      "initialAnchorRef": "home-b-resident",
+      "homeNodeRef": "facility:synthetic:b",
+      "homeCondition": "ExistingOrUnassigned"
+    },
+    {
+      "actorId": "actor:synthetic-courier:1",
+      "title": "배달 기사 1",
+      "role": "Courier",
+      "workNodeRef": "facility:synthetic:courier-base",
+      "initialAnchorRef": "waiting-0",
+      "homeNodeRef": "facility:synthetic:b",
+      "homeCondition": "NeighborhoodDayEnabled"
+    },
+    {
+      "actorId": "actor:synthetic-courier:2",
+      "title": "배달 기사 2",
+      "role": "Courier",
+      "workNodeRef": "facility:synthetic:courier-base",
+      "initialAnchorRef": "waiting-1",
+      "homeNodeRef": "facility:synthetic:a",
+      "homeCondition": "NeighborhoodDayEnabled"
+    },
+    {
+      "actorId": "actor:synthetic-courier:3",
+      "title": "배달 기사 3",
+      "role": "Courier",
+      "workNodeRef": "facility:synthetic:courier-base",
+      "initialAnchorRef": "waiting-2",
+      "homeNodeRef": "facility:synthetic:b",
+      "homeCondition": "NeighborhoodDayEnabled"
+    }
+  ],
+  "knownGaps": [
+    {
+      "id": "mart-inbound-outside-footprint",
+      "anchorRefs": [
+        "mart-inbound",
+        "mart-inbound-turn"
+      ],
+      "reason": "보충 입고 통로 x=-14는 기존 마트 바닥 왼쪽 x=-12 밖이다. 코드 좌표를 옮기지 않고 현상으로 보존한다.",
+      "blocksSceneReadiness": true
+    },
+    {
+      "id": "mart-operational-simulation-anchors",
+      "anchorRefs": [
+        "mart-inbound",
+        "mart-server-inbound",
+        "mart-work",
+        "mart-server-wait"
+      ],
+      "reason": "같은 마트의 운영 조회와 합성 생활 작업점은 다르다. 각 소비 경로를 유지하며 자동 동시 표시하지 않는다.",
+      "blocksSceneReadiness": true
+    },
+    {
+      "id": "exact-geometry",
+      "anchorRefs": [],
+      "reason": "실제 Collider·높이·문턱·사람/차량 간 간격은 미검증이다. 도형 AABB 검사는 실제 보행 증거가 아니다.",
+      "blocksSceneReadiness": true
+    }
+  ],
+  "placementRules": [
+    "기존 식별자·좌표 보존",
+    "기존 공식 Scene 재사용",
+    "경로 미연결은 새 길 추론 없이 차단",
+    "Graph 관계는 통행 가능의 증거가 아님"
+  ],
+  "requiredDevelopmentChecks": [
+    "UniqueReferences",
+    "GeneratedCodeFreshness",
+    "ExplicitPathConnectivity",
+    "FootprintOverlap",
+    "WorkAccess",
+    "LegacyReplayRegression"
+  ],
+  "presentationOnly": true,
+  "isOperationalState": false
+}

@@ -50,7 +50,7 @@ $flows = Get-Content -LiteralPath (
 $polarities = Get-Content -LiteralPath (
     Join-Path $repositoryRoot ([string] $catalog.polarityQuadrantCatalogPath)) -Raw -Encoding UTF8 |
     ConvertFrom-Json
-if (@($responsibilities.primaryOutcomeCodes.PSObject.Properties).Count -ne 105) {
+if (@($responsibilities.primaryOutcomeCodes.PSObject.Properties).Count -ne 118) {
     throw "WorldInteractionPrimaryOutcomeCountInvalid"
 }
 if (@($responsibilities.legacyCompositeMigrations).Count -ne 6) {
@@ -77,12 +77,12 @@ if ((@($responsibilities.legacyCompositeMigrations.worldInteractionId | Sort-Obj
         "WI-NATURE-17", "WI-WORLD-07") | Sort-Object) -join ",")) {
     throw "WorldInteractionLegacyCompositeAuditSetInvalid"
 }
-if (@($flows.flows.edges).Count -ne 60) {
+if (@($flows.flows.edges).Count -ne 62) {
     throw "WorldInteractionFlowEdgeCountInvalid"
 }
-if (@($polarities.fixedYangWorldInteractionIds).Count -ne 27 -or
-    @($polarities.fixedYinWorldInteractionIds).Count -ne 28 -or
-    @($polarities.contextualWorldInteractionIds).Count -ne 38 -or
+if (@($polarities.fixedYangWorldInteractionIds).Count -ne 28 -or
+    @($polarities.fixedYinWorldInteractionIds).Count -ne 31 -or
+    @($polarities.contextualWorldInteractionIds).Count -ne 47 -or
     @($polarities.notApplicableWorldInteractionIds).Count -ne 12) {
     throw "WorldInteractionPolarityCoverageInvalid"
 }
@@ -155,7 +155,7 @@ $e4SeedbedBackedSpatialItems = @($e4SpatialItems | Where-Object { $_.implementat
 $e5Items = @($catalog.items | Where-Object { $_.integration.currentStage -eq "E5" })
 $e6Items = @($catalog.items | Where-Object { $_.integration.currentStage -eq "E6" })
 $e7Items = @($catalog.items | Where-Object { $_.integration.currentStage -eq "E7" })
-if ($e4Items.Count -ne 17) { throw "WorldInteractionE4SeedbedItemCountMustBe17" }
+if ($e4Items.Count -ne 22) { throw "WorldInteractionE4SeedbedItemCountMustBe22" }
 if ((@($e5Items.id | Sort-Object) -join ",") -ne
     "WI-ACTOR-01,WI-ACTOR-02,WI-NATURE-14") {
     throw "WorldInteractionE5ItemsInvalid"
@@ -197,7 +197,7 @@ if ($natureAxe.Count -ne 1 -or
     @($natureAxe[0].integration.e7EvidenceRefs).Count -lt 3) {
     throw "WorldInteractionNatureAxeEvidenceInvalid"
 }
-if ($check -notmatch "WorldInteractionCatalogValid:105") {
+if ($check -notmatch "WorldInteractionCatalogValid:118") {
     throw "WorldInteractionCatalogValidationDidNotComplete"
 }
 

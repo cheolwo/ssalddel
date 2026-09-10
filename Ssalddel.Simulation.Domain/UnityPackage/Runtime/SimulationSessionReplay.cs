@@ -117,6 +117,8 @@ namespace Ssalddel.Simulation.Domain
                 package.RealityContext == null ? null
                     : 경영SimulationSessionAggregate.CloneRealityContext(
                         package.RealityContext));
+            aggregate.RestoreTickRuleRevision(package.TickRuleRevision);
+            aggregate.ReplayingSyntheticRecords = true;
             if (!string.Equals(package.SchemaVersion, SimulationSaveSchemaVersions.V5,
                     StringComparison.Ordinal)
                 && !string.Equals(package.SchemaVersion, SimulationSaveSchemaVersions.V6,
@@ -579,12 +581,15 @@ namespace Ssalddel.Simulation.Domain
                 throw new SimulationConflictException("SimulationSavePositionMismatch");
             }
 
+            aggregate.ReplayingSyntheticRecords = false;
             return aggregate;
         }
 
         private static void ValidatePackage(SimulationSessionSavePackage package)
         {
             if (package == null) throw new ArgumentNullException(nameof(package));
+            if (package.TickRuleRevision != string.Empty && package.TickRuleRevision != SimulationTickRuleRevisions.SingleStep)
+                throw new SimulationContractException("SimulationTickRuleRevisionUnsupported");
             if (string.Equals(package.SchemaVersion,
                     SimulationSaveSchemaVersions.V30,
                     StringComparison.Ordinal))

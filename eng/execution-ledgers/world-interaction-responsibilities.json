@@ -1,7 +1,7 @@
 {
   "schemaVersion": "simulation-world-interaction-responsibilities.v1",
-  "revision": "simulation-world-interaction-responsibilities.r14",
-  "lastVerifiedDate": "2026-09-04",
+  "revision": "simulation-world-interaction-responsibilities.r16",
+  "lastVerifiedDate": "2026-09-05",
   "principles": {
     "oneIntentPerWorldInteraction": true,
     "onePrimaryAuthorityOutcomePerWorldInteraction": true,
@@ -28,6 +28,29 @@
     "ActorResponsibilityMigrationRequired"
   ],
   "primaryOutcomeCodes": {
+    "WI-CITY-SYNTHETIC-LIFE-SHIFT": "Working",
+    "WI-CITY-SYNTHETIC-LIFE-REST": "Resting",
+    "WI-CITY-SYNTHETIC-DEPOT-INSPECT": "Inspected",
+    "WI-CITY-SYNTHETIC-DEPOT-PUTAWAY": "Stored",
+    "WI-CITY-SYNTHETIC-DEPOT-RESERVE": "Reserved",
+    "WI-CITY-SYNTHETIC-DEPOT-PICK": "Picked",
+    "WI-CITY-SYNTHETIC-DEPOT-PACK": "Packed",
+    "WI-CITY-SYNTHETIC-DEPOT-STAGE": "Ready",
+    "WI-CITY-SYNTHETIC-FREIGHT-LOAD": "Loaded",
+    "WI-CITY-SYNTHETIC-FREIGHT-UNLOAD": "Unloaded",
+    "WI-CITY-SYNTHETIC-MART-INBOUND": "Received",
+    "WI-CITY-SYNTHETIC-MART-RESERVE": "Reserved",
+    "WI-CITY-SYNTHETIC-MART-PICK": "Picked",
+    "WI-CITY-SYNTHETIC-MART-PACK": "Packed",
+    "WI-CITY-SYNTHETIC-MART-STAGE": "ReadyForCourier",
+    "WI-CITY-SYNTHETIC-ASSIGN": "Assigned",
+    "WI-CITY-SYNTHETIC-MOVE": "PositionAdvanced",
+    "WI-CITY-SYNTHETIC-PICKUP": "PickedUp",
+    "WI-CITY-SYNTHETIC-DELIVER": "Delivered",
+    "WI-CITY-SYNTHETIC-RECEIVE": "Received",
+    "WI-CITY-SYNTHETIC-RETURN": "Returned",
+    "WI-CITY-RESTAURANT-COOK": "RestaurantCookingScheduled",
+    "WI-CITY-RESTAURANT-ACCEPT": "RestaurantResponseRecorded",
     "WI-ACTOR-CONSUME": "ItemConsumed",
     "WI-ACTOR-PLAN-SET": "PersonalPlanSet",
     "WI-COMBAT-DIRECT-CONTROL-SET": "ActorDirectControlChanged",
@@ -134,7 +157,10 @@
     "WI-WORLD-06": "TeamRoleCardEquipped",
     "WI-WORLD-07": "TeamActivityStarted",
     "WI-WORLD-08": "TurnClosed",
-    "WI-REVIEW-01": "NpcWorkReviewConfirmed"
+    "WI-REVIEW-01": "NpcWorkReviewConfirmed",
+    "WI-NATURE-HANS-BOUNDARY-PATROL": "FarmBoundaryPatrolCompleted",
+    "WI-WORLD-BOUNDED-MANAGEMENT-GRANT": "BoundedManagementAuthorityGranted",
+    "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF": "HansFarmCrisisDebriefCompleted"
   },
   "atomicBundles": [
     {
@@ -200,54 +226,91 @@
     {
       "worldInteractionId": "WI-WORLD-03",
       "reason": "업무 취소와 해당 업무가 소유한 예약 해제는 동일 취소 트랜잭션이다."
+    },
+    {
+      "worldInteractionId": "WI-NATURE-HANS-BOUNDARY-PATROL",
+      "reason": "공동 순찰 완료, 함께 귀환과 약속 이행 기록은 같은 공동 행동 계보에서 함께 성립해야 한다."
+    },
+    {
+      "worldInteractionId": "WI-REFLECT-HANS-FARM-CRISIS-DEBRIEF",
+      "reason": "위기 사후 성찰, 학습 필요 인식과 다음 캠페인 진입 가능성은 같은 성찰 결과에서 함께 성립한다."
     }
   ],
   "alternativeOutcomeSets": [
     {
       "worldInteractionId": "WI-WORLD-RESOURCE-REGENERATE",
-      "outcomeCodes": ["ResourceAvailabilityRestored", "ResourceAvailabilityUnchanged"],
+      "outcomeCodes": [
+        "ResourceAvailabilityRestored",
+        "ResourceAvailabilityUnchanged"
+      ],
       "reason": "신뢰된 Tick의 단일 재생 평가 결과다. 변경 노드가 있으면 복원, 없으면 자원 가용성 유지 중 정확히 하나의 행위 결과만 기록한다."
     },
     {
       "worldInteractionId": "WI-CITY-02",
-      "outcomeCodes": ["CityInventoryAllocated", "CityInventoryShortage"],
+      "outcomeCodes": [
+        "CityInventoryAllocated",
+        "CityInventoryShortage"
+      ],
       "reason": "재고 배정 판정 하나가 성공 또는 부족 중 정확히 하나의 결과를 만든다."
     },
     {
       "worldInteractionId": "WI-CITY-03",
-      "outcomeCodes": ["CityServiceCompleted", "CityServiceDeferred"],
+      "outcomeCodes": [
+        "CityServiceCompleted",
+        "CityServiceDeferred"
+      ],
       "reason": "서비스 처리 하나가 완료 또는 유예 중 정확히 하나의 결과를 만든다."
     }
   ],
   "legacyCompositeMigrations": [
     {
       "worldInteractionId": "WI-001",
-      "targetResponsibilities": ["입고 화물 검수 완료", "운송 화물 인수 확정"],
+      "targetResponsibilities": [
+        "입고 화물 검수 완료",
+        "운송 화물 인수 확정"
+      ],
       "compatibilityBoundary": "기존 WI-001 저장·API·업무 계보는 유지하고 새 실행 판본에서 검수 결과와 인수 전이를 분리한다."
     },
     {
       "worldInteractionId": "WI-NATURE-11",
-      "targetResponsibilities": ["황혼 위협 대응 방식 확정", "전투 또는 후퇴 인계", "조우 결과 반영"],
+      "targetResponsibilities": [
+        "황혼 위협 대응 방식 확정",
+        "전투 또는 후퇴 인계",
+        "조우 결과 반영"
+      ],
       "compatibilityBoundary": "기존 전투 저장과 결과 코드를 다시 계산하지 않고 새 활성 조우부터 분리한다."
     },
     {
       "worldInteractionId": "WI-NATURE-14",
-      "targetResponsibilities": ["수면 시작", "세계 시간 진행", "수면 종료"],
+      "targetResponsibilities": [
+        "수면 시작",
+        "세계 시간 진행",
+        "수면 종료"
+      ],
       "compatibilityBoundary": "simulation-save.v17 이상 기존 수면 계보는 유지하고 새 저장 판본에서 명령과 자동 시간 전이를 분리한다."
     },
     {
       "worldInteractionId": "WI-NATURE-16",
-      "targetResponsibilities": ["현장 보급 꾸러미 제작", "원정에서 보급 효과 사용"],
+      "targetResponsibilities": [
+        "현장 보급 꾸러미 제작",
+        "원정에서 보급 효과 사용"
+      ],
       "compatibilityBoundary": "기존 제작 결과는 유지하되 새 판본에서는 재료 보호 효과를 제작 시점이 아니라 사용 WI가 소유한다."
     },
     {
       "worldInteractionId": "WI-NATURE-17",
-      "targetResponsibilities": ["현장 보급 제작 업무 위임", "NPC의 현장 보급 꾸러미 제작"],
+      "targetResponsibilities": [
+        "현장 보급 제작 업무 위임",
+        "NPC의 현장 보급 꾸러미 제작"
+      ],
       "compatibilityBoundary": "기존 WI-NATURE-17 실행 계보는 유지하고 새 판본에서는 위임과 actor-agnostic 제작 실행을 분리한다."
     },
     {
       "worldInteractionId": "WI-WORLD-07",
-      "targetResponsibilities": ["세계 활동 시작", "세계 활동 종료"],
+      "targetResponsibilities": [
+        "세계 활동 시작",
+        "세계 활동 종료"
+      ],
       "compatibilityBoundary": "기존 시작·종료 payload와 고유 식별자는 읽기 호환하며 새 명령 계약에서 책임별 식별자를 도입한다."
     }
   ],

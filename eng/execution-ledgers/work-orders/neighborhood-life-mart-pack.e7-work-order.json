@@ -1,0 +1,332 @@
+{
+  "schemaVersion": "simulation-e7-vertical-work-order.v2",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
+  "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
+  "workOrderId": "E7-WO-NEIGHBORHOOD-LIFE-MART-PACK",
+  "title": "도심 생활 · 마트 주문 포장",
+  "activeWorldInteractionId": "WI-CITY-SYNTHETIC-MART-PACK",
+  "targetEvidenceStage": "E7",
+  "currentEvidenceStage": "E0",
+  "promotionEligible": false,
+  "iterationState": {
+    "currentPass": "ImpactReassessment",
+    "nextReopenCondition": "Core·Unity 자동 검증 결과는 반환 문서 참조. 개별 E 판정과 실제 입력·시각 수용은 별도 검토한다."
+  },
+  "changeImpactReviewRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/observer-phone.r1.md",
+  "presentationE4Preparation": {
+    "applicabilityCode": "Required",
+    "notApplicableReason": "",
+    "playerReadableMoment": "마트 주문 포장의 진행·대기·직접 결과",
+    "requiredHCapabilities": [],
+    "visualKeys": [
+      "visual:synthetic-neighborhood-life.r1"
+    ],
+    "primaryAssetCandidateRefs": [
+      "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+    ],
+    "alternativeAssetCandidateRefs": [],
+    "fallbackPresentationRefs": [],
+    "placementIntent": "기존 도형 보존, 승인된 서쪽 합성 창고와 구간 점유",
+    "interactionAnchorIntent": "승인 기획에 명시된 작업점·정차점·출입구. Unity는 동일 Revision 사본을 조회한다.",
+    "candidateRevisionOrFingerprint": "synthetic-neighborhood-life.r1",
+    "e5ReadinessCode": "Blocked",
+    "openGapRefs": [
+      "UI 코드·자동 시험과 실제 Play Mode·Game View 완주는 별도 증거다. E0·승격 비활성 유지."
+    ]
+  },
+  "presentationModuleBindings": [
+    {
+      "moduleCode": "presentation-requirement-contract",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-projection-lifecycle",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-automated-regression",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-binding",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "visual-source-bounds",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "player-scale-spacing",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "state-difference-readability",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "actual-camera-input-result-return",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    }
+  ],
+  "trackPlans": {
+    "logic": {
+      "trackCode": "Logic",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    "presentation": {
+      "trackCode": "Presentation",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "마트 주문 포장의 주체·직접 결과·상태/표현 결속·저장 회귀를 검토한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    }
+  },
+  "integratedGate": {
+    "currentEvidenceStage": "E0",
+    "status": "Blocked",
+    "candidateRevision": "",
+    "evidenceRefs": [
+      "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life-result.r1.md"
+    ],
+    "openFeedbackRefs": [
+      "자동 시험·부분 Play·저장 재진입과 실제 Game View/Hosted 수용은 별도. docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life-result.r1.md"
+    ]
+  },
+  "planningGate": {
+    "topicStableId": "topic:restaurant-npc-operation.v1",
+    "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+    "designRevision": "neighborhood-life.r1",
+    "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+    "statusCode": "Approved",
+    "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+  },
+  "workOrderStableId": "work-order:neighborhood-life-mart-pack.v1",
+  "worldInteractionId": "WI-CITY-SYNTHETIC-MART-PACK",
+  "subjectBindingRefs": [
+    "subject:synthetic-neighborhood-workforce.v1",
+    "subject:npc-routine-actor.v1",
+    "subject:authoritative-interaction-target.v1"
+  ],
+  "subjectResolution": "합성 생활 주체를 기존 ActorStableId 및 주문/재고/차량 ID로 해석",
+  "designDocumentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+  "designRevision": "neighborhood-life.r1",
+  "designHashSha256": "C9C1ECCB55D94FA5A171979A22646933AF40DC5E6B33AAD10DD862EA74D3F82B",
+  "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+  "statusCode": "Approved",
+  "deliveryCap": "E3",
+  "implementationScopeRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md",
+  "runtimeBoundary": "LocalProcess와 RemoteHost 공통 Core. 실제 Hosted 연결은 미검증.",
+  "requiredResearch": [
+    {
+      "requirementCode": "Required",
+      "statusCode": "Accepted",
+      "documentRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/mart-center.r3.md",
+      "sha256": "9DD5F03FFF1D6072E57C51AC7720ACC50E8AEBFCB900AA61D287BAD47B806EF1"
+    }
+  ],
+  "researchBoundary": "기존 Accepted r3 공간 계승. 추가 서쪽 합성 공간은 기획 제약/좌표 시험 뒤 실제 배치 증거 별도.",
+  "writePaths": [
+    "Ssalddel.Unity/Runtime/Observation/동네관찰SessionController.cs",
+    "Ssalddel.Unity/Runtime/Observation/동네관찰Presenter.cs",
+    "Ssalddel.Unity.Tests/동네관찰Tests.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상마트작업.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/가상동네생활해시.cs",
+    "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/가상동네생활Contracts.cs",
+    "Ssalddel.Unity/Runtime/Warehouse/가상배달관찰표본.cs",
+    "Ssalddel.Simulation.Tests/가상동네생활Tests.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/가상동네생활View.cs"
+  ],
+  "openFeedbackItems": [
+    "휴대폰 표현 보완: docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/observer-phone.r1.md. 기존 업무 기획/hash/E 상한은 유지하며 실제 입력·화면 결과를 별도로 결속한다.",
+    "E0/승격 비활성 유지. 구현·시험 결과: docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life-result.r1.md"
+  ],
+  "reopenCondition": "권한·수락·조리 분리 변경 시 Logic E1 재개",
+  "interactionGoalStableId": "interaction-goal:neighborhood-life-mart-pack.v1",
+  "detailedWorkOrderRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-life.r1.md"
+}

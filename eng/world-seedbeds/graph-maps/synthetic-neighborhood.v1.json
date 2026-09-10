@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "simulation-world-graph-map.v1",
+  "graphStableId": "graph-map:synthetic-neighborhood.v1",
+  "revision": "synthetic-neighborhood.r1",
+  "planningRef": "docs/AI/Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/neighborhood-maps.r1.md",
+  "placementMapRef": "eng/world-seedbeds/placement-map-profiles/synthetic-neighborhood.v1.json",
+  "authorityBoundary": "기존 합성 동네의 관계 대조. 실제 면목동/GIS 아님. 업무 상태·Scene·E 승격을 만들지 않는다.",
+  "nodes": [
+    {"nodeStableId":"facility:synthetic:courier-base","nodeKindCode":"Workplace","title":"마트 주변 배달 대기 거점","hStatus":"SharedExistingFacility"},
+    {
+      "nodeStableId": "facility:sim.restaurant-1",
+      "nodeKindCode": "Facility",
+      "title": "음식점",
+      "hStatus": "UnassignedExistingFacility"
+    },
+    {
+      "nodeStableId": "facility:synthetic:a",
+      "nodeKindCode": "Facility",
+      "title": "주택 A",
+      "hStatus": "UnassignedExistingFacility"
+    },
+    {
+      "nodeStableId": "facility:synthetic:b",
+      "nodeKindCode": "Facility",
+      "title": "주택 B",
+      "hStatus": "UnassignedExistingFacility"
+    },
+    {
+      "nodeStableId": "facility:synthetic:mart",
+      "nodeKindCode": "Facility",
+      "title": "살뜰마트",
+      "hStatus": "UnassignedExistingFacility"
+    },
+    {
+      "nodeStableId": "facility:synthetic:depot",
+      "nodeKindCode": "Facility",
+      "title": "보충창고",
+      "hStatus": "UnassignedExistingFacility"
+    },
+    {
+      "nodeStableId": "road:east",
+      "nodeKindCode": "Road",
+      "title": "동서 도로"
+    },
+    {
+      "nodeStableId": "road:west",
+      "nodeKindCode": "Road",
+      "title": "서쪽 보충 도로"
+    },
+    {
+      "nodeStableId": "road:trunk",
+      "nodeKindCode": "Road",
+      "title": "남북 도로"
+    },
+    {
+      "nodeStableId": "road:homes",
+      "nodeKindCode": "Road",
+      "title": "주택 도로"
+    },
+    {
+      "nodeStableId": "actor:sim.restaurant-1",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:sim.restaurant-1",
+      "title": "음식점 주인",
+      "role": "RestaurantOperator"
+    },
+    {
+      "nodeStableId": "actor:synthetic-mart-worker",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-mart-worker",
+      "title": "마트 작업자",
+      "role": "WarehouseWorker"
+    },
+    {
+      "nodeStableId": "actor:synthetic-depot-worker",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-depot-worker",
+      "title": "창고 작업자",
+      "role": "WarehouseWorker"
+    },
+    {
+      "nodeStableId": "actor:synthetic-freight-driver",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-freight-driver",
+      "title": "화물 기사",
+      "role": "FreightDriver"
+    },
+    {
+      "nodeStableId": "participant:synthetic:a",
+      "nodeKindCode": "Subject",
+      "subjectRef": "participant:synthetic:a",
+      "title": "주민 A",
+      "role": "Resident"
+    },
+    {
+      "nodeStableId": "participant:synthetic:b",
+      "nodeKindCode": "Subject",
+      "subjectRef": "participant:synthetic:b",
+      "title": "주민 B",
+      "role": "Resident"
+    },
+    {
+      "nodeStableId": "actor:synthetic-courier:1",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-courier:1",
+      "title": "배달 기사 1",
+      "role": "Courier"
+    },
+    {
+      "nodeStableId": "actor:synthetic-courier:2",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-courier:2",
+      "title": "배달 기사 2",
+      "role": "Courier"
+    },
+    {
+      "nodeStableId": "actor:synthetic-courier:3",
+      "nodeKindCode": "Subject",
+      "subjectRef": "actor:synthetic-courier:3",
+      "title": "배달 기사 3",
+      "role": "Courier"
+    }
+  ],
+  "edges": [
+    {"edgeStableId":"relation:courier-base-location","fromNodeRef":"facility:synthetic:courier-base","toNodeRef":"facility:synthetic:mart","relationCode":"SharedWaitingArea","wiRefs":[]},
+    {
+      "edgeStableId": "relation:work:actor:sim.restaurant-1",
+      "fromNodeRef": "actor:sim.restaurant-1",
+      "toNodeRef": "facility:sim.restaurant-1",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:home:actor:sim.restaurant-1",
+      "fromNodeRef": "actor:sim.restaurant-1",
+      "toNodeRef": "facility:synthetic:a",
+      "relationCode": "DayHomeAssignment",
+      "condition": "NeighborhoodDayEnabled",
+      "wiRefs": [
+        "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+        "WI-CITY-SYNTHETIC-LIFE-REST"
+      ]
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-mart-worker",
+      "fromNodeRef": "actor:synthetic-mart-worker",
+      "toNodeRef": "facility:synthetic:mart",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:home:actor:synthetic-mart-worker",
+      "fromNodeRef": "actor:synthetic-mart-worker",
+      "toNodeRef": "facility:synthetic:a",
+      "relationCode": "DayHomeAssignment",
+      "condition": "NeighborhoodDayEnabled",
+      "wiRefs": [
+        "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+        "WI-CITY-SYNTHETIC-LIFE-REST"
+      ]
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-depot-worker",
+      "fromNodeRef": "actor:synthetic-depot-worker",
+      "toNodeRef": "facility:synthetic:depot",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-freight-driver",
+      "fromNodeRef": "actor:synthetic-freight-driver",
+      "toNodeRef": "facility:synthetic:depot",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:work:participant:synthetic:a",
+      "fromNodeRef": "participant:synthetic:a",
+      "toNodeRef": "facility:synthetic:a",
+      "relationCode": "LivesAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:work:participant:synthetic:b",
+      "fromNodeRef": "participant:synthetic:b",
+      "toNodeRef": "facility:synthetic:b",
+      "relationCode": "LivesAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-courier:1",
+      "fromNodeRef": "actor:synthetic-courier:1",
+      "toNodeRef": "facility:synthetic:courier-base",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:home:actor:synthetic-courier:1",
+      "fromNodeRef": "actor:synthetic-courier:1",
+      "toNodeRef": "facility:synthetic:b",
+      "relationCode": "DayHomeAssignment",
+      "condition": "NeighborhoodDayEnabled",
+      "wiRefs": [
+        "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+        "WI-CITY-SYNTHETIC-LIFE-REST"
+      ]
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-courier:2",
+      "fromNodeRef": "actor:synthetic-courier:2",
+      "toNodeRef": "facility:synthetic:courier-base",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:home:actor:synthetic-courier:2",
+      "fromNodeRef": "actor:synthetic-courier:2",
+      "toNodeRef": "facility:synthetic:a",
+      "relationCode": "DayHomeAssignment",
+      "condition": "NeighborhoodDayEnabled",
+      "wiRefs": [
+        "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+        "WI-CITY-SYNTHETIC-LIFE-REST"
+      ]
+    },
+    {
+      "edgeStableId": "relation:work:actor:synthetic-courier:3",
+      "fromNodeRef": "actor:synthetic-courier:3",
+      "toNodeRef": "facility:synthetic:courier-base",
+      "relationCode": "WorksAt",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:home:actor:synthetic-courier:3",
+      "fromNodeRef": "actor:synthetic-courier:3",
+      "toNodeRef": "facility:synthetic:b",
+      "relationCode": "DayHomeAssignment",
+      "condition": "NeighborhoodDayEnabled",
+      "wiRefs": [
+        "WI-CITY-SYNTHETIC-LIFE-SHIFT",
+        "WI-CITY-SYNTHETIC-LIFE-REST"
+      ]
+    },
+    {
+      "edgeStableId": "relation:replenishment",
+      "fromNodeRef": "facility:synthetic:depot",
+      "toNodeRef": "facility:synthetic:mart",
+      "relationCode": "ExistingSyntheticReplenishment",
+      "wiRefs": []
+    },
+    {
+      "edgeStableId": "relation:order:a:facility:sim.restaurant-1",
+      "fromNodeRef": "participant:synthetic:a",
+      "toNodeRef": "facility:sim.restaurant-1",
+      "relationCode": "OrdersAndReceives",
+      "wiRefs": [],
+      "condition": "AutomationEnabledAndOrderCapacity;DayModeBefore1050"
+    },
+    {
+      "edgeStableId": "relation:order:a:facility:synthetic:mart",
+      "fromNodeRef": "participant:synthetic:a",
+      "toNodeRef": "facility:synthetic:mart",
+      "relationCode": "OrdersAndReceives",
+      "wiRefs": [],
+      "condition": "AutomationEnabledAndOrderCapacity;DayModeBefore1050"
+    },
+    {
+      "edgeStableId": "relation:order:b:facility:sim.restaurant-1",
+      "fromNodeRef": "participant:synthetic:b",
+      "toNodeRef": "facility:sim.restaurant-1",
+      "relationCode": "OrdersAndReceives",
+      "wiRefs": [],
+      "condition": "AutomationEnabledAndOrderCapacity;DayModeBefore1050"
+    },
+    {
+      "edgeStableId": "relation:order:b:facility:synthetic:mart",
+      "fromNodeRef": "participant:synthetic:b",
+      "toNodeRef": "facility:synthetic:mart",
+      "relationCode": "OrdersAndReceives",
+      "wiRefs": [],
+      "condition": "AutomationEnabledAndOrderCapacity;DayModeBefore1050"
+    }
+  ]
+}
