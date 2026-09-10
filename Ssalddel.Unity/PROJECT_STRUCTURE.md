@@ -33,7 +33,7 @@ Ssalddel.Unity engine-independent core
   └─ Interactions
        ↓
 Unity presentation assembly
-  ├─ WorldBootstrapScene
+  ├─ SimulationWorldShell (공식 실행 Scene)
   ├─ CommunityMarketSquare
   ├─ Farm
   ├─ VisualRoot wrappers
@@ -41,7 +41,7 @@ Unity presentation assembly
   └─ panels, animation, VFX and SFX
 ```
 
-현재 체크아웃에는 engine-independent core가 있다. 사용자가 확인한 P2 `UnityWebRequest → Repository → UseCase → Scene Controller → Presenter → WorldBootstrapScene` 소스는 이 체크아웃에서 발견되지 않았으므로, 이 구조는 그 코드를 대체하지 않고 결합 지점을 제공한다. DTO 호환성 판정은 Repository에 섞지 않고 기존의 명시적 Mapper에 유지한다.
+이 체크아웃은 공통 package를 소유하고 별도 `C:\Users\user\ssalddel`의 `Assets/Ssalddel`이 실제 Bootstrap·HTTP Client·Scene·View를 소유한다. 별도 프로젝트의 manifest가 이 package를 로컬 참조한다. 위 트리는 책임 분류이며 실행 호출 순서는 [실제 코드 연결 안내](../docs/Architecture/UnityClientLayeredArchitecture.md)를 따른다. DTO 호환성 판정은 기존 명시적 Mapper에 유지하고, 로컬 음식점 예제는 HTTP 없이 공통 Core의 명령/조회 포트를 사용한다.
 
 ## Runtime 폴더 책임
 

@@ -10,6 +10,12 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class Simulation음식배달PreviewRequest
     {
+        /// <summary>음식점 내부 처리 표본. 픽업 대기에서 종료하며 배정·배송을 자동 실행하지 않는다.</summary>
+        public bool RestaurantPreparationOnly { get; set; }
+        /// <summary>제출만 기록하고 음식점의 별도 수락/거절을 기다린다. 조리 전용 방식에서만 사용한다.</summary>
+        public bool AwaitRestaurantResponse { get; set; }
+        /// <summary>권한 NPC가 Tick에서 자동 수락한다. 수락 결과는 조리 대기이며 조리를 즉시 시작하지 않는다.</summary>
+        public bool NpcAutoAccept { get; set; }
         public string FoodOrderStableId { get; set; } = string.Empty;
         public string MenuItemStableId { get; set; } = string.Empty;
         public string RestaurantFacilityStableId { get; set; } = string.Empty;
@@ -74,6 +80,8 @@ namespace Ssalddel.Simulation.Contracts
 
     public sealed class Simulation음식배달Snapshot
     {
+        public string RestaurantResponseDecisionStableId { get; set; } = string.Empty;
+        public string RejectionReasonCode { get; set; } = string.Empty;
         public string FoodOrderStableId { get; set; } = string.Empty;
         public string MenuItemStableId { get; set; } = string.Empty;
         public string RestaurantFacilityStableId { get; set; } = string.Empty;
@@ -103,5 +111,16 @@ namespace Ssalddel.Simulation.Contracts
         public string[] SourceStableIds { get; set; } = Array.Empty<string>();
         public Simulation음식배달상태전이Snapshot[] StateHistory { get; set; }
             = Array.Empty<Simulation음식배달상태전이Snapshot>();
+    }
+
+    public sealed class Simulation음식점응답Request
+    {
+        public string CommandId { get; set; } = string.Empty;
+        public long ExpectedRevision { get; set; }
+        public string FoodOrderStableId { get; set; } = string.Empty;
+        public long FoodOrderRevision { get; set; }
+        public string ActorStableId { get; set; } = string.Empty;
+        public bool Accept { get; set; }
+        public string RejectionReasonCode { get; set; } = string.Empty;
     }
 }

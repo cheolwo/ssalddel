@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "simulation-e7-vertical-work-order.v2",
+  "protocolRevision": "simulation-e7-vertical-implementation-protocol.r7",
+  "evidenceModelRevision": "horizontal-dual-cycle-evidence.r3",
+  "workOrderId": "E7-WO-RESTAURANT-COOKING",
+  "title": "음식점 조리 자리 배정",
+  "ownerThreadId": "01a06f87-43c4-7150-8138-3368d9744af5",
+  "handoffNotes": {
+    "purpose": "2026-09-07 통합 담당 지정 질문에 대한 사용자 진행 승인으로 현 작업실이 기존 조리 경계의 회귀·인계를 맡는다. 새 배달 규칙은 전용 WI 명세로 분리한다.",
+    "excludedScope": "배차·배달·새 이야기·공간 배치·Blender·운영 DB 연결·E 승격은 제외한다. 승인 상한 E3와 기존 E0 증거 기록을 유지한다.",
+    "moduleRelations": [
+      "기존 연결: 음식점관찰AutoBootstrap → 음식점관찰SceneController → 음식점정책카드Presenter. SceneController가 Runtime 포트를 주입하며 View 입력을 전달한다.",
+      "기존 권위: LocalSimulationRuntime → 공통 Simulation Core의 NPC 수락·FIFO 조리 자리 배정·Tick 처리 → 최신 SessionSnapshot. 화면이나 애니메이션이 조리 완료를 결정하지 않는다.",
+      "기존 표시: SessionSnapshot → 음식점정책카드Presenter의 주문 표시 행 → 음식점관찰View. 실제 Play Mode·Game View와 Hosted 연결은 별도 미검증이다.",
+      "조리 인계 시험은 음식점조리인계Tests.cs에서 두 목적지·중간 저장·재진입을 검사한다. 기존 Simulation음식배달Tests.cs는 자동 수락 작업의 쓰기 범위로 보존한다."
+    ],
+    "readRefs": [
+      "docs/Architecture/UnityClientLayeredArchitecture.md",
+      "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-processing.md",
+      "Ssalddel.Simulation.Application/RuntimeCore/LocalSimulationRuntime.cs",
+      "unity:Assets/Ssalddel/Bootstrap/음식점관찰SceneController.cs"
+    ],
+    "firstTask": "인계 Check 결과와 restaurant-processing.md의 실제 검증 수준을 읽는다. OwnerMissing 또는 WriteOwnershipConflict가 있으면 담당과 파일 소유 범위를 먼저 조율하며 게임 코드를 수정하지 않는다.",
+    "completionCriteria": "이 표본의 완료는 목적·모듈 연결·수정 범위·차단·기준 파일을 다른 담당이 찾을 수 있는 인계 생성까지다. 게임 완료는 승인된 원래 작업 명세의 조건을 별도로 충족해야 한다.",
+    "validationCommands": [
+      "pwsh -NoProfile -File eng/tests/development-handoff.ps1",
+      "pwsh -NoProfile -File eng/execution-ledgers/manage-e7-vertical-work-order.ps1 -InputPath eng/execution-ledgers/work-orders/restaurant-cooking.e7-work-order.json"
+    ],
+    "decisionBoundary": "인계 서식·도구 결함은 제작 담당이 수정한다. 게임 규칙·공유 계약·승인 상한·쓰기 소유권은 임의 변경하지 않고 기존 개발 통합 담당에 반환한다.",
+    "returnInstructions": "기존 개발→기획 반환의 실제 통합, 미통합, 검증 범위, 기획 판단, 다음 작업을 사용한다. 인계 JSON·Markdown 경로와 기준 hash, 차단 코드를 첨부하고 시험·Unity 실행·서버 연결·커밋·푸시는 분리해 기록한다."
+  },
+  "activeWorldInteractionId": "WI-CITY-RESTAURANT-COOK",
+  "targetEvidenceStage": "E7",
+  "currentEvidenceStage": "E0",
+  "promotionEligible": false,
+  "iterationState": {
+    "currentPass": "ImpactReassessment",
+    "nextReopenCondition": "P0 코드·회귀 검증 뒤 실제 카드 화면 결속은 Presentation E2부터 진행한다. 시간·저장 변경 시 Logic E3를 다시 검증한다."
+  },
+  "changeImpactReviewRef": "",
+  "presentationE4Preparation": {
+    "applicabilityCode": "Required",
+    "notApplicableReason": "",
+    "playerReadableMoment": "주문 접수 대기·조리 대기·조리 중·픽업 대기를 구분한다.",
+    "requiredHCapabilities": [],
+    "visualKeys": ["visual:restaurant:observer-card.r1"],
+    "primaryAssetCandidateRefs": ["C:/Users/user/ssalddel/Assets/Ssalddel/Presentation/World/음식점관찰View.cs"],
+    "alternativeAssetCandidateRefs": [],
+    "fallbackPresentationRefs": [],
+    "placementIntent": "공식 SimulationWorldShell에서 음식점 프로필을 명시적으로 선택할 때만 화면 공간 카드로 조립한다. 기존 H 배치·Scene 자산은 바꾸지 않는다.",
+    "interactionAnchorIntent": "비공간 UI 버튼·입력. 3D InteractionAnchor 변경 없음.",
+    "candidateRevisionOrFingerprint": "restaurant-observer-ui.r1",
+    "e5ReadinessCode": "Blocked",
+    "openGapRefs": [
+      "UI 코드·자동 시험과 실제 Play Mode·Game View 완주는 별도 증거다. E0·승격 비활성 유지."
+    ]
+  },
+  "presentationModuleBindings": [
+    {
+      "moduleCode": "presentation-requirement-contract",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-projection-lifecycle",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-automated-regression",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "presentation-binding",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "visual-source-bounds",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "player-scale-spacing",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "state-difference-readability",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "moduleCode": "actual-camera-input-result-return",
+      "statusCode": "Unverified",
+      "reason": "해당 모듈 구현·시험·후보·증거 연결 필요. 문서 생성으로 통과하지 않는다.",
+      "candidateRevisionOrFingerprint": "",
+      "implementationRefs": [],
+      "testRefs": [],
+      "evidenceRefs": []
+    }
+  ],
+  "trackPlans": {
+    "logic": {
+      "trackCode": "Logic",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    "presentation": {
+      "trackCode": "Presentation",
+      "currentEvidenceStage": "E0",
+      "downwardPlan": [
+        {
+          "code": "E7",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E6",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E5",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E4",
+          "disposition": "Blocked",
+          "summary": "실제 World·표현·입력은 미검증이며 자동 승격하지 않는다."
+        },
+        {
+          "code": "E3",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E2",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        },
+        {
+          "code": "E1",
+          "disposition": "Affected",
+          "summary": "기존 구현의 규칙·결속·회귀를 이번 P0 수정으로 재검증한다."
+        }
+      ],
+      "upwardValidation": [
+        {
+          "code": "E1",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E2",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E3",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E4",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E5",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E6",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        },
+        {
+          "code": "E7",
+          "status": "NotStarted",
+          "evidenceRefs": []
+        }
+      ]
+    }
+  },
+  "integratedGate": {
+    "currentEvidenceStage": "E0",
+    "status": "Blocked",
+    "candidateRevision": "",
+    "evidenceRefs": [],
+    "openFeedbackRefs": [
+      "실제 카드 화면·Scene·Hosted 미검증. P0 자동 시험 결과는 restaurant-processing.md에서 별도로 확인한다."
+    ]
+  },
+  "planningGate": {
+    "statusCode": "Approved",
+    "designDocumentRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md",
+    "designRevision": "restaurant-npc-operation.r3",
+    "designHashSha256": "410C8CF0501C1256C5ACA39BF311A21B46B559F95FE373BF96ECD30F3E4ECF08",
+    "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md"
+  },
+  "workOrderStableId": "work-order:restaurant-cooking.v1",
+  "worldInteractionId": "WI-CITY-RESTAURANT-COOK",
+  "subjectBindingRefs": [
+    "subject:npc-routine-actor.v1",
+    "subject:authoritative-interaction-target.v1"
+  ],
+  "subjectResolution": "기존 npcActors의 시설·조직·활성 조리 권한과 foodDeliveries 주문 식별자로 해석한다.",
+  "designDocumentRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md",
+  "designRevision": "restaurant-npc-operation.r3",
+  "designHashSha256": "410C8CF0501C1256C5ACA39BF311A21B46B559F95FE373BF96ECD30F3E4ECF08",
+  "approvalEvidenceRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-npc-operation.r3.md",
+  "statusCode": "Approved",
+  "deliveryCap": "E3",
+  "implementationScopeRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-observer-ui.r1.md",
+  "runtimeBoundary": "LocalProcess와 RemoteHost 공통 Core. 실제 Hosted 연결은 미검증.",
+  "requiredResearch": [],
+  "researchBoundary": "공간·자산을 바꾸지 않는 음식점 조리 자리 배정·설정 연결만 다룬다.",
+  "writePaths": [
+    "Ssalddel.Unity/Runtime/Warehouse/음식점정책카드Presenter.cs",
+    "Ssalddel.Unity/Runtime/Warehouse/음식점관찰표본.cs",
+    "Ssalddel.Unity.Tests/음식점정책카드Tests.cs",
+    "Ssalddel.Simulation.Tests/음식점관찰표본Tests.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/음식점관찰SceneController.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/음식점관찰AutoBootstrap.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Presentation/World/음식점관찰View.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Infrastructure/Simulation/SimulationWorldLocalRuntimeScope.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Tests/EditMode/음식점관찰Tests.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Editor/음식점관찰ProfileMenu.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/Nature생존AutoBootstrap.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/턴마감SceneCompositionRoot.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/정착지상호작용SceneCompositionRoot.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/물류이동SceneCompositionRoot.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/현장전투CompositionRoot.cs",
+    "C:/Users/user/ssalddel/Assets/Ssalddel/Bootstrap/공간TileStreamingCompositionRoot.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/Simulation음식점조리.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationNpcWorkforce.cs",
+    "Ssalddel.Simulation.Contracts/UnityPackage/Runtime/SimulationNpcWorkforceContracts.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationReplayHasher.cs",
+    "Ssalddel.Simulation.Domain/UnityPackage/Runtime/SimulationSaveReplayCloner.cs",
+    "Ssalddel.Simulation.Tests/음식점조리인계Tests.cs"
+  ],
+  "openFeedbackItems": [
+    "기사 배정·실제 UI 후속"
+  ],
+  "reopenCondition": "권한·수락·조리 분리 변경 시 Logic E1 재개",
+  "detailedWorkOrderRef": "docs/AI/Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/restaurant-cooking-work.md",
+  "interactionGoalStableId": "interaction-goal:restaurant-cooking.v1"
+}

@@ -130,13 +130,8 @@ public sealed class 음식배달배차업무정책 : I배차업무정책
                 cancellationToken));
         }
 
-        var best = 평가목록
-            .OrderBy(x => x.픽업시각단계)
-            .ThenBy(x => x.픽업시각차이분)
-            .ThenBy(x => x.공간단계)
-            .ThenByDescending(x => x.추천점수)
-            .ThenBy(x => x.거리Km)
-            .ThenBy(x => x.기사.DriverId, StringComparer.Ordinal)
+        var best = Ssalddel.WorkflowRules.음식배달픽업평가Policy.정렬(
+            평가목록, x => x.평가, x => x.공간단계, x => x.거리Km, x => x.기사.DriverId)
             .FirstOrDefault();
         return best is null
             ? null
@@ -231,56 +226,22 @@ public sealed class 음식배달배차업무정책 : I배차업무정책
                 continue;
             }
 
-            var 픽업시각 = Calculate픽업시각(distance.Value, 조리예상완료시각Utc, now);
-            var distanceScore = Math.Max(0m, 100m - distance.Value * 12m);
-            var timingPenalty = 픽업시각.단계 * 100m + 픽업시각.차이분;
+            var 픽업시각 = Ssalddel.WorkflowRules.음식배달픽업평가Policy.판정(
+                distance.Value, candidate.Aging점수, 조리예상완료시각Utc, now,
+                _options.음식배달평균이동속도KmH,
+                _options.음식배달픽업조기도착허용분, _options.음식배달픽업지연허용분);
             result.Add(new 음식배달기사항목(
                 candidate,
                 distance.Value,
                 공간단계,
                 공간설명,
-                픽업시각.단계,
-                픽업시각.차이분,
-                픽업시각.설명,
-                distanceScore + candidate.Aging점수 - timingPenalty));
+                픽업시각));
         }
 
         return result;
     }
 
-    private (int 단계, decimal 차이분, string 설명) Calculate픽업시각(
-        decimal distanceKm,
-        DateTime? 조리예상완료시각Utc,
-        DateTime now)
-    {
-        if (!조리예상완료시각Utc.HasValue)
-        {
-            return (0, 0m, "조리예정시각 미확정");
-        }
 
-        var speedKmH = Math.Max(1m, _options.음식배달평균이동속도KmH);
-        var estimatedTravelMinutes = distanceKm / speedKmH * 60m;
-        var estimatedArrival = now.AddMinutes((double)estimatedTravelMinutes);
-        var windowStart = 조리예상완료시각Utc.Value.AddMinutes(
-            -(double)Math.Max(0m, _options.음식배달픽업조기도착허용분));
-        var windowEnd = 조리예상완료시각Utc.Value.AddMinutes(
-            (double)Math.Max(0m, _options.음식배달픽업지연허용분));
-
-        if (estimatedArrival < windowStart)
-        {
-            var earlyMinutes = Math.Max(0m, (decimal)(windowStart - estimatedArrival).TotalMinutes);
-            return (1, earlyMinutes, $"조기 도착 대기 약 {earlyMinutes:0}분");
-        }
-
-        if (estimatedArrival > windowEnd)
-        {
-            var lateMinutes = Math.Max(0m, (decimal)(estimatedArrival - windowEnd).TotalMinutes);
-            return (2, lateMinutes, $"픽업창 지연 약 {lateMinutes:0}분");
-        }
-
-        var readyGapMinutes = Math.Abs((decimal)(estimatedArrival - 조리예상완료시각Utc.Value).TotalMinutes);
-        return (0, readyGapMinutes, "적정 픽업창");
-    }
 
     private DateTime? Resolve조리예상완료시각Utc(운송원장 queue)
     {
@@ -306,8 +267,9 @@ public sealed class 음식배달배차업무정책 : I배차업무정책
         decimal 거리Km,
         int 공간단계,
         string 공간설명,
-        int 픽업시각단계,
-        decimal 픽업시각차이분,
-        string 픽업시각설명,
-        decimal 추천점수);
+        Ssalddel.WorkflowRules.음식배달픽업평가 평가)
+    {
+        public string 픽업시각설명 => 평가.설명;
+        public decimal 추천점수 => 평가.추천점수;
+    }
 }

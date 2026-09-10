@@ -42,7 +42,7 @@ public sealed class SimulationServerHttpBoundaryTests
         var hash = Convert.ToHexString(SHA256.HashData(
                 Encoding.UTF8.GetBytes(string.Join("\n", manifest))))
             .ToLowerInvariant();
-        Assert.Equal(179, manifest.Length);
+        Assert.Equal(180, manifest.Length);
         Assert.Contains(
             "GET api/simulation/v1/sessions/{sessionStableId}/nature-survival/observation",
             manifest);
@@ -56,10 +56,13 @@ public sealed class SimulationServerHttpBoundaryTests
             "POST api/simulation/v1/sessions/{sessionStableId}/learning-focus/equip/confirm",
             manifest);
         Assert.Contains(
+            "POST api/simulation/v1/sessions/{sessionStableId}/restaurant-responses/confirm",
+            manifest);
+        Assert.Contains(
             "POST api/simulation/v1/sessions/{sessionStableId}/hexagram-campaign/fail",
             manifest);
         Assert.Equal(
-            "ad225f32d6ff8c98d608509ff40d7027ad1020365a9f619444674ca08deb248a",
+            "da5bb95d1c0dbf59551781c986dd4a8f6aa9664649a68d07c8dfa79288cae9e1",
             hash);
     }
 

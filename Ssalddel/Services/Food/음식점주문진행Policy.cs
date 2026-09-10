@@ -70,9 +70,12 @@ public static class 음식점주문진행Policy
 
     private static 음식점주문진행판정 MarkPickupReady(string current)
     {
-        EnsureCurrent(current, 음식주문상태코드.조리중, 음식점주문진행작업코드.픽업준비);
+        // 기사 배정은 조리 완료가 아니다. 배정 뒤 준비 완료를 기록해도
+        // 배차 상태를 픽업대기로 되돌리지 않고 기존 기사 진행을 보존한다.
+        if (current != 음식주문상태코드.기사배정)
+            EnsureCurrent(current, 음식주문상태코드.조리중, 음식점주문진행작업코드.픽업준비);
         return new 음식점주문진행판정(
-            음식주문상태코드.픽업대기,
+            current == 음식주문상태코드.기사배정 ? current : 음식주문상태코드.픽업대기,
             0,
             "음식점 픽업 준비 완료");
     }

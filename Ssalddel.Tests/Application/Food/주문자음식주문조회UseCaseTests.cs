@@ -52,6 +52,7 @@ public sealed class 주문자음식주문조회UseCaseTests
         Assert.Equal("서울 강서구 수령로 1", own.Value.수령인정보.주소);
         Assert.Equal("010-1234-5678", own.Value.수령인정보.연락처);
         Assert.Equal("돈까스", Assert.Single(own.Value.상품목록).상품명);
+        Assert.Equal(42L, Assert.Single(own.Value.상품목록).메뉴Id);
         Assert.True(other.IsFailed);
         Assert.Equal(404, other.Errors.Single().Metadata["StatusCode"]);
     }
@@ -203,7 +204,7 @@ public sealed class 주문자음식주문조회UseCaseTests
                 "user-a",
                 "돈까스집",
                 음식주문상태코드.주문대기,
-                new 음식주문상품 { 상품명 = "돈까스", 수량 = 1, 단가 = 11000m },
+                new 음식주문상품 { 메뉴Id = 42, 상품명 = "돈까스", 수량 = 1, 단가 = 11000m },
                 new DateTime(2026, 7, 20, 1, 0, 0, DateTimeKind.Utc)),
             CreateOrder(
                 "FOOD-A-002",

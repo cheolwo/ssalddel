@@ -5,9 +5,23 @@ using System.Linq;
 using Ssalddel.Simulation.Contracts;
 using Ssalddel.WorkflowRules;
 using Ssalddel.WorkflowRules.Contracts;
+using Ssalddel.Contracts.Common.Metadata;
 
 namespace Ssalddel.Simulation.Domain
 {
+    [SsalddelCodeMetadata(SsalddelCodeFeatureKeys.FoodWorkflowLineage, SsalddelCodeLayer.Domain,
+        "운영 주문 등록·수령 확인 의미를 세션 주문 상태로 재구성",
+        StepKey = "domain.food-order-adaptation", FlowOrder = 10,
+        ExecutionStage = SsalddelCodeExecutionStage.Confirm,
+        ReadsFrom = SsalddelCodeDataScope.SimulationState, WritesTo = SsalddelCodeDataScope.SimulationState,
+        Effects = SsalddelCodeEffect.StateMutation,
+        SourceCodeRefs = new[] {
+            "Ssalddel/Application/Food/Handlers/음식주문등록CommandHandler.cs",
+            "Ssalddel/Application/Food/Handlers/주문자음식주문수령확인CommandHandler.cs" },
+        ReuseKind = "SemanticAdaptation",
+        SharedRuleRefs = new[] { "Ssalddel.WorkflowRules/UnityPackage/Runtime/업무흐름규칙Catalog.cs" },
+        Adaptation = "업무 의미 대응이며 Handler 직접 호출이나 동일 구현 주장이 아니다. 세션 CommandId/Revision/Tick과 가상 주문을 사용하고 운영 메뉴·개인정보·DB·Event를 소비하지 않는다.",
+        Boundary = "SimulationState만 변경; 실제 주문·결제·운영 원장 생성 없음")]
     public sealed partial class 경영SimulationSessionAggregate
     {
         private const string 음식배달수량EffectCode = "FoodDeliveryQuantity";
@@ -110,8 +124,9 @@ namespace Ssalddel.Simulation.Domain
             {
                 FoodOrderStableId = request.FoodOrderStableId.Trim(),
                 SuggestedStateCode = 음식배달상태코드.주문대기,
-                TotalDurationTicks = request.PreparationDurationTicks
-                    + request.DeliveryDurationTicks + 2,
+                TotalDurationTicks = request.AwaitRestaurantResponse ? 1
+                    : request.RestaurantPreparationOnly ? request.PreparationDurationTicks
+                    : request.PreparationDurationTicks + request.DeliveryDurationTicks + 2,
                 RuleRevision = workflow.RuleRevision,
                 ExcludedOperationalEffectCodes = Copy(workflow.Simulation제외운영효과코드목록),
                 BoundaryCodes = new[]
@@ -126,6 +141,11 @@ namespace Ssalddel.Simulation.Domain
                 BlockReasonCodes = blocks.ToArray(),
                 SourceStableIds = sources,
             };
+            if (request.RestaurantPreparationOnly)
+                preview.BoundaryCodes = preview.BoundaryCodes.Concat(new[]
+                { "RestaurantPreparationOnly", "StopsAtPickupReady", "DriverAssignmentNotImplemented" }).ToArray();
+            if (request.AwaitRestaurantResponse)
+                preview.BoundaryCodes = preview.BoundaryCodes.Concat(new[] { "AwaitRestaurantResponse" }).ToArray();
             preview.CommonDecisionPreview = CreateDecisionPreview(
                 CreateFoodDeliveryDecisionRequest(request, preview));
             return preview;
@@ -166,13 +186,15 @@ namespace Ssalddel.Simulation.Domain
                 Task = new SimulationTaskPlanRequest
                 {
                     TaskStableId = "task:food-delivery:" + orderId,
-                    TaskTypeCode = "FoodDeliveryLifecycle",
+                    TaskTypeCode = request.NpcAutoAccept ? "FoodOrderNpcSubmission" : request.AwaitRestaurantResponse ? "FoodOrderInboxSubmission"
+                        : request.RestaurantPreparationOnly ? "FoodPreparationOnly" : "FoodDeliveryLifecycle",
                     FacilityStableId = request.RestaurantFacilityStableId.Trim(),
                     AssignedCapacity = request.Quantity,
                     AssignedCapacityUnitCode = unitCode,
                     DurationTicks = preview.TotalDurationTicks,
                     InputLotStableIds = new[] { request.MenuItemStableId.Trim() },
-                    OutputCandidateCodes = new[] { 음식배달상태코드.전달완료 },
+                    OutputCandidateCodes = new[] { request.AwaitRestaurantResponse ? 음식배달상태코드.주문대기 : request.RestaurantPreparationOnly
+                        ? 음식배달상태코드.픽업대기 : 음식배달상태코드.전달완료 },
                     SourceStableIds = sources,
                 },
             };
@@ -289,6 +311,7 @@ namespace Ssalddel.Simulation.Domain
             order.DecisionStableId = decision.DecisionStableId;
             order.TaskStableId = task.TaskStableId;
             foodDeliveries.Add(order.FoodOrderStableId, order);
+            주문접수연결(order);
         }
 
         private static void ScheduleFoodDeliveryReceipt(
@@ -304,6 +327,8 @@ namespace Ssalddel.Simulation.Domain
 
         private void AdvanceFoodDeliveryForTask(SimulationTaskSnapshot task, int currentTick)
         {
+            if (task.TaskTypeCode == "FoodOrderInboxSubmission" || task.TaskTypeCode == "FoodOrderRejected"
+                || task.TaskTypeCode == "FoodOrderNpcSubmission" || task.TaskTypeCode == "FoodOrderCookingQueued") return;
             var order = foodDeliveries.Values.FirstOrDefault(value =>
                 string.Equals(value.TaskStableId, task.TaskStableId, StringComparison.Ordinal));
             if (order != null)
@@ -319,6 +344,8 @@ namespace Ssalddel.Simulation.Domain
                     TransitionFoodDelivery(order, 음식배달상태코드.픽업대기, currentTick, task.TaskStableId);
                     order.ReadyForPickupTick ??= currentTick;
                 }
+                // 조리 전용 Task 완료는 배달 완료가 아니다. 별도 배정/픽업 명령 연결 전 여기서 끝난다.
+                if (task.TaskTypeCode == "FoodPreparationOnly") return;
                 if (elapsed >= order.PreparationDurationTicks + 1 && order.DispatchCandidateTick == null)
                 {
                     TransitionFoodDelivery(order, 음식배달상태코드.기사배정, currentTick, task.TaskStableId);
@@ -381,6 +408,8 @@ namespace Ssalddel.Simulation.Domain
             => new Simulation음식배달Snapshot
             {
                 FoodOrderStableId = source.FoodOrderStableId,
+                RestaurantResponseDecisionStableId = source.RestaurantResponseDecisionStableId,
+                RejectionReasonCode = source.RejectionReasonCode,
                 MenuItemStableId = source.MenuItemStableId,
                 RestaurantFacilityStableId = source.RestaurantFacilityStableId,
                 DestinationFacilityStableId = source.DestinationFacilityStableId,
@@ -438,12 +467,17 @@ namespace Ssalddel.Simulation.Domain
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             RequirePrefixedId(request.FoodOrderStableId, "food-order:", "SimulationFoodDeliveryStableIdInvalid");
+            if (request.NpcAutoAccept && !request.AwaitRestaurantResponse)
+                throw new SimulationContractException("SimulationRestaurantAutoAcceptRequiresInbox");
+            if (request.AwaitRestaurantResponse && (!request.RestaurantPreparationOnly
+                || !string.Equals(request.ActorStableId?.Trim(), request.OrdererStableId?.Trim(), StringComparison.Ordinal)))
+                throw new SimulationContractException("SimulationRestaurantSubmissionActorInvalid");
             RequirePrefixedId(request.MenuItemStableId, "menu-item:", "SimulationFoodDeliveryMenuItemStableIdInvalid");
             RequireStableId(request.RestaurantFacilityStableId, "SimulationFoodDeliveryRestaurantFacilityStableIdInvalid");
             RequireStableId(request.DestinationFacilityStableId, "SimulationFoodDeliveryDestinationFacilityStableIdInvalid");
             RequirePrefixedId(request.DeliveryScopeStableId, "delivery-scope:", "SimulationFoodDeliveryScopeStableIdInvalid");
-            RequirePrefixedId(request.OrdererStableId, "participant:", "SimulationFoodDeliveryOrdererStableIdInvalid");
-            RequireStableId(request.ActorStableId, "SimulationActorStableIdInvalid");
+            RequirePrefixedId(request.OrdererStableId ?? string.Empty, "participant:", "SimulationFoodDeliveryOrdererStableIdInvalid");
+            RequireStableId(request.ActorStableId ?? string.Empty, "SimulationActorStableIdInvalid");
             if (request.Quantity <= 0m) throw new SimulationContractException("SimulationFoodDeliveryQuantityInvalid");
             RequireText(request.UnitCode, "SimulationFoodDeliveryUnitCodeMissing");
             if (request.PreparationDurationTicks <= 0 || request.PreparationDurationTicks > 14)
@@ -480,7 +514,10 @@ namespace Ssalddel.Simulation.Domain
                 value.Quantity.ToString(CultureInfo.InvariantCulture), value.UnitCode.Trim(),
                 value.PreparationDurationTicks.ToString(CultureInfo.InvariantCulture),
                 value.DeliveryDurationTicks.ToString(CultureInfo.InvariantCulture),
-                string.Join("\u001f", value.SourceStableIds.OrderBy(source => source, StringComparer.Ordinal)));
+                string.Join("\u001f", value.SourceStableIds.OrderBy(source => source, StringComparer.Ordinal)))
+                + (value.RestaurantPreparationOnly ? "\u001eFoodPreparationOnly" : string.Empty)
+                + (value.AwaitRestaurantResponse ? "\u001eAwaitRestaurantResponse" : string.Empty)
+                + (value.NpcAutoAccept ? "\u001eNpcAutoAccept" : string.Empty);
 
         private static string BuildFoodDeliveryReceiptPayloadKey(
             Simulation음식배달수령PreviewRequest value)

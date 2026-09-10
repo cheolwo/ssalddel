@@ -8,6 +8,7 @@ public sealed class HrRoleAssignmentRecordConfiguration : IEntityTypeConfigurati
 {
     public void Configure(EntityTypeBuilder<HrRoleAssignmentRecord> builder)
     {
-        builder.HasIndex(x => new { x.UserId, x.ScopeType, x.ScopeId, x.RoleCode, x.IsActive });
+        // 기존 migration/호환 초기화와 같은 키: ScopeId 추가 시 utf8mb4 키 길이 초과.
+        builder.HasIndex(x => new { x.UserId, x.ScopeType, x.RoleCode, x.IsActive });
     }
 }

@@ -18,6 +18,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Packages.props", "./"]
 COPY ["Ssalddel/Ssalddel.csproj", "Ssalddel/"]
+COPY ["Ssalddel.Interior.Contracts/Ssalddel.Interior.Contracts.csproj", "Ssalddel.Interior.Contracts/"]
+COPY ["Ssalddel.Interior.Domain/Ssalddel.Interior.Domain.csproj", "Ssalddel.Interior.Domain/"]
 COPY ["Ssalddel.Community/Ssalddel.Community.csproj", "Ssalddel.Community/"]
 COPY ["Ssalddel.Contracts/Ssalddel.Contracts.csproj", "Ssalddel.Contracts/"]
 COPY ["Ssalddel.Domain/Ssalddel.Domain.csproj", "Ssalddel.Domain/"]

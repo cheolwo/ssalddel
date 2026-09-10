@@ -66,4 +66,10 @@ public sealed class FoodDeliveryDriverActionResponse
 
     [JsonPropertyName("message")]
     public string Message { get; set; } = string.Empty;
+
+    [JsonPropertyName("locationAuditCode")]
+    public string LocationAuditCode { get; set; } = string.Empty;
+
+    [JsonPropertyName("locationDistanceKm")]
+    public decimal? LocationDistanceKm { get; set; }
 }

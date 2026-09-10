@@ -6,6 +6,7 @@ namespace 살뜰.도메인.운송
     {
         public const string 배차엔진판단감사 = "DispatchEngineDecisionAudit";
         public const string 관리자취소환불상태기록 = "AdminRequestCancelRefundRecorded";
+        public const string 음식배달위치감사 = "FoodDeliveryLocationAudit";
     }
 
     public class 운송이벤트

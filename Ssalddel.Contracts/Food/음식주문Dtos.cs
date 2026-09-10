@@ -143,6 +143,7 @@ public sealed class 음식점주문수락요청
 public sealed class 음식점주문진행변경요청
 {
     public Guid 클라이언트요청Id { get; set; }
+    public long? 예상Revision { get; set; }
     public string 작업 { get; set; } = string.Empty;
     public int? 조리예상분 { get; set; }
     public string 사유 { get; set; } = string.Empty;
@@ -174,6 +175,7 @@ public sealed class 음식주문응답
     public string? 결제수단 { get; set; }
     public DateTime? 음식점수락시각Utc { get; set; }
     public DateTime? 조리예상완료시각Utc { get; set; }
+    public DateTime? 픽업준비시각Utc { get; set; }
     public DateTime? 배차요청시각Utc { get; set; }
     public string? 수락메모 { get; set; }
     public string? 커뮤니티원장Id { get; set; }
@@ -182,6 +184,7 @@ public sealed class 음식주문응답
     public DateTime? 커뮤니티원장동기화시각Utc { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? 최근변경시각Utc { get; set; }
+    public long Revision { get; set; }
     public IReadOnlyList<음식주문상태전이기록Dto> 상태이력 { get; set; } = [];
 }
 

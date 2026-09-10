@@ -7,6 +7,30 @@ namespace Ssalddel.Tests.Services.LogisticsProcessing.Warehouse;
 public sealed class OutboundBatchEngineTests
 {
     [Fact]
+    public void 공통배분은_동결한기존엔진과_동일입력에서_전체결과가같다()
+    {
+        for (var seed = 0; seed < 150; seed++)
+        {
+            var random = new Random(seed);
+            var lines = Enumerable.Range(0, 3).Select(index => Line($"line-{index}", random.Next(1, 9))).ToArray();
+            var map = new Dictionary<string, IReadOnlyList<OutboundBatchEngine.OutboundStockCandidate>>();
+            // 사전 삽입 순서와 라인 순서가 달라도 기존 동점 처리를 보존한다.
+            foreach (var line in lines.Reverse())
+            {
+                map.Add(line.LineKey, Enumerable.Range(1, random.Next(0, 5)).Select(index =>
+                    new OutboundBatchEngine.OutboundStockCandidate(line.LineKey, null,
+                        index, index % 2, "모의 창고", "", "SKU-1", "모의 상품",
+                        random.Next(0, 12), random.Next(2) == 0, null, null, random.Next(0, 3), "모의 후보"))
+                    .OrderByDescending(value => value.Score).ToArray());
+            }
+            var expected = 기존창고배분참조.CreatePlan(lines, map);
+            var actual = OutboundBatchEngine.CreatePlan(lines, map);
+            Assert.Equal(System.Text.Json.JsonSerializer.Serialize(expected),
+                System.Text.Json.JsonSerializer.Serialize(actual));
+        }
+    }
+
+    [Fact]
     public void CreatePlan_consumes_shared_inbound_stock_across_duplicate_sku_lines()
     {
         var lines = new[]

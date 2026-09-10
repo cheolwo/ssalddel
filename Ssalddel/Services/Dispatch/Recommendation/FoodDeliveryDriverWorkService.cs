@@ -1,4 +1,5 @@
 using FluentResults;
+using System.Text.Json;
 using Ssalddel.Application.CommandProcessing;
 using Ssalddel.Application.Driver.DispatchAction;
 using Ssalddel.Application.Food.Events;
@@ -405,12 +406,18 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
             }
 
             var currentOrderState = 음식주문상태코드.Normalize(order.상태);
+            _locationStore.TryGetLatest(driverId, out var latestLocation);
+            var locationAudit = FoodDeliveryLocationAudit.Evaluate(
+                latestLocation,
+                nextOrderState == 음식주문상태코드.픽업완료 ? queue.픽업_위도 : queue.하차_위도,
+                nextOrderState == 음식주문상태코드.픽업완료 ? queue.픽업_경도 : queue.하차_경도,
+                DateTime.UtcNow);
             if (string.Equals(currentOrderState, nextOrderState, StringComparison.Ordinal))
             {
                 return Result.Ok(new FoodDeliveryStateChange(
                     queue,
                     order.주문번호,
-                    Response(offerId, order.주문번호, responseState, $"이미 {reason} 상태입니다."),
+                    Response(offerId, order.주문번호, responseState, $"이미 {reason} 상태입니다.", locationAudit),
                     false));
             }
 
@@ -418,6 +425,13 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
                 && currentOrderState != 음식주문상태코드.기사배정)
             {
                 return Result.Fail<FoodDeliveryStateChange>("기사 배정이 완료된 주문만 픽업 완료할 수 있습니다.");
+            }
+
+            if (nextOrderState == 음식주문상태코드.픽업완료
+                && !order.상태이력.Any(history => history.다음상태 == 음식주문상태코드.픽업대기
+                                                      || history.사유.StartsWith("음식점 픽업 준비 완료", StringComparison.Ordinal)))
+            {
+                return Result.Fail<FoodDeliveryStateChange>("음식점이 픽업 준비를 완료한 주문만 픽업할 수 있습니다.");
             }
 
             if (nextOrderState == 음식주문상태코드.전달완료
@@ -428,6 +442,25 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
 
             var changedAtUtc = DateTime.UtcNow;
             ApplyFoodOrderState(order, nextOrderState, nextDispatchState, reason, changedAtUtc);
+            _db.운송이벤트.Add(new 운송이벤트
+            {
+                의뢰Id = queue.의뢰Id,
+                이벤트타입 = 운송이벤트유형.음식배달위치감사,
+                이벤트시각 = changedAtUtc,
+                메타데이터 = JsonSerializer.Serialize(new
+                {
+                    Action = nextOrderState,
+                    DriverId = driverId,
+                    locationAudit.Code,
+                    locationAudit.DistanceKm,
+                    locationAudit.DriverLocationAtUtc,
+                    locationAudit.DriverLatitude,
+                    locationAudit.DriverLongitude,
+                    locationAudit.TargetLatitude,
+                    locationAudit.TargetLongitude,
+                    Policy = "AdvisoryEvidenceOnly"
+                })
+            });
             queue.상태 = nextTransportState;
             queue.UpdatedAt = changedAtUtc;
             if (nextOrderState == 음식주문상태코드.픽업완료)
@@ -447,7 +480,7 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
                 : Result.Ok(new FoodDeliveryStateChange(
                     queue,
                     order.주문번호,
-                    Response(offerId, order.주문번호, responseState, $"{reason} 처리했습니다."),
+                    Response(offerId, order.주문번호, responseState, $"{reason} 처리했습니다.", locationAudit),
                     true));
         });
         if (transactionResult.IsFailed)
@@ -846,12 +879,15 @@ public sealed class 음식배달기사업무Service : I음식배달기사업무S
         string offerId,
         string orderNo,
         string status,
-        string message)
+        string message,
+        FoodDeliveryLocationAuditResult? locationAudit = null)
         => new()
         {
             OfferId = offerId,
             OrderIds = [orderNo],
             Status = status,
-            Message = message
+            Message = message,
+            LocationAuditCode = locationAudit?.Code ?? string.Empty,
+            LocationDistanceKm = locationAudit?.DistanceKm
         };
 }

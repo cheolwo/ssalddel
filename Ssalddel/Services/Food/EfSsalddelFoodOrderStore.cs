@@ -220,6 +220,10 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
         }
 
         var currentStatus = 음식주문상태코드.Normalize(order.상태);
+        if (request.예상Revision.HasValue && request.예상Revision.Value != order.상태이력.Count)
+        {
+            throw new DbUpdateConcurrencyException("음식 주문이 다른 요청에서 먼저 변경되었습니다.");
+        }
         var decision = 음식점주문진행Policy.판정(currentStatus, request);
         var now = DateTime.UtcNow;
         order.상태 = decision.다음상태;
@@ -458,6 +462,12 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
             결제수단 = order.결제수단,
             음식점수락시각Utc = order.음식점수락시각Utc,
             조리예상완료시각Utc = order.조리예상완료시각Utc,
+            픽업준비시각Utc = order.상태이력
+                .Where(x => x.다음상태 == 음식주문상태코드.픽업대기
+                            || x.사유.StartsWith("음식점 픽업 준비 완료", StringComparison.Ordinal))
+                .OrderBy(x => x.전이시각Utc)
+                .Select(x => (DateTime?)x.전이시각Utc)
+                .FirstOrDefault(),
             배차요청시각Utc = order.배차요청시각Utc,
             수락메모 = order.수락메모,
             커뮤니티원장Id = order.커뮤니티원장Id,
@@ -466,6 +476,7 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
             커뮤니티원장동기화시각Utc = order.커뮤니티원장동기화시각Utc,
             CreatedAt = order.CreatedAt,
             최근변경시각Utc = order.UpdatedAt,
+            Revision = order.상태이력.Count,
             상태이력 = order.상태이력
                 .OrderBy(x => x.전이시각Utc)
                 .Select(x => new 음식주문상태전이기록Dto

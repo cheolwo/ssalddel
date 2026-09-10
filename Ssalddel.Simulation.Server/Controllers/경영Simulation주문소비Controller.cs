@@ -27,6 +27,13 @@ public sealed class 경영Simulation주문소비Controller(
         [FromBody] Simulation같이주문ConfirmRequest request)
         => Ok(service.ConfirmGroupOrder(sessionStableId, request));
 
+    [HttpPost("{sessionStableId}/restaurant-responses/confirm")]
+    [ProducesResponseType(typeof(경영SimulationSessionSnapshot), StatusCodes.Status200OK)]
+    public ActionResult<경영SimulationSessionSnapshot> ConfirmRestaurantResponse(
+        string sessionStableId,
+        [FromBody] Simulation음식점응답Request request)
+        => Ok(service.ConfirmRestaurantResponse(sessionStableId, request));
+
     [HttpPost("{sessionStableId}/food-delivery-previews")]
     [ProducesResponseType(typeof(Simulation음식배달PreviewSnapshot), StatusCodes.Status200OK)]
     public ActionResult<Simulation음식배달PreviewSnapshot> PreviewFoodDelivery(

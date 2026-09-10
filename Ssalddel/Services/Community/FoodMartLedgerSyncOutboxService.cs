@@ -146,10 +146,12 @@ public sealed class 음식마트원장동기화OutboxService(
         var retryCutoff = now - OutboxProcessingPolicy.RetryDelay;
         var leaseCutoff = now - OutboxProcessingPolicy.LeaseTimeout;
         var query = db.음식마트원장동기화Outbox.Where(x =>
-            (x.처리상태 == OutboxProcessingStatuses.Pending
+            (x.동기화유형 == 음식마트원장동기화유형코드.음식주문
+             || x.동기화유형 == 음식마트원장동기화유형코드.창고출고)
+            && ((x.처리상태 == OutboxProcessingStatuses.Pending
              && (x.시도횟수 == 0 || x.UpdatedAtUtc <= retryCutoff))
             || (x.처리상태 == OutboxProcessingStatuses.Processing
-                && x.UpdatedAtUtc <= leaseCutoff));
+                && x.UpdatedAtUtc <= leaseCutoff)));
         if (requestedIds is not null)
         {
             query = query.Where(x => requestedIds.Contains(x.Id));

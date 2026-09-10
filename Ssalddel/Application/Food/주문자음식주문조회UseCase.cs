@@ -216,6 +216,7 @@ public sealed class 주문자음식주문조회UseCase(
                 .OrderBy(item => item.Id)
                 .Select(item => new 음식주문상품Dto
                 {
+                    메뉴Id = item.메뉴Id,
                     상품명 = item.상품명,
                     수량 = item.수량,
                     단가 = item.단가

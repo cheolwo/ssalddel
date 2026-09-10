@@ -4,6 +4,7 @@ using Ssalddel.Contracts.Food;
 using Ssalddel.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Ssalddel.Security;
 using 살뜰.Services.Versioning;
@@ -65,6 +66,10 @@ public sealed class 음식주문Controller(
             return order is null ? NotFound() : Ok(order);
         }
         catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+        catch (DbUpdateConcurrencyException ex)
         {
             return Conflict(new { message = ex.Message });
         }
@@ -139,6 +144,10 @@ public sealed class 음식주문Controller(
         {
             return Conflict(new { message = ex.Message });
         }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
         catch (ArgumentException ex)
         {
             return BadRequest(new { message = ex.Message });
@@ -174,6 +183,10 @@ public sealed class 음식주문Controller(
             return order is null ? NotFound() : Ok(order);
         }
         catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+        catch (DbUpdateConcurrencyException ex)
         {
             return Conflict(new { message = ex.Message });
         }

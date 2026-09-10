@@ -8,6 +8,8 @@ public sealed class HrEmploymentContractRecordConfiguration : IEntityTypeConfigu
 {
     public void Configure(EntityTypeBuilder<HrEmploymentContractRecord> builder)
     {
-        builder.HasIndex(x => new { x.WorkerUserId, x.EmployerScopeType, x.EmployerScopeId, x.ContractStatus });
+        // 기존 migration/DatabaseCompatibilityInitializer의 3열 인덱스와 일치시킨다.
+        // ScopeId까지 포함하면 utf8mb4에서 MySQL의 3072-byte 한도를 초과한다.
+        builder.HasIndex(x => new { x.WorkerUserId, x.EmployerScopeType, x.ContractStatus });
     }
 }

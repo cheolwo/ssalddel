@@ -10,6 +10,69 @@ namespace Ssalddel.Tests.Services.Food;
 public sealed class EfSsalddelFoodOrderStoreTests
 {
     [Fact]
+    public void 새DB의_문자열복합인덱스가_MySql키길이를_초과하지_않는다()
+    {
+        using var db = CreateContext();
+        var oversized = db.Model.GetEntityTypes().SelectMany(type => type.GetIndexes().Select(index => new
+        {
+            Name = type.ClrType.Name + ":" + string.Join(",", index.Properties.Select(x => x.Name)),
+            Bytes = index.Properties.Sum(p => p.ClrType == typeof(string) ? (p.GetMaxLength() ?? 0) * 4 : 8)
+        })).Where(x => x.Bytes > 3072).Select(x => x.Name + "=" + x.Bytes).ToArray();
+        Assert.True(oversized.Length == 0, string.Join("; ", oversized));
+    }
+
+    [Fact]
+    public void 새DB의_HR인덱스는_기존마이그레이션의_키길이를_유지한다()
+    {
+        using var db = CreateContext();
+        var type = db.Model.GetEntityTypes().Single(x => x.ClrType.Name == "HrEmploymentContractRecord");
+        var index = Assert.Single(type.GetIndexes());
+        Assert.Equal(new[] { "WorkerUserId", "EmployerScopeType", "ContractStatus" }, index.Properties.Select(x => x.Name));
+        Assert.True(index.Properties.Sum(x => x.GetMaxLength() ?? 0) * 4 <= 3072);
+    }
+
+    [Fact]
+    public async Task 기사배정뒤_픽업준비는_배정과_원장을_보존하고_중복을_기록하지_않는다()
+    {
+        await using var db = CreateContext();
+        var store = new EfSsalddelFoodOrderStore(db);
+        var order = store.AddOrder(CreateRequest(Guid.NewGuid()));
+        var entity = await db.음식주문.SingleAsync(x => x.주문번호 == order.주문번호);
+        entity.상태 = 음식주문상태코드.기사배정;
+        entity.배차상태 = 음식주문배차상태코드.기사배정;
+        entity.조리예상완료시각Utc = DateTime.UtcNow.AddMinutes(1);
+        await db.SaveChangesAsync();
+        var request = new 음식점주문진행변경요청
+            { 클라이언트요청Id = Guid.NewGuid(), 작업 = 음식점주문진행작업코드.픽업준비 };
+        var first = store.음식점진행변경(order.주문번호, request, "restaurant-user");
+        var repeated = store.음식점진행변경(order.주문번호, request, "restaurant-user");
+        Assert.True(first!.새로변경됨);
+        Assert.False(repeated!.새로변경됨);
+        Assert.Equal(음식주문상태코드.기사배정, repeated.주문.상태);
+        Assert.Equal(음식주문배차상태코드.기사배정, repeated.주문.배차상태);
+        Assert.NotNull(repeated.주문.픽업준비시각Utc);
+        Assert.Equal(2, repeated.주문.Revision);
+        Assert.Single(await db.음식주문상태이력.Where(x => x.클라이언트요청Id == request.클라이언트요청Id).ToListAsync());
+    }
+
+    [Fact]
+    public void 음식점진행변경은_오래된Revision을거부한다()
+    {
+        using var db = CreateContext();
+        var store = new EfSsalddelFoodOrderStore(db);
+        var order = store.AddOrder(CreateRequest(Guid.NewGuid()));
+
+        Assert.Throws<DbUpdateConcurrencyException>(() => store.음식점진행변경(order.주문번호,
+            new 음식점주문진행변경요청
+            {
+                클라이언트요청Id = Guid.NewGuid(),
+                예상Revision = order.Revision + 1,
+                작업 = 음식점주문진행작업코드.거절,
+                사유 = "재료 품절"
+            }, "restaurant-user"));
+    }
+
+    [Fact]
     public async Task 같은주문자와클라이언트요청Id는_Rdb에한건만저장한다()
     {
         await using var db = CreateContext();

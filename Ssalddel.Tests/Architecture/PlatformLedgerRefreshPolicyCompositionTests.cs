@@ -80,12 +80,12 @@ public sealed class PlatformLedgerRefreshPolicyCompositionTests
     {
         var source = Read(
             "Ssalddel",
-            "Application/Food/Handlers/음식점수락후배차대기생성EventHandler.cs");
+            "Services/Food/음식배차요청OutboxService.cs");
 
-        Assert.Contains("ITransportRequestLedgerRealtimeService transportLedgerRealtimeService", source);
-        Assert.Contains("transportLedgerRealtimeService.PublishAsync(", source);
+        Assert.Contains("ITransportRequestLedgerRealtimeService transportLedgerRealtime", source);
+        Assert.Contains("transportLedgerRealtime.PublishAsync(", source);
         Assert.Contains("order.주문번호", source);
-        Assert.Contains("nameof(음식점주문수락됨Event)", source);
+        Assert.Contains("FoodDispatchRequested", source);
     }
 
     private static string Read(string project, string relativePath)

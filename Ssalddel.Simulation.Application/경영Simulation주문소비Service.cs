@@ -59,6 +59,9 @@ namespace Ssalddel.Simulation.Application
             Simulation음식배달PreviewRequest request)
             => sessions.Require(sessionStableId).PreviewFoodDelivery(request);
 
+        public 경영SimulationSessionSnapshot ConfirmRestaurantResponse(string sessionStableId, Simulation음식점응답Request request)
+            => sessions.Require(sessionStableId).ConfirmRestaurantResponse(request);
+
         public 경영SimulationSessionSnapshot ConfirmFoodDelivery(
             string sessionStableId,
             Simulation음식배달ConfirmRequest request)
