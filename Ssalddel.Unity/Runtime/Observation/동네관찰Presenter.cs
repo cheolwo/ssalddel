@@ -27,11 +27,32 @@ namespace Ssalddel.Unity.Observation
         public string FacilityId { get; set; } = "";
         public string RelatedId { get; set; } = "";
     }
+
+    /// <summary>한 음식 주문의 참여 주체와 현재 단계를 같은 Simulation revision에서 읽는 관찰 전용 투영이다.</summary>
+    public sealed class 동네음식생활CycleModel
+    {
+        public string OrderId { get; set; } = "";
+        public string OrdererActorId { get; set; } = "";
+        public string RestaurantActorId { get; set; } = "";
+        public string DriverActorId { get; set; } = "";
+        public string StageCode { get; set; } = "";
+        public string StageDisplayName { get; set; } = "";
+        public string WaitReason { get; set; } = "";
+        public string CurrentActorId { get; set; } = "";
+        public string CurrentFacilityId { get; set; } = "";
+        public bool Completed { get; set; }
+        public bool Rejected { get; set; }
+        public string Title { get; set; } = "";
+        public string Body { get; set; } = "";
+    }
+
     public sealed class 동네관찰ScreenModel
     {
         public long Revision { get; set; }
         public string Time { get; set; } = "";
         public string Summary { get; set; } = "";
+        public string BoundaryNotice { get; set; } = "가상 NPC 생활 관찰 · 실제 앱 주문 및 실제 기사 배차 없음";
+        public 동네음식생활CycleModel[] FoodLifeCycles { get; set; } = Array.Empty<동네음식생활CycleModel>();
         public 동네관찰Row[] FoodCycles { get; set; } = Array.Empty<동네관찰Row>();
         public 동네관찰Row[] Orders { get; set; } = Array.Empty<동네관찰Row>();
         public 동네관찰Row[] Actors { get; set; } = Array.Empty<동네관찰Row>();
@@ -107,6 +128,11 @@ namespace Ssalddel.Unity.Observation
             "LifeInboundWalk" => "입고점 접근", "LifeInboundInspect" => "보충 물품 검수", "LifeInboundStore" => "보충 물품 적치",
             "LifeInboundReturn" => "작업점 복귀", "" => "대기", _ => code.Any(c => c >= '가' && c <= '힣') ? code : "상태 확인 필요" };
 
+        private static string 관찰시설(string stableId)
+            => stableId.EndsWith(":a", StringComparison.Ordinal) ? "home-a"
+                : stableId.EndsWith(":b", StringComparison.Ordinal) ? "home-b"
+                : "restaurant";
+
         public static 동네관찰ScreenModel 생성(경영SimulationSessionSnapshot state)
         {
             var life = state.WaitingFleet?.NeighborhoodLife;
@@ -116,6 +142,42 @@ namespace Ssalddel.Unity.Observation
             model.Time = (life.DayEnabled ? (state.CurrentTick < 300 ? "아침" : state.CurrentTick < 1050 ? "낮" : state.CurrentTick < 1500 ? "저녁" : "밤")
                 : "기존 근무 표본") + " · " + model.Time;
             var fleet = state.WaitingFleet!;
+            var entries = fleet.OrderFlow?.Entries ?? Array.Empty<가상주문연결Snapshot>();
+            model.FoodLifeCycles = state.FoodDeliveries.Select(food =>
+            {
+                var entry = entries.FirstOrDefault(x => x.OrderId == food.FoodOrderStableId);
+                var driver = entry?.DriverId ?? "";
+                var completed = food.ReceivedTick.HasValue || food.StateCode == "수령확인";
+                var rejected = food.StateCode == "거절";
+                var courierActive = driver.Length > 0 && (food.DispatchCandidateTick.HasValue || food.PickedUpTick.HasValue || food.DeliveredTick.HasValue);
+                var currentActor = completed ? food.OrdererStableId
+                    : courierActive ? driver
+                    : 가상동네생활기준.RestaurantActorId;
+                var currentFacility = food.PickedUpTick.HasValue || food.DeliveredTick.HasValue || completed
+                    ? 관찰시설(food.DestinationFacilityStableId)
+                    : "restaurant";
+                var waitReason = rejected ? food.RejectionReasonCode
+                    : !string.IsNullOrWhiteSpace(entry?.WaitReason) ? entry!.WaitReason
+                    : driver.Length == 0 && (food.ReadyForPickupTick.HasValue || food.DispatchCandidateTick.HasValue) ? "담당 기사 대기"
+                    : "";
+                var participants = $"주문자 {이름(food.OrdererStableId)} · 음식점 {이름(가상동네생활기준.RestaurantActorId)}"
+                    + (driver.Length == 0 ? " · 배달 기사 미배정" : " · " + 이름(driver));
+                return new 동네음식생활CycleModel {
+                    OrderId = food.FoodOrderStableId,
+                    OrdererActorId = food.OrdererStableId,
+                    RestaurantActorId = 가상동네생활기준.RestaurantActorId,
+                    DriverActorId = driver,
+                    StageCode = food.StateCode,
+                    StageDisplayName = 단계(food.StateCode),
+                    WaitReason = waitReason,
+                    CurrentActorId = currentActor,
+                    CurrentFacilityId = currentFacility,
+                    Completed = completed,
+                    Rejected = rejected,
+                    Title = $"음식 생활 · {이름(food.OrdererStableId)} · {단계(food.StateCode)}",
+                    Body = participants + (waitReason.Length == 0 ? "" : "\n" + waitReason)
+                };
+            }).Reverse().ToArray();
             model.FoodCycles = (fleet.OrderFlow?.Orderers ?? Array.Empty<가상주문자Snapshot>()).Select(person =>
             {
                 var id = "participant:synthetic:" + person.Residence;
@@ -135,7 +197,6 @@ namespace Ssalddel.Unity.Observation
                     Body = (active == null ? "진행 중 음식 주문 없음" : "현재: " + 단계(active.StateCode)) + "\n" + next };
             }).ToArray();
             var orders = new List<동네관찰Row>();
-            var entries = fleet.OrderFlow?.Entries ?? Array.Empty<가상주문연결Snapshot>();
             int index = 0;
             foreach (var food in state.FoodDeliveries)
             {

@@ -159,13 +159,37 @@ public sealed class 동네관찰Tests
     public void 음식주문은_기존원장의_담당기사와_연결된다()
     {
         var state = 표본(); state.FoodDeliveries = new[] { new Simulation음식배달Snapshot {
-            FoodOrderStableId = "food:1", StateCode = "조리완료", ReadyForPickupTick = 20, OrdererStableId = "participant:synthetic:a" } };
+            FoodOrderStableId = "food:1", StateCode = "픽업완료", ReadyForPickupTick = 20, PickedUpTick = 25,
+            DestinationFacilityStableId = "facility:synthetic:a", OrdererStableId = "participant:synthetic:a" } };
         state.WaitingFleet!.OrderFlow!.Entries = new[] { new 가상주문연결Snapshot { OrderId = "food:1", DriverId = "actor:synthetic-courier:1" } };
         state.WaitingFleet.Drivers[0].Courier.OrderStableId = "food:1";
+        var before = System.Text.Json.JsonSerializer.Serialize(state);
         var model = 동네관찰Presenter.생성(state);
         Assert.Contains("주민 A", model.Orders[0].Title); Assert.Contains("배달 기사 1", model.Orders[0].Body);
-        Assert.Contains("픽업 대기 10초", model.Orders[0].Body); Assert.Equal("food:1", model.Actors[0].RelatedId);
+        Assert.Equal("food:1", model.Actors[0].RelatedId);
         Assert.Equal("restaurant", model.Orders[0].FacilityId); Assert.Equal(42, state.Revision);
+        var cycle = Assert.Single(model.FoodLifeCycles);
+        Assert.Equal("participant:synthetic:a", cycle.OrdererActorId);
+        Assert.Equal(가상동네생활기준.RestaurantActorId, cycle.RestaurantActorId);
+        Assert.Equal("actor:synthetic-courier:1", cycle.DriverActorId);
+        Assert.Equal("home-a", cycle.CurrentFacilityId);
+        Assert.Equal("actor:synthetic-courier:1", cycle.CurrentActorId);
+        Assert.False(cycle.Completed); Assert.False(cycle.Rejected);
+        Assert.Contains("실제 앱 주문", model.BoundaryNotice);
+        Assert.Equal(before, System.Text.Json.JsonSerializer.Serialize(state));
+    }
+
+    [Fact]
+    public void 수령완료생활은_주문자와목적지로귀결되고_운영행위를노출하지않는다()
+    {
+        var state = 표본(); state.FoodDeliveries = new[] { new Simulation음식배달Snapshot {
+            FoodOrderStableId = "food:received", StateCode = "수령확인", OrdererStableId = "participant:synthetic:b",
+            DestinationFacilityStableId = "facility:synthetic:b", ReceivedTick = 29 } };
+        var model = 동네관찰Presenter.생성(state);
+        var cycle = Assert.Single(model.FoodLifeCycles);
+        Assert.True(cycle.Completed); Assert.Equal("participant:synthetic:b", cycle.CurrentActorId);
+        Assert.Equal("home-b", cycle.CurrentFacilityId); Assert.Empty(cycle.DriverActorId);
+        Assert.DoesNotContain("실제 주문 실행", cycle.Body);
     }
     [Theory]
     [InlineData("DriveHome", "주문지로 운전")]
