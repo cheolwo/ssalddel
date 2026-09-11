@@ -6,6 +6,7 @@ public interface IDriverTransportApiService
 {
     Task<IReadOnlyList<기사운송요약응답>> 목록조회Async(CancellationToken cancellationToken = default);
     Task<기사운송요약응답?> 현재조회Async(CancellationToken cancellationToken = default);
+    Task<기사화물운송작업공간응답?> 작업공간조회Async(CancellationToken cancellationToken = default);
     Task<기사운송상세응답?> 상세조회Async(long transportId, CancellationToken cancellationToken = default);
     Task<기사운송상태변경응답?> 상차지도착Async(long transportId, CancellationToken cancellationToken = default);
     Task<기사운송상태변경응답?> 상차완료Async(

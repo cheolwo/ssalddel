@@ -25,6 +25,12 @@ public sealed class DriverTransportApiService : IDriverTransportApiService
             "현재 운송 조회",
             cancellationToken);
 
+    public Task<기사화물운송작업공간응답?> 작업공간조회Async(CancellationToken cancellationToken = default)
+        => _client.GetAsync<기사화물운송작업공간응답>(
+            $"{BasePath}/workspace",
+            "화물 운송 작업공간 조회",
+            cancellationToken);
+
     public Task<기사운송상세응답?> 상세조회Async(
         long transportId,
         CancellationToken cancellationToken = default)

@@ -12,7 +12,10 @@ public interface IDriverRecommendationDecisionService
 
     RecommendationDecisionState Accept(DriverRequestItem request);
 
-    Task<RecommendationDecisionState> AcceptAsync(DriverRequestItem request, CancellationToken cancellationToken = default);
+    Task<RecommendationDecisionState> AcceptAsync(
+        DriverRequestItem request,
+        IReadOnlyCollection<string>? acknowledgedWarningCodes = null,
+        CancellationToken cancellationToken = default);
 
     RecommendationDecisionState Hold(DriverRequestItem request);
 

@@ -15,7 +15,7 @@ namespace DriverApp.Services.Samples;
 public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataService
 {
     private readonly IAuthSession _authSession;
-    private readonly IDriverTransportApiService _transportApi;
+    private readonly IDriverFreightWorkspaceStore _freightWorkspace;
     private readonly IDriverRecommendationApiService _recommendationApi;
     private readonly IDriverSettlementApiService _settlementApi;
     private readonly IDriverReservationApiService _reservationApi;
@@ -38,7 +38,7 @@ public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataServi
 
     public ServerBackedDriverSampleDataService(
         IAuthSession authSession,
-        IDriverTransportApiService transportApi,
+        IDriverFreightWorkspaceStore freightWorkspace,
         IDriverRecommendationApiService recommendationApi,
         IDriverSettlementApiService settlementApi,
         IDriverReservationApiService reservationApi,
@@ -49,7 +49,7 @@ public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataServi
         ITransportRequestLedgerObserver ledgerObserver)
     {
         _authSession = authSession;
-        _transportApi = transportApi;
+        _freightWorkspace = freightWorkspace;
         _recommendationApi = recommendationApi;
         _settlementApi = settlementApi;
         _reservationApi = reservationApi;
@@ -171,7 +171,7 @@ public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataServi
     private async Task LoadLiveServerDataAsync(CancellationToken cancellationToken)
     {
         var recommendations = await _recommendationApi.전체조회Async(cancellationToken);
-        var transports = await _transportApi.목록조회Async(cancellationToken);
+        var freightWorkspace = await _freightWorkspace.RefreshAsync(cancellationToken);
         var settlement = await _settlementApi.현재월조회Async(cancellationToken);
         var reservations = await _reservationApi.목록조회Async(cancellationToken);
         var workStatus = await _workApi.운행상태조회Async(cancellationToken);
@@ -182,10 +182,7 @@ public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataServi
             _추천의뢰목록 = recommendations.Select(ToRequestItem).ToArray();
         }
 
-        if (transports is not null)
-        {
-            _운송목록 = transports.Select(ToTransportItem).ToArray();
-        }
+        _운송목록 = freightWorkspace.활성운송목록.Select(ToTransportItem).ToArray();
 
         if (settlement is not null)
         {
@@ -273,7 +270,12 @@ public sealed class ServerBackedDriverSampleDataService : IDriverSampleDataServi
             상태 = source.상태,
             배차상태 = source.배차상태,
             추천시작시각 = source.추천시작시각,
-            추천만료시각 = source.추천만료시각
+            추천만료시각 = source.추천만료시각,
+            추천라운드 = source.추천라운드,
+            경고목록 = source.경고.Concat(source.차량경고).Distinct(StringComparer.Ordinal).ToArray(),
+            확인필요경고코드 = source.차량경고.Length > 0
+                ? ["FreightVehicleAdvisory"]
+                : []
         };
     }
 

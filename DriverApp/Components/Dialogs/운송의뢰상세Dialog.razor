@@ -65,6 +65,12 @@
 
                 <MudAlert Severity="Severity.Info">@의뢰.추천사유</MudAlert>
 
+                @if (의뢰.경고목록.Count > 0)
+                {
+                    <MudAlert Severity="Severity.Warning">@string.Join(" · ", 의뢰.경고목록)</MudAlert>
+                    <MudCheckBox T="bool" @bind-Value="_경고확인완료" Label="차량·화물 주의사항을 확인했습니다." />
+                }
+
                 @if (!string.IsNullOrWhiteSpace(의뢰.복귀추천사유))
                 {
                     <MudAlert Severity="Severity.Info">@의뢰.복귀추천사유</MudAlert>
@@ -88,7 +94,7 @@
         }
     </DialogContent>
     <DialogActions>
-        <MudButton Variant="Variant.Filled" Color="Color.Success" Disabled="@(의뢰 is null)" OnClick="Accept">수락</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Success" Disabled="@(의뢰 is null || (의뢰.경고목록.Count > 0 && !_경고확인완료))" OnClick="Accept">수락</MudButton>
         <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled="@(의뢰 is null)" OnClick="Hold">보류</MudButton>
         @if (_거절입력표시)
         {
@@ -116,9 +122,17 @@
     private string _거절사유 = "동선이 맞지 않음";
     private string? _처리메시지;
     private Severity _처리Severity = Severity.Info;
+    private bool _경고확인완료;
+    private string? _경고확인의뢰Id;
 
     protected override void OnParametersSet()
     {
+        if (!string.Equals(_경고확인의뢰Id, 의뢰?.의뢰Id, StringComparison.Ordinal))
+        {
+            _경고확인의뢰Id = 의뢰?.의뢰Id;
+            _경고확인완료 = false;
+        }
+
         if (의뢰 is null)
         {
             return;
@@ -141,7 +155,9 @@
 
         try
         {
-            var decision = await DecisionService.AcceptAsync(의뢰);
+            var decision = await DecisionService.AcceptAsync(
+                의뢰,
+                _경고확인완료 ? 의뢰.확인필요경고코드 : []);
             _처리Severity = Severity.Success;
             _처리메시지 = decision.Memo;
             MudDialog.Close(DialogResult.Ok(decision));

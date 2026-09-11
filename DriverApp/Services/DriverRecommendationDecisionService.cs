@@ -35,9 +35,19 @@ public sealed class DriverRecommendationDecisionService : IDriverRecommendationD
         return SaveAccepted(request, "기사님이 추천 의뢰를 수락했습니다.");
     }
 
-    public async Task<RecommendationDecisionState> AcceptAsync(DriverRequestItem request, CancellationToken cancellationToken = default)
+    public async Task<RecommendationDecisionState> AcceptAsync(
+        DriverRequestItem request,
+        IReadOnlyCollection<string>? acknowledgedWarningCodes = null,
+        CancellationToken cancellationToken = default)
     {
-        var response = await _dispatchActionApi.수락Async(request.의뢰Id, cancellationToken);
+        var response = await _dispatchActionApi.수락Async(
+            request.의뢰Id,
+            new 기사화물배차수락요청
+            {
+                ExpectedRecommendationRound = request.서버지정추천 ? request.추천라운드 : null,
+                AcknowledgedWarningCodes = acknowledgedWarningCodes?.ToArray() ?? []
+            },
+            cancellationToken);
         var verified = await RefreshServerLedgerAsync(
             request.의뢰Id,
             "DriverApp.Accepted",

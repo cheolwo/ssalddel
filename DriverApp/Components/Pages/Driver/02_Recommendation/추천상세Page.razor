@@ -101,12 +101,17 @@
                         </MudPaper>
                     }
                     <MudAlert Severity="Severity.Info">@의뢰.추천사유</MudAlert>
+                    @if (의뢰.경고목록.Count > 0)
+                    {
+                        <MudAlert Severity="Severity.Warning">@string.Join(" · ", 의뢰.경고목록)</MudAlert>
+                        <MudCheckBox T="bool" @bind-Value="_경고확인완료" Label="차량·화물 주의사항을 확인했습니다." />
+                    }
                     @if (!string.IsNullOrWhiteSpace(_처리상태))
                     {
                         <MudAlert Severity="@_처리Severity">@_처리상태</MudAlert>
                     }
                     <MudStack Row="true" Spacing="2" Wrap="Wrap.Wrap">
-                        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Accept">수락</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Success" Disabled="@(의뢰.경고목록.Count > 0 && !_경고확인완료)" OnClick="Accept">수락</MudButton>
                         <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="Hold">보류</MudButton>
                         <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="Reject">거절</MudButton>
                         <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@DriverRoutes.RecommendationDecision(의뢰Id)">배차 처리 화면</MudButton>
@@ -133,9 +138,17 @@
     private bool _데이터로딩중 = true;
     private bool _인증됨;
     private string? _데이터오류;
+    private bool _경고확인완료;
+    private string? _경고확인의뢰Id;
 
     protected override async Task OnParametersSetAsync()
     {
+        if (!string.Equals(_경고확인의뢰Id, 의뢰Id, StringComparison.Ordinal))
+        {
+            _경고확인의뢰Id = 의뢰Id;
+            _경고확인완료 = false;
+        }
+
         await 데이터조회Async(force: false);
         현재결정표시();
     }
@@ -196,7 +209,9 @@
 
         try
         {
-            var decision = await DecisionService.AcceptAsync(의뢰);
+            var decision = await DecisionService.AcceptAsync(
+                의뢰,
+                _경고확인완료 ? 의뢰.확인필요경고코드 : []);
             _처리상태 = decision.Memo;
             _처리Severity = Severity.Success;
         }

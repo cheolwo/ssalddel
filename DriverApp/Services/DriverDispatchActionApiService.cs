@@ -4,7 +4,10 @@ namespace DriverApp.Services;
 
 public interface IDriverDispatchActionApiService
 {
-    Task<기사배차처리응답?> 수락Async(string requestId, CancellationToken cancellationToken = default);
+    Task<기사배차처리응답?> 수락Async(
+        string requestId,
+        기사화물배차수락요청 request,
+        CancellationToken cancellationToken = default);
     Task 거절Async(
         string requestId,
         기사배차거절요청 request,
@@ -27,9 +30,11 @@ public sealed class DriverDispatchActionApiService : IDriverDispatchActionApiSer
 
     public Task<기사배차처리응답?> 수락Async(
         string requestId,
+        기사화물배차수락요청 request,
         CancellationToken cancellationToken = default)
-        => _client.PostAsync<기사배차처리응답>(
+        => _client.PostAsync<기사화물배차수락요청, 기사배차처리응답>(
             BuildPath(requestId, "accept"),
+            request,
             "기사 배차 수락",
             cancellationToken);
 

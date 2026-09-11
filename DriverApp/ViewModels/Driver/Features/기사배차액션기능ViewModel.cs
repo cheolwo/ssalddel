@@ -7,7 +7,11 @@ public sealed class 기사배차액션기능ViewModel : 조립ViewModelBase
 {
     public 기사배차액션기능ViewModel(IDriverDispatchActionApiService api)
     {
-        수락 = 하위ViewModel등록(new Api작업ViewModel<string, 기사배차처리응답?>(api.수락Async));
+        수락 = 하위ViewModel등록(new Api작업ViewModel<string, 기사배차처리응답?>(
+            (requestId, cancellationToken) => api.수락Async(
+                requestId,
+                new 기사화물배차수락요청(),
+                cancellationToken)));
         거절 = 하위ViewModel등록(
             new Api작업ViewModel<기사배차거절조건, Api작업완료>(async (condition, cancellationToken) =>
             {

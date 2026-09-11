@@ -47,6 +47,9 @@ public sealed class DriverRequestItem
     public string 배차상태 { get; set; } = string.Empty;
     public DateTime? 추천시작시각 { get; set; }
     public DateTime? 추천만료시각 { get; set; }
+    public int 추천라운드 { get; set; }
+    public IReadOnlyList<string> 경고목록 { get; set; } = [];
+    public IReadOnlyList<string> 확인필요경고코드 { get; set; } = [];
     public bool 서버지정추천 => 추천시작시각.HasValue && 추천만료시각.HasValue;
     public TimeSpan 추천제한시간 => 서버지정추천
         ? 추천만료시각!.Value.ToLocalTime() - 추천시작시각!.Value.ToLocalTime()

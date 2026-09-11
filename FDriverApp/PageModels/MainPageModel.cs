@@ -51,6 +51,7 @@ public sealed partial class MainPageModel : ObservableObject
     [ObservableProperty] private string _realtimeConnectionText = "실시간 배차 연결 대기 · 30초 자동 조회 보조";
     [ObservableProperty] private string _locationSyncText = "기사 위치 전송 대기";
     [ObservableProperty] private bool _dispatchAutomationEnabled;
+    [ObservableProperty] private int _maxActiveDeliveries;
     [ObservableProperty] private string _dispatchAutomationNotice = "자동 배차 상태 확인 전";
     [ObservableProperty] private IReadOnlyList<DriverMapMarkerItem> _mapMarkers = [];
     [ObservableProperty] private IReadOnlyList<DriverMapRouteOverlay> _selectedRouteOverlays = [];
@@ -118,7 +119,8 @@ public sealed partial class MainPageModel : ObservableObject
     public bool CanCompleteDelivery => !IsBusy && ActiveDelivery?.WorkStatus == DriverWorkOfferStatus.MovingToDropoff;
     public bool CanAcceptSelectedTicket => !IsBusy
                                            && SelectedTicket is { IsExpired: false }
-                                           && ActiveDeliveryItems.Count < 3;
+                                           && MaxActiveDeliveries > 0
+                                           && ActiveDeliveryItems.Count < MaxActiveDeliveries;
     public bool HasBundleCandidates => BundleCandidateItems.Count > 0;
     public bool HasMultipleActiveDeliveries => ActiveDeliveryItems.Count > 1;
 
@@ -527,6 +529,7 @@ public sealed partial class MainPageModel : ObservableObject
                          + $"배차 {workspace.Settlement.배차건수:N0}건 · 이용료 {workspace.Settlement.이용료:N0}원"
                           + (workspace.Settlement.결제완료 ? " · 납부 완료" : string.Empty);
         DispatchAutomationEnabled = workspace.DispatchAutomationEnabled;
+        MaxActiveDeliveries = workspace.MaxActiveDeliveries;
         DispatchAutomationNotice = workspace.DispatchAutomationNotice;
         WorkspaceSyncText = $"업무 동기화 {workspace.UpdatedAtUtc.ToLocalTime():HH:mm:ss} · 다음 자동 갱신 30초 이내";
         MapMarkers = RecommendedTicketItems.Select(ToMapMarker)

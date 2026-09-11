@@ -90,6 +90,7 @@ public static class DriverServiceCollectionExtensions
         services.AddSingleton<DriverViewVisibilityService>();
         services.AddSingleton<IDriverNativeMapNavigator, DriverNativeMapNavigator>();
         services.AddSingleton<IDriverTransportApiService, DriverTransportApiService>();
+        services.AddSingleton<IDriverFreightWorkspaceStore, DriverFreightWorkspaceStore>();
         services.AddSingleton<HttpDriverTransportCompletionPhotoService>();
         services.AddSingleton<IDriverTransportCompletionPhotoService>(sp => sp.GetRequiredService<HttpDriverTransportCompletionPhotoService>());
         services.AddSingleton<HttpDriverTransportExceptionService>();
