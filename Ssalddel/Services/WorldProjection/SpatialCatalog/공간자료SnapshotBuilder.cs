@@ -23,8 +23,10 @@ public static class 공간자료SnapshotBuilder
         "myeonmok-address-spatial-index.r1", "myeonmok-diorama-presentation.r1",
         "myeonmok-game-object-catalog.v1", "myeonmok-game-object-candidate-projection.v1",
         "five-element-work-object-catalog.v1", "neighborhood-game-object-candidate-projection.v1",
-        "neighborhood-spatial-package.v1", "neighborhood-package-registry.v1",
-        "neighborhood-observation-inventory.v1"
+        "neighborhood-spatial-package.v1", "neighborhood-spatial-package.v2",
+        "neighborhood-package-registry.v1", "neighborhood-package-registry.v2",
+        "neighborhood-observation-inventory.v1", "spatial-semantic-layer-catalog.v1",
+        "neighborhood-unity-projection-handoff.v1"
     };
 
     private static readonly Dictionary<string, string> ArrayKinds = new(StringComparer.Ordinal)
@@ -48,11 +50,13 @@ public static class 공간자료SnapshotBuilder
         ["roleActionBindings"]="RoleActionBinding", ["candidates"]="ObjectCandidateBinding",
         ["packages"]="NeighborhoodPackageRegistration", ["observations"]="ObservationCandidate",
         ["compatibilityAliases"]="CompatibilityAlias", ["coordinateFrames"]="CoordinateFrameRegistration",
-        ["sourceInputs"]="SourceInput"
+        ["sourceInputs"]="SourceInput", ["semanticLayers"]="SemanticLayerDefinition",
+        ["layerBindings"]="SemanticLayerBinding"
     };
 
     private static readonly string[] IdentityKeys =
     ["candidateStableId", "packageStableId", "observationStableId", "aliasStableId", "registryStableId", "inventoryStableId",
+     "semanticLayerStableId", "layerBindingStableId",
      "bindingStableId", "objectArchetypeStableId",
      "nodeStableId", "nodeId", "edgeStableId", "edgeId", "placementInstanceId", "addressStableId",
      "observationId", "sampleId", "spatialId", "stableId", "constraintId", "bindingId", "subgraphId",
@@ -152,6 +156,9 @@ public static class 공간자료SnapshotBuilder
         "NeighborhoodPackage" => 공간자료Json.Text(payload, "packageStableId"),
         "NeighborhoodRegistry" => 공간자료Json.Text(payload, "registryStableId"),
         "ObservationInventory" => 공간자료Json.Text(payload, "inventoryStableId"),
+        "SemanticLayerCatalog" => 공간자료Json.Text(payload, "catalogStableId"),
+        "PresentationProjection" when schema == "neighborhood-unity-projection-handoff.v1"
+            => 공간자료Json.Text(payload, "projectionStableId"),
         _ => ""
     };
 
@@ -195,6 +202,7 @@ public static class 공간자료SnapshotBuilder
                         ["stableId"]=key, ["pointer"]=path, ["kind"]=kind, ["dataset"]=doc["dataset"],
                         ["areaStableId"]=area,
                         ["reviewState"]="PendingHumanReview", ["layer"]=Layer(kind,payload),
+                        ["semanticLayerStableId"]=SemanticLayer(kind,payload),
                         ["tile"]=Tile(kind,payload,doc), ["payload"]=payload.DeepClone()
                     };
                     output.Add(record);
@@ -212,9 +220,33 @@ public static class 공간자료SnapshotBuilder
         "ObjectArchetype" => "object-archetypes", "InteractionProfile" => "interaction-profiles",
         "RoleActionBinding" => "role-action-bindings", "ObjectCandidateBinding" => "object-candidates",
         "NeighborhoodPackageRegistration" => "neighborhood-packages", "ObservationCandidate" => "observations",
-        "CompatibilityAlias" => "compatibility-aliases",
+        "CompatibilityAlias" => "compatibility-aliases", "SemanticLayerDefinition" => "semantic-layers",
+        "SemanticLayerBinding" => "layer-bindings", "CoordinateFrameRegistration" => "coordinate-frames",
         _ => 공간자료Json.Text(payload, "layerCode", "layerRef")
     };
+
+    private static string SemanticLayer(string kind, BsonDocument payload)
+    {
+        var declared=공간자료Json.Text(payload,"semanticLayerStableId","semanticLayerRef");
+        if(declared.Length>0) return declared;
+        return kind switch
+        {
+            "Building" => "spatial-layer:building-footprint.v1",
+            "Road" => "spatial-layer:road-centerline.v1",
+            "Address" => "spatial-layer:address-link-private.v1",
+            "ActivityObservation" or "ObservationCandidate" or "BuildingOverlay"
+                => "spatial-layer:facility-observation.v1",
+            "ScenarioOverlay" => "spatial-layer:scenario-overlay.v1",
+            "CoordinateFrameRegistration" => "spatial-layer:coordinate-frame.v1",
+            "ObjectCandidateBinding" when 공간자료Json.Text(payload,"objectArchetypeRef")
+                .Contains("neutral-building",StringComparison.Ordinal)
+                => "spatial-layer:building-footprint.v1",
+            "ObjectCandidateBinding" when 공간자료Json.Text(payload,"objectArchetypeRef")
+                .Contains("neutral-road-network",StringComparison.Ordinal)
+                => "spatial-layer:road-centerline.v1",
+            _ => ""
+        };
+    }
 
     private static string Tile(string kind, BsonDocument payload, BsonDocument doc)
     {
@@ -292,6 +324,7 @@ public static class 공간자료SnapshotBuilder
             ["_id"]="relation:"+공간자료Json.Hash(doc["_id"].AsString+"\n"+pointer+"\n"+kind+"\n"+from+"\n"+to),
             ["documentId"]=doc["_id"], ["pointer"]=pointer, ["fromKey"]=from, ["toKey"]=to,
             ["kind"]=kind, ["dataset"]=doc["dataset"], ["areaStableId"]=areaStableId,
+            ["semanticLayerStableId"]=SemanticLayer("",evidence),
             ["evidenceCode"]="SourceExplicitReference",
             ["reviewState"]="PendingHumanReview", ["expectedRevision"]=공간자료Json.Text(evidence,"expectedRevision"),
             ["expectedSha256"]=공간자료Json.Text(evidence,"expectedSha256","sourceHash"),

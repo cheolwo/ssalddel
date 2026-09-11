@@ -100,7 +100,8 @@ public sealed class 공간자료CatalogService(I공간자료CatalogStore store)
         var docs=await EligibleDocumentsAsync(snapshot,query,ct);
         var conditions=new Dictionary<string,string>();
         Add(conditions,"areaStableId",query.AreaStableId);
-        Add(conditions,"kind",query.Kind); Add(conditions,"layer",query.Layer); Add(conditions,"tile",query.Tile);
+        Add(conditions,"kind",query.Kind); Add(conditions,"layer",query.Layer);
+        Add(conditions,"semanticLayerStableId",query.SemanticLayerStableId); Add(conditions,"tile",query.Tile);
         Add(conditions,"stableId",query.StableId); Add(conditions,"reviewState",query.ReviewState);
         var filter=new 공간자료Filter(DocumentIds:docs.Select(x=>x["_id"].AsString).ToArray(),Equal:conditions);
         var total=(int)await store.CountAsync(공간자료Collections.Elements,filter,ct);
@@ -115,6 +116,7 @@ public sealed class 공간자료CatalogService(I공간자료CatalogStore store)
         var snapshot=await SnapshotAsync(query.BundleId,ct);
         var documents=await EligibleDocumentsAsync(snapshot,query,ct);
         var conditions=new Dictionary<string,string>(); Add(conditions,"areaStableId",query.AreaStableId); Add(conditions,"kind",query.Kind);
+        Add(conditions,"semanticLayerStableId",query.SemanticLayerStableId);
         var filter=new 공간자료Filter(DocumentIds:documents.Select(x=>x["_id"].AsString).ToArray(),Equal:conditions,RelationKey:query.RelationKey,Direction:query.Direction);
         var total=(int)await store.CountAsync(공간자료Collections.Relations,filter,ct);
         var relations=await store.FindAsync(공간자료Collections.Relations,filter,query.Skip,query.Take,ct);
@@ -220,7 +222,7 @@ public sealed class 공간자료CatalogService(I공간자료CatalogStore store)
         if(query.Skip<0 || query.Skip>1_000_000 || query.Take is <1 or >500) throw new ArgumentException("SpatialPageOutOfRange");
         if(paginationRequiresBundle && query.Skip>0 && string.IsNullOrWhiteSpace(query.BundleId)) throw new ArgumentException("SpatialBundleRequiredForPagination");
         if(query.Direction is not ("both" or "incoming" or "outgoing")) throw new ArgumentException("SpatialDirectionInvalid");
-        if(new[]{query.BundleId,query.Dataset,query.AreaStableId,query.Kind,query.Revision,query.ReviewState,query.DocumentId,query.StableId,query.Layer,query.Tile,query.RelationKey}.Any(x=>x is not null && (x.Length==0 || x.Length>512 || x.Any(char.IsControl))))
+        if(new[]{query.BundleId,query.Dataset,query.AreaStableId,query.Kind,query.Revision,query.ReviewState,query.DocumentId,query.StableId,query.SemanticLayerStableId,query.Layer,query.Tile,query.RelationKey}.Any(x=>x is not null && (x.Length==0 || x.Length>512 || x.Any(char.IsControl))))
             throw new ArgumentException("SpatialQueryValueInvalid");
     }
 }

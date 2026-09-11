@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "spatial-semantic-layer-catalog.v1",
+  "catalogStableId": "spatial-semantic-layer-catalog:ssalddel-neighborhood.v1",
+  "revision": "ssalddel-neighborhood-semantic-layers.r1",
+  "stateCode": "ApprovedFoundation",
+  "authorityBoundary": {
+    "isExecutionAuthority": false,
+    "isPlacementAuthority": false,
+    "sceneReady": false,
+    "gameStateConnected": false,
+    "rule": "공공자료의 의미와 관계를 정규화하는 대장이다. 현실 영업·입주·통행·업무 상태나 Unity Scene을 만들지 않는다."
+  },
+  "readinessOrder": [
+    "InventoryReady",
+    "GeometryReady",
+    "RelationshipReady",
+    "PlacementReviewReady",
+    "ProjectionReady"
+  ],
+  "semanticLayers": [
+    {
+      "semanticLayerStableId": "spatial-layer:administrative-boundary.v1",
+      "layerCode": "AdministrativeBoundary",
+      "displayName": "행정·법정동 경계",
+      "dataClassCode": "ReferenceGeometry",
+      "geometryTypeCode": "PolygonOrMultiPolygon",
+      "privacyClassCode": "PublicSourceDependent",
+      "placementRuleCode": "EvidenceRequired"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:coordinate-frame.v1",
+      "layerCode": "CoordinateFrame",
+      "displayName": "좌표계",
+      "dataClassCode": "SpatialReference",
+      "geometryTypeCode": "CoordinateReference",
+      "privacyClassCode": "PublicMetadata",
+      "placementRuleCode": "TransformOnly"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:building-footprint.v1",
+      "layerCode": "BuildingFootprint",
+      "displayName": "건물 윤곽",
+      "dataClassCode": "ReferenceGeometry",
+      "geometryTypeCode": "Polygon",
+      "privacyClassCode": "PublicSourceDependent",
+      "placementRuleCode": "SourceGeometryOnly"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:road-centerline.v1",
+      "layerCode": "RoadCenterline",
+      "displayName": "도로 중심선",
+      "dataClassCode": "ReferenceGeometry",
+      "geometryTypeCode": "LineString",
+      "privacyClassCode": "PublicSourceDependent",
+      "placementRuleCode": "SourceGeometryOnly"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:address-link-private.v1",
+      "layerCode": "AddressLink",
+      "displayName": "주소 연결 자료",
+      "dataClassCode": "PrivateReferenceLink",
+      "geometryTypeCode": "PointOrReference",
+      "privacyClassCode": "PrivateReviewOnly",
+      "placementRuleCode": "NoUnityDistribution"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:facility-observation.v1",
+      "layerCode": "FacilityObservation",
+      "displayName": "시설·사업체 관측",
+      "dataClassCode": "Observation",
+      "geometryTypeCode": "PointOrAggregate",
+      "privacyClassCode": "PrivateReviewProjection",
+      "placementRuleCode": "CoordinateCandidateOrAggregateOnly"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:regional-metric.v1",
+      "layerCode": "RegionalMetric",
+      "displayName": "인구·경제 통계",
+      "dataClassCode": "AreaMetric",
+      "geometryTypeCode": "AreaAssignmentOrAggregate",
+      "privacyClassCode": "PublicAggregateOnly",
+      "placementRuleCode": "NoPointInference"
+    },
+    {
+      "semanticLayerStableId": "spatial-layer:scenario-overlay.v1",
+      "layerCode": "ScenarioOverlay",
+      "displayName": "가상 업무·판타지 시나리오 오버레이",
+      "dataClassCode": "SimulationOverlay",
+      "geometryTypeCode": "GraphOrPlacementOverlay",
+      "privacyClassCode": "Synthetic",
+      "placementRuleCode": "ScenarioOverlayOfRequired"
+    }
+  ]
+}

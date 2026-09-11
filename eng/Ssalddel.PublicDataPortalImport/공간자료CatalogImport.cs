@@ -9,7 +9,7 @@ using 살뜰.Services.Options;
 
 internal static class 공간자료CatalogImport
 {
-    internal const string ArtifactRelative = "artifacts/local/spatial-catalog/20260909-r5";
+    internal const string ArtifactRelative = "artifacts/local/spatial-catalog/20260910-r6";
     internal const string UnityRoot = "C:/Users/user/ssalddel";
     private static readonly string[] GraphFiles =
     ["graph-map-overlays.v1.json", "hans-farm-fence-restoration.v1.json", "hans-farm-hex03-campaign.v1.json",
@@ -32,6 +32,7 @@ internal static class 공간자료CatalogImport
         paths.AddRange(new[]
         {
             (동별공간PackageCatalog.RegistryRelative,"NeighborhoodRegistry"),
+            (동별공간PackageCatalog.SemanticLayerCatalogRelative,"SemanticLayerCatalog"),
             ("eng/world-seedbeds/map-source-manifests/jungnang-myeonmok.v1.json","SourceManifest"),
             ("eng/world-seedbeds/map-source-manifests/jungnang-myeonmok.v2.json","SourceManifest"),
             ("eng/world-seedbeds/reality-context/farm-production.v1.json","RealityContextDefinition"),
@@ -51,7 +52,8 @@ internal static class 공간자료CatalogImport
     }
 
     private static string Dataset(string path) => path==동별공간PackageCatalog.RegistryRelative
-        ? "neighborhood-registry" : path.Contains("myeonmok",StringComparison.OrdinalIgnoreCase) || path.Contains("Sagajeong",StringComparison.Ordinal)
+        ? "neighborhood-registry" : path==동별공간PackageCatalog.SemanticLayerCatalogRelative
+        ? "spatial-semantic-layers" : path.Contains("myeonmok",StringComparison.OrdinalIgnoreCase) || path.Contains("Sagajeong",StringComparison.Ordinal)
         ? "jungnang-myeonmok" : path.Contains("synthetic-neighborhood",StringComparison.Ordinal) || path.Contains("neighborhood-market",StringComparison.Ordinal)
         ? "synthetic-neighborhood" : path.Contains("hans",StringComparison.Ordinal) || path.Contains("forest-edge",StringComparison.Ordinal)
         ? "hans-farm" : path.Contains("farm-production",StringComparison.Ordinal) || path.Contains("farm-cultivation",StringComparison.Ordinal)
@@ -68,9 +70,11 @@ internal static class 공간자료CatalogImport
     {
         if(mode is "serve" or "http-verify") { await 공간자료Catalog검증Host.RunAsync(root,mode=="serve");return; }
         if(mode is not ("preview" or "apply" or "verify")) throw new InvalidDataException("SpatialImportModeInvalid");
-        if(areaStableId is not null && areaStableId is not (동별공간PackageCatalog.MyeonmokArea or 동별공간PackageCatalog.JunghwaArea))
-            throw new InvalidDataException("SpatialAreaStableIdUnsupported");
         var physicalSources=ReadInputs(root);
+        var registry=공간자료Json.Parse(physicalSources.Single(x=>x.Kind=="NeighborhoodRegistry").Bytes);
+        var registeredAreas=registry["packages"].AsBsonArray.Select(x=>x["areaStableId"].AsString).ToHashSet(StringComparer.Ordinal);
+        if(areaStableId is not null && !registeredAreas.Contains(areaStableId))
+            throw new InvalidDataException("SpatialAreaStableIdUnsupported");
         var legacyProjectionSource=면목동GameObjectCatalog.BuildProjection(root,physicalSources);
         var neighborhoods=동별공간PackageCatalog.Build(root,physicalSources,legacyProjectionSource);
         var sources=physicalSources.Where(x=>x.Kind!="ObjectCatalog").Concat(neighborhoods.Sources)
@@ -99,6 +103,9 @@ internal static class 공간자료CatalogImport
         result["elements"]=batch.Elements.Count;result["relations"]=batch.Relations.Count;
         result["byKind"]=batch.Documents.GroupBy(x=>x["kind"].AsString).ToDictionary(x=>x.Key,x=>x.Count());
         result["byElementKind"]=batch.Elements.GroupBy(x=>x["kind"].AsString).ToDictionary(x=>x.Key,x=>x.Count());
+        result["bySemanticLayer"]=batch.Elements.Where(x=>공간자료Json.Text(x,"semanticLayerStableId").Length>0)
+            .GroupBy(x=>x["semanticLayerStableId"].AsString).OrderBy(x=>x.Key,StringComparer.Ordinal)
+            .ToDictionary(x=>x.Key,x=>x.Count(),StringComparer.Ordinal);
         result["manifestHash"]=batch.Snapshot["manifestHash"].AsString;
         result["objectCandidates"]=batch.Elements.Count(x=>x["kind"]=="ObjectCandidateBinding");
         result["workflowObjectArchetypes"]=batch.Elements.Count(x=>x["kind"]=="ObjectArchetype");

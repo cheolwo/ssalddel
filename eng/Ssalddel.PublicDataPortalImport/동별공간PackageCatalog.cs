@@ -10,19 +10,20 @@ using Ssalddel.Services.WorldProjection.SpatialCatalog;
 // 이 빌더의 결과는 비공개 검토용 Mongo 조회 자료이며 Unity·Simulation·업무 상태의 권위가 아니다.
 internal static class 동별공간PackageCatalog
 {
-    internal const string RegistryRelative = "eng/world-seedbeds/neighborhood-packages/registry.v1.json";
+    internal const string RegistryRelative = "eng/world-seedbeds/neighborhood-packages/registry.v2.json";
+    internal const string SemanticLayerCatalogRelative = "eng/world-seedbeds/neighborhood-packages/semantic-layers.v1.json";
     internal const string MyeonmokArea = "region:kr:bjd:1126010100";
     internal const string JunghwaArea = "region:kr:bjd:1126010300";
     internal const string CommonCatalogSourcePath = "generated:five-element-work-object-catalog.r1.json";
     internal const string MyeonmokProjectionSourcePath = "generated:myeonmok-game-object-candidates.r3.json";
     internal const string JunghwaInventorySourcePath = "generated:junghwa-observation-inventory.r1.json";
-    internal const string MyeonmokPackageSourcePath = "generated:neighborhood-package-1126010100.r1.json";
-    internal const string JunghwaPackageSourcePath = "generated:neighborhood-package-1126010300.r1.json";
+    internal const string MyeonmokPackageSourcePath = "generated:neighborhood-package-1126010100.r2.json";
+    internal const string JunghwaPackageSourcePath = "generated:neighborhood-package-1126010300.r2.json";
 
     private const string CommonCatalogId = "game-object-catalog:ssalddel-five-element-work.v1";
     private const string CommonCatalogRevision = "ssalddel-five-element-work-objects.r1";
-    private const string MyeonmokPackageId = "neighborhood-spatial-package:region:kr:bjd:1126010100.v1";
-    private const string JunghwaPackageId = "neighborhood-spatial-package:region:kr:bjd:1126010300.v1";
+    private const string MyeonmokPackageId = "neighborhood-spatial-package:region:kr:bjd:1126010100.v2";
+    private const string JunghwaPackageId = "neighborhood-spatial-package:region:kr:bjd:1126010300.v2";
     private const string JunghwaInventoryId = "neighborhood-observation-inventory:region:kr:bjd:1126010300.v1";
     private const string SeoulShopEntry = "소상공인시장진흥공단_상가(상권)정보_서울_202606.csv";
 
@@ -40,6 +41,8 @@ internal static class 동별공간PackageCatalog
         var registry = 공간자료Json.Parse(registrySource.Bytes);
         ValidateRegistry(registry);
         var rawInputFingerprints = VerifyRawInputs(root, registry);
+        var semanticLayerSource = physicalSources.Single(x => x.Kind == "SemanticLayerCatalog");
+        ValidateSemanticLayerCatalog(registry, semanticLayerSource);
 
         var legacyCatalogSource = physicalSources.Single(x => x.Kind == "ObjectCatalog");
         var commonCatalog = BuildCommonCatalog(legacyCatalogSource);
@@ -55,9 +58,13 @@ internal static class 동별공간PackageCatalog
         var inventorySource = new 공간자료Source(JunghwaInventorySourcePath,
             "neighborhood:1126010300", "ObservationInventory", Bytes(inventory.Document), JunghwaArea);
 
-        var myeonmokPackage = BuildMyeonmokPackage(registry, commonSource, myeonmokProjectionSource,
+        var myeonmokPackage = BuildMyeonmokPackage(registry, semanticLayerSource, commonSource, myeonmokProjectionSource,
             physicalSources);
-        var junghwaPackage = BuildJunghwaPackage(registry, commonSource, inventorySource, inventory);
+        var junghwaPackage = BuildJunghwaPackage(registry, semanticLayerSource, commonSource, inventorySource, inventory);
+        var myeonmokHandoff = BuildMyeonmokUnityHandoff(myeonmokPackage, semanticLayerSource);
+        ValidateNeighborhoodPackage(myeonmokPackage, semanticLayerSource, 7);
+        ValidateNeighborhoodPackage(junghwaPackage, semanticLayerSource, 5);
+        ValidateUnityHandoff(myeonmokHandoff);
 
         return new 결과(
         [
@@ -67,7 +74,9 @@ internal static class 동별공간PackageCatalog
             new 공간자료Source(MyeonmokPackageSourcePath, "neighborhood:1126010100",
                 "NeighborhoodPackage", Bytes(myeonmokPackage), MyeonmokArea),
             new 공간자료Source(JunghwaPackageSourcePath, "neighborhood:1126010300",
-                "NeighborhoodPackage", Bytes(junghwaPackage), JunghwaArea)
+                "NeighborhoodPackage", Bytes(junghwaPackage), JunghwaArea),
+            new 공간자료Source("generated:myeonmok-unity-projection-handoff.r1.json", "neighborhood:1126010100",
+                "PresentationProjection", Bytes(myeonmokHandoff), MyeonmokArea)
         ], rawInputFingerprints, inventory.ShopRows, inventory.FacilityRows, inventory.CoordinateRows);
     }
 
@@ -180,7 +189,8 @@ internal static class 동별공간PackageCatalog
         return projection;
     }
 
-    private static BsonDocument BuildMyeonmokPackage(BsonDocument registry, 공간자료Source commonSource,
+    private static BsonDocument BuildMyeonmokPackage(BsonDocument registry, 공간자료Source semanticLayerSource,
+        공간자료Source commonSource,
         공간자료Source projectionSource, IReadOnlyList<공간자료Source> physicalSources)
     {
         var registration = Package(registry, MyeonmokPackageId);
@@ -188,14 +198,18 @@ internal static class 동별공간PackageCatalog
         var projection = 공간자료Json.Parse(projectionSource.Bytes);
         return new BsonDocument
         {
-            ["schemaVersion"] = "neighborhood-spatial-package.v1",
+            ["schemaVersion"] = "neighborhood-spatial-package.v2",
             ["packageStableId"] = MyeonmokPackageId,
+            ["legacyPackageRef"] = registration["legacyPackageRef"],
             ["revision"] = Text(registration, "packageRevision"),
             ["areaStableId"] = MyeonmokArea,
             ["legalDongCode"] = Text(registration, "legalDongCode"),
             ["legalDongName"] = Text(registration, "legalDongName"),
             ["dataset"] = Text(registration, "dataset"),
             ["coordinateFrame"] = CoordinateFrame(registry, registration),
+            ["semanticLayerCatalogRef"] = Text(registry, "semanticLayerCatalogRef"),
+            ["semanticLayerCatalogRevision"] = Text(registry, "semanticLayerCatalogRevision"),
+            ["semanticLayerCatalogSha256"] = 공간자료Json.Hash(semanticLayerSource.Bytes),
             ["commonObjectCatalogRef"] = CommonCatalogId,
             ["commonObjectCatalogRevision"] = CommonCatalogRevision,
             ["commonObjectCatalogSha256"] = 공간자료Json.Hash(commonSource.Bytes),
@@ -219,6 +233,16 @@ internal static class 동별공간PackageCatalog
             {
                 ["buildingCandidates"] = projection["candidateCounts"]["buildingBackdrop"],
                 ["roadSegments"] = projection["sourceElementCounts"]["roads"]
+            },
+            ["layerBindings"] = new BsonArray
+            {
+                LayerBinding(MyeonmokArea,"administrative-boundary","spatial-layer:administrative-boundary.v1","","ContainsLayer","BlockedByEvidence","Unplaced"),
+                LayerBinding(MyeonmokArea,"coordinate-frame","spatial-layer:coordinate-frame.v1",Text(registration,"coordinateFrameRef"),"UsesCoordinateFrame","RelationshipReady","TransformOnly"),
+                LayerBinding(MyeonmokArea,"building-footprint","spatial-layer:building-footprint.v1",Text(legacy,"placementMapRef"),"ProjectsLayer","PlacementReviewReady","PlacedCandidate"),
+                LayerBinding(MyeonmokArea,"road-centerline","spatial-layer:road-centerline.v1",Text(legacy,"placementMapRef"),"ProjectsLayer","PlacementReviewReady","PlacedCandidate"),
+                LayerBinding(MyeonmokArea,"address-link","spatial-layer:address-link-private.v1",Text(legacy,"sourceManifestRef"),"InterpretsLayer","RelationshipReady","PrivateReviewOnly"),
+                LayerBinding(MyeonmokArea,"facility-observation","spatial-layer:facility-observation.v1",Text(legacy,"sourceManifestRef"),"InterpretsLayer","RelationshipReady","AggregateOrCandidate"),
+                LayerBinding(MyeonmokArea,"scenario-overlay","spatial-layer:scenario-overlay.v1",Text(legacy,"graphMapRef"),"ScenarioOverlayOf","RelationshipReady","OverlayOnly")
             },
             ["administrativeDongRefs"] = new BsonArray(),
             ["privacyState"] = "PrivateReviewOnly;NoDetailedAddressInPackage",
@@ -269,6 +293,7 @@ internal static class 동별공간PackageCatalog
                     ["sourceDatasetId"] = "data-go-kr-15083033",
                     ["sourceRecordSha256"] = rawHash,
                     ["observationKindCode"] = "ShopListing",
+                    ["semanticLayerStableId"] = "spatial-layer:facility-observation.v1",
                     ["activityCategoryCode"] = Required(row, "상권업종대분류코드"),
                     ["activitySubcategoryCode"] = Required(row, "상권업종소분류코드"),
                     ["longitude"] = longitude.HasValue ? (BsonValue)longitude.Value : BsonNull.Value,
@@ -309,6 +334,7 @@ internal static class 동별공간PackageCatalog
                     ["sourceDatasetId"] = feature.GetProperty("DatasetId").GetString()!,
                     ["sourceRecordSha256"] = item.GetProperty("RawRecordSha256").GetString()!,
                     ["observationKindCode"] = "PublicFacility",
+                    ["semanticLayerStableId"] = "spatial-layer:facility-observation.v1",
                     ["facilityKindCode"] = item.GetProperty("Kind").GetString()!,
                     ["longitude"] = hasLongitude ? (BsonValue)longitudeElement.GetDouble() : BsonNull.Value,
                     ["latitude"] = hasLatitude ? (BsonValue)latitudeElement.GetDouble() : BsonNull.Value,
@@ -366,20 +392,25 @@ internal static class 동별공간PackageCatalog
         return new(document, shopRows, facilityRows, shopCoordinateRows + facilityCoordinateRows);
     }
 
-    private static BsonDocument BuildJunghwaPackage(BsonDocument registry, 공간자료Source commonSource,
+    private static BsonDocument BuildJunghwaPackage(BsonDocument registry, 공간자료Source semanticLayerSource,
+        공간자료Source commonSource,
         공간자료Source inventorySource, Inventory inventory)
     {
         var registration = Package(registry, JunghwaPackageId);
         return new BsonDocument
         {
-            ["schemaVersion"] = "neighborhood-spatial-package.v1",
+            ["schemaVersion"] = "neighborhood-spatial-package.v2",
             ["packageStableId"] = JunghwaPackageId,
+            ["legacyPackageRef"] = registration["legacyPackageRef"],
             ["revision"] = Text(registration, "packageRevision"),
             ["areaStableId"] = JunghwaArea,
             ["legalDongCode"] = Text(registration, "legalDongCode"),
             ["legalDongName"] = Text(registration, "legalDongName"),
             ["dataset"] = Text(registration, "dataset"),
             ["coordinateFrame"] = CoordinateFrame(registry, registration),
+            ["semanticLayerCatalogRef"] = Text(registry, "semanticLayerCatalogRef"),
+            ["semanticLayerCatalogRevision"] = Text(registry, "semanticLayerCatalogRevision"),
+            ["semanticLayerCatalogSha256"] = 공간자료Json.Hash(semanticLayerSource.Bytes),
             ["commonObjectCatalogRef"] = CommonCatalogId,
             ["commonObjectCatalogRevision"] = CommonCatalogRevision,
             ["commonObjectCatalogSha256"] = 공간자료Json.Hash(commonSource.Bytes),
@@ -398,6 +429,14 @@ internal static class 동별공간PackageCatalog
                 ["facilityObservations"] = inventory.FacilityRows,
                 ["coordinateObservations"] = inventory.CoordinateRows
             },
+            ["layerBindings"] = new BsonArray
+            {
+                LayerBinding(JunghwaArea,"administrative-boundary","spatial-layer:administrative-boundary.v1","","ContainsLayer","BlockedByEvidence","Unplaced"),
+                LayerBinding(JunghwaArea,"coordinate-frame","spatial-layer:coordinate-frame.v1",Text(registration,"coordinateFrameRef"),"UsesCoordinateFrame","RelationshipReady","TransformOnly"),
+                LayerBinding(JunghwaArea,"building-footprint","spatial-layer:building-footprint.v1","","ProjectsLayer","BlockedByEvidence","Unplaced"),
+                LayerBinding(JunghwaArea,"road-centerline","spatial-layer:road-centerline.v1","","ProjectsLayer","BlockedByEvidence","Unplaced"),
+                LayerBinding(JunghwaArea,"facility-observation","spatial-layer:facility-observation.v1",JunghwaInventoryId,"InterpretsLayer","InventoryReady","CoordinateCandidateOrAggregateOnly")
+            },
             ["administrativeDongRefs"] = new BsonArray(),
             ["privacyState"] = "NamesAndDetailedAddressesExcluded",
             ["sceneReady"] = false,
@@ -406,10 +445,111 @@ internal static class 동별공간PackageCatalog
         };
     }
 
+    private static BsonDocument BuildMyeonmokUnityHandoff(BsonDocument package,
+        공간자료Source semanticLayerSource) => new()
+    {
+        ["schemaVersion"] = "neighborhood-unity-projection-handoff.v1",
+        ["projectionStableId"] = "unity-projection-handoff:region:kr:bjd:1126010100.v1",
+        ["revision"] = "jungnang-myeonmok-unity-projection-handoff.r1",
+        ["areaStableId"] = MyeonmokArea,
+        ["packageRef"] = package["packageStableId"],
+        ["packageRevision"] = package["revision"],
+        ["semanticLayerCatalogRef"] = package["semanticLayerCatalogRef"],
+        ["semanticLayerCatalogRevision"] = package["semanticLayerCatalogRevision"],
+        ["semanticLayerCatalogSha256"] = 공간자료Json.Hash(semanticLayerSource.Bytes),
+        ["graphMapRef"] = package["graphMapRef"],
+        ["graphMapRevision"] = package["graphMapRevision"],
+        ["graphMapSha256"] = package["graphMapSha256"],
+        ["placementMapRef"] = package["placementMapRef"],
+        ["placementMapRevision"] = package["placementMapRevision"],
+        ["placementMapSha256"] = package["placementMapSha256"],
+        ["includedSemanticLayerRefs"] = new BsonArray
+        {
+            "spatial-layer:coordinate-frame.v1",
+            "spatial-layer:building-footprint.v1",
+            "spatial-layer:road-centerline.v1",
+            "spatial-layer:scenario-overlay.v1"
+        },
+        ["observationPresentationOnly"] = true,
+        ["traversalReady"] = false,
+        ["gameplayReady"] = false,
+        ["sceneReady"] = false,
+        ["gameStateConnected"] = false,
+        ["isExecutionAuthority"] = false,
+        ["privateDetailIncluded"] = false,
+        ["containsDetailedAddress"] = false,
+        ["containsBusinessName"] = false,
+        ["rule"] = "Unity Scene 배치 전의 비식별 읽기 전용 인계 자료다. 카메라·NPC·Simulation·업무 상태를 변경하지 않는다."
+    };
+
+    private static BsonDocument LayerBinding(string areaStableId, string code,
+        string semanticLayerRef, string sourceRef, string relationshipCode,
+        string readinessCode, string placementState) => new()
+    {
+        ["layerBindingStableId"] = $"spatial-layer-binding:{areaStableId}:{code}.v1",
+        ["areaStableId"] = areaStableId,
+        ["semanticLayerRef"] = semanticLayerRef,
+        ["sourceRef"] = sourceRef,
+        ["relationshipCode"] = relationshipCode,
+        ["readinessCode"] = readinessCode,
+        ["placementState"] = placementState,
+        ["readinessIsApproval"] = false,
+        ["sceneReady"] = false
+    };
+
+    private static void ValidateSemanticLayerCatalog(BsonDocument registry, 공간자료Source source)
+    {
+        var catalog = 공간자료Json.Parse(source.Bytes);
+        Require(Text(catalog, "schemaVersion") == "spatial-semantic-layer-catalog.v1"
+            && Text(catalog, "catalogStableId") == Text(registry, "semanticLayerCatalogRef")
+            && Text(catalog, "revision") == Text(registry, "semanticLayerCatalogRevision"),
+            "SemanticLayerCatalogIdentityMismatch");
+        Require(공간자료Json.Hash(source.Bytes).Equals(Text(registry, "semanticLayerCatalogSha256"),
+            StringComparison.OrdinalIgnoreCase), "SemanticLayerCatalogHashMismatch");
+        var layers = Array(catalog, "semanticLayers");
+        Require(layers.Count == 8 && layers.Select(x => Text(x, "semanticLayerStableId"))
+            .Distinct(StringComparer.Ordinal).Count() == layers.Count, "SemanticLayerCatalogSetMismatch");
+    }
+
+    private static void ValidateNeighborhoodPackage(BsonDocument package,
+        공간자료Source semanticLayerSource, int expectedBindings)
+    {
+        Require(Text(package,"schemaVersion") == "neighborhood-spatial-package.v2"
+            && !package.GetValue("sceneReady",true).ToBoolean()
+            && !package.GetValue("gameStateConnected",true).ToBoolean()
+            && !package.GetValue("isExecutionAuthority",true).ToBoolean(), "NeighborhoodPackageAuthorityLeak");
+        Require(Text(package,"semanticLayerCatalogSha256") == 공간자료Json.Hash(semanticLayerSource.Bytes),
+            "NeighborhoodPackageSemanticLayerHashMismatch");
+        var allowed=Array(공간자료Json.Parse(semanticLayerSource.Bytes),"semanticLayers")
+            .Select(x=>Text(x,"semanticLayerStableId")).ToHashSet(StringComparer.Ordinal);
+        var bindings=Array(package,"layerBindings");
+        Require(bindings.Count==expectedBindings && bindings.Select(x=>Text(x,"layerBindingStableId"))
+            .Distinct(StringComparer.Ordinal).Count()==bindings.Count
+            && bindings.All(x=>allowed.Contains(Text(x,"semanticLayerRef"))
+                && !x.GetValue("readinessIsApproval",true).ToBoolean()
+                && !x.GetValue("sceneReady",true).ToBoolean()), "NeighborhoodPackageLayerBindingMismatch");
+    }
+
+    private static void ValidateUnityHandoff(BsonDocument handoff)
+    {
+        Require(Text(handoff,"schemaVersion") == "neighborhood-unity-projection-handoff.v1"
+            && handoff.GetValue("observationPresentationOnly",false).ToBoolean()
+            && !handoff.GetValue("traversalReady",true).ToBoolean()
+            && !handoff.GetValue("gameplayReady",true).ToBoolean()
+            && !handoff.GetValue("sceneReady",true).ToBoolean()
+            && !handoff.GetValue("gameStateConnected",true).ToBoolean()
+            && !handoff.GetValue("isExecutionAuthority",true).ToBoolean()
+            && !handoff.GetValue("privateDetailIncluded",true).ToBoolean()
+            && !handoff.GetValue("containsDetailedAddress",true).ToBoolean()
+            && !handoff.GetValue("containsBusinessName",true).ToBoolean(), "NeighborhoodUnityHandoffBoundaryMismatch");
+        Require(handoff["includedSemanticLayerRefs"].AsBsonArray.All(x=>x.AsString
+            is not "spatial-layer:address-link-private.v1"), "NeighborhoodUnityHandoffPrivateLayerLeak");
+    }
+
     private static void ValidateRegistry(BsonDocument registry)
     {
-        Require(Text(registry, "schemaVersion") == "neighborhood-package-registry.v1"
-            && Text(registry, "registryStableId") == "neighborhood-package-registry:seoul-east.v1",
+        Require(Text(registry, "schemaVersion") == "neighborhood-package-registry.v2"
+            && Text(registry, "registryStableId") == "neighborhood-package-registry:seoul-east.v2",
             "NeighborhoodRegistryIdentityMismatch");
         var packages = Array(registry, "packages");
         Require(packages.Count == 2 && packages.Select(x => Text(x, "packageStableId")).Distinct().Count() == 2,
@@ -420,12 +560,22 @@ internal static class 동별공간PackageCatalog
             "MyeonmokPackageRegionMismatch");
         Require(Text(junghwa, "areaStableId") == JunghwaArea && Text(junghwa, "legalDongCode") == "1126010300"
             && Text(junghwa, "readinessCode") == "InventoryReady", "JunghwaPackageRegionMismatch");
-        Require(Array(registry, "coordinateFrames").Count == 1, "NeighborhoodCoordinateFrameSetChanged");
+        Require(Text(myeonmok, "readinessCode") == "PlacementReviewReady"
+            && Text(myeonmok, "legacyReadinessCode") == "PlacementReady", "MyeonmokReadinessCompatibilityMismatch");
+        Require(Array(registry, "coordinateFrames").Count == 1
+            && Array(registry, "compatibilityAliases").Any(x => Text(x, "legacyRef") == "area:reference:myeonmok"
+                && Text(x, "canonicalRef") == MyeonmokArea), "NeighborhoodCoordinateOrAliasSetChanged");
     }
 
     private static IReadOnlyList<원본입력Fingerprint> VerifyRawInputs(string root, BsonDocument registry)
     {
         var fingerprints = new List<원본입력Fingerprint>();
+        var legacyRegistry=registry["legacyRegistryRef"].AsBsonDocument;
+        var legacyRegistryPath=Resolve(root,Text(legacyRegistry,"path"));
+        using(var legacyRegistryStream=File.OpenRead(legacyRegistryPath))
+            Require(Convert.ToHexString(SHA256.HashData(legacyRegistryStream)).Equals(
+                Text(legacyRegistry,"expectedSha256"),StringComparison.OrdinalIgnoreCase),
+                "NeighborhoodLegacyRegistryHashMismatch");
         foreach (var package in Array(registry, "packages"))
         foreach (var input in Array(package, "sourceInputs"))
         {

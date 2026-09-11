@@ -145,9 +145,11 @@ public sealed class 공간자료CatalogTests
              "offsetX":550,"offsetZ":8,"halfExtent":500,"roads":[{"id":"road:1","x1":550,"x2":560,"z1":8,"z2":20}],"buildings":[]}
             """),"region:kr:bjd:1126010100");
         var batch=공간자료SnapshotBuilder.Build([geometry]);var service=new 공간자료CatalogService(new MemoryStore());await service.ImportAsync(batch,default);
-        var result=await service.PresentationAsync(new(){BundleId=batch.Snapshot["_id"].AsString,DocumentId=batch.Documents[0]["_id"].AsString,Layer="roads",Tile="tile:myeonmok:500m:x0:z0"},default);
+        var result=await service.PresentationAsync(new(){BundleId=batch.Snapshot["_id"].AsString,DocumentId=batch.Documents[0]["_id"].AsString,
+            SemanticLayerStableId="spatial-layer:road-centerline.v1",Tile="tile:myeonmok:500m:x0:z0"},default);
         Assert.False(result.GameStateConnected);Assert.Single(result.Document.GetProperty("items").EnumerateArray());
         Assert.Equal(37.5806971,result.Document.GetProperty("coordinateFrame").GetProperty("originLatitude").GetDouble());
+        Assert.Equal("spatial-layer:road-centerline.v1",result.Document.GetProperty("items").EnumerateArray().Single().GetProperty("semanticLayerStableId").GetString());
     }
 
     [Fact]
@@ -238,6 +240,42 @@ public sealed class 공간자료CatalogTests
         var observation=Assert.Single(batch.Elements,x=>x["kind"]=="ObservationCandidate");
         Assert.Equal(area,observation["areaStableId"]);Assert.Equal("observations",observation["layer"]);
         Assert.False(observation["payload"]["isExecutionAuthority"].AsBoolean);
+    }
+
+    [Fact]
+    public async Task 의미레이어대장과v2동별패키지를_기존구조레이어와분리해조회한다()
+    {
+        const string area="region:kr:bjd:1126010100";
+        var sources=new 공간자료Source[]
+        {
+            new("semantic-layers.json","shared","SemanticLayerCatalog",Encoding.UTF8.GetBytes("""
+                {"schemaVersion":"spatial-semantic-layer-catalog.v1","catalogStableId":"catalog:spatial-layers","revision":"r1",
+                 "semanticLayers":[{"semanticLayerStableId":"spatial-layer:building-footprint.v1","layerCode":"BuildingFootprint"}]}
+                """)),
+            new("registry.json","registry","NeighborhoodRegistry",Encoding.UTF8.GetBytes("""
+                {"schemaVersion":"neighborhood-package-registry.v2","registryStableId":"registry:neighborhoods","revision":"r2",
+                 "packages":[{"packageStableId":"package:myeonmok","areaStableId":"region:kr:bjd:1126010100"}]}
+                """)),
+            new("package.json","neighborhood","NeighborhoodPackage",Encoding.UTF8.GetBytes("""
+                {"schemaVersion":"neighborhood-spatial-package.v2","packageStableId":"package:myeonmok","revision":"r2",
+                 "areaStableId":"region:kr:bjd:1126010100","readinessCode":"PlacementReviewReady","sceneReady":false,
+                 "layerBindings":[{"layerBindingStableId":"binding:myeonmok:building","semanticLayerRef":"spatial-layer:building-footprint.v1",
+                 "sourceRef":"placement:myeonmok","relationshipCode":"ProjectsLayer","readinessCode":"PlacementReviewReady"}]}
+                """),area)
+        };
+        var batch=공간자료SnapshotBuilder.Build(sources);
+        var definition=Assert.Single(batch.Elements,x=>x["kind"]=="SemanticLayerDefinition");
+        Assert.Equal("spatial-layer:building-footprint.v1",definition["semanticLayerStableId"]);
+        var binding=Assert.Single(batch.Elements,x=>x["kind"]=="SemanticLayerBinding");
+        Assert.Equal("layer-bindings",binding["layer"]);Assert.Equal(area,binding["areaStableId"]);
+
+        var service=new 공간자료CatalogService(new MemoryStore());await service.ImportAsync(batch,default);
+        var page=await service.ElementsAsync(new(){BundleId=batch.Snapshot["_id"].AsString,AreaStableId=area,
+            SemanticLayerStableId="spatial-layer:building-footprint.v1"},default);
+        Assert.Single(page.Items);Assert.Equal("binding:myeonmok:building",page.Items[0].GetProperty("stableId").GetString());
+        var relations=await service.RelationsAsync(new(){BundleId=batch.Snapshot["_id"].AsString,AreaStableId=area,
+            SemanticLayerStableId="spatial-layer:building-footprint.v1"},default);
+        Assert.True(relations.Total>=2);
     }
 
     [Fact]

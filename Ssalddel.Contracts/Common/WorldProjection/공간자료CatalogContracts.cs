@@ -6,7 +6,7 @@ public static class 공간자료CatalogCodes
 {
     public const string Route = "api/v1/admin/spatial-catalog";
     public const string Policy = "서버관리자전용";
-    public const string AdapterVersion = "spatial-catalog.r3";
+    public const string AdapterVersion = "spatial-catalog.r4";
     public const string Feature = "spatial-json-catalog";
 }
 
@@ -27,6 +27,8 @@ public sealed class 공간자료Query
     public string? ReviewState { get; set; }
     public string? DocumentId { get; set; }
     public string? StableId { get; set; }
+    // 기존 Layer는 원본 JSON 배열/구조 이름이다. 의미 계층 조회는 이 안정 식별자를 사용한다.
+    public string? SemanticLayerStableId { get; set; }
     public string? Layer { get; set; }
     public string? Tile { get; set; }
     public string? RelationKey { get; set; }

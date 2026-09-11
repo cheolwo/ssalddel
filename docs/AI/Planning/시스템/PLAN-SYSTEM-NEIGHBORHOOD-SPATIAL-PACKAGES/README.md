@@ -1,17 +1,17 @@
-[기획 · 월드·공간·배치 · PLAN-SYSTEM-NEIGHBORHOOD-SPATIAL-PACKAGES · r1]
+[기획 · 월드·공간·배치 · PLAN-SYSTEM-NEIGHBORHOOD-SPATIAL-PACKAGES · r2]
 
 # 법정동별 공간 패키지와 공통 오행 업무 객체
 
-상태: `Approved / FoundationImplemented / MyeonmokPlacementCompatibilityPreserved / JunghwaInventoryReady / UnityApplicationDeferred`
+상태: `Approved / SemanticLayerFoundationImplemented / MyeonmokPlacementCompatibilityPreserved / JunghwaInventoryReady / ReadOnlyUnityHandoffPrepared / UnityApplicationDeferred`
 
 ## 목적
 
 면목동 화면을 동마다 복제하지 않고, 공공자료를 **법정동 패키지**로 정리한 뒤 필요할 때 동별로 읽고 500m 타일 단위로 표현할 수 있는 기반을 둔다. 오행 업무 객체 원형은 모든 동이 같은 대장을 참조하고, 현실 건물·도로·시설의 좌표와 근거는 각 동 패키지가 별도로 소유한다.
 
 ```text
-공통 오행 업무 객체 대장
-          ↓ 참조
-법정동 패키지 대장
+공공데이터 원본 → 의미 레이어 대장 → Graph Map → 배치 Map
+                                      ↓ 참조
+공통 오행 업무 객체 대장 → 법정동 패키지 대장
   ├─ 면목동 1126010100 ─ Graph Map + 배치 Map + 객체 후보
   └─ 중화동 1126010300 ─ 공공자료 관측 재고 (배치 전)
           ↓ 검토·승인 뒤에만
@@ -19,6 +19,14 @@
 ```
 
 Graph Map은 객체·주체·행위의 의미 관계를, 배치 Map은 좌표·외곽·높이 근거·타일·미배치 사유를 소유한다. MongoDB 공간자료 보관함은 둘의 불변 조회 사본이며 원본 편집 권위나 게임 실행 권위가 아니다.
+
+### 의미 레이어와 관계 축
+
+기존 `layer`는 원본 JSON 배열과 구조 이름으로 보존하고, 교차 자료 조회에는 `semanticLayerStableId`를 사용한다. 공통 대장은 행정·법정동 경계, 좌표계, 건물 윤곽, 도로 중심선, 비공개 주소 연결, 시설·사업체 관측, 인구·경제 통계, 시나리오 오버레이의 8개 의미 레이어를 정의한다.
+
+관계는 `ContainsLayer`, `DerivedFrom`, `UsesCoordinateFrame`, `InterpretsLayer`, `ProjectsLayer`, `ScenarioOverlayOf`, `AliasOf`로 명시한다. 기존 `area:reference:myeonmok`은 삭제하지 않고 법정동 정본 `region:kr:bjd:1126010100`의 호환 별칭으로 보존한다.
+
+준비 상태는 `InventoryReady → GeometryReady → RelationshipReady → PlacementReviewReady → ProjectionReady` 순서로만 올라간다. 어느 상태도 사람 승인, 통행 가능, 업무 장소, `SceneReady`를 뜻하지 않는다.
 
 ## 확정
 
@@ -47,16 +55,16 @@ Graph Map은 객체·주체·행위의 의미 관계를, 배치 Map은 좌표·�
 
 | 동 | 상태 | 현재 근거 | 허용되는 사용 |
 | --- | --- | --- | --- |
-| 면목동 | `PlacementReady`이되 승인 아님 | 기존 Graph/배치 Map, 건물 602개, 도로 2,397개, 건물 배경 후보 602개와 도로망 후보 1개 | 기존 안정 ID와 500m 타일의 비식별 검토·호환 조회 |
+| 면목동 | `PlacementReviewReady`이되 승인 아님 (`PlacementReady` 호환 보존) | 기존 Graph/배치 Map, 건물 602개, 도로 2,397개, 건물 배경 후보 602개와 도로망 후보 1개 | 기존 안정 ID와 500m 타일의 비식별 검토·호환 조회 |
 | 중화동 | `InventoryReady` | 2026-06 서울 상가 1,672건, 중랑구 시설 14건, 좌표 후보 1,683건 | 업종·시설 종류·좌표 품질의 비공개 검토 조회 |
 
 중화동은 공식 법정동 경계, 건물·도로 도형, 출입구와 높이 근거가 아직 없다. 따라서 Graph Map과 배치 Map, Unity 배치, `SceneReady`, `GameplayReady`를 만들지 않는다. 상호명·상세 주소·공급자 원본 ID는 생성 관측 재고에서 제외하고 식별자는 hash로 제한한다.
 
 ### Mongo 조회
 
-기존 네 컬렉션만 사용하며 `areaStableId`를 문서·구성요소·관계의 선택 필터로 추가한다. 공유 대장 안의 동별 등록 항목도 자기 `areaStableId`를 이어받는다. 전체 묶음과 면목동/중화동 전용 묶음은 같은 동결 입력에서 결정적으로 생성할 수 있다.
+기존 네 컬렉션만 사용하며 `areaStableId`와 `semanticLayerStableId`를 문서·구성요소·관계의 선택 필터로 사용한다. 공유 대장 안의 동별 등록 항목도 자기 `areaStableId`를 이어받는다. 전체 묶음과 면목동/중화동 전용 묶음은 같은 동결 입력에서 결정적으로 생성할 수 있다.
 
-현행 로컬 검토 묶음은 `bundle:4055D8D43005D7BDD2D99C2878394DA9516C2A98034251BE0244D1435CB3BB1E`이며 32문서·7,490구성요소·9,652명시 관계다. 이는 로컬 저장·재조회 성공 증거이지 자료 승인이나 Unity 적용 증거가 아니다.
+현행 로컬 검토 묶음은 `bundle:1862BC54C14DD21CCA5AB38FBCCD9DF1E0674A4331E6B327038C13A12274AAF2`이며 34문서·7,511구성요소·9,692명시 관계다. 의미 레이어 정의 8개, 동별 레이어 결속 12개와 면목동 읽기 전용 Unity 인계 문서를 포함한다. 이는 로컬 저장·재조회 성공 증거이지 자료 승인이나 Unity 적용 증거가 아니다.
 
 ## 확장 순서
 
@@ -81,9 +89,9 @@ Graph Map은 객체·주체·행위의 의미 관계를, 배치 Map은 좌표·�
 
 ## 구현·검증 기록
 
-- `spatial-catalog.r3`가 공통 객체 대장, 동별 등록 대장, 면목동 후보 투영, 중화동 관측 재고와 두 동 패키지를 읽는다.
-- 전체 묶음 반입 신규 17,175기록, 독립 재조회 성공, 같은 입력 재반입 신규 0을 확인했다. 다른 Mongo 컬렉션·MySQL·Unity·게임 상태는 변경하지 않았다.
-- 공간자료 집중 .NET 시험 43/43, 표준 Fast 대상 회귀 130/130, v3.5 빌드 오류 0을 확인했다. importer와 관리자 웹의 직접 빌드는 경고·오류 0, 전용 원본/hash 검사와 실제 HTTP의 권한·지역 필터·개인정보 축소 검사를 통과했다.
+- `spatial-catalog.r4`가 공통 의미 레이어, 공통 객체 대장, v2 동별 등록 대장, 면목동 후보 투영, 중화동 관측 재고와 두 동 패키지를 읽는다. 기존 v1 패키지와 구조 `layer` 조회는 호환 유지한다.
+- 전체 묶음 반입 신규 17,238기록, 독립 재조회 성공, 같은 입력 재반입 신규 0을 확인했다. 다른 Mongo 컬렉션·MySQL·Unity·게임 상태는 변경하지 않았다.
+- 공간자료 집중 .NET 시험 24/24, importer 빌드 경고·오류 0, 전용 원본/hash·수량·개인정보 경계 검사를 통과했다. 전체 범위 검증 결과는 `CURRENT_WORK.md`의 최신 상태를 따른다.
 - Play Mode·Game View는 이번 목표의 대상이 아니며 실행하지 않았다.
 
 ## 미정
