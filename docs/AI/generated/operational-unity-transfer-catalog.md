@@ -1,13 +1,13 @@
 # 운영 서버에서 Mirror Unity로의 선별 이관 대장
 
-- 판본: `operations-unity-transfer.r1`
+- 판본: `operations-unity-transfer.r2`
 - 기획: [PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001](../Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md)
-- 기획 SHA-256: `02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31`
+- 기획 SHA-256: `dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d`
 - 페이지 기능: 241개
 - EF Core DbSet: 271개
-- MongoDB collection 호출: 28개
+- MongoDB collection 호출: 33개
 - 기존 Unity 대표 경로: 18개
-- 참조 가능한 H: H1 85 / H2 38 / H3 20 / H4 6
+- 참조 가능한 H: H1 86 / H2 40 / H3 21 / H4 6
 
 이 대장은 자동 생성물이다. 페이지·저장 개체는 조사 모수이며 H1로 자동 승격되지 않는다. `MappedCandidate`도 실제 배치나 E5 증거가 아니다.
 
@@ -19,6 +19,24 @@
 | `PlayableAction` | 67 | 명시적 선택·확인 뒤 서버 권위 결과 재조회 |
 | `ReadOnlyContext` | 111 | 선택형 상세 또는 World 패널 |
 | `ServerOnly` | 4 | Unity 직접 실행 금지, 필요 시 Web 인계 |
+
+## 생활 관찰 프로필
+
+운영 앱과 Unity 생활 관찰은 다대다 관계다. `SimulationAnalog`는 앱의 운영 원장을 연결한다는 뜻이 아니라, 같은 업무 의미를 가상 Simulation 생활로 관찰한다는 뜻이다.
+
+| 프로필 | 장면·영역 | 권위·경험 | 카메라 | 운영 행위 | WI |
+| --- | --- | --- | --- | --- | --- |
+| `observation-profile:synthetic-neighborhood-food-life.v1`<br>합성 동네 자율 음식 생활 | `SimulationWorldShell` / `City` | `SimulationSession` / `AutonomousNpcWorld` | `OverviewWithManualFocus` | 금지 / 표현 전용 `True` | WI-CITY-RESTAURANT-ACCEPT<br>WI-CITY-RESTAURANT-COOK<br>WI-CITY-SYNTHETIC-ASSIGN<br>WI-CITY-SYNTHETIC-MOVE<br>WI-CITY-SYNTHETIC-PICKUP<br>WI-CITY-SYNTHETIC-DELIVER<br>WI-CITY-SYNTHETIC-RECEIVE<br>WI-CITY-SYNTHETIC-RETURN |
+
+- 첫 생활 장면 프로필: `observation-profile:synthetic-neighborhood-food-life.v1`
+
+## 앱과 관찰 프로필 연결
+
+| 앱 | 관계 | 관찰 프로필 |
+| --- | --- | --- |
+| `FoodDeliveryDriverApp` | `SimulationAnalog` | `observation-profile:synthetic-neighborhood-food-life.v1` |
+| `OrdererApp` | `SimulationAnalog` | `observation-profile:synthetic-neighborhood-food-life.v1` |
+| `RestaurantDeskApp` | `SimulationAnalog` | `observation-profile:synthetic-neighborhood-food-life.v1` |
 
 ## 첫 독립 표본
 
@@ -275,6 +293,6 @@
 
 ## 진단
 
-- `SpatialCatalogDeclaredH2CountDrift:18->38`
-- `SpatialCatalogDeclaredH3CountDrift:10->20`
+- `SpatialCatalogDeclaredH2CountDrift:18->40`
+- `SpatialCatalogDeclaredH3CountDrift:10->21`
 - `SpatialCatalogDeclaredH4CountDrift:5->6`

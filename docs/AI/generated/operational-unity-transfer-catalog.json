@@ -1,20 +1,20 @@
 {
-  "schemaVersion": "operational-unity-transfer-catalog.v1",
-  "revision": "operations-unity-transfer.r1",
+  "schemaVersion": "operational-unity-transfer-catalog.v2",
+  "revision": "operations-unity-transfer.r2",
   "planning": {
     "planningId": "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
     "documentRef": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
-    "revision": "operations-unity-transfer.r2",
-    "documentSha256": "02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31"
+    "revision": "operations-unity-transfer.r3",
+    "documentSha256": "dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d"
   },
   "summary": {
     "pageCapabilityCount": 241,
     "dbSetCount": 271,
-    "mongoCollectionCount": 28,
+    "mongoCollectionCount": 33,
     "unityRepresentativeRouteCount": 18,
-    "h1Count": 85,
-    "h2Count": 38,
-    "h3Count": 20,
+    "h1Count": 86,
+    "h2Count": 40,
+    "h3Count": 21,
     "h4Count": 6,
     "classificationCounts": {
       "AmbientSimulation": 59,
@@ -16333,6 +16333,31 @@
       "sourcePath": "Ssalddel.Tests/Infrastructure/RuntimeInfrastructureIntegrationTests.cs"
     },
     {
+      "documentType": "BsonDocument",
+      "collectionExpression": "name",
+      "sourcePath": "Ssalddel/Services/WorldProjection/SpatialCatalog/\uACF5\uAC04\uC790\uB8CCCatalogStore.cs"
+    },
+    {
+      "documentType": "BsonDocument",
+      "collectionExpression": "name",
+      "sourcePath": "eng/Ssalddel.PublicDataPortalImport/\uACF5\uAC04\uC790\uB8CCCatalogImport.cs"
+    },
+    {
+      "documentType": "BsonDocument",
+      "collectionExpression": "\u0022simulation_bootstrap_bundles\u0022",
+      "sourcePath": "eng/Ssalddel.PublicDataPortalImport/\uB85C\uCEEC\uC0DD\uD65C\uC790\uB8CCImport.cs"
+    },
+    {
+      "documentType": "BsonDocument",
+      "collectionExpression": "(string",
+      "sourcePath": "eng/Ssalddel.PublicDataPortalImport/\uB85C\uCEEC\uC0DD\uD65C\uC790\uB8CCImport.cs"
+    },
+    {
+      "documentType": "BsonDocument",
+      "collectionExpression": "name",
+      "sourcePath": "eng/Ssalddel.PublicDataPortalImport/\uB85C\uCEEC\uC0DD\uD65C\uC790\uB8CCImport.cs"
+    },
+    {
       "documentType": "CollectiveProcurementPlanDocument",
       "collectionExpression": "CollectionName",
       "sourcePath": "Ssalddel/Services/CollectiveProcurement/CollectiveProcurementPlanningMongoStore.cs"
@@ -16761,6 +16786,64 @@
       "requiresCanonicalStateRefresh": true
     }
   ],
+  "observationProfiles": [
+    {
+      "profileId": "observation-profile:synthetic-neighborhood-food-life.v1",
+      "displayNameKo": "\uD569\uC131 \uB3D9\uB124 \uC790\uC728 \uC74C\uC2DD \uC0DD\uD65C",
+      "authorityScopeCode": "SimulationSession",
+      "experienceRoleCode": "AutonomousNpcWorld",
+      "sceneStableId": "SimulationWorldShell",
+      "areaCode": "City",
+      "cameraModeCode": "OverviewWithManualFocus",
+      "actorRoleCodes": [
+        "Orderer",
+        "RestaurantOwner",
+        "FoodCourier"
+      ],
+      "facilityCodes": [
+        "restaurant",
+        "home-a",
+        "home-b"
+      ],
+      "workflowCodes": [
+        "FoodDelivery"
+      ],
+      "worldInteractionRefs": [
+        "WI-CITY-RESTAURANT-ACCEPT",
+        "WI-CITY-RESTAURANT-COOK",
+        "WI-CITY-SYNTHETIC-ASSIGN",
+        "WI-CITY-SYNTHETIC-MOVE",
+        "WI-CITY-SYNTHETIC-PICKUP",
+        "WI-CITY-SYNTHETIC-DELIVER",
+        "WI-CITY-SYNTHETIC-RECEIVE",
+        "WI-CITY-SYNTHETIC-RETURN"
+      ],
+      "unityImplementationRefs": [
+        "Ssalddel.Unity/Runtime/Observation/\uB3D9\uB124\uAD00\uCC30Presenter.cs",
+        "Ssalddel.Unity/Runtime/Observation/\uB3D9\uB124\uAD00\uCC30SessionController.cs"
+      ],
+      "allowsOperationalActions": false,
+      "observationPresentationOnly": true
+    }
+  ],
+  "appObservationBindings": [
+    {
+      "appCode": "FoodDeliveryDriverApp",
+      "observationProfileRef": "observation-profile:synthetic-neighborhood-food-life.v1",
+      "relationCode": "SimulationAnalog"
+    },
+    {
+      "appCode": "OrdererApp",
+      "observationProfileRef": "observation-profile:synthetic-neighborhood-food-life.v1",
+      "relationCode": "SimulationAnalog"
+    },
+    {
+      "appCode": "RestaurantDeskApp",
+      "observationProfileRef": "observation-profile:synthetic-neighborhood-food-life.v1",
+      "relationCode": "SimulationAnalog"
+    }
+  ],
+  "firstLivingSceneProfileRef": "observation-profile:synthetic-neighborhood-food-life.v1",
   "firstSlice": {
     "sliceId": "operational-unity-slice:hub-inbound-putaway.v1",
     "areaCode": "Hub",
@@ -16795,16 +16878,24 @@
       "sha256": "2d7937115c9c8ee3f6a64ef08a9f5382b65f9f5ca55064483a52a54e09911b72"
     },
     {
+      "path": "Ssalddel.Unity/Runtime/Observation/\uB3D9\uB124\uAD00\uCC30Presenter.cs",
+      "sha256": "6d25ed1c9cc1a4511f81fef872aed460e436a52d082343d6ff3e4939484537f2"
+    },
+    {
+      "path": "Ssalddel.Unity/Runtime/Observation/\uB3D9\uB124\uAD00\uCC30SessionController.cs",
+      "sha256": "ac59f72f55cc7da25ecc66ff922406477b0d44055729952b0c383421e5b2b62f"
+    },
+    {
       "path": "Ssalddel.Unity/Runtime/WorldProjection/PageWorldProjectionCatalog.cs",
       "sha256": "a86ea3da8f6fe9dc890055a856ab036eda88bbd0dcac612aba77befeb086b925"
     },
     {
       "path": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
-      "sha256": "02aa39f12973b3ad2428ba6192f787e7cf8a3438db8eea3887984193c1097b31"
+      "sha256": "dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d"
     },
     {
       "path": "eng/Ssalddel.OperationalUnityTransfer/Program.cs",
-      "sha256": "5f3f630951e14f5ba58d233847dd56907862c7dfc9ef1e7a1f29768835af142e"
+      "sha256": "68ea00ca2a0906db8593683d84cf0697c5c1166ab3ea09a5af5c1b94660de4ff"
     },
     {
       "path": "eng/Ssalddel.OperationalUnityTransfer/Ssalddel.OperationalUnityTransfer.csproj",
@@ -16812,25 +16903,25 @@
     },
     {
       "path": "eng/execution-ledgers/operational-unity-transfer-policy.json",
-      "sha256": "51939e002d865a73e4ee2236f1f93920cb07a9911fa9df6cb7d01e7adf810a44"
+      "sha256": "8e5eb3de2ced7cd7e7525c0f4ccfa18ce386a8cd827945a0ebfc20faa4fc4bf8"
     },
     {
       "path": "eng/execution-ledgers/playable-loops.json",
-      "sha256": "917fd009f6a6a0e0a0b86967c546e9632bec95d1885571505289ef77cd21da29"
+      "sha256": "d646f856eb8f5484d4ad0424a0856db82280b2c5006991b0f7f0676dbdbe2f1d"
     },
     {
       "path": "eng/execution-ledgers/world-interactions.json",
-      "sha256": "ecfec4187f9d33eb9cde8c75dc95e2b5f532a114ccc9c0913658e6195fe12898"
+      "sha256": "75383697365c145bd0abead0ff8dc36c3bdab6a36c9f252720480bf41bb9b097"
     },
     {
       "path": "eng/world-seedbeds/synty-bottom-up-inventory/catalog.v3.json",
-      "sha256": "9fc9f0b8cea60a6d0b290b8e152f9afa584e73cd077db7e53ecdfb8a70474bc1"
+      "sha256": "2c974b8f8f3b1e7cae099c2ed2eabf40be73fa4dab3b3f63a347ff0d4caefdd1"
     }
   ],
   "diagnostics": {
     "warnings": [
-      "SpatialCatalogDeclaredH2CountDrift:18-\u003E38",
-      "SpatialCatalogDeclaredH3CountDrift:10-\u003E20",
+      "SpatialCatalogDeclaredH2CountDrift:18-\u003E40",
+      "SpatialCatalogDeclaredH3CountDrift:10-\u003E21",
       "SpatialCatalogDeclaredH4CountDrift:5-\u003E6"
     ]
   }

@@ -4,8 +4,8 @@
 
 - 기획 ID: `PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001`
 - 기획 분야: 시스템·운영 기능 이관
-- 기획 판본: `operations-unity-transfer.r2`
-- 상태: `ApprovedForHandoff`
+- 기획 판본: `operations-unity-transfer.r3`
+- 상태: `ApprovedForHandoff / AppObservationProfilesSeparated`
 - 상위 기획: `PLAN-GAME-COMMON-PURPOSE-001`
 - 관련 하위 기획: `PLAN-GRAPH-HUB-LOGISTICS-CIRCULATION-001`, `PLAN-PRESENTATION-E4-POOL-001`
 - 관련 결정: 운영·Simulation·Unity 권위 분리, Farm·Hub·City 독립 영역 우선
@@ -43,7 +43,25 @@
 
 등급은 서버 실행 권한을 부여하지 않는다. `PlayableAction`도 기존 권한·revision·Preview·Confirm·canonical 재조회를 통과해야 한다.
 
-## 3. H1·H2 번역 규칙
+## 3. 앱과 생활 관찰 프로필 분리
+
+운영 앱의 존재와 Unity에서 관찰할 수 있는 생활은 같은 목록으로 취급하지 않는다. 운영 앱은 실제 사용자·업무 원장·명시적 Command의 진입점이고, 생활 관찰 프로필은 `SimulationSession` 상태 사본을 같은 장면에서 읽어 표현하는 구성이다. 앱 하나가 여러 관찰 프로필과 연결되거나 여러 앱이 하나의 생활 프로필을 설명할 수 있으므로 관계는 다대다로 둔다.
+
+첫 프로필은 `observation-profile:synthetic-neighborhood-food-life.v1`이다. `SimulationWorldShell`의 City 합성 동네에서 주민 주문, 음식점 수락·조리, 음식 배달 기사 배정·이동·픽업·전달, 주민 수령, 기사 복귀를 자율 생활로 묶는다. 기본 카메라는 전체 개요이며 사용자가 고른 주체·시설만 추적한다. 사건 발생만으로 카메라를 자동 전환하지 않는다.
+
+| 운영 앱 | 관찰 관계 | 첫 생활 프로필에서 읽는 의미 |
+| --- | --- | --- |
+| `OrdererApp` | `SimulationAnalog` | 가상 주민의 음식 주문과 수령 |
+| `RestaurantDeskApp` | `SimulationAnalog` | 가상 음식점의 접수·수락·조리 |
+| `FoodDeliveryDriverApp` (`FDriverApp`) | `SimulationAnalog` | 가상 배달 기사의 배정·이동·픽업·전달·복귀 |
+
+`SimulationAnalog`는 운영 앱·계정·주문·기사 위치를 Unity에 연결한다는 뜻이 아니다. 첫 프로필은 `allowsOperationalActions=false`, `observationPresentationOnly=true`이며 실제 주문, 실제 배차, 운영 DB 변경, 정산 효과를 만들지 않는다. 기존 Hub 입고 첫 표본과 전수 이관 등급은 그대로 유지한다.
+
+세부 범위와 검증 절차는 [같은 장면 자율 음식 생활 관찰 r1](../PLAN-SYSTEM-MYEONMOK-OBSERVER/same-scene-food-life-observation.r1.md)에 결속한다.
+
+운영 기사 앱과 Unity NPC의 권위 경계는 [음식 배달 기사 경계 r2](../PLAN-SYSTEM-MYEONMOK-OBSERVER/driver-role-boundary.r2.md)와 [화물 기사 경계 r1](../PLAN-SYSTEM-MYEONMOK-OBSERVER/freight-driver-role-boundary.r1.md)을 지원 자료로 사용한다. 두 문서는 과거 면목동 경로에 남아 있지만 소유 의미는 운영 기능 이관이며, 거리·거절률·완료율·시간당 균형 같은 운영 배차 정책은 별도 [운영 배차 공통 코어](../../공통/PLAN-OPERATIONS-DISPATCH-CORE/README.md)가 소유한다.
+
+## 4. H1·H2 번역 규칙
 
 ### H1
 
@@ -81,7 +99,7 @@ H2는 둘 이상의 H1을 시작·선택·결과·회복 또는 귀환으로 연
 
 H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업 지점 하나가 여러 소품·Actor·Animation을 조합할 수 있고, 같은 창고 건물 안에 여러 H1이 함께 존재할 수 있다.
 
-## 4. 전수 이관 대장
+## 5. 전수 이관 대장
 
 기계 판독 대장은 다음을 각각 독립 배열로 보존한다.
 
@@ -94,7 +112,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 
 페이지 별칭은 canonical 기능 ID로 묶는다. 다만 자동 정규화로 의미를 확정하지 않으며, 검증된 별칭 규칙만 같은 ID를 공유한다.
 
-## 5. 첫 독립 표본: Hub 입고·검수·적치
+## 6. 첫 독립 표본: Hub 입고·검수·적치
 
 ### 지금·여기·나·너·이렇게
 
@@ -123,7 +141,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 - 운영 Command 연결과 canonical 재조회: 조회 표본 뒤 별도 WI에서 검증
 - 현행 Presentation은 E1이며 이 이관 대장의 목표 상한은 E4 준비다. E5는 실제 배치 증거 전까지 금지한다.
 
-## 6. 영역별 후속 순서
+## 7. 영역별 후속 순서
 
 1. Hub 창고 입고·검수·적치
 2. Hub 출고 준비와 내부 작업 반환
@@ -136,7 +154,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 
 이 순서는 제품 출시 판본의 선후행 의존성을 뜻하지 않는다.
 
-## 7. E4에서 E5로 가는 관문
+## 8. E4에서 E5로 가는 관문
 
 다음 항목이 같은 판본으로 결속된 H1만 E5 실행 후보가 된다.
 
@@ -150,7 +168,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 
 정적 Fixture, 컴파일, 단위 시험, 보조 Scene 또는 이미지 후보만으로 E5를 선언하지 않는다.
 
-## 8. 상위 목적 정렬
+## 9. 상위 목적 정렬
 
 - 나의 막힘: 방대한 운영 기능을 그대로 World Object로 옮기면 무엇을 해야 하는지 판독하기 어렵다.
 - 회복 행동과 대가: 플레이어 과업 단위로 선별 번역하되 정밀 관리·민감 업무는 Web에 남긴다.
@@ -160,7 +178,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 - 환류: 성공 결과를 재조회해 다음 과업과 H1 상태를 갱신한다.
 - 보조 층: 공공데이터 근거, 상세 이력, Web 인계, 환경 NPC·차량 표현
 
-## 9. 확정·미정
+## 10. 확정·미정
 
 ### 확정
 
@@ -179,7 +197,7 @@ H1 하나를 건물 하나나 Prefab 하나와 동일시하지 않는다. 작업
 - 도심 배송 표본의 정확 WI·H1/H2·경로·오토바이 및 Actor 표현 후보
 - 운영 Command를 게임 내에서 허용할 개별 WI와 권한
 
-## 10. 구현된 관리 도구
+## 11. 구현된 관리 도구
 
 - 음식점 첫 구현: [접수→조리→픽업 대기 전용 처리](restaurant-processing.md). 별도 고객 주문 대기함·수락/거절·배차 연결과 실제 UI는 미완료.
 

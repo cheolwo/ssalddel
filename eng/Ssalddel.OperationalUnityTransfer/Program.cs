@@ -91,6 +91,13 @@ internal static class OperationalUnityTransferProgram
     {
         var diagnostics = new List<string>();
         ValidatePolicy(root, policy);
+        var observationProfiles = (policy.ObservationProfiles ?? Array.Empty<ObservationProfileDefinition>())
+            .OrderBy(item => item.ProfileId, StringComparer.Ordinal)
+            .ToArray();
+        var appObservationBindings = (policy.AppObservationBindings ?? Array.Empty<AppObservationBindingDefinition>())
+            .OrderBy(item => item.AppCode, StringComparer.Ordinal)
+            .ThenBy(item => item.ObservationProfileRef, StringComparer.Ordinal)
+            .ToArray();
 
         var planningPath = ResolvePath(root, policy.Planning.DocumentRef);
         var actualPlanHash = Sha256(planningPath);
@@ -166,7 +173,8 @@ internal static class OperationalUnityTransferProgram
             "eng/world-seedbeds/synty-bottom-up-inventory/catalog.v3.json",
             "eng/execution-ledgers/playable-loops.json",
             "eng/execution-ledgers/world-interactions.json"
-        }.Concat(Directory.EnumerateFiles(
+        }.Concat(observationProfiles.SelectMany(item => item.UnityImplementationRefs))
+        .Concat(Directory.EnumerateFiles(
                 ResolvePath(root, "Ssalddel.Contracts/Common/Versioning"),
                 "*PageCapabilityCatalog*.cs",
                 SearchOption.TopDirectoryOnly)
@@ -191,7 +199,7 @@ internal static class OperationalUnityTransferProgram
             .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
 
         return new TransferCatalog(
-            "operational-unity-transfer-catalog.v1",
+            "operational-unity-transfer-catalog.v2",
             policy.Revision,
             new PlanningBinding(
                 policy.Planning.PlanningId,
@@ -213,6 +221,9 @@ internal static class OperationalUnityTransferProgram
             persistence.DbSets,
             persistence.MongoCollections,
             routeCatalog,
+            observationProfiles,
+            appObservationBindings,
+            policy.FirstLivingSceneProfileRef ?? string.Empty,
             policy.FirstSlice,
             sourceFingerprints,
             new CatalogDiagnostics(diagnostics.OrderBy(item => item, StringComparer.Ordinal).ToArray()));
@@ -457,10 +468,14 @@ internal static class OperationalUnityTransferProgram
 
     private static void ValidatePolicy(string root, TransferPolicy policy)
     {
-        if (!string.Equals(policy.SchemaVersion, "operational-unity-transfer-policy.v1", StringComparison.Ordinal))
+        if (!string.Equals(policy.SchemaVersion, "operational-unity-transfer-policy.v1", StringComparison.Ordinal)
+            && !string.Equals(policy.SchemaVersion, "operational-unity-transfer-policy.v2", StringComparison.Ordinal))
         {
             throw new CatalogValidationException($"UnsupportedPolicySchema:{policy.SchemaVersion}");
         }
+
+        var observationProfiles = policy.ObservationProfiles ?? Array.Empty<ObservationProfileDefinition>();
+        var appObservationBindings = policy.AppObservationBindings ?? Array.Empty<AppObservationBindingDefinition>();
 
         var duplicateRules = policy.MappingRules.GroupBy(rule => rule.MappingId, StringComparer.Ordinal).Where(group => group.Count() > 1).Select(group => group.Key).ToArray();
         if (duplicateRules.Length > 0)
@@ -468,7 +483,8 @@ internal static class OperationalUnityTransferProgram
             throw new CatalogValidationException($"DuplicateMappingRule:{string.Join(',', duplicateRules)}");
         }
 
-        foreach (var path in policy.MappingRules.SelectMany(rule => rule.UnityImplementationRefs).Concat(new[]
+        foreach (var path in policy.MappingRules.SelectMany(rule => rule.UnityImplementationRefs)
+            .Concat(observationProfiles.SelectMany(profile => profile.UnityImplementationRefs)).Concat(new[]
         {
             policy.FirstSlice.ServerContractRef,
             policy.FirstSlice.ServerUseCaseRef,
@@ -480,6 +496,86 @@ internal static class OperationalUnityTransferProgram
             if (!File.Exists(ResolvePath(root, path)) && !Directory.Exists(ResolvePath(root, path)))
             {
                 throw new CatalogValidationException($"ReferencedPathMissing:{path}");
+            }
+        }
+
+        var duplicateProfileIds = observationProfiles
+            .GroupBy(profile => profile.ProfileId, StringComparer.Ordinal)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .ToArray();
+        if (duplicateProfileIds.Length > 0)
+        {
+            throw new CatalogValidationException($"DuplicateObservationProfile:{string.Join(',', duplicateProfileIds)}");
+        }
+
+        var duplicateBindings = appObservationBindings
+            .GroupBy(binding => $"{binding.AppCode}|{binding.ObservationProfileRef}", StringComparer.Ordinal)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .ToArray();
+        if (duplicateBindings.Length > 0)
+        {
+            throw new CatalogValidationException($"DuplicateAppObservationBinding:{string.Join(',', duplicateBindings)}");
+        }
+
+        var profileIds = observationProfiles.Select(profile => profile.ProfileId).ToHashSet(StringComparer.Ordinal);
+        if (!string.IsNullOrWhiteSpace(policy.FirstLivingSceneProfileRef)
+            && !profileIds.Contains(policy.FirstLivingSceneProfileRef))
+        {
+            throw new CatalogValidationException($"FirstLivingSceneProfileMissing:{policy.FirstLivingSceneProfileRef}");
+        }
+
+        var appCodes = SsalddelPageCapabilityCatalog.GetAll()
+            .Select(item => item.AppCode)
+            .ToHashSet(StringComparer.Ordinal);
+        var allowedRelations = new HashSet<string>(new[] { "SimulationAnalog", "ReadOnlyProjection", "NoUnityRepresentation" }, StringComparer.Ordinal);
+        foreach (var binding in appObservationBindings)
+        {
+            if (!appCodes.Contains(binding.AppCode))
+            {
+                throw new CatalogValidationException($"ObservationBindingAppMissing:{binding.AppCode}");
+            }
+            if (!allowedRelations.Contains(binding.RelationCode))
+            {
+                throw new CatalogValidationException($"UnsupportedObservationRelation:{binding.RelationCode}");
+            }
+            if (!string.Equals(binding.RelationCode, "NoUnityRepresentation", StringComparison.Ordinal)
+                && !profileIds.Contains(binding.ObservationProfileRef))
+            {
+                throw new CatalogValidationException($"ObservationBindingProfileMissing:{binding.ObservationProfileRef}");
+            }
+            if (policy.ServerOnly.AppCodes.Contains(binding.AppCode, StringComparer.Ordinal)
+                && !string.Equals(binding.RelationCode, "NoUnityRepresentation", StringComparison.Ordinal))
+            {
+                throw new CatalogValidationException($"ServerOnlyAppObservationForbidden:{binding.AppCode}");
+            }
+        }
+
+        var interactions = File.ReadAllText(ResolvePath(root, "eng/execution-ledgers/world-interactions.json"), Encoding.UTF8);
+        foreach (var profile in observationProfiles)
+        {
+            if (!string.Equals(profile.SceneStableId, "SimulationWorldShell", StringComparison.Ordinal))
+            {
+                throw new CatalogValidationException($"ObservationSceneMustBeCanonical:{profile.ProfileId}:{profile.SceneStableId}");
+            }
+            if (!string.Equals(profile.CameraModeCode, "OverviewWithManualFocus", StringComparison.Ordinal))
+            {
+                throw new CatalogValidationException($"UnsupportedObservationCameraMode:{profile.ProfileId}:{profile.CameraModeCode}");
+            }
+            if (string.Equals(profile.ExperienceRoleCode, "AutonomousNpcWorld", StringComparison.Ordinal)
+                && (!string.Equals(profile.AuthorityScopeCode, "SimulationSession", StringComparison.Ordinal)
+                    || profile.AllowsOperationalActions
+                    || !profile.ObservationPresentationOnly))
+            {
+                throw new CatalogValidationException($"AutonomousNpcObservationBoundaryInvalid:{profile.ProfileId}");
+            }
+            var missingInteractions = profile.WorldInteractionRefs
+                .Where(reference => !interactions.Contains(reference, StringComparison.Ordinal))
+                .ToArray();
+            if (missingInteractions.Length > 0)
+            {
+                throw new CatalogValidationException($"ObservationWorldInteractionMissing:{profile.ProfileId}:{string.Join(',', missingInteractions)}");
             }
         }
 
@@ -580,6 +676,30 @@ internal static class OperationalUnityTransferProgram
         {
             builder.AppendLine($"| `{item.Key}` | {item.Value} | {ClassificationDescription(item.Key)} |");
         }
+        builder.AppendLine();
+        builder.AppendLine("## 생활 관찰 프로필");
+        builder.AppendLine();
+        builder.AppendLine("운영 앱과 Unity 생활 관찰은 다대다 관계다. `SimulationAnalog`는 앱의 운영 원장을 연결한다는 뜻이 아니라, 같은 업무 의미를 가상 Simulation 생활로 관찰한다는 뜻이다.");
+        builder.AppendLine();
+        builder.AppendLine("| 프로필 | 장면·영역 | 권위·경험 | 카메라 | 운영 행위 | WI |");
+        builder.AppendLine("| --- | --- | --- | --- | --- | --- |");
+        foreach (var profile in catalog.ObservationProfiles)
+        {
+            builder.AppendLine($"| `{Escape(profile.ProfileId)}`<br>{Escape(profile.DisplayNameKo)} | `{Escape(profile.SceneStableId)}` / `{Escape(profile.AreaCode)}` | `{Escape(profile.AuthorityScopeCode)}` / `{Escape(profile.ExperienceRoleCode)}` | `{Escape(profile.CameraModeCode)}` | {(profile.AllowsOperationalActions ? "허용" : "금지")} / 표현 전용 `{profile.ObservationPresentationOnly}` | {Escape(string.Join("<br>", profile.WorldInteractionRefs))} |");
+        }
+        if (catalog.ObservationProfiles.Count == 0) builder.AppendLine("| - | - | - | - | - | - |");
+        builder.AppendLine();
+        builder.AppendLine($"- 첫 생활 장면 프로필: `{Escape(catalog.FirstLivingSceneProfileRef)}`");
+        builder.AppendLine();
+        builder.AppendLine("## 앱과 관찰 프로필 연결");
+        builder.AppendLine();
+        builder.AppendLine("| 앱 | 관계 | 관찰 프로필 |");
+        builder.AppendLine("| --- | --- | --- |");
+        foreach (var binding in catalog.AppObservationBindings)
+        {
+            builder.AppendLine($"| `{Escape(binding.AppCode)}` | `{Escape(binding.RelationCode)}` | `{Escape(binding.ObservationProfileRef)}` |");
+        }
+        if (catalog.AppObservationBindings.Count == 0) builder.AppendLine("| - | - | - |");
         builder.AppendLine();
         builder.AppendLine("## 첫 독립 표본");
         builder.AppendLine();
@@ -748,7 +868,10 @@ internal sealed record TransferPolicy(
     ServerOnlyPolicy ServerOnly,
     IReadOnlyList<CanonicalGroupRule> CanonicalGroups,
     IReadOnlyList<MappingRule> MappingRules,
-    FirstSliceDefinition FirstSlice);
+    FirstSliceDefinition FirstSlice,
+    IReadOnlyList<ObservationProfileDefinition>? ObservationProfiles = null,
+    IReadOnlyList<AppObservationBindingDefinition>? AppObservationBindings = null,
+    string? FirstLivingSceneProfileRef = null);
 
 internal sealed record PlanningPolicy(string PlanningId, string DocumentRef, string Revision, string DocumentSha256);
 internal sealed record ServerOnlyPolicy(IReadOnlyList<string> AppCodes, IReadOnlyList<string> PageKeyPatterns, IReadOnlyList<string> RoutePatterns);
@@ -783,6 +906,27 @@ internal sealed record FirstSliceDefinition(
     string TargetPresentationEvidence,
     string E5Status);
 
+internal sealed record ObservationProfileDefinition(
+    string ProfileId,
+    string DisplayNameKo,
+    string AuthorityScopeCode,
+    string ExperienceRoleCode,
+    string SceneStableId,
+    string AreaCode,
+    string CameraModeCode,
+    IReadOnlyList<string> ActorRoleCodes,
+    IReadOnlyList<string> FacilityCodes,
+    IReadOnlyList<string> WorkflowCodes,
+    IReadOnlyList<string> WorldInteractionRefs,
+    IReadOnlyList<string> UnityImplementationRefs,
+    bool AllowsOperationalActions,
+    bool ObservationPresentationOnly);
+
+internal sealed record AppObservationBindingDefinition(
+    string AppCode,
+    string ObservationProfileRef,
+    string RelationCode);
+
 internal sealed record TransferCatalog(
     string SchemaVersion,
     string Revision,
@@ -792,6 +936,9 @@ internal sealed record TransferCatalog(
     IReadOnlyList<DbSetEntry> DbSets,
     IReadOnlyList<MongoCollectionEntry> MongoCollections,
     IReadOnlyList<UnityRouteEntry> UnityRepresentativeRoutes,
+    IReadOnlyList<ObservationProfileDefinition> ObservationProfiles,
+    IReadOnlyList<AppObservationBindingDefinition> AppObservationBindings,
+    string FirstLivingSceneProfileRef,
     FirstSliceDefinition FirstSlice,
     IReadOnlyList<SourceFingerprint> SourceFingerprints,
     CatalogDiagnostics Diagnostics);
