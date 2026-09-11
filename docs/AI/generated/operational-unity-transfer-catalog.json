@@ -5,11 +5,11 @@
     "planningId": "PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001",
     "documentRef": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
     "revision": "operations-unity-transfer.r3",
-    "documentSha256": "dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d"
+    "documentSha256": "7c41c708a70eae5a113d62a03d9318112c2dd9a2bc07362f158a821c7072bc80"
   },
   "summary": {
     "pageCapabilityCount": 241,
-    "dbSetCount": 271,
+    "dbSetCount": 277,
     "mongoCollectionCount": 33,
     "unityRepresentativeRouteCount": 18,
     "h1Count": 86,
@@ -15907,6 +15907,12 @@
     },
     {
       "contextName": "SsalddelContext",
+      "propertyName": "\uC6B4\uC601\uBC30\uCC28\uD65C\uB3D9\uC0AC\uAC74",
+      "entityType": "\uC6B4\uC601\uBC30\uCC28\uD65C\uB3D9\uC0AC\uAC74",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
       "propertyName": "\uC6B4\uC784\uAD6C\uC131",
       "entityType": "\uC6B4\uC784\uAD6C\uC131",
       "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
@@ -15921,6 +15927,12 @@
       "contextName": "SsalddelContext",
       "propertyName": "\uC74C\uC2DD\uB9C8\uD2B8\uC6D0\uC7A5\uB3D9\uAE30\uD654Outbox",
       "entityType": "\uC74C\uC2DD\uB9C8\uD2B8\uC6D0\uC7A5\uB3D9\uAE30\uD654Outbox",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
+      "propertyName": "\uC74C\uC2DD\uBC30\uB2EC\uC2DC\uB3C4",
+      "entityType": "\uC74C\uC2DD\uBC30\uB2EC\uC2DC\uB3C4",
       "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
     },
     {
@@ -15945,6 +15957,12 @@
       "contextName": "SsalddelContext",
       "propertyName": "\uC74C\uC2DD\uC810\uBA54\uB274",
       "entityType": "\uC74C\uC2DD\uC810\uBA54\uB274",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
+      "propertyName": "\uC74C\uC2DD\uC810\uC870\uB9AC\uC2DC\uAC04\uC124\uC815",
+      "entityType": "\uC74C\uC2DD\uC810\uC870\uB9AC\uC2DC\uAC04\uC124\uC815",
       "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
     },
     {
@@ -16213,8 +16231,26 @@
     },
     {
       "contextName": "SsalddelContext",
+      "propertyName": "\uD654\uBB3C\uB2E4\uC74C\uCF5C\uC608\uC57D",
+      "entityType": "\uD654\uBB3C\uB2E4\uC74C\uCF5C\uC608\uC57D",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
+      "propertyName": "\uD654\uBB3C\uC5F0\uC18D\uBC30\uCC28\uC0C1\uD0DC",
+      "entityType": "\uD654\uBB3C\uC5F0\uC18D\uBC30\uCC28\uC0C1\uD0DC",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
       "propertyName": "\uD654\uBB3C\uC694\uAD6C\uC870\uAC74",
       "entityType": "\uD654\uBB3C\uC694\uAD6C\uC870\uAC74",
+      "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
+    },
+    {
+      "contextName": "SsalddelContext",
+      "propertyName": "\uD654\uBB3C\uC6B4\uC1A1\uC2DC\uAC04\uC57D\uC18D",
+      "entityType": "\uD654\uBB3C\uC6B4\uC1A1\uC2DC\uAC04\uC57D\uC18D",
       "sourcePath": "Ssalddel.Infrastructure/Persistence/SsalddelContext.cs"
     },
     {
@@ -16891,7 +16927,7 @@
     },
     {
       "path": "docs/AI/Planning/\uC2DC\uC2A4\uD15C/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md",
-      "sha256": "dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d"
+      "sha256": "7c41c708a70eae5a113d62a03d9318112c2dd9a2bc07362f158a821c7072bc80"
     },
     {
       "path": "eng/Ssalddel.OperationalUnityTransfer/Program.cs",
@@ -16903,7 +16939,7 @@
     },
     {
       "path": "eng/execution-ledgers/operational-unity-transfer-policy.json",
-      "sha256": "8e5eb3de2ced7cd7e7525c0f4ccfa18ce386a8cd827945a0ebfc20faa4fc4bf8"
+      "sha256": "5e3a1a2d8cb6da8aa8d79a0070ddae72ad01cff68cadd9ca58b50c903d0de33e"
     },
     {
       "path": "eng/execution-ledgers/playable-loops.json",

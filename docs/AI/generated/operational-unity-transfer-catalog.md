@@ -2,9 +2,9 @@
 
 - 판본: `operations-unity-transfer.r2`
 - 기획: [PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001](../Planning/시스템/PLAN-ARCH-OPERATIONS-UNITY-TRANSFER-001/README.md)
-- 기획 SHA-256: `dc724d16e11ece31fadea78136d50fbaa4c8e66ac5f44012c7aec7b9f0887f0d`
+- 기획 SHA-256: `7c41c708a70eae5a113d62a03d9318112c2dd9a2bc07362f158a821c7072bc80`
 - 페이지 기능: 241개
-- EF Core DbSet: 271개
+- EF Core DbSet: 277개
 - MongoDB collection 호출: 33개
 - 기존 Unity 대표 경로: 18개
 - 참조 가능한 H: H1 86 / H2 40 / H3 21 / H4 6
