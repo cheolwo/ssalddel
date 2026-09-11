@@ -12,7 +12,7 @@ namespace Ssalddel.Simulation.Application
         SubmoduleKey = SsalddelEvidenceSubmoduleKeys.E2로컬권위Adapter)]
     public static class LocalBusinessWorkflowRuntimeFactory
     {
-        public const string ContractRevision = "business-workflow-runtime.r1";
+        public const string ContractRevision = "business-workflow-runtime.r2";
 
         public static IBusinessWorkflowRuntime Create(
             LocalSimulationRuntime runtime,
@@ -30,6 +30,10 @@ namespace Ssalddel.Simulation.Application
                     RuntimeStableId = runtime.Descriptor.RuntimeStableId,
                     ModeCode = BusinessWorkflowRuntimeModeCodes.LocalProcess,
                     RequiresNetwork = false,
+                    AuthorityScopeCode = BusinessWorkflowAuthorityScopeCodes.SimulationSession,
+                    ExperienceRoleCode = BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld,
+                    AllowsOperationalDriverActions = false,
+                    ObservationPresentationOnly = true,
                     ContractRevision = ContractRevision,
                     ClassificationMetadata =
                         rules.Engine정보조회().ClassificationMetadata,

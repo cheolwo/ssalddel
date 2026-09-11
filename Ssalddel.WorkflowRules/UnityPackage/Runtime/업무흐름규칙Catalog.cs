@@ -8,7 +8,7 @@ namespace Ssalddel.WorkflowRules
     public static class 업무흐름규칙Catalog
     {
         private const string 기존RuleRevision = "workflow-rules.v1";
-        private const string 음식배달RuleRevision = "food-delivery.v2";
+        private const string 음식배달RuleRevision = "food-delivery.v4";
         private const string 창고입고RuleRevision = "warehouse-inbound.v1";
 
         private static readonly IReadOnlyDictionary<string, 업무흐름규칙Snapshot> 규칙목록 =
@@ -70,11 +70,15 @@ namespace Ssalddel.WorkflowRules
                         Transition(음식배달상태코드.주문대기, 음식배달상태코드.조리중),
                         Transition(음식배달상태코드.주문대기, 음식배달상태코드.픽업대기),
                         Transition(음식배달상태코드.주문대기, 음식배달상태코드.거절),
+                        Transition(음식배달상태코드.주문대기, 음식배달상태코드.취소),
                         Transition(음식배달상태코드.조리중, 음식배달상태코드.픽업대기),
                         Transition(음식배달상태코드.조리중, 음식배달상태코드.기사배정),
                         Transition(음식배달상태코드.픽업대기, 음식배달상태코드.기사배정),
                         Transition(음식배달상태코드.기사배정, 음식배달상태코드.픽업완료),
+                        Transition(음식배달상태코드.기사배정, 음식배달상태코드.조리중),
+                        Transition(음식배달상태코드.기사배정, 음식배달상태코드.픽업대기),
                         Transition(음식배달상태코드.픽업완료, 음식배달상태코드.전달완료),
+                        Transition(음식배달상태코드.픽업완료, 음식배달상태코드.조리중),
                         Transition(음식배달상태코드.전달완료, 음식배달상태코드.수령확인),
                     },
                     음식배달RuleRevision,

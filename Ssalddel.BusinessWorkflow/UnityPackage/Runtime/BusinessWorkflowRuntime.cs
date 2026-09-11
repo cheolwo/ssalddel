@@ -91,6 +91,14 @@ namespace Ssalddel.BusinessWorkflow
             if (value.RequiresNetwork
                 != (value.ModeCode == BusinessWorkflowRuntimeModeCodes.RemoteHost))
                 throw new ArgumentException("업무 흐름 Runtime 네트워크 경계가 실행 위치와 다릅니다.", nameof(value));
+            if (value.AuthorityScopeCode != BusinessWorkflowAuthorityScopeCodes.SimulationSession)
+                throw new ArgumentException("업무 흐름 Runtime은 Simulation Session 권위만 사용할 수 있습니다.", nameof(value));
+            if (value.ExperienceRoleCode != BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld)
+                throw new ArgumentException("업무 흐름 Runtime은 자율 NPC 세계 경험만 표현할 수 있습니다.", nameof(value));
+            if (value.AllowsOperationalDriverActions)
+                throw new ArgumentException("업무 흐름 Runtime은 실제 기사 업무 동작을 허용하지 않습니다.", nameof(value));
+            if (!value.ObservationPresentationOnly)
+                throw new ArgumentException("업무 흐름 Runtime은 관찰 표현 전용 경계를 명시해야 합니다.", nameof(value));
             if (string.IsNullOrWhiteSpace(value.ContractRevision))
                 throw new ArgumentException("업무 흐름 Runtime 계약 판본이 필요합니다.", nameof(value));
             return Copy(value);
@@ -103,6 +111,10 @@ namespace Ssalddel.BusinessWorkflow
                 RuntimeStableId = value.RuntimeStableId,
                 ModeCode = value.ModeCode,
                 RequiresNetwork = value.RequiresNetwork,
+                AuthorityScopeCode = value.AuthorityScopeCode,
+                ExperienceRoleCode = value.ExperienceRoleCode,
+                AllowsOperationalDriverActions = value.AllowsOperationalDriverActions,
+                ObservationPresentationOnly = value.ObservationPresentationOnly,
                 ContractRevision = value.ContractRevision,
                 ClassificationMetadata = WorkflowClassificationMetadataCloner.Copy(
                     value.ClassificationMetadata),

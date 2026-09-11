@@ -70,6 +70,12 @@ public sealed class BusinessWorkflowRuntimeCompositionTests
         Assert.NotEqual("MUTATED",
             runtime.Descriptor.ClassificationMetadata!.PrimaryCode);
         Assert.False(runtime.Descriptor.ClassificationMetadata.IsExecutionAuthority);
+        Assert.Equal(BusinessWorkflowAuthorityScopeCodes.SimulationSession,
+            runtime.Descriptor.AuthorityScopeCode);
+        Assert.Equal(BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld,
+            runtime.Descriptor.ExperienceRoleCode);
+        Assert.False(runtime.Descriptor.AllowsOperationalDriverActions);
+        Assert.True(runtime.Descriptor.ObservationPresentationOnly);
     }
 
     [Fact]
@@ -94,6 +100,10 @@ public sealed class BusinessWorkflowRuntimeCompositionTests
         Assert.Equal(BusinessWorkflowRuntimeModeCodes.RemoteHost,
             runtime.Descriptor.ModeCode);
         Assert.True(runtime.Descriptor.RequiresNetwork);
+        Assert.Equal(BusinessWorkflowAuthorityScopeCodes.SimulationSession,
+            runtime.Descriptor.AuthorityScopeCode);
+        Assert.False(runtime.Descriptor.AllowsOperationalDriverActions);
+        Assert.True(runtime.Descriptor.ObservationPresentationOnly);
         Assert.Equal(
             [
                 "POST api/simulation/v1/sessions/session%3Aremote/food-delivery-previews",
@@ -202,12 +212,40 @@ public sealed class BusinessWorkflowRuntimeCompositionTests
         Assert.Contains("네트워크 경계", error.Message);
     }
 
+    [Theory]
+    [InlineData("Operational", BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld, false, true)]
+    [InlineData(BusinessWorkflowAuthorityScopeCodes.SimulationSession, "OperationalDriver", false, true)]
+    [InlineData(BusinessWorkflowAuthorityScopeCodes.SimulationSession, BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld, true, true)]
+    [InlineData(BusinessWorkflowAuthorityScopeCodes.SimulationSession, BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld, false, false)]
+    public void 운영기사권위나_관찰전용이아닌Descriptor는_거부한다(
+        string authorityScopeCode,
+        string experienceRoleCode,
+        bool allowsOperationalDriverActions,
+        bool observationPresentationOnly)
+    {
+        var descriptor = LocalDescriptor();
+        descriptor.AuthorityScopeCode = authorityScopeCode;
+        descriptor.ExperienceRoleCode = experienceRoleCode;
+        descriptor.AllowsOperationalDriverActions = allowsOperationalDriverActions;
+        descriptor.ObservationPresentationOnly = observationPresentationOnly;
+
+        Assert.Throws<ArgumentException>(() => new BusinessWorkflowRuntime(
+            new RecordingFoodRuntime(),
+            new RecordingLogisticsRuntime(),
+            WorkflowRules.BusinessWorkflowRuleEngine.기본,
+            descriptor));
+    }
+
     private static BusinessWorkflowRuntimeDescriptor LocalDescriptor()
         => new()
         {
             RuntimeStableId = "business-workflow-runtime:test-local",
             ModeCode = BusinessWorkflowRuntimeModeCodes.LocalProcess,
             RequiresNetwork = false,
+            AuthorityScopeCode = BusinessWorkflowAuthorityScopeCodes.SimulationSession,
+            ExperienceRoleCode = BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld,
+            AllowsOperationalDriverActions = false,
+            ObservationPresentationOnly = true,
             ContractRevision = Application.LocalBusinessWorkflowRuntimeFactory.ContractRevision,
             ClassificationMetadata = WorkflowRules.BusinessWorkflowRuleEngine.기본
                 .Engine정보조회().ClassificationMetadata,

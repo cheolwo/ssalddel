@@ -9,7 +9,7 @@ using Ssalddel.WorkflowRules.Contracts;
 
 namespace Ssalddel.Simulation.Infrastructure
 {
-    /// <summary>웹·모바일이 사용할 RemoteHost 업무 흐름 Runtime 조립기다.</summary>
+    /// <summary>원격 Simulation Host의 가상 세션을 관찰하는 업무 흐름 Runtime 조립기다.</summary>
     [SsalddelEvidenceResponsibility(
         SsalddelEvidenceStage.E2,
         "RemoteHost의 기존 Simulation HTTP 포트를 공통 업무 흐름 Runtime으로 조립한다.",
@@ -33,6 +33,10 @@ namespace Ssalddel.Simulation.Infrastructure
                     RuntimeStableId = "business-workflow-runtime:remote-host",
                     ModeCode = BusinessWorkflowRuntimeModeCodes.RemoteHost,
                     RequiresNetwork = true,
+                    AuthorityScopeCode = BusinessWorkflowAuthorityScopeCodes.SimulationSession,
+                    ExperienceRoleCode = BusinessWorkflowExperienceRoleCodes.AutonomousNpcWorld,
+                    AllowsOperationalDriverActions = false,
+                    ObservationPresentationOnly = true,
                     ContractRevision = LocalBusinessWorkflowRuntimeFactory.ContractRevision,
                     ClassificationMetadata =
                         selectedRules.Engine정보조회().ClassificationMetadata,

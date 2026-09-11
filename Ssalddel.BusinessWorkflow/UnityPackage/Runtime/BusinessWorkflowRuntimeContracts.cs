@@ -11,11 +11,25 @@ namespace Ssalddel.BusinessWorkflow
         public const string RemoteHost = "RemoteHost";
     }
 
+    public static class BusinessWorkflowAuthorityScopeCodes
+    {
+        public const string SimulationSession = "SimulationSession";
+    }
+
+    public static class BusinessWorkflowExperienceRoleCodes
+    {
+        public const string AutonomousNpcWorld = "AutonomousNpcWorld";
+    }
+
     public sealed class BusinessWorkflowRuntimeDescriptor
     {
         public string RuntimeStableId { get; set; } = string.Empty;
         public string ModeCode { get; set; } = string.Empty;
         public bool RequiresNetwork { get; set; }
+        public string AuthorityScopeCode { get; set; } = string.Empty;
+        public string ExperienceRoleCode { get; set; } = string.Empty;
+        public bool AllowsOperationalDriverActions { get; set; }
+        public bool ObservationPresentationOnly { get; set; }
         public string ContractRevision { get; set; } = string.Empty;
         public WorkflowClassificationMetadata? ClassificationMetadata { get; set; }
     }
@@ -74,8 +88,9 @@ namespace Ssalddel.BusinessWorkflow
     }
 
     /// <summary>
-    /// 웹·모바일·Unity가 공유하는 비상태 업무 흐름 facade다.
-    /// 하위 Runtime의 상태 권위와 수명은 소유하거나 복제하지 않는다.
+    /// LocalProcess 또는 원격 Simulation Host의 가상 세션 업무 흐름 facade다.
+    /// 운영 기사 앱의 수락·위치·픽업·전달 API가 아니며, 하위 Runtime의 상태 권위와
+    /// 수명을 소유하거나 복제하지 않는다.
     /// </summary>
     public interface IBusinessWorkflowRuntime
     {
