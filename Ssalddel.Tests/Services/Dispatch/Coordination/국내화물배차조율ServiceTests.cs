@@ -100,7 +100,7 @@ public sealed class 국내화물배차조율ServiceTests
     }
 
     [Fact]
-    public void 조율은_이미_두_건을_수락한_기사를_추천에서_제외한다()
+    public void 조율은_기존수락건수를_추천노출상한으로사용하지않는다()
     {
         var service = new 국내화물배차조율Service();
         var input = new 국내화물배차조율입력(
@@ -121,12 +121,13 @@ public sealed class 국내화물배차조율ServiceTests
 
         var result = service.조율(input);
 
-        Assert.Empty(result.추천배정목록);
-        Assert.Single(result.보류목록, x => x.의뢰Id == "REQ-1");
+        Assert.Single(result.추천배정목록);
+        Assert.Equal("REQ-1", result.추천배정목록[0].의뢰Id);
+        Assert.Empty(result.보류목록);
     }
 
     [Fact]
-    public void 조율은_기존_수락건수를_차감한_남은_용량만큼만_추천한다()
+    public void 조율은_기사당최대추천건수만큼_새추천을노출한다()
     {
         var service = new 국내화물배차조율Service();
         var input = new 국내화물배차조율입력(
@@ -149,9 +150,10 @@ public sealed class 국내화물배차조율ServiceTests
 
         var result = service.조율(input);
 
-        Assert.Single(result.추천배정목록);
-        Assert.Equal("REQ-1", result.추천배정목록[0].의뢰Id);
-        Assert.Single(result.보류목록, x => x.의뢰Id == "REQ-2");
+        Assert.Equal(2, result.추천배정목록.Count);
+        Assert.Contains(result.추천배정목록, x => x.의뢰Id == "REQ-1");
+        Assert.Contains(result.추천배정목록, x => x.의뢰Id == "REQ-2");
+        Assert.Empty(result.보류목록);
     }
 
     [Fact]

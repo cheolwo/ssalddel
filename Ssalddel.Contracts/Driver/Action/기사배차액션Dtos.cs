@@ -1,5 +1,16 @@
 namespace Ssalddel.Contracts.Driver.Action;
 
+public sealed class 기사화물배차수락요청
+{
+    public int? ExpectedRecommendationRound { get; set; }
+
+    public string? ReservationId { get; set; }
+
+    public long? ExpectedReservationRevision { get; set; }
+
+    public IReadOnlyList<string> AcknowledgedWarningCodes { get; set; } = [];
+}
+
 public sealed class 기사배차거절요청
 {
     public string? 사유 { get; set; }

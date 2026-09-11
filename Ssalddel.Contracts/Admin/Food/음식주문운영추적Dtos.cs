@@ -58,6 +58,8 @@ public sealed class 음식주문운영추적응답
 
     public IReadOnlyList<음식주문운영이벤트응답> 운송이벤트목록 { get; set; } = [];
 
+    public IReadOnlyList<음식배달시도운영응답> 배달시도목록 { get; set; } = [];
+
     public IReadOnlyList<string> 경고목록 { get; set; } = [];
 
     public IReadOnlyList<string> 복구안내목록 { get; set; } = [];
@@ -104,4 +106,29 @@ public sealed class 음식주문운영이벤트응답
     public string 이벤트유형 { get; set; } = string.Empty;
 
     public DateTime 이벤트시각Utc { get; set; }
+}
+
+public sealed class 음식배달시도운영응답
+{
+    public string 시도StableId { get; set; } = string.Empty;
+    public string 제안Id { get; set; } = string.Empty;
+    public string 기사Id { get; set; } = string.Empty;
+    public int 시도순번 { get; set; }
+    public long Revision { get; set; }
+    public string 상태Code { get; set; } = string.Empty;
+    public DateTime 수락시각Utc { get; set; }
+    public DateTime? 표시준비예정시각Utc { get; set; }
+    public DateTime? 가게도착시각Utc { get; set; }
+    public DateTime? 픽업완료시각Utc { get; set; }
+    public DateTime? 중단시각Utc { get; set; }
+    public DateTime? 전달완료시각Utc { get; set; }
+    public int? 현장대기초 { get; set; }
+    public string 중단사유Code { get; set; } = string.Empty;
+    public string 책임Code { get; set; } = string.Empty;
+    public bool 조리지연재배차여부 { get; set; }
+    public string 재조리요청StableId { get; set; } = string.Empty;
+    public DateTime? 재조리요청시각Utc { get; set; }
+    public bool 유산추정여부 { get; set; }
+    public bool 악용확정여부 { get; set; }
+    public string 검토사유 { get; set; } = string.Empty;
 }

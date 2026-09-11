@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Ssalddel.ApiMetadata;
 using Ssalddel.Application.Admin.Food;
 using Ssalddel.Contracts.Admin.Food;
@@ -11,7 +12,9 @@ namespace Ssalddel.Controllers.Admin.Food;
 [Authorize(Policy = "서버관리자전용")]
 [Route("api/v1/admin/food-orders")]
 [SsalddelApiContractName("FoodOrderOperationsTraceController")]
-public sealed class 음식주문운영추적Controller(I음식주문운영추적UseCase useCase) : ControllerBase
+public sealed class 음식주문운영추적Controller(
+    I음식주문운영추적UseCase useCase,
+    I음식배달중단검토UseCase? interruptionReviewUseCase = null) : ControllerBase
 {
     [HttpGet("{orderNo}/operations-trace")]
     [SsalddelApiContractName("GetOperationsTrace")]
@@ -27,6 +30,35 @@ public sealed class 음식주문운영추적Controller(I음식주문운영추적
         catch (ArgumentException ex)
         {
             return this.ToProblemActionResult(ex.Message, StatusCodes.Status400BadRequest);
+        }
+    }
+
+    [HttpPut("delivery-attempts/{attemptId}/interruption-review")]
+    [SsalddelApiContractName("ReviewDeliveryInterruption")]
+    public async Task<IActionResult> 중단검토(
+        string attemptId,
+        [FromBody] Ssalddel.Contracts.Food.음식배달중단검토요청 request,
+        CancellationToken cancellationToken)
+    {
+        if (interruptionReviewUseCase is null)
+            return StatusCode(StatusCodes.Status503ServiceUnavailable);
+
+        try
+        {
+            var result = await interruptionReviewUseCase.검토Async(attemptId, request, cancellationToken);
+            return result is null ? NotFound() : Ok(result);
+        }
+        catch (ArgumentException ex)
+        {
+            return this.ToProblemActionResult(ex.Message, StatusCodes.Status400BadRequest);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            return this.ToProblemActionResult(ex.Message, StatusCodes.Status409Conflict);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return this.ToProblemActionResult(ex.Message, StatusCodes.Status409Conflict);
         }
     }
 }

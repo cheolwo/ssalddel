@@ -22,6 +22,12 @@ public interface I음식주문접수UseCase
         주문자음식주문수령확인요청 request,
         string 주문자UserId,
         CancellationToken cancellationToken);
+
+    Task<음식주문응답?> 주문자취소Async(
+        string orderNo,
+        주문자음식주문취소요청 request,
+        string 주문자UserId,
+        CancellationToken cancellationToken);
 }
 
 [SsalddelApiWorkflow(SsalddelWorkflow.FoodDelivery)]
@@ -71,6 +77,18 @@ public sealed class 음식주문접수UseCase(ISender sender) : I음식주문접
         CancellationToken cancellationToken)
         => sender.Send(
             new 주문자음식주문수령확인Command(
+                orderNo,
+                request,
+                주문자UserId),
+            cancellationToken);
+
+    public Task<음식주문응답?> 주문자취소Async(
+        string orderNo,
+        주문자음식주문취소요청 request,
+        string 주문자UserId,
+        CancellationToken cancellationToken)
+        => sender.Send(
+            new 주문자음식주문취소Command(
                 orderNo,
                 request,
                 주문자UserId),

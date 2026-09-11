@@ -66,6 +66,35 @@ public sealed class 음식주문운영추적UseCase(SsalddelContext db) : I음�
                 이벤트시각Utc = x.이벤트시각
             })
             .ToListAsync(cancellationToken);
+        var deliveryAttempts = await db.음식배달시도
+            .AsNoTracking()
+            .Where(x => x.주문번호 == normalizedOrderNo)
+            .OrderByDescending(x => x.시도순번)
+            .Select(x => new 음식배달시도운영응답
+            {
+                시도StableId = x.시도StableId,
+                제안Id = x.제안Id,
+                기사Id = x.기사Id,
+                시도순번 = x.시도순번,
+                Revision = x.Revision,
+                상태Code = x.상태Code,
+                수락시각Utc = x.수락시각Utc,
+                표시준비예정시각Utc = x.표시준비예정시각Utc,
+                가게도착시각Utc = x.가게도착시각Utc,
+                픽업완료시각Utc = x.픽업완료시각Utc,
+                중단시각Utc = x.중단시각Utc,
+                전달완료시각Utc = x.전달완료시각Utc,
+                현장대기초 = x.현장대기초,
+                중단사유Code = x.중단사유Code ?? string.Empty,
+                책임Code = x.책임Code ?? string.Empty,
+                조리지연재배차여부 = x.조리지연재배차여부,
+                재조리요청StableId = x.재조리요청StableId ?? string.Empty,
+                재조리요청시각Utc = x.재조리요청시각Utc,
+                유산추정여부 = x.유산추정여부,
+                악용확정여부 = x.악용확정여부,
+                검토사유 = x.검토사유 ?? string.Empty
+            })
+            .ToListAsync(cancellationToken);
 
         var now = DateTime.UtcNow;
         var normalizedOrderStatus = 음식주문상태코드.Normalize(order.상태);
@@ -127,6 +156,7 @@ public sealed class 음식주문운영추적UseCase(SsalddelContext db) : I음�
             체크포인트 = checkpoints,
             Outbox목록 = outboxes,
             운송이벤트목록 = transportEvents,
+            배달시도목록 = deliveryAttempts,
             경고목록 = warnings,
             복구안내목록 = recoveryGuides
         };

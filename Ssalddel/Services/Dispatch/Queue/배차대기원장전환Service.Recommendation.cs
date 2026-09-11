@@ -1,5 +1,6 @@
 using 살뜰.도메인.공통;
 using 살뜰.도메인.배차;
+using 살뜰.Services.Dispatch.Common;
 
 namespace 살뜰.Services.Dispatch.Queue
 {
@@ -65,6 +66,11 @@ namespace 살뜰.Services.Dispatch.Queue
                 배차엔진후속전환.추천시작,
                 result.결과코드,
                 changedAtUtc);
+            _db.운영배차활동사건.Add(운영배차활동사건Factory.유효제안(
+                driverId,
+                queue.의뢰Id,
+                queue.추천라운드,
+                changedAtUtc));
 
             await _db.SaveChangesAsync(cancellationToken);
 

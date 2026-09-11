@@ -2,20 +2,28 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using FluentResults;
 using Microsoft.Extensions.Logging;
+using System.Collections.Concurrent;
+using System.Data;
 using Ssalddel.Application.CommandProcessing;
 using Ssalddel.Contracts.Common.Hr;
 using Ssalddel.Contracts.Common.Operations;
 using 살뜰.도메인.공통;
+using 살뜰.Services.Dispatch.Recommendation;
+using 살뜰.Services.Dispatch.Continuity;
 
 namespace Ssalddel.Application.Driver.DispatchAction;
 
 public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Command, Result<배차수락결과>>
 {
+    private static readonly ConcurrentDictionary<string, SemaphoreSlim> 기사별수락Gate = new(StringComparer.Ordinal);
+
     private readonly SsalddelContext _db;
     private readonly IPublisher _publisher;
     private readonly ICurrentUserAccessor _currentUserAccessor;
     private readonly I참여자실행권한검사 _권한검사;
     private readonly IWorkRelationshipSnapshotCollector _relationshipSnapshotCollector;
+    private readonly I화물배차수락적격성Service _수락적격성Service;
+    private readonly I화물연속배차UseCase _연속배차UseCase;
     private readonly ILogger<배차수락CommandHandler> _logger;
 
     public 배차수락CommandHandler(
@@ -24,6 +32,8 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         ICurrentUserAccessor currentUserAccessor,
         I참여자실행권한검사 권한검사,
         IWorkRelationshipSnapshotCollector relationshipSnapshotCollector,
+        I화물배차수락적격성Service 수락적격성Service,
+        I화물연속배차UseCase 연속배차UseCase,
         ILogger<배차수락CommandHandler> logger)
     {
         _db = db;
@@ -31,6 +41,8 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         _currentUserAccessor = currentUserAccessor;
         _권한검사 = 권한검사;
         _relationshipSnapshotCollector = relationshipSnapshotCollector;
+        _수락적격성Service = 수락적격성Service;
+        _연속배차UseCase = 연속배차UseCase;
         _logger = logger;
     }
 
@@ -51,7 +63,11 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
                 "플랫폼의 후보 정보만으로 배차를 확정할 수 없습니다. 참여 기사 본인의 수락이 필요합니다.");
         }
 
-        await using var tx = await _db.Database.BeginTransactionAsync(cancellationToken);
+        var driverGate = 기사별수락Gate.GetOrAdd(request.기사Id, static _ => new SemaphoreSlim(1, 1));
+        await driverGate.WaitAsync(cancellationToken);
+        try
+        {
+        await using var tx = await _db.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
 
         var queue = await _db.운송원장.FirstOrDefaultAsync(x => x.의뢰Id == request.RequestId, cancellationToken);
         if (queue is null)
@@ -70,6 +86,40 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
             return Result.Fail<배차수락결과>("결제완료 의뢰만 수락할 수 있습니다.");
         }
 
+        if (queue.배차업무유형 != 상태값.배차업무유형.용달운송)
+        {
+            return Conflict(
+                화물배차수락오류코드.차량적합실패,
+                "화물 기사 수락 경로에서는 용달 운송 의뢰만 처리할 수 있습니다.");
+        }
+
+        if (queue.상태 == 상태값.배차대기상태.확정
+            && string.Equals(queue.확정기사Id ?? queue.기사_운송자, request.기사Id, StringComparison.Ordinal))
+        {
+            return Result.Ok(new 배차수락결과(request.RequestId, "이미 수락된 운송입니다."));
+        }
+
+        if (request.ExpectedRecommendationRound.HasValue
+            && request.ExpectedRecommendationRound.Value != queue.추천라운드)
+        {
+            return Conflict(
+                화물배차수락오류코드.추천판본불일치,
+                "추천 판본이 변경되었습니다. 최신 추천을 다시 확인해 주세요.");
+        }
+
+        var reservationValidation = await _연속배차UseCase.수락예약검증Async(
+            request.기사Id,
+            request.RequestId,
+            request.ReservationId,
+            request.ExpectedReservationRevision,
+            cancellationToken);
+        if (!reservationValidation.유효)
+        {
+            return Conflict(
+                reservationValidation.오류Code ?? "FreightReservationInvalid",
+                reservationValidation.오류메시지 ?? "다음 콜 예약을 수락할 수 없습니다.");
+        }
+
         var now = DateTime.UtcNow;
         var canAcceptRecommendation = 배차응답가능정책.추천수락가능(queue, request.기사Id, now);
         var canAcceptPublic = 배차응답가능정책.공개배차수락가능(queue);
@@ -77,6 +127,19 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         if (!canAcceptRecommendation && !canAcceptPublic)
         {
             return Result.Fail<배차수락결과>("수락 가능한 배차가 아닙니다.");
+        }
+
+        var eligibility = await _수락적격성Service.평가Async(
+            request.기사Id,
+            dispatchRequest,
+            request.AcknowledgedWarningCodes,
+            cancellationToken);
+        if (!eligibility.수락가능)
+        {
+            return Conflict(
+                eligibility.오류코드 ?? 화물배차수락오류코드.일정실패,
+                eligibility.오류메시지 ?? "현재 운송 조건으로 수락할 수 없습니다.",
+                eligibility.경고코드);
         }
 
         queue.상태 = 상태값.배차대기상태.확정;
@@ -109,6 +172,7 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         try
         {
             await _db.SaveChangesAsync(cancellationToken);
+            await _연속배차UseCase.수락완료Async(request.기사Id, request.RequestId, cancellationToken);
             await tx.CommitAsync(cancellationToken);
         }
         catch (DbUpdateConcurrencyException ex)
@@ -120,6 +184,15 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         {
             _logger.LogWarning(ex, "배차 수락 저장 중 DB 예외가 발생했습니다. RequestId={RequestId} DriverId={DriverId}", request.RequestId, request.기사Id);
             return Result.Fail<배차수락결과>("수락 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+        }
+
+        try
+        {
+            await _연속배차UseCase.시간약속잠금Async(request.기사Id, dispatchRequest, cancellationToken);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            _logger.LogWarning(ex, "배차 수락 뒤 화물 시간 약속 잠금에 실패했습니다. RequestId={RequestId}", request.RequestId);
         }
 
         _relationshipSnapshotCollector.Add(new WorkRelationshipSnapshotRecordRequest
@@ -157,5 +230,20 @@ public sealed class 배차수락CommandHandler : IRequestHandler<배차수락Com
         }
 
         return Result.Ok(new 배차수락결과(request.RequestId, "수락되었습니다."));
+        }
+        finally
+        {
+            driverGate.Release();
+        }
     }
+
+    private static Result<배차수락결과> Conflict(
+        string errorCode,
+        string message,
+        IReadOnlyList<string>? warningCodes = null)
+        => Result.Fail<배차수락결과>(
+            new Error(message)
+                .WithMetadata("StatusCode", 409)
+                .WithMetadata("ErrorCode", errorCode)
+                .WithMetadata("WarningCodes", warningCodes ?? []));
 }

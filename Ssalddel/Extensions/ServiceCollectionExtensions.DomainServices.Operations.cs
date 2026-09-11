@@ -8,6 +8,7 @@ using Ssalddel.Services.LogisticsProcessing.Warehouse;
 using Ssalddel.Services.Content;
 using Ssalddel.Services.Storage.Azure;
 using 살뜰.Services.Dispatch.Coordination;
+using 살뜰.Services.Dispatch.Continuity;
 using 살뜰.Services.Dispatch.Engine;
 using 살뜰.Services.Dispatch.Notification;
 using 살뜰.Services.Dispatch.Queue;
@@ -81,6 +82,9 @@ public static partial class ServiceCollectionExtensions
         services.AddScoped<I기사지급OutboxService, 기사지급OutboxService>();
         services.AddScoped<I기사운송일정구성Service, 기사운송일정구성Service>();
         services.AddScoped<I운송일정삽입평가Service, 운송일정삽입평가Service>();
+        services.AddScoped<I화물배차수락적격성Service, 화물배차수락적격성Service>();
+        services.AddSingleton<살뜰.도메인.운송.화물연속배차Policy>();
+        services.AddScoped<I화물연속배차UseCase, 화물연속배차UseCase>();
         services.AddScoped<I픽업하차경로최적화Service, 픽업하차경로최적화Service>();
         services.AddScoped<I음식멀티배차조합AIService, 규칙기반음식멀티배차조합AIService>();
         services.AddScoped<I음식멀티배차조합Service, 음식멀티배차조합Service>();
@@ -141,6 +145,7 @@ public static partial class ServiceCollectionExtensions
         services.AddScoped<I기사월정산Service, 기사월정산Service>();
         services.AddScoped<IPlatformProfitReturnService, PlatformProfitReturnService>();
         services.AddHostedService<배차실행인덱스예열HostedService>();
+        services.AddHostedService<화물연속배차BackgroundService>();
 
         return services;
     }

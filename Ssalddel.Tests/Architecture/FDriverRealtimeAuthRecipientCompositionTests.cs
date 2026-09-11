@@ -120,6 +120,24 @@ public sealed class FDriverRealtimeAuthRecipientCompositionTests
         Assert.Contains("배차가 확정된 현재 업무에서만 수령자 정보를 표시합니다.", page);
     }
 
+    [Fact]
+    public void 음식배달기사앱은_운영Api만사용하고_활성업무상한은_서버값을따른다()
+    {
+        var registrations = Read("FDriverApp", "MauiProgram.cs");
+        var model = Read("FDriverApp", "PageModels/MainPageModel.cs");
+        var contract = Read("Ssalddel.Contracts", "Driver/Food/FoodDeliveryDriverWorkspaceDtos.cs");
+        var workspace = Read("Ssalddel", "Application/Driver/Food/FoodDeliveryDriverWorkspaceUseCase.cs");
+
+        Assert.Contains("IFoodDeliveryDriverApiService, FoodDeliveryDriverApiService", registrations);
+        Assert.DoesNotContain("BusinessWorkflowRuntime", registrations);
+        Assert.DoesNotContain("LocalSimulationRuntime", registrations);
+        Assert.Contains("MaxActiveDeliveries", contract);
+        Assert.Contains("MaxActiveDeliveries = workspace.MaxActiveDeliveries", model);
+        Assert.Contains("ActiveDeliveryItems.Count < MaxActiveDeliveries", model);
+        Assert.DoesNotContain("ActiveDeliveryItems.Count < 3", model);
+        Assert.Contains("음식배달기사활성업무Policy.MaxActiveDeliveries", workspace);
+    }
+
     private static string Read(string project, string relativePath)
         => File.ReadAllText(Path.Combine(FindRepositoryRoot(), project, relativePath));
 

@@ -11,7 +11,7 @@ public interface I국내화물배차조율적용Service
     Task<국내화물배차조율적용결과> 추천잠금적용Async(
         국내화물배차조율결과 조율결과,
         int? timeoutSeconds = null,
-        int 기사최대수락운송건수 = 2,
+        int 기사동시추천잠금건수 = 2,
         CancellationToken cancellationToken = default);
 }
 
@@ -43,7 +43,7 @@ public sealed partial class 국내화물배차조율적용Service : I국내화�
     public async Task<국내화물배차조율적용결과> 추천잠금적용Async(
         국내화물배차조율결과 조율결과,
         int? timeoutSeconds = null,
-        int 기사최대수락운송건수 = 2,
+        int 기사동시추천잠금건수 = 2,
         CancellationToken cancellationToken = default)
     {
         var 잠금목록 = new List<국내화물배차추천잠금>();
@@ -58,7 +58,7 @@ public sealed partial class 국내화물배차조율적용Service : I국내화�
                 var 적용된잠금 = await 추천잠금시도Async(
                     배차제안,
                     timeoutSeconds,
-                    Math.Max(1, 기사최대수락운송건수),
+                    Math.Max(1, 기사동시추천잠금건수),
                     cancellationToken);
                 if (적용된잠금 is null)
                 {

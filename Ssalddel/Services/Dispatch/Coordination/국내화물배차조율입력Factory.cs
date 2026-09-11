@@ -75,13 +75,10 @@ public sealed partial class 국내화물배차조율입력Factory : I국내화�
         var currentShiftMap = await LoadCurrentShiftMapAsync(driverMap.Keys, now, cancellationToken);
         var vehicleSpecMap = await LoadVehicleSpecMapAsync(driverMap.Values, cancellationToken);
         var acceptedTransportCounts = await LoadAcceptedTransportCountsAsync(driverMap.Keys, cancellationToken);
-        var maxAcceptedTransportCount = Math.Max(1, request.기사당최대추천건수);
         var candidateQueues = FilterCandidateQueues(queues, requestMap, now);
         var candidateDriverStates = FilterCandidateDriverStates(
             driverStates,
-            driverMap,
-            acceptedTransportCounts,
-            maxAcceptedTransportCount);
+            driverMap);
 
         var requestInputs = candidateQueues
             .Where(x => requestMap.ContainsKey(x.의뢰Id))
@@ -101,7 +98,6 @@ public sealed partial class 국내화물배차조율입력Factory : I국내화�
             currentShiftMap,
             vehicleSpecMap,
             acceptedTransportCounts,
-            maxAcceptedTransportCount,
             now,
             cancellationToken);
         var revenueBundles = BuildRevenueBundles(requestInputs, evaluations);

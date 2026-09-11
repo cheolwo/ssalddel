@@ -9,7 +9,7 @@ public sealed partial class 국내화물배차조율적용Service
     private async Task<국내화물배차추천잠금?> 추천잠금시도Async(
         국내화물배차제안 배차제안,
         int? timeoutSeconds,
-        int 최대수락운송건수,
+        int 최대동시추천잠금건수,
         CancellationToken cancellationToken)
     {
         await using var tx = await _db.Database.BeginTransactionAsync(cancellationToken);
@@ -24,11 +24,6 @@ public sealed partial class 국내화물배차조율적용Service
             return null;
         }
 
-        var 현재수락운송건수 = await _db.운송원장
-            .AsNoTracking()
-            .CountAsync(
-                x => x.기사_운송자 == 배차제안.기사Id && x.상태 != "인수완료",
-                cancellationToken);
         var 현재추천잠금건수 = await _db.운송원장
             .AsNoTracking()
             .CountAsync(
@@ -38,7 +33,10 @@ public sealed partial class 국내화물배차조율적용Service
                      && x.배차노출상태 == 상태값.배차노출상태.추천중
                      && (!x.추천만료시각.HasValue || x.추천만료시각 > DateTime.UtcNow),
                 cancellationToken);
-        if (현재수락운송건수 + 현재추천잠금건수 >= 최대수락운송건수)
+        // 이 값은 기사에게 동시에 노출할 추천 잠금 수만 제한한다.
+        // 이미 수락한 운송 건수는 업무 상한이 아니며, 추가 수락 가능 여부는
+        // 수락 관문에서 차량·구간 적재량·전체 시간창으로 다시 판정한다.
+        if (현재추천잠금건수 >= 최대동시추천잠금건수)
         {
             await tx.RollbackAsync(cancellationToken);
             return null;

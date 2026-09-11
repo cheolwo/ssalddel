@@ -8,6 +8,7 @@ public sealed class FoodDeliveryDriverWorkspaceDto
     public IReadOnlyList<FoodDeliveryDriverOfferDto> Recommendations { get; set; } = [];
     public IReadOnlyList<FoodDeliveryDriverActiveDeliveryDto> ActiveDeliveries { get; set; } = [];
     public IReadOnlyList<FoodDeliveryBundleCandidateDto> BundleCandidates { get; set; } = [];
+    public int MaxActiveDeliveries { get; set; }
     public 배달기사월정산응답 Settlement { get; set; } = new();
     public bool DispatchAutomationEnabled { get; set; }
     public string DispatchAutomationNotice { get; set; } = string.Empty;
@@ -48,6 +49,12 @@ public sealed class FoodDeliveryDriverActiveDeliveryDto
     public decimal DriverPayout { get; set; }
     public string TransportStatus { get; set; } = string.Empty;
     public string WorkStatus { get; set; } = string.Empty;
+    public string DeliveryAttemptId { get; set; } = string.Empty;
+    public long AttemptRevision { get; set; }
+    public DateTime? RestaurantArrivedAtUtc { get; set; }
+    public DateTime? DisplayedPreparationReadyAtUtc { get; set; }
+    public DateTime? PreparationDelayEligibleAtUtc { get; set; }
+    public bool IsPreparationDelayRedispatch { get; set; }
     public 운송실행프로필Dto ExecutionProfile { get; set; } = new();
     public FoodDeliveryDriverRecipientDto Recipient { get; set; } = new();
     public DateTime UpdatedAtUtc { get; set; }
@@ -74,6 +81,11 @@ public sealed class FoodDeliveryBundleCandidateDto
 public sealed class FoodDeliveryBundleAcceptRequest
 {
     public IReadOnlyList<string> OfferIds { get; set; } = [];
+}
+
+public sealed class FoodDeliveryOfferRejectRequest
+{
+    public string? ReasonCode { get; set; }
 }
 
 public sealed class FoodDeliveryDriverActionResultDto

@@ -15,7 +15,8 @@ public sealed class 운송목록조회QueryHandler : IRequestHandler<운송목�
     {
         var transports = await _db.운송원장
             .AsNoTracking()
-            .Where(x => x.기사_운송자 == request.기사Id)
+            .Where(x => x.기사_운송자 == request.기사Id
+                        && x.배차업무유형 == 상태값.배차업무유형.용달운송)
             .OrderByDescending(x => x.UpdatedAt)
             .ToListAsync(cancellationToken);
 

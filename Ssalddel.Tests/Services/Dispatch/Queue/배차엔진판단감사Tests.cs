@@ -1,16 +1,19 @@
 using System.Reflection;
 using System.Text.Json;
 using Ssalddel.Application.Admin.Operating;
+using Ssalddel.Contracts.Common.Dispatch;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using 살뜰.Data;
 using 살뜰.Infrastructure.Security;
 using 살뜰.Services.Dispatch.Coordination;
+using 살뜰.Services.Dispatch.Common;
 using 살뜰.Services.Dispatch.Notification;
 using 살뜰.Services.Dispatch.Queue;
 using 살뜰.Services.Storage.Local;
 using 살뜰.도메인.공통;
+using 살뜰.도메인.배차;
 using 살뜰.도메인.운송;
 
 namespace Ssalddel.Tests.Services.Dispatch.Queue;
@@ -214,6 +217,56 @@ public sealed class 배차엔진판단감사Tests
         var batch = Assert.Single(db.SaveBatches);
         Assert.Contains(batch, item => item.EntityType == typeof(운송원장) && item.State == EntityState.Modified);
         Assert.Contains(batch, item => item.EntityType == typeof(운송이벤트) && item.State == EntityState.Added);
+        Assert.Contains(batch, item => item.EntityType == typeof(운영배차활동사건) && item.State == EntityState.Added);
+    }
+
+    [Fact]
+    public async Task 기사거절은_선택한사유와_유효제안책임을_활동원장에남긴다()
+    {
+        await using var db = new SsalddelContext(
+            new DbContextOptionsBuilder<SsalddelContext>()
+                .UseInMemoryDatabase($"dispatch-reject-{Guid.NewGuid():N}")
+                .Options,
+            new DummyPersonalDataEncryptionService());
+        var queue = CreateQueue();
+        queue.배차업무유형 = 상태값.배차업무유형.음식배달;
+        queue.원본의뢰유형 = 살뜰.Services.Dispatch.Engine.운송의뢰배차원천유형.음식점주문;
+        queue.배차큐단계 = 상태값.배차큐단계.배차추천;
+        queue.배차노출상태 = 상태값.배차노출상태.추천중;
+        queue.현재추천대상기사Id = "DRIVER-REJECT";
+        queue.추천라운드 = 2;
+        queue.추천시작시각 = DateTime.UtcNow.AddSeconds(-5);
+        queue.추천만료시각 = DateTime.UtcNow.AddSeconds(25);
+        db.운송원장.Add(queue);
+        await db.SaveChangesAsync();
+
+        var noCandidate = 배차추천후보선정결과.적격후보없음("다음 후보 없음") with
+        {
+            감사Context = new 배차엔진판단감사Context(
+                "correlation-reject",
+                Ssalddel.Contracts.Common.Versioning.OperatingSystemIds.FoodDelivery,
+                Ssalddel.Contracts.Common.Versioning.EngineFamilyIds.TransportRequestDispatch,
+                Ssalddel.Contracts.Common.Versioning.EngineImplementationIds.FoodDeliveryDispatch)
+        };
+        var service = new 배차대기원장전환Service(
+            db,
+            Options.Create(new 배차큐정책Options { 최대추천라운드 = 5 }),
+            new StubCandidateSelectionService(noCandidate),
+            null!,
+            null!,
+            null!);
+
+        await service.추천거절처리Async(
+            queue.의뢰Id,
+            "DRIVER-REJECT",
+            운영배차거절사유Code.시간제약);
+
+        var activity = Assert.Single(await db.운영배차활동사건.ToListAsync());
+        Assert.Equal(운영배차사건유형Code.거절, activity.사건유형Code);
+        Assert.Equal(운영배차제안유효성Code.유효, activity.제안유효성Code);
+        Assert.Equal(운영배차책임Code.기사, activity.책임Code);
+        Assert.Equal(운영배차거절사유Code.시간제약, activity.사유Code);
+        Assert.Equal("DRIVER-REJECT", activity.주체Id);
     }
 
     [Fact]

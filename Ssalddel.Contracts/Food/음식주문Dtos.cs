@@ -146,6 +146,7 @@ public sealed class 음식점주문진행변경요청
     public long? 예상Revision { get; set; }
     public string 작업 { get; set; } = string.Empty;
     public int? 조리예상분 { get; set; }
+    public string? 사유Code { get; set; }
     public string 사유 { get; set; } = string.Empty;
 }
 
@@ -153,6 +154,14 @@ public sealed class 주문자음식주문수령확인요청
 {
     public Guid 클라이언트요청Id { get; set; }
     public string 확인메모 { get; set; } = string.Empty;
+}
+
+public sealed class 주문자음식주문취소요청
+{
+    public Guid 클라이언트요청Id { get; set; }
+    public long? 예상Revision { get; set; }
+    public string 사유Code { get; set; } = string.Empty;
+    public string 사유 { get; set; } = string.Empty;
 }
 
 public sealed class 음식주문응답

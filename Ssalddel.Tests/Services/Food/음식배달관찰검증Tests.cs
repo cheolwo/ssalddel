@@ -45,6 +45,20 @@ public sealed class 음식배달관찰검증Tests
         Assert.Equal(0, result.조리예상분);
     }
 
+    [Fact]
+    public void 기사배정_후_조리시간을바꿔도_배정을_취소하지_않는다()
+    {
+        var result = 음식점주문진행Policy.판정(음식주문상태코드.기사배정,
+            new 음식점주문진행변경요청
+            {
+                작업 = 음식점주문진행작업코드.조리시간변경,
+                조리예상분 = 30
+            });
+
+        Assert.Equal(음식주문상태코드.기사배정, result.다음상태);
+        Assert.Equal(30, result.조리예상분);
+    }
+
     [Theory]
     [InlineData(음식주문상태코드.주문대기)]
     [InlineData(음식주문상태코드.픽업완료)]

@@ -31,7 +31,7 @@ public sealed class 국내화물배차조율실행Service : I국내화물배차�
         var result = _coordinationService.조율(input);
         var applyResult = await _applyService.추천잠금적용Async(
             result,
-            기사최대수락운송건수: Math.Max(1, request.기사당최대추천건수),
+            기사동시추천잠금건수: Math.Max(1, request.기사당최대추천건수),
             cancellationToken: cancellationToken);
         return (input, result, applyResult);
     }

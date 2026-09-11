@@ -5,9 +5,11 @@ using Ssalddel.Controllers;
 using Ssalddel.Contracts.Driver.Food;
 using Ssalddel.Contracts.Driver.Work;
 using Ssalddel.Contracts.Common.Transport;
+using Ssalddel.Contracts.Food;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Ssalddel.Filters;
 using 살뜰.Services.Dispatch.Recommendation;
 using 살뜰.Services.Versioning;
@@ -137,10 +139,12 @@ public sealed class 음식배달기사업무Controller : DriverControllerBase
     [SsalddelApiContractName("Reject")]
     public async Task<IActionResult> 제안거절(
         [FromRoute(Name = "offerId")] string 제안Id,
+        [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] FoodDeliveryOfferRejectRequest? 요청,
         CancellationToken cancellationToken)
         => this.ToActionResult(await _음식배달기사업무Service.거절Async(
             CurrentDriverId(),
             제안Id,
+            요청?.ReasonCode,
             cancellationToken));
 
     [HttpPost("bundles/accept")]
@@ -161,6 +165,30 @@ public sealed class 음식배달기사업무Controller : DriverControllerBase
         => this.ToActionResult(await _음식배달기사업무Service.픽업완료Async(
             CurrentDriverId(),
             제안Id,
+            cancellationToken));
+
+    [HttpPost("offers/{offerId}/restaurant-arrival")]
+    [SsalddelApiContractName("RecordRestaurantArrival")]
+    public async Task<IActionResult> 가게도착(
+        [FromRoute(Name = "offerId")] string 제안Id,
+        [FromBody] 음식배달가게도착요청 요청,
+        CancellationToken cancellationToken)
+        => this.ToActionResult(await _음식배달기사업무Service.가게도착Async(
+            CurrentDriverId(),
+            제안Id,
+            요청,
+            cancellationToken));
+
+    [HttpPost("offers/{offerId}/interruption")]
+    [SsalddelApiContractName("InterruptDelivery")]
+    public async Task<IActionResult> 배달중단(
+        [FromRoute(Name = "offerId")] string 제안Id,
+        [FromBody] 음식배달중단요청 요청,
+        CancellationToken cancellationToken)
+        => this.ToActionResult(await _음식배달기사업무Service.중단Async(
+            CurrentDriverId(),
+            제안Id,
+            요청,
             cancellationToken));
 
     [HttpPost("offers/{offerId}/delivery-complete")]

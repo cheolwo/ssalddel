@@ -164,6 +164,7 @@ public static partial class ServiceCollectionExtensions
         services.AddSingleton<I공동구매수입물류정규화Service, 공동구매수입물류정규화Service>();
         services.AddSingleton<IVersionFeatureFlagService, VersionFeatureFlagService>();
         services.AddScoped<ISsalddelFoodOrderStore, EfSsalddelFoodOrderStore>();
+        services.AddScoped<I음식점조리시간Service, 음식점조리시간Service>();
         services.AddScoped<I음식주문메뉴검증Service, 음식주문메뉴검증Service>();
         services.AddSingleton<배차주소Store>();
         services.AddScoped<I음식점주문실시간알림Service, 음식점주문SignalR알림Service>();

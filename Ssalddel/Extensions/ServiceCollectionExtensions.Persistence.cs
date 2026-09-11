@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MongoDB.Driver;
 using 살뜰.Services.Options;
+using 살뜰.Services.Dispatch.Common;
+using 살뜰.도메인.배차;
 
 namespace Ssalddel.Extensions;
 
@@ -24,6 +27,12 @@ public static partial class ServiceCollectionExtensions
                     mysqlOptions.MigrationsAssembly("Ssalddel");
                     mysqlOptions.EnableRetryOnFailure();
                 }));
+
+        services.AddScoped<I운영배차활동원장Store, Ef운영배차활동원장Store>();
+        services.AddScoped<I운영배차공통UseCase, 운영배차공통UseCase>();
+        services.AddSingleton<운영배차수신상태Policy>();
+        services.AddSingleton<운영배차단기지표Calculator>();
+        services.TryAddSingleton(TimeProvider.System);
 
         services.AddTraditionalMarketModule(connectionString);
         services.AddAgriculturalFisheriesPersistence(connectionString);

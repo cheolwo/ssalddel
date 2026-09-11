@@ -82,6 +82,13 @@ namespace Ssalddel.Controllers.Driver.Progress05
             return this.ToActionResult(result);
         }
 
+        [HttpGet("workspace")]
+        public async Task<IActionResult> 작업공간조회()
+        {
+            var driverId = 현재기사Id();
+            return Ok(await _sender.Send(new 화물운송작업공간조회Query(driverId)));
+        }
+
         [HttpPost("{id:long}/arrive-dropoff")]
         public async Task<IActionResult> 하차지도착(long id)
         {

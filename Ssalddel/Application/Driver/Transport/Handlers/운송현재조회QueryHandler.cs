@@ -15,8 +15,16 @@ public sealed class 운송현재조회QueryHandler : IRequestHandler<운송현�
     {
         var entity = await _db.운송원장
             .AsNoTracking()
-            .Where(x => x.기사_운송자 == request.기사Id && x.상태 != "인수완료")
-            .OrderByDescending(x => x.UpdatedAt)
+            .Where(x => x.기사_운송자 == request.기사Id
+                        && x.배차업무유형 == 상태값.배차업무유형.용달운송
+                        && x.상태 != "인수완료")
+            .OrderBy(x => x.상태 == "하차지도착" ? 0
+                : x.상태 == "상차완료" || x.상태 == "운송중" ? 1
+                : x.상태 == "상차지도착" ? 2
+                : x.상태 == "배차확정" || x.상태 == "확정" || x.상태 == "매칭중" ? 3
+                : 9)
+            .ThenBy(x => x.출발_픽업 ?? x.도착 ?? DateTime.MaxValue)
+            .ThenBy(x => x.Id)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (entity is null)

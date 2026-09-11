@@ -315,6 +315,7 @@ public static class CommunityLedgerTemplateCatalog
             [
                 ApiEndpoint("POST", "음식주문Controller", "등록", "커뮤니티 원장을 음식 주문으로 접수합니다.", "I음식주문접수UseCase.등록Async"),
                 ApiEndpoint("POST", "음식주문Controller", "음식점수락", "음식점 주문 수락과 준비 상태를 처리합니다.", "I음식주문접수UseCase.음식점수락Async"),
+                ApiEndpoint("POST", "음식주문Controller", "주문자취소", "음식점 수락 전 주문자의 명시적 취소와 책임을 기록합니다.", "I음식주문접수UseCase.주문자취소Async"),
                 ApiEndpoint("POST", "음식주문Controller", "주문자수령확인", "기사 전달 완료와 주문자의 실제 수령 확인을 분리해 기록합니다.", "I음식주문접수UseCase.주문자수령확인Async")
             ],
             PersistencePolicy = MongoPolicy(

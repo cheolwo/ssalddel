@@ -62,6 +62,7 @@ public sealed class 기사배차추천항목응답
     public string[] 차량경고 { get; set; } = [];
     public DateTime? 추천시작시각 { get; set; }
     public DateTime? 추천만료시각 { get; set; }
+    public int 추천라운드 { get; set; }
     public string 상태 { get; set; } = string.Empty;
     public string 배차상태 { get; set; } = string.Empty;
 }

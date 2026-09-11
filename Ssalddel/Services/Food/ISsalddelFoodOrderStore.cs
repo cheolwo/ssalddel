@@ -38,6 +38,12 @@ public interface ISsalddelFoodOrderStore
         string 처리UserId)
         => throw new NotSupportedException("이 음식 주문 저장소는 음식점 진행 변경을 지원하지 않습니다.");
 
+    음식주문변경결과? 주문자취소(
+        string orderNo,
+        주문자음식주문취소요청 request,
+        string 주문자UserId)
+        => throw new NotSupportedException("이 음식 주문 저장소는 주문자 취소를 지원하지 않습니다.");
+
     음식주문변경결과? 주문자수령확인(
         string orderNo,
         주문자음식주문수령확인요청 request,

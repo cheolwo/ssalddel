@@ -3,13 +3,17 @@ using Ssalddel.Application.Food.Events;
 using Ssalddel.Contracts.Food;
 using Ssalddel.Services.Food;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using 살뜰.Data;
+using 살뜰.Services.Dispatch.Common;
 
 namespace Ssalddel.Application.Food.Handlers;
 
 public sealed class 음식주문등록CommandHandler(
     ISsalddelFoodOrderStore orderStore,
     I음식주문메뉴검증Service menuValidationService,
-    IPublisher publisher) : IRequestHandler<음식주문등록Command, 음식주문응답>
+    IPublisher publisher,
+    SsalddelContext? db = null) : IRequestHandler<음식주문등록Command, 음식주문응답>
 {
     public async Task<음식주문응답> Handle(음식주문등록Command request, CancellationToken cancellationToken)
     {
@@ -18,7 +22,7 @@ public sealed class 음식주문등록CommandHandler(
             request.Payload,
             cancellationToken);
 
-        var saveResult = orderStore.멱등등록(canonicalRequest);
+        var saveResult = await 등록과음식점제안기록Async(canonicalRequest, cancellationToken);
         var order = saveResult.주문;
 
         if (saveResult.새로생성됨)
@@ -29,6 +33,47 @@ public sealed class 음식주문등록CommandHandler(
         }
 
         return orderStore.GetOrder(order.주문번호) ?? order;
+    }
+
+    private async Task<음식주문저장결과> 등록과음식점제안기록Async(
+        음식주문등록요청 request,
+        CancellationToken cancellationToken)
+    {
+        if (db is null)
+        {
+            return orderStore.멱등등록(request);
+        }
+
+        if (!db.Database.IsRelational())
+        {
+            var saved = orderStore.멱등등록(request);
+            if (saved.새로생성됨)
+            {
+                db.운영배차활동사건.Add(운영배차활동사건Factory.음식점유효주문제안(
+                    saved.주문.음식점Id,
+                    saved.주문.주문번호,
+                    saved.주문.CreatedAt));
+                await db.SaveChangesAsync(cancellationToken);
+            }
+            return saved;
+        }
+
+        var strategy = db.Database.CreateExecutionStrategy();
+        return await strategy.ExecuteAsync(async () =>
+        {
+            await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
+            var saved = orderStore.멱등등록(request);
+            if (saved.새로생성됨)
+            {
+                db.운영배차활동사건.Add(운영배차활동사건Factory.음식점유효주문제안(
+                    saved.주문.음식점Id,
+                    saved.주문.주문번호,
+                    saved.주문.CreatedAt));
+                await db.SaveChangesAsync(cancellationToken);
+            }
+            await transaction.CommitAsync(cancellationToken);
+            return saved;
+        });
     }
 
     private static void Validate(음식주문등록요청 request)

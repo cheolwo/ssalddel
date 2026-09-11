@@ -72,4 +72,13 @@ public sealed class FoodDeliveryDriverActionResponse
 
     [JsonPropertyName("locationDistanceKm")]
     public decimal? LocationDistanceKm { get; set; }
+
+    [JsonPropertyName("deliveryAttemptId")]
+    public string DeliveryAttemptId { get; set; } = string.Empty;
+
+    [JsonPropertyName("attemptRevision")]
+    public long? AttemptRevision { get; set; }
+
+    [JsonPropertyName("occurredAtUtc")]
+    public DateTime? OccurredAtUtc { get; set; }
 }

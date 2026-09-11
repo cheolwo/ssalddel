@@ -25,20 +25,15 @@ public sealed partial class 국내화물배차조율입력Factory
 
     private static 국내화물운송기사상태Snapshot[] FilterCandidateDriverStates(
         IEnumerable<국내화물운송기사상태Snapshot> driverStates,
-        IReadOnlyDictionary<string, 용달기사> driverMap,
-        IReadOnlyDictionary<string, int> acceptedTransportCounts,
-        int maxAcceptedTransportCount)
+        IReadOnlyDictionary<string, 용달기사> driverMap)
     {
         return driverStates
             .Where(state =>
             {
                 driverMap.TryGetValue(state.DriverId, out var driver);
-                var acceptedTransportCount = GetAcceptedTransportCount(acceptedTransportCounts, state.DriverId);
                 return 국내화물배차후보금지정책.기사후보금지사유(
                     state,
-                    driver,
-                    acceptedTransportCount,
-                    maxAcceptedTransportCount).Count == 0;
+                    driver).Count == 0;
             })
             .ToArray();
     }
@@ -52,7 +47,6 @@ public sealed partial class 국내화물배차조율입력Factory
         IReadOnlyDictionary<string, 기사근무> currentShiftMap,
         IReadOnlyDictionary<string, 차량제원> vehicleSpecMap,
         IReadOnlyDictionary<string, int> acceptedTransportCounts,
-        int maxAcceptedTransportCount,
         DateTime now,
         CancellationToken cancellationToken)
     {
@@ -88,7 +82,6 @@ public sealed partial class 국내화물배차조율입력Factory
                     vehicleSpec,
                     rejectedDriverIds,
                     GetAcceptedTransportCount(acceptedTransportCounts, state.DriverId),
-                    maxAcceptedTransportCount,
                     now));
             }
         }

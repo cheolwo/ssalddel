@@ -20,16 +20,13 @@ public sealed partial class 국내화물배차조율입력Factory
         차량제원? vehicleSpec,
         IReadOnlySet<string> rejectedDriverIds,
         int acceptedTransportCount,
-        int maxAcceptedTransportCount,
         DateTime now)
     {
         var excluded = new List<string>();
         excluded.AddRange(국내화물배차후보금지정책.조합후보금지사유(driver.기사Id, rejectedDriverIds));
         excluded.AddRange(국내화물배차후보금지정책.기사후보금지사유(
             state,
-            driver,
-            acceptedTransportCount,
-            maxAcceptedTransportCount));
+            driver));
 
         var pickupPoint = CreatePoint(queue.픽업_위도, queue.픽업_경도);
         var dropoffPoint = CreatePoint(queue.하차_위도, queue.하차_경도);

@@ -35,7 +35,7 @@ public sealed class 국내화물배차후보금지정책Tests
     }
 
     [Fact]
-    public void 기사후보금지는_운행상태_위치_수락건수를_하드_금지로_본다()
+    public void 기사후보금지는_운행상태와_위치를_하드금지로보되_수락건수는상한으로쓰지않는다()
     {
         var state = new 국내화물운송기사상태Snapshot(
             "DRV-1",
@@ -58,13 +58,11 @@ public sealed class 국내화물배차후보금지정책Tests
 
         var reasons = 국내화물배차후보금지정책.기사후보금지사유(
             state,
-            new 용달기사 { 기사Id = "DRV-1", 상태 = "활동중" },
-            현재수락운송건수: 2,
-            기사최대수락운송건수: 2);
+            new 용달기사 { 기사Id = "DRV-1", 상태 = "활동중" });
 
         Assert.Contains("기사가 운행중 상태가 아닙니다.", reasons);
         Assert.Contains("기사 현재 위치가 없습니다.", reasons);
-        Assert.Contains("이미 수락한 진행 중 운송이 2건입니다.", reasons);
+        Assert.DoesNotContain(reasons, x => x.Contains("수락한 진행 중 운송", StringComparison.Ordinal));
     }
 
     [Fact]

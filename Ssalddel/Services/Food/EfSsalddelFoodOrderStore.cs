@@ -303,6 +303,63 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
             request.클라이언트요청Id);
     }
 
+    public 음식주문변경결과? 주문자취소(
+        string orderNo,
+        주문자음식주문취소요청 request,
+        string 주문자UserId)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        var cleanOrderNo = Clean(orderNo);
+        var cleanOrdererUserId = Clean(주문자UserId);
+        if (cleanOrderNo is null || cleanOrdererUserId is null)
+        {
+            return null;
+        }
+
+        var order = LoadOrderForUpdate(cleanOrderNo);
+        if (order is null
+            || !string.Equals(order.주문자UserId, cleanOrdererUserId, StringComparison.Ordinal))
+        {
+            return null;
+        }
+
+        if (FindDuplicate(order, request.클라이언트요청Id))
+        {
+            return new 음식주문변경결과(ToDto(order), false);
+        }
+
+        var currentStatus = 음식주문상태코드.Normalize(order.상태);
+        if (currentStatus != 음식주문상태코드.주문대기)
+        {
+            throw new InvalidOperationException(
+                $"음식점 수락 전 주문대기 상태에서만 주문자가 직접 취소할 수 있습니다. 현재상태={order.상태}");
+        }
+        if (request.예상Revision.HasValue && request.예상Revision.Value != order.상태이력.Count)
+        {
+            throw new DbUpdateConcurrencyException("음식 주문이 다른 요청에서 먼저 변경되었습니다.");
+        }
+
+        var now = DateTime.UtcNow;
+        음식배달업무상태전이Guard.허용확인(currentStatus, 음식주문상태코드.취소);
+        order.상태 = 음식주문상태코드.취소;
+        order.UpdatedAt = now;
+        order.상태이력.Add(new 음식주문상태이력
+        {
+            클라이언트요청Id = request.클라이언트요청Id,
+            처리UserId = cleanOrdererUserId,
+            이전상태 = currentStatus,
+            다음상태 = 음식주문상태코드.취소,
+            사유 = BuildOrdererCancellationReason(request),
+            전이시각Utc = now
+        });
+
+        return SaveIdempotentChange(
+            order,
+            cleanOrderNo,
+            request.클라이언트요청Id);
+    }
+
     public 음식주문응답? 배차대기반영(string orderNo, long dispatchWaitId, DateTime dispatchRequestedAtUtc)
     {
         var cleanOrderNo = Clean(orderNo);
@@ -380,6 +437,11 @@ public sealed class EfSsalddelFoodOrderStore : ISsalddelFoodOrderStore, I커뮤�
         => Clean(note) is { } cleanNote
             ? $"주문자 수령 확인 · {cleanNote}"
             : "주문자 수령 확인";
+
+    private static string BuildOrdererCancellationReason(주문자음식주문취소요청 request)
+        => Clean(request.사유) is { } cleanReason
+            ? $"주문자 취소 · {request.사유Code.Trim()} · {cleanReason}"
+            : $"주문자 취소 · {request.사유Code.Trim()}";
 
     private 음식주문변경결과 SaveIdempotentChange(
         음식주문 order,

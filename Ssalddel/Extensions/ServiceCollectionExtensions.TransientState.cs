@@ -4,6 +4,8 @@ using StackExchange.Redis;
 using 살뜰.Infrastructure.Storage.Local;
 using 살뜰.Infrastructure.Storage.Redis;
 using 살뜰.Services.Options;
+using 살뜰.Services.Dispatch.Common;
+using 살뜰.Services.Dispatch.Continuity;
 using 살뜰.Services.Storage.Local;
 
 namespace Ssalddel.Extensions;
@@ -39,6 +41,8 @@ public static partial class ServiceCollectionExtensions
         services.AddSingleton<IDriverCallScopeStore, InMemoryDriverCallScopeStore>();
         services.AddSingleton<IDriverNotificationSettingsStore, InMemoryDriverNotificationSettingsStore>();
         services.AddSingleton<IIsmsPTransportKeyStatusStore, InMemoryIsmsPTransportKeyStatusStore>();
+        services.AddSingleton<I운영배차판정ProjectionStore, InMemory운영배차판정ProjectionStore>();
+        services.AddSingleton<I화물연속배차ProjectionStore, InMemory화물연속배차ProjectionStore>();
         return services;
     }
 
@@ -71,6 +75,8 @@ public static partial class ServiceCollectionExtensions
         services.AddSingleton<IDriverCallScopeStore, RedisDriverCallScopeStore>();
         services.AddSingleton<IDriverNotificationSettingsStore, RedisDriverNotificationSettingsStore>();
         services.AddSingleton<IIsmsPTransportKeyStatusStore, RedisIsmsPTransportKeyStatusStore>();
+        services.AddSingleton<I운영배차판정ProjectionStore, Redis운영배차판정ProjectionStore>();
+        services.AddSingleton<I화물연속배차ProjectionStore, Redis화물연속배차ProjectionStore>();
         return services;
     }
 }

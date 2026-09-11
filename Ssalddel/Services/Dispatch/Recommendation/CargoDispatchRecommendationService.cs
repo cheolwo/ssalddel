@@ -251,6 +251,7 @@ namespace 살뜰.Services.Dispatch.Recommendation
                     차량경고 = fit?.경고 ?? Array.Empty<string>(),
                     추천시작시각 = x.Item.추천시작시각,
                     추천만료시각 = x.Item.추천만료시각,
+                    추천라운드 = x.Item.추천라운드,
                     상태 = x.Item.상태,
                     배차상태 = 상태값.배차상태.대기
                 };

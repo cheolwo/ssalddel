@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Ssalddel.Security;
+using Ssalddel.Services.Food;
 using 살뜰.Services.Versioning;
 
 namespace Ssalddel.Controllers.Food;
@@ -20,7 +21,8 @@ namespace Ssalddel.Controllers.Food;
 public sealed class 음식주문Controller(
     I음식주문접수UseCase commandUseCase,
     I주문자음식주문조회UseCase readUseCase,
-    I음식점음식주문조회UseCase restaurantReadUseCase) : ControllerBase
+    I음식점음식주문조회UseCase restaurantReadUseCase,
+    I음식점조리시간Service? preparationTimeService = null) : ControllerBase
 {
     [HttpGet]
     [Authorize]
@@ -79,6 +81,42 @@ public sealed class 음식주문Controller(
         }
     }
 
+    [HttpPost("{orderNo}/cancellation")]
+    [Authorize]
+    public async Task<ActionResult<음식주문응답>> 주문자취소(
+        string orderNo,
+        [FromBody] 주문자음식주문취소요청 request,
+        CancellationToken cancellationToken)
+    {
+        var ordererUserId = 현재사용자Id();
+        if (string.IsNullOrWhiteSpace(ordererUserId))
+        {
+            return Forbid();
+        }
+
+        try
+        {
+            var order = await commandUseCase.주문자취소Async(
+                orderNo,
+                request,
+                ordererUserId,
+                cancellationToken);
+            return order is null ? NotFound() : Ok(order);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+
     [HttpGet("restaurant/inbox")]
     [Authorize(Policy = "음식점운영자전용")]
     public ActionResult<음식점주문수신함응답> 음식점수신함(
@@ -110,6 +148,43 @@ public sealed class 음식주문Controller(
 
         var order = restaurantReadUseCase.상세(orderNo, restaurantId.Value);
         return order is null ? NotFound() : Ok(order);
+    }
+
+    [HttpGet("restaurant/preparation-time-settings")]
+    [Authorize(Policy = "음식점운영자전용")]
+    public async Task<ActionResult<음식점조리시간설정응답>> 음식점조리시간설정조회(CancellationToken cancellationToken)
+    {
+        var restaurantId = 현재음식점Id();
+        if (restaurantId is null || preparationTimeService is null) return Forbid();
+        return Ok(await preparationTimeService.설정조회Async(restaurantId.Value, cancellationToken));
+    }
+
+    [HttpPut("restaurant/preparation-time-settings")]
+    [Authorize(Policy = "음식점운영자전용")]
+    public async Task<ActionResult<음식점조리시간설정응답>> 음식점조리시간설정변경(
+        [FromBody] 음식점조리시간설정변경요청 request,
+        CancellationToken cancellationToken)
+    {
+        var restaurantId = 현재음식점Id();
+        var actorUserId = 현재사용자Id();
+        if (restaurantId is null || string.IsNullOrWhiteSpace(actorUserId) || preparationTimeService is null) return Forbid();
+        try
+        {
+            return Ok(await preparationTimeService.설정교체Async(restaurantId.Value, actorUserId, request, cancellationToken));
+        }
+        catch (DbUpdateConcurrencyException ex) { return Conflict(new { message = ex.Message }); }
+        catch (ArgumentException ex) { return BadRequest(new { message = ex.Message }); }
+    }
+
+    [HttpGet("restaurant/inbox/{orderNo}/preparation-reference")]
+    [Authorize(Policy = "음식점운영자전용")]
+    public async Task<ActionResult<음식점조리참고응답>> 음식점조리참고조회(string orderNo, CancellationToken cancellationToken)
+    {
+        var restaurantId = 현재음식점Id();
+        if (restaurantId is null || preparationTimeService is null) return Forbid();
+        if (restaurantReadUseCase.상세(orderNo, restaurantId.Value) is null) return NotFound();
+        var result = await preparationTimeService.주문참고조회Async(orderNo, restaurantId.Value, DateTime.UtcNow, cancellationToken);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost("{orderNo}/restaurant-acceptance")]

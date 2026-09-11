@@ -81,7 +81,11 @@ public static class Result응답확장
         return controller.ToProblemActionResult(message, StatusCodes.Status403Forbidden);
     }
 
-    private static IActionResult ToProblemActionResult(this ControllerBase controller, IEnumerable<string> errors, int? statusCode)
+    private static IActionResult ToProblemActionResult(
+        this ControllerBase controller,
+        IEnumerable<string> errors,
+        int? statusCode,
+        string? errorCode = null)
     {
         var messages = errors.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
         var firstMessage = messages.FirstOrDefault() ?? "요청을 처리할 수 없습니다.";
@@ -97,7 +101,9 @@ public static class Result응답확장
             Instance = controller.HttpContext?.Request?.Path.Value
         };
         problem.Extensions["errors"] = messages;
-        problem.Extensions["errorCode"] = failure.Code;
+        problem.Extensions["errorCode"] = string.IsNullOrWhiteSpace(errorCode)
+            ? failure.Code
+            : errorCode;
         problem.Extensions["traceId"] = controller.HttpContext?.TraceIdentifier ?? string.Empty;
 
         return controller.StatusCode(failure.StatusCode, problem);
@@ -109,8 +115,15 @@ public static class Result응답확장
             .Select(x => x.Metadata.TryGetValue("StatusCode", out var value) ? value : null)
             .OfType<int>()
             .FirstOrDefault();
+        var errorCode = errors
+            .Select(x => x.Metadata.TryGetValue("ErrorCode", out var value) ? value : null)
+            .OfType<string>()
+            .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
 
-        return controller.ToProblemActionResult(errors.Select(x => x.Message), statusCode == 0 ? null : statusCode);
+        return controller.ToProblemActionResult(
+            errors.Select(x => x.Message),
+            statusCode == 0 ? null : statusCode,
+            errorCode);
     }
 
     private static FailureClassification 실패분류(string message, int statusCode)

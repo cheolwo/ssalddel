@@ -37,7 +37,7 @@ public sealed partial class 국내화물배차조율Service : I국내화물배�
             .GroupBy(x => x.기사Id, StringComparer.Ordinal)
             .ToDictionary(
                 x => x.Key,
-                x => Math.Max(0, maxPerDriver - x.Max(driver => driver.현재수락운송건수)),
+                _ => maxPerDriver,
                 StringComparer.Ordinal);
         var rawRequestIds = input.운송의뢰목록
             .Select(x => x.의뢰Id)

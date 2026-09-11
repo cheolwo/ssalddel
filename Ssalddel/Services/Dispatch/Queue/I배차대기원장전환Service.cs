@@ -10,6 +10,7 @@ namespace 살뜰.Services.Dispatch.Queue
         Task<배차대기원장전환결과> 추천대기처리Async(string requestId, CancellationToken cancellationToken = default);
         Task<배차대기원장전환결과> 추천시작Async(string requestId, string driverId, int? timeoutSeconds = null, CancellationToken cancellationToken = default);
         Task<배차대기원장전환결과> 추천거절처리Async(string requestId, string driverId, CancellationToken cancellationToken = default);
+        Task<배차대기원장전환결과> 추천거절처리Async(string requestId, string driverId, string? reasonCode, CancellationToken cancellationToken = default);
         Task<배차대기원장전환결과> 추천만료처리Async(string requestId, CancellationToken cancellationToken = default);
         Task<배차대기원장전환결과> 공개배차로전환Async(string requestId, CancellationToken cancellationToken = default);
         Task<배차대기원장전환결과> 실행주체확정결과동기화Async(

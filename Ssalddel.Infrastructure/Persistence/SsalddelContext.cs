@@ -59,6 +59,7 @@ namespace 살뜰.Data
 
         public DbSet<배차계획신청> 배차계획신청 { get; set; } = null!;
         public DbSet<기사배차> 기사배차 { get; set; } = null!;
+        public DbSet<운영배차활동사건> 운영배차활동사건 { get; set; } = null!;
         public DbSet<플랫폼배달권> 플랫폼배달권 { get; set; } = null!;
         public DbSet<원장배달권투영> 원장배달권투영 { get; set; } = null!;
 
@@ -67,6 +68,9 @@ namespace 살뜰.Data
         public DbSet<운송원장> 운송원장 { get; set; } = null!;
         public DbSet<운송이벤트> 운송이벤트 { get; set; } = null!;
         public DbSet<운송의뢰상품연결> 운송의뢰상품연결 { get; set; } = null!;
+        public DbSet<화물연속배차상태> 화물연속배차상태 { get; set; } = null!;
+        public DbSet<화물운송시간약속> 화물운송시간약속 { get; set; } = null!;
+        public DbSet<화물다음콜예약> 화물다음콜예약 { get; set; } = null!;
 
         public DbSet<운임구성> 운임구성 { get; set; } = null!;
         public DbSet<차량단가> 차량단가 { get; set; } = null!;
@@ -154,6 +158,8 @@ namespace 살뜰.Data
         public DbSet<음식주문> 음식주문 { get; set; } = null!;
         public DbSet<음식주문상품> 음식주문상품 { get; set; } = null!;
         public DbSet<음식주문상태이력> 음식주문상태이력 { get; set; } = null!;
+        public DbSet<음식점조리시간설정> 음식점조리시간설정 { get; set; } = null!;
+        public DbSet<음식배달시도> 음식배달시도 { get; set; } = null!;
         public DbSet<음식점리뷰> 음식점리뷰 { get; set; } = null!;
         public DbSet<음식운영정책> 음식운영정책 { get; set; } = null!;
         public DbSet<마트공개상품> 마트공개상품 { get; set; } = null!;

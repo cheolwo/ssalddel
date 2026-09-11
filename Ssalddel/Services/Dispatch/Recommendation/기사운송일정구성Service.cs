@@ -25,7 +25,9 @@ namespace 살뜰.Services.Dispatch.Recommendation
         {
             var transports = await _db.운송원장
                 .AsNoTracking()
-                .Where(x => x.기사_운송자 == 기사Id && x.상태 != "인수완료")
+                .Where(x => x.기사_운송자 == 기사Id
+                            && x.배차업무유형 == 상태값.배차업무유형.용달운송
+                            && x.상태 != "인수완료")
                 .OrderBy(x => x.출발_픽업 ?? x.UpdatedAt)
                 .ThenBy(x => x.도착 ?? x.CreatedAt)
                 .ToListAsync(cancellationToken);

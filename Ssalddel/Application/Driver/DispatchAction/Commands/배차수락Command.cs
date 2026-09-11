@@ -7,17 +7,35 @@ namespace Ssalddel.Application.Driver.DispatchAction;
 
 public sealed record 배차수락Command : 살뜰CommandBase, IRequest<Result<배차수락결과>>, IWorkRelationshipSnapshotCommand
 {
-    public 배차수락Command(string driverId, string requestId)
+    public 배차수락Command(
+        string driverId,
+        string requestId,
+        int? expectedRecommendationRound = null,
+        IReadOnlyCollection<string>? acknowledgedWarningCodes = null,
+        string? reservationId = null,
+        long? expectedReservationRevision = null)
     {
         기사Id = string.IsNullOrWhiteSpace(driverId) ? string.Empty : driverId;
         RequestId = requestId;
         참여자Id = 기사Id;
         실행역할 = 살뜰역할유형.기사;
+        ExpectedRecommendationRound = expectedRecommendationRound;
+        AcknowledgedWarningCodes = acknowledgedWarningCodes ?? [];
+        ReservationId = reservationId;
+        ExpectedReservationRevision = expectedReservationRevision;
     }
 
     public string 기사Id { get; init; } = string.Empty;
 
     public string RequestId { get; init; } = string.Empty;
+
+    public int? ExpectedRecommendationRound { get; init; }
+
+    public IReadOnlyCollection<string> AcknowledgedWarningCodes { get; init; } = [];
+
+    public string? ReservationId { get; init; }
+
+    public long? ExpectedReservationRevision { get; init; }
 }
 
 public sealed record 배차수락결과(string RequestId, string Message);

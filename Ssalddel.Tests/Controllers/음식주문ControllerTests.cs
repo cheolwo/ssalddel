@@ -40,10 +40,11 @@ public sealed class 음식주문ControllerTests
     }
 
     [Fact]
-    public void 주문등록과수령확인은_로그인을요구하고_음식점업무는음식점정책을요구한다()
+    public void 주문등록수령확인취소는_로그인을요구하고_음식점업무는음식점정책을요구한다()
     {
         var register = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.등록));
         var receipt = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.주문자수령확인));
+        var cancellation = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.주문자취소));
         var inbox = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.음식점수신함));
         var detail = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.음식점상세));
         var accept = typeof(음식주문Controller).GetMethod(nameof(음식주문Controller.음식점수락));
@@ -54,6 +55,10 @@ public sealed class 음식주문ControllerTests
         Assert.Equal(
             "{orderNo}/receipt-confirmation",
             receipt?.GetCustomAttribute<HttpPostAttribute>()?.Template);
+        Assert.NotNull(cancellation?.GetCustomAttribute<AuthorizeAttribute>());
+        Assert.Equal(
+            "{orderNo}/cancellation",
+            cancellation?.GetCustomAttribute<HttpPostAttribute>()?.Template);
         Assert.Equal("restaurant/inbox", inbox?.GetCustomAttribute<HttpGetAttribute>()?.Template);
         Assert.Equal("음식점운영자전용", inbox?.GetCustomAttribute<AuthorizeAttribute>()?.Policy);
         Assert.Equal("restaurant/inbox/{orderNo}", detail?.GetCustomAttribute<HttpGetAttribute>()?.Template);
@@ -109,6 +114,32 @@ public sealed class 음식주문ControllerTests
         Assert.Equal("signed-in-orderer", command.ReceiptOrdererUserId);
         Assert.Equal("FOOD-RECEIPT", command.ReceiptOrderNo);
         Assert.Same(request, command.ReceiptRequest);
+    }
+
+    [Fact]
+    public async Task 주문자취소는_로그인사용자Id를Command에전달한다()
+    {
+        var command = new RecordingCommandUseCase();
+        var controller = new 음식주문Controller(command, null!, null!)
+        {
+            ControllerContext = Context(
+                new Claim(ClaimTypes.NameIdentifier, "signed-in-orderer"))
+        };
+        var request = new 주문자음식주문취소요청
+        {
+            클라이언트요청Id = Guid.NewGuid(),
+            사유Code = "ChangedMind"
+        };
+
+        var result = await controller.주문자취소(
+            "FOOD-CANCEL",
+            request,
+            CancellationToken.None);
+
+        Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal("signed-in-orderer", command.CancellationOrdererUserId);
+        Assert.Equal("FOOD-CANCEL", command.CancellationOrderNo);
+        Assert.Same(request, command.CancellationRequest);
     }
 
     [Fact]
@@ -188,6 +219,9 @@ public sealed class 음식주문ControllerTests
         public string? ReceiptOrderNo { get; private set; }
         public string? ReceiptOrdererUserId { get; private set; }
         public 주문자음식주문수령확인요청? ReceiptRequest { get; private set; }
+        public string? CancellationOrderNo { get; private set; }
+        public string? CancellationOrdererUserId { get; private set; }
+        public 주문자음식주문취소요청? CancellationRequest { get; private set; }
 
         public Task<음식주문응답> 등록Async(
             음식주문등록요청 request,
@@ -242,6 +276,23 @@ public sealed class 음식주문ControllerTests
                 주문번호 = orderNo,
                 주문자UserId = 주문자UserId,
                 상태 = 음식주문상태코드.수령확인
+            });
+        }
+
+        public Task<음식주문응답?> 주문자취소Async(
+            string orderNo,
+            주문자음식주문취소요청 request,
+            string 주문자UserId,
+            CancellationToken cancellationToken)
+        {
+            CancellationOrderNo = orderNo;
+            CancellationOrdererUserId = 주문자UserId;
+            CancellationRequest = request;
+            return Task.FromResult<음식주문응답?>(new 음식주문응답
+            {
+                주문번호 = orderNo,
+                주문자UserId = 주문자UserId,
+                상태 = 음식주문상태코드.취소
             });
         }
     }

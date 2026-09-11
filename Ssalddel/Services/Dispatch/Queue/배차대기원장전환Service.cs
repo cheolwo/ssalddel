@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Ssalddel;
 using Ssalddel.Contracts.Common.Operations;
+using 살뜰.Services.Dispatch.Common;
 using 살뜰.도메인.공통;
 using 살뜰.도메인.배차;
 using 살뜰.Services.Dispatch.Engine;
@@ -121,6 +122,13 @@ namespace 살뜰.Services.Dispatch.Queue
         }
 
         public async Task<배차대기원장전환결과> 추천거절처리Async(string requestId, string driverId, CancellationToken cancellationToken = default)
+            => await 추천거절처리Async(requestId, driverId, reasonCode: null, cancellationToken);
+
+        public async Task<배차대기원장전환결과> 추천거절처리Async(
+            string requestId,
+            string driverId,
+            string? reasonCode,
+            CancellationToken cancellationToken = default)
         {
             var queue = await _db.운송원장.FirstOrDefaultAsync(x => x.의뢰Id == requestId, cancellationToken);
             if (queue is null)
@@ -143,13 +151,21 @@ namespace 살뜰.Services.Dispatch.Queue
                     driverId);
             }
 
+            var rejectedAtUtc = DateTime.UtcNow;
+            var rejectionEvent = 운영배차활동사건Factory.거절(
+                driverId,
+                queue.의뢰Id,
+                queue.추천라운드,
+                rejectedAtUtc,
+                reasonCode);
             queue.배차큐단계 = 상태값.배차큐단계.배차추천;
             queue.배차노출상태 = 상태값.배차노출상태.추천거절;
             queue.마지막거절기사Id = driverId;
             queue.현재추천대상기사Id = null;
             queue.추천시작시각 = null;
             queue.추천만료시각 = null;
-            queue.UpdatedAt = DateTime.UtcNow;
+            queue.UpdatedAt = rejectedAtUtc;
+            _db.운영배차활동사건.Add(rejectionEvent);
 
             await _db.SaveChangesAsync(cancellationToken);
 
@@ -291,15 +307,7 @@ namespace 살뜰.Services.Dispatch.Queue
                 dispatchRequest.UpdatedAt = DateTime.UtcNow;
             }
 
-            queue.상태 = 상태값.배차대기상태.대기;
-            queue.배차큐단계 = 상태값.배차큐단계.배차추천;
-            queue.배차노출상태 = 상태값.배차노출상태.추천대기;
-            queue.마지막거절기사Id = driverId;
-            queue.확정기사Id = null;
-            queue.현재추천대상기사Id = null;
-            queue.추천시작시각 = null;
-            queue.추천만료시각 = null;
-            queue.UpdatedAt = DateTime.UtcNow;
+            배차재추천상태Policy.적용(queue, driverId, DateTime.UtcNow);
 
             await _db.SaveChangesAsync(cancellationToken);
 

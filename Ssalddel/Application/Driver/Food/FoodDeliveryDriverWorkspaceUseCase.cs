@@ -66,9 +66,24 @@ public sealed class FoodDeliveryDriverWorkspaceUseCase : IFoodDeliveryDriverWork
                             && (x.기사_운송자 == driverId || x.확정기사Id == driverId))
                 .OrderBy(x => x.CreatedAt)
                 .ToListAsync(cancellationToken);
+        var activeAttempts = activeIds.Length == 0
+            ? new Dictionary<string, 살뜰.도메인.음식.음식배달시도>(StringComparer.Ordinal)
+            : (await _db.음식배달시도
+                .AsNoTracking()
+                .Where(x => Enumerable.Contains(activeIds, x.제안Id)
+                            && x.기사Id == driverId
+                            && x.중단시각Utc == null
+                            && x.전달완료시각Utc == null)
+                .OrderByDescending(x => x.시도순번)
+                .ToListAsync(cancellationToken))
+                .GroupBy(x => x.제안Id, StringComparer.Ordinal)
+                .ToDictionary(x => x.Key, x => x.First(), StringComparer.Ordinal);
         var active = activeQueues
             .Where(x => activeWork.ContainsKey(x.의뢰Id))
-            .Select(x => ToActiveDelivery(x, activeWork[x.의뢰Id]))
+            .Select(x => ToActiveDelivery(
+                x,
+                activeWork[x.의뢰Id],
+                activeAttempts.GetValueOrDefault(x.의뢰Id)))
             .ToArray();
 
         var settlementResult = await _settlements.당월조회Async(driverId, driverId, cancellationToken);
@@ -90,6 +105,7 @@ public sealed class FoodDeliveryDriverWorkspaceUseCase : IFoodDeliveryDriverWork
             Recommendations = offers,
             ActiveDeliveries = active,
             BundleCandidates = BuildBundleCandidates(offers),
+            MaxActiveDeliveries = 음식배달기사활성업무Policy.MaxActiveDeliveries,
             Settlement = settlement,
             DispatchAutomationEnabled = dispatchAutomationEnabled,
             DispatchAutomationNotice = ResolveDispatchAutomationNotice(dispatchAutomationEnabled),
@@ -129,7 +145,8 @@ public sealed class FoodDeliveryDriverWorkspaceUseCase : IFoodDeliveryDriverWork
 
     private static FoodDeliveryDriverActiveDeliveryDto ToActiveDelivery(
         살뜰.도메인.운송.운송원장 transport,
-        DriverWorkOfferDto offer)
+        DriverWorkOfferDto offer,
+        살뜰.도메인.음식.음식배달시도? attempt)
         => new()
         {
             TransportId = transport.Id,
@@ -141,6 +158,12 @@ public sealed class FoodDeliveryDriverWorkspaceUseCase : IFoodDeliveryDriverWork
             DriverPayout = offer.DriverPayout,
             TransportStatus = transport.상태,
             WorkStatus = offer.Status,
+            DeliveryAttemptId = attempt?.시도StableId ?? string.Empty,
+            AttemptRevision = attempt?.Revision ?? 0,
+            RestaurantArrivedAtUtc = attempt?.가게도착시각Utc,
+            DisplayedPreparationReadyAtUtc = attempt?.표시준비예정시각Utc,
+            PreparationDelayEligibleAtUtc = attempt?.표시준비예정시각Utc?.AddMinutes(10),
+            IsPreparationDelayRedispatch = attempt?.조리지연재배차여부 ?? false,
             ExecutionProfile = offer.ExecutionProfile ?? 운송실행프로필Factory.Create(transport),
             Recipient = ToRecipient(offer.Recipient),
             UpdatedAtUtc = transport.UpdatedAt

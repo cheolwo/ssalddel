@@ -224,6 +224,7 @@ namespace Ssalddel.Hubs
         public string[] 차량경고 { get; set; } = Array.Empty<string>();
         public DateTime? 추천시작시각 { get; set; }
         public DateTime? 추천만료시각 { get; set; }
+        public int 추천라운드 { get; set; }
 
         public new decimal? 직선거리Km
         {

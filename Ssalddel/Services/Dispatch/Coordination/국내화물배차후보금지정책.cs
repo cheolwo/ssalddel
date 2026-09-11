@@ -65,9 +65,7 @@ public static class 국내화물배차후보금지정책
 
     public static IReadOnlyList<string> 기사후보금지사유(
         국내화물운송기사상태Snapshot 기사상태,
-        용달기사? 기사,
-        int 현재수락운송건수,
-        int 기사최대수락운송건수)
+        용달기사? 기사)
     {
         var 금지사유목록 = new List<string>();
 
@@ -88,11 +86,6 @@ public static class 국내화물배차후보금지정책
         if (!기사상태.Latitude.HasValue || !기사상태.Longitude.HasValue)
         {
             금지사유목록.Add("기사 현재 위치가 없습니다.");
-        }
-
-        if (현재수락운송건수 >= Math.Max(1, 기사최대수락운송건수))
-        {
-            금지사유목록.Add($"이미 수락한 진행 중 운송이 {현재수락운송건수}건입니다.");
         }
 
         return 금지사유목록;

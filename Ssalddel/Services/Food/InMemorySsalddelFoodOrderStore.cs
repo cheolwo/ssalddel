@@ -268,6 +268,56 @@ public sealed class InMemorySsalddelFoodOrderStore : ISsalddelFoodOrderStore, I�
         }
     }
 
+    public 음식주문변경결과? 주문자취소(
+        string orderNo,
+        주문자음식주문취소요청 request,
+        string 주문자UserId)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        lock (_gate)
+        {
+            var order = _orders.FirstOrDefault(x =>
+                string.Equals(x.주문번호, orderNo, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(x.주문자UserId, 주문자UserId, StringComparison.Ordinal));
+            if (order is null)
+            {
+                return null;
+            }
+
+            if (FindDuplicate(order, request.클라이언트요청Id))
+            {
+                return new 음식주문변경결과(FoodOrderSampleData.Clone(order), false);
+            }
+
+            var currentStatus = 음식주문상태코드.Normalize(order.상태);
+            if (currentStatus != 음식주문상태코드.주문대기)
+            {
+                throw new InvalidOperationException(
+                    $"음식점 수락 전 주문대기 상태에서만 주문자가 직접 취소할 수 있습니다. 현재상태={order.상태}");
+            }
+            if (request.예상Revision.HasValue && request.예상Revision.Value != order.상태이력.Count)
+            {
+                throw new InvalidOperationException("음식 주문이 다른 요청에서 먼저 변경되었습니다.");
+            }
+
+            var now = DateTime.UtcNow;
+            음식배달업무상태전이Guard.허용확인(currentStatus, 음식주문상태코드.취소);
+            order.상태 = 음식주문상태코드.취소;
+            order.최근변경시각Utc = now;
+            order.상태이력 = AppendHistory(
+                order,
+                currentStatus,
+                음식주문상태코드.취소,
+                BuildOrdererCancellationReason(request),
+                now,
+                request.클라이언트요청Id,
+                주문자UserId);
+
+            return new 음식주문변경결과(FoodOrderSampleData.Clone(order), true);
+        }
+    }
+
     public 음식주문응답? 배차대기반영(string orderNo, long dispatchWaitId, DateTime dispatchRequestedAtUtc)
     {
         lock (_gate)
@@ -350,6 +400,11 @@ public sealed class InMemorySsalddelFoodOrderStore : ISsalddelFoodOrderStore, I�
         => NormalizeOptional(note) is { } cleanNote
             ? $"주문자 수령 확인 · {cleanNote}"
             : "주문자 수령 확인";
+
+    private static string BuildOrdererCancellationReason(주문자음식주문취소요청 request)
+        => NormalizeOptional(request.사유) is { } cleanReason
+            ? $"주문자 취소 · {request.사유Code.Trim()} · {cleanReason}"
+            : $"주문자 취소 · {request.사유Code.Trim()}";
 
     private static string? NormalizeOptional(string? value)
         => string.IsNullOrWhiteSpace(value) ? null : value.Trim();

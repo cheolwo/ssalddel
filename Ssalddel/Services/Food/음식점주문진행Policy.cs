@@ -55,7 +55,11 @@ public static class 음식점주문진행Policy
         string current,
         음식점주문진행변경요청 request)
     {
-        EnsureCurrent(current, 음식주문상태코드.조리중, request.작업);
+        if (current is not (음식주문상태코드.조리중 or 음식주문상태코드.기사배정))
+        {
+            throw new InvalidOperationException(
+                $"{request.작업} 작업이 가능한 주문 상태가 아닙니다. 현재상태={current}, 필요상태={음식주문상태코드.조리중} 또는 {음식주문상태코드.기사배정}");
+        }
         if (request.조리예상분 is null)
         {
             throw new ArgumentException("변경할 조리 예상 시간이 필요합니다.", nameof(request));
@@ -63,7 +67,7 @@ public static class 음식점주문진행Policy
 
         var minutes = 음식점조리시간정책.Clamp(request.조리예상분.Value);
         return new 음식점주문진행판정(
-            음식주문상태코드.조리중,
+            current,
             minutes,
             $"조리 예상 시간 변경 · {minutes}분");
     }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MediatR;
 using Ssalddel.Controllers;
 using Ssalddel.Application.Driver.DispatchAction;
@@ -30,10 +31,18 @@ namespace Ssalddel.Controllers.Driver.Action03
         }
 
         [HttpPost("{requestId}/accept")]
-        public async Task<IActionResult> 수락(string requestId)
+        public async Task<IActionResult> 수락(
+            string requestId,
+            [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] 기사화물배차수락요청? request = null)
         {
             var driverId = 현재기사Id();
-            var result = await _sender.Send(new 배차수락Command(driverId, requestId));
+            var result = await _sender.Send(new 배차수락Command(
+                driverId,
+                requestId,
+                request?.ExpectedRecommendationRound,
+                request?.AcknowledgedWarningCodes,
+                request?.ReservationId,
+                request?.ExpectedReservationRevision));
 
             return this.ToActionResult(result);
         }

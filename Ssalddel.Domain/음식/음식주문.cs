@@ -89,6 +89,19 @@ public class 음식주문
     [Column("조리예상완료시각_utc")]
     public DateTime? 조리예상완료시각Utc { get; set; }
 
+    [Column("플랫폼_참고_조리_분")]
+    public int? 플랫폼참고조리분 { get; set; }
+
+    [Column("음식점_선택_조리_분")]
+    public int? 음식점선택조리분 { get; set; }
+
+    [Column("적용_조리_분")]
+    public int? 적용조리분 { get; set; }
+
+    [Column("조리_시간_결정_출처_code")]
+    [MaxLength(50)]
+    public string? 조리시간결정출처Code { get; set; }
+
     [Column("배차요청시각_utc")]
     public DateTime? 배차요청시각Utc { get; set; }
 

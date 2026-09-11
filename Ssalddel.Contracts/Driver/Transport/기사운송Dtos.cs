@@ -1,5 +1,7 @@
 namespace Ssalddel.Contracts.Driver.Transport;
 
+using Ssalddel.Contracts.Common.Dispatch;
+
 public class 기사운송요약응답
 {
     public long Id { get; set; }
@@ -24,6 +26,35 @@ public class 기사운송요약응답
     public string 다음행동안내 { get; set; } = string.Empty;
     public bool 관리자확인필요 { get; set; }
     public DateTime UpdatedAt { get; set; }
+}
+
+public sealed class 기사화물운송작업공간응답
+{
+    public const string CurrentRuleRevision = "freight-driver-workspace.r2";
+
+    public string RuleRevision { get; set; } = CurrentRuleRevision;
+    public IReadOnlyList<기사운송요약응답> 활성운송목록 { get; set; } = [];
+    public 기사운송요약응답? 다음행동운송 { get; set; }
+    public string 다음행동 { get; set; } = "대기";
+    public IReadOnlyList<기사화물경로정차응답> 권장경로정차목록 { get; set; } = [];
+    public string 일정검증상태 { get; set; } = "수락시재검증";
+    public string 적재검증상태 { get; set; } = "수락시재검증";
+    public IReadOnlyList<string> WarningCodes { get; set; } = [];
+    public IReadOnlyList<string> BlockCodes { get; set; } = [];
+    public 화물연속배차상태Dto 연속배차 { get; set; } = new();
+    public IReadOnlyList<화물운송시간약속Dto> 시간약속목록 { get; set; } = [];
+    public 화물경로위험Dto 현재경로위험 { get; set; } = new();
+}
+
+public sealed class 기사화물경로정차응답
+{
+    public string 의뢰Id { get; set; } = string.Empty;
+    public string 단계 { get; set; } = string.Empty;
+    public string 주소 { get; set; } = string.Empty;
+    public int 순서 { get; set; }
+    public DateTime? 시간창종료일시 { get; set; }
+    public bool 좌표근거있음 { get; set; }
+    public bool 시간창근거있음 { get; set; }
 }
 
 public sealed class 기사운송상세응답 : 기사운송요약응답

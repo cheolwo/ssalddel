@@ -109,6 +109,27 @@ public sealed class RoleAppRealApiDefaultCompositionTests
     }
 
     [Fact]
+    public void 화물기사_활성운송은_별도운영작업공간에서읽고_경고확인을수락요청에보낸다()
+    {
+        var registrations = Read("DriverApp/Services/DriverServiceCollectionExtensions.cs");
+        var cache = Read("DriverApp/Services/Samples/ServerBackedDriverSampleDataService.cs");
+        var decision = Read("DriverApp/Services/DriverRecommendationDecisionService.cs");
+        var controller = Read("Ssalddel/Controllers/Driver/05_Settings/기사운송진행Controller.cs");
+        var recommendationLock = Read("Ssalddel/Services/Dispatch/Coordination/국내화물배차조율적용Service.Locking.cs");
+        var coordination = Read("Ssalddel/Services/Dispatch/Coordination/국내화물배차조율Service.cs");
+
+        Assert.Contains("IDriverFreightWorkspaceStore, DriverFreightWorkspaceStore", registrations);
+        Assert.Contains("_freightWorkspace.RefreshAsync", cache);
+        Assert.DoesNotContain("_transportApi.목록조회Async", cache);
+        Assert.Contains("ExpectedRecommendationRound", decision);
+        Assert.Contains("AcknowledgedWarningCodes", decision);
+        Assert.Contains("HttpGet(\"workspace\")", controller);
+        Assert.DoesNotContain("현재수락운송건수", recommendationLock);
+        Assert.Contains("현재추천잠금건수 >= 최대동시추천잠금건수", recommendationLock);
+        Assert.DoesNotContain("maxPerDriver -", coordination);
+    }
+
+    [Fact]
     public void 창고_작업진입_입고_피킹은_서버구현을기본등록한다()
     {
         var registrations = Read("WarehouseManagerApp/Services/WarehouseManagerServiceCollectionExtensions.cs");
