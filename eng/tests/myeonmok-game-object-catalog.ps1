@@ -7,9 +7,10 @@ $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $catalogPath = Join-Path $repositoryRoot 'eng/world-seedbeds/object-catalogs/jungnang-myeonmok-game-objects.v1.json'
 $classificationPath = Join-Path $repositoryRoot 'docs/AI/generated/world-interaction-gwae-classifications.json'
 $projectPath = Join-Path $repositoryRoot 'eng/Ssalddel.PublicDataPortalImport/Ssalddel.PublicDataPortalImport.csproj'
-$artifactPath = Join-Path $repositoryRoot 'artifacts/local/spatial-catalog/20260909-r5'
+$artifactPath = Join-Path $repositoryRoot 'artifacts/local/spatial-catalog/20260910-r6'
 $legacyArtifactPath = Join-Path $repositoryRoot 'artifacts/local/spatial-catalog/20260909-r4'
-$registryPath = Join-Path $repositoryRoot 'eng/world-seedbeds/neighborhood-packages/registry.v1.json'
+$registryPath = Join-Path $repositoryRoot 'eng/world-seedbeds/neighborhood-packages/registry.v2.json'
+$semanticLayerPath = Join-Path $repositoryRoot 'eng/world-seedbeds/neighborhood-packages/semantic-layers.v1.json'
 
 $catalogText = Get-Content -LiteralPath $catalogPath -Raw -Encoding UTF8
 $catalog = $catalogText | ConvertFrom-Json
@@ -107,21 +108,40 @@ else {
     if ($null -eq $previewEvidence) { throw 'MyeonmokObjectCatalogPreviewEvidenceMissing' }
     $preview = Get-Content -LiteralPath $previewEvidence.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
 }
-if ((-not $SkipBuild -and $LASTEXITCODE -ne 0) -or $preview.documents -ne 32 -or $preview.elements -ne 7490 -or
+if ((-not $SkipBuild -and $LASTEXITCODE -ne 0) -or $preview.documents -ne 34 -or $preview.elements -ne 7511 -or
     $preview.objectCandidates -ne 603 -or $preview.workflowObjectArchetypes -ne 26 -or
     $preview.neighborhoodPackageRegistrations -ne 2 -or $preview.neighborhoodPackageDocuments -ne 2 -or
     $preview.junghwaShopObservations -ne 1672 -or $preview.junghwaFacilityObservations -ne 14 -or
     $preview.junghwaCoordinateObservations -ne 1683 -or @($preview.areaStableIds).Count -ne 2 -or
+    $preview.byKind.SemanticLayerCatalog -ne 1 -or $preview.byKind.PresentationProjection -ne 2 -or
+    $preview.byElementKind.SemanticLayerDefinition -ne 8 -or $preview.byElementKind.SemanticLayerBinding -ne 12 -or
+    $preview.bySemanticLayer.'spatial-layer:building-footprint.v1' -ne 1207 -or
+    $preview.bySemanticLayer.'spatial-layer:road-centerline.v1' -ne 2401 -or
+    $preview.bySemanticLayer.'spatial-layer:facility-observation.v1' -ne 2694 -or
+    $preview.bySemanticLayer.'spatial-layer:address-link-private.v1' -ne 206 -or
     $preview.databaseWriteAttempted -or $preview.gameStateConnected) {
     throw 'MyeonmokObjectCatalogPreviewMismatch'
 }
 
 $registry = Get-Content -LiteralPath $registryPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ($registry.schemaVersion -ne 'neighborhood-package-registry.v1' -or @($registry.packages).Count -ne 2 -or
+if ($registry.schemaVersion -ne 'neighborhood-package-registry.v2' -or
+    $registry.semanticLayerCatalogRef -ne 'spatial-semantic-layer-catalog:ssalddel-neighborhood.v1' -or
+    @($registry.packages).Count -ne 2 -or
     @($registry.packages | Where-Object areaStableId -eq 'region:kr:bjd:1126010100').Count -ne 1 -or
     @($registry.packages | Where-Object areaStableId -eq 'region:kr:bjd:1126010300').Count -ne 1) {
     throw 'NeighborhoodPackageRegistryMismatch'
 }
+$semanticLayerText = Get-Content -LiteralPath $semanticLayerPath -Raw -Encoding UTF8
+$semanticLayerCatalog = $semanticLayerText | ConvertFrom-Json
+if ($semanticLayerCatalog.schemaVersion -ne 'spatial-semantic-layer-catalog.v1' -or
+    @($semanticLayerCatalog.semanticLayers).Count -ne 8 -or
+    @($semanticLayerCatalog.semanticLayers.semanticLayerStableId | Sort-Object -Unique).Count -ne 8 -or
+    (Get-FileHash -LiteralPath $semanticLayerPath -Algorithm SHA256).Hash -ne $registry.semanticLayerCatalogSha256) {
+    throw 'NeighborhoodSemanticLayerCatalogMismatch'
+}
+if (@($registry.compatibilityAliases | Where-Object {
+    $_.legacyRef -eq 'area:reference:myeonmok' -and $_.canonicalRef -eq 'region:kr:bjd:1126010100'
+}).Count -ne 1) { throw 'NeighborhoodAreaCompatibilityAliasMissing' }
 foreach ($package in @($registry.packages)) {
     foreach ($input in @($package.sourceInputs)) {
         $inputPath = Join-Path $repositoryRoot $input.repoRelativePath
