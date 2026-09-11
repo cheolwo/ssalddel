@@ -1,18 +1,52 @@
 # Mirror(거울) Current Work
 
+## 운영 배차 공통 코어 백엔드 5차 중단·회복 및 화물 연속배차 기반 (2026-09-11)
+
+- 후속 화물 문답을 [운영 배차 공통 코어 r33](Planning/공통/PLAN-OPERATIONS-DISPATCH-CORE/README.md)에 반영했다. 플랫폼은 기사 휴식·주유·식사 사유를 수집하거나 추측하지 않고 서버 내부 `운송 약속 그래프`를 주기적으로 순회한다. 그래프 판정과 경로 안내는 화주에게 공개하지 않으며, 화주에게는 실제 업무 결과가 달라졌을 때만 최소 결과를 알리고 이후 정상 범위로 회복되면 같은 상태 revision에 한 번만 회복 결과를 알린다. 이는 Unity Graph Map 변경이 아니다.
+- 화물 연속 배차는 기본 비활성·Shadow 경계에서 계약, 기사 의사 상태, 다음 콜 단일 보유 예약, 수락 reservation/revision 검증, 운송 시간 약속, 현재 위치 기반 위험 조회, Memory/Redis 재구성 투영과 조회 API까지 백엔드 기반을 정리했다. 한 기사당 활성 예약은 nullable 고유 키로 1건만 허용하고, 보유 만료는 기존 추천 만료를 넘지 않는다. 자동 추천·최소지급 정책은 명시 설정 전 켜지지 않는다.
+- 기사 수락 뒤 핵심 운송 조건 변경은 기사 재동의를 필수로 하고, 재동의 거절을 기사 불이익에 넣지 않으며 이미 발생한 이동·대기는 보전 대상으로 분리하는 원칙을 확정했다. 다만 조건 변경 요청·재동의·보전 원장은 아직 실제 흐름이 없어 선행 빈 테이블로 만들지 않았고 후속 수직 구현으로 남겼다.
+- [운영 배차 공통 코어 r33](Planning/공통/PLAN-OPERATIONS-DISPATCH-CORE/README.md)은 특정 지역·Unity 장면과 독립된 정본이다. 이번 묶음은 `상품 × 시간대` 조리 설정과 주문별 조리 결정, 기사 배달 시도, 가게 도착·현장 대기, 픽업 전후 중단·재조리·재배차, 운영자 책임 검토를 서버·계약·MySQL 원장에 결속했다.
+- 조리 참고값은 최근 28일 같은 음식점·해당 시간 구간의 픽업 준비 완료 표본이 3건 이상이면 산술평균, 부족하면 음식점의 현행 설정, 둘 다 없으면 20분이다. 음식점 명시 선택값은 참고값보다 우선하며 참고·선택·적용값과 결정 출처를 주문에 보존한다. 기사 배정 뒤 조리시간을 바꿔도 기존 배정을 취소하지 않는다.
+- 기사 수락마다 `음식배달시도` revision 원장을 만든다. `restaurant-arrival`은 서버 수신 시각을 권위로 기록하고 위치는 차단하지 않는 감사 자료로만 남긴다. 픽업 때 현장 대기 초를 계산하며 조리 지연 재배차 기사는 수락 시각+10분과 최신 예정 시각 중 늦은 값을 표시 기준으로 받는다.
+- 중단은 기사 신규 배차 ON/OFF를 바꾸지 않는다. 픽업 전에는 주문을 조리중/픽업대기로 되살리고 같은 영속 배차 원장을 즉시 재추천하며, 픽업 후에는 모든 중단 사유에서 재조리 ID와 새 예정 시각을 만든 뒤 재추천한다. 사고·배터리 부족·배달 수단 고장·위험 기상·하루 첫 개인 긴급은 보호, 조리 지연은 음식점 책임, 나머지는 미확정으로 시작한다.
+- 운영 추적 API는 주문의 모든 배달 시도·도착·대기·중단·재조리를 반환한다. 운영자 책임 검토는 revision·멱등 요청 ID·담당자·판정 사유를 저장하며 보호 중단을 기사 책임으로 바꾸려면 사람의 악용 확정이 필요하다. 검토 사건에서 오늘·어제·그제 완료율과 균형 점유 Redis 투영을 영속 원장 기준으로 다시 만든다.
+- `20260911030000_AddFoodDeliveryInterruptionRecovery`와 후속 schema 동기화 마이그레이션을 생성했고 EF 모델 차이 없음까지 확인했다. 실제 개발/운영 MySQL에는 적용하지 않았고 실제 Redis 연결도 이번 묶음에서 실행하지 않았다. 서버 build 오류0, 운영 배차·음식 중단·화물 수락·연속배차 정책 등을 묶은 집중 회귀 214/214, Simulation 1,895/1,895, Unity 관찰 25/25가 통과했고 DriverApp 4개 대상 플랫폼 빌드도 오류0이다.
+- 범위 Fast와 Task는 `git diff --check`와 Simulation/Unity 코드 지도를 통과한 뒤 이번 범위 밖 기존 E 책임 미분류 8건에서 빌드·시험 실행 전에 중단됐다. 로그는 `artifacts/local/validation/20260911-114326/evidence-map-check.log`, `artifacts/local/validation/20260911-114413/evidence-map-check.log`다. 이 8건은 이전 4차와 같은 Simulation·Unity 타입이며 이번 백엔드 신규 타입은 오류 목록에 없다.
+- DriverApp은 서버 화물 작업공간과 reservation/revision을 사용하도록 정리했고 FDriver는 서버가 내려준 동시 수행 상한을 사용한다. 주문자·음식점 전용 프론트엔드는 이번 묶음에서 변경하지 않았다. 세 번째 조리 지연 주문자 알림·취소, 음식점별 오늘·어제·그제 분석·권고 메시지, 사고 재조리 비용 정산, 기사 통지·이의 제기, 실제 배차 점수와 운영 활성화는 후속이다. 실제 인증 HTTP·현장 운행·Play Mode·Game View·배포는 수행하지 않았다.
+
+## 운영 앱과 같은 장면 자율 음식 생활 관찰 분리 (2026-09-10)
+
+- [승인 기획](Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/same-scene-food-life-observation.r1.md)과 [구현·검증 보고](../Reports/같은장면-자율음식생활관찰-2026-09-10.md): 운영 앱과 Unity 생활 관찰을 별도 다대다 대장으로 분리했다. 첫 프로필은 `OrdererApp`, `RestaurantDeskApp`, `FoodDeliveryDriverApp`을 `SimulationAnalog`로 묶되 `SimulationSession / AutonomousNpcWorld / observationPresentationOnly`만 허용하고 운영 행위는 금지한다. 기존 Hub 첫 표본은 유지했다.
+- Presenter는 주문별 주문자·음식점·기사·단계·대기·현재 시설·완료/거절을 상태 사본에서만 파생한다. Unity 휴대폰은 카드 선택 뒤 주체 상세의 `이 NPC 따라가기`를 다시 눌러야 카메라가 이동하고, 대상이 없으면 전체 개요로 돌아간다.
+- 검증은 이관 대장34/34, .NET 관찰25/25·합성 동네10/10·한 기사 전체 흐름1/1, Unity 휴대폰 EditMode9/9·생활 EditMode3/3을 통과했다. 문서 범위 표준 Fast와 변경 파일 공백 검사는 통과했고 코드 범위 표준 Fast·Task는 빌드·시험 전에 기존 E 책임 미분류8건에서 중단됐다. 실제 `SimulationWorldShell` 프로필5 Play에서 주문·정책 추가 입력 없이 Tick50 첫 주문 `수령확인`, 담당 기사 `Idle`, 기사 주문 ID 빈 값을 확인했고 전체 개요·수동 추적·완료 주문 Game View와 Console 오류0을 기록했다. Scene은 저장하지 않았고 실제 마우스 클릭·운영 서버/DB·commit·push는 수행하지 않았다.
+
+## 운영 화물 기사와 Unity NPC 관찰 역할 경계 (2026-09-10)
+
+- [승인 기획](Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/freight-driver-role-boundary.r1.md)과 [구현 보고](../Reports/화물배달-운영기사와Unity관찰-경계보완-2026-09-10.md): DriverApp의 실제 화물 운송과 Unity의 가상 화물 NPC 관찰을 분리했다. Unity 기존 물류 Presenter는 `가상 화물 NPC 관찰 · 실제 화물 운송 없음`을 표시하며 운영 기사 API를 연결하지 않는다.
+- 화물 수락은 고정 활성 건수 상한을 사용하지 않는다. 추천 잠금 수만 기존 노출 한도로 제한하고, 수락 시 서버가 최신 원장에서 차량·혼적 금지·권장 경로 구간별 중량/부피/팔레트·기존/신규 시간창·근거 누락을 재검증한다. 추천 라운드 불일치와 경고 미확인도 안정 오류 코드로 차단한다.
+- `GET api/v1/driver/transports/workspace`는 모든 활성 운송, 다음 행동 운송 하나, 정렬된 상·하차 정차점과 검증 상태를 반환한다. `/current`도 최근 수정 건 대신 현장 행동 우선순위로 선택한다. DriverApp은 별도 화물 작업공간 Store를 사용하고 경고를 명시 확인한 뒤에만 수락 요청에 확인 코드를 보낸다.
+- 현재 검증: 서버 수락·화물 조율·작업공간·현재 행동·앱 경계 집중33/33, DriverApp Windows build 오류0, Unity 물류 EditMode10/10 통과. 앞선 범위 Fast는 솔루션 build와 200개 중 195개가 통과했으나 이번 변경 밖 기존 역할별 Controller metadata 5건이 실패했다. 최종 재실행은 다른 생성 문서의 후행 공백 4줄 때문에 전역 diff 관문에서 먼저 중단됐고, 이번 변경 파일만의 `git diff --check`는 통과했다. 실제 운영 서버·DB 다중 host 경쟁·현장 운행·Unity Play Mode/Game View·Scene/Prefab·commit·push는 실행하거나 변경하지 않았다.
+
+## 운영 음식 배달 기사와 Unity NPC 관찰 역할 경계 (2026-09-10)
+
+- [승인 기획](Planning/시스템/PLAN-SYSTEM-MYEONMOK-OBSERVER/driver-role-boundary.r2.md)과 [구현·검증 보고](../Reports/음식배달-운영기사와Unity관찰-경계보완-2026-09-10.md): FDriver의 실제 기사 업무와 Unity의 가상 NPC 관찰을 분리했다. `IBusinessWorkflowRuntime`은 `SimulationSession / AutonomousNpcWorld / ObservationPresentationOnly`만 허용하며 운영 기사 행위는 허용하지 않는다.
+- 음식 배달 수락은 기사별 진행 중 건수와 새 요청을 합산해 최대 3건으로 제한한다. 단건·묶음 모두 같은 정책과 `Serializable` 트랜잭션을 사용하고 초과 시 HTTP 409와 `FoodDeliveryActiveWorkLimitExceeded`를 반환한다. FDriver는 서버가 내려준 `MaxActiveDeliveries`를 화면 판단에 사용한다.
+- Unity 프로필5는 로컬 자율 NPC 관찰, 프로필6은 격리된 원격 Simulation 검증이며 Editor·Development Build에서만 허용한다. 관찰 화면에는 `가상 NPC 관찰 · 실제 기사 배차 없음` 경계를 표시한다.
+- 최종 검증은 Simulation Runtime 12/12, 서버·FDriver 관련 32/32, FDriver Windows build 오류0, 실제 Unity Editor 컴파일 및 EditMode 27/27이다. 범위 Fast는 이번 변경과 무관하게 이미 남아 있던 E 책임 미분류 8개에서 중단됐다. 실제 운영 서버·DB 동시 수락 부하·기사 운행·Unity Play Mode/Game View·배포 빌드 거부 실행은 미검증이다. Scene/Prefab·운영 데이터·commit·push는 변경하거나 실행하지 않았다.
+
 ## 업무 흐름 Runtime의 웹·모바일·Unity 공통 조립 (2026-09-10)
 
 - [기준 문서](../Architecture/업무흐름Runtime.md)와 [구현·검증 보고](../Reports/업무흐름Runtime-공통조립-2026-09-10.md): `Ssalddel.BusinessWorkflow` 공통 프로젝트와 `IBusinessWorkflowRuntime` facade로 주문·음식점·배차·배송·창고 포트를 조립했다. 역할별 포트는 같은 하위 원장을 사용하며 상태를 복제하지 않는다.
 - 실행 API와 파일 이름은 `BusinessWorkflow`, `WorkflowRule`, `BusinessObjectInteraction`으로 정리했다. 오행·괘상은 선택적 `WorkflowClassificationMetadata`로만 보존하며 `IsExecutionAuthority=false`이고 실행 판정에 사용하지 않는다.
 - 웹·모바일은 명시적 `RemoteHost`, Unity Solo는 기존 `LocalSimulationRuntime`을 공유하는 `LocalProcess` 조립을 사용한다. 실패 시 실행 위치 자동 전환은 없다.
-- 공통 Runtime 집중 시험 8/8, 규칙·객체 결속 집중 시험 14/14, `Ssalddel.v3.5.slnx`와 `Ssalddel.Unity.slnx`, 공공데이터 importer build 오류 0을 확인했다. Unity package와 소스 연결은 반영했지만 Editor import·Play Mode·Game View·실제 서버 연결은 미검증이다.
+- 공통 Runtime 집중 시험 8/8, 규칙·객체 결속 집중 시험 14/14, `Ssalddel.v3.5.slnx`와 `Ssalddel.Unity.slnx`, 공공데이터 importer build 오류 0을 확인했다. 범위 Fast에서 이번 신규 타입의 E 책임 누락은 보완됐고, 병행 작업의 기존 미분류 타입 8개가 남아 전체 Fast는 미통과다. Unity package와 소스 연결은 반영했지만 Editor import·Play Mode·Game View·실제 서버 연결은 미검증이다.
 
-## 법정동별 공간 패키지·중화동 관측 재고 (2026-09-09)
+## 법정동별 의미 레이어·배치 전 관계 기반 (2026-09-10)
 
-- [기획·구현 기준](Planning/시스템/PLAN-SYSTEM-NEIGHBORHOOD-SPATIAL-PACKAGES/README.md): 오행 업무 객체 원형을 동마다 복제하지 않는 공통 대장으로 분리하고, 법정동 `areaStableId` 패키지와 후속 500m 타일 로드를 구분했다. 기존 면목동 Graph/배치 Map과 602건물·2,397도로 안정 ID를 보존한다.
+- [기획·구현 기준 r2](Planning/시스템/PLAN-SYSTEM-NEIGHBORHOOD-SPATIAL-PACKAGES/README.md)와 [구현·검증 보고](../Reports/법정동-의미레이어-관계기반-r2-2026-09-10.md): 기존 구조 `layer`와 v1 읽기 호환을 유지하면서 행정 경계·좌표계·건물·도로·주소·시설 관측·지역 통계·시나리오의 의미 레이어 8개를 공통 대장으로 분리했다. 법정동별 12개 결속은 `semanticLayerStableId`로 조회하며 기존 면목동 Graph/배치 Map과 602건물·2,397도로 안정 ID를 보존한다.
 - 첫 확장 동은 중화동 `region:kr:bjd:1126010300`이다. 동결 공식자료에서 상가1,672·공공시설14, 좌표 후보1,683건을 상호명·상세주소·공급자 원본 ID 없이 관측 재고로 만들었다. 공식 경계·건물·도로 도형이 없어 `InventoryReady / GraphMap NotCreated / PlacementMap NotCreated / SceneReady=false`로 멈췄다.
-- `spatial-catalog.r3`의 `areaStableId` 문서·구성요소·관계 필터, 동별 CLI 필터와 관리자 화면 선택을 추가했다. 로컬 Mongo 현행 묶음 `4055D8D…B3BB1E`은 32문서·7,490요소·9,652관계, 최초 신규17,175·독립 재조회·같은 입력 신규0이며 다른 Mongo 컬렉션 불변을 확인했다.
-- 공간자료 집중 .NET43/43, 표준 Fast 대상 회귀130/130, v3.5 build 오류0(기존 경고60), importer·관리자 직접 build 경고0/오류0, 전용 원본/hash 검사와 실제 HTTP 권한·지역 필터·개인정보 축소 검사를 통과했다. Unity·Simulation·Scene·Prefab·Play Mode·Game View·MySQL·운영 업무 상태·외부 재수집·commit·push는 변경하거나 실행하지 않았다. 다음 후보는 망우동 관측 재고이며 자동 배치하지 않는다.
+- `spatial-catalog.r4`는 기존 `layer`와 별도로 `semanticLayerStableId` 조회를 제공하고 v2 동별 패키지·면목동 별칭·읽기 전용 Unity 인계 문서를 보관한다. 로컬 Mongo 현행 묶음 `1862BC54…74AAF2`는 34문서·7,511요소·9,692관계, 최초 신규17,238·독립 재조회·같은 입력 신규0이며 다른 Mongo 컬렉션 불변을 확인했다.
+- 공간자료 집중 .NET24/24, importer build 경고0/오류0, 전용 원본/hash·수량·개인정보 경계와 범위 Fast를 통과했다. Task의 v3.5 전체 build는 통과했고 전체 시험은 4,993개 중 4,986개 통과·이번 범위 밖 기존 Controller metadata 6건과 공식 재료 UI 1건 실패로 전체 회귀는 미완료다. Unity·Simulation·Scene·Prefab·Play Mode·Game View·MySQL·운영 업무 상태·외부 재수집·commit·push는 변경하거나 실행하지 않았다. 중화동은 계속 `InventoryReady`이며 다음 동도 공식 경계·geometry 전에는 자동 배치하지 않는다.
 
 ## 오행 업무 오프라인 생활 구성·보고 (2026-09-09)
 
